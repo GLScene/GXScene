@@ -1,0 +1,56 @@
+package GXScene_DT;
+
+{$R *.res}
+{$IFDEF IMPLICITBUILDING This IFDEF should not be used by users}
+{$ALIGN 8}
+{$ASSERTIONS ON}
+{$BOOLEVAL OFF}
+{$DEBUGINFO OFF}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS ON}
+{$LOCALSYMBOLS ON}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION OFF}
+{$OVERFLOWCHECKS OFF}
+{$RANGECHECKS OFF}
+{$REFERENCEINFO ON}
+{$SAFEDIVIDE OFF}
+{$STACKFRAMES ON}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST OFF}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $400000}
+{$DEFINE DEBUG}
+{$ENDIF IMPLICITBUILDING}
+{$DESCRIPTION 'GXScene Engine'}
+{$RUNONLY}
+{$IMPLICITBUILD ON}
+
+requires
+  rtl,
+  fmx,
+  GXScene_RT;
+
+contains
+  FGUILayoutEditor in '..\..\Source\FGUILayoutEditor.pas' {FGUILayoutEditor: T},
+  FInfo in '..\..\Source\FInfo.pas' {FInfo: TForm},
+  FRTextureEdit in '..\..\Source\FRTextureEdit.pas' {FRTextureEdit: TFrame},
+  FRTrackBarEdit in '..\..\Source\FRTrackBarEdit.pas' {FRTrackBarEdit: TFrame},
+  FXCollectionEditor in '..\..\Source\FXCollectionEditor.pas' {FXCollectionEditor},
+  FLibMaterialPicker in '..\..\Source\FLibMaterialPicker.pas' {FLibMaterialPicker},
+  FRMaterialPreview in '..\..\Source\FRMaterialPreview.pas' {FRMaterialPreview: TFrame},
+  FRFaceEditor in '..\..\Source\FRFaceEditor.pas' {FRFaceEditor: TFrame},
+  FRColorEditor in '..\..\Source\FRColorEditor.pas' {FRColorEditor: TFrame},
+  FPlugInManagerEditor in '..\..\Source\FPlugInManagerEditor.pas' {FPlugInManagerEditor},
+  FMaterialEditorForm in '..\..\Source\FMaterialEditorForm.pas' {FMaterialEditorForm},
+  FShaderMemo in '..\..\Source\FShaderMemo.pas' {FShaderMemoForm},
+  FShaderUniformEditor in '..\..\Source\FShaderUniformEditor.pas' {FShaderUniformEditorForm},
+  FGuiSkinEditor in '..\..\Source\FGuiSkinEditor.pas' {FGUISkinEditor: TForm},
+  FSceneEditor in '..\..\Source\FSceneEditor.pas' {FSceneEditor: TForm},
+  GXS.RegisterXCollection in '..\..\Source\GXS.RegisterXCollection.pas',
+  GXS.SceneRegister in '..\..\Source\GXS.SceneRegister.pas';
+
+end.

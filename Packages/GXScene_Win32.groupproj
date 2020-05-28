@@ -1,0 +1,120 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{9ED56614-3545-46C2-AFD4-5F2C7ED54592}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="Win32\GXScene_RT.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Win32\GXScene_DT.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Win32\GXScene_Sounds_RT.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Win32\GXScene_Sounds_DT.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Win32\GXScene_Physics_RT.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Win32\GXScene_Physics_DT.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Win32\GXScene_Parallel_RT.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Win32\GXScene_Parallel_DT.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="GXScene_RT">
+        <MSBuild Projects="Win32\GXScene_RT.dproj"/>
+    </Target>
+    <Target Name="GXScene_RT:Clean">
+        <MSBuild Projects="Win32\GXScene_RT.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="GXScene_RT:Make">
+        <MSBuild Projects="Win32\GXScene_RT.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="GXScene_DT">
+        <MSBuild Projects="Win32\GXScene_DT.dproj"/>
+    </Target>
+    <Target Name="GXScene_DT:Clean">
+        <MSBuild Projects="Win32\GXScene_DT.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="GXScene_DT:Make">
+        <MSBuild Projects="Win32\GXScene_DT.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="GXScene_Sounds_RT">
+        <MSBuild Projects="Win32\GXScene_Sounds_RT.dproj"/>
+    </Target>
+    <Target Name="GXScene_Sounds_RT:Clean">
+        <MSBuild Projects="Win32\GXScene_Sounds_RT.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="GXScene_Sounds_RT:Make">
+        <MSBuild Projects="Win32\GXScene_Sounds_RT.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="GXScene_Sounds_DT">
+        <MSBuild Projects="Win32\GXScene_Sounds_DT.dproj"/>
+    </Target>
+    <Target Name="GXScene_Sounds_DT:Clean">
+        <MSBuild Projects="Win32\GXScene_Sounds_DT.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="GXScene_Sounds_DT:Make">
+        <MSBuild Projects="Win32\GXScene_Sounds_DT.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="GXScene_Physics_RT">
+        <MSBuild Projects="Win32\GXScene_Physics_RT.dproj"/>
+    </Target>
+    <Target Name="GXScene_Physics_RT:Clean">
+        <MSBuild Projects="Win32\GXScene_Physics_RT.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="GXScene_Physics_RT:Make">
+        <MSBuild Projects="Win32\GXScene_Physics_RT.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="GXScene_Physics_DT">
+        <MSBuild Projects="Win32\GXScene_Physics_DT.dproj"/>
+    </Target>
+    <Target Name="GXScene_Physics_DT:Clean">
+        <MSBuild Projects="Win32\GXScene_Physics_DT.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="GXScene_Physics_DT:Make">
+        <MSBuild Projects="Win32\GXScene_Physics_DT.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="GXScene_Parallel_RT">
+        <MSBuild Projects="Win32\GXScene_Parallel_RT.dproj"/>
+    </Target>
+    <Target Name="GXScene_Parallel_RT:Clean">
+        <MSBuild Projects="Win32\GXScene_Parallel_RT.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="GXScene_Parallel_RT:Make">
+        <MSBuild Projects="Win32\GXScene_Parallel_RT.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="GXScene_Parallel_DT">
+        <MSBuild Projects="Win32\GXScene_Parallel_DT.dproj"/>
+    </Target>
+    <Target Name="GXScene_Parallel_DT:Clean">
+        <MSBuild Projects="Win32\GXScene_Parallel_DT.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="GXScene_Parallel_DT:Make">
+        <MSBuild Projects="Win32\GXScene_Parallel_DT.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="GXScene_RT;GXScene_DT;GXScene_Sounds_RT;GXScene_Sounds_DT;GXScene_Physics_RT;GXScene_Physics_DT;GXScene_Parallel_RT;GXScene_Parallel_DT"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="GXScene_RT:Clean;GXScene_DT:Clean;GXScene_Sounds_RT:Clean;GXScene_Sounds_DT:Clean;GXScene_Physics_RT:Clean;GXScene_Physics_DT:Clean;GXScene_Parallel_RT:Clean;GXScene_Parallel_DT:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="GXScene_RT:Make;GXScene_DT:Make;GXScene_Sounds_RT:Make;GXScene_Sounds_DT:Make;GXScene_Physics_RT:Make;GXScene_Physics_DT:Make;GXScene_Parallel_RT:Make;GXScene_Parallel_DT:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>

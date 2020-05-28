@@ -1,0 +1,203 @@
+object RFaceEditor: TRFaceEditor
+  Size.Width = 433.000000000000000000
+  Size.Height = 232.000000000000000000
+  Size.PlatformDefault = False
+  object Label1: TLabel
+    Position.X = 16.000000000000000000
+    Position.Y = 24.000000000000000000
+    Size.Width = 65.000000000000000000
+    Size.Height = 17.000000000000000000
+    Size.PlatformDefault = False
+    Text = 'Shininess'
+  end
+  inline TBEShininess: TRTrackBarEdit
+    Position.X = 85.000000000000000000
+    Position.Y = 12.000000000000000000
+    Size.Width = 307.000000000000000000
+    Size.Height = 37.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 1
+    inherited TrackBar: TTrackBar
+      OnChange = TBEShininessTrackBarChange
+    end
+  end
+  object TabControl: TTabControl
+    Position.X = 16.000000000000000000
+    Position.Y = 64.000000000000000000
+    Size.Width = 401.000000000000000000
+    Size.Height = 153.000000000000000000
+    Size.PlatformDefault = False
+    TabIndex = 2
+    TabOrder = 2
+    TabPosition = PlatformDefault
+    Sizes = (
+      401s
+      148s
+      401s
+      148s
+      401s
+      148s
+      401s
+      148s)
+    object TIAmbient: TTabItem
+      CustomIcon = <
+        item
+        end>
+      IsSelected = False
+      Size.Height = 5.000000000000000000
+      Size.PlatformDefault = False
+      StyleLookup = ''
+      TabOrder = 0
+      Text = 'Ambient'
+      ExplicitSize.cx = 65.000000000000000000
+      ExplicitSize.cy = 24.000000000000000000
+      inline CEAmbiant: TRColorEditor
+        Align = Client
+        Size.Width = 401.000000000000000000
+        Size.Height = 148.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 0
+        inherited ColorEditorPaintBox: TPaintBox
+          Size.Width = 401.000000000000000000
+          Size.Height = 148.000000000000000000
+        end
+        inherited Panel1: TPanel
+          Size.Width = 395.000000000000000000
+          Size.Height = 142.000000000000000000
+        end
+        inherited Label1: TLabel
+          TextSettings.Font.StyleExt = {00070000000000000004000000}
+        end
+        inherited Label2: TLabel
+          TextSettings.Font.StyleExt = {00070000000000000004000000}
+        end
+        inherited Label3: TLabel
+          TextSettings.Font.StyleExt = {00070000000000000004000000}
+        end
+        inherited Label4: TLabel
+          TextSettings.Font.StyleExt = {00070000000000000004000000}
+        end
+      end
+    end
+    object TIDiffuse: TTabItem
+      CustomIcon = <
+        item
+        end>
+      IsSelected = False
+      Size.Height = 5.000000000000000000
+      Size.PlatformDefault = False
+      StyleLookup = ''
+      TabOrder = 0
+      Text = 'Diffuse'
+      ExplicitSize.cx = 57.000000000000000000
+      ExplicitSize.cy = 24.000000000000000000
+      inline CEDiffuse: TRColorEditor
+        Align = Client
+        Size.Width = 401.000000000000000000
+        Size.Height = 148.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 0
+        inherited ColorEditorPaintBox: TPaintBox
+          Size.Width = 401.000000000000000000
+          Size.Height = 148.000000000000000000
+        end
+        inherited Panel1: TPanel
+          Size.Width = 395.000000000000000000
+          Size.Height = 142.000000000000000000
+        end
+        inherited Label1: TLabel
+          TextSettings.Font.StyleExt = {00070000000000000004000000}
+        end
+        inherited Label2: TLabel
+          TextSettings.Font.StyleExt = {00070000000000000004000000}
+        end
+        inherited Label3: TLabel
+          TextSettings.Font.StyleExt = {00070000000000000004000000}
+        end
+        inherited Label4: TLabel
+          TextSettings.Font.StyleExt = {00070000000000000004000000}
+        end
+      end
+    end
+    object TIEmission: TTabItem
+      CustomIcon = <
+        item
+        end>
+      IsSelected = True
+      Size.Height = 5.000000000000000000
+      Size.PlatformDefault = False
+      StyleLookup = ''
+      TabOrder = 0
+      Text = 'Emission'
+      ExplicitSize.cx = 66.000000000000000000
+      ExplicitSize.cy = 24.000000000000000000
+      inline CEEmission: TRColorEditor
+        Align = Client
+        Size.Width = 401.000000000000000000
+        Size.Height = 148.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 0
+        inherited ColorEditorPaintBox: TPaintBox
+          Size.Width = 401.000000000000000000
+          Size.Height = 148.000000000000000000
+        end
+        inherited Panel1: TPanel
+          Size.Width = 395.000000000000000000
+          Size.Height = 142.000000000000000000
+        end
+        inherited Label1: TLabel
+          TextSettings.Font.StyleExt = {00070000000000000004000000}
+        end
+        inherited Label2: TLabel
+          TextSettings.Font.StyleExt = {00070000000000000004000000}
+        end
+        inherited Label3: TLabel
+          TextSettings.Font.StyleExt = {00070000000000000004000000}
+        end
+        inherited Label4: TLabel
+          TextSettings.Font.StyleExt = {00070000000000000004000000}
+        end
+      end
+    end
+    object TISpecular: TTabItem
+      CustomIcon = <
+        item
+        end>
+      IsSelected = False
+      Size.Height = 5.000000000000000000
+      Size.PlatformDefault = False
+      StyleLookup = ''
+      TabOrder = 0
+      Text = 'Specular'
+      ExplicitSize.cx = 66.000000000000000000
+      ExplicitSize.cy = 24.000000000000000000
+      inline CESpecular: TRColorEditor
+        Align = Client
+        Size.Width = 401.000000000000000000
+        Size.Height = 148.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 0
+        inherited ColorEditorPaintBox: TPaintBox
+          Size.Width = 401.000000000000000000
+          Size.Height = 148.000000000000000000
+        end
+        inherited Panel1: TPanel
+          Size.Width = 395.000000000000000000
+          Size.Height = 142.000000000000000000
+        end
+        inherited Label1: TLabel
+          TextSettings.Font.StyleExt = {00070000000000000004000000}
+        end
+        inherited Label2: TLabel
+          TextSettings.Font.StyleExt = {00070000000000000004000000}
+        end
+        inherited Label3: TLabel
+          TextSettings.Font.StyleExt = {00070000000000000004000000}
+        end
+        inherited Label4: TLabel
+          TextSettings.Font.StyleExt = {00070000000000000004000000}
+        end
+      end
+    end
+  end
+end

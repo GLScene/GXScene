@@ -1,3 +1,3 @@
 # GXScene
-GXScene is an integrated graphic engine based on eXtended GLScene's and FMX components for Delphi and C++ Builder.
+GXScene is a graphic engine based on FMX and eXtended GLScene's components for Delphi and C++ Builder.
 It supports OpenGL/DirectX/Vulkan for cross-platform applications.

@@ -11,10 +11,12 @@ interface
 uses
   System.Classes,
   System.SysUtils,
+  {
   DesignIntf,
   DesignEditors,
   ToolsAPI,
   STREDIT,
+  }
 
   GXS.SceneRegister;
 

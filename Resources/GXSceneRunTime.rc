@@ -1,4 +1,4 @@
-OmniLightTexture RCDATA xrs\OmniLightTexture.dds
-ParallelLightTexture RCDATA xrs\ParallelLightTexture.dds
-ParallelSpotLightTexture RCDATA xrs\ParallelSpotLightTexture.dds
-SpotLightTexture RCDATA xrs\SpotLightTexture.dds
+OmniLightTexture RCDATA fmx\OmniLightTexture.dds
+ParallelLightTexture RCDATA fmx\ParallelLightTexture.dds
+ParallelSpotLightTexture RCDATA fmx\ParallelSpotLightTexture.dds
+SpotLightTexture RCDATA fmx\SpotLightTexture.dds

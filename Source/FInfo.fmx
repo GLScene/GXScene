@@ -17,7 +17,7 @@ object InfoForm: TInfoForm
     Size.Width = 540.000000000000000000
     Size.Height = 361.000000000000000000
     Size.PlatformDefault = False
-    TabIndex = 2
+    TabIndex = 3
     TabOrder = 0
     TabPosition = PlatformDefault
     Sizes = (
@@ -16088,7 +16088,7 @@ object InfoForm: TInfoForm
       CustomIcon = <
         item
         end>
-      IsSelected = True
+      IsSelected = False
       Size.Width = 136.000000000000000000
       Size.Height = 26.000000000000000000
       Size.PlatformDefault = False
@@ -16116,7 +16116,7 @@ object InfoForm: TInfoForm
       CustomIcon = <
         item
         end>
-      IsSelected = False
+      IsSelected = True
       Size.Width = 87.000000000000000000
       Size.Height = 26.000000000000000000
       Size.PlatformDefault = False
@@ -16179,8 +16179,8 @@ object InfoForm: TInfoForm
         Size.Height = 335.000000000000000000
         Size.PlatformDefault = False
         TabOrder = 0
-        Viewport.Width = 540.000000000000000000
-        Viewport.Height = 335.000000000000000000
+        Viewport.Width = 520.000000000000000000
+        Viewport.Height = 331.000000000000000000
       end
     end
     object TabItemAbout: TTabItem
@@ -16223,8 +16223,8 @@ object InfoForm: TInfoForm
         Size.Height = 233.000000000000000000
         Size.PlatformDefault = False
         TabOrder = 0
-        Viewport.Width = 540.000000000000000000
-        Viewport.Height = 233.000000000000000000
+        Viewport.Width = 536.000000000000000000
+        Viewport.Height = 229.000000000000000000
       end
       object LabelOfficial: TLabel
         AutoSize = True

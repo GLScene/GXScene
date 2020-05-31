@@ -6,8 +6,6 @@ unit GXS.CUDAGraphics;
 
 interface
 
-{$I cuda.inc}
-
 uses
   System.Classes,
   FMX.Dialogs,

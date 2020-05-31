@@ -1,12 +1,12 @@
 ﻿//
-// This unit is part of the GXScene Engine, http://glscene.org
+// This unit is part of the GLScene Engine, http://glscene.org
 //
-{ 
+(* 
   Conversion of OpenCL header file: cl_platform.h to CL_Platform.pas,
   from http://www.khronos.org/registry/cl/.
-}
+*)
 (****************************************************************************
- * Copyright (c) 2008-2015 The Khronos Group Inc.
+ * Copyright (c) 2008-2020 The Khronos Group Inc.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a
  * copy of this software and/or associated documentation files (the
@@ -33,18 +33,9 @@
  * MATERIALS OR THE USE OR OTHER DEALINGS IN THE MATERIALS.
  **************************************************************************)
 
-unit CL_Platform;
+unit OpenCL_Platform;
 
 interface
-
-{$IFDEF MSWINDOWS}
-   {$DEFINE CL_APT_ENTRY}
-const
-   CL_APT_CALL = 'stdcall';
-   CL_CALLBACK = 'stdcall';
-
-{$ENDIF}
-
 
 (*
  * Deprecation flags refer to the last version of the header in which the

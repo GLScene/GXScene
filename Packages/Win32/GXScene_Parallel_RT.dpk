@@ -35,9 +35,6 @@ requires
   GXScene_RT;
 
 contains
-  CL in '..\..\Source\CL.pas',
-  CL_GL in '..\..\Source\CL_GL.pas',
-  CL_Platform in '..\..\Source\CL_Platform.pas',
   GXS.CUDARunTime in '..\..\Source\GXS.CUDARunTime.pas',
   GXS.CUDAFourierTransform in '..\..\Source\GXS.CUDAFourierTransform.pas',
   GXS.CUDAUtility in '..\..\Source\GXS.CUDAUtility.pas',
@@ -48,6 +45,9 @@ contains
   GXS.CUDAGraphics in '..\..\Source\GXS.CUDAGraphics.pas',
   GXS.CUDAParser in '..\..\Source\GXS.CUDAParser.pas',
   GXS.CUDADataAccess in '..\..\Source\GXS.CUDADataAccess.pas',
-  GXS.CUDAApi in '..\..\Source\GXS.CUDAApi.pas';
+  GXS.CUDAApi in '..\..\Source\GXS.CUDAApi.pas',
+  OpenCL in '..\..\Source\OpenCL.pas',
+  OpenCL_GL in '..\..\Source\OpenCL_GL.pas',
+  OpenCL_Platform in '..\..\Source\OpenCL_Platform.pas';
 
 end.

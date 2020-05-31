@@ -1,2 +1,2 @@
-TVXSDLViewer BITMAP vxs\TVXSDLViewer.bmp
-TVXSDLWindow BITMAP vxs\TVXSDLWindow.bmp
+TgxSDLViewer BITMAP fmx\TgxSDLViewer.bmp
+TgxSDLWindow BITMAP fmx\TgxDLWindow.bmp

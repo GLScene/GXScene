@@ -10,8 +10,6 @@ unit GXS.CUDACompiler;
 
 interface
 
-{$I cuda.inc}
-
 uses
   Winapi.Windows, 
   Winapi.Messages,

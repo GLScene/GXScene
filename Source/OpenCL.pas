@@ -1,12 +1,12 @@
 //
-// The unit for GXScene Engine
+// This unit is part of the GLScene Engine, http://glscene.org
 //
-{
+(*
    Conversion of OpenCL cl.h header file into CL.pas
    from http://www.khronos.org/registry/cl/.
-}
+*)
 (****************************************************************************
- * Copyright (c) 2008-2017 The Khronos Group Inc.
+ * Copyright (c) 2008-2020 The Khronos Group Inc.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a
  * copy of this software and/or associated documentation files (the
@@ -33,13 +33,13 @@
  * MATERIALS OR THE USE OR OTHER DEALINGS IN THE MATERIALS.
  **************************************************************************)
 
-unit CL;
+unit OpenCL;
 
 interface
 
 uses
   Winapi.Windows,
-  CL_Platform;
+  OpenCL_Platform;
 
 const
   {$IFDEF MSWINDOWS}
@@ -635,33 +635,33 @@ const
   CL_KERNEL_MAX_NUM_SUB_GROUPS =                  $11B9;
   CL_KERNEL_COMPILE_NUM_SUB_GROUPS =              $11BA;
 
-  //* cl_kernel_arg_info *//
+  (* cl_kernel_arg_info *)
   CL_KERNEL_ARG_ADDRESS_QUALIFIER =               $1196;
   CL_KERNEL_ARG_ACCESS_QUALIFIER =                $1197;
   CL_KERNEL_ARG_TYPE_NAME =                       $1198;
   CL_KERNEL_ARG_TYPE_QUALIFIER =                  $1199;
   CL_KERNEL_ARG_NAME =                            $119A;
 
-  //* cl_kernel_arg_address_qualifier *//
+  (* cl_kernel_arg_address_qualifier *)
   CL_KERNEL_ARG_ADDRESS_GLOBAL =                  $119B;
   CL_KERNEL_ARG_ADDRESS_LOCAL =                   $119C;
   CL_KERNEL_ARG_ADDRESS_CONSTANT =                $119D;
   CL_KERNEL_ARG_ADDRESS_PRIVATE =                 $119E;
 
-  //* cl_kernel_arg_access_qualifier *//
+  (* cl_kernel_arg_access_qualifier *)
   CL_KERNEL_ARG_ACCESS_READ_ONLY =                $11A0;
   CL_KERNEL_ARG_ACCESS_WRITE_ONLY =               $11A1;
   CL_KERNEL_ARG_ACCESS_READ_WRITE =               $11A2;
   CL_KERNEL_ARG_ACCESS_NONE =                     $11A3;
 
-  //* cl_kernel_arg_type_qualifer *//
+  (* cl_kernel_arg_type_qualifer *)
   CL_KERNEL_ARG_TYPE_NONE =                       0;
   CL_KERNEL_ARG_TYPE_CONST =                   	  (1 shl 0);
   CL_KERNEL_ARG_TYPE_RESTRICT =                   (1 shl 1);
   CL_KERNEL_ARG_TYPE_VOLATILE =                   (1 shl 2);
   CL_KERNEL_ARG_TYPE_PIPE =                       (1 shl 3);
 
-  //* cl_kernel_work_group_info *//
+  (* cl_kernel_work_group_info *)
   CL_KERNEL_WORK_GROUP_SIZE =                     $11B0;
   CL_KERNEL_COMPILE_WORK_GROUP_SIZE =             $11B1;
   CL_KERNEL_LOCAL_MEM_SIZE =                      $11B2;
@@ -669,22 +669,22 @@ const
   CL_KERNEL_PRIVATE_MEM_SIZE =                    $11B4;
   CL_KERNEL_GLOBAL_WORK_SIZE =                    $11B5;
 
-  //* cl_kernel_sub_group_info *//
+  (* cl_kernel_sub_group_info *)
   CL_KERNEL_MAX_SUB_GROUP_SIZE_FOR_NDRANGE =      $2033;
   CL_KERNEL_SUB_GROUP_COUNT_FOR_NDRANGE =         $2034;
   CL_KERNEL_LOCAL_SIZE_FOR_SUB_GROUP_COUNT =      $11B8;
 
-  //* cl_kernel_exec_info *//
+  (* cl_kernel_exec_info *)
   CL_KERNEL_EXEC_INFO_SVM_PTRS =                  $11B6;
   CL_KERNEL_EXEC_INFO_SVM_FINE_GRAIN_SYSTEM =     $11B7;
-  //* cl_event_info  *//
+  (* cl_event_info  *)
   CL_EVENT_COMMAND_QUEUE =                        $11D0;
   CL_EVENT_COMMAND_TYPE =                         $11D1;
   CL_EVENT_REFERENCE_COUNT =                      $11D2;
   CL_EVENT_COMMAND_EXECUTION_STATUS =             $11D3;
   CL_EVENT_CONTEXT =                              $11D4;
 
-  //* cl_command_type *//
+  (* cl_command_type *)
   CL_COMMAND_NDRANGE_KERNEL =                     $11F0;
   CL_COMMAND_TASK =                               $11F1;
   CL_COMMAND_NATIVE_KERNEL =                      $11F2;
@@ -716,16 +716,16 @@ const
   CL_COMMAND_SVM_MAP =                            $120C;
   CL_COMMAND_SVM_UNMAP =                          $120D;
 
-  //* command execution status *//
+  (* command execution status *)
   CL_COMPLETE =                                   $0;
   CL_RUNNING =                                    $1;
   CL_SUBMITTED =                                  $2;
   CL_QUEUED =                                     $3;
 
-  //* cl_buffer_create_type  *//
+  (* cl_buffer_create_type  *)
   CL_BUFFER_CREATE_TYPE_REGION =                  $1220;
 
-  //* cl_profiling_info *//
+  (* cl_profiling_info *)
   CL_PROFILING_COMMAND_QUEUED =                   $1280;
   CL_PROFILING_COMMAND_SUBMIT =                   $1281;
   CL_PROFILING_COMMAND_START =                    $1282;
@@ -955,7 +955,7 @@ type
     param_value_size_ret: Psize_t): Tcl_int; //CL_API_SUFFIX__VERSION_1_0
    stdcall; external LibOpenCL;
 
-  //* Program Object APIs *//
+  (* Program Object APIs *)
   function clCreateProgramWithSource(context: Pcl_context;
     count: Tcl_uint;
     strings: PPAnsiChar;
@@ -1044,7 +1044,7 @@ type
     param_value_size_ret: Psize_t): Tcl_int; //CL_API_SUFFIX__VERSION_1_0
    stdcall; external LibOpenCL;
 
-  //* Kernel Object APIs *//
+  (* Kernel Object APIs *)
   function clCreateKernel(_program: Pcl_program;
     kernel_name: PAnsiChar;
     errcode_ret: Pcl_int): Pcl_kernel; //CL_API_SUFFIX__VERSION_1_0
@@ -1154,7 +1154,7 @@ type
     user_data: Pointer): Tcl_int; //CL_API_SUFFIX__VERSION_1_1
    stdcall; external LibOpenCL;
 
-  //* Profiling APIs *//
+  (* Profiling APIs *)
   function clGetEventProfilingInfo(event: Pcl_event;
     param_name: Tcl_profiling_info;
     param_value_size: NativeUInt;
@@ -1522,6 +1522,7 @@ const
 var
   CLHandle: HINST;
 {$ENDIF}
+
 // ************** UNIX specific ********************
 {$IFDEF UNIX}
 var

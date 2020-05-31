@@ -41,7 +41,6 @@ unit GXS.CUDAFourierTransform;
 interface
 
 {$I gxscene.inc}
-{$I Cuda.inc}
 
 uses
   Winapi.Windows,

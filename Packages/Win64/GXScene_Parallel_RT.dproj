@@ -159,9 +159,9 @@
         <DCCReference Include="rtl.dcp"/>
         <DCCReference Include="fmx.dcp"/>
         <DCCReference Include="GXScene_RT.dcp"/>
-        <DCCReference Include="..\..\Source\CL.pas"/>
-        <DCCReference Include="..\..\Source\CL_GL.pas"/>
-        <DCCReference Include="..\..\Source\CL_Platform.pas"/>
+        <DCCReference Include="..\..\Source\OpenCL.pas"/>
+        <DCCReference Include="..\..\Source\OpenCL_GL.pas"/>
+        <DCCReference Include="..\..\Source\OpenCL_Platform.pas"/>
         <DCCReference Include="..\..\Source\GXS.CUDARunTime.pas"/>
         <DCCReference Include="..\..\Source\GXS.CUDAFourierTransform.pas"/>
         <DCCReference Include="..\..\Source\GXS.CUDAUtility.pas"/>

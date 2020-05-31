@@ -1,12 +1,12 @@
 ﻿//
-// The unit for GXScene Engine
+// This unit is part of the GLScene Engine, http://glscene.org
 //
-{
+(*
    Conversion of OpenCL header file: cl_gl.h to CL_GL.pas,
    from http://www.khronos.org/registry/cl/.
-}
+*)
 ///*****************************************************************************
-// * Copyright (c) 2008-2013 The Khronos Group Inc.
+// * Copyright (c) 2008-2020 The Khronos Group Inc.
 // *
 // * Permission is hereby granted, free of charge, to any person obtaining a
 // * copy of this software and/or associated documentation files (the
@@ -28,13 +28,13 @@
 // * MATERIALS OR THE USE OR OTHER DEALINGS IN THE MATERIALS.
 // ****************************************************************************/
 
-unit CL_GL;
+unit OpenCL_GL;
 
 interface
 
 uses
-  CL,
-  CL_Platform;
+  OpenCL,
+  OpenCL_Platform;
 
 type
   PGLuint = ^Cardinal;
@@ -162,11 +162,7 @@ function clGetGLContextInfoKHR_fn(properties: Pcl_context_properties;
 *)
 
 //--------------------------------------------------------------------
-//--------------------------------------------------------------------
-//--------------------------------------------------------------------
 implementation
-//--------------------------------------------------------------------
-//--------------------------------------------------------------------
 //--------------------------------------------------------------------
 
 end.

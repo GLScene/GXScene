@@ -40,14 +40,12 @@ unit GXS.CUDAApi;
 
 interface
 
-{$I cuda.inc}
-
 uses
   Winapi.Windows,
   System.SysUtils,
   FMX.Dialogs,
-  CL,
-  CL_Platform,
+  OpenCL,
+  OpenCL_Platform,
   GXS.CrossPlatform,
   GXS.Strings;
 

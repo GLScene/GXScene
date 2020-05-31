@@ -17,14 +17,11 @@ uses
   GXS.CUDARunTime,
   GXS.Context,
   GXS.Generics,
-  CL,
-  CL_Platform,
+  OpenCL,
+  OpenCL_Platform,
   GXS.CUDAAPI;
 
 type
-
-  // TCUDADimensions
-  //
 
   TCUDADimensions = class(TgxUpdateAbleObject)
   private
@@ -37,7 +34,6 @@ type
     function GetMaxDimComponent(index: Integer): Integer;
     procedure SetMaxDimComponent(index: Integer; Value: Integer);
   public
-    
     constructor Create(AOwner: TPersistent); override;
     procedure Assign(Source: TPersistent); override;
     property MaxSizeX: Integer index 0 read GetMaxDimComponent
@@ -48,7 +44,6 @@ type
       write SetMaxDimComponent;
     property ReadOnlyValue: Boolean read FReadOnly write FReadOnly;
   published
-    { Published Properties }
     property SizeX: Integer index 0 read GetDimComponent write SetDimComponent
       default 1;
     property SizeY: Integer index 1 read GetDimComponent write SetDimComponent
@@ -73,10 +68,8 @@ type
     fMaxThreadsDim: TCUDADimensions;
     fMaxGridSize: TCUDADimensions;
   protected
-    
     function GetName: string;
   public
-    
     constructor Create; reintroduce;
     destructor Destroy; override;
     procedure Assign(Source: TPersistent); override;
@@ -84,7 +77,6 @@ type
       available on the device dev in bytes. }
     function TotalMemory: Cardinal;
   published
-    
     property Name: string read GetName;
     property TotalGlobalMem: TSize_t read fDeviceProperties.TotalGlobalMem;
     property SharedMemPerBlock: TSize_t read fDeviceProperties.SharedMemPerBlock;
@@ -113,12 +105,10 @@ type
     procedure SetDevice(AValue: TCUDADevice);
     procedure SetDeviceName(const AName: string);
   public
-    
     constructor Create(AOwner: TComponent); override;
     destructor Destroy; override;
     function Suitable: Boolean;
   published
-    
     property SelectDevice: string read FSelectDeviceName write SetDeviceName;
     property Device: TCUDADevice read GetDevice write SetDevice;
   end;
@@ -134,26 +124,20 @@ type
 
   TCUDAContext = class(TObject)
   private
-    
     fHandle: PCUcontext;
     FDevice: TCUDADevice;
     FOnOpenGLInteropInit: TOnOpenGLInteropInit;
     FHandleList: TCUDAHandleList;
     procedure SetDevice(ADevice: TCUDADevice);
-  protected
-    
   public
-    
     constructor Create;
     destructor Destroy; override;
-
-    { Destroy all handles based of this context. }
+    // Destroy all handles based of this context.
     procedure DestroyAllHandles;
-    { Pushes context onto CPU thread’s stack of current contexts. }
+    // Pushes context onto CPU thread’s stack of current contexts.
     procedure Requires;
-    { Pops context from current CPU thread. }
+    // Pops context from current CPU thread.
     procedure Release;
-
     function IsValid: Boolean; inline;
     property Device: TCUDADevice read FDevice write SetDevice;
     property OnOpenGLInteropInit: TOnOpenGLInteropInit read FOnOpenGLInteropInit
@@ -164,20 +148,15 @@ type
   TCUDAContextList = GList<TCUDAContext>;
 
   // CUDAContextManager
-  //
 
-  { Static class of CUDA contexts manager. }
-
+  //  Static class of CUDA contexts manager.
   CUDAContextManager = class
   private
-    
     class var fDeviceList: TCUDADeviceList;
-
   class var
     fContextList: TCUDAContextList;
     class var FContextStacks: array of TCUDAContextList;
   protected
-    
     class function GetDevice(i: Integer): TCUDADevice;
     class function GetNextUnusedDevice: TCUDADevice;
     class procedure RegisterContext(aContext: TCUDAContext);
@@ -185,8 +164,7 @@ type
     class function GetThreadStack: TCUDAContextList;
     class function GetContext(i: Integer): TCUDAContext;
   public
-    
-    { Managment. }
+    // Managment.
     class procedure Init;
     class procedure Done;
     class procedure CreateContext(aContext: TCUDAContext);
@@ -195,21 +173,21 @@ type
     class procedure DestroyContextOf(ADevice: TCUDADevice);
     class procedure PushContext(aContext: TCUDAContext);
     class function PopContext: TCUDAContext;
-    { Fill unused device list to show its in property. }
+    // Fill unused device list to show its in property.
     class procedure FillUnusedDeviceList(var AList: TStringList);
-    { Return device by name. }
+    // Return device by name.
     class function GetDeviceByName(const AName: string): TCUDADevice;
-    { Returns the number of CUDA compatiable devices. }
+    // Returns the number of CUDA compatiable devices.
     class function DeviceCount: Integer;
-    { Access to devices list. }
+    // Access to devices list.
     property Devices[i: Integer]: TCUDADevice read GetDevice;
-    { Returns a device that has a maximum Giga flops. }
+    // Returns a device that has a maximum Giga flops.
     class function GetMaxGflopsDevice: TCUDADevice;
-    { Returns the number of TCUDAcontext object. }
+    // Returns the number of TCUDAcontext object.
     class function ContextCount: Integer;
-    { Return CUDA context of current thread. }
+    // Return CUDA context of current thread.
     class function GetCurrentThreadContext: TCUDAContext;
-    { Access to contexts list. }
+    // Access to contexts list.
     property Contexts[i: Integer]: TCUDAContext read GetContext;
   end;
 
@@ -962,12 +940,7 @@ end;
 {$IFDEF VXS_REGION}{$ENDREGION}{$ENDIF}
 
 // ------------------------------------------------------------------
-// ------------------------------------------------------------------
-// ------------------------------------------------------------------
 initialization
-
-// ------------------------------------------------------------------
-// ------------------------------------------------------------------
 // ------------------------------------------------------------------
 
   RegisterClasses([TgxSCUDADevice]);

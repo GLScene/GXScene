@@ -8,8 +8,6 @@ unit GXS.CUDA;
 
 interface
 
-{$I cuda.inc}
-
 uses
   System.Classes,
   System.SysUtils,
@@ -31,8 +29,8 @@ uses
   GXS.CUDADataAccess,
   GXS.Strings,
   GXS.Utils,
-  CL,
-  CL_Platform,
+  OpenCL,
+  OpenCL_Platform,
   GXS.CUDAApi;
 
 type

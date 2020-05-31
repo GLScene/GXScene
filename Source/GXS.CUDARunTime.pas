@@ -41,7 +41,6 @@ unit GXS.CUDARuntime;
 interface
 
 {$I gxscene.inc}
-{$I Cuda.inc}
 
 uses
 {$IFDEF MSWINDOWS}
@@ -49,8 +48,8 @@ uses
 {$ENDIF}
   System.SysUtils,
   FMX.Dialogs,
-  CL,
-  CL_Platform,
+  OpenCL,
+  OpenCL_Platform,
 
   OpenGLx,
   GXS.CUDAAPI,

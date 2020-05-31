@@ -1,21 +1,16 @@
 //
 // The unit for GXScene Engine
 //
-{
-   Wraper of cutil. 
-   
-}
+(*
+   Wraper of cutil.
+*)
+
 unit GXS.CUDAUtility;
 
 interface
 
-{$IFDEF MSWINDOWS}
 uses
   Winapi.Windows;
-{$ENDIF}
-
-
-{$I cuda.inc}
 
 const
 {$IFDEF WIN64}

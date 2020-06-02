@@ -4,7 +4,7 @@
 {
    Need a short description of what it does here. 
  }
-unit FPlugInManagerEditor;
+unit GXS.FPlugInManagerEditor;
 
 interface
 

@@ -8,7 +8,7 @@ unit GXS.File3DS;
 
 interface
 
-{$I gxscene.inc}
+{$I GXS.Scene.inc}
 
 uses
   System.Classes,

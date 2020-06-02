@@ -17,7 +17,6 @@ del *.a /s
 del *.map /s
 del *.rsm /s
 del *.drc /s
-del *.2007 /s
 del *.local /s
 
 rem delete more files
@@ -55,7 +54,7 @@ attrib +R "AdvDemos/Q3Demo/Model/animation.cfg"
 rem del *.cfg /s  - there are quake's animations
 attrib -R "AdvDemos/Q3Demo/Model/animation.cfg"
 
-rem del *.res /s
+del *.res /s
 rem del *.ico /s  - some projects have own icos
 rem del *.cur /s  - cursors
 rem del *.obj /s  - obj models and resources for lazarus
@@ -67,8 +66,6 @@ echo delete all .svn directories with subdirectories and files
 for /r %1 %%R in (.svn) do if exist "%%R" (rd /s /q "%%R")
 echo---------------------------------------------------------
 echo delete debug and Platform directories with all subdirectories and files 
-for /r %1 %%R in (Win32) do if exist "%%R" (rd /s /q "%%R")
-for /r %1 %%R in (Win64) do if exist "%%R" (rd /s /q "%%R")
 for /r %1 %%R in (Debug_Build) do if exist "%%R" (rd /s /q "%%R")
 for /r %1 %%R in (Release_Build) do if exist "%%R" (rd /s /q "%%R")
 for /r %1 %%R in (__history) do if exist "%%R" (rd /s /q "%%R")

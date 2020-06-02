@@ -4,7 +4,7 @@
 
 unit GXS.FilePAK;
 
-{$I gxscene.inc}
+{$I GXS.Scene.inc}
 
 interface
 

@@ -40,7 +40,7 @@ unit GXS.CUDARuntime;
 
 interface
 
-{$I gxscene.inc}
+{$I GXS.Scene.inc}
 
 uses
 {$IFDEF MSWINDOWS}

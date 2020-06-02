@@ -6,7 +6,7 @@
 }
 unit GXS.BitmapFont;
 
-{$I gxscene.inc}
+{$I GXS.Scene.inc}
 
 interface
 

@@ -1,10 +1,10 @@
 //
 // The unit for GXScene Engine
 //
-{
-  Editor frame for a TgxFaceProperties. 
-}
-unit FRFaceEditor;
+(*
+  Editor frame for a TRFaceProperties.
+*)
+unit GXS.FRFaceEditor;
 
 interface
 
@@ -22,8 +22,8 @@ uses
   FMX.StdCtrls,
   FMX.TabControl,
   FMX.Controls.Presentation,
+  FMX.Edit,
 
-  FRTrackBarEdit,
   FRColorEditor,
   GXS.Material;
 
@@ -36,17 +36,25 @@ type
     TISpecular: TTabItem;
     CEAmbiant: TRColorEditor;
     Label1: TLabel;
-    TBEShininess: TRTrackBarEdit;
     CEDiffuse: TRColorEditor;
     CEEmission: TRColorEditor;
     CESpecular: TRColorEditor;
-    procedure TBEShininessTrackBarChange(Sender: TObject);
+    TrackBar: TTrackBar;
+    Edit: TEdit;
+    procedure TrackBarChange(Sender: TObject);
+    procedure EditChange(Sender: TObject);
   private
     FOnChange: TNotifyEvent;
     Updating: Boolean;
     FFaceProperties: TgxFaceProperties;
     procedure SetFaceProperties(const val: TgxFaceProperties);
     procedure OnColorChange(Sender: TObject);
+    procedure SetValue(const val : Single);
+    function GetValue : Single;
+    procedure SetValueMin(const val : Single);
+    function GetValueMin : Single;
+    procedure SetValueMax(const val : Single);
+    function GetValueMax : Single;
   public
     constructor Create(AOwner: TComponent); override;
     destructor Destroy; override;
@@ -62,7 +70,7 @@ implementation
 {$R *.fmx}
 
 //---------------------------------------------------------
-{ TRFaceEditor }
+// TRFaceEditor
 //---------------------------------------------------------
 
 constructor TRFaceEditor.Create(AOwner: TComponent);
@@ -82,6 +90,52 @@ begin
   FFaceProperties.Free;
   inherited;
 end;
+
+procedure TRFaceEditor.EditChange(Sender: TObject);
+var
+   I : Integer;
+begin
+   try
+      I := StrToInt(Edit.Text);
+      TrackBar.Value := I;
+   except
+      // ignore
+   end;
+end;
+
+function TRFaceEditor.GetValue: Single;
+begin
+  Result := TrackBar.Value;
+end;
+
+function TRFaceEditor.GetValueMax: Single;
+begin
+  Result := TrackBar.Max;
+end;
+
+function TRFaceEditor.GetValueMin: Single;
+begin
+  Result := TrackBar.Min;
+end;
+
+procedure TRFaceEditor.SetValue(const val: Single);
+begin
+   TrackBar.Value := val;
+   TrackBarChange(Self);
+end;
+
+procedure TRFaceEditor.SetValueMax(const val: Single);
+begin
+  TrackBar.Max := val;
+  TrackBarChange(Self);
+end;
+
+procedure TRFaceEditor.SetValueMin(const val: Single);
+begin
+  TrackBar.Min := val;
+  TrackBarChange(Self);
+end;
+
 
 procedure TRFaceEditor.OnColorChange(Sender: TObject);
 var
@@ -129,12 +183,12 @@ begin
   end;
 end;
 
-procedure TRFaceEditor.TBEShininessTrackBarChange(Sender: TObject);
+procedure TRFaceEditor.TrackBarChange(Sender: TObject);
 begin
+  Edit.Text:=FloatToStr(TrackBar.Value);
   if not Updating then
   begin
-    TBEShininess.TrackBarChange(Sender);
-    FFaceProperties.Shininess := Round(TBEShininess.Value);
+    FFaceProperties.Shininess := Round(TrackBar.Value);
     if Assigned(FOnChange) then
       FOnChange(Self);
   end;
@@ -148,12 +202,12 @@ begin
     CEDiffuse.Color := val.Diffuse.Color;
     CEEmission.Color := val.Emission.Color;
     CESpecular.Color := val.Specular.Color;
-    TBEShininess.Value := val.Shininess;
+    TrackBar.Value := val.Shininess;
   finally
     Updating := False;
   end;
   OnColorChange(Self);
-  TBEShininessTrackBarChange(Self);
+  TrackBarChange(Self);
 end;
 
 end.

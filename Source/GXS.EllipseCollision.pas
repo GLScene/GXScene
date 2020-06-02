@@ -8,7 +8,7 @@ unit GXS.EllipseCollision;
 
 interface
 
-{$I gxscene.inc}
+{$I GXS.Scene.inc}
 
 uses
   GXS.VectorGeometry,

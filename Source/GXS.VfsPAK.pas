@@ -10,7 +10,7 @@
 
 unit GXS.VfsPAK;
 
-{$I gxscene.inc}
+{$I GXS.Scene.inc}
 // Activate support for LZRW1 compression. 
 // Remove the "." characted in order to activate compression features.
 {.$DEFINE GXS_LZRW_SUPPORT}

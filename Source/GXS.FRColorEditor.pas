@@ -4,7 +4,7 @@
 {
   RGB+Alpha color editor.
 }
-unit FRColorEditor;
+unit GXS.FRColorEditor;
 
 interface
 

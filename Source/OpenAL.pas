@@ -42,10 +42,11 @@ unit OpenAL;
 
 interface
 
-{$I gxscene.inc}
+{$I GXS.Scene.inc}
 
 uses
-  System.SysUtils{$IFDEF MSWINDOWS},Winapi.Windows{$ENDIF};
+  System.SysUtils
+  {$IFDEF MSWINDOWS},Winapi.Windows{$ENDIF};
 
 { $ DEFINE ALUT} //define ALUT to use alut.dll
 

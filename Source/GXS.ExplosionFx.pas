@@ -23,7 +23,7 @@ unit GXS.ExplosionFx;
 
 interface
 
-{$I gxscene.inc}
+{$I GXS.Scene.inc}
 
 uses
   OpenGLx,

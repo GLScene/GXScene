@@ -12,7 +12,7 @@ interface
 uses
   GXS.VectorGeometry;
 
-{$I gxscene.inc}
+{$I GXS.Scene.inc}
 
 type
 

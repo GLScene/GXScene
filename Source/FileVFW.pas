@@ -1,9 +1,15 @@
-unit GXS.Vfw;
+//
+// This unit is part of the GXScene Engine, http://glscene.org
+//
+(*
+   Video for windows
+*)
+unit FileVFW;
 
 interface
 
 {.$UNDEF UNICODE}
-{$I gxscene.inc}
+{$I GXS.Scene.inc}
 
 (****************************************************************************
  *
@@ -77,10 +83,11 @@ interface
 (******************************************************************************)
 
 uses
-    Winapi.Windows, Winapi.Messages, Winapi.MMSystem,   Winapi.CommDlg,
-    Winapi.ActiveX,
-
-    FMX.Dialogs;
+    Winapi.Windows,
+    Winapi.MMSystem,
+    Winapi.Messages,
+    Winapi.CommDlg,
+    Winapi.ActiveX;
 
 (****************************************************************************
  *

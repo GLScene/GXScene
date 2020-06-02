@@ -13,7 +13,7 @@ unit GXS.SMBASS;
 
 interface
 
-{$I gxscene.inc}
+{$I GXS.Scene.inc}
 
 uses
   Winapi.Windows,

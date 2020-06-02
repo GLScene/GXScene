@@ -265,7 +265,6 @@ contains
   GXS.VerletSkeletonColliders in '..\..\Source\GXS.VerletSkeletonColliders.pas',
   GXS.VerletTypes in '..\..\Source\GXS.VerletTypes.pas',
   GXS.VfsPAK in '..\..\Source\GXS.VfsPAK.pas',
-  GXS.Vfw in '..\..\Source\GXS.Vfw.pas',
   GXS.WaterPlane in '..\..\Source\GXS.WaterPlane.pas',
   GXS.Windows in '..\..\Source\GXS.Windows.pas',
   GXS.WindowsFont in '..\..\Source\GXS.WindowsFont.pas',
@@ -274,7 +273,8 @@ contains
   OpenGLx in '..\..\Source\OpenGLx.pas',
   XOpenGL in '..\..\Source\XOpenGL.pas',
   XCollection in '..\..\Source\XCollection.pas',
-  Vulkan in '..\..\Source\Vulkan.pas';
+  Vulkan in '..\..\Source\Vulkan.pas',
+  FileVFW in '..\..\Source\FileVFW.pas';
 
 end.
 

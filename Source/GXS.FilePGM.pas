@@ -4,7 +4,7 @@
 
 unit GXS.FilePGM;
 
-{$I gxscene.inc}
+{$I GXS.Scene.inc}
 
 interface
 

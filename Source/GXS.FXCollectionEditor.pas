@@ -4,7 +4,7 @@
 (*
   Edits a TXCollection
 *)
-unit FXCollectionEditor;
+unit GXS.FXCollectionEditor;
 
 interface
 

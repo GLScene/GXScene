@@ -6,7 +6,7 @@ unit GXS.GLSLParameter;
 
 interface
 
-{$I gxscene.inc}
+{$I GXS.Scene.inc}
 {$M-}
 
 uses

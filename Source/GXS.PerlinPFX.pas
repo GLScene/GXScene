@@ -8,7 +8,7 @@ unit GXS.PerlinPFX;
 
 interface
 
-{$I gxscene.inc}
+{$I GXS.Scene.inc}
 
 uses
   System.Classes,

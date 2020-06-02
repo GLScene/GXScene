@@ -10,7 +10,7 @@ unit GXS.GeomObjects;
 
 interface
 
-{$I gxscene.inc}
+{$I GXS.Scene.inc}
 uses
   System.Classes,
   System.Math,

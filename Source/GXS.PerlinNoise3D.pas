@@ -9,7 +9,7 @@ unit GXS.PerlinNoise3D;
 
 interface
 
-{$I gxscene.inc}
+{$I GXS.Scene.inc}
 
 uses
   System.Math,

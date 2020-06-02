@@ -5,7 +5,7 @@
 
 unit GXS.ArchiveManager;
 
-{$I gxscene.inc}
+{$I GXS.Scene.inc}
 
 interface
 

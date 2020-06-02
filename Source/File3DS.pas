@@ -18,7 +18,7 @@ unit File3DS;
 
 interface
 
-{$I gxscene.inc}
+{$I GXS.Scene.inc}
 
 {$ALIGN ON}
 {$MINENUMSIZE 4}

@@ -10,7 +10,7 @@ unit File3DSUtils;
 
 interface
 
-{$I gxscene.inc}
+{$I GXS.Scene.inc}
 {$R-}
 
 uses

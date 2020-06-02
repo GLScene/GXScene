@@ -10,7 +10,7 @@ unit FileB3D;
 
 interface
 
-{$I gxscene.inc}
+{$I GXS.Scene.inc}
 {$R-}
 
 uses

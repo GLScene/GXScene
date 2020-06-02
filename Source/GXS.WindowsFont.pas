@@ -9,7 +9,7 @@ unit GXS.WindowsFont;
 
 interface
 
-{$I gxscene.inc}
+{$I GXS.Scene.inc}
 
 uses
 {$IFDEF MSWINDOWS}

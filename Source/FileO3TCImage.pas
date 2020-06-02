@@ -10,7 +10,7 @@ unit FileO3TCImage;
 
 interface
 
-{$I gxscene.inc}
+{$I GXS.Scene.inc}
 
 uses
   Winapi.Windows,

@@ -8,7 +8,7 @@ unit GXS.Texture;
 
 interface
 
-{$I gxscene.inc}
+{$I GXS.Scene.inc}
 
 uses
   System.Classes,

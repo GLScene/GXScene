@@ -10,7 +10,7 @@ unit FileMD2;
 interface
 
 {$R-}
-{$I gxscene.inc}
+{$I GXS.Scene.inc}
 
 uses
   System.Classes,

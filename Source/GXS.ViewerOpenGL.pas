@@ -9,7 +9,7 @@ unit GXS.ViewerOpenGL;
 
 interface
 
-{$I gxscene.inc}
+{$I GXS.Scene.inc}
 
 uses
   WinApi.Windows,

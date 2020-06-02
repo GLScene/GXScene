@@ -5,7 +5,7 @@
    Scene Editor, for adding + removing scene objects within the Delphi IDE.
 }
 
-unit FSceneEditor;
+unit GXS.FSceneEditor;
 
 interface
 

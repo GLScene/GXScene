@@ -7,7 +7,7 @@
 
 { TODO : Replace STImageClass with a dropdown (polymorphism) }
 
-unit FRTextureEdit;
+unit GXS.FRTextureEdit;
 
 interface
 

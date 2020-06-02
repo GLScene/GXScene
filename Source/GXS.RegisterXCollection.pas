@@ -1,14 +1,14 @@
 //
 // The unit for GXScene Engine
 //
-{
-  Register TXCollection property editor 
-}
+(*
+  Register TXCollection property editor
+*)
 unit GXS.RegisterXCollection;
 
 interface
 
-{$I gxscene.inc}
+{$I GXS.Scene.inc}
 
 uses
   System.Classes,
@@ -109,9 +109,8 @@ begin
 
 end;
 
+// ------------------------------------------------------------------
 initialization
-// ------------------------------------------------------------------
-// ------------------------------------------------------------------
 // ------------------------------------------------------------------
 
 	// class registrations

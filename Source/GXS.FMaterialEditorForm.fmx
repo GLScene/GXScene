@@ -54,18 +54,9 @@ object MaterialEditorForm: TMaterialEditorForm
             401s
             127s)
           inherited TIAmbient: TTabItem
-            Size.Width = 66.000000000000000000
-            Size.Height = 26.000000000000000000
             ExplicitSize.cx = 65.000000000000000000
             ExplicitSize.cy = 24.000000000000000000
             inherited CEAmbiant: TRColorEditor
-              Size.Height = 127.000000000000000000
-              inherited ColorEditorPaintBox: TPaintBox
-                Size.Height = 127.000000000000000000
-              end
-              inherited Panel1: TPanel
-                Size.Height = 121.000000000000000000
-              end
               inherited Label1: TLabel
                 TextSettings.Font.StyleExt = {00070000000000000004000000}
               end
@@ -81,18 +72,9 @@ object MaterialEditorForm: TMaterialEditorForm
             end
           end
           inherited TIDiffuse: TTabItem
-            Size.Width = 57.000000000000000000
-            Size.Height = 26.000000000000000000
             ExplicitSize.cx = 57.000000000000000000
             ExplicitSize.cy = 24.000000000000000000
             inherited CEDiffuse: TRColorEditor
-              Size.Height = 127.000000000000000000
-              inherited ColorEditorPaintBox: TPaintBox
-                Size.Height = 127.000000000000000000
-              end
-              inherited Panel1: TPanel
-                Size.Height = 121.000000000000000000
-              end
               inherited Label1: TLabel
                 TextSettings.Font.StyleExt = {00070000000000000004000000}
               end
@@ -108,18 +90,9 @@ object MaterialEditorForm: TMaterialEditorForm
             end
           end
           inherited TIEmission: TTabItem
-            Size.Width = 67.000000000000000000
-            Size.Height = 26.000000000000000000
             ExplicitSize.cx = 66.000000000000000000
             ExplicitSize.cy = 24.000000000000000000
             inherited CEEmission: TRColorEditor
-              Size.Height = 127.000000000000000000
-              inherited ColorEditorPaintBox: TPaintBox
-                Size.Height = 127.000000000000000000
-              end
-              inherited Panel1: TPanel
-                Size.Height = 121.000000000000000000
-              end
               inherited Label1: TLabel
                 TextSettings.Font.StyleExt = {00070000000000000004000000}
               end
@@ -135,18 +108,9 @@ object MaterialEditorForm: TMaterialEditorForm
             end
           end
           inherited TISpecular: TTabItem
-            Size.Width = 66.000000000000000000
-            Size.Height = 26.000000000000000000
             ExplicitSize.cx = 66.000000000000000000
             ExplicitSize.cy = 24.000000000000000000
             inherited CESpecular: TRColorEditor
-              Size.Height = 127.000000000000000000
-              inherited ColorEditorPaintBox: TPaintBox
-                Size.Height = 127.000000000000000000
-              end
-              inherited Panel1: TPanel
-                Size.Height = 121.000000000000000000
-              end
               inherited Label1: TLabel
                 TextSettings.Font.StyleExt = {00070000000000000004000000}
               end
@@ -195,18 +159,9 @@ object MaterialEditorForm: TMaterialEditorForm
             401s
             127s)
           inherited TIAmbient: TTabItem
-            Size.Width = 66.000000000000000000
-            Size.Height = 26.000000000000000000
             ExplicitSize.cx = 65.000000000000000000
             ExplicitSize.cy = 24.000000000000000000
             inherited CEAmbiant: TRColorEditor
-              Size.Height = 127.000000000000000000
-              inherited ColorEditorPaintBox: TPaintBox
-                Size.Height = 127.000000000000000000
-              end
-              inherited Panel1: TPanel
-                Size.Height = 121.000000000000000000
-              end
               inherited Label1: TLabel
                 TextSettings.Font.StyleExt = {00070000000000000004000000}
               end
@@ -222,18 +177,9 @@ object MaterialEditorForm: TMaterialEditorForm
             end
           end
           inherited TIDiffuse: TTabItem
-            Size.Width = 57.000000000000000000
-            Size.Height = 26.000000000000000000
             ExplicitSize.cx = 57.000000000000000000
             ExplicitSize.cy = 24.000000000000000000
             inherited CEDiffuse: TRColorEditor
-              Size.Height = 127.000000000000000000
-              inherited ColorEditorPaintBox: TPaintBox
-                Size.Height = 127.000000000000000000
-              end
-              inherited Panel1: TPanel
-                Size.Height = 121.000000000000000000
-              end
               inherited Label1: TLabel
                 TextSettings.Font.StyleExt = {00070000000000000004000000}
               end
@@ -249,18 +195,9 @@ object MaterialEditorForm: TMaterialEditorForm
             end
           end
           inherited TIEmission: TTabItem
-            Size.Width = 67.000000000000000000
-            Size.Height = 26.000000000000000000
             ExplicitSize.cx = 66.000000000000000000
             ExplicitSize.cy = 24.000000000000000000
             inherited CEEmission: TRColorEditor
-              Size.Height = 127.000000000000000000
-              inherited ColorEditorPaintBox: TPaintBox
-                Size.Height = 127.000000000000000000
-              end
-              inherited Panel1: TPanel
-                Size.Height = 121.000000000000000000
-              end
               inherited Label1: TLabel
                 TextSettings.Font.StyleExt = {00070000000000000004000000}
               end
@@ -276,18 +213,9 @@ object MaterialEditorForm: TMaterialEditorForm
             end
           end
           inherited TISpecular: TTabItem
-            Size.Width = 66.000000000000000000
-            Size.Height = 26.000000000000000000
             ExplicitSize.cx = 66.000000000000000000
             ExplicitSize.cy = 24.000000000000000000
             inherited CESpecular: TRColorEditor
-              Size.Height = 127.000000000000000000
-              inherited ColorEditorPaintBox: TPaintBox
-                Size.Height = 127.000000000000000000
-              end
-              inherited Panel1: TPanel
-                Size.Height = 121.000000000000000000
-              end
               inherited Label1: TLabel
                 TextSettings.Font.StyleExt = {00070000000000000004000000}
               end

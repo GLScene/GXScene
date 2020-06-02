@@ -27,7 +27,7 @@ unit GXS.EParticleMasksManager;
 
 interface
 
-{$I gxscene.inc}
+{$I GXS.Scene.inc}
 
 uses
   System.Types,

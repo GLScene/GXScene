@@ -462,9 +462,7 @@ object gxSceneEditorForm: TgxSceneEditorForm
               C6759BDE21BEFA750CE936F5359ECF9C5C43E3E96C816846252EE91E711C57D7
               421EF2F27FB05E87A38FE93F92643FF9355F00F806FB8E91035AB08710000000
               0049454E44AE426082}
-            FileName = 
-              'D:\VXScene\Resources\bitmaps\CharacterPanels.' +
-              'bmp'
+            FileName = 'D:\VXScene\Resources\bitmaps\CharacterPanels.bmp'
           end>
         Align = Client
         HitTest = False

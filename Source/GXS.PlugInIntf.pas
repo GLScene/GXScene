@@ -11,7 +11,7 @@ unit GXS.PlugInIntf;
 
 interface
 
-{$I gxscene.inc}
+{$I GXS.Scene.inc}
 
 type
   TPIServiceType = (stRaw, stObject, stBitmap, stTexture, stImport, stExport);

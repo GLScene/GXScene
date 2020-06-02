@@ -8,7 +8,7 @@ unit GXS.RenderContextInfo;
 
 interface
 
-{$I gxscene.inc}
+{$I GXS.Scene.inc}
 
 uses
   GXS.PersistentClasses,

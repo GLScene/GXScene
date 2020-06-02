@@ -9,7 +9,7 @@ unit FileDXTC;
 
 interface
 
-{$I gxscene.inc}
+{$I GXS.Scene.inc}
 {$Z4}  // Minimum enum size = dword
 
 uses

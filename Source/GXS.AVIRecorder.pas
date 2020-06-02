@@ -1,16 +1,15 @@
 //
 // The unit for GXScene Engine
 //
-{
-  Component to make it easy to record frames into an AVI file 
-
-}
+(*
+  Component to make it easy to record frames into an AVI file
+*)
 
 unit GXS.AVIRecorder;
 
 interface
 
-{$I gxscene.inc}
+{$I GXS.Scene.inc}
 
 uses
   Winapi.Windows,
@@ -26,37 +25,38 @@ uses
   FMX.Types,
 
   GXS.Graphics,
-  GXS.Vfw,
   GXS.Scene,
   GXS.Win64Viewer,
-  GXS.CrossPlatform;
+  GXS.CrossPlatform,
+
+  FileVFW;
 
 type
   TAVICompressor = (acDefault, acShowDialog, acDivX);
 
   PAVIStream = ^IAVIStream;
 
-  { Frame size restriction.
+  (* Frame size restriction.
     Forces frame dimensions to be a multiple of 2, 4, or 8. Some compressors
-    require this. e.g. DivX 5.2.1 requires mutiples of 2. }
+    require this. e.g. DivX 5.2.1 requires mutiples of 2. *)
   TAVISizeRestriction = (srNoRestriction, srForceBlock2x2, srForceBlock4x4,
     srForceBlock8x8);
 
   TAVIRecorderState = (rsNone, rsRecording);
 
-  { Image retrieval mode for frame capture.
+  (* Image retrieval mode for frame capture.
     Following modes are supported:
      irmSnapShot : retrieve OpenGL framebuffer content using glReadPixels
      irmRenderToBitmap : renders the whole scene to a bitmap, this is
     the slowest mode, but it won't be affected by driver-side specifics.
      irmBitBlt : tranfers the framebuffer using the BitBlt function,
-    usually the fastest solution }
+    usually the fastest solution *)
   TAVIImageRetrievalMode = (irmSnapShot, irmRenderToBitmap, irmBitBlt);
 
   TAVIRecorderPostProcessEvent = procedure(Sender: TObject; frame: TBitmap)
     of object;
 
-  { Component to make it easy to record GLScene frames into an AVI file. }
+  // Component to make it easy to record GLScene frames into an AVI file.
   TgxAVIRecorder = class(TComponent)
   private
     AVIBitmap: TBitmap;
@@ -169,8 +169,6 @@ begin
   ImageSize := BI.biSizeImage;
 end;
 
-// InternalGetDIB
-//
 function InternalGetDIB(Bitmap: HBITMAP; var bitmapInfo; var bits): boolean;
 var
   focus: HWND;

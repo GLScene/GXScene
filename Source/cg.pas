@@ -98,7 +98,7 @@ uses
   Winapi.Windows;
 {$ENDIF}
 
-{$I gxscene.inc}
+{$I GXS.Scene.inc}
 
 {$MINENUMSIZE 4}
 

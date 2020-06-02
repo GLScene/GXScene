@@ -15,7 +15,7 @@ unit GXS.SpaceText;
 
 interface
 
-{$I gxscene.inc}
+{$I GXS.Scene.inc}
 {$IFDEF UNIX}{$MESSAGE Error 'Unit not supported'}{$ENDIF}
 
 uses

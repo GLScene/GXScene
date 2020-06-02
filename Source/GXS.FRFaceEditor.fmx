@@ -1,6 +1,6 @@
 object RFaceEditor: TRFaceEditor
-  Size.Width = 433.000000000000000000
-  Size.Height = 232.000000000000000000
+  Size.Width = 424.000000000000000000
+  Size.Height = 230.000000000000000000
   Size.PlatformDefault = False
   object Label1: TLabel
     Position.X = 16.000000000000000000
@@ -10,17 +10,6 @@ object RFaceEditor: TRFaceEditor
     Size.PlatformDefault = False
     Text = 'Shininess'
   end
-  inline TBEShininess: TRTrackBarEdit
-    Position.X = 85.000000000000000000
-    Position.Y = 12.000000000000000000
-    Size.Width = 307.000000000000000000
-    Size.Height = 37.000000000000000000
-    Size.PlatformDefault = False
-    TabOrder = 1
-    inherited TrackBar: TTrackBar
-      OnChange = TBEShininessTrackBarChange
-    end
-  end
   object TabControl: TTabControl
     Position.X = 16.000000000000000000
     Position.Y = 64.000000000000000000
@@ -28,23 +17,24 @@ object RFaceEditor: TRFaceEditor
     Size.Height = 153.000000000000000000
     Size.PlatformDefault = False
     TabIndex = 2
-    TabOrder = 2
+    TabOrder = 1
     TabPosition = PlatformDefault
     Sizes = (
       401s
-      148s
+      127s
       401s
-      148s
+      127s
       401s
-      148s
+      127s
       401s
-      148s)
+      127s)
     object TIAmbient: TTabItem
       CustomIcon = <
         item
         end>
       IsSelected = False
-      Size.Height = 5.000000000000000000
+      Size.Width = 66.000000000000000000
+      Size.Height = 26.000000000000000000
       Size.PlatformDefault = False
       StyleLookup = ''
       TabOrder = 0
@@ -54,16 +44,16 @@ object RFaceEditor: TRFaceEditor
       inline CEAmbiant: TRColorEditor
         Align = Client
         Size.Width = 401.000000000000000000
-        Size.Height = 148.000000000000000000
+        Size.Height = 127.000000000000000000
         Size.PlatformDefault = False
         TabOrder = 0
         inherited ColorEditorPaintBox: TPaintBox
           Size.Width = 401.000000000000000000
-          Size.Height = 148.000000000000000000
+          Size.Height = 127.000000000000000000
         end
         inherited Panel1: TPanel
           Size.Width = 395.000000000000000000
-          Size.Height = 142.000000000000000000
+          Size.Height = 121.000000000000000000
         end
         inherited Label1: TLabel
           TextSettings.Font.StyleExt = {00070000000000000004000000}
@@ -84,7 +74,8 @@ object RFaceEditor: TRFaceEditor
         item
         end>
       IsSelected = False
-      Size.Height = 5.000000000000000000
+      Size.Width = 57.000000000000000000
+      Size.Height = 26.000000000000000000
       Size.PlatformDefault = False
       StyleLookup = ''
       TabOrder = 0
@@ -94,16 +85,16 @@ object RFaceEditor: TRFaceEditor
       inline CEDiffuse: TRColorEditor
         Align = Client
         Size.Width = 401.000000000000000000
-        Size.Height = 148.000000000000000000
+        Size.Height = 127.000000000000000000
         Size.PlatformDefault = False
         TabOrder = 0
         inherited ColorEditorPaintBox: TPaintBox
           Size.Width = 401.000000000000000000
-          Size.Height = 148.000000000000000000
+          Size.Height = 127.000000000000000000
         end
         inherited Panel1: TPanel
           Size.Width = 395.000000000000000000
-          Size.Height = 142.000000000000000000
+          Size.Height = 121.000000000000000000
         end
         inherited Label1: TLabel
           TextSettings.Font.StyleExt = {00070000000000000004000000}
@@ -124,7 +115,8 @@ object RFaceEditor: TRFaceEditor
         item
         end>
       IsSelected = True
-      Size.Height = 5.000000000000000000
+      Size.Width = 67.000000000000000000
+      Size.Height = 26.000000000000000000
       Size.PlatformDefault = False
       StyleLookup = ''
       TabOrder = 0
@@ -134,16 +126,16 @@ object RFaceEditor: TRFaceEditor
       inline CEEmission: TRColorEditor
         Align = Client
         Size.Width = 401.000000000000000000
-        Size.Height = 148.000000000000000000
+        Size.Height = 127.000000000000000000
         Size.PlatformDefault = False
         TabOrder = 0
         inherited ColorEditorPaintBox: TPaintBox
           Size.Width = 401.000000000000000000
-          Size.Height = 148.000000000000000000
+          Size.Height = 127.000000000000000000
         end
         inherited Panel1: TPanel
           Size.Width = 395.000000000000000000
-          Size.Height = 142.000000000000000000
+          Size.Height = 121.000000000000000000
         end
         inherited Label1: TLabel
           TextSettings.Font.StyleExt = {00070000000000000004000000}
@@ -164,7 +156,8 @@ object RFaceEditor: TRFaceEditor
         item
         end>
       IsSelected = False
-      Size.Height = 5.000000000000000000
+      Size.Width = 66.000000000000000000
+      Size.Height = 26.000000000000000000
       Size.PlatformDefault = False
       StyleLookup = ''
       TabOrder = 0
@@ -174,16 +167,16 @@ object RFaceEditor: TRFaceEditor
       inline CESpecular: TRColorEditor
         Align = Client
         Size.Width = 401.000000000000000000
-        Size.Height = 148.000000000000000000
+        Size.Height = 127.000000000000000000
         Size.PlatformDefault = False
         TabOrder = 0
         inherited ColorEditorPaintBox: TPaintBox
           Size.Width = 401.000000000000000000
-          Size.Height = 148.000000000000000000
+          Size.Height = 127.000000000000000000
         end
         inherited Panel1: TPanel
           Size.Width = 395.000000000000000000
-          Size.Height = 142.000000000000000000
+          Size.Height = 121.000000000000000000
         end
         inherited Label1: TLabel
           TextSettings.Font.StyleExt = {00070000000000000004000000}
@@ -199,5 +192,23 @@ object RFaceEditor: TRFaceEditor
         end
       end
     end
+  end
+  object TrackBar: TTrackBar
+    CanParentFocus = True
+    Orientation = Horizontal
+    Position.X = 80.000000000000000000
+    Position.Y = 24.000000000000000000
+    Size.Width = 193.000000000000000000
+    Size.Height = 19.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 2
+    OnChange = TrackBarChange
+  end
+  object Edit: TEdit
+    Touch.InteractiveGestures = [LongTap, DoubleTap]
+    TabOrder = 3
+    Position.X = 272.000000000000000000
+    Position.Y = 24.000000000000000000
+    OnChange = EditChange
   end
 end

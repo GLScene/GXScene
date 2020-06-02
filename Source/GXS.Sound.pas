@@ -24,7 +24,7 @@ uses
   GXS.CrossPlatform,
   GXS.Utils;
 
-{$I gxscene.inc}
+{$I GXS.Scene.inc}
 
 type
 

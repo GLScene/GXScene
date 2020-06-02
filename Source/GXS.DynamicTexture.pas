@@ -11,7 +11,7 @@ unit GXS.DynamicTexture;
 
 interface
 
-{$I gxscene.inc}
+{$I GXS.Scene.inc}
 
 uses
   System.Classes, System.SysUtils, Winapi.OpenGL, Winapi.OpenGLext,  GXS.Context, 

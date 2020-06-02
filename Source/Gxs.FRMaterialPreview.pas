@@ -1,11 +1,11 @@
 //
 // The unit for GXScene Engine
 //
-{
-   Material Preview frame. 
-}
+(*
+   Material Preview frame.
+*)
 
-unit FRMaterialPreview;
+unit GXS.FRMaterialPreview;
 
 interface
 

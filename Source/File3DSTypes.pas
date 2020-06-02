@@ -15,7 +15,7 @@ unit File3DSTypes;
 
 interface
 
-{$I gxscene.inc}
+{$I GXS.Scene.inc}
 
 uses
   System.Classes; // for TStringList

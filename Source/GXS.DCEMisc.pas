@@ -8,7 +8,7 @@ unit GXS.DCEMisc;
 
 interface
 
-{$I gxscene.inc}
+{$I GXS.Scene.inc}
 
 uses
   GXS.Coordinates,

@@ -4,7 +4,7 @@
 (*
    Editor window for a material (with preview).
 *)
-unit FMaterialEditorForm;
+unit GXS.FMaterialEditorForm;
 
 interface
 

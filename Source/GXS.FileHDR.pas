@@ -6,7 +6,7 @@
 }
 unit GXS.FileHDR;
 
-{$I gxscene.inc}
+{$I GXS.Scene.inc}
 
 interface
 

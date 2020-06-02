@@ -4,7 +4,7 @@
 {
  Allows choosing a material in a material library 
 }
-unit FLibMaterialPicker;
+unit GXS.FLibMaterialPicker;
 
 interface
 

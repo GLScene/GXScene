@@ -9,7 +9,7 @@ unit GXS.PerlinBase;
 
 interface
 
-{$I gxscene.inc}
+{$I GXS.Scene.inc}
 
 type
   T1DPerlinArray = array of Double;

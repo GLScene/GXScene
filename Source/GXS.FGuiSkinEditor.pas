@@ -4,7 +4,7 @@
 {
    Editor for Gui skin. 
 }
-unit FGuiSkinEditor;
+unit GXS.FGuiSkinEditor;
 
 interface
 

@@ -8,7 +8,7 @@ unit GXS.GLUTesselation;
 
 interface
 
-{$I gxscene.inc}
+{$I GXS.Scene.inc}
 
 uses
   System.SysUtils,

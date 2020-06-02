@@ -1,7 +1,7 @@
 //
 // The unit for GXScene Engine
 //
-unit FGUILayoutEditor;
+unit GXS.FGUILayoutEditor;
 
 interface
 

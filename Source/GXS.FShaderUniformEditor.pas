@@ -2,7 +2,7 @@
 // The unit is for GXScene Engine
 //
 
-unit FShaderUniformEditor;
+unit GXS.FShaderUniformEditor;
 
 interface
 

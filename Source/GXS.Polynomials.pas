@@ -14,7 +14,7 @@ unit GXS.Polynomials;
 
 interface
 
-{$I gxscene.inc}
+{$I GXS.Scene.inc}
 
 uses
   GXS.VectorGeometry;

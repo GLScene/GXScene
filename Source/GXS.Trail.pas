@@ -1,16 +1,16 @@
 //
 // The unit is for GXScene Engine
 //
-{
+(*
   Creates a trail-like mesh.
   Based on Jason Lanford's demo.
-}
+*)
 
 unit GXS.Trail;
 
 interface
 
-{$I gxscene.inc}
+{$I GXS.Scene.inc}
 
 uses
   System.Classes,
@@ -320,24 +320,18 @@ procedure TgxTrail.CreateMark(APos,ADir,AUp: TVector3f; AWidth: single;ACurrentT
 var
 apoint1,apoint2,crossp: TVector3f;
 begin
-
     if fMinDistance > 0 then
         if vectorDistance(APos,fLastPos) < fMinDistance then
            exit;
-
     fLastPos := APos;
     fLastDir := ADir;
     fLastUp := AUp;
-
     apoint1 := APos;
     apoint2 := APos;
     crossp :=  vectorcrossproduct(ADir,AUp);
-
     CombineVector( apoint1,vectornormalize(crossp),AWidth);
     CombineVector( apoint2,vectornormalize(VectorNegate(crossp)),AWidth);
-
     CreateMark( apoint1, apoint2,ACurrentTime);
-
 end;
 
 // NOTES and stuff:
@@ -444,11 +438,7 @@ begin
 end;
 
 // ------------------------------------------------------------------
-// ------------------------------------------------------------------
-// ------------------------------------------------------------------
 initialization
-// ------------------------------------------------------------------
-// ------------------------------------------------------------------
 // ------------------------------------------------------------------
 
    // class registrations

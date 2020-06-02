@@ -10,7 +10,7 @@ unit GXS.ApplicationFileIO;
 
 interface
 
-{$I gxscene.inc}
+{$I GXS.Scene.inc}
 
 uses
   Winapi.Windows,

@@ -135,57 +135,53 @@
         <DCCReference Include="rtl.dcp"/>
         <DCCReference Include="fmx.dcp"/>
         <DCCReference Include="GXScene_RT.dcp"/>
-        <DCCReference Include="..\..\Source\FGUILayoutEditor.pas">
+        <DCCReference Include="..\..\Source\GXS.FGUILayoutEditor.pas">
             <Form>FGUILayoutEditor</Form>
             <DesignClass>T</DesignClass>
         </DCCReference>
-        <DCCReference Include="..\..\Source\FInfo.pas">
+        <DCCReference Include="..\..\Source\GXS.FInfo.pas">
             <Form>FInfo</Form>
             <DesignClass>TForm</DesignClass>
         </DCCReference>
-        <DCCReference Include="..\..\Source\FRTextureEdit.pas">
+        <DCCReference Include="..\..\Source\GXS.FRTextureEdit.pas">
             <Form>FRTextureEdit</Form>
             <DesignClass>TFrame</DesignClass>
         </DCCReference>
-        <DCCReference Include="..\..\Source\FRTrackBarEdit.pas">
-            <Form>FRTrackBarEdit</Form>
-            <DesignClass>TFrame</DesignClass>
-        </DCCReference>
-        <DCCReference Include="..\..\Source\FXCollectionEditor.pas">
+        <DCCReference Include="..\..\Source\GXS.FXCollectionEditor.pas">
             <Form>FXCollectionEditor</Form>
         </DCCReference>
-        <DCCReference Include="..\..\Source\FLibMaterialPicker.pas">
+        <DCCReference Include="..\..\Source\GXS.FLibMaterialPicker.pas">
             <Form>FLibMaterialPicker</Form>
         </DCCReference>
-        <DCCReference Include="..\..\Source\FRMaterialPreview.pas">
+        <DCCReference Include="..\..\Source\GXS.FRMaterialPreview.pas">
             <Form>FRMaterialPreview</Form>
             <DesignClass>TFrame</DesignClass>
         </DCCReference>
-        <DCCReference Include="..\..\Source\FRFaceEditor.pas">
+        <DCCReference Include="..\..\Source\GXS.FRFaceEditor.pas">
             <Form>FRFaceEditor</Form>
             <DesignClass>TFrame</DesignClass>
         </DCCReference>
-        <DCCReference Include="..\..\Source\FRColorEditor.pas">
+        <DCCReference Include="..\..\Source\GXS.FRColorEditor.pas">
             <Form>FRColorEditor</Form>
             <DesignClass>TFrame</DesignClass>
         </DCCReference>
-        <DCCReference Include="..\..\Source\FPlugInManagerEditor.pas">
+        <DCCReference Include="..\..\Source\GXS.FPlugInManagerEditor.pas">
             <Form>FPlugInManagerEditor</Form>
         </DCCReference>
-        <DCCReference Include="..\..\Source\FMaterialEditorForm.pas">
+        <DCCReference Include="..\..\Source\GXS.FMaterialEditorForm.pas">
             <Form>FMaterialEditorForm</Form>
         </DCCReference>
-        <DCCReference Include="..\..\Source\FShaderMemo.pas">
+        <DCCReference Include="..\..\Source\GXS.FShaderMemo.pas">
             <Form>FShaderMemoForm</Form>
         </DCCReference>
-        <DCCReference Include="..\..\Source\FShaderUniformEditor.pas">
+        <DCCReference Include="..\..\Source\GXS.FShaderUniformEditor.pas">
             <Form>FShaderUniformEditorForm</Form>
         </DCCReference>
-        <DCCReference Include="..\..\Source\FGuiSkinEditor.pas">
+        <DCCReference Include="..\..\Source\GXS.FGuiSkinEditor.pas">
             <Form>FGUISkinEditor</Form>
             <DesignClass>TForm</DesignClass>
         </DCCReference>
-        <DCCReference Include="..\..\Source\FSceneEditor.pas">
+        <DCCReference Include="..\..\Source\GXS.FSceneEditor.pas">
             <Form>FSceneEditor</Form>
             <DesignClass>TForm</DesignClass>
         </DCCReference>

@@ -7,14 +7,14 @@
 
    Note: TgxBitmap32 has support for Alex Denissov's Graphics32 library
    (http://www.g32.org), just make sure the USE_GRAPHICS32 conditionnal
-   is active in GXScene.inc and recompile.
+   is active in GXS.Scene.inc and recompile.
 }
 
 unit GXS.Graphics;
 
 interface
 
-{$I gxscene.inc}
+{$I GXS.Scene.inc}
 
 uses
   Winapi.Windows,

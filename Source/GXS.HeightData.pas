@@ -19,7 +19,7 @@ unit GXS.HeightData;
 
 interface
 
-{$I gxscene.inc}
+{$I GXS.Scene.inc}
 
 uses
   Winapi.Windows, // for CreateMonochromeBitmap

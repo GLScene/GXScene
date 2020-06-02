@@ -8,7 +8,7 @@ unit GXS.GLSLShader;
 
 interface
 
-{$I gxscene.inc}
+{$I GXS.Scene.inc}
 
 uses
   System.Classes,

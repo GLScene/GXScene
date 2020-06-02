@@ -22,7 +22,7 @@ uses
   GXS.VectorTypes,
   XOpenGL;
 
-{$I gxscene.inc}
+{$I GXS.Scene.inc}
 
 type
   TgxNode = class(TCollectionItem)

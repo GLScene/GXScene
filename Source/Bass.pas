@@ -11,7 +11,7 @@ unit Bass;
 
 interface
 
-{$I gxscene.inc}
+{$I GXS.Scene.inc}
 
 {$IFDEF MSWINDOWS}
 uses

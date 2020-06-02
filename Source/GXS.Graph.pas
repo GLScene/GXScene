@@ -18,15 +18,15 @@ uses
   XOpenGL,
   GXS.Scene,
   GXS.Context,
-  GXS.VectorGeometry,
+  Scene.VectorGeometry,
   GXS.Material,
   GXS.Objects,
-  GXS.VectorLists,
+  Scene.VectorLists,
   GXS.Color,
   GXS.BaseClasses,
   GXS.RenderContextInfo,
   GXS.State,
-  GXS.VectorTypes;
+  Scene.VectorTypes;
 
 type
 

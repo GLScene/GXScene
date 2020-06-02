@@ -18,10 +18,10 @@ uses
   OpenGLx,
   XCollection,
   GXS.Scene,
-  GXS.VectorTypes,
-  GXS.VectorGeometry,
+  Scene.VectorTypes,
+  Scene.VectorGeometry,
 
-  GXS.PersistentClasses,
+  Scene.PersistentClasses,
   GXS.Context,
   GXS.Material,
   GXS.CrossPlatform,

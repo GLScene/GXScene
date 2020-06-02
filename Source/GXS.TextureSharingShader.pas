@@ -21,13 +21,13 @@ uses
 
   XOpenGL,
   GXS.Scene,
-  GXS.VectorGeometry,
+  Scene.VectorGeometry,
   GXS.Color,
   GXS.Material,
-  GXS.Strings,
+  Scene.Strings,
   GXS.VectorFileObjects,
   GXS.State,
-  GXS.PersistentClasses,
+  Scene.PersistentClasses,
   GXS.Coordinates,
   GXS.RenderContextInfo;
 

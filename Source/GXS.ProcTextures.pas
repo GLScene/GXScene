@@ -19,7 +19,7 @@ uses
   GXS.Graphics,
   GXS.CrossPlatform,
   GXS.TextureFormat,
-  GXS.VectorGeometry;
+  Scene.VectorGeometry;
 
 const
   GRADIENT_TABLE_SIZE = 256;

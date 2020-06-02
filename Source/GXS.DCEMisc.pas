@@ -14,13 +14,13 @@ uses
   GXS.Coordinates,
   GXS.VectorFileObjects,
   GXS.EllipseCollision,
-  GXS.VectorGeometry,
-  GXS.VectorLists,
+  Scene.VectorGeometry,
+  Scene.VectorLists,
   GXS.Scene,
   GXS.TerrainRenderer,
   GXS.ProxyObjects,
   GXS.MultiProxy,
-  GXS.VectorTypes;
+  Scene.VectorTypes;
 
 //Calculate and set the collision range
 procedure ECSetCollisionRange(var MovePack: TECMovePack);

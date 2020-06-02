@@ -35,7 +35,7 @@ uses
   GXS.Scene,
   GXS.Win64Viewer,
   GXS.SceneRegister,
-  GXS.Strings,
+  Scene.Strings,
   FInfo,
   GXS.XCollection,
   GXS.CrossPlatform;

@@ -17,9 +17,9 @@ uses
   System.Math,
 
   OpenGLx,
-  GXS.PersistentClasses,
+  Scene.PersistentClasses,
   GXS.Scene,
-  GXS.VectorGeometry,
+  Scene.VectorGeometry,
   GXS.Objects,
   GXS.PipelineTransformation,
   GXS.Context,
@@ -27,7 +27,7 @@ uses
   GXS.BaseClasses,
   GXS.RenderContextInfo,
   GXS.State,
-  GXS.VectorTypes,
+  Scene.VectorTypes,
   GXS.Utils,
   GXS.TextureFormat;
 

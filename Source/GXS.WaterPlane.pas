@@ -20,15 +20,15 @@ uses
   FMX.Graphics,
 
   OpenGLx,
-  GXS.VectorGeometry,
+  Scene.VectorGeometry,
   GXS.Scene,
-  GXS.VectorLists,
+  Scene.VectorLists,
   GXS.CrossPlatform,
-  GXS.PersistentClasses,
+  Scene.PersistentClasses,
   GXS.BaseClasses,
   GXS.Context,
   GXS.RenderContextInfo,
-  GXS.VectorTypes;
+  Scene.VectorTypes;
 
 type
 

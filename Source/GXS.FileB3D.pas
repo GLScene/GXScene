@@ -17,9 +17,9 @@ uses
   GXS.Texture,
   GXS.TextureFormat,
   GXS.Material,
-  GXS.VectorTypes,
-  GXS.VectorGeometry,
-  GXS.VectorLists,
+  Scene.VectorTypes,
+  Scene.VectorGeometry,
+  Scene.VectorLists,
 
   FileB3D;
 

@@ -27,7 +27,7 @@ uses
   GXS.MultisampleImage,
   GXS.Graphics,
   GXS.TextureFormat,
-  GXS.VectorTypes;
+  Scene.VectorTypes;
 
 
 const

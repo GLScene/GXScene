@@ -16,7 +16,7 @@ uses
   System.SysUtils,
 
   OpenGLx,
-  GXS.VectorTypes,
+  Scene.VectorTypes,
   GXS.Scene,
   GXS.Coordinates,
   GXS.Material,

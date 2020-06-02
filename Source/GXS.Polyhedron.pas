@@ -15,7 +15,7 @@ uses
   GXS.Scene,
   GXS.VectorFileObjects,
   GXS.Objects,
-  GXS.VectorGeometry,
+  Scene.VectorGeometry,
   GXS.RenderContextInfo;
 
 type

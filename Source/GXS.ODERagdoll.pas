@@ -15,7 +15,7 @@ uses
   GXS.Ragdoll,
   GXS.Scene,
   GXS.Objects,
-  GXS.VectorGeometry,
+  Scene.VectorGeometry,
   GXS.Texture,
   GXS.VectorFileObjects;
 

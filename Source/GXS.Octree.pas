@@ -13,9 +13,9 @@ interface
 
 uses
   System.Classes,
-  GXS.VectorTypes,
-  GXS.VectorGeometry,
-  GXS.VectorLists,
+  Scene.VectorTypes,
+  Scene.VectorGeometry,
+  Scene.VectorLists,
   GXS.GeometryBB,
   GXS.Context;
 

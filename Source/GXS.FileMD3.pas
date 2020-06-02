@@ -14,7 +14,7 @@ uses
   GXS.VectorFileObjects,
   GXS.Material,
   GXS.ApplicationFileIO,
-  GXS.VectorGeometry,
+  Scene.VectorGeometry,
   GXS.Texture,
 
   FileMD3;

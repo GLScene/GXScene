@@ -16,9 +16,9 @@ uses
   System.Classes,
   GXS.Scene,
   GXS.VectorFileObjects,
-  GXS.VectorTypes,
-  GXS.VectorGeometry,
-  GXS.VectorLists;
+  Scene.VectorTypes,
+  Scene.VectorGeometry,
+  Scene.VectorLists;
 
 procedure BuildCube(Mesh: TgxMeshObject; Position, Scale: TAffineVector);
 procedure BuildCylinder(Mesh: TgxMeshObject; Position, Scale: TAffineVector;

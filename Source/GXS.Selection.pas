@@ -14,10 +14,10 @@ uses
 
   OpenGLx,
   GXS.Context,
-  GXS.VectorLists,
-  GXS.VectorGeometry,
+  Scene.VectorLists,
+  Scene.VectorGeometry,
   GXS.BaseClasses,
-  GXS.PersistentClasses;
+  Scene.PersistentClasses;
 
  const
   MAX_OBJECT_STACK_DEPTH = 512;

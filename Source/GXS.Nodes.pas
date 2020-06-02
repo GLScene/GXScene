@@ -14,12 +14,12 @@ uses
   System.Math,
 
   OpenGLx,
-  GXS.VectorGeometry,
+  Scene.VectorGeometry,
   GXS.Context,
   GXS.BaseClasses,
   GXS.Coordinates,
   GXS.Spline,
-  GXS.VectorTypes,
+  Scene.VectorTypes,
   XOpenGL;
 
 {$I GXS.Scene.inc}

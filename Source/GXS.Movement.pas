@@ -20,15 +20,15 @@ uses
 
   OpenGLx,
   XCollection,
-  GXS.PersistentClasses,
+  Scene.PersistentClasses,
   GXS.Scene,
-  GXS.VectorGeometry,
+  Scene.VectorGeometry,
   GXS.Spline,
   GXS.Objects,
   GXS.CrossPlatform,
-  GXS.Strings,
+  Scene.Strings,
   GXS.BaseClasses,
-  GXS.VectorTypes;
+  Scene.VectorTypes;
 
 type
 

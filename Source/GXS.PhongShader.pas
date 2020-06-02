@@ -16,10 +16,10 @@ uses
   System.SysUtils,
 
   OpenGLx,
-  GXS.VectorTypes,
+  Scene.VectorTypes,
   GXS.Texture, 
-  GXS.VectorGeometry, 
-  GXS.VectorLists, 
+  Scene.VectorGeometry, 
+  Scene.VectorLists, 
   GXS.Context,
   GXS.AsmShader, 
   GXS.RenderContextInfo, 

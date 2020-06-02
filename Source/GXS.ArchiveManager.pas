@@ -13,8 +13,8 @@ uses
   System.Classes,
   System.SysUtils,
   
-  GXS.Strings,
-  GXS.PersistentClasses,
+  Scene.Strings,
+  Scene.PersistentClasses,
   GXS.ApplicationFileIO;
 
 Type

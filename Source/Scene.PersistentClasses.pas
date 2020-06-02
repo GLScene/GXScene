@@ -1,18 +1,17 @@
 //
 // The unit is for GXScene Engine
 //
-{
+(*
    Base persistence classes.
 
    These classes are used in GXScene, but are designed for generic purpose.
-   They implement a slightly different persistence mechanism than that of the FMX,
+   They implement a slightly different persistence mechanism than that of the VCL/FMX,
    allowing for object-level versioning (100% backward compatibility) and full
    polymorphic persistence.
 
    Internal Note: stripped down versions of XClasses & XLists.
-
-}
-unit GXS.PersistentClasses;
+*)
+unit Scene.PersistentClasses;
 
 interface
 {$I GXS.Scene.inc}
@@ -21,8 +20,7 @@ uses
   System.Classes,
   System.SysUtils,
 
-  GXS.CrossPlatform,
-  GXS.Strings;
+  Scene.Strings;
 
 type
   PObject = ^TObject;

@@ -15,13 +15,13 @@ uses
 
   OpenGLx,
   GXS.Scene,
-  GXS.PersistentClasses,
+  Scene.PersistentClasses,
   GXS.State,
-  GXS.VectorGeometry,
+  Scene.VectorGeometry,
   GXS.PipelineTransformation,
   GXS.Context,
   GXS.RenderContextInfo,
-  GXS.VectorTypes;
+  Scene.VectorTypes;
 
 type
 

@@ -12,8 +12,8 @@ uses
   System.Classes,
 
   GXS.VectorFileObjects,
-  GXS.VectorGeometry,
-  GXS.VectorLists,
+  Scene.VectorGeometry,
+  Scene.VectorLists,
   GXS.ApplicationFileIO;
 
 const

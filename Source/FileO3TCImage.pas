@@ -21,7 +21,7 @@ uses
 
   OpenGLx,
   GXS.CrossPlatform,
-  GXS.VectorGeometry,
+  Scene.VectorGeometry,
   GXS.Graphics,
   GXS.FileO3TC,
   GXS.TextureFormat;

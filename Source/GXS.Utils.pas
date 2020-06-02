@@ -1,10 +1,10 @@
 //
 // The unit is for GXScene Engine
 //
-{
+(*
    Miscellaneous support utilities & classes.
    The history is logged in a former GLS version of the unit.
-}
+*)
 unit GXS.Utils;
 
 interface
@@ -14,22 +14,25 @@ interface
 uses
   System.Classes,
   System.SysUtils,
+  System.StrUtils,
   System.UITypes,
   System.UIConsts,
+
   FMX.Graphics,
   FMX.Controls,
   FMX.Dialogs,
 
-  GXS.VectorGeometry,
-  GXS.Strings,
-  GXS.CrossPlatform;
+  Scene.VectorGeometry,
+  Scene.Strings,
+
+  GXS.ApplicationFileIO;
 
 type
   EGLUtilsException = class(Exception);
   TSqrt255Array = array[0..255] of Byte;
   PSqrt255Array = ^TSqrt255Array;
 
-  // Copies the values of Source to Dest (converting word values to integer values)
+// Copies the values of Source to Dest (converting word values to integer values)
 procedure WordToIntegerArray(Source: PWordArray; Dest: PIntegerArray; Count: Cardinal);
 // Round ups to the nearest power of two, value must be positive
 function RoundUpToPowerOf2(value: Integer): Integer;
@@ -37,8 +40,8 @@ function RoundUpToPowerOf2(value: Integer): Integer;
 function RoundDownToPowerOf2(value: Integer): Integer;
 // Returns True if value is a true power of two
 function IsPowerOf2(value: Integer): Boolean;
-{ Read a CRLF terminated string from a stream. 
-   The CRLF is NOT in the returned string. }
+(* Read a CRLF terminated string from a stream.
+   The CRLF is NOT in the returned string. *)
 function ReadCRLFString(aStream: TStream): AnsiString;
 // Write the string and a CRLF in the stream
 procedure WriteCRLFString(aStream: TStream; const aString: AnsiString);
@@ -54,53 +57,50 @@ function TryStringToColorAdvanced(const Str: string; var OutColor: TColor): Bool
 // Converts a string into color
 function StringToColorAdvanced(const Str: string): TColor;
 
-{ Parses the next integer in the string. 
+(* Parses the next integer in the string.
    Initial non-numeric characters are skipper, p is altered, returns 0 if none
-   found. '+' and '-' are acknowledged. }
+   found. '+' and '-' are acknowledged. *)
 function ParseInteger(var p: PChar): Integer;
-{ Parses the next integer in the string.
+(* Parses the next integer in the string.
    Initial non-numeric characters are skipper, p is altered, returns 0 if none
-   found. Both '.' and ',' are accepted as decimal separators. }
+   found. Both '.' and ',' are accepted as decimal separators. *)
 function ParseFloat(var p: PChar): Extended;
 
-{ Saves "data" to "filename". }
+// Saves "data" to "filename".
 procedure SaveAnsiStringToFile(const fileName: string; const data: AnsiString);
-{ Returns the content of "filename". }
+// Returns the content of "filename".
 function LoadAnsiStringFromFile(const fileName: string): AnsiString;
 
-{ Saves component to a file. }
+// Saves component to a file.
 procedure SaveComponentToFile(const Component: TComponent; const FileName: string; const AsText: Boolean = True);
-{ Loads component from a file. }
+// Loads component from a file.
 procedure LoadComponentFromFile(const Component: TComponent; const FileName: string; const AsText: Boolean = True);
 
-{ Returns the size of "filename". 
-   Returns 0 (zero) is file does not exists. }
+(* Returns the size of "filename".
+   Returns 0 (zero) is file does not exists. *)
 function SizeOfFile(const fileName: string): Int64;
 
-{ Returns a pointer to an array containing the results of "255*sqrt(i/255)". }
+// Returns a pointer to an array containing the results of "255*sqrt(i/255)".
 function GetSqrt255Array: PSqrt255Array;
 
-{ Pops up a simple dialog with msg and an Ok button. }
+// Pops up a simple dialog with msg and an Ok button.
 procedure InformationDlg(const msg: string);
-{ Pops up a simple question dialog with msg and yes/no buttons. 
-   Returns True if answer was "yes". }
+(* Pops up a simple question dialog with msg and yes/no buttons.
+   Returns True if answer was "yes". *)
 function QuestionDlg(const msg: string): Boolean;
-{ Posp a simple dialog with a string input. }
+// Posp a simple dialog with a string input.
 function InputDlg(const aCaption, aPrompt, aDefault: string): string;
 
-{ Pops up a simple save picture dialog. }
+// Pops up a simple save picture dialog.
 function SavePictureDialog(var AFileName: string; const ATitle: string = ''): Boolean;
-{ Pops up a simple open picture dialog. }
+// Pops up a simple open picture dialog.
 function OpenPictureDialog(var AFileName: string; const ATitle: string = ''): Boolean;
 
-procedure SetGXSceneMediaDir();
+procedure SetSceneMediaDir();
 
 //------------------------------------------------------
 implementation
 //------------------------------------------------------
-
-uses
-  GXS.ApplicationFileIO;
 
 var
   vSqrt255: TSqrt255Array;
@@ -574,14 +574,14 @@ begin
   end;
 end;
 
-procedure SetGXSceneMediaDir();
+procedure SetSceneMediaDir();
 var
   path: String;
   p: Integer;
 begin
    path := ParamStr(0);
    path := LowerCase(ExtractFilePath(path));
-   p := Pos('samples', path);
+   p := Pos('demos', path);
    Delete(path, p+7, Length(path));
    path := IncludeTrailingPathDelimiter(path) + 'media';
    SetCurrentDir(path);

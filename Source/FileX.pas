@@ -13,10 +13,10 @@ interface
 uses
   System.Classes,
   System.SysUtils,
-  GXS.VectorTypes,
-  GXS.VectorGeometry,
-  GXS.VectorLists,
-  GXS.PersistentClasses,
+  Scene.VectorTypes,
+  Scene.VectorGeometry,
+  Scene.VectorLists,
+  Scene.PersistentClasses,
   GXS.Utils;
 
 type

@@ -225,7 +225,7 @@ implementation
 
 uses
   System.SysUtils,
-  GXS.Strings,
+  Scene.Strings,
   GXS.TextureFormat;
 
 

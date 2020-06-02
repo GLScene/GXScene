@@ -14,7 +14,7 @@ uses
   System.Math,
 
   OpenGLx,
-  GXS.VectorGeometry,
+  Scene.VectorGeometry,
   GXS.CrossPlatform,
   GXS.Context,
   GXS.Graphics,

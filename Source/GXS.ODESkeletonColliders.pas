@@ -12,8 +12,8 @@ uses
   System.Classes,
 
   ODEImport,
-  GXS.PersistentClasses,
-  GXS.VectorGeometry,
+  Scene.PersistentClasses,
+  Scene.VectorGeometry,
   GXS.VectorFileObjects;
 
 type

@@ -25,10 +25,10 @@ uses
   FMX.Controls.Presentation,
   FMX.Objects,
 
-  GXS.VectorGeometry,
+  Scene.VectorGeometry,
   GXS.Color,
   GXS.Texture,
-  GXS.VectorTypes,
+  Scene.VectorTypes,
   GXS.Crossplatform;
 
 type

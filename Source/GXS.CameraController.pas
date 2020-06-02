@@ -31,12 +31,12 @@ uses
   System.Math, 
   System.Contnrs,
   
-  GXS.PersistentClasses,
+  Scene.PersistentClasses,
   GXS.Scene,
-  GXS.VectorGeometry,
+  Scene.VectorGeometry,
   GXS.Coordinates,
   GXS.SmoothNavigator, 
-  GXS.VectorTypes;
+  Scene.VectorTypes;
 
 type
 

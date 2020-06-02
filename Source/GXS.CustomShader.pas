@@ -19,16 +19,16 @@ uses
   System.SysUtils,
 
   OpenGLx,
-  GXS.VectorGeometry,
-  GXS.VectorTypes, 
+  Scene.VectorGeometry,
+  Scene.VectorTypes, 
   GXS.Texture, 
   GXS.Cadencer, 
   GXS.Scene,
-  GXS.Strings, 
+  Scene.Strings, 
   GXS.Context,
   GXS.RenderContextInfo, 
   GXS.Material,
-  GXS.VectorLists, 
+  Scene.VectorLists, 
   GXS.TextureFormat, 
   GXS.GLSLParameter;
 

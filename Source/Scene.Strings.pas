@@ -1,11 +1,11 @@
 //
 // The unit is for GXScene Engine
 //
-{
+(*
    String constants that are used in many GXScene units
-}
+*)
 
-unit GXS.Strings;
+unit Scene.Strings;
 
 interface
 

@@ -47,10 +47,10 @@ uses
   System.SysUtils,
   FMX.Dialogs,
 
-  GXS.VectorTypes,
+  Scene.VectorTypes,
   GXS.CUDAAPI,
   GXS.CUDARunTime,
-  GXS.Strings;
+  Scene.Strings;
 
 
 const

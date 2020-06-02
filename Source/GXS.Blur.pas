@@ -18,11 +18,11 @@ uses
   FMX.Graphics,
 
   OpenGLx,
-  GXS.VectorTypes,
-  GXS.PersistentClasses,
+  Scene.VectorTypes,
+  Scene.PersistentClasses,
   GXS.Scene,
   GXS.Coordinates,
-  GXS.VectorGeometry,
+  Scene.VectorGeometry,
   GXS.Objects,
   GXS.BitmapFont,
   GXS.Texture,
@@ -32,7 +32,7 @@ uses
   GXS.Graphics,
   GXS.Context,
   GXS.State,
-  GXS.Strings,
+  Scene.Strings,
   GXS.TextureFormat,
   GXS.BaseClasses,
   GXS.RenderContextInfo;

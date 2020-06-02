@@ -26,9 +26,9 @@ uses
 
   OpenGLx,
   GXS.CrossPlatform,
-  GXS.Strings,
+  Scene.Strings,
   GXS.TextureFormat,
-  GXS.VectorGeometry;
+  Scene.VectorGeometry;
 
 var
   vImageScaleFilterWidth: Integer = 5; // Relative sample radius for filtering

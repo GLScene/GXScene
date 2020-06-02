@@ -20,9 +20,9 @@ uses
 
   GXS.VectorFileObjects,
   GXS.ApplicationFileIO,
-  GXS.VectorGeometry,
-  GXS.VectorTypes,
-  GXS.VectorLists,
+  Scene.VectorGeometry,
+  Scene.VectorTypes,
+  Scene.VectorLists,
   GXS.BSP,
   GXS.Texture,
   GXS.Graphics,

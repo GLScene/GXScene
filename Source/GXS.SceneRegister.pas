@@ -33,7 +33,7 @@ uses
   DesignEditors,
   *)
   
-  GXS.Strings,
+  Scene.Strings,
   GXS.Scene,
   GXS.Context,
   GXS.Color,
@@ -382,7 +382,7 @@ uses
   GXS.SmoothNavigator,
   GXS.SMWaveOut,
   GXS.State,
-  GXS.Strings,
+  Scene.Strings,
   GXS.Teapot,
   GXS.TerrainRenderer,
   GXS.TexCombineShader,
@@ -406,8 +406,8 @@ uses
   GXS.Windows,
   GXS.WindowsFont,
   GXS.zBuffer,
-  GXS.VectorTypes,
-  GXS.VectorGeometry,
+  Scene.VectorTypes,
+  Scene.VectorGeometry,
   // Image file formats
   FileDDSImage,
   GXS.FileTGA,

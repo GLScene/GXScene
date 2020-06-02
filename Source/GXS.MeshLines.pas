@@ -17,7 +17,7 @@ uses
   GXS.Scene,
   GXS.Objects,
   GXS.Texture,
-  GXS.VectorTypes,
+  Scene.VectorTypes,
   GXS.VectorFileObjects,
   GXS.Coordinates,
   GXS.Context,
@@ -25,9 +25,9 @@ uses
   GXS.Color,
   GXS.State,
   GXS.Nodes,
-  GXS.VectorGeometry,
+  Scene.VectorGeometry,
   GXS.Spline,
-  GXS.VectorLists,
+  Scene.VectorLists,
   GXS.RenderContextInfo;
 
 type

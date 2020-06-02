@@ -21,7 +21,7 @@ uses
   FMX.Graphics,
 
   GXS.CrossPlatform,
-  GXS.VectorGeometry,
+  Scene.VectorGeometry,
   GXS.PerlinBase, 
   GXS.HeightData;
 

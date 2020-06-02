@@ -16,10 +16,10 @@ uses
   
   OpenGLx,
   XOpenGL,
-  GXS.VectorGeometry,
+  Scene.VectorGeometry,
   GXS.HeightData,
   GXS.Isolines,
-  GXS.VectorLists,
+  Scene.VectorLists,
   GXS.Context;
 
 type

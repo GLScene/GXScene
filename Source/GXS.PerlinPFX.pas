@@ -18,7 +18,7 @@ uses
   GXS.ParticleFX,
   GXS.Graphics,
   GXS.PerlinNoise3D,
-  GXS.VectorGeometry;
+  Scene.VectorGeometry;
 
 type
 

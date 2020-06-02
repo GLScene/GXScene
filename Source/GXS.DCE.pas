@@ -32,8 +32,8 @@ uses
 
   XCollection,
   GXS.Scene,
-  GXS.VectorGeometry,
-  GXS.VectorLists,
+  Scene.VectorGeometry,
+  Scene.VectorLists,
   GXS.VectorFileObjects,
   GXS.CrossPlatform,
   GXS.DCEMisc,
@@ -42,7 +42,7 @@ uses
   GXS.Coordinates,
   GXS.BaseClasses,
   GXS.Manager,
-  GXS.VectorTypes;
+  Scene.VectorTypes;
 
 type
   { Only csEllipsoid can have dynamic behaviour }

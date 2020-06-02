@@ -15,7 +15,7 @@ uses
   GXS.Coordinates,
   GXS.Win64Viewer,
   GXS.SpacePartition,
-  GXS.VectorGeometry,
+  Scene.VectorGeometry,
   GXS.GeometryBB,
   GXS.RenderContextInfo,
   GXS.State;
@@ -51,7 +51,7 @@ implementation
 // -------------------------------------------------------------------
 
 uses
-  GXS.VectorTypes,
+  Scene.VectorTypes,
   GXS.Context;
 
 procedure RenderAABB(var rci: TgxRenderContextInfo; AABB: TAABB);

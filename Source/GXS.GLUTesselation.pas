@@ -15,9 +15,9 @@ uses
 
   OpenGLx,
   GXS.VectorFileObjects,
-  GXS.VectorLists,
-  GXS.VectorGeometry,
-  GXS.VectorTypes;
+  Scene.VectorLists,
+  Scene.VectorGeometry,
+  Scene.VectorTypes;
 
 { Tesselates the polygon outlined by the Vertexes.
   And addeds them to the first facegroup of the Mesh. }

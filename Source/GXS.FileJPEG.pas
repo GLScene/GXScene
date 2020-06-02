@@ -13,7 +13,7 @@ uses
   System.SysUtils,
 
   OpenGLx,
-  GXS.VectorGeometry,
+  Scene.VectorGeometry,
   GXS.Context,
   GXS.Graphics,
   GXS.TextureFormat,

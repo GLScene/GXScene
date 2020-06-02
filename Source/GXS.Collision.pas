@@ -17,12 +17,12 @@ uses
 
   XCollection,
   GXS.Scene,
-  GXS.VectorGeometry,
-  GXS.VectorLists,
+  Scene.VectorGeometry,
+  Scene.VectorLists,
   GXS.VectorFileObjects,
   GXS.GeometryBB,
   GXS.Manager,
-  GXS.VectorTypes;
+  Scene.VectorTypes;
 
 type
   TgxBCollision = class;

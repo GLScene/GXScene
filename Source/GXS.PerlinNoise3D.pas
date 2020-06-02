@@ -14,8 +14,8 @@ interface
 uses
   System.Math,
 
-  GXS.VectorTypes,
-  GXS.VectorGeometry;
+  Scene.VectorTypes,
+  Scene.VectorGeometry;
 
 const
   cPERLIN_TABLE_SIZE = 256; // must be a power of two

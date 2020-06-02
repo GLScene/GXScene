@@ -18,11 +18,11 @@ uses
 
   OpenGLx,
   GXS.Scene,
-  GXS.VectorGeometry,
+  Scene.VectorGeometry,
   GXS.Context,
   GXS.State,
   GXS.Graphics,
-  GXS.VectorTypes,
+  Scene.VectorTypes,
   GXS.Color,
   GXS.RenderContextInfo;
 

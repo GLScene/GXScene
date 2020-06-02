@@ -17,14 +17,14 @@ uses
   System.SysUtils,
 
   GXS.Scene,
-  GXS.VectorTypes,
+  Scene.VectorTypes,
   GXS.MeshUtils,
-  GXS.VectorGeometry,
+  Scene.VectorGeometry,
   GXS.VectorFileObjects,
   GXS.Mesh,
   GXS.Objects,
   GXS.Material,
-  GXS.Strings,
+  Scene.Strings,
   GXS.BaseClasses;
 
 const cMaxVerts = 2000;

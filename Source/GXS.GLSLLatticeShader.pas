@@ -18,7 +18,7 @@ uses
   System.Classes,
   
   GXS.Scene, GXS.CrossPlatform, GXS.BaseClasses, GXS.State, Winapi.OpenGL, Winapi.OpenGLext,  GXS.OpenGL1x, 
-  GXS.Context, GXS.RenderContextInfo, GXS.VectorGeometry, GXS.Coordinates,
+  GXS.Context, GXS.RenderContextInfo, Scene.VectorGeometry, GXS.Coordinates,
   GXS.TextureFormat, GXS.Color, GXS.Texture, GXS.Material,
   GLSL.Shader, GXS.CustomShader;
 

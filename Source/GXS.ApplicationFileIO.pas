@@ -1,10 +1,10 @@
 //
 // The unit is for GXScene Engine
 //
-{
-   Components and functions that abstract file I/O access for an application.
-   Allows re-routing file reads to reads from a single archive file f.i. 
-}
+(*
+  Components and functions that abstract file I/O access for an application.
+  Allows re-routing file reads to reads from a single archive file f.i.
+*)
 
 unit GXS.ApplicationFileIO;
 
@@ -16,9 +16,10 @@ uses
   Winapi.Windows,
   System.Classes,
   System.SysUtils,
-  FMX.Dialogs,
-  GXS.BaseClasses;
 
+  FMX.Dialogs,
+
+  GXS.BaseClasses;
 
 const
   VXS_RC_DDS_Type = RT_RCDATA;
@@ -28,25 +29,21 @@ const
 
 type
 
-  TgxApplicationResource = (
-    aresNone,
-    aresSplash,
-    aresTexture,
-    aresMaterial,
-    aresSampler,
-    aresFont,
-    aresMesh);
+  TgxApplicationResource = (aresNone, aresSplash, aresTexture, aresMaterial,
+    aresSampler, aresFont, aresMesh);
 
   TAFIOCreateFileStream = function(const fileName: string; mode: Word): TStream;
   TAFIOFileStreamExists = function(const fileName: string): Boolean;
-  TAFIOFileStreamEvent = procedure (const fileName : String; mode : Word; var Stream : TStream) of object;
-  TAFIOFileStreamExistsEvent = function(const fileName: string): Boolean of object;
+  TAFIOFileStreamEvent = procedure(const fileName: String; mode: Word;
+    var Stream: TStream) of object;
+  TAFIOFileStreamExistsEvent = function(const fileName: string)
+    : Boolean of object;
 
-    { Allows specifying a custom behaviour for CreateFileStream. 
-       The component should be considered a helper only, you can directly specify
-       a function via the vAFIOCreateFileStream variable. 
-       If multiple ApplicationFileIO components exist in the application,
-       the last one created will be the active one. }
+  (* Allows specifying a custom behaviour for CreateFileStream.
+    The component should be considered a helper only, you can directly specify
+    a function via the vAFIOCreateFileStream variable.
+    If multiple ApplicationFileIO components exist in the application,
+    the last one created will be the active one. *)
   TgxApplicationFileIO = class(TComponent)
   private
     FOnFileStream: TAFIOFileStreamEvent;
@@ -55,45 +52,46 @@ type
     constructor Create(AOwner: TComponent); override;
     destructor Destroy; override;
   published
-    { Event that allows you to specify a stream for the file.
+    (* Event that allows you to specify a stream for the file.
       Destruction of the stream is at the discretion of the code that
       invoked CreateFileStream. Return nil to let the default mechanism
-      take place (ie. attempt a regular file system access). }
-    property OnFileStream: TAFIOFileStreamEvent read FOnFileStream write FOnFileStream;
-    { Event that allows you to specify if a stream for the file exists.  }
-    property OnFileStreamExists: TAFIOFileStreamExistsEvent read FOnFileStreamExists write FOnFileStreamExists;
+      take place (ie. attempt a regular file system access). *)
+    property OnFileStream: TAFIOFileStreamEvent read FOnFileStream
+      write FOnFileStream;
+    // Event that allows you to specify if a stream for the file exists.
+    property OnFileStreamExists: TAFIOFileStreamExistsEvent
+      read FOnFileStreamExists write FOnFileStreamExists;
   end;
 
   TgxDataFileCapability = (dfcRead, dfcWrite);
   TgxDataFileCapabilities = set of TgxDataFileCapability;
 
-  { Abstract base class for data file formats interfaces.
+  (* Abstract base class for data file formats interfaces.
     This class declares base file-related behaviours, ie. ability to load/save
     from a file or a stream.
     It is highly recommended to overload ONLY the stream based methods, as the
     file-based one just call these, and stream-based behaviours allow for more
     enhancement (such as other I/O abilities, compression, cacheing, etc.)
-    to this class, without the need to rewrite subclasses. }
+    to this class, without the need to rewrite subclasses. *)
   TgxDataFile = class(TgxUpdateAbleObject)
   private
     FResourceName: string;
     procedure SetResourceName(const AName: string);
   public
-    { Describes what the TgxDataFile is capable of. 
-       Default value is [dfcRead]. }
+    // Describes what the TgxDataFile is capable of. Default value is [dfcRead].
     class function Capabilities: TgxDataFileCapabilities; virtual;
-    { Duplicates Self and returns a copy. 
-       Subclasses should override this method to duplicate their data. }
+    (* Duplicates Self and returns a copy.
+      Subclasses should override this method to duplicate their data. *)
     function CreateCopy(AOwner: TPersistent): TgxDataFile; virtual;
     procedure LoadFromFile(const fileName: string); virtual;
     procedure SaveToFile(const fileName: string); virtual;
-    procedure LoadFromStream(stream: TStream); virtual;
-    procedure SaveToStream(stream: TStream); virtual;
+    procedure LoadFromStream(Stream: TStream); virtual;
+    procedure SaveToStream(Stream: TStream); virtual;
     procedure Initialize; virtual;
-    { Optionnal resource name. 
-       When using LoadFromFile/SaveToFile, the filename is placed in it,
-       when using the Stream variants, the caller may place the resource
-       name in it for parser use. }
+    (* Optionnal resource name.
+      When using LoadFromFile/SaveToFile, the filename is placed in it,
+      when using the Stream variants, the caller may place the resource
+      name in it for parser use. *)
     property ResourceName: string read FResourceName write SetResourceName;
   end;
 
@@ -102,18 +100,16 @@ type
 
 // Returns true if an ApplicationFileIO has been defined
 function ApplicationFileIODefined: Boolean;
-
-(*Creates a file stream corresponding to the fileName.
-   If the file does not exists, an exception will be triggered.
-   Default mechanism creates a regular TFileStream, the 'mode' parameter
-   is similar to the one for TFileStream. *)
+(* Creates a file stream corresponding to the fileName.
+  If the file does not exists, an exception will be triggered.
+  Default mechanism creates a regular TFileStream, the 'mode' parameter
+  is similar to the one for TFileStream. *)
 function CreateFileStream(const fileName: string;
   mode: Word = fmOpenRead + fmShareDenyNone): TStream;
 // Queries is a file stream corresponding to the fileName exists.
 function FileStreamExists(const fileName: string): Boolean;
-
-function CreateResourceStream(const ResName: string; ResType: PChar): TgxResourceStream;
-
+function CreateResourceStream(const ResName: string; ResType: PChar)
+  : TgxResourceStream;
 function StrToGLSResType(const AStrRes: string): TgxApplicationResource;
 
 var
@@ -129,8 +125,8 @@ var
 
 function ApplicationFileIODefined: Boolean;
 begin
-  Result := (Assigned(vAFIOCreateFileStream) and Assigned(vAFIOFileStreamExists))
-    or Assigned(vAFIO);
+  Result := (Assigned(vAFIOCreateFileStream) and Assigned(vAFIOFileStreamExists)
+    ) or Assigned(vAFIO);
 end;
 
 function CreateFileStream(const fileName: string;
@@ -140,18 +136,17 @@ begin
     Result := vAFIOCreateFileStream(fileName, mode)
   else
   begin
-      Result:=nil;
-      if Assigned(vAFIO) and Assigned(vAFIO.FOnFileStream) then
-         vAFIO.FOnFileStream(fileName, mode, Result);
-      if not Assigned(Result) then 
-	  begin
-         if ((mode and fmCreate)=fmCreate) or FileExists(fileName) then
-            Result := TFileStream.Create(fileName, mode)
-         else
-         raise
-           Exception.Create('File not found: "'+fileName+'"');
-      end;
-   end;
+    Result := nil;
+    if Assigned(vAFIO) and Assigned(vAFIO.FOnFileStream) then
+      vAFIO.FOnFileStream(fileName, mode, Result);
+    if not Assigned(Result) then
+    begin
+      if ((mode and fmCreate) = fmCreate) or FileExists(fileName) then
+        Result := TFileStream.Create(fileName, mode)
+      else
+        raise Exception.Create('File not found: "' + fileName + '"');
+    end;
+  end;
 end;
 
 function FileStreamExists(const fileName: string): Boolean;
@@ -167,7 +162,8 @@ begin
   end;
 end;
 
-function CreateResourceStream(const ResName: string; ResType: PChar): TgxResourceStream;
+function CreateResourceStream(const ResName: string; ResType: PChar)
+  : TgxResourceStream;
 var
   InfoBlock: HRSRC;
 begin
@@ -176,7 +172,8 @@ begin
   if InfoBlock <> 0 then
     Result := TResourceStream.Create(HInstance, ResName, ResType)
   else
-    ShowMessage(Format('Can''t create stream of application resource "%s"', [ResName]));
+    ShowMessage(Format('Can''t create stream of application resource "%s"',
+      [ResName]));
 end;
 
 // ------------------
@@ -238,14 +235,16 @@ begin
   end;
 end;
 
-procedure TgxDataFile.LoadFromStream(stream: TStream);
+procedure TgxDataFile.LoadFromStream(Stream: TStream);
 begin
-  Assert(False, 'Import for ' + ClassName + ' to ' + stream.ClassName + ' not available.');
+  Assert(False, 'Import for ' + ClassName + ' to ' + Stream.ClassName +
+    ' not available.');
 end;
 
-procedure TgxDataFile.SaveToStream(stream: TStream);
+procedure TgxDataFile.SaveToStream(Stream: TStream);
 begin
-  Assert(False, 'Export for ' + ClassName + ' to ' + stream.ClassName + ' not available.');
+  Assert(False, 'Export for ' + ClassName + ' to ' + Stream.ClassName +
+    ' not available.');
 end;
 
 procedure TgxDataFile.Initialize;
@@ -288,4 +287,3 @@ begin
 end;
 
 end.
-

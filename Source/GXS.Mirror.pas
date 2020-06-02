@@ -18,16 +18,16 @@ uses
 
   OpenGLx,
   XCollection,
-  GXS.PersistentClasses,
+  Scene.PersistentClasses,
   GXS.Scene,
   GXS.PipelineTransformation,
-  GXS.VectorGeometry,
+  Scene.VectorGeometry,
   GXS.Context,
   GXS.Material,
   GXS.Color,
   GXS.RenderContextInfo,
   GXS.State,
-  GXS.VectorTypes;
+  Scene.VectorTypes;
 
 
 type

@@ -13,8 +13,8 @@ interface
 uses
   System.Classes,
   System.SysUtils,
-  GXS.VectorTypes,
-  GXS.VectorLists,
+  Scene.VectorTypes,
+  Scene.VectorLists,
   GXS.Utils;
 
 type

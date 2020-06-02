@@ -1,7 +1,7 @@
 //
 // The unit is for GXScene Engine
 //
-{
+(*
   Base classes and structures.
 
   Most common functions/procedures come in various flavours (using overloads),
@@ -24,9 +24,9 @@
 
    Based on Geometry.pas v.2.5 by Mike Lischke from 04. January 2000
    The history is logged in a former GLS version of the unit.
-}
+*)
 
-unit GXS.VectorGeometry;
+unit Scene.VectorGeometry;
 
 
 interface
@@ -34,10 +34,11 @@ interface
 {$I GXS.Scene.inc}
 
 uses
-  System.SysUtils, 
-  System.Types, 
+  System.SysUtils,
+  System.Types,
   System.Math,
-  GXS.VectorTypes;
+
+  Scene.VectorTypes;
 
 const
   cMaxArray = (MaxInt shr 4);

@@ -20,15 +20,15 @@ uses
 
   OpenGLx,
   XOpenGL,
-  GXS.Strings,
+  Scene.Strings,
   GXS.Context,
   GXS.Scene,
-  GXS.VectorGeometry,
+  Scene.VectorGeometry,
   GXS.State,
   GXS.Color, 
   GXS.BaseClasses,  
   GXS.RenderContextInfo, 
-  GXS.VectorTypes;
+  Scene.VectorTypes;
 
 type
   TMeshMode = (mmTriangleStrip, mmTriangleFan, mmTriangles, mmQuadStrip,

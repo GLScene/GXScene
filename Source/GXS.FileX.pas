@@ -15,12 +15,12 @@ uses
   System.Classes,
   System.SysUtils,
 
-  GXS.VectorTypes,
+  Scene.VectorTypes,
   GXS.VectorFileObjects,
   GXS.ApplicationFileIO,
-  GXS.VectorGeometry,
+  Scene.VectorGeometry,
   GXS.Texture,
-  GXS.VectorLists,
+  Scene.VectorLists,
   GXS.Material,
 
   FileX;

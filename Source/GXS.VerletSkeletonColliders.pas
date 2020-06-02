@@ -13,8 +13,8 @@ interface
 uses
   System.Classes,
    
-  GXS.PersistentClasses, GXS.VectorGeometry, GXS.VectorFileObjects,
-  GXS.VerletTypes,  GXS.VectorTypes;
+  Scene.PersistentClasses, Scene.VectorGeometry, GXS.VectorFileObjects,
+  GXS.VerletTypes,  Scene.VectorTypes;
 
 type
   

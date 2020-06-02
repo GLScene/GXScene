@@ -16,7 +16,7 @@ interface
 uses
   System.SysUtils,
   System.Classes,
-  GXS.Strings,
+  Scene.Strings,
   File3DSConst,
   File3DS,
   File3DSTypes;

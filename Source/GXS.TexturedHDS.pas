@@ -28,7 +28,7 @@ uses
   System.Types,
   System.Classes,
 
-  GXS.VectorTypes,
+  Scene.VectorTypes,
   GXS.Coordinates,
   GXS.HeightData,
   GXS.Material;

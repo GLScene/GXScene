@@ -29,13 +29,13 @@ uses
   XOpenGL,
   GXS.Scene,
   GXS.Material,
-  GXS.VectorGeometry,
-  GXS.VectorLists,
+  Scene.VectorGeometry,
+  Scene.VectorLists,
   GXS.VectorFileObjects,
   GXS.ApplicationFileIO,
   GXS.RenderContextInfo,
   GXS.Context,
-  GXS.VectorTypes;
+  Scene.VectorTypes;
 
 type
   TgxTree = class;

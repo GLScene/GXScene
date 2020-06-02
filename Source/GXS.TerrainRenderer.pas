@@ -23,14 +23,14 @@ uses
   GXS.Scene,
   GXS.HeightData,
   GXS.Material,
-  GXS.VectorGeometry,
+  Scene.VectorGeometry,
   GXS.Coordinates,
   GXS.Context,
   GXS.ROAMPatch,
-  GXS.VectorLists,
+  Scene.VectorLists,
   GXS.RenderContextInfo,
   GXS.Utils,
-  GXS.VectorTypes;
+  Scene.VectorTypes;
 
 const
   cTilesHashSize = 255;

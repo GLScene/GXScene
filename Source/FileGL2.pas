@@ -12,8 +12,8 @@ interface
 uses
   System.Classes,
   System.SysUtils,
-  GXS.VectorTypes,
-  GXS.VectorGeometry;
+  Scene.VectorTypes,
+  Scene.VectorGeometry;
 
 type
   TgxMHeader = record

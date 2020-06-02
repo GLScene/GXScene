@@ -23,13 +23,13 @@ uses
   GXS.Scene,
   GXS.Objects,
   GXS.Cadencer,
-  GXS.VectorGeometry,
+  Scene.VectorGeometry,
   GXS.Context,
-  GXS.Strings,
+  Scene.Strings,
   GXS.Color,
   GXS.RenderContextInfo,
   GXS.State,
-  GXS.VectorTypes;
+  Scene.VectorTypes;
 
 type
    EGLAtmosphereException = class(Exception);

@@ -28,14 +28,14 @@ uses
   System.Classes,
 
   XCollection,
-  GXS.VectorTypes,
+  Scene.VectorTypes,
   GXS.Navigator,
-  GXS.VectorGeometry,
+  Scene.VectorGeometry,
   GXS.Scene,
   GXS.CrossPlatform,
   GXS.Coordinates,
   GXS.Screen,
-  GXS.PersistentClasses;
+  Scene.PersistentClasses;
 
 type
 
@@ -729,7 +729,7 @@ begin
 
     if (Abs(FinalPitch) > FCutOff) or (Abs(FinalTurn) > FCutOff) then
     begin
-      MovingObject.AbsolutePosition := GXS.VectorGeometry.MoveObjectAround(
+      MovingObject.AbsolutePosition := Scene.VectorGeometry.MoveObjectAround(
         MovingObject.AbsolutePosition, lUp, AObject.AbsolutePosition, FinalPitch, FinalTurn);
       Result := True;
     end;

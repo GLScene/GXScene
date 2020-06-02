@@ -30,8 +30,8 @@ uses
 
   OpenGLx,
   GXS.CrossPlatform,
-  GXS.VectorTypes,
-  GXS.VectorGeometry,
+  Scene.VectorTypes,
+  Scene.VectorGeometry,
   GXS.TextureFormat;
 
 const

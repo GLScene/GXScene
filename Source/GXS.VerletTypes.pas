@@ -22,11 +22,11 @@ uses
   GXS.Objects,
   GXS.Scene,
   GXS.Coordinates,
-  GXS.VectorGeometry,
-  GXS.VectorLists,
+  Scene.VectorGeometry,
+  Scene.VectorLists,
   GXS.SpacePartition,
   GXS.GeometryBB,
-  GXS.VectorTypes;
+  Scene.VectorTypes;
 
 const
   G_DRAG = 0.0001;

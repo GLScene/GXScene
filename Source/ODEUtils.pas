@@ -23,12 +23,12 @@ uses
   ODEImport,
 
   GXS.Context,
-  GXS.VectorGeometry,
+  Scene.VectorGeometry,
   GXS.Scene,
-  GXS.PersistentClasses,
+  Scene.PersistentClasses,
   GXS.Coordinates,
-  GXS.VectorTypes,
-  GXS.VectorLists,
+  Scene.VectorTypes,
+  Scene.VectorLists,
   GXS.Objects,
   GXS.VerletClothify,
   GXS.VectorFileObjects;

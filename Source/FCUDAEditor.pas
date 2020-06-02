@@ -26,7 +26,7 @@ uses
   FMX.StdCtrls,
   FMX.Controls.Presentation,
 
-  GXS.Strings,
+  Scene.Strings,
   GXS.CUDA,
   GXS.CUDAFFTPlan,
   GXS.CUDAGraphics;

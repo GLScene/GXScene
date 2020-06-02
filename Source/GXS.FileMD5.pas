@@ -14,9 +14,9 @@ uses
   GXS.VectorFileObjects,
   GXS.Utils,
   GXS.ApplicationFileIO,
-  GXS.VectorTypes,
-  GXS.VectorGeometry,
-  GXS.VectorLists;
+  Scene.VectorTypes,
+  Scene.VectorGeometry,
+  Scene.VectorLists;
 
 type
 

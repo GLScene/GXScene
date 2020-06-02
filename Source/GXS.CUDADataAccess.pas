@@ -12,7 +12,7 @@ uses
   System.SysUtils,
   FMX.Dialogs,
   GXS.CrossPlatform,
-  GXS.Strings;
+  Scene.Strings;
 
 type
 

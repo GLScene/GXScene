@@ -13,9 +13,9 @@ uses
   FMX.Graphics,
 
   GXS.Color,
-  GXS.VectorGeometry,
-  GXS.VectorLists,
-  GXS.VectorTypes;
+  Scene.VectorGeometry,
+  Scene.VectorLists,
+  Scene.VectorTypes;
 
 type
   TNormalMapSpace = (nmsObject, nmsTangent);

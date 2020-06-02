@@ -19,9 +19,9 @@ uses
   XOpenGL,
   GXS.Scene,
   GXS.Material,
-  GXS.VectorGeometry,
+  Scene.VectorGeometry,
   GXS.RenderContextInfo,
-  GXS.VectorTypes;
+  Scene.VectorTypes;
 
 type
 

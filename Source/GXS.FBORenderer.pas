@@ -17,8 +17,8 @@ uses
   FMX.Dialogs,
 
   OpenGLx,
-  GXS.PersistentClasses,
-  GXS.VectorGeometry,
+  Scene.PersistentClasses,
+  Scene.VectorGeometry,
   GXS.Scene,
   GXS.Texture,
   GXS.Context,
@@ -29,7 +29,7 @@ uses
   GXS.State,
   GXS.PipelineTransformation,
   GXS.TextureFormat,
-  GXS.VectorTypes,
+  Scene.VectorTypes,
   GXS.MultisampleImage;
 
 type

@@ -15,8 +15,8 @@ uses
   System.SysUtils,
 
   OpenGLx,
-  GXS.VectorGeometry,
-  GXS.VectorTypes,
+  Scene.VectorGeometry,
+  Scene.VectorTypes,
   GXS.Texture,
   GXS.Context,
   GXS.CustomShader,

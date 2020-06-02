@@ -13,7 +13,7 @@ uses
   System.SysUtils,
   Winapi.Windows, 
   FMX.Forms,
-  GXS.VectorGeometry, 
+  Scene.VectorGeometry, 
   GXS.CrossPlatform;
 
 const

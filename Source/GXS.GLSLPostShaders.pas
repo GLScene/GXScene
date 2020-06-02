@@ -15,14 +15,14 @@ uses
 
   GXS.Texture,
   GXS.Scene,
-  GXS.VectorGeometry,
+  Scene.VectorGeometry,
   GXS.Context,
   GXS.Material,
   GXS.GLSLShader,
   GXS.CustomShader,
   GXS.RenderContextInfo,
   GXS.TextureFormat,
-  GXS.VectorTypes;
+  Scene.VectorTypes;
 
   { Custom class for GLSLPostBlurShader. A shader that blurs the entire scene }
 type

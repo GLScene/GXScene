@@ -13,16 +13,18 @@ uses
   System.Classes, 
   System.Math,
   System.Generics.Collections,
-  GXS.VectorGeometry, 
-  GXS.VectorLists, 
-  GXS.Objects, 
-  GXS.MultiPolygon,  
+
+  Scene.VectorGeometry,
+  Scene.VectorLists,
+  Scene.VectorTypes,
+  Scene.VectorRecTypes,
+
+  GXS.Objects,
+  GXS.MultiPolygon,
   GXS.Coordinates,
-  GXS.Types, 
-  GXS.Color, 
-  GXS.Spline, 
-  GXS.SpaceText, 
-  GXS.VectorTypes,
+  GXS.Color,
+  GXS.Spline,
+  GXS.SpaceText,
   GXS.VectorFileObjects;
 
 type

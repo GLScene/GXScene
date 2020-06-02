@@ -17,12 +17,12 @@ uses
   System.Classes,
   System.Math,
 
-  GXS.VectorGeometry,
+  Scene.VectorGeometry,
   GXS.Scene,
   GXS.CrossPlatform,
   GXS.Coordinates,
   GXS.Screen,
-  GXS.VectorTypes;
+  Scene.VectorTypes;
 
 type
 

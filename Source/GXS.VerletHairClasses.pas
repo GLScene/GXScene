@@ -15,7 +15,7 @@ interface
 uses
   System.Classes, System.SysUtils,
 
-  GXS.VerletTypes, GXS.VectorTypes, GXS.VectorLists, GXS.VectorGeometry;
+  GXS.VerletTypes, Scene.VectorTypes, Scene.VectorLists, Scene.VectorGeometry;
 
 type
   TVHStiffness = (vhsFull, vhsSkip1Node, vhsSkip2Node, vhsSkip3Node,

@@ -32,8 +32,8 @@ uses
   GXS.Scene, 
   GXS.Texture,
   GXS.Context,
-  GXS.VectorGeometry,
-  GXS.Strings,
+  Scene.VectorGeometry,
+  Scene.Strings,
   GXS.RenderContextInfo,
   GXS.State;
 

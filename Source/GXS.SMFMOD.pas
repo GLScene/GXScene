@@ -21,7 +21,7 @@ uses
   System.Classes, System.SysUtils,
   
   FMod, FmodTypes, FmodPresets,
-  GXS.Sound, GXS.Scene, GXS.VectorGeometry;
+  GXS.Sound, GXS.Scene, Scene.VectorGeometry;
 
 type
 

@@ -21,9 +21,9 @@ uses
 
   OpenGLx,
   XOpenGL,
-  GXS.PersistentClasses,
+  Scene.PersistentClasses,
   GXS.Scene,
-  GXS.VectorGeometry,
+  Scene.VectorGeometry,
   GXS.Context,
   GXS.CrossPlatform,
   GXS.Texture,
@@ -34,7 +34,7 @@ uses
   GXS.BaseClasses,
   GXS.RenderContextInfo,
   GXS.TextureFormat,
-  GXS.VectorTypes;
+  Scene.VectorTypes;
 
 type
 

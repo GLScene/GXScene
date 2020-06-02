@@ -19,9 +19,9 @@ uses
   FMX.Graphics,
 
   OpenGLx,
-  GXS.VectorTypes,
-  GXS.VectorGeometry,
-  GXS.PersistentClasses,
+  Scene.VectorTypes,
+  Scene.VectorGeometry,
+  Scene.PersistentClasses,
   GXS.BaseClasses;
 
 type

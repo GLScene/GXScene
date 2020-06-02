@@ -10,7 +10,7 @@ unit GXS.Spline;
 interface
 
 uses
-  GXS.VectorGeometry;
+  Scene.VectorGeometry;
 
 {$I GXS.Scene.inc}
 

@@ -20,10 +20,10 @@ uses
   FMX.Graphics,
 
   OpenGLx,
-  GXS.VectorGeometry,
+  Scene.VectorGeometry,
   GXS.Color,
   GXS.Context,
-  GXS.VectorTypes,
+  Scene.VectorTypes,
   GXS.State;
 
 type

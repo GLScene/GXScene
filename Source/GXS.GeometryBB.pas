@@ -14,9 +14,9 @@ interface
 uses
   System.SysUtils,
 
-  GXS.VectorGeometry,
-  GXS.VectorLists,
-  GXS.VectorTypes;
+  Scene.VectorGeometry,
+  Scene.VectorLists,
+  Scene.VectorTypes;
 
 type
   {  Structure for storing Bounding Boxes }

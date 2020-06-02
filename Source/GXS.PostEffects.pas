@@ -16,13 +16,13 @@ uses
 
   OpenGLx,
   GXS.Scene,
-  GXS.PersistentClasses,
+  Scene.PersistentClasses,
   GXS.Texture,
   GXS.Graphics,
-  GXS.Strings,
+  Scene.Strings,
   GXS.CustomShader,
   GXS.Context,
-  GXS.VectorGeometry,
+  Scene.VectorGeometry,
   GXS.RenderContextInfo,
   GXS.Material,
   GXS.TextureFormat;

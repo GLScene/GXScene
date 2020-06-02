@@ -25,7 +25,7 @@ interface
 uses
   System.Classes, System.SysUtils, System.Math,
    
-  GXS.VectorTypes, GXS.VectorGeometry,  GXS.GeometryBB, GXS.PersistentClasses;
+  Scene.VectorTypes, Scene.VectorGeometry,  GXS.GeometryBB, Scene.PersistentClasses;
 
 const
   COctree_LEAF_TRHESHOLD = 30;

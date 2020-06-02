@@ -10,7 +10,7 @@ interface
 
 uses
   System.Classes,
-  GXS.VectorGeometry;
+  Scene.VectorGeometry;
 
 type
 

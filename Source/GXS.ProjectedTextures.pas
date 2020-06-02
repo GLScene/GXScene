@@ -16,11 +16,11 @@ uses
 
   OpenGLx,
   XOpenGL,
-  GXS.VectorTypes,
+  Scene.VectorTypes,
   GXS.Scene,
-  GXS.PersistentClasses,
+  Scene.PersistentClasses,
   GXS.Texture,
-  GXS.VectorGeometry,
+  Scene.VectorGeometry,
   GXS.RenderContextInfo,
   GXS.State,
   GXS.Context;

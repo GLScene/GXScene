@@ -18,7 +18,7 @@ uses
   System.SysUtils,
   FMX.Forms,
   FMX.Controls,
-  GXS.Strings;
+  Scene.Strings;
 
 type
   TJoystickButton = (jbButton1, jbButton2, jbButton3, jbButton4);
@@ -32,7 +32,7 @@ type
   TJoystickEvent = procedure(Sender: TObject; JoyID: TJoystickID;
     Buttons: TJoystickButtons; XDeflection, YDeflection: Integer) of Object;
 
-  { A component interfacing the Joystick via the (regular) windows API. }
+  // A component interfacing the Joystick via the (regular) windows API.
   TgxJoystick = class(TComponent)
   private
     FWindowHandle: HWND;
@@ -93,9 +93,9 @@ const
   cJoystickIDToNative: array [jidNoJoystick .. jidJoystick2] of Byte = (9,
     JOYSTICKID1, JOYSTICKID2);
 
-  // ------------------
-  // ------------------ TJoystick ------------------
-  // ------------------
+// ------------------
+// ------------------ TJoystick ------------------
+// ------------------
 
 constructor TgxJoystick.Create(AOwner: TComponent);
 begin

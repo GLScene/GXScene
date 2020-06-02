@@ -1,9 +1,9 @@
 //
 // The unit for GXScene Engine
 //
-{
-   Implements a multi-proxy object, useful for discreet LOD. 
-   Allows assign a unique material for each proxy master. 
+(*
+   Implements a multi-proxy object, useful for discreet LOD.
+   Allows assign a unique material for each proxy master.
 
   What changed compared to GLMultiProxy:
     1) Allows assign a unique material for each proxy master
@@ -18,7 +18,7 @@
        allows to assign directly to TgxLibMaterial)
     9) FMX-style code formating
 
-}
+*)
 
 unit GXS.MaterialMultiProxy;
 
@@ -29,20 +29,23 @@ interface
 uses
   System.Classes,
   System.SysUtils,
-   
-  GXS.Scene, 
-  GXS.VectorGeometry, 
-  GXS.Texture, 
-  GXS.Material, 
-  GXS.Silhouette, 
-  GXS.Strings,
-  GXS.CrossPlatform, 
-  GXS.PersistentClasses, 
-  GXS.RenderContextInfo, 
+
+  OpenGLx,
+
+  Scene.VectorTypes,
+
+  GXS.Scene,
+  Scene.VectorGeometry,
+  GXS.Texture,
+  GXS.Material,
+  GXS.Silhouette,
+  Scene.Strings,
+  GXS.CrossPlatform,
+  Scene.PersistentClasses,
+  GXS.RenderContextInfo,
   GXS.BaseClasses,
   GXS.Context,
-  GXS.PipelineTransformation,
-  GXS.VectorTypes;
+  GXS.PipelineTransformation;
 
 type
 

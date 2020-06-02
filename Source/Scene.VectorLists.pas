@@ -1,10 +1,10 @@
 //
 // The unit is for GXScene Engine
 //
-{
+(*
    Misc. lists of vectors and entities
-}
-unit GXS.VectorLists;
+*)
+unit Scene.VectorLists;
 
 interface
 
@@ -14,15 +14,15 @@ uses
   System.Classes,
   System.SysUtils,
 
-  GXS.VectorTypes,
-  GXS.VectorGeometry,
-  GXS.PersistentClasses;
+  Scene.VectorTypes,
+  Scene.VectorGeometry,
+  Scene.PersistentClasses;
 
 type
   TBaseListOption = (bloExternalMemory, bloSetCountResetsMemory);
   TBaseListOptions = set of TBaseListOption;
 
-  {Base class for lists, introduces common behaviours. }
+  // Base class for lists, introduces common behaviours.
   TBaseList = class(TPersistentObject)
   private
     FCount: Integer;
@@ -38,9 +38,9 @@ type
     // Must be defined by all subclasses in their constructor(s)
     FItemSize: Integer;
     procedure SetCount(Val: Integer);
-   {Only function where list may be alloc'ed & freed.
+    (*Only function where list may be alloc'ed & freed.
     Resizes the array pointed by FBaseList, adjust the subclass's
-    typed pointer accordingly if any. }
+    typed pointer accordingly if any. *)
     procedure SetCapacity(NewCapacity: Integer); virtual;
     function BufferItem: PByteArray;
     function GetSetCountResetsMemory: Boolean;
@@ -59,37 +59,37 @@ type
     procedure InsertNulls(Index: Integer; nbVals: Cardinal);
     procedure AdjustCapacityToAtLeast(const size: Integer);
     function DataSize: Integer;
-    {Tell the list to use the specified range instead of its own.
+    (* Tell the list to use the specified range instead of its own.
      rangeCapacity should be expressed in bytes.
      The allocated memory is NOT managed by the list, current content
      if copied to the location, if the capacity is later changed, regular
-     memory will be allocated, and the specified range no longer used. }
+     memory will be allocated, and the specified range no longer used. *)
     procedure UseMemory(rangeStart: Pointer; rangeCapacity: Integer);
-    { Empties the list without altering capacity. }
+    // Empties the list without altering capacity.
     procedure Flush;
-    { Empties the list and release. }
+    // Empties the list and release.
     procedure Clear;
     procedure Delete(Index: Integer);
     procedure DeleteItems(Index: Integer; nbVals: Cardinal);
     procedure Exchange(index1, index2: Integer);
     procedure Move(curIndex, newIndex: Integer);
     procedure Reverse;
-    {Nb of items in the list. When assigning a Count, added items are reset to zero. }
+    // Nb of items in the list. When assigning a Count, added items are reset to zero.
     property Count: Integer read FCount write SetCount;
-    {Current list capacity. Not persistent. }
+    // Current list capacity. Not persistent.
     property Capacity: Integer read FCapacity write SetCapacity;
-    {List growth granularity. Not persistent. }
+    // List growth granularity. Not persistent.
     property GrowthDelta: Integer read FGrowthDelta write FGrowthDelta;
-    {If true (default value) adjusting count will reset added values.
+    (* If true (default value) adjusting count will reset added values.
      Switching this option to true will turn off this memory reset,
-     which can improve performance is that having empty values isn't required. }
+     which can improve performance is that having empty values isn't required. *)
     property SetCountResetsMemory: Boolean read GetSetCountResetsMemory write SetSetCountResetsMemory;
     property TagString: string read FTagString write FTagString;
-    { Increase by one after every content changes. }
+    // Increase by one after every content changes.
     property Revision: LongWord read FRevision write FRevision;
   end;
 
-  {Base class for vector lists, introduces common behaviours. }
+  // Base class for vector lists, introduces common behaviours.
   TBaseVectorList = class(TBaseList)
   protected
     function GetItemAddress(Index: Integer): PFloatArray;
@@ -103,22 +103,22 @@ type
     procedure Translate(const delta: TAffineVector); overload; virtual;
     procedure Translate(const delta: TBaseVectorList); overload; virtual;
     procedure TranslateInv(const delta: TBaseVectorList); overload; virtual;
-    {Replace content of the list with lerp results between the two given lists.
-     Note: you can't Lerp with Self!!! }
+    (* Replace content of the list with lerp results between the two given lists.
+     Note: you can't Lerp with Self!!! *)
     procedure Lerp(const list1, list2: TBaseVectorList; lerpFactor: Single); virtual; abstract;
-   {Replace content of the list with angle lerp between the two given lists.
-    Note: you can't Lerp with Self!!! }
+    (* Replace content of the list with angle lerp between the two given lists.
+    Note: you can't Lerp with Self!!! *)
     procedure AngleLerp(const list1, list2: TBaseVectorList; lerpFactor: Single);
     procedure AngleCombine(const list1: TBaseVectorList; intensity: Single);
-    {Linear combination of Self with another list.
-     Self[i]:=Self[i]+list2[i]*factor }
+    (* Linear combination of Self with another list.
+     Self[i]:=Self[i]+list2[i]*factor *)
     procedure Combine(const list2: TBaseVectorList; factor: Single); virtual;
     property ItemAddress[Index: Integer]: PFloatArray read GetItemAddress;
   end;
 
-  {A list of TAffineVector.
+  (* A list of TAffineVector.
    Similar to TList, but using TAffineVector as items.
-   The list has stack-like push/pop methods. }
+   The list has stack-like push/pop methods. *)
   TAffineVectorList = class(TBaseVectorList)
   private
     FList: PAffineVectorArray;
@@ -173,9 +173,9 @@ type
     procedure Scale(const factors: TAffineVector); overload;
   end;
 
-  {A list of TVector.
+  (* A list of TVector.
    Similar to TList, but using TVector as items.
-   The list has stack-like push/pop methods. }
+   The list has stack-like push/pop methods. *)
   TVectorList = class(TBaseVectorList)
   private
     FList: PVectorArray;
@@ -204,9 +204,9 @@ type
     procedure Lerp(const list1, list2: TBaseVectorList; lerpFactor: Single); override;
   end;
 
-  {A list of TTexPoint.
+  (* A list of TTexPoint.
    Similar to TList, but using TTexPoint as items.
-   The list has stack-like push/pop methods. }
+   The list has stack-like push/pop methods. *)
   TTexPointList = class(TBaseVectorList)
   private
     FList: PTexPointArray;
@@ -237,9 +237,9 @@ type
     procedure Lerp(const list1, list2: TBaseVectorList; lerpFactor: Single); override;
   end;
 
-  { A list of Integers.
+  (* A list of Integers.
    Similar to TList, but using TTexPoint as items.
-   The list has stack-like push/pop methods. }
+   The list has stack-like push/pop methods. *)
   TIntegerList = class(TBaseList)
   private
     FList: PIntegerArray;
@@ -262,37 +262,37 @@ type
     function IndexOf(item: Integer): Integer;
     property Items[Index: Integer]: Integer read Get write Put; default;
     property List: PIntegerArray read FList;
-    { Adds count items in an arithmetic serie.
-      Items are (aBase), (aBase+aDelta) ... (aBase+(aCount-1)*aDelta) }
+    (* Adds count items in an arithmetic serie.
+      Items are (aBase), (aBase+aDelta) ... (aBase+(aCount-1)*aDelta) *)
     procedure AddSerie(aBase, aDelta, aCount: Integer);
-    { Add n integers at the address starting at (and including) first. }
+    // Add n integers at the address starting at (and including) first.
     procedure AddIntegers(const First: PInteger; n: Integer); overload;
-    { Add all integers from aList into the list. }
+    // Add all integers from aList into the list.
     procedure AddIntegers(const aList: TIntegerList); overload;
-    { Add all integers from anArray into the list. }
+    // Add all integers from anArray into the list.
     procedure AddIntegers(const anArray: array of Integer); overload;
-    { Returns the minimum integer item, zero if list is empty. }
+    // Returns the minimum integer item, zero if list is empty.
     function MinInteger: Integer;
-    { Returns the maximum integer item, zero if list is empty. }
+    // Returns the maximum integer item, zero if list is empty.
     function MaxInteger: Integer;
-    { Sort items in ascending order. }
+    // Sort items in ascending order.
     procedure Sort;
-    { Sort items in ascending order and remove duplicated integers. }
+    // Sort items in ascending order and remove duplicated integers.
     procedure SortAndRemoveDuplicates;
-    { Locate a value in a sorted list. }
+    // Locate a value in a sorted list.
     function BinarySearch(const Value: Integer): Integer; overload;
-    { Locate a value in a sorted list.
+    (* Locate a value in a sorted list.
       If ReturnBestFit is set to true, the routine will return the position
       of the largest value that's smaller than the sought value. Found will
-      be set to True if the exact value was found, False if a "BestFit" was found. }
+      be set to True if the exact value was found, False if a "BestFit" was found. *)
     function BinarySearch(const Value: Integer; returnBestFit: Boolean; var found: Boolean): Integer; overload;
-    { Add integer to a sorted list.
+    (* Add integer to a sorted list.
       Maintains the list sorted. If you have to add "a lot" of integers
-      at once, use the Add method then Sort the list for better performance. }
+      at once, use the Add method then Sort the list for better performance. *)
     function AddSorted(const Value: Integer; const ignoreDuplicates: Boolean = False): Integer;
-    { Removes an integer from a sorted list.  }
+    // Removes an integer from a sorted list.
     procedure RemoveSorted(const Value: Integer);
-    { Adds delta to all items in the list. }
+    // Adds delta to all items in the list.
     procedure Offset(delta: Integer); overload;
     procedure Offset(delta: Integer; const base, nb: Integer); overload;
   end;
@@ -300,9 +300,9 @@ type
   TSingleArrayList = array[0..MaxInt shr 4] of Single;
   PSingleArrayList = ^TSingleArrayList;
 
-  { A list of Single.
+  (* A list of Single.
    Similar to TList, but using Single as items.
-   The list has stack-like push/pop methods. }
+   The list has stack-like push/pop methods. *)
   TSingleList = class(TBaseList)
   private
     FList: PSingleArrayList;
@@ -323,19 +323,19 @@ type
     property Items[Index: Integer]: Single read Get write Put; default;
     property List: PSingleArrayList read FList;
     procedure AddSerie(aBase, aDelta: Single; aCount: Integer);
-    { Adds delta to all items in the list. }
+    // Adds delta to all items in the list.
     procedure Offset(delta: Single); overload;
-    { Adds to each item the corresponding item in the delta list.
+    (*  Adds to each item the corresponding item in the delta list.
        Performs 'Items[i]:=Items[i]+delta[i]'.
-       If both lists don't have the same item count, an exception is raised. }
+       If both lists don't have the same item count, an exception is raised. *)
     procedure Offset(const delta: TSingleList); overload;
-    { Multiplies all items by factor. }
+    //  Multiplies all items by factor.
     procedure Scale(factor: Single);
-    { Square all items. }
+    // Square all items.
     procedure Sqr;
-    { SquareRoot all items. }
+    // SquareRoot all items.
     procedure Sqrt;
-    { Computes the sum of all elements. }
+    // Computes the sum of all elements.
     function Sum: Single;
     function Min: Single;
     function Max: Single;
@@ -343,9 +343,9 @@ type
 
   TDoubleArrayList = array[0..MaxInt shr 4] of Double;
   PDoubleArrayList = ^TDoubleArrayList;
-  { A list of Double.
+  (*  A list of Double.
     Similar to TList, but using Double as items.
-    The list has stack-like push/pop methods. }
+    The list has stack-like push/pop methods. *)
   TDoubleList = class(TBaseList)
   private
     FList: PDoubleArrayList;
@@ -363,25 +363,25 @@ type
     property Items[Index: Integer]: Double read Get write Put; default;
     property List: PDoubleArrayList read FList;
     procedure AddSerie(aBase, aDelta: Double; aCount: Integer);
-    { Adds delta to all items in the list. }
+    // Adds delta to all items in the list.
     procedure Offset(delta: Double); overload;
-    { Adds to each item the corresponding item in the delta list.
+    (* Adds to each item the corresponding item in the delta list.
       Performs 'Items[i]:=Items[i]+delta[i]'.
-      If both lists don't have the same item count, an exception is raised. }
+      If both lists don't have the same item count, an exception is raised. *)
     procedure Offset(const delta: TDoubleList); overload;
-    { Multiplies all items by factor. }
+    // Multiplies all items by factor.
     procedure Scale(factor: Double);
-    { Square all items. }
+    // Square all items.
     procedure Sqr;
-    { SquareRoot all items. }
+    // SquareRoot all items.
     procedure Sqrt;
-    { Computes the sum of all elements. }
+    // Computes the sum of all elements.
     function Sum: Double;
     function Min: Single;
     function Max: Single;
   end;
 
-  { A list of bytes. Similar to TList, but using Byte as items.  }
+  // A list of bytes. Similar to TList, but using Byte as items.
   TByteList = class(TBaseList)
   private
     FList: PByteArray;
@@ -398,9 +398,9 @@ type
     property List: PByteArray read FList;
   end;
 
-  { A list of TQuaternion.
+  (* A list of TQuaternion.
     Similar to TList, but using TQuaternion as items.
-    The list has stack-like push/pop methods. }
+    The list has stack-like push/pop methods. *)
   TQuaternionList = class(TBaseVectorList)
   private
     FList: PQuaternionArray;
@@ -421,11 +421,11 @@ type
     procedure Insert(Index: Integer; const item: TQuaternion);
     property Items[Index: Integer]: TQuaternion read Get write Put; default;
     property List: PQuaternionArray read FList;
-    { Lerps corresponding quaternions from both lists using QuaternionSlerp. }
+    // Lerps corresponding quaternions from both lists using QuaternionSlerp.
     procedure Lerp(const list1, list2: TBaseVectorList; lerpFactor: Single); override;
-    { Multiplies corresponding quaternions after the second quaternion is
+    (* Multiplies corresponding quaternions after the second quaternion is
       slerped with the IdentityQuaternion using factor. This allows for weighted
-      combining of rotation transforms using quaternions. }
+      combining of rotation transforms using quaternions. *)
     procedure Combine(const list2: TBaseVectorList; factor: Single); override;
   end;
 
@@ -442,7 +442,7 @@ type
   T4ByteArrayList = array[0..MaxInt shr 4] of T4ByteData;
   P4ByteArrayList = ^T4ByteArrayList;
 
-  { A list of T4ByteData.  }
+  // A list of T4ByteData.
   T4ByteList = class(TBaseList)
   private
     FList: P4ByteArrayList;
@@ -496,20 +496,20 @@ type
     function IndexOf(item: Integer): LongWord;
     property Items[Index: Integer]: LongWord read Get write Put; default;
     property List: PLongWordArray read FList;
-    { Add n integers at the address starting at (and including) first. }
+    // Add n integers at the address starting at (and including) first.
     procedure AddLongWords(const First: PLongWord; n: Integer); overload;
-    { Add all integers from aList into the list. }
+    // Add all integers from aList into the list.
     procedure AddLongWords(const aList: TLongWordList); overload;
-    { Add all integers from anArray into the list. }
+    // Add all integers from anArray into the list.
     procedure AddLongWords(const anArray: array of LongWord); overload;
   end;
 
-{ Sort the refList in ascending order, ordering objList (TList) on the way. }
+// Sort the refList in ascending order, ordering objList (TList) on the way.
 procedure QuickSortLists(startIndex, endIndex: Integer; refList: TSingleList; objList: TList); overload;
-{ Sort the refList in ascending order, ordering objList (TBaseList) on the way. }
+// Sort the refList in ascending order, ordering objList (TBaseList) on the way.
 procedure QuickSortLists(startIndex, endIndex: Integer; refList: TSingleList; objList: TBaseList); overload;
-{ Sort the refList in ascending order, ordering objList on the way.
-   Use if, and *ONLY* if refList contains only values superior or equal to 1. }
+(* Sort the refList in ascending order, ordering objList on the way.
+   Use if, and *ONLY* if refList contains only values superior or equal to 1. *)
 procedure FastQuickSortLists(startIndex, endIndex: Integer; const refList: TSingleList; const objList: TPersistentObjectList);
 
 // ------------------------------------------------------------------

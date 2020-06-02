@@ -16,7 +16,7 @@ uses
   GXS.CUDAContext,
   GXS.CUDA,
   GXS.CUDAFourierTransform,
-  GXS.Strings,
+  Scene.Strings,
   GXS.CUDAAPI;
 
 type

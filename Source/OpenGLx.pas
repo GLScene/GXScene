@@ -29,7 +29,7 @@ uses
   Winapi.Windows,
   System.SysUtils,
   System.Math,
-  GXS.VectorTypes;
+  Scene.VectorTypes;
 
 const
   opengl32 = 'OpenGL32.dll';

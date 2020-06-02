@@ -13,8 +13,8 @@ uses
   FMX.Dialogs,
 
   OpenGLx,
-  GXS.VectorGeometry,
-  GXS.VectorTypes;
+  Scene.VectorGeometry,
+  Scene.VectorTypes;
 
 const
   MAX_MATRIX_STACK_DEPTH = 128;

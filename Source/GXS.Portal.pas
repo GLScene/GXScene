@@ -17,11 +17,11 @@ uses
   System.Classes,
   System.SysUtils,
 
-  GXS.VectorTypes,
+  Scene.VectorTypes,
   GXS.VectorFileObjects,
   GXS.Scene,
   GXS.Material,
-  GXS.VectorGeometry,
+  Scene.VectorGeometry,
   GXS.RenderContextInfo;
 
 type

@@ -23,9 +23,9 @@ uses
   System.SyncObjs,
 
   OpenGLx,
-  GXS.VectorTypes,
+  Scene.VectorTypes,
   GXS.Context,
-  GXS.VectorGeometry,
+  Scene.VectorGeometry,
   SDL2;
 
 type

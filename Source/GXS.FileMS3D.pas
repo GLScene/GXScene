@@ -16,12 +16,12 @@ uses
   System.Math,
 
   GXS.VectorFileObjects,
-  GXS.VectorTypes,
+  Scene.VectorTypes,
   GXS.Material,
   GXS.Color,
   GXS.Texture,
-  GXS.VectorGeometry,
-  GXS.VectorLists,
+  Scene.VectorGeometry,
+  Scene.VectorLists,
   GXS.ApplicationFileIO;
 
 const

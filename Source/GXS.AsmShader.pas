@@ -1,12 +1,12 @@
 //
 // The unit for GXScene Engine
 //
-{
-    TgxAsmShader is a wrapper for all ARB shaders 
+(*
+    TgxAsmShader is a wrapper for all ARB shaders
     This component is only a template and has to be replaced with a
     proper version by someone who uses ARB shaders more then me.
     The history is logged in a former GLS version of the unit.
-}
+*)
  
 unit GXS.AsmShader;
 
@@ -20,8 +20,8 @@ uses
   
   OpenGLx,
   GXS.Context,
-  GXS.VectorGeometry, 
-  GXS.VectorTypes, 
+  Scene.VectorGeometry, 
+  Scene.VectorTypes, 
   GXS.Texture,
   GXS.CustomShader, 
   GXS.RenderContextInfo;
@@ -121,7 +121,9 @@ type
 implementation
 //==============================
 
-{ TgxCustomAsmShader }
+//------------------------------
+// TgxCustomAsmShader
+//------------------------------
 
 procedure TgxCustomAsmShader.DoFinalize;
 begin
@@ -147,7 +149,6 @@ end;
 destructor TgxCustomAsmShader.Destroy;
 begin
   DestroyARBPrograms;
-
   inherited Destroy;
 end;
 

@@ -18,7 +18,7 @@ uses
   FMX.Graphics,
 
   GXS.VectorFileObjects,
-  GXS.VectorGeometry,
+  Scene.VectorGeometry,
   GXS.ApplicationFileIO,
   GXS.Texture,
   GXS.Material,

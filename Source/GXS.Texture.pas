@@ -20,7 +20,7 @@ uses
   OpenGLx,
   GXS.CrossPlatform,
   GXS.BaseClasses,
-  GXS.VectorGeometry,
+  Scene.VectorGeometry,
   GXS.Graphics,
   GXS.Context,
   GXS.State,
@@ -31,8 +31,8 @@ uses
   GXS.TextureFormat,
   GXS.ApplicationFileIO,
   GXS.Utils,
-  GXS.VectorTypes,
-  GXS.Strings;
+  Scene.VectorTypes,
+  Scene.Strings;
 
 const
   cDefaultNormalMapScale = 0.125;

@@ -12,9 +12,9 @@ uses
   System.Classes, 
   System.SysUtils,
   GXS.ApplicationFileIO, 
-  GXS.VectorGeometry,
+  Scene.VectorGeometry,
   GXS.VectorFileObjects,
-  GXS.VectorLists, 
+  Scene.VectorLists, 
   GXS.Material, 
   FileMD3;
 

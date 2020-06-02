@@ -19,10 +19,10 @@ uses
   System.Classes,
   System.SysUtils,
 
-  GXS.VectorTypes,
+  Scene.VectorTypes,
   GXS.ApplicationFileIO,
-  GXS.VectorGeometry,
-  GXS.VectorLists,
+  Scene.VectorGeometry,
+  Scene.VectorLists,
   GXS.Scene,
   GXS.Texture,
   GXS.VectorFileObjects,

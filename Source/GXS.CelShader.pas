@@ -21,7 +21,7 @@ uses
   GXS.Context,
   GXS.Graphics,
   GXS.Utils,
-  GXS.VectorGeometry,
+  Scene.VectorGeometry,
   GXS.Color,
   GXS.RenderContextInfo,
   GXS.Material,

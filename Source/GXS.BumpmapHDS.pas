@@ -23,11 +23,11 @@ uses
   GXS.HeightData,
   GXS.Graphics,
   GXS.Coordinates,
-  GXS.VectorGeometry,
+  Scene.VectorGeometry,
   GXS.Texture,
   GXS.Material,
   GXS.Utils,
-  GXS.VectorTypes;
+  Scene.VectorTypes;
 
 type
   TgxBumpmapHDS = class;

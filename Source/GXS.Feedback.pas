@@ -26,9 +26,9 @@ uses
   System.SysUtils,
 
   OpenGLx,
-  GXS.PersistentClasses,
-  GXS.VectorGeometry,
-  GXS.VectorLists,
+  Scene.PersistentClasses,
+  Scene.VectorGeometry,
+  Scene.VectorLists,
   GXS.Scene,
   GXS.VectorFileObjects,
   GXS.Texture,
@@ -37,7 +37,7 @@ uses
   GXS.State,
   GXS.PipelineTransformation,
   GXS.MeshUtils, 
-  GXS.VectorTypes;
+  Scene.VectorTypes;
 
 type
   TFeedbackMode = (fm2D, fm3D, fm3DColor, fm3DColorTexture, fm4DColorTexture);

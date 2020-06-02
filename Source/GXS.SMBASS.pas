@@ -23,7 +23,7 @@ uses
 
   GXS.Sound,
   GXS.Scene,
-  GXS.VectorGeometry,
+  Scene.VectorGeometry,
 
   Bass;
 

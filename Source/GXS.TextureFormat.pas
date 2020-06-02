@@ -7,7 +7,7 @@ unit GXS.TextureFormat;
 interface
 
 uses
-  GXS.Strings,
+  Scene.Strings,
   OpenGLx;
 
 type

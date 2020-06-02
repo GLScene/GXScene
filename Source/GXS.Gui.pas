@@ -17,14 +17,14 @@ uses
   System.SysUtils,
 
   OpenGLx,
-  GXS.VectorTypes,
+  Scene.VectorTypes,
   GXS.Scene,
   GXS.BitmapFont,
   GXS.Material,
   GXS.CrossPlatform,
   GXS.Context,
-  GXS.PersistentClasses,
-  GXS.VectorGeometry,
+  Scene.PersistentClasses,
+  Scene.VectorGeometry,
   GXS.Coordinates,
   GXS.BaseClasses;
 

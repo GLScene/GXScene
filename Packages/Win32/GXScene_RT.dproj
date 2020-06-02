@@ -335,7 +335,7 @@
         <DCCReference Include="..\..\Source\GXS.Isolines.pas"/>
         <DCCReference Include="..\..\Source\GXS.Isosurface.pas"/>
         <DCCReference Include="..\..\Source\GXS.Joystick.pas"/>
-        <DCCReference Include="..\..\Source\GXS.Keyboard.pas"/>
+        <DCCReference Include="..\..\Source\Scene.Keyboard.pas"/>
         <DCCReference Include="..\..\Source\GXS.LensFlare.pas"/>
         <DCCReference Include="..\..\Source\GXS.LinePFX.pas"/>
         <DCCReference Include="..\..\Source\GXS.Manager.pas"/>
@@ -368,7 +368,7 @@
         <DCCReference Include="..\..\Source\GXS.PerlinBase.pas"/>
         <DCCReference Include="..\..\Source\GXS.PerlinNoise3D.pas"/>
         <DCCReference Include="..\..\Source\GXS.PerlinPFX.pas"/>
-        <DCCReference Include="..\..\Source\GXS.PersistentClasses.pas"/>
+        <DCCReference Include="..\..\Source\Scene.PersistentClasses.pas"/>
         <DCCReference Include="..\..\Source\GXS.PhongShader.pas"/>
         <DCCReference Include="..\..\Source\GXS.PictureRegisteredFormats.pas"/>
         <DCCReference Include="..\..\Source\GXS.PipelineTransformation.pas"/>
@@ -412,7 +412,7 @@
         <DCCReference Include="..\..\Source\GXS.SpatialPartitioning.pas"/>
         <DCCReference Include="..\..\Source\GXS.Spline.pas"/>
         <DCCReference Include="..\..\Source\GXS.State.pas"/>
-        <DCCReference Include="..\..\Source\GXS.Strings.pas"/>
+        <DCCReference Include="..\..\Source\Scene.Strings.pas"/>
         <DCCReference Include="..\..\Source\GXS.Teapot.pas"/>
         <DCCReference Include="..\..\Source\GXS.TerrainRenderer.pas"/>
         <DCCReference Include="..\..\Source\GXS.TexCombineShader.pas"/>
@@ -429,12 +429,12 @@
         <DCCReference Include="..\..\Source\GXS.Trail.pas"/>
         <DCCReference Include="..\..\Source\GXS.Tree.pas"/>
         <DCCReference Include="..\..\Source\GXS.Triangulation.pas"/>
-        <DCCReference Include="..\..\Source\GXS.Types.pas"/>
+        <DCCReference Include="..\..\Source\Scene.VectorRecTypes.pas"/>
         <DCCReference Include="..\..\Source\GXS.Utils.pas"/>
         <DCCReference Include="..\..\Source\GXS.VectorFileObjects.pas"/>
-        <DCCReference Include="..\..\Source\GXS.VectorGeometry.pas"/>
-        <DCCReference Include="..\..\Source\GXS.VectorLists.pas"/>
-        <DCCReference Include="..\..\Source\GXS.VectorTypes.pas"/>
+        <DCCReference Include="..\..\Source\Scene.VectorGeometry.pas"/>
+        <DCCReference Include="..\..\Source\Scene.VectorLists.pas"/>
+        <DCCReference Include="..\..\Source\Scene.VectorTypes.pas"/>
         <DCCReference Include="..\..\Source\GXS.VerletClothify.pas"/>
         <DCCReference Include="..\..\Source\GXS.VerletHairClasses.pas"/>
         <DCCReference Include="..\..\Source\GXS.VerletSkeletonColliders.pas"/>

@@ -25,10 +25,10 @@ uses
   FMX.Controls,
   FMX.ExtCtrls,
   FMX.Types,
-  GXS.VectorGeometry,
+  Scene.VectorGeometry,
   GXS.Scene,
   GXS.Win64Viewer,
-  GXS.Strings;
+  Scene.Strings;
 
 type
 

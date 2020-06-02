@@ -16,15 +16,15 @@ uses
 
   OpenGLx,
   GXS.Scene,
-  GXS.VectorGeometry,
-  GXS.PersistentClasses,
+  Scene.VectorGeometry,
+  Scene.PersistentClasses,
   GXS.Objects,
   GXS.Texture,
   GXS.Context,
   GXS.RenderContextInfo,
   GXS.BaseClasses,
   GXS.State,
-  GXS.VectorTypes;
+  Scene.VectorTypes;
 
 type
 

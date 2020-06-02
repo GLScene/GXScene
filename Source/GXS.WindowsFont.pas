@@ -27,11 +27,11 @@ uses
   GXS.Texture,
   GXS.BitmapFont,
   GXS.RenderContextInfo,
-  GXS.VectorLists,
+  Scene.VectorLists,
   GXS.Utils,
-  GXS.VectorGeometry,
+  Scene.VectorGeometry,
   GXS.ApplicationFileIO,
-  GXS.VectorTypes;
+  Scene.VectorTypes;
 
 type
 

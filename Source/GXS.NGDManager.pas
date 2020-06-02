@@ -20,8 +20,8 @@ uses
   NGDImport,
   NGDImport_Joints, // Newton
   XCollection,  //TXCollection file function
-  GXS.VectorGeometry, // PVector TVector TMatrix PMatrix NullHmgVector...
-  GXS.VectorLists, // TaffineVectorList for Tree
+  Scene.VectorGeometry, // PVector TVector TMatrix PMatrix NullHmgVector...
+  Scene.VectorLists, // TaffineVectorList for Tree
   GXS.BaseClasses,
   GXS.Scene,
   GXS.Manager,

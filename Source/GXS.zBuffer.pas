@@ -34,8 +34,8 @@ uses
   OpenGLx,
   XOpenGL,
   GXS.Scene,
-  GXS.PersistentClasses,
-  GXS.VectorGeometry,
+  Scene.PersistentClasses,
+  Scene.VectorGeometry,
   GXS.Coordinates,
   GXS.Graphics,
   GXS.Objects,
@@ -45,7 +45,7 @@ uses
   GXS.RenderContextInfo,
   GXS.State,
   GXS.TextureFormat,
-  GXS.VectorTypes;
+  Scene.VectorTypes;
 
 
 type
@@ -61,7 +61,7 @@ type
 
   TOptimise = (opNone, op4in1, op9in1, op16in1);
 
-  TgxzBuffer = class(TPersistent)
+  TgxZBuffer = class(TPersistent)
   private
     FData: PZArray;
     FDataIdx, FDataInvIdx: TZArrayIdx;
@@ -152,8 +152,8 @@ type
     procedure SetSoft(const val: boolean);
     procedure BindTexture;
   public
-    ViewerZBuf: TgxzBuffer;
-    CasterZBuf: TgxzBuffer;
+    ViewerZBuf: TgxZBuffer;
+    CasterZBuf: TgxZBuffer;
     constructor Create(AOwner: TComponent); override;
     destructor Destroy; override;
     procedure DoRender(var ARci: TgxRenderContextInfo; ARenderSelf,
@@ -182,7 +182,7 @@ type
 implementation
 //======================================================================
 
-constructor TgxzBuffer.Create;
+constructor TgxZBuffer.Create;
 begin
   inherited Create;
 
@@ -196,7 +196,7 @@ begin
   // self.DoCalcVectors;
 end;
 
-procedure TgxzBuffer.LinkToViewer(viewer: TgxSceneViewer); // overload;
+procedure TgxZBuffer.LinkToViewer(viewer: TgxSceneViewer); // overload;
 begin
   if ((FWidth <> Viewer.Buffer.Width) or (FHeight <> Viewer.Buffer.Height)) then
   begin
@@ -210,7 +210,7 @@ begin
   self.DoCalcVectors;
 end;
 
-procedure TgxzBuffer.LinkToViewer(viewer: TgxMemoryViewer); // overload;
+procedure TgxZBuffer.LinkToViewer(viewer: TgxMemoryViewer); // overload;
 begin
   if ((FWidth <> Viewer.width) or (FHeight <> Viewer.height)) then
   begin
@@ -224,13 +224,13 @@ begin
   self.DoCalcVectors;
 end;
 
-destructor TgxzBuffer.Destroy;
+destructor TgxZBuffer.Destroy;
 begin
   FreeMem(FData);
   inherited Destroy;
 end;
 
-procedure TgxzBuffer.PrepareBufferMemory;
+procedure TgxZBuffer.PrepareBufferMemory;
 var
   i: Integer;
 begin
@@ -247,7 +247,7 @@ begin
   FDataInvIdx[FHeight] := FDataInvIdx[FHeight - 1];
 end;
 
-procedure TgxzBuffer.SetWidth(val: Integer);
+procedure TgxZBuffer.SetWidth(val: Integer);
 begin
   if val <> FWidth then
   begin
@@ -257,7 +257,7 @@ begin
   end;
 end;
 
-procedure TgxzBuffer.SetHeight(const val: Integer);
+procedure TgxZBuffer.SetHeight(const val: Integer);
 begin
   if val <> FHeight then
   begin
@@ -267,7 +267,7 @@ begin
   end;
 end;
 
-function TgxzBuffer.GetDepthBuffer(CalcVectors: Boolean; ContextIsActive:
+function TgxZBuffer.GetDepthBuffer(CalcVectors: Boolean; ContextIsActive:
   boolean): PZArray;
 begin
   if ContextIsActive = True then
@@ -289,7 +289,7 @@ begin
   Result := FData;
 end;
 
-function TgxzBuffer.GetPixelzDepth(x, y: integer): Single;
+function TgxZBuffer.GetPixelzDepth(x, y: integer): Single;
 begin
   if (Cardinal(x) < Cardinal(FWidth)) and (Cardinal(y) < Cardinal(FHeight)) then
     Result := FDataInvIdx[y]^[x]
@@ -297,7 +297,7 @@ begin
     Result := 0;
 end;
 
-function TgxzBuffer.PixelToDistance_OLD(x, y: integer): Single;
+function TgxZBuffer.PixelToDistance_OLD(x, y: integer): Single;
 var
   z, dst, camAng, wrpdst: single;
   vec: TAffineVector;
@@ -315,7 +315,7 @@ begin
   end;
 end;
 
-function TgxzBuffer.PixelToDistance(x, y: integer): Single;
+function TgxZBuffer.PixelToDistance(x, y: integer): Single;
 var
   z, dst: single;
   xx, yy, zz: single;
@@ -341,13 +341,13 @@ begin
   end;
 end;
 
-procedure TgxzBuffer.Refresh;
+procedure TgxZBuffer.Refresh;
 begin
   if assigned(Buffer) then
     GetDepthBuffer(True, False);
 end;
 
-procedure TgxzBuffer.DoCalcVectors;
+procedure TgxZBuffer.DoCalcVectors;
 var
   axs: TAffineVector;
   Hnorm, hcvec: TVector;
@@ -443,7 +443,7 @@ begin
   //--------------------
 end;
 
-function TgxzBuffer.FastScreenToVector(x, y: integer): TAffineVector;
+function TgxZBuffer.FastScreenToVector(x, y: integer): TAffineVector;
 var
   w, h: integer;
   Rlerp, Ulerp: single;
@@ -457,7 +457,7 @@ begin
   result.Z := lb.Z + riVec.Z * Rlerp + UpVec.Z * Ulerp;
 end;
 
-function TgxzBuffer.FastVectorToScreen(Vec: TAffineVector): TAffineVector;
+function TgxZBuffer.FastVectorToScreen(Vec: TAffineVector): TAffineVector;
 var
   v0, v1, x, y, z: Single;
 begin
@@ -475,7 +475,7 @@ begin
 
 end;
 
-function TgxzBuffer.PixelToWorld(const x, y: Integer): TAffineVector;
+function TgxZBuffer.PixelToWorld(const x, y: Integer): TAffineVector;
 var
   z, dst: single;
   fy: integer;
@@ -500,7 +500,7 @@ begin
   end;
 end;
 
-function TgxzBuffer.WorldToPixel(const aPoint: TAffineVector; out pixX, pixY:
+function TgxZBuffer.WorldToPixel(const aPoint: TAffineVector; out pixX, pixY:
   integer; out pixZ: single): boolean;
 var
   camPos: TVector;
@@ -537,7 +537,7 @@ begin
   end;
 end;
 
-function TgxzBuffer.WorldToPixelZ(const aPoint: TAffineVector; out pixX, pixY:
+function TgxZBuffer.WorldToPixelZ(const aPoint: TAffineVector; out pixX, pixY:
   integer; out pixZ: single): boolean; //OVERLOAD
 var
   camPos: TVector;
@@ -576,7 +576,7 @@ begin
   end;
 end;
 
-function TgxzBuffer.WorldToPixelZ(const aPoint: TAffineVector; out pixX, pixY:
+function TgxZBuffer.WorldToPixelZ(const aPoint: TAffineVector; out pixX, pixY:
   single; out pixZ: single): boolean; //OVERLOAD
 var
   camPos: TVector;
@@ -616,7 +616,7 @@ begin
   end;
 end;
 
-function TgxzBuffer.OrthWorldToPixelZ(const aPoint: TAffineVector; out pixX,
+function TgxZBuffer.OrthWorldToPixelZ(const aPoint: TAffineVector; out pixX,
   pixY: single; out pixZ: single): boolean;
 var
   camPos: TVector;

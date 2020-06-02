@@ -23,7 +23,7 @@ uses
   DwsFunctions, 
   DwsHelperFunc, 
   GXS.Scene, 
-  GXS.VectorGeometry,
+  Scene.VectorGeometry,
   GXS.Coordinates;
 
 type
@@ -792,7 +792,7 @@ begin
   FUnitName:='GXScene';
   with FDependencies do begin
     Add('Classes');
-    Add('GXS.VectorGeometry');
+    Add('Scene.VectorGeometry');
   end;
 end;
 

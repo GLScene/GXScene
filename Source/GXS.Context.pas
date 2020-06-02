@@ -26,9 +26,9 @@ uses
 
   OpenGLx,
   GXS.Generics,
-  GXS.VectorGeometry,
-  GXS.Strings,
-  GXS.VectorTypes,
+  Scene.VectorGeometry,
+  Scene.Strings,
+  Scene.VectorTypes,
   GXS.State,
   GXS.PipelineTransformation,
   GXS.TextureFormat;

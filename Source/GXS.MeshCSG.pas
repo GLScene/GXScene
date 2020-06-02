@@ -26,11 +26,11 @@ uses
   System.Math,
   
   GXS.Scene, 
-  GXS.VectorTypes, 
+  Scene.VectorTypes, 
   GXS.VectorFileObjects,
-  GXS.VectorGeometry, 
+  Scene.VectorGeometry, 
   GXS.BSP, 
-  GXS.VectorLists;
+  Scene.VectorLists;
 
 type
   TCSGOperation = (CSG_Union, CSG_Subtraction, CSG_Intersection);

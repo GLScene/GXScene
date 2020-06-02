@@ -28,7 +28,7 @@ uses
    FMX.Forms, FMX.Dialogs,
    
    OpenAL{al, alut, alTypes},  
-   GXS.VectorGeometry, 
+   Scene.VectorGeometry, 
    GXS.Sound, 
    GXS.Scene, 
    GXS.SoundFileObjects;

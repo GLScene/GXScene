@@ -30,12 +30,12 @@ uses
   System.Math,
 
   OpenGLx,
-  GXS.VectorLists,
+  Scene.VectorLists,
   GXS.HeightData,
   GXS.Graphics,
-  GXS.VectorGeometry,
+  Scene.VectorGeometry,
   GXS.Texture,
-  GXS.VectorTypes,
+  Scene.VectorTypes,
   GXS.Coordinates,
   GXS.Material;
 

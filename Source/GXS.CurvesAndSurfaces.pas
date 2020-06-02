@@ -13,8 +13,8 @@ interface
 uses
   System.SysUtils,
   System.Math,
-  GXS.VectorGeometry,
-  GXS.VectorLists;
+  Scene.VectorGeometry,
+  Scene.VectorLists;
 
 type
   TBSplineContinuity = (bscUniformNonPeriodic, bscUniformPeriodic);

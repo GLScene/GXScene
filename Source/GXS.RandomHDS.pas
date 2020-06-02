@@ -57,8 +57,8 @@ uses
 
   OpenGLx,
   GXS.Scene,
-  GXS.VectorTypes,
-  GXS.VectorGeometry,
+  Scene.VectorTypes,
+  Scene.VectorGeometry,
   GXS.HeightData,
   GXS.TerrainRenderer,
   GXS.Texture,

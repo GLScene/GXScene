@@ -47,7 +47,7 @@ uses
   OpenCL,
   OpenCL_Platform,
   GXS.CrossPlatform,
-  GXS.Strings;
+  Scene.Strings;
 
 const
   CUDAAPIDLL = 'nvcuda.dll';

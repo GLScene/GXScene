@@ -15,9 +15,9 @@ uses
   System.SysUtils,
 
   XCollection,
-  GXS.VectorTypes,
+  Scene.VectorTypes,
   GXS.Scene,
-  GXS.VectorGeometry,
+  Scene.VectorGeometry,
   GXS.BaseClasses,
   GXS.Coordinates;
 

@@ -15,10 +15,10 @@ uses
   System.Classes,
   System.Math,
   GXS.VectorFileObjects,
-  GXS.VectorGeometry,
+  Scene.VectorGeometry,
   GXS.Texture,
   GXS.Material,
-  GXS.VectorTypes,
+  Scene.VectorTypes,
 
   FileLWObjects;
 

@@ -11,7 +11,7 @@ interface
 uses
   System.Classes,
   System.SysUtils,
-  GXS.VectorTypes;
+  Scene.VectorTypes;
 
 const FACE_POLYGON = 1;
 const MAX_TEXTURES = 1000;

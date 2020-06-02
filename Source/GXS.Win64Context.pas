@@ -22,8 +22,8 @@ uses
   OpenGLx,
   GXS.Context,
   GXS.State,
-  GXS.Strings,
-  GXS.VectorGeometry;
+  Scene.Strings,
+  Scene.VectorGeometry;
 
 type
   { A context driver for standard Windows OpenGL }

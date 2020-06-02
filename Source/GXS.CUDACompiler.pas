@@ -18,7 +18,7 @@ uses
   System.UITypes,
   FMX.Forms, 
   FMX.Dialogs,
-  GXS.Strings,
+  Scene.Strings,
   GXS.CUDAParser, 
   GXS.ApplicationFileIO;
 

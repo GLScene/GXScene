@@ -30,7 +30,7 @@ uses
 
   GXS.ApplicationFileIO,
   GXS.Utils,
-  GXS.VectorGeometry, GXS.CrossPlatform, GXS.Material, GXS.BaseClasses;
+  Scene.VectorGeometry, GXS.CrossPlatform, GXS.Material, GXS.BaseClasses;
 
 type
   TByteArray = array [0 .. MaxInt div (2 * SizeOf(Byte))] of Byte;

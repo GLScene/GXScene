@@ -1,9 +1,9 @@
 //
 // The unit is for GXScene Engine
 //
-{
+(*
   TIN (Triangular Irregular Network) vector file format implementation.
-}
+*)
 unit GXS.FileTIN;
 
 interface
@@ -12,12 +12,13 @@ uses
   System.Classes,
   System.SysUtils,
 
-  GXS.VectorTypes,
+  Scene.VectorTypes,
+  Scene.VectorGeometry,
+  Scene.VectorRecTypes,
+
   GXS.VectorFileObjects,
   GXS.ApplicationFileIO,
-  GXS.VectorGeometry,
-  GXS.Utils,
-  GXS.Types;
+  GXS.Utils;
 
 
 type

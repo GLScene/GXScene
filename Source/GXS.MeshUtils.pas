@@ -14,10 +14,10 @@ uses
   System.Classes,
   System.SysUtils,
   System.Math,
-  GXS.PersistentClasses,
-  GXS.VectorLists,
-  GXS.VectorGeometry,
-  GXS.VectorTypes,
+  Scene.PersistentClasses,
+  Scene.VectorLists,
+  Scene.VectorGeometry,
+  Scene.VectorTypes,
   GXS.CrossPlatform;
 
 

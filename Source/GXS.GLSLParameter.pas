@@ -13,7 +13,7 @@ uses
   System.Classes,
 
   OpenGLx,
-  GXS.VectorTypes,
+  Scene.VectorTypes,
   GXS.TextureFormat,
   GXS.RenderContextInfo;
 

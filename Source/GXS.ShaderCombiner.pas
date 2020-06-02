@@ -21,8 +21,8 @@ uses
   
   GXS.Material,
   GXS.Scene,
-  GXS.VectorGeometry,
-  GXS.Strings,
+  Scene.VectorGeometry,
+  Scene.Strings,
   GXS.RenderContextInfo;
 
 type

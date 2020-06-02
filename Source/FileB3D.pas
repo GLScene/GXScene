@@ -1,11 +1,9 @@
 //
 // The unit for GXScene Engine
 //
-{
-  File streaming class for the B3D loader 
-  	  
-
-}
+(*
+  File streaming class for the B3D loader
+*)
 unit FileB3D;
 
 interface
@@ -17,9 +15,9 @@ uses
   System.Classes,
   System.SysUtils,
 
-  GXS.VectorGeometry,
-  GXS.VectorTypes,
-  GXS.VectorLists;
+  Scene.VectorGeometry,
+  Scene.VectorTypes,
+  Scene.VectorLists;
 
 
 type

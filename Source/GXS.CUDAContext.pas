@@ -12,7 +12,7 @@ uses
   System.Classes,
   System.SysUtils,
   FMX.Dialogs,
-  GXS.Strings,
+  Scene.Strings,
   GXS.BaseClasses,
   GXS.CUDARunTime,
   GXS.Context,

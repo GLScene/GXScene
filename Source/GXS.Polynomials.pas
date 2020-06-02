@@ -17,7 +17,7 @@ interface
 {$I GXS.Scene.inc}
 
 uses
-  GXS.VectorGeometry;
+  Scene.VectorGeometry;
 
 
 type

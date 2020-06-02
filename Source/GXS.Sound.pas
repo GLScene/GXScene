@@ -15,10 +15,10 @@ uses
   System.Types,
 
   XCollection,
-  GXS.VectorTypes,
+  Scene.VectorTypes,
   GXS.SoundFileObjects,
   GXS.Scene,
-  GXS.VectorGeometry,
+  Scene.VectorGeometry,
   GXS.Cadencer,
   GXS.BaseClasses,
   GXS.CrossPlatform,

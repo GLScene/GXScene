@@ -14,9 +14,9 @@ uses
   System.Classes,
   System.SysUtils,
 
-  GXS.VectorTypes,
-  GXS.VectorGeometry,
-  GXS.VectorLists,
+  Scene.VectorTypes,
+  Scene.VectorGeometry,
+  Scene.VectorLists,
   GXS.VectorFileObjects,
   GXS.ApplicationFileIO,
   GXS.Utils,

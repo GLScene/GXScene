@@ -40,8 +40,8 @@ uses
   GXS.Texture, 
   GXS.Material, 
   GXS.Scene, 
-  GXS.VectorGeometry,
-  GXS.VectorTypes, 
+  Scene.VectorGeometry,
+  Scene.VectorTypes, 
   GXS.ParticleFX, 
   GXS.CrossPlatform, 
   GXS.Coordinates;

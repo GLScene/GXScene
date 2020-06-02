@@ -32,7 +32,7 @@ uses
   FMX.ListView,
 
   GXS.Scene,
-  GXS.Strings,
+  Scene.Strings,
   GXS.Behaviours,
   XCollection;
 

@@ -22,8 +22,8 @@ uses
   GXS.TextureFormat,
   GXS.RGBE,
   GXS.ApplicationFileIO,
-  GXS.VectorGeometry,
-  GXS.Strings,
+  Scene.VectorGeometry,
+  Scene.Strings,
   FileDXTC;
 
 type

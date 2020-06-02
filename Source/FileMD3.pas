@@ -11,7 +11,7 @@ interface
 
 uses
   System.Classes, 
-  GXS.VectorTypes;
+  Scene.VectorTypes;
 
 type
   // Quake3 MD3 structure types

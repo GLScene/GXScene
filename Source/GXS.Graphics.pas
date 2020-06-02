@@ -33,15 +33,15 @@ uses
 
   OpenGLx,
   GXS.ApplicationFileIO,
-  GXS.PersistentClasses,
+  Scene.PersistentClasses,
   GXS.Context,
   GXS.ImageUtils,
   GXS.Utils,
   GXS.CrossPlatform,
   GXS.Color,
   GXS.TextureFormat,
-  GXS.VectorGeometry,
-  GXS.Strings;
+  Scene.VectorGeometry,
+  Scene.Strings;
 
 type
 

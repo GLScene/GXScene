@@ -11,12 +11,12 @@ interface
 
 uses
   GXS.Scene,
-  GXS.PersistentClasses,
-  GXS.VectorGeometry,
+  Scene.PersistentClasses,
+  Scene.VectorGeometry,
   GXS.VectorFileObjects,
-  GXS.VectorLists,
+  Scene.VectorLists,
   GXS.Objects,
-  GXS.VectorTypes;
+  Scene.VectorTypes;
 
 type
   TgxRagdoll = class;

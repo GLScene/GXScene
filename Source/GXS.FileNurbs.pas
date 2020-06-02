@@ -12,8 +12,8 @@ uses
   System.Classes,
   System.SysUtils,
   GXS.VectorFileObjects,
-  GXS.VectorGeometry,
-  GXS.VectorLists,
+  Scene.VectorGeometry,
+  Scene.VectorLists,
   GXS.ApplicationFileIO,
   GXS.ParametricSurfaces,
   GXS.Utils;

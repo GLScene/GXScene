@@ -13,8 +13,8 @@ interface
 
 uses
   System.Classes,
-  GXS.VectorGeometry,
-  GXS.VectorLists,
+  Scene.VectorGeometry,
+  Scene.VectorLists,
   GXS.VectorFileObjects,
   GXS.Silhouette;
 

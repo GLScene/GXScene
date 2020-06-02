@@ -1,9 +1,9 @@
 //
 // The unit is for GXScene Engine
 //
-{
+(*
   Base classes
-}
+*)
 
 unit GXS.BaseClasses;
 
@@ -12,9 +12,9 @@ interface
 uses
   System.Classes,
   System.SysUtils,
-  
-  GXS.Strings,
-  GXS.PersistentClasses;
+
+  Scene.Strings,
+  Scene.PersistentClasses;
 
 type
 
@@ -22,9 +22,9 @@ type
     deltaTime, newTime: Double
   end;
 
-  { Progression event for time-base animations/simulations.
+  (* Progression event for time-base animations/simulations.
      deltaTime is the time delta since last progress and newTime is the new
-     time after the progress event is completed. }
+     time after the progress event is completed. *)
   TgxProgressEvent = procedure(Sender: TObject; const deltaTime, newTime: Double) of object;
 
   IgxNotifyAble = interface(IInterface)

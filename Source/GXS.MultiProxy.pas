@@ -14,14 +14,14 @@ uses
   System.SysUtils,
 
   OpenGLx,
-  GXS.PersistentClasses,
+  Scene.PersistentClasses,
   GXS.Context,
   GXS.Scene,
-  GXS.VectorGeometry,
+  Scene.VectorGeometry,
   GXS.Silhouette,
   GXS.RenderContextInfo,
   GXS.BaseClasses,
-  GXS.VectorTypes;
+  Scene.VectorTypes;
 
 type
 

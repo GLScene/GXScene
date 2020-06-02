@@ -28,16 +28,16 @@ uses
   System.Classes,
   System.SysUtils,
   
-  GXS.PersistentClasses,
+  Scene.PersistentClasses,
   GXS.Scene,
   GXS.Texture,
-  GXS.VectorGeometry,
+  Scene.VectorGeometry,
   GXS.Context,
   GXS.Color,
   GXS.RenderContextInfo,
   GXS.TextureFormat,
   GXS.PipelineTransformation,
-  GXS.VectorTypes;
+  Scene.VectorTypes;
 
 type
   TgxSLProjectedTexturesStyle = (ptsLight, ptsShadow);

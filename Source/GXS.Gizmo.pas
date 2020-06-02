@@ -16,13 +16,13 @@ uses
   System.SysUtils,
   FMX.TextLayout,
   
-  GXS.PersistentClasses,
+  Scene.PersistentClasses,
   GXS.Scene,
   GXS.Color,
   GXS.Objects,
-  GXS.VectorGeometry,
+  Scene.VectorGeometry,
   GXS.Material,
-  GXS.Strings,
+  Scene.Strings,
   GXS.GeomObjects,
   GXS.BitmapFont,
   GXS.Win64Viewer,
@@ -32,7 +32,7 @@ uses
   GXS.RenderContextInfo,
   GXS.State,
   GXS.Selection,
-  GXS.VectorTypes;
+  Scene.VectorTypes;
 
 type
   TgxGizmoUndoCollection = class;

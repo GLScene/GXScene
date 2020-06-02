@@ -15,7 +15,7 @@ uses
   FMX.Dialogs,
   FMX.Graphics,
   
-  GXS.VectorGeometry;
+  Scene.VectorGeometry;
 
 // Set these as applicable
 const

@@ -20,7 +20,7 @@ uses
 
   OpenGLx,
   GXS.CrossPlatform,
-  GXS.VectorGeometry,
+  Scene.VectorGeometry,
   GXS.Graphics;
 
 type

@@ -83,7 +83,7 @@ type
 implementation
 
 uses
-  GXS.VectorGeometry;
+  Scene.VectorGeometry;
 
 { TgxDynamicTextureImage }
 

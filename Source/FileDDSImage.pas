@@ -26,7 +26,7 @@ uses
   FMX.Types,
   
   OpenGLx,
-  GXS.VectorGeometry,
+  Scene.VectorGeometry,
   GXS.Graphics,
   GXS.Context,
   GXS.FileDDS,

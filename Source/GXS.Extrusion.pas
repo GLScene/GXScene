@@ -29,12 +29,12 @@ uses
   GXS.Scene,
   GXS.MultiPolygon,
   GXS.Color,
-  GXS.VectorGeometry,
+  Scene.VectorGeometry,
   GXS.RenderContextInfo,
   GXS.Nodes,
   GXS.State,
-  GXS.VectorTypes,
-  GXS.VectorLists;
+  Scene.VectorTypes,
+  Scene.VectorLists;
 
 type
 

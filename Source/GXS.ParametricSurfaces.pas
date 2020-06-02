@@ -32,12 +32,12 @@ interface
 
 uses
   OpenGLx,
-  GXS.VectorTypes,
+  Scene.VectorTypes,
   GXS.VectorFileObjects,
   GXS.CurvesAndSurfaces,
-  GXS.VectorGeometry,
-  GXS.VectorLists,
-  GXS.PersistentClasses,
+  Scene.VectorGeometry,
+  Scene.VectorLists,
+  Scene.PersistentClasses,
   GXS.Texture,
   GXS.State,
   GXS.Context,

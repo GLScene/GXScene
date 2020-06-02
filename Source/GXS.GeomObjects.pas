@@ -16,13 +16,13 @@ uses
   System.Math,
 
   OpenGLx,
-  GXS.PersistentClasses,
+  Scene.PersistentClasses,
   GXS.Scene,
-  GXS.VectorGeometry,
+  Scene.VectorGeometry,
   GXS.Context,
   GXS.Objects,
   GXS.Silhouette,
-  GXS.VectorTypes,
+  Scene.VectorTypes,
   GXS.GeometryBB,
   GXS.RenderContextInfo,
   GXS.Polynomials;

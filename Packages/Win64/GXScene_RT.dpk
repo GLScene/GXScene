@@ -160,7 +160,6 @@ contains
   GXS.Isolines in '..\..\Source\GXS.Isolines.pas',
   GXS.Isosurface in '..\..\Source\GXS.Isosurface.pas',
   GXS.Joystick in '..\..\Source\GXS.Joystick.pas',
-  GXS.Keyboard in '..\..\Source\GXS.Keyboard.pas',
   GXS.LensFlare in '..\..\Source\GXS.LensFlare.pas',
   GXS.LinePFX in '..\..\Source\GXS.LinePFX.pas',
   GXS.Manager in '..\..\Source\GXS.Manager.pas',
@@ -193,7 +192,6 @@ contains
   GXS.PerlinBase in '..\..\Source\GXS.PerlinBase.pas',
   GXS.PerlinNoise3D in '..\..\Source\GXS.PerlinNoise3D.pas',
   GXS.PerlinPFX in '..\..\Source\GXS.PerlinPFX.pas',
-  GXS.PersistentClasses in '..\..\Source\GXS.PersistentClasses.pas',
   GXS.PhongShader in '..\..\Source\GXS.PhongShader.pas',
   GXS.PictureRegisteredFormats in '..\..\Source\GXS.PictureRegisteredFormats.pas',
   GXS.PipelineTransformation in '..\..\Source\GXS.PipelineTransformation.pas',
@@ -237,7 +235,6 @@ contains
   GXS.SpatialPartitioning in '..\..\Source\GXS.SpatialPartitioning.pas',
   GXS.Spline in '..\..\Source\GXS.Spline.pas',
   GXS.State in '..\..\Source\GXS.State.pas',
-  GXS.Strings in '..\..\Source\GXS.Strings.pas',
   GXS.Teapot in '..\..\Source\GXS.Teapot.pas',
   GXS.TerrainRenderer in '..\..\Source\GXS.TerrainRenderer.pas',
   GXS.TexCombineShader in '..\..\Source\GXS.TexCombineShader.pas',
@@ -254,12 +251,8 @@ contains
   GXS.Trail in '..\..\Source\GXS.Trail.pas',
   GXS.Tree in '..\..\Source\GXS.Tree.pas',
   GXS.Triangulation in '..\..\Source\GXS.Triangulation.pas',
-  GXS.Types in '..\..\Source\GXS.Types.pas',
   GXS.Utils in '..\..\Source\GXS.Utils.pas',
   GXS.VectorFileObjects in '..\..\Source\GXS.VectorFileObjects.pas',
-  GXS.VectorGeometry in '..\..\Source\GXS.VectorGeometry.pas',
-  GXS.VectorLists in '..\..\Source\GXS.VectorLists.pas',
-  GXS.VectorTypes in '..\..\Source\GXS.VectorTypes.pas',
   GXS.VerletClothify in '..\..\Source\GXS.VerletClothify.pas',
   GXS.VerletHairClasses in '..\..\Source\GXS.VerletHairClasses.pas',
   GXS.VerletSkeletonColliders in '..\..\Source\GXS.VerletSkeletonColliders.pas',
@@ -274,7 +267,14 @@ contains
   XOpenGL in '..\..\Source\XOpenGL.pas',
   XCollection in '..\..\Source\XCollection.pas',
   Vulkan in '..\..\Source\Vulkan.pas',
-  FileVFW in '..\..\Source\FileVFW.pas';
+  FileVFW in '..\..\Source\FileVFW.pas',
+  Scene.Keyboard in '..\..\Source\Scene.Keyboard.pas',
+  Scene.PersistentClasses in '..\..\Source\Scene.PersistentClasses.pas',
+  Scene.Strings in '..\..\Source\Scene.Strings.pas',
+  Scene.VectorGeometry in '..\..\Source\Scene.VectorGeometry.pas',
+  Scene.VectorRecTypes in '..\..\Source\Scene.VectorRecTypes.pas',
+  Scene.VectorTypes in '..\..\Source\Scene.VectorTypes.pas',
+  Scene.VectorLists in '..\..\Source\Scene.VectorLists.pas';
 
 end.
 

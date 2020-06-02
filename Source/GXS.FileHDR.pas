@@ -53,8 +53,8 @@ implementation
 
 uses
   GXS.RGBE,
-  GXS.VectorTypes,
-  GXS.VectorGeometry;
+  Scene.VectorTypes,
+  Scene.VectorGeometry;
 
 // ------------------
 // ------------------ TgxHDRImage ------------------

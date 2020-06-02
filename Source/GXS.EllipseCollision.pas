@@ -11,10 +11,10 @@ interface
 {$I GXS.Scene.inc}
 
 uses
-  GXS.VectorGeometry,
+  Scene.VectorGeometry,
   GXS.Octree,
-  GXS.VectorLists,
-  GXS.VectorTypes;
+  Scene.VectorLists,
+  Scene.VectorTypes;
 
 type
   TECPlane = class

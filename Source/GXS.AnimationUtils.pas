@@ -17,8 +17,8 @@ uses
   System.Classes, 
   System.Math,
   GXS.CrossPlatform, 
-  GXS.VectorTypes, 
-  GXS.VectorGeometry;
+  Scene.VectorTypes, 
+  Scene.VectorGeometry;
 
 type
 

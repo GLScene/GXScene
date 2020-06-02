@@ -11,8 +11,8 @@ interface
 {$I GXS.Scene.inc}
 
 uses
-  GXS.PersistentClasses,
-  GXS.VectorGeometry,
+  Scene.PersistentClasses,
+  Scene.VectorGeometry,
   GXS.State,
   GXS.PipelineTransformation,
   GXS.Color;

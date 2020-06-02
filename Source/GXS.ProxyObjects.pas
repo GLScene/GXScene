@@ -17,17 +17,17 @@ uses
   OpenGLx,
   XCollection,
   GXS.Scene,
-  GXS.PersistentClasses,
-  GXS.VectorGeometry,
+  Scene.PersistentClasses,
+  Scene.VectorGeometry,
   GXS.Texture,
   GXS.VectorFileObjects,
-  GXS.Strings,
+  Scene.Strings,
   GXS.RenderContextInfo,
   GXS.BaseClasses,
   GXS.Material,
   GXS.Context,
   GXS.PipelineTransformation,
-  GXS.VectorTypes;
+  Scene.VectorTypes;
 
 type
   EGLProxyException = class(Exception);

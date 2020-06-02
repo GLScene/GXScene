@@ -15,10 +15,10 @@ uses
 
   GXS.VectorFileObjects,
   GXS.ApplicationFileIO,
-  GXS.VectorLists,
-  GXS.VectorGeometry,
+  Scene.VectorLists,
+  Scene.VectorGeometry,
   GXS.Texture,
-  GXS.PersistentClasses,
+  Scene.PersistentClasses,
   GXS.Graphics,
   GXS.Material;
 

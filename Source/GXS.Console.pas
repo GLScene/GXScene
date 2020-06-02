@@ -52,14 +52,14 @@ uses
   GXS.HUDObjects,
   GXS.Win64Viewer,
   GXS.BitmapFont,
-  GXS.PersistentClasses,
+  Scene.PersistentClasses,
   GXS.Context,
   GXS.Texture,
   GXS.Utils,
-  GXS.Strings,
+  Scene.Strings,
   GXS.CrossPlatform,
   GXS.Material,
-  GXS.VectorTypes;
+  Scene.VectorTypes;
 
 const
   CONSOLE_MAX_COMMANDS = 120;

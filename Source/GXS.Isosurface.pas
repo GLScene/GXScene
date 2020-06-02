@@ -34,12 +34,13 @@ unit GXS.Isosurface;
 interface
 
 uses
-  GXS.VectorGeometry,
-  GXS.VectorLists,
+  Scene.VectorGeometry,
+  Scene.VectorLists,
+  Scene.VectorTypes,
+  Scene.VectorRecTypes,
+
   GXS.Mesh,
-  GXS.VectorFileObjects,
-  GXS.VectorTypes,
-  GXS.Types;
+  GXS.VectorFileObjects;
 
 
 const

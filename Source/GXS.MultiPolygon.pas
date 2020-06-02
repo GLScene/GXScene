@@ -6,7 +6,7 @@
 *)
 (* TODO
 
-  And I reactivated the TgxVectorPool object. The GXS.VectorLists are not suitable for this job.
+  And I reactivated the TgxVectorPool object. The Scene.VectorLists are not suitable for this job.
   When the tesselator finds an intersection of edges it wants us to give him some storage
   for this new vertex, and he wants a pointer (see tessCombine). The pointers taken from
   TAffineVectorList become invalid after enlarging the capacity (makes a ReAllocMem), which
@@ -30,10 +30,10 @@ uses
   XOpenGL,
   GXS.Spline,
   GXS.Context,
-  GXS.VectorTypes,
-  GXS.VectorGeometry,
-  GXS.VectorLists,
-  GXS.PersistentClasses,
+  Scene.VectorTypes,
+  Scene.VectorGeometry,
+  Scene.VectorLists,
+  Scene.PersistentClasses,
   GXS.Scene,
   GXS.Objects,
   GXS.GeomObjects,
@@ -115,7 +115,7 @@ type
      TgxMultiPolygonBase will take the input contours and let the tesselator
      make an outline from it (this is done in RetreiveOutline). This outline is
      used for Rendering. Only when there are changes in the contours, the
-     outline will be recalculated. The ouline in fact is a list of GXS.VectorLists. *)
+     outline will be recalculated. The ouline in fact is a list of Scene.VectorLists. *)
   TgxMultiPolygonBase = class(TgxSceneObject)
   private
     FContours: TgxContours;

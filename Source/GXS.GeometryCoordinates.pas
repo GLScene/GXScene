@@ -11,7 +11,7 @@ interface
 
 uses
   System.Math,
-  GXS.VectorGeometry;
+  Scene.VectorGeometry;
 
 { Convert cylindrical to cartesian [single]. theta in rad }
 procedure Cylindrical_Cartesian(const r, theta, z1: single; var x, y, z: single); overload;

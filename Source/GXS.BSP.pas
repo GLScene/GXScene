@@ -16,11 +16,11 @@ uses
   System.Classes,
   System.Math,
 
-  GXS.VectorTypes,
+  Scene.VectorTypes,
   GXS.VectorFileObjects,
   GXS.Material,
-  GXS.VectorGeometry,
-  GXS.VectorLists,
+  Scene.VectorGeometry,
+  Scene.VectorLists,
   GXS.Color,
   GXS.RenderContextInfo;
 

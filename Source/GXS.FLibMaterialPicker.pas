@@ -1,9 +1,9 @@
 //
-// The unit for GXScene Engine
+// Graphic Scene Engine, http://glscene.org
 //
-{
- Allows choosing a material in a material library 
-}
+(*
+ Allows choosing a material in a material library
+*)
 unit GXS.FLibMaterialPicker;
 
 interface
@@ -33,7 +33,7 @@ uses
   FMX.Controls.Presentation,
 
   GXS.Material,
-  FRMaterialPreview;
+  GXS.FRMaterialPreview;
 
 type
   TgxLibMaterialPicker = class(TForm)

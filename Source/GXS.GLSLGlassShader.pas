@@ -1,4 +1,4 @@
-// The unit for GXScene Engine
+// Graphic Scene Engine, http://glscene.org
 //
 {
    Glass shader : Environment mapping with an
@@ -12,19 +12,32 @@ unit GXS.GLSLGlassShader;
 
 interface
 
-{$I GXS.Scene.inc}
+{$I Scene.inc}
 
 uses
+  Winapi.OpenGL, 
+  Winapi.OpenGLext,  
   System.Classes,
   
-  GXS.Scene, GXS.CrossPlatform, GXS.BaseClasses, GXS.State, Winapi.OpenGL, Winapi.OpenGLext,  GXS.OpenGL1x, 
-  GXS.Context, GXS.RenderContextInfo, Scene.VectorGeometry, GXS.Coordinates, 
-  GXS.TextureFormat, GXS.Color, GXS.Texture, GXS.Material, Scene.PersistentClasses, GXS.Graphics,
-  GLSLS.Shader, GXS.CustomShader;
+  GXS.Scene, 
+  GXS.CrossPlatform, 
+  GXS.BaseClasses, 
+  GXS.State, 
+  GXS.OpenGL1x, 
+  GXS.Context, 
+  GXS.RenderContextInfo, 
+  Scene.VectorGeometry, 
+  GXS.Coordinates, 
+  GXS.TextureFormat, 
+  GXS.Color, 
+  GXS.Texture, 
+  GXS.Material, 
+  Scene.PersistentClasses, 
+  GXS.Graphics,
+  GXS.GLSLShader, 
+  GXS.CustomShader;
 
 
-//TgxCustomGLSLSimpleGlassShader
-//
 { Custom class for GLSLGlassShader. 
   Glass shader : Environment mapping and refraction mapping using the fresnel terms }
 Type

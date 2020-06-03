@@ -1,5 +1,5 @@
 //
-// The unit is for GXScene Engine
+// Graphic Scene Engine, http://glscene.org
 //
 {
 	Classes and methods for 2D triangulation of scatter points.

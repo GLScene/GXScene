@@ -1,5 +1,5 @@
 //
-// The unit is for GXScene Engine
+// Graphic Scene Engine, http://glscene.org
 //
 
 unit GXS.TextureFormat;
@@ -8,18 +8,18 @@ interface
 
 uses
   Scene.Strings,
-  OpenGLx;
+  Import.OpenGLx;
 
 type
-  { Texture addressing rules }
+  // Texture addressing rules
   TgxSeparateTextureWrap = (twRepeat, twClampToEdge, twClampToBorder,
     twMirrorRepeat, twMirrorClampToEdge, twMirrorClampToBorder);
 
-  { Specifies the texture comparison mode for currently bound depth textures.
-    That is, a texture whose internal format is tfDEPTH_COMPONENT* }
+  (* Specifies the texture comparison mode for currently bound depth textures.
+    That is, a texture whose internal format is tfDEPTH_COMPONENT* *)
   TgxTextureCompareMode = (tcmNone, tcmCompareRtoTexture);
 
-  { Filtering quality }
+  // Filtering quality
   TgxTextureFilteringQuality = (tfIsotropic, tfAnisotropic);
 
   TgxTextureTarget =
@@ -193,14 +193,13 @@ type
     tfRGBA16_SNORM
     );
 
-  { Texture compression option.
+  (* Texture compression option.
      If OpenVX supports it, this will activate a compressed texture format:
       tcDefault : uses global default compression option
       tcNone : do not use compression
       tcStandard : use standard compression, average quality, average rate
       tcHighQuality : choose a high-quality, low-speed compression
-      tcHighSpeed : choose a high-speed, low-quality compression
-      . }
+      tcHighSpeed : choose a high-speed, low-quality compression. *)
   TgxInternalCompression = (tcDefault, tcNone, tcStandard, tcHighQuality,
     tcHighSpeed);
 
@@ -211,42 +210,40 @@ var
 const
   cDefaultSwizzleVector: TSwizzleVector = (tswRed, tswGreen, tswBlue, tswAlpha);
 
-{Give a OpenVX texture format from texture format. }
+// Give a OpenVX texture format from texture format.
 function InternalFormatToOpenVXFormat(intFormat: TgxInternalFormat): Cardinal;
-{Give a GXScene texture format from OpenVX texture format. }
+// Give a GXScene texture format from OpenVX texture format.
 function OpenVXFormatToInternalFormat(glFormat: Cardinal): TgxInternalFormat;
-{Give a pixel size in bytes from texture format or data format. }
+// Give a pixel size in bytes from texture format or data format.
 function GetTextureElementSize(intFormat: TgxInternalFormat): Integer; overload;
 function GetTextureElementSize(colorFormat: Cardinal; dataType: Cardinal):
   Integer; overload;
-{Give compatible OpenVX image format and data type. }
+// Give compatible OpenVX image format and data type.
 procedure FindCompatibleDataFormat(intFormat: TgxInternalFormat; out dFormat:
   Cardinal; out dType: Cardinal);
-{Give a compressed OpenVX texture format from GLScene texture format
-  if format is have not compression than return same openGL format. }
-function CompressedInternalFormatToOpenVX(intFormat: TgxInternalFormat):
-  Integer;
-{True if texture target supported. }
+(* Give a compressed OpenVX texture format from GLScene texture format
+  if format is have not compression than return same openGL format. *)
+function CompressedInternalFormatToOpenVX(intFormat: TgxInternalFormat): Integer;
+// True if texture target supported.
 function IsTargetSupported(glTarget: Cardinal): Boolean; overload;
 function IsTargetSupported(target: TgxTextureTarget): Boolean; overload;
-{True if texture format is supported by hardware or software. }
+// True if texture format is supported by hardware or software.
 function IsFormatSupported(intFormat: TgxInternalFormat): Boolean;
-{True if texture format is float. }
+// True if texture format is float.
 function IsFloatFormat(intFormat: TgxInternalFormat): Boolean; overload;
 function IsFloatFormat(glFormat: Cardinal): Boolean; overload;
-{True if depth texture. }
+// True if depth texture.
 function IsDepthFormat(intFormat: TgxInternalFormat): boolean; overload;
 function IsDepthFormat(glFormat: Cardinal): Boolean; overload;
-{True if texture compressed. }
+// True if texture compressed.
 function IsCompressedFormat(intFormat: TgxInternalFormat): Boolean; overload;
 function IsCompressedFormat(glFormat: Cardinal): Boolean; overload;
-{Give generic compressed OpenVX texture format. }
+// Give generic compressed OpenVX texture format.
 function GetGenericCompressedFormat(const intFormat: TgxInternalFormat;
   const colorFormat: Cardinal; out internalFormat: Cardinal): Boolean;
-{Give uncompressed texture format and OpenVX color format. }
+// Give uncompressed texture format and OpenVX color format.
 function GetUncompressedFormat(const intFormat: TgxInternalFormat;
   out internalFormat: TgxInternalFormat; out colorFormat: Cardinal): Boolean;
-
 function DecodeTextureTarget(const TextureTarget: TgxTextureTarget): Cardinal;
 function EncodeTextureTarget(const glTarget: Cardinal): TgxTextureTarget;
 function IsTargetSupportMipmap(const TextureTarget: TgxTextureTarget): Boolean; overload;

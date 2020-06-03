@@ -1,5 +1,5 @@
 //
-// The unit is for GXScene Engine
+// Graphic Scene Engine, http://glscene.org
 //
 {
    Utility class and functions to manipulate a bitmap in OpenGL's default
@@ -7,14 +7,14 @@
 
    Note: TgxBitmap32 has support for Alex Denissov's Graphics32 library
    (http://www.g32.org), just make sure the USE_GRAPHICS32 conditionnal
-   is active in GXS.Scene.inc and recompile.
+   is active in Scene.inc and recompile.
 }
 
 unit GXS.Graphics;
 
 interface
 
-{$I GXS.Scene.inc}
+{$I Scene.inc}
 
 uses
   Winapi.Windows,
@@ -31,16 +31,16 @@ uses
   GR32,
 {$ENDIF}
 
-  OpenGLx,
-  GXS.ApplicationFileIO,
+  Import.OpenGLx,
+  Scene.VectorGeometry,
   Scene.PersistentClasses,
+  GXS.ApplicationFileIO,
   GXS.Context,
   GXS.ImageUtils,
   GXS.Utils,
   GXS.CrossPlatform,
   GXS.Color,
   GXS.TextureFormat,
-  Scene.VectorGeometry,
   Scene.Strings;
 
 type
@@ -184,16 +184,16 @@ type
 
   TgxBaseImageClass = class of TgxBaseImage;
 
-    { Contains and manipulates a 32 bits (24+8) bitmap.
-       This is the base class for preparing and manipulating textures in GXS.Scene,
-       this function does not rely on a windows handle and should be used for
-       in-memory manipulations only.
-       16 bits textures are automatically converted to 24 bits and an opaque (255)
-       alpha channel is assumed for all planes, the byte order is as specified
-       in GL_RGBA. If 32 bits is used in this class, it can however output 16 bits texture
-       data for use in OpenGL.
-       The class has support for registering its content as a texture, as well
-       as for directly drawing/reading from the current OpenGL buffer. }
+  (* Contains and manipulates a 32 bits (24+8) bitmap.
+     This is the base class for preparing and manipulating textures in GXS.Scene,
+     this function does not rely on a windows handle and should be used for
+     in-memory manipulations only.
+     16 bits textures are automatically converted to 24 bits and an opaque (255)
+     alpha channel is assumed for all planes, the byte order is as specified
+     in GL_RGBA. If 32 bits is used in this class, it can however output 16 bits texture
+     data for use in OpenGL.
+     The class has support for registering its content as a texture, as well
+     as for directly drawing/reading from the current OpenGL buffer. *)
   TgxImage = class(TgxBaseImage)
   private
     FVerticalReverseOnAssignFromBitmap: Boolean;

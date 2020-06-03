@@ -1,5 +1,5 @@
 //
-// The unit for GXScene Engine
+// Graphic Scene Engine, http://glscene.org
 //
 (*
   Skeleton colliders for defining and controlling ODE geoms.

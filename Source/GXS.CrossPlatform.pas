@@ -1,5 +1,5 @@
 ﻿//
-// The unit is for GXScene Engine
+// Graphic Scene Engine, http://glscene.org
 //
 {
    Cross platform support functions and types.
@@ -12,7 +12,7 @@ unit GXS.CrossPlatform;
 
 interface
 
-{$I GXS.Scene.inc}
+{$I Scene.inc}
 
 uses
   Winapi.Windows,

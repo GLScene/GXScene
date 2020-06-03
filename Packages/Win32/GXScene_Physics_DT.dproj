@@ -114,7 +114,6 @@
         <DCCReference Include="GXScene_RT.dcp"/>
         <DCCReference Include="..\..\Source\GXS.ODERegister.pas"/>
         <DCCReference Include="..\..\Source\GXS.NGDRegister.pas"/>
-        <DCCReference Include="..\..\Source\NGDImport_Joints.pas"/>
         <RcCompile Include="..\..\Resources\GXScenePhysics.rc">
             <Form>GXScenePhysics.res</Form>
         </RcCompile>

@@ -1,5 +1,5 @@
 //
-// The unit is for GXScene Engine
+// Graphic Scene Engine, http://glscene.org
 //
 (*
   Coordinate related classes.
@@ -9,13 +9,13 @@ unit GXS.Coordinates;
 
 interface
 
-{$I GXS.Scene.inc}
+{$I Scene.inc}
 
 uses
   System.Classes,
   System.SysUtils,
 
-  OpenGLx,
+  Import.OpenGLx,
   Scene.VectorGeometry,
   Scene.VectorTypes, 
   GXS.BaseClasses,

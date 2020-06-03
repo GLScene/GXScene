@@ -1,5 +1,5 @@
 //
-// The unit for GXScene Engine
+// Graphic Scene Engine, http://glscene.org
 //
 (*
   Base abstract ragdoll class. Should be extended to use any physics system.
@@ -10,13 +10,13 @@ unit GXS.Ragdoll;
 interface
 
 uses
-  GXS.Scene,
+  Scene.VectorTypes,
   Scene.PersistentClasses,
   Scene.VectorGeometry,
-  GXS.VectorFileObjects,
   Scene.VectorLists,
+  GXS.Scene,
   GXS.Objects,
-  Scene.VectorTypes;
+  GXS.VectorFileObjects;
 
 type
   TgxRagdoll = class;
@@ -30,23 +30,18 @@ type
     
      FRagdoll : TgxRagdoll;
   protected
-    
     function GetRagdollBone(Index: Integer) : TgxRagdolBone;
   public
-    
     constructor Create(Ragdoll: TgxRagdoll); reintroduce;
     destructor Destroy; override;
-
     procedure WriteToFiler(writer : TVirtualWriter); override;
     procedure ReadFromFiler(reader : TVirtualReader); override;
-
     property Ragdoll : TgxRagdoll read FRagdoll;
     property Items[Index: Integer] : TgxRagdolBone read GetRagdollBone; default;
 	end;
 
 	TgxRagdolBone = class (TgxRagdolBoneList)
   private
-    
     FOwner : TgxRagdolBoneList;
     FName : String;
     FBoneID : Integer; //Refering to TgxActor Bone
@@ -69,21 +64,17 @@ type
     procedure UpdateChild;
     procedure StopChild;
   protected
-    
     function GetRagdollBone(Index: Integer) : TgxRagdolBone;
     procedure Start; virtual; abstract;
     procedure Align; virtual; abstract;
     procedure Update; virtual; abstract;
     procedure Stop; virtual; abstract;
   public
-    
     constructor CreateOwned(aOwner : TgxRagdolBoneList);
     constructor Create(Ragdoll: TgxRagdoll);
     destructor Destroy; override;
-
     procedure WriteToFiler(writer : TVirtualWriter); override;
     procedure ReadFromFiler(reader : TVirtualReader); override;
-
     property Owner : TgxRagdolBoneList read FOwner;
     property Name : String read FName write FName;
     property BoneID : Integer read FBoneID write FBoneID;
@@ -98,39 +89,34 @@ type
 
   TgxRagdoll = class(TPersistentObject)
 	private
-    
     FOwner : TgxBaseMesh;
     FRootBone : TgxRagdolBone;
     FEnabled: Boolean;
     FBuilt: Boolean;
-  protected
-    
   public
-    
     constructor Create(AOwner : TgxBaseMesh); reintroduce;
     destructor Destroy; override;
-
     procedure WriteToFiler(writer : TVirtualWriter); override;
     procedure ReadFromFiler(reader : TVirtualReader); override;
-
-    { Must be set before build the ragdoll }
+    // Must be set before build the ragdoll
     procedure SetRootBone(RootBone: TgxRagdolBone);
-    { Create the bounding box and setup the ragdoll do be started later }
+    // Create the bounding box and setup the ragdoll do be started later
     procedure BuildRagdoll;
-
     procedure Start;
     procedure Update;
     procedure Stop;
-
     property Owner : TgxBaseMesh read FOwner;
     property RootBone : TgxRagdolBone read FRootBone;
     property Enabled : Boolean read FEnabled;
 	end;
+
 //-----------------------------------------------------------------------
 implementation
 //-----------------------------------------------------------------------
 
-{ TgxRagdolBoneList }
+//--------------------------------
+// TgxRagdolBoneList
+//--------------------------------
 
 constructor TgxRagdolBoneList.Create(Ragdoll: TgxRagdoll);
 begin

@@ -1,17 +1,16 @@
 //
-// The unit for GXScene Engine
+// Graphic Scene Engine, http://glscene.org
 //
-{
-    Support-code to load Q3BSP Files into TgxFreeForm-Components.  
+(*
+    Support-code to load Q3BSP Files into TgxFreeForm-Components.
     Note that you must manually add this unit to one of your project's uses
-    to enable support for OBJ & OBJF at run-time. 
-
-}
+    to enable support for OBJ & OBJF at run-time.
+*)
 unit GXS.FileQ3BSP;
 
 interface
 
-{$I GXS.Scene.inc}
+{$I Scene.inc}
 
 uses
   System.Classes,
@@ -32,11 +31,11 @@ uses
   GXS.Material,
   GXS.TextureFormat,
 
-  FileQ3BSP;
+  Formats.FileQ3BSP;
 
 type
 
-  { The Q3BSP vector file (Quake III BSP).  }
+  // The Q3BSP vector file (Quake III BSP).
   TgxQ3BSPVectorFile = class(TgxVectorFile)
   public
     class function Capabilities: TgxDataFileCapabilities; override;

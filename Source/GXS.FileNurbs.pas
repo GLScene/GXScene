@@ -1,5 +1,5 @@
 //
-// The unit is for GXScene Engine
+// Graphic Scene Engine, http://glscene.org
 //
 {
   Nurbs surfaces vector file loading.

@@ -1,5 +1,5 @@
 //
-// The unit is for GXScene Engine
+// Graphic Scene Engine, http://glscene.org
 //
 {
     Support-code to load OCT Files into TgxFreeForm-Components in GLScene.
@@ -10,7 +10,7 @@ unit GXS.FileOCT;
 
 interface
 
-{$I GXS.Scene.inc}
+{$I Scene.inc}
 
 uses
   System.SysUtils,
@@ -28,7 +28,7 @@ uses
   GXS.Utils,
   GXS.TextureFormat,
 
-  FileOCT;
+  Formats.FileOCT;
 
 type
 

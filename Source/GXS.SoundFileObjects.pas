@@ -1,5 +1,5 @@
 //
-// The unit is for GXScene Engine
+// Graphic Scene Engine, http://glscene.org
 //
 {
    Support classes for loading various fileformats.
@@ -10,7 +10,7 @@ unit GXS.SoundFileObjects;
 
 interface
 
-{$I GXS.Scene.inc}
+{$I Scene.inc}
 
 uses
   System.Classes,

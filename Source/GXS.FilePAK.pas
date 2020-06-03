@@ -1,10 +1,10 @@
 //
-// The unit is for GXScene Engine
+// Graphic Scene Engine, http://glscene.org
 //
 
 unit GXS.FilePAK;
 
-{$I GXS.Scene.inc}
+{$I Scene.inc}
 
 interface
 

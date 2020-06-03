@@ -1,5 +1,5 @@
 //
-// The unit is for GXScene Engine
+// Graphic Scene Engine, http://glscene.org
 //
 {
   3D Text component.
@@ -15,7 +15,7 @@ unit GXS.SpaceText;
 
 interface
 
-{$I GXS.Scene.inc}
+{$I Scene.inc}
 {$IFDEF UNIX}{$MESSAGE Error 'Unit not supported'}{$ENDIF}
 
 uses
@@ -28,7 +28,7 @@ uses
   FMX.Graphics,
   FMX.Controls,
 
-  OpenGLx,
+  Import.OpenGLx,
   GXS.Scene, 
   GXS.Texture,
   GXS.Context,

@@ -1,5 +1,5 @@
 //
-// The unit is for GXScene Engine
+// Graphic Scene Engine, http://glscene.org
 //
 (*
   Prototypes and base implementation of TgxContext.
@@ -9,7 +9,7 @@ unit GXS.Context;
 
 interface
 
-{$I GXS.Scene.inc}
+{$I Scene.inc}
 
 uses
   Winapi.Windows,
@@ -24,7 +24,7 @@ uses
   FMX.Types,
   FMX.Dialogs,
 
-  OpenGLx,
+  Import.OpenGLx,
   GXS.Generics,
   Scene.VectorGeometry,
   Scene.Strings,

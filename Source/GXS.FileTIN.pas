@@ -1,5 +1,5 @@
 //
-// The unit is for GXScene Engine
+// Graphic Scene Engine, http://glscene.org
 //
 (*
   TIN (Triangular Irregular Network) vector file format implementation.

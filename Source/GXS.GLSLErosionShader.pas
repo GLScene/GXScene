@@ -1,5 +1,5 @@
 //
-// The unit for GXScene Engine
+// Graphic Scene Engine, http://glscene.org
 //
 {
    Erosion shader Erode surface object and render with Anisotropic Specular Reflection 
@@ -9,31 +9,39 @@ unit GXS.GLSLErosionShader;
 
 interface
 
-{$I GXS.Scene.inc}
+{$I Scene.inc}
 
 uses
   System.Classes,
   
-  GXS.Scene, GXS.CrossPlatform, GXS.BaseClasses, GXS.State, Winapi.OpenGL, Winapi.OpenGLext,  GXS.OpenGL1x, 
-  GXS.Context, GXS.RenderContextInfo, GXS.Coordinates, Scene.VectorGeometry, Scene.VectorTypes,
-  GXS.TextureFormat, GXS.Color, GXS.Texture, GXS.Material,
-  GLSL.Shader, GXS.CustomShader;
+  GXS.Scene, 
+  GXS.CrossPlatform, 
+  GXS.BaseClasses, 
+  GXS.State, 
+  Winapi.OpenGL, 
+  Winapi.OpenGLext,  
+  GXS.OpenGL1x, 
+  GXS.Context, 
+  GXS.RenderContextInfo, 
+  GXS.Coordinates, 
+  Scene.VectorGeometry, 
+  Scene.VectorTypes,
+  GXS.TextureFormat, 
+  GXS.Color, 
+  GXS.Texture, 
+  GXS.Material,
+  GXS.GLSLShader, 
+  GXS.CustomShader;
 
-//TgxCustomGLSLSimpleErosionShader
-//
 { Custom class for GLSLSimpleErosionShader. 
  A shader that Erode surface object }
 Type
   TgxCustomGLSLSimpleErosionShader = class(TgxCustomGLSLShader)
   private
-
-
     FMaterialLibrary: TgxAbstractMaterialLibrary;
-
     FMainTex  : TgxTexture;
     FNoiseTex : TgxTexture;
     FErosionTex : TgxTexture;
-
     FMainTexName   : TgxLibMaterialName;
     FNoiseTexName  : TgxLibMaterialName;
     FErosionTexName  : TgxLibMaterialName;
@@ -42,7 +50,6 @@ Type
     FErosionFactor: Single;
     FIntensityFactor1: Single;
     FIntensityFactor2: Single;
-
     FSpecularColor : TgxColor;
     FAmbientColor : TgxColor;
     FAmbientFactor : Single;
@@ -50,36 +57,28 @@ Type
     FSpecularFactor : Single;
     FSpecularRoughness : Single;
     FAnisotropicRoughness : Single;
-
     function GetMaterialLibrary: TgxAbstractMaterialLibrary;
-
     procedure SetMainTexTexture(const Value: TgxTexture);
     procedure SetNoiseTexTexture(const Value: TgxTexture);
     procedure SetErosionTexTexture(const Value: TgxTexture);
-
     function GetMainTexName: TgxLibMaterialName;
     procedure SetMainTexName(const Value: TgxLibMaterialName);
     function GetNoiseTexName: TgxLibMaterialName;
     procedure SetNoiseTexName(const Value: TgxLibMaterialName);
     function GetErosionTexName: TgxLibMaterialName;
     procedure SetErosionTexName(const Value: TgxLibMaterialName);
-
     procedure SetAmbientColor(AValue: TgxColor);
     procedure SetSpecularColor(AValue: TgxColor);
-
   protected
     procedure DoApply(var rci : TgxRenderContextInfo; Sender : TObject); override;
     function DoUnApply(var rci: TgxRenderContextInfo): Boolean; override;
-
     procedure SetMaterialLibrary(const Value: TgxAbstractMaterialLibrary); virtual;
     procedure Notification(AComponent: TComponent; Operation: TOperation); override;
   public
     constructor Create(AOwner : TComponent); override;
     destructor Destroy; override;
-
 //    property Color1: TgxColor read FColor1;
 //    property Color2: TgxColor read FColor2;
-
     property MaterialLibrary: TgxAbstractMaterialLibrary read getMaterialLibrary write SetMaterialLibrary;
     property MainTexture: TgxTexture read FMainTex write SetMainTexTexture;
     property MainTextureName: TgxLibMaterialName read GetMainTexName write SetMainTexName;
@@ -87,12 +86,10 @@ Type
     property NoiseTextureName: TgxLibMaterialName read GetNoiseTexName write SetNoiseTexName;
     property ErosionTexture: TgxTexture read FErosionTex write SetErosionTexTexture;
     property ErosionTextureName: TgxLibMaterialName read GetErosionTexName write SetErosionTexName;
-
     property ErosionFactor: Single read FErosionFactor write FErosionFactor;
     property ErosionScale: Single read FErosionFactor write FErosionFactor;
     property IntensityFactor1: Single read FIntensityFactor1 write FIntensityFactor1;
     property IntensityFactor2: Single read FIntensityFactor2 write FIntensityFactor2;
-
     property SpecularColor : TgxColor Read FSpecularColor Write setSpecularColor;
     property AmbientColor : TgxColor Read FAmbientColor Write setAmbientColor;
     property AmbientFactor : Single Read FAmbientFactor Write FAmbientFactor;
@@ -100,28 +97,23 @@ Type
     property SpecularFactor : Single Read FSpecularFactor Write FSpecularFactor;
     property SpecularRoughness : Single Read FSpecularRoughness  Write FSpecularRoughness;
     property AnisotropicRoughness : Single Read FAnisotropicRoughness Write FAnisotropicRoughness;
-
   end;
 
   TgxSLSimpleErosionShader = class(TgxCustomGLSLSimpleErosionShader)
   published
 //    property Color1;
 //    property Color2;
-
     property MaterialLibrary;
-
     property MainTexture;
     property MainTextureName;
     property NoiseTexture;
     property NoiseTextureName;
     property ErosionTexture;
     property ErosionTextureName;
-
     property ErosionScale;
     property ErosionFactor;
     property IntensityFactor1;
     property IntensityFactor2;
-
     property SpecularColor;
     property AmbientColor;
     property AmbientFactor;
@@ -141,15 +133,12 @@ begin
   inherited;
   with VertexProgram.Code do
   begin
-
     Add('uniform float Scale; ');
-
     Add('varying vec3 normal; ');
     Add('varying vec2 vTexCoord; ');
     Add('varying vec3 lightVec; ');
     Add('varying vec3 viewVec; ');
     Add('varying vec3 Position; ');
-
     Add(' ');
     Add('void main(void) { ');
    // Add('  mat4 mWorld = gl_ModelViewMatrix; ');
@@ -157,7 +146,6 @@ begin
     Add('  vec4 lightPos = gl_LightSource[0].position;');
     Add('  vec4 vert =  gl_ModelViewMatrix * gl_Vertex; ');
     Add('  normal = gl_NormalMatrix * gl_Normal; ');
-
     Add('  Position       = vec3(gl_Vertex)*Scale; ');
     Add('  vTexCoord = gl_MultiTexCoord0; ');
     Add('  lightVec = vec3(lightPos - vert); ');
@@ -168,15 +156,12 @@ begin
 
   with FragmentProgram.Code do
   begin
-
     Add('uniform float ErosionFactor; ');
     Add('uniform float IntensityFactor1; ');
     Add('uniform float IntensityFactor2; ');
-
     Add('uniform sampler2D MainTexture; ');
     Add('uniform sampler2D Noise2d; ');
     Add('uniform sampler2D ErosionTexture; ');
-
     Add('uniform vec4  SpecularColor; ');
     Add('uniform vec4  AmbientColor; ');
     Add('uniform float DiffuseIntensity; ');
@@ -184,7 +169,6 @@ begin
     Add('uniform float SpecularIntensity; ');
     Add('uniform float SpecularRoughness; ');
     Add('uniform float AnisoRoughness; ');
-
     Add('varying vec3 normal; ');
     Add('varying vec2 vTexCoord; ');
     Add('varying vec3 lightVec; ');
@@ -195,10 +179,8 @@ begin
     Add('{ ');
     Add('  vec3 offset     = vec3(- ErosionFactor, - ErosionFactor + 0.06, - ErosionFactor * 0.92); ');
     Add('  vec4 DiffuseColor;    ');
-
     Add('  vec4 Color1 = texture2D(MainTexture,vTexCoord); ');
     Add('  vec4 Color2 = texture2D(ErosionTexture,vTexCoord); ');
-
     Add('  // Compute noise ');
     Add('  vec3 noiseCoord = Position.xyz + offset; ');
     Add('  vec4 noiseVec   = texture2D(Noise2d, noiseCoord.xy); ');
@@ -209,7 +191,6 @@ begin
     Add('  // continue noise evaluation');
     Add('  intensity = IntensityFactor1 * (noiseVec.x + noiseVec.y+ noiseVec.z + noiseVec.w); ');
     Add('  intensity = IntensityFactor2 * abs(2.0 * intensity -1.0); ');
-
     Add('  // discard pixels in a psuedo-random fashion (noise) ');
     Add('  if (intensity < fract(0.5 - offset.x - offset.y - offset.z)) discard; ');
 
@@ -228,16 +209,13 @@ begin
     // SpecDirection vector (in object space)
     // add  new var and replace the follow line
     // vec3 T = cross(norm,V) by vec3 T = cross(norm,normalize(SpecDirection));
-
     Add('  vec3 norm = normalize(normal); ');
     Add('  vec3 L = normalize(lightVec); ');
     Add('  vec3 V = normalize(viewVec); ');
     Add('  vec3 halfAngle = normalize(L + V); ');
     Add('  vec3 T = cross(norm,V);  ');
-
     Add('  float NdotL = dot(L, norm); ');
     Add('  float NdotH = clamp(dot(halfAngle, norm), 0.0, 1.0); ');
-
     Add('  // "Half-Lambert" technique for more pleasing diffuse term ');
     Add('  float diffuse = 0.5 * NdotL + 0.5; ');
     Add('  float specular = pow(NdotH,1.0/SpecularRoughness); '); //54
@@ -245,12 +223,9 @@ begin
     Add('  float ldott = dot(L,T); ');
     Add('  float vdott = dot(V,T); ');
     Add('  float aniso = pow(sin(ldott)*sin(vdott) + cos(ldott)*cos(vdott),1.0/AnisoRoughness); ');
-
     Add(' vec3 FinalColour = AmbientColor*AmbientIntensity + ');
     Add('                         DiffuseColor*diffuse*DiffuseIntensity + ');
     Add('                         SpecularColor*aniso*specular*SpecularIntensity; ');
-
-
     Add('  gl_FragColor = vec4(FinalColour,intensity); ');
     Add('} '); 
   end;
@@ -291,8 +266,6 @@ begin
   param['SpecularIntensity'].AsVector1f := FSpecularFactor;
   param['SpecularRoughness'].AsVector1f := FSpecularRoughness;
   param['AnisoRoughness'].AsVector1f := FAnisotropicRoughness;
-
-
   param['ErosionFactor'].AsVector1f := FErosionFactor;
   param['IntensityFactor1'].AsVector1f := FIntensityFactor1;
   param['IntensityFactor2'].AsVector1f := FIntensityFactor2;

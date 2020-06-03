@@ -1,5 +1,5 @@
 //
-// The unit for GXScene Engine
+// Graphic Scene Engine, http://glscene.org
 //
 {
   A shader that applies a render pass for each material in

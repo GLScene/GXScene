@@ -1,5 +1,5 @@
 //
-// The unit for GXScene Engine
+// Graphic Scene Engine, http://glscene.org
 //
 {
    Texture combiners setup utility functions. 
@@ -8,13 +8,13 @@ unit GXS.TextureCombiners;
 
 interface
 
-{$I GXS.Scene.inc}
+{$I Scene.inc}
 
 uses
   System.SysUtils,
   System.Classes,
   
-  OpenGLx,
+  Import.OpenGLx,
   GXS.Context;
 
 type

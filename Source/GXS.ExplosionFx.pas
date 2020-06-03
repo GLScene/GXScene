@@ -1,5 +1,5 @@
 //
-// The unit for GXScene Engine
+// Graphic Scene Engine, http://glscene.org
 //
 (*
   TgxBExplosionFX Effect
@@ -23,11 +23,11 @@ unit GXS.ExplosionFx;
 
 interface
 
-{$I GXS.Scene.inc}
+{$I Scene.inc}
 
 uses
-  OpenGLx,
-  XCollection,
+  Import.OpenGLx,
+  Scene.XCollection,
   Scene.VectorGeometry,
   GXS.Scene,
   GXS.VectorFileObjects,

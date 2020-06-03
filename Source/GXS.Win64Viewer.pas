@@ -1,5 +1,5 @@
 //
-// The unit is for GXScene Engine
+// Graphic Scene Engine, http://glscene.org
 //
 (*
    Cross-platform viewer.
@@ -21,7 +21,7 @@ uses
   FMX.Dialogs.Win,
   FMX.Viewport3D,
   
-  OpenGLx,
+  Import.OpenGLx,
   GXS.Scene,
   GXS.Win64Context,
   GXS.Context;

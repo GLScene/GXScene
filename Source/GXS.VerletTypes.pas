@@ -1,5 +1,5 @@
 //
-// The unit is for GXScene Engine
+// Graphic Scene Engine, http://glscene.org
 //
 {
   Base Verlet modelling/simulation classes.
@@ -12,7 +12,7 @@ unit GXS.VerletTypes;
 
 interface
 
-{$I GXS.Scene.inc}
+{$I Scene.inc}
 
 uses
   System.Classes,

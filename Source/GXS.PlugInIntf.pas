@@ -1,5 +1,5 @@
 //
-// The unit for GXScene Engine
+// Graphic Scene Engine, http://glscene.org
 //
 {
   An interface unit to plug-ins. 
@@ -11,7 +11,7 @@ unit GXS.PlugInIntf;
 
 interface
 
-{$I GXS.Scene.inc}
+{$I Scene.inc}
 
 type
   TPIServiceType = (stRaw, stObject, stBitmap, stTexture, stImport, stExport);

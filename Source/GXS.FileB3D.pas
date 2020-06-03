@@ -1,9 +1,9 @@
 //
-// The unit for GXScene Engine
+// Graphic Scene Engine, http://glscene.org
 //
-{ 
-  B3D VectorFile class to load Blitz 3D model files 
-}
+(*
+  B3D VectorFile class to load Blitz 3D model files
+*)
 unit GXS.FileB3D;
 
 interface
@@ -21,7 +21,7 @@ uses
   Scene.VectorGeometry,
   Scene.VectorLists,
 
-  FileB3D;
+  Formats.FileB3D;
 
 type
   TgxB3DVectorFile = class(TgxVectorFile)

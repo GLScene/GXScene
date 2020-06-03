@@ -1,5 +1,5 @@
 //
-// The unit is for GXScene Engine
+// Graphic Scene Engine, http://glscene.org
 //
 {
   Parametric surface implementation (like Bezier and BSpline surfaces)
@@ -28,10 +28,10 @@ unit GXS.ParametricSurfaces;
 
 interface
 
-{$I GXS.Scene.inc}
+{$I Scene.inc}
 
 uses
-  OpenGLx,
+  Import.OpenGLx,
   Scene.VectorTypes,
   GXS.VectorFileObjects,
   GXS.CurvesAndSurfaces,

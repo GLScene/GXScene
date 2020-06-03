@@ -1,28 +1,29 @@
 //
-// The unit is for GXScene Engine
+// Graphic Scene Engine, http://glscene.org
 //
-{
+(*
   GTS (GNU Triangulated Surface) vector file format implementation.
-}
+*)
 unit GXS.FileGTS;
 
 interface
 
-{$I GXS.Scene.inc}
+{$I Scene.inc}
 
 uses
   System.Classes,
+  System.SysUtils,
   GXS.VectorFileObjects,
   GXS.ApplicationFileIO;
 
 type
-  { The GTS vector file (GNU Triangulated Surface library).
+  (* The GTS vector file (GNU Triangulated Surface library).
     It is a simple text format, with indexed vertices. The first line contains
     the number of vertices, the number of edges and the number of faces separated
     by spaces.
     Following lines contain the x/y/z coordinates of vertices, then the edges
     (two indices) and the faces (three indices).
-    http://gts.sourceforge.net/ }
+    http://gts.sourceforge.net/ *)
   TgxGTSVectorFile = class(TgxVectorFile)
   public
     class function Capabilities: TgxDataFileCapabilities; override;
@@ -34,7 +35,6 @@ implementation
 // ------------------------------------------------------------------
 
 uses
-  System.SysUtils,
   GXS.Utils;
 
 // ------------------

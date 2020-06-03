@@ -1,5 +1,5 @@
 //
-// The unit for GXScene Engine
+// Graphic Scene Engine, http://glscene.org
 //
 { 
    Methods for turning a TgxBaseMesh into a Verlet cloth / jelly 
@@ -10,13 +10,13 @@ unit GXS.VerletClothify;
 
 interface
 
-{$I GXS.Scene.inc}
+{$I Scene.inc}
 
 uses
   System.Classes,
   System.SysUtils,
 
-  OpenGLx,
+  Import.OpenGLx,
   GXS.VectorFileObjects,
   GXS.VerletTypes,
   Scene.VectorTypes,

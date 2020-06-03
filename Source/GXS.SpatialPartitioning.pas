@@ -1,5 +1,5 @@
 //
-// The unit is for GXScene Engine
+// Graphic Scene Engine, http://glscene.org
 //
 {
   Spatial partitioning related code that also uses scene objects
@@ -10,7 +10,7 @@ unit GXS.SpatialPartitioning;
 interface
 
 uses
-  OpenGLx,
+  Import.OpenGLx,
   GXS.Scene,
   GXS.Coordinates,
   GXS.Win64Viewer,

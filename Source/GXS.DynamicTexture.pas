@@ -1,5 +1,5 @@
 //
-// The unit for GXScene Engine
+// Graphic Scene Engine, http://glscene.org
 //
 {
   Adds a dynamic texture image, which allows for easy updating of
@@ -11,15 +11,20 @@ unit GXS.DynamicTexture;
 
 interface
 
-{$I GXS.Scene.inc}
+{$I Scene.inc}
 
 uses
-  System.Classes, System.SysUtils, Winapi.OpenGL, Winapi.OpenGLext,  GXS.Context, 
-  GXS.Texture, GXS.TextureFormat, GXS.Graphics, GXS.CrossPlatform;
+  System.Classes, 
+  System.SysUtils, 
+  Winapi.OpenGL, 
+  Winapi.OpenGLext, 
+  GXS.Context, 
+  GXS.Texture, 
+  GXS.TextureFormat, 
+  GXS.Graphics, 
+  GXS.CrossPlatform;
 
 type
-  // TgxDynamicTextureImage
-  //
   { Allows for fast updating of the texture at runtime. }
   TgxDynamicTextureImage = class(TgxBlankImage)
   private

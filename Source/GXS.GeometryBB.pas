@@ -1,5 +1,5 @@
 //
-// This unit is part of the GXScene Engine, http://glscene.org
+// Graphic Scene Engine, http://glscene.org
 //
 {
   Calculations and manipulations on Bounding Boxes.
@@ -9,7 +9,7 @@ unit GXS.GeometryBB;
 
 interface
 
-{$I GXS.Scene.inc}
+{$I Scene.inc}
 
 uses
   System.SysUtils,

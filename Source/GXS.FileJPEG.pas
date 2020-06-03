@@ -1,18 +1,18 @@
 //
-// The unit is for GXScene Engine
+// Graphic Scene Engine, http://glscene.org
 //
 
 unit GXS.FileJPEG;
 
 interface
 
-{$I GXS.Scene.inc}
+{$I Scene.inc}
 
 uses
   System.Classes,
   System.SysUtils,
 
-  OpenGLx,
+  Import.OpenGLx,
   Scene.VectorGeometry,
   GXS.Context,
   GXS.Graphics,

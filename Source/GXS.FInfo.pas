@@ -1,12 +1,12 @@
 //
-// The unit for GXScene Engine
+// Graphic Scene Engine, http://glscene.org
 //
 unit GXS.FInfo;
 
 interface
 
 uses
-  OpenGLx,
+  Import.OpenGLx,
   System.SysUtils,
   System.Types,
   System.UITypes,

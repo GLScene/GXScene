@@ -1,5 +1,5 @@
 //
-// The unit is for GXScene Engine
+// Graphic Scene Engine, http://glscene.org
 //
 {
   Class for managing a ROAM (square) patch.
@@ -9,13 +9,13 @@ unit GXS.ROAMPatch;
 
 interface
 
-{$I GXS.Scene.inc}
+{$I Scene.inc}
 
 uses
   System.SysUtils,
   
-  OpenGLx,
-  XOpenGL,
+  Import.OpenGLx,
+  Scene.XOpenGL,
   Scene.VectorGeometry,
   GXS.HeightData,
   GXS.Isolines,

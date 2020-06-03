@@ -1,5 +1,5 @@
 //
-// The unit is for GXScene Engine
+// Graphic Scene Engine, http://glscene.org
 //
 {
    Implements basic shadow volumes support.
@@ -13,13 +13,13 @@ unit GXS.ShadowVolume;
 
 interface
 
-{$I GXS.Scene.inc}
+{$I Scene.inc}
 
 uses
   System.SysUtils,
   System.Classes,
 
-  OpenGLx,
+  Import.OpenGLx,
   GXS.Scene,
   GXS.PipelineTransformation,
   Scene.VectorLists,

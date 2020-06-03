@@ -1,21 +1,21 @@
 //
-// The unit is for GXScene Engine
+// Graphic Scene Engine, http://glscene.org
 //
-{
+(*
   3DStudio 3DS vector file format implementation.
-}
+*)
 unit GXS.File3DS;
 
 interface
 
-{$I GXS.Scene.inc}
+{$I Scene.inc}
 
 uses
   System.Classes,
   System.SysUtils,
   System.Math,
 
-  OpenGLx,
+  Import.OpenGLx,
   GXS.Scene,
   GXS.Objects,
   GXS.VectorFileObjects,
@@ -32,8 +32,8 @@ uses
   GXS.RenderContextInfo,
   GXS.Material,
 
-  File3DS,
-  File3DSTypes;
+  Formats.File3DS,
+  Formats.File3DSTypes;
 
 type
 

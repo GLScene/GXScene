@@ -1,5 +1,5 @@
 //
-// The unit for GXScene Engine
+// Graphic Scene Engine, http://glscene.org
 //
 (*
   Support-Code to load DXF (Drawing eXchange Files) TgxFreeForm or

@@ -17,7 +17,7 @@ uses
   System.Classes,
   FMX.Controls,
   FMX.ExtCtrls,
-  SDL2;
+  Import.SDL2;
 
 type
   TSDL2Frame = class(TPanel)

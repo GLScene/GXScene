@@ -1,5 +1,5 @@
 //
-// The unit for GXScene Engine
+// Graphic Scene Engine, http://glscene.org
 //
 (*
   Ragdoll extended using Open Dynamics Engine (ODE).
@@ -10,12 +10,12 @@ unit GXS.ODERagdoll;
 interface
 
 uses
-  ODEImport,
-  ODEUtils,
+  Import.ODE,
+  Import.ODEUtils,
+  Scene.VectorGeometry,
   GXS.Ragdoll,
   GXS.Scene,
   GXS.Objects,
-  Scene.VectorGeometry,
   GXS.Texture,
   GXS.VectorFileObjects;
 

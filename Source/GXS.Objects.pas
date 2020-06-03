@@ -1,5 +1,5 @@
 //
-// The unit is for GXScene Engine
+// Graphic Scene Engine, http://glscene.org
 //
 {
   Implementation of basic scene objects plus some management routines.
@@ -16,7 +16,7 @@ unit GXS.Objects;
 
 interface
 
-{$I GXS.Scene.inc}
+{$I Scene.inc}
 
 uses
   System.Types,
@@ -24,8 +24,8 @@ uses
   System.SysUtils,
   System.Math,
 
-  OpenGLx,
-  XOpenGL,
+  Import.OpenGLx,
+  Scene.XOpenGL,
   Scene.PersistentClasses,
   Scene.VectorGeometry,
   Scene.VectorTypes,

@@ -1,5 +1,5 @@
 //
-// This unit is part of the GXScene Engine, http://glscene.org
+// Graphic Scene Engine, http://glscene.org
 //
 {
   Applies a blur effect over the viewport.
@@ -9,7 +9,7 @@ unit GXS.Blur;
 
 interface
 
-{$I GXS.Scene.inc}
+{$I Scene.inc}
 
 uses
   System.Classes,
@@ -17,7 +17,7 @@ uses
   System.UITypes,
   FMX.Graphics,
 
-  OpenGLx,
+  Import.OpenGLx,
   Scene.VectorTypes,
   Scene.PersistentClasses,
   GXS.Scene,

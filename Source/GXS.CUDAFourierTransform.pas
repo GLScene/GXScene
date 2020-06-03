@@ -1,5 +1,5 @@
 //
-// The unit for GXScene Engine
+// Graphic Scene Engine, http://glscene.org
 //
 /// *
 // * Copyright 1993-2009 NVIDIA Corporation.  All rights reserved.
@@ -40,7 +40,7 @@ unit GXS.CUDAFourierTransform;
 
 interface
 
-{$I GXS.Scene.inc}
+{$I Scene.inc}
 
 uses
   Winapi.Windows,

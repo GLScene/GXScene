@@ -198,17 +198,17 @@
         </DelphiCompile>
         <DCCReference Include="rtl.dcp"/>
         <DCCReference Include="GXScene_RT.dcp"/>
-        <DCCReference Include="..\..\Source\Bass.pas"/>
-        <DCCReference Include="..\..\Source\fmod.pas"/>
-        <DCCReference Include="..\..\Source\fmoddyn.pas"/>
-        <DCCReference Include="..\..\Source\fmoderrors.pas"/>
-        <DCCReference Include="..\..\Source\fmodpresets.pas"/>
-        <DCCReference Include="..\..\Source\fmodtypes.pas"/>
+        <DCCReference Include="..\..\Source\Import.Bass.pas"/>
+        <DCCReference Include="..\..\Source\Import.fmod.pas"/>
+        <DCCReference Include="..\..\Source\Import.fmoddyn.pas"/>
+        <DCCReference Include="..\..\Source\Import.fmoderrors.pas"/>
+        <DCCReference Include="..\..\Source\Import.fmodpresets.pas"/>
+        <DCCReference Include="..\..\Source\Import.fmodtypes.pas"/>
         <DCCReference Include="..\..\Source\GXS.SMBASS.pas"/>
         <DCCReference Include="..\..\Source\GXS.SMFMOD.pas"/>
         <DCCReference Include="..\..\Source\GXS.SMOpenAL.pas"/>
         <DCCReference Include="..\..\Source\GXS.SMWaveOut.pas"/>
-        <DCCReference Include="..\..\Source\OpenAL.pas"/>
+        <DCCReference Include="..\..\Source\Import.OpenAL.pas"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>

@@ -1,18 +1,18 @@
 //
-// The unit for GXScene Engine
+// Graphic Scene Engine, http://glscene.org
 //
 
 unit GXS.Selection;
 
 interface
 
-{$I GXS.Scene.inc}
+{$I Scene.inc}
 
 uses
   System.SysUtils,
   System.Classes,
 
-  OpenGLx,
+  Import.OpenGLx,
   GXS.Context,
   Scene.VectorLists,
   Scene.VectorGeometry,

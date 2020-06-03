@@ -1,5 +1,5 @@
 //
-// The unit is for GXScene Engine
+// Graphic Scene Engine, http://glscene.org
 //
 {
    Support-code to load Lightwave LWO Files (v6.0+, partial support).
@@ -8,7 +8,7 @@ unit GXS.FileLWO;
 
 interface
 
-{$I GXS.Scene.inc}
+{$I Scene.inc}
 
 uses
   System.SysUtils,
@@ -20,7 +20,7 @@ uses
   GXS.Material,
   Scene.VectorTypes,
 
-  FileLWObjects;
+  Formats.FileLWObjects;
 
 type
   TgxLWOVectorFile = class(TgxVectorFile)

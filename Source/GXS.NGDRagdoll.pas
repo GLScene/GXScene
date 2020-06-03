@@ -1,18 +1,17 @@
 //
-// The unit is for GXScene Engine
+// Graphic Scene Engine, http://glscene.org
 //
-
 unit GXS.NGDRagdoll;
 
 interface
 
 uses
-  System.Classes, 
+  System.Classes,
   System.SysUtils,
   Scene.VectorGeometry,
   Scene.VectorTypes,
   GXS.VectorFileObjects,
-  NGDImport;
+  Import.Newton;
 
 type
   TNewtonRagdoll = class
@@ -53,9 +52,10 @@ end;
 
 function GetBoneParent(actor: TgxActor; bone: integer): integer;
 
-//=====================================
+// =====================================
 implementation
-//=====================================
+
+// =====================================
 
 function TNewtonRagdoll.TranslatePos;
 begin
@@ -134,9 +134,9 @@ begin
   SetLength(joints, actor.Skeleton.BoneCount - 1);
   for i := 0 to actor.Skeleton.BoneCount - 2 do
   begin
-    p1 := actor.Skeleton.BoneByID(i).GlobalMatrix.W;
+    p1 := actor.Skeleton.BoneByID(i).GlobalMatrix.w;
     if actor.Skeleton.BoneByID(i).BoneCount > 1 then
-      p2 := actor.Skeleton.BoneByID(i).Items[0].GlobalMatrix.W
+      p2 := actor.Skeleton.BoneByID(i).Items[0].GlobalMatrix.w
     else
       p2 := p1;
     p1 := VectorTransform(p1, actor.AbsoluteMatrix);
@@ -162,22 +162,22 @@ begin
       end;
       m := MatrixMultiply(actor.Skeleton.BoneByID(i).GlobalMatrix,
         actor.AbsoluteMatrix);
-      m.W := TranslatePos(i, true);
+      m.w := TranslatePos(i, true);
       case kind of
         0, 1:
           begin
-///?            collision := NewtonCreateBox(newtonworld, w, h, d, nil);
-///?            bodies.add(NewtonCreateBody(world, collision));
+            /// ?            collision := NewtonCreateBox(newtonworld, w, h, d, nil);
+            /// ?            bodies.add(NewtonCreateBody(world, collision));
             NewtonBodySetMassMatrix(bodies[bodies.Count - 1], mass, w, h, d);
           end;
         2:
           begin
-///?            bodies.add(NewtonCreateBody(world, NewtonCreateCylinder(newtonworld, w, h, nil)));
+            /// ?            bodies.add(NewtonCreateBody(world, NewtonCreateCylinder(newtonworld, w, h, nil)));
             NewtonBodySetMassMatrix(bodies[bodies.Count - 1], mass, 2, w, h);
           end;
         3:
           begin
-///?            bodies.add(NewtonCreateBody(world, NewtonCreateSphere(newtonworld, w, w, w, nil)));
+            /// ?            bodies.add(NewtonCreateBody(world, NewtonCreateSphere(newtonworld, w, w, w, nil)));
             NewtonBodySetMassMatrix(bodies[bodies.Count - 1], mass, w, w, w);
           end;
       end;
@@ -203,7 +203,7 @@ begin
       joints[i] := NewtonConstraintCreateHinge(newtonworld, @p1, @m.Y,
         bodies[i], bodies[j]);
     NewtonJointSetCollisionState(joints[i], 1);
-///?    NewtonHingeSetUserCallback(joints[i], NewtonJointCallBack);
+    /// ?    NewtonHingeSetUserCallback(joints[i], NewtonJointCallBack);
   end;
 end;
 
@@ -217,7 +217,7 @@ begin
     with envelopes[i] do
     begin
       NewtonBodyGetMatrix(bodies[i], @m);
-      m.W := TranslatePos(i, false);
+      m.w := TranslatePos(i, false);
       actor.Skeleton.BoneByID(i).SetGlobalMatrixForRagDoll(m);
     end;
   actor.Skeleton.MorphMesh(true);
@@ -319,7 +319,7 @@ begin
     F.Read(envelopes[i].mass, SizeOf(envelopes[i].mass));
     F.Read(envelopes[i].pt, SizeOf(envelopes[i].pt));
   end;
-///  Create(actor, newtonworld, 0.8, s, e, a, false);
+  /// Create(actor, newtonworld, 0.8, s, e, a, false);
   F.Free;
 end;
 

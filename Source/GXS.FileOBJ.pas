@@ -1,5 +1,5 @@
 //
-// The unit is for GXScene Engine
+// Graphic Scene Engine, http://glscene.org
 //
 (*
   Support-Code to load Wavefront OBJ Files into TgxFreeForm-Components
@@ -14,14 +14,14 @@ unit GXS.FileOBJ;
 
 interface
 
-{$I GXS.Scene.inc}
+{$I Scene.inc}
 
 uses
   System.Classes,
   System.SysUtils,
 
-  OpenGLx,
-  XOpenGL,
+  Import.OpenGLx,
+  Scene.XOpenGL,
   Scene.VectorTypes,
   Scene.Strings,
   GXS.Context,

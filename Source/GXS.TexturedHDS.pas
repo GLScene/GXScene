@@ -1,5 +1,5 @@
 //
-// The unit is for GXScene Engine
+// Graphic Scene Engine, http://glscene.org
 //
 {
    Implements a HDS, which automatically maps textures onto a parent HDS .
@@ -22,7 +22,7 @@ unit GXS.TexturedHDS;
 
 interface
 
-{$I GXS.Scene.inc}
+{$I Scene.inc}
 
 uses
   System.Types,

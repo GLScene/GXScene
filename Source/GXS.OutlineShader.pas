@@ -1,5 +1,5 @@
 //
-// The unit for GXScene Engine
+// Graphic Scene Engine, http://glscene.org
 //
 (*
    A simple shader that adds an outline to an object.
@@ -15,12 +15,12 @@ unit GXS.OutlineShader;
 
 interface
 
-{$I GXS.Scene.inc}
+{$I Scene.inc}
 
 uses
   System.Classes,
 
-  OpenGLx,
+  Import.OpenGLx,
   GXS.Material,
   GXS.CrossPlatform,
   GXS.Color,

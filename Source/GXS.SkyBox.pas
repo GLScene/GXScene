@@ -1,5 +1,5 @@
 //
-// The unit for GXScene Engine
+// Graphic Scene Engine, http://glscene.org
 //
 {
    A TgxImmaterialSceneObject drawing 6 quads (plus another quad as "Cloud" plane)
@@ -10,13 +10,13 @@ unit GXS.SkyBox;
 
 interface
 
-{$I GXS.Scene.inc}
+{$I Scene.inc}
 
 uses
   System.Classes,
 
-  OpenGLx,
-  XOpenGL,
+  Import.OpenGLx,
+  Scene.XOpenGL,
   GXS.Scene,
   GXS.Material,
   Scene.VectorGeometry,

@@ -1,5 +1,5 @@
 //
-// The unit for GXScene Engine
+// Graphic Scene Engine, http://glscene.org
 //
 {
   Functions for generating perlin noise. 
@@ -9,7 +9,7 @@ unit GXS.PerlinBase;
 
 interface
 
-{$I GXS.Scene.inc}
+{$I Scene.inc}
 
 type
   T1DPerlinArray = array of Double;

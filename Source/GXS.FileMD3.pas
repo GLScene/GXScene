@@ -1,9 +1,9 @@
 //
-// The unit for GXScene Engine
+// Graphic Scene Engine, http://glscene.org
 //
-{
+(*
   Code for loading animated MD3 files into GXScene FreeForms and Actors.
-}
+*)
 unit GXS.FileMD3;
 
 interface
@@ -17,7 +17,7 @@ uses
   Scene.VectorGeometry,
   GXS.Texture,
 
-  FileMD3;
+  Formats.FileMD3;
 
 type
 

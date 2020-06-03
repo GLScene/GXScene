@@ -34,16 +34,16 @@ requires
   GXScene_RT;
 
 contains
-  Bass in '..\..\Source\Bass.pas',
-  fmod in '..\..\Source\fmod.pas',
-  fmoddyn in '..\..\Source\fmoddyn.pas',
-  fmoderrors in '..\..\Source\fmoderrors.pas',
-  fmodpresets in '..\..\Source\fmodpresets.pas',
-  fmodtypes in '..\..\Source\fmodtypes.pas',
+  Import.Bass in '..\..\Source\Import.Bass.pas',
+  Import.fmod in '..\..\Source\Import.fmod.pas',
+  Import.fmoddyn in '..\..\Source\Import.fmoddyn.pas',
+  Import.fmoderrors in '..\..\Source\Import.fmoderrors.pas',
+  Import.fmodpresets in '..\..\Source\Import.fmodpresets.pas',
+  Import.fmodtypes in '..\..\Source\Import.fmodtypes.pas',
   GXS.SMBASS in '..\..\Source\GXS.SMBASS.pas',
   GXS.SMFMOD in '..\..\Source\GXS.SMFMOD.pas',
   GXS.SMOpenAL in '..\..\Source\GXS.SMOpenAL.pas',
   GXS.SMWaveOut in '..\..\Source\GXS.SMWaveOut.pas',
-  OpenAL in '..\..\Source\OpenAL.pas';
+  Import.OpenAL in '..\..\Source\Import.OpenAL.pas';
 
 end.

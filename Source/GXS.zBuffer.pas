@@ -1,11 +1,11 @@
 //
-// The unit is for GXScene Engine
+// Graphic Scene Engine, http://glscene.org
 //
-{
+(*
    ZBuffer retrieval and computations.
    See readme.txt in the Demos/SpecialsFX/Shadows directory.
    By René Lindsay.
-}
+*)
 
    //--------These formulas are the key to making use of the z-Buffer--------
    //
@@ -24,18 +24,19 @@ unit GXS.zBuffer;
 
 interface
 
-{$I GXS.Scene.inc}
+{$I Scene.inc}
 
 uses
   System.Classes,
   System.SysUtils,
   System.Math,
 
-  OpenGLx,
-  XOpenGL,
-  GXS.Scene,
+  Import.OpenGLx,
+  Scene.XOpenGL,
+  Scene.VectorTypes,
   Scene.PersistentClasses,
   Scene.VectorGeometry,
+  GXS.Scene,
   GXS.Coordinates,
   GXS.Graphics,
   GXS.Objects,
@@ -44,8 +45,7 @@ uses
   GXS.Color,
   GXS.RenderContextInfo,
   GXS.State,
-  GXS.TextureFormat,
-  Scene.VectorTypes;
+  GXS.TextureFormat;
 
 
 type
@@ -384,12 +384,12 @@ begin
   invOneMinNp_Fp := 1 / OneMinNp_Fp;
 
   //-----------For VectorToScreen-------------
-  {
+  (*
     cam :=Viewer.Camera.Position.AsAffineVector;
     targ:=Viewer.Camera.TargetObject.Position.AsAffineVector;
     norm:=VectorSubtract(targ,cam);     //---Camera Normal vector---
     MakeVector(hnorm,norm);
-  }
+  *)
   MakeVector(hnorm, normal);
 
   MakeVector(hcVec, lb); //---Corner Vector---

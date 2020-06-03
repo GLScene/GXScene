@@ -1,5 +1,5 @@
 //
-// The unit is for GXScene Engine
+// Graphic Scene Engine, http://glscene.org
 //
 {
    An extention of TgxNavigator, which allows to move objects with inertia
@@ -21,13 +21,13 @@ unit GXS.SmoothNavigator;
 
 interface
 
-{$I GXS.Scene.inc}
+{$I Scene.inc}
 
 uses
   System.Types,
   System.Classes,
 
-  XCollection,
+  Scene.XCollection,
   Scene.VectorTypes,
   GXS.Navigator,
   Scene.VectorGeometry,

@@ -1,5 +1,5 @@
 //
-// The unit for GXScene Engine
+// Graphic Scene Engine, http://glscene.org
 //
 {
    Toon shader : Toon shading also called Cell Shading 
@@ -10,17 +10,28 @@ unit GXS.GLSLToonShader;
 
 interface
 
-//{$I GXS.Scene.inc}
+{$I Scene.inc}
 
 uses
+  Winapi.OpenGL, 
+  Winapi.OpenGLext,  
   System.Classes,
-  //GXScene
-  GXS.Scene, GXS.CrossPlatform, GXS.BaseClasses, GXS.State, Winapi.OpenGL, Winapi.OpenGLext,  GXS.OpenGL1x, 
-  GXS.Context, GXS.RenderContextInfo, Scene.VectorGeometry, GXS.Coordinates,
-  GXS.TextureFormat, GXS.Color, GXS.Texture, GXS.Material, GLSL.Shader, GXS.CustomShader;
+  GXS.Scene, 
+  GXS.CrossPlatform, 
+  GXS.BaseClasses, 
+  GXS.State, 
+  Import.OpenGLx, 
+  GXS.Context, 
+  GXS.RenderContextInfo, 
+  Scene.VectorGeometry, 
+  GXS.Coordinates,
+  GXS.TextureFormat, 
+  GXS.Color, 
+  GXS.Texture, 
+  GXS.Material, 
+  GXS.GLSLShader, 
+  GXS.CustomShader;
 
-//TgxCustomGLSLToonShader
-//
 { Custom class for GLSLToonShader. }
 type
   TgxCustomGLSLToonShader = class(TgxCustomGLSLShader)

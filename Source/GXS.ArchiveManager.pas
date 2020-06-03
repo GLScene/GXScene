@@ -1,11 +1,11 @@
 ﻿//
-// The unit is for GXScene Engine
+// Graphic Scene Engine, http://glscene.org
 //
 {  The history is logged in GLS version of the unit }
 
 unit GXS.ArchiveManager;
 
-{$I GXS.Scene.inc}
+{$I Scene.inc}
 
 interface
 

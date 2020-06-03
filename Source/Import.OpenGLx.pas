@@ -1,5 +1,5 @@
 //
-// This unit is part of the GLScene Project, http://glscene.org
+// Graphic Scene Engine, http://glscene.org
 //
 
 // -------------------------------------------------------------
@@ -23,7 +23,7 @@ unit Import.OpenGLx;
 
 interface
 
-{$I GXS.Scene.inc}
+{$I Scene.inc}
 
 uses
   Winapi.Windows,

@@ -1,5 +1,5 @@
 //
-// The unit is for GXScene Engine
+// Graphic Scene Engine, http://glscene.org
 //
 {
   Standard TgxBehaviour subclasses
@@ -8,13 +8,13 @@ unit GXS.Behaviours;
 
 interface
 
-{$I GXS.Scene.inc}
+{$I Scene.inc}
 
 uses
   System.Classes,
   System.SysUtils,
 
-  XCollection,
+  Scene.XCollection,
   Scene.VectorTypes,
   GXS.Scene,
   Scene.VectorGeometry,

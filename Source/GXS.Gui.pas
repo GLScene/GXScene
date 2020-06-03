@@ -1,5 +1,5 @@
 //
-// The unit for GXScene Engine
+// Graphic Scene Engine, http://glscene.org
 //
 {
   In GL windows management classes and structures 
@@ -10,13 +10,13 @@ unit GXS.Gui;
 
 interface
 
-{$I GXS.Scene.inc}
+{$I Scene.inc}
 
 uses
   System.Classes,
   System.SysUtils,
 
-  OpenGLx,
+  Import.OpenGLx,
   Scene.VectorTypes,
   GXS.Scene,
   GXS.BitmapFont,

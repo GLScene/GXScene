@@ -187,13 +187,13 @@
         <DCCReference Include="GXScene_RT.dcp"/>
         <DCCReference Include="..\..\Source\GXS.ODEManager.pas"/>
         <DCCReference Include="..\..\Source\GXS.ODESkeletonColliders.pas"/>
-        <DCCReference Include="..\..\Source\ODEImport.pas"/>
-        <DCCReference Include="..\..\Source\ODEUtils.pas"/>
+        <DCCReference Include="..\..\Source\Import.ODE.pas"/>
+        <DCCReference Include="..\..\Source\Import.ODEUtils.pas"/>
         <DCCReference Include="..\..\Source\GXS.ODERagdoll.pas"/>
         <DCCReference Include="..\..\Source\GXS.ModuleLoader.pas"/>
         <DCCReference Include="..\..\Source\GXS.NGDManager.pas"/>
-        <DCCReference Include="..\..\Source\NGDImport.pas"/>
-        <DCCReference Include="..\..\Source\NGDImport_Joints.pas"/>
+        <DCCReference Include="..\..\Source\Import.Newton.pas"/>
+        <DCCReference Include="..\..\Source\Import.Newton_Joints.pas"/>
         <DCCReference Include="..\..\Source\GXS.PhysX.pas"/>
         <DCCReference Include="..\..\Source\GXS.NGDRagdoll.pas"/>
         <BuildConfiguration Include="Debug">

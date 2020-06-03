@@ -1,5 +1,5 @@
 //
-// The unit is for GXScene Engine
+// Graphic Scene Engine, http://glscene.org
 //
 {
    An ARBvp1.0 + ARBfp1.0 shader that implements phong shading.
@@ -9,13 +9,13 @@ unit GXS.PhongShader;
 
 interface
 
-{$I GXS.Scene.inc}
+{$I Scene.inc}
 
 uses
   System.Classes,
   System.SysUtils,
 
-  OpenGLx,
+  Import.OpenGLx,
   Scene.VectorTypes,
   GXS.Texture, 
   Scene.VectorGeometry, 

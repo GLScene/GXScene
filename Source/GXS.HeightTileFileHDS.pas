@@ -1,5 +1,5 @@
 //
-// The unit for GXScene Engine
+// Graphic Scene Engine, http://glscene.org
 //
 (*
   HeightDataSource for the HTF (HeightTileFile) format.
@@ -8,7 +8,7 @@ unit GXS.HeightTileFileHDS;
 
 interface
 
-{$I GXS.Scene.inc}
+{$I Scene.inc}
 
 uses
   System.Classes,

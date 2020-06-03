@@ -1,5 +1,5 @@
 //
-// The unit is for GXScene Engine
+// Graphic Scene Engine, http://glscene.org
 //
 (*
   BASS based sound-manager (http://www.un4seen.com/music/, free for freeware).
@@ -13,7 +13,7 @@ unit GXS.SMBASS;
 
 interface
 
-{$I GXS.Scene.inc}
+{$I Scene.inc}
 
 uses
   Winapi.Windows,
@@ -25,7 +25,7 @@ uses
   GXS.Scene,
   Scene.VectorGeometry,
 
-  Bass;
+  Import.Bass;
 
 type
 

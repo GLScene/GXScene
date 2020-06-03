@@ -1,5 +1,5 @@
 //
-// The unit is for GXScene Engine
+// Graphic Scene Engine, http://glscene.org
 //
 {
    Implements a basic shadow plane.
@@ -12,14 +12,14 @@ unit GXS.ShadowPlane;
 
 interface
 
-{$I GXS.Scene.inc}
+{$I Scene.inc}
 
 uses
   System.Types,
   System.Classes,
   FMX.Effects,
 
-  OpenGLx,
+  Import.OpenGLx,
   Scene.VectorTypes,
   Scene.PersistentClasses,
   GXS.Scene,

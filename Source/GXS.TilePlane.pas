@@ -1,5 +1,5 @@
 //
-// The unit is for GXScene Engine
+// Graphic Scene Engine, http://glscene.org
 //
 {
   Implements a tiled texture plane.
@@ -8,13 +8,13 @@ unit GXS.TilePlane;
 
 interface
 
-{$I GXS.Scene.inc}
+{$I Scene.inc}
 
 uses
   System.Classes,
 
-  OpenGLx,
-  XOpenGL,
+  Import.OpenGLx,
+  Scene.XOpenGL,
   GXS.Scene,
   Scene.VectorGeometry,
   GXS.Context,

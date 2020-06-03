@@ -1,5 +1,5 @@
 //
-// This unit is part of the GXScene Engine, http://glscene.org
+// Graphic Scene Engine, http://glscene.org
 //
 (*
    This unit contains classes that imitate an atmosphere around a planet.
@@ -13,13 +13,13 @@ unit GXS.Atmosphere;
 
 interface
 
-{$I GXS.Scene.inc}
+{$I Scene.inc}
 
 uses
   System.SysUtils,
   System.Classes,
 
-  OpenGLx,
+  Import.OpenGLx,
   GXS.Scene,
   GXS.Objects,
   GXS.Cadencer,

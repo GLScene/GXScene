@@ -1,5 +1,5 @@
 //
-// The unit is for GXScene Engine
+// Graphic Scene Engine, http://glscene.org
 //
 {
    Scene Editor, for adding + removing scene objects within the Delphi IDE.
@@ -36,8 +36,8 @@ uses
   GXS.Win64Viewer,
   GXS.SceneRegister,
   Scene.Strings,
-  FInfo,
-  GXS.XCollection,
+  GXS.FInfo,
+  GXS.Scene.XCollection,
   GXS.CrossPlatform;
 
 type

@@ -1,5 +1,5 @@
 //
-// The unit for GXScene Engine
+// Graphic Scene Engine, http://glscene.org
 //
 (*
     A collection of pure abstract classes - descendants of TgxShader, which are
@@ -12,13 +12,13 @@ unit GXS.CustomShader;
 
 interface
 
-{$I GXS.Scene.inc}
+{$I Scene.inc}
 
 uses
   System.Classes,
   System.SysUtils,
 
-  OpenGLx,
+  Import.OpenGLx,
   Scene.VectorGeometry,
   Scene.VectorTypes, 
   GXS.Texture, 

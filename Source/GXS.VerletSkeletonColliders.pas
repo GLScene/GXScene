@@ -1,5 +1,5 @@
 //
-// The unit for GXScene Engine
+// Graphic Scene Engine, http://glscene.org
 //
 {
    Skeleton colliders for defining and controlling verlet
@@ -13,8 +13,11 @@ interface
 uses
   System.Classes,
    
-  Scene.PersistentClasses, Scene.VectorGeometry, GXS.VectorFileObjects,
-  GXS.VerletTypes,  Scene.VectorTypes;
+  Scene.PersistentClasses, 
+  Scene.VectorGeometry, 
+  GXS.VectorFileObjects,
+  GXS.VerletTypes,  
+  Scene.VectorTypes;
 
 type
   

@@ -1,5 +1,5 @@
 //
-// The unit for GXScene Engine
+// Graphic Scene Engine, http://glscene.org
 //
 (*
   Component to make it easy to record frames into an AVI file
@@ -9,7 +9,7 @@ unit GXS.AVIRecorder;
 
 interface
 
-{$I GXS.Scene.inc}
+{$I Scene.inc}
 
 uses
   Winapi.Windows,
@@ -29,7 +29,7 @@ uses
   GXS.Win64Viewer,
   GXS.CrossPlatform,
 
-  FileVFW;
+  Formats.FileVFW;
 
 type
   TAVICompressor = (acDefault, acShowDialog, acDivX);

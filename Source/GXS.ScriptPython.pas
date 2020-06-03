@@ -1,5 +1,5 @@
 //
-// This unit is part of the GXScene Engine, http://glscene.org
+// Graphic Scene Engine, http://glscene.org
 //
 { Python implementation for the GLScene scripting layer.
 
@@ -13,7 +13,7 @@ uses
   System.Classes,
   System.SysUtils,
 
-  GXS.XCollection,
+  GXS.Scene.XCollection,
   GXS.ScriptBase,
   GXS.Manager,
 

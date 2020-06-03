@@ -1,5 +1,5 @@
 //
-// The unit for GXScene Engine
+// Graphic Scene Engine, http://glscene.org
 //
 (*
   Implements specific proxying classes.
@@ -8,14 +8,14 @@ unit GXS.ProxyObjects;
 
 interface
 
-{$I GXS.Scene.inc}
+{$I Scene.inc}
 
 uses
   System.Classes,
   System.SysUtils,
 
-  OpenGLx,
-  XCollection,
+  Import.OpenGLx,
+  Scene.XCollection,
   GXS.Scene,
   Scene.PersistentClasses,
   Scene.VectorGeometry,

@@ -1,5 +1,5 @@
 //
-// The unit for GXScene Engine
+// Graphic Scene Engine, http://glscene.org
 //
 (*
   A Newton Game Dynamics Manager for GXScene.
@@ -11,15 +11,15 @@ unit GXS.NGDManager;
 
 interface
 
-{$I GXS.Scene.inc}
+{$I Scene.inc}
 
 uses
   System.Classes, // TComponent Tlist TWriter TReader TPersistent
   System.SysUtils, //System utilities
   System.Math, // Samevalue isZero to compare single
-  NGDImport,
-  NGDImport_Joints, // Newton
-  XCollection,  //TXCollection file function
+  Import.Newton,
+  Import.Newton_Joints, // Newton
+  Scene.XCollection,  //TXCollection file function
   Scene.VectorGeometry, // PVector TVector TMatrix PMatrix NullHmgVector...
   Scene.VectorLists, // TaffineVectorList for Tree
   GXS.BaseClasses,
@@ -34,10 +34,9 @@ uses
   GXS.GeometryBB; // For show debug
 
 type
-  NGDFloat = NGDImport.Float;
+  NGDFloat = Import.Newton.Float;
   PNGDFloat = ^NGDFloat;
 
-  { Record }
   TgxHeightField = record
     heightArray: array of Word;
     width: Integer;
@@ -47,13 +46,11 @@ type
     heightScale: Single;
   end;
 
-  { Class }
   TgxNGDBehaviour = class;
   TgxNGDManager = class;
   TNGDSurfaceItem = class;
   TNGDJoint = class;
 
-  { Enums }
   TNGDSolverModels = (smExact = 0, smLinear1, smLinear2, smLinear3, smLinear4,
     smLinear5, smLinear6, smLinear7, smLinear8, smLinear9);
 
@@ -81,8 +78,7 @@ type
       : TgxNGDBehaviour read GetBehav write PutBehav; default;
   end;
 
-  { Events for Newton Callback }
-
+  // Events for Newton Callback
   TCollisionIteratorEvent = procedure(const userData: Pointer;
     vertexCount: Integer; const cfaceArray: PNGDFloat;
     faceId: Integer) of object;
@@ -105,8 +101,6 @@ type
 
   TContactProcessEvent = procedure(const ccontact: PNewtonJoint;
     timestep: NGDFloat; threadIndex: Integer) of object;
-
-  { Class }
 
   TNGDDebugOption = class(TPersistent)
   strict private
@@ -228,7 +222,7 @@ type
       FNewtonJointGroup;
   end;
 
-  { Basis structures for behaviour style implementations. }
+  // Basis structures for behaviour style implementations.
   TgxNGDBehaviour = class(TgxBehaviour)
   private
     FManager: TgxNGDManager;

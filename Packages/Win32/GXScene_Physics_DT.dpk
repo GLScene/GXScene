@@ -36,8 +36,7 @@ requires
 
 contains
   GXS.ODERegister in '..\..\Source\GXS.ODERegister.pas',
-  GXS.NGDRegister in '..\..\Source\GXS.NGDRegister.pas',
-  NGDImport_Joints in '..\..\Source\NGDImport_Joints.pas';
+  GXS.NGDRegister in '..\..\Source\GXS.NGDRegister.pas';
 
 end.
 

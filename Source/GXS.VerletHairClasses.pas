@@ -1,5 +1,5 @@
 //
-// The unit for GXScene Engine
+// Graphic Scene Engine, http://glscene.org
 //
 { 
    Creates a single strand of hair using verlet classes. Can be used to simulate
@@ -10,12 +10,16 @@ unit GXS.VerletHairClasses;
 
 interface
 
-{$I GXS.Scene.inc}
+{$I Scene.inc}
 
 uses
-  System.Classes, System.SysUtils,
+  System.Classes, 
+  System.SysUtils,
 
-  GXS.VerletTypes, Scene.VectorTypes, Scene.VectorLists, Scene.VectorGeometry;
+  GXS.VerletTypes, 
+  Scene.VectorTypes, 
+  Scene.VectorLists, 
+  Scene.VectorGeometry;
 
 type
   TVHStiffness = (vhsFull, vhsSkip1Node, vhsSkip2Node, vhsSkip3Node,

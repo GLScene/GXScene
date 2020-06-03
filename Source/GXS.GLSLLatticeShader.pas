@@ -1,5 +1,5 @@
 //
-// The unit for GXScene Engine
+// Graphic Scene Engine, http://glscene.org
 //
 {
    Lattice shader that simulate Lattice. 
@@ -12,18 +12,29 @@ unit GXS.GLSLLatticeShader;
 
 interface
 
-{$I GXS.Scene.inc}
+{$I Scene.inc}
 
 uses
+  Winapi.OpenGL, 
+  Winapi.OpenGLext,  
   System.Classes,
   
-  GXS.Scene, GXS.CrossPlatform, GXS.BaseClasses, GXS.State, Winapi.OpenGL, Winapi.OpenGLext,  GXS.OpenGL1x, 
-  GXS.Context, GXS.RenderContextInfo, Scene.VectorGeometry, GXS.Coordinates,
-  GXS.TextureFormat, GXS.Color, GXS.Texture, GXS.Material,
-  GLSL.Shader, GXS.CustomShader;
+  GXS.Scene, 
+  GXS.CrossPlatform, 
+  GXS.BaseClasses, 
+  GXS.State, 
+  GXS.OpenGL1x, 
+  GXS.Context, 
+  GXS.RenderContextInfo, 
+  Scene.VectorGeometry, 
+  GXS.Coordinates,
+  GXS.TextureFormat, 
+  GXS.Color, 
+  GXS.Texture, 
+  GXS.Material,
+  GXS.GLSLShader, 
+  GXS.CustomShader;
 
-//TgxCustomGLSLSimpleLatticeShader
-//
 { Custom class for GLSLSimpleLatticeShader. 
  A shader that simulate Lattice }
 type

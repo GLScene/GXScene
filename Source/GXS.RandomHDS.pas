@@ -1,5 +1,5 @@
 //
-// This unit is part of the GLScene Project, http://glscene.org
+// Graphic Scene Engine, http://glscene.org
 //
 (*
   This unit provides tools and objects to generate random Height Data Sources
@@ -55,7 +55,7 @@ uses
 //  Fmx.Imaging.jpeg,
   Fmx.Forms,
 
-  OpenGLx,
+  Import.OpenGLx,
   GXS.Scene,
   Scene.VectorTypes,
   Scene.VectorGeometry,

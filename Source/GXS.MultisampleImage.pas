@@ -1,5 +1,5 @@
 //
-// The unit for GXScene Engine
+// Graphic Scene Engine, http://glscene.org
 //
 {
     This unit provides support for two new types of "multisample
@@ -12,12 +12,12 @@ unit GXS.MultisampleImage;
 
 interface
 
-{$I GXS.Scene.inc}
+{$I Scene.inc}
 
 uses
   System.Classes,
 
-  OpenGLx,
+  Import.OpenGLx,
   GXS.Context,
   GXS.Texture,
   GXS.Graphics,

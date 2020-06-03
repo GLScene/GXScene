@@ -1,12 +1,12 @@
 //
-// This unit is part of the GXScene Engine, http://glscene.org
+// Graphic Scene Engine, http://glscene.org
 //
 {
   Bitmap Fonts management classes
 }
 unit GXS.BitmapFont;
 
-{$I GXS.Scene.inc}
+{$I Scene.inc}
 
 interface
 
@@ -19,8 +19,8 @@ uses
   FMX.Graphics,
   FMX.Types,
 
-  OpenGLx,
-  XOpenGL,
+  Import.OpenGLx,
+  Scene.XOpenGL,
   Scene.PersistentClasses,
   GXS.Scene,
   Scene.VectorGeometry,

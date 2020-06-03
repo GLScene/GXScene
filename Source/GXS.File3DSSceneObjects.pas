@@ -1,21 +1,21 @@
 //
-// The unit is for GXScene Engine
+// Graphic Scene Engine, http://glscene.org
 //
-{
+(*
   3ds-specific scene objects.
-}
+*)
 unit GXS.File3DSSceneObjects;
 
 interface
 
-{$I GXS.Scene.inc}
+{$I Scene.inc}
 
 uses
   System.Classes,
   System.SysUtils,
   System.Math,
 
-  OpenGLx,
+  Import.OpenGLx,
   Scene.VectorGeometry,
   GXS.Context,
   GXS.Scene,

@@ -1,5 +1,5 @@
 //
-// The unit is for GXScene Engine
+// Graphic Scene Engine, http://glscene.org
 //
 (*
    Miscellaneous support utilities & classes.
@@ -9,7 +9,7 @@ unit GXS.Utils;
 
 interface
 
-{$I GXS.Scene.inc}
+{$I Scene.inc}
 
 uses
   System.Classes,
@@ -582,7 +582,7 @@ begin
    path := ParamStr(0);
    path := LowerCase(ExtractFilePath(path));
    p := Pos('demos', path);
-   Delete(path, p+7, Length(path));
+   Delete(path, p+5, Length(path));
    path := IncludeTrailingPathDelimiter(path) + 'media';
    SetCurrentDir(path);
 end;

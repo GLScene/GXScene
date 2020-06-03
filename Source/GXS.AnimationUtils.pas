@@ -1,5 +1,5 @@
 //
-// This unit is part of the GXScene Engine, http://glscene.org
+// Graphic Scene Engine, http://glscene.org
 //
 {
   Main purpose is to give an easy way to create an interpolation. 
@@ -10,7 +10,7 @@ unit GXS.AnimationUtils;
 
 interface
 
-{$I GXS.Scene.inc}
+{$I Scene.inc}
 
 uses
   System.SysUtils, 

@@ -1,5 +1,5 @@
 //
-// The unit for GXScene Engine
+// Graphic Scene Engine, http://glscene.org
 //
 {******************************************************************}
 {                                                                  }
@@ -57,7 +57,9 @@ function GetModuleSymbolEx(Module: TModuleHandle; SymbolName: PChar; var Accu: B
 function ReadModuleData(Module: TModuleHandle; SymbolName: PChar; var Buffer; Size: Cardinal): Boolean; stdcall;
 function WriteModuleData(Module: TModuleHandle; SymbolName: PChar; var Buffer; Size: Cardinal): Boolean; stdcall;
 
+//-----------------------------------------------------
 implementation
+//-----------------------------------------------------
 
 // load the DLL file FileName
 // the rules for FileName are those of LoadLibrary
@@ -188,7 +190,9 @@ function GetModuleSymbolEx(Module: TModuleHandle; SymbolName: PChar; var Accu: B
 function ReadModuleData(Module: TModuleHandle; SymbolName: PChar; var Buffer; Size: Cardinal): Boolean;
 function WriteModuleData(Module: TModuleHandle; SymbolName: PChar; var Buffer; Size: Cardinal): Boolean;
 
+//----------------------------------------------
 implementation
+//----------------------------------------------
 
 // load the .so file FileName
 // the rules for FileName are those of dlopen()

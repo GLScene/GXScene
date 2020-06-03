@@ -1,5 +1,5 @@
 //
-// The unit is for GXScene Engine
+// Graphic Scene Engine, http://glscene.org
 //
 (*
   An ODE Manager for GXScene.
@@ -11,18 +11,18 @@ unit GXS.ODEManager;
 
 interface
 
-{$I GXS.Scene.inc}
+{$I Scene.inc}
 
 uses
   System.Classes,
   System.SysUtils,
   System.Math,
 
-  OpenGLx,
-  XOpenGL,
+  Import.OpenGLx,
+  Scene.XOpenGL,
 
 
-  XCollection,
+  Scene.XCollection,
   GXS.Scene,
   Scene.VectorGeometry,
   GXS.Texture,
@@ -38,8 +38,8 @@ uses
   GXS.TerrainRenderer,
   GXS.Graph,
 
-  ODEUtils,
-  ODEImport;
+  Import.ODEUtils,
+  Import.ODE;
 
 type
 
@@ -1064,7 +1064,7 @@ begin
     exit;
   pos := dGeomGetPosition(o2);
   R := dGeomGetRotation(o2);
-  ODERToGXSceneMatrix(mat, R^, pos^);
+  ODERToSceneMatrix(mat, R^, pos^);
   Collider.SetTransform(mat);
 
   rad := dGeomSphereGetRadius(o2);
@@ -1109,7 +1109,7 @@ begin
     exit;
   pos := dGeomGetPosition(o2);
   R := dGeomGetRotation(o2);
-  ODERToGXSceneMatrix(mat, R^, pos^);
+  ODERToSceneMatrix(mat, R^, pos^);
   Collider.SetTransform(mat);
 
   dGeomBoxGetLengths(o2, s);
@@ -1190,7 +1190,7 @@ begin
     exit;
   pos := dGeomGetPosition(o2);
   R := dGeomGetRotation(o2);
-  ODERToGXSceneMatrix(mat, R^, pos^);
+  ODERToSceneMatrix(mat, R^, pos^);
   Collider.SetTransform(mat);
   dGeomCapsuleGetParams(o2, rad, len);
   res := Round(5 * MaxFloat(4 * rad, len) / Collider.ContactResolution);
@@ -1238,7 +1238,7 @@ begin
 
   pos := dGeomGetPosition(o2);
   R := dGeomGetRotation(o2);
-  ODERToGXSceneMatrix(mat, R^, pos^);
+  ODERToSceneMatrix(mat, R^, pos^);
   Collider.SetTransform(mat);
   dGeomCylinderGetParams(o2, rad, len);
   res := Round(5 * MaxFloat(4 * rad, len) / Collider.ContactResolution);
@@ -2191,7 +2191,7 @@ var
 begin
   Pos := dBodyGetPosition(Body);
   R := dBodyGetRotation(Body);
-  ODERToGXSceneMatrix(m, R^, Pos^);
+  ODERToSceneMatrix(m, R^, Pos^);
   if OwnerBaseSceneObject.Parent is TgxBaseSceneObject then
     m := MatrixMultiply(m, OwnerBaseSceneObject.Parent.InvAbsoluteMatrix);
   OwnerBaseSceneObject.Matrix^ := m;

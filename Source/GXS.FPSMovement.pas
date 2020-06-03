@@ -1,15 +1,14 @@
 //
-// The unit for GXScene Engine
+// Graphic Scene Engine, http://glscene.org
 //
-{
-   FPS-like movement behaviour and manager. 
-  
-}
+(*
+   FPS-like movement behaviour and manager.
+*)
 unit GXS.FPSMovement;
 
 interface
 
-{$I GXS.Scene.inc}
+{$I Scene.inc}
 
 uses
   System.Classes,
@@ -17,8 +16,8 @@ uses
   System.UITypes,
   FMX.Graphics,
 
-  OpenGLx,
-  XCollection,
+  Import.OpenGLx,
+  Scene.XCollection,
   Scene.VectorTypes,
   GXS.Context,
   GXS.CrossPlatform,
@@ -69,11 +68,10 @@ type
 
     property Map: TgxFreeForm read FMap write setMap;
 
-    { Indicates the collision group of this map. A Collision Group
+    (* Indicates the collision group of this map. A Collision Group
       is a set of logical maps and movers that can collide between
       themselves (i.e. a Behaviour with group 1 can only collide with
-      maps that are also on group 1).
-    }
+      maps that are also on group 1). *)
     property CollisionGroup: integer read FCollisionGroup write FCollisionGroup;
   end;
 
@@ -110,10 +108,11 @@ type
     constructor Create(aOwner: TComponent); override;
     destructor Destroy; override;
 
-    // Basic idea is to OctreeSphereSweepIntersect to plane, update position then change
-    // velocity to slide along the plane
-    // Camera can collide with multiple planes (e.g. floor + multiple walls + ceiling)
-    // limit iterations to 4 or 5 for now, may need to be higher for more complex maps or fast motion
+    (* Basic idea is to OctreeSphereSweepIntersect to plane, update position then change
+       velocity to slide along the plane
+       Camera can collide with multiple planes (e.g. floor + multiple walls + ceiling)
+       limit iterations to 4 or 5 for now, may need to be higher
+      for more complex maps or fast motion *)
     function SphereSweepAndSlide(freeform: TgxFreeForm;
       behaviour: TgxBFPSMovement; SphereStart: TVector;
       var Velocity, newPosition: TVector; sphereRadius: single)
@@ -128,7 +127,7 @@ type
     property Navigator: TgxNavigator read FNavigator write SetNavigator;
     property Scene: TgxScene read FScene write setScene;
 
-    { Display Time for the arrow lines. }
+    // Display Time for the arrow lines.
     property DisplayTime: integer read FDisplayTime write FDisplayTime;
     property MovementScale: single read FMovementScale write FMovementScale;
   end;
@@ -167,27 +166,25 @@ type
     Procedure Straighten;
   published
     property Manager: TgxFPSMovementManager read FManager write FManager;
-    { 
+    (*
       Radius to execute the testing with. A value < 0 indicates to use
       the boundingSphereRadius of the object.
-    }
+    *)
     property sphereRadius: single read FSphereRadius write FSphereRadius;
-    { Show Arrows and trailing for debuging. }
+    // Show Arrows and trailing for debuging.
     property ShowArrows: boolean read FShowArrows write setShowArrows;
-    { Indicates the collision group of this behaviour. A Collision Group
+    (* Indicates the collision group of this behaviour. A Collision Group
       is a set of logical maps and movers that can collide between
       themselves (i.e. a Behaviour with group 1 can only collide with
-      maps that are also on group 1) }
+      maps that are also on group 1) *)
     property CollisionGroup: integer read FCollisionGroup write FCollisionGroup;
     property GravityEnabled: boolean read FGravityEnabled write FGravityEnabled;
   end;
 
 function GetFPSMovement(behaviours: TgxBehaviours): TgxBFPSMovement; overload;
 function GetFPSMovement(obj: TgxBaseSceneObject): TgxBFPSMovement; overload;
-function GetOrCreateFPSMovement(behaviours: TgxBehaviours)
-  : TgxBFPSMovement; overload;
-function GetOrCreateFPSMovement(obj: TgxBaseSceneObject)
-  : TgxBFPSMovement; overload;
+function GetOrCreateFPSMovement(behaviours: TgxBehaviours): TgxBFPSMovement; overload;
+function GetOrCreateFPSMovement(obj: TgxBaseSceneObject): TgxBFPSMovement; overload;
 
 //-------------------------------------------------------------------------
 implementation

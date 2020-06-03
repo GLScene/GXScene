@@ -1,5 +1,5 @@
 //
-// This unit is part of the GXScene Engine, http://glscene.org
+// Graphic Scene Engine, http://glscene.org
 //
 {
   Geometric objects.
@@ -10,12 +10,12 @@ unit GXS.GeomObjects;
 
 interface
 
-{$I GXS.Scene.inc}
+{$I Scene.inc}
 uses
   System.Classes,
   System.Math,
 
-  OpenGLx,
+  Import.OpenGLx,
   Scene.PersistentClasses,
   GXS.Scene,
   Scene.VectorGeometry,

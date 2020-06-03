@@ -1,5 +1,5 @@
 //
-// The unit for GXScene Engine
+// Graphic Scene Engine, http://glscene.org
 //
 {
    A shader that applies cel shading through a vertex program
@@ -10,13 +10,13 @@ unit GXS.CelShader;
 
 interface
 
-{$I GXS.Scene.inc}
+{$I Scene.inc}
 
 uses
   System.Classes,
   System.SysUtils,
 
-  OpenGLx,
+  Import.OpenGLx,
   GXS.Texture,
   GXS.Context,
   GXS.Graphics,

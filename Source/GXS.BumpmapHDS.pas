@@ -1,5 +1,5 @@
 //
-// The unit for GXScene Engine
+// Graphic Scene Engine, http://glscene.org
 //
 {  
   Implements a HDS that automatically generates an elevation bumpmap.
@@ -13,7 +13,7 @@ unit GXS.BumpmapHDS;
 
 interface
 
-{$I GXS.Scene.inc}
+{$I Scene.inc}
 
 uses
   System.Classes,

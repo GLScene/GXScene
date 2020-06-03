@@ -1,5 +1,5 @@
 //
-// The unit for GXScene Engine
+// Graphic Scene Engine, http://glscene.org
 //
 {
    Base classes for scene-wide blended particles FX. 
@@ -13,7 +13,7 @@ unit GXS.ParticleFX;
 
 interface
 
-{$I GXS.Scene.inc}
+{$I Scene.inc}
 
 uses
   System.Classes,
@@ -21,8 +21,8 @@ uses
   System.Types,
   System.Math,
 
-  OpenGLx,
-  XCollection,
+  Import.OpenGLx,
+  Scene.XCollection,
   GXS.Scene,
   GXS.CrossPlatform,
   GXS.State,

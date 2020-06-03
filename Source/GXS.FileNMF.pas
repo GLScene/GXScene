@@ -1,5 +1,5 @@
 //
-// The unit is for GXScene Engine
+// Graphic Scene Engine, http://glscene.org
 //
 {
   GXS.FileNMF - NormalMapper loading into GLScene FreeForms/Actors

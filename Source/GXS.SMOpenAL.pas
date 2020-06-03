@@ -1,5 +1,5 @@
 //
-// The unit for GXScene Engine
+// Graphic Scene Engine, http://glscene.org
 //
 {
    OpenAL based sound-manager (http://www.openal.org). 
@@ -21,21 +21,21 @@ unit GXS.SMOpenAL;
 
 interface
 
-{$I GXS.Scene.inc}
+{$I Scene.inc}
 
 uses
-   System.Classes, System.SysUtils,
-   FMX.Forms, FMX.Dialogs,
-   
-   OpenAL{al, alut, alTypes},  
+   System.Classes,
+   System.SysUtils,
+   FMX.Forms,
+   FMX.Dialogs,
+
+   Import.OpenAL{al, alut, alTypes},  
    Scene.VectorGeometry, 
    GXS.Sound, 
    GXS.Scene, 
    GXS.SoundFileObjects;
 
 type
-	// TgxSMOpenAL
-	//
 	TgxSMOpenAL = class (TgxSoundManager)
       private
          FActivated : Boolean;      

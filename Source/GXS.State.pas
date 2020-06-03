@@ -1,5 +1,5 @@
 //
-// The unit is for GXScene Engine
+// Graphic Scene Engine, http://glscene.org
 //
 {
    Tools for managing an application-side cache of OpenGL state.
@@ -22,13 +22,13 @@ unit GXS.State;
 
 interface
 
-{$I GXS.Scene.inc}
+{$I Scene.inc}
 
 uses
   System.Classes,
   System.SysUtils,
 
-  OpenGLx,
+  Import.OpenGLx,
   GXS.CrossPlatform,
   Scene.VectorTypes,
   Scene.VectorGeometry,

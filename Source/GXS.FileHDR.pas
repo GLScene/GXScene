@@ -1,12 +1,12 @@
 //
-// The unit is for GXScene Engine
+// Graphic Scene Engine, http://glscene.org
 //
 {
    HDR File support.
 }
 unit GXS.FileHDR;
 
-{$I GXS.Scene.inc}
+{$I Scene.inc}
 
 interface
 
@@ -14,7 +14,7 @@ uses
   System.Classes,
   System.SysUtils,
 
-  OpenGLx,
+  Import.OpenGLx,
   GXS.Context,
   GXS.Graphics,
   GXS.TextureFormat,

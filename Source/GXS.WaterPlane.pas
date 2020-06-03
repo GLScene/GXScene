@@ -1,5 +1,5 @@
 //
-// The unit is for GXScene Engine
+// Graphic Scene Engine, http://glscene.org
 //
 (*
   A plane simulating animated water
@@ -11,7 +11,7 @@ unit GXS.WaterPlane;
 
 interface
 
-{$I GXS.Scene.inc}
+{$I Scene.inc}
 
 uses
   System.Classes,
@@ -19,7 +19,7 @@ uses
   FMX.Types,
   FMX.Graphics,
 
-  OpenGLx,
+  Import.OpenGLx,
   Scene.VectorGeometry,
   GXS.Scene,
   Scene.VectorLists,

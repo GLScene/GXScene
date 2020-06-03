@@ -1,5 +1,5 @@
 //
-// The unit for GXScene Engine
+// Graphic Scene Engine, http://glscene.org
 //
 (*
   Editor frame for a TRFaceProperties.
@@ -24,7 +24,7 @@ uses
   FMX.Controls.Presentation,
   FMX.Edit,
 
-  FRColorEditor,
+  GXS.FRColorEditor,
   GXS.Material;
 
 type

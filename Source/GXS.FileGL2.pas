@@ -1,5 +1,5 @@
 //
-// The unit for GXScene Engine
+// Graphic Scene Engine, http://glscene.org
 //
 (*
 	Vector file object loading of Ghoul2 model and animation files.
@@ -19,7 +19,7 @@ uses
   Scene.VectorTypes,
   Scene.VectorLists,
 
-  FileGL2;
+  Formats.FileGL2;
 
 type
 

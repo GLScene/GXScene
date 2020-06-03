@@ -1,5 +1,5 @@
 //
-// The unit for GXScene Engine
+// Graphic Scene Engine, http://glscene.org
 //
 (*
   How to use:
@@ -24,13 +24,13 @@ unit GXS.DCE;
 
 interface
 
-{$I GXS.Scene.inc}
+{$I Scene.inc}
 
 uses
   System.Classes,
   System.SysUtils,
 
-  XCollection,
+  Scene.XCollection,
   GXS.Scene,
   Scene.VectorGeometry,
   Scene.VectorLists,

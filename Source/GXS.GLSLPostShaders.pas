@@ -1,5 +1,5 @@
 //
-// The unit for GXScene Engine
+// Graphic Scene Engine, http://glscene.org
 //
 { 
    Post shaders that simulate shader visions for a mask or the entire scene. 
@@ -8,7 +8,7 @@ unit GXS.GLSLPostShaders;
 
 interface
 
-{$I GXS.Scene.inc}
+{$I Scene.inc}
 
 uses
   System.Classes,

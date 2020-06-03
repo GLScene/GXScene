@@ -1,5 +1,5 @@
 //
-// The unit for GXScene Engine
+// Graphic Scene Engine, http://glscene.org
 //
 {
    A shader that allows texture combiner setup. 
@@ -8,14 +8,14 @@ unit GXS.TexCombineShader;
 
 interface
 
-{$I GXS.Scene.inc}
+{$I Scene.inc}
 
 uses
   System.Classes,
   System.SysUtils,
   
-  OpenGLx,
-  XOpenGL,
+  Import.OpenGLx,
+  Scene.XOpenGL,
   GXS.Texture,
   GXS.Material,
   GXS.RenderContextInfo,

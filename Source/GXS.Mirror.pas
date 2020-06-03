@@ -1,5 +1,5 @@
 //
-// The unit is for GXScene Engine
+// Graphic Scene Engine, http://glscene.org
 //
 (*
    Implements a basic, stencil-based mirror (as in Mark Kilgard's demo).
@@ -11,13 +11,13 @@ unit GXS.Mirror;
 
 interface
 
-{$I GXS.Scene.inc}
+{$I Scene.inc}
 
 uses
   System.Classes,
 
-  OpenGLx,
-  XCollection,
+  Import.OpenGLx,
+  Scene.XCollection,
   Scene.PersistentClasses,
   GXS.Scene,
   GXS.PipelineTransformation,

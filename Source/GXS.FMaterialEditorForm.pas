@@ -1,5 +1,5 @@
 //
-// The unit for GXScene Engine
+// Graphic Scene Engine, http://glscene.org
 //
 (*
    Editor window for a material (with preview).
@@ -26,11 +26,11 @@ uses
   FMX.ListBox,
   FMX.Controls.Presentation,
 
-  FRMaterialPreview,
-  FRColorEditor,
-  FRFaceEditor,
+  GXS.FRMaterialPreview,
+  GXS.FRColorEditor,
+  GXS.FRFaceEditor,
   GXS.Texture,
-  FRTextureEdit,
+  GXS.FRTextureEdit,
   GXS.Material,
   GXS.State;
 

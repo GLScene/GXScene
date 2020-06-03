@@ -1,5 +1,5 @@
 //
-// The unit is for GXScene Engine
+// Graphic Scene Engine, http://glscene.org
 //
 {
    Handles all the color and texture stuff.
@@ -8,7 +8,7 @@ unit GXS.Texture;
 
 interface
 
-{$I GXS.Scene.inc}
+{$I Scene.inc}
 
 uses
   System.Classes,
@@ -17,10 +17,11 @@ uses
   FMX.Graphics,
   FMX.Objects,
 
-  OpenGLx,
+  Import.OpenGLx,
+  Scene.VectorTypes,
+  Scene.VectorGeometry,
   GXS.CrossPlatform,
   GXS.BaseClasses,
-  Scene.VectorGeometry,
   GXS.Graphics,
   GXS.Context,
   GXS.State,
@@ -31,7 +32,6 @@ uses
   GXS.TextureFormat,
   GXS.ApplicationFileIO,
   GXS.Utils,
-  Scene.VectorTypes,
   Scene.Strings;
 
 const
@@ -237,7 +237,7 @@ type
     property ColorFormat: Cardinal read fColorFormat write fColorFormat;
   end;
 
-  {Base class for image data classes internally based on a TgxPicture. }
+  // Base class for image data classes internally based on a TgxPicture.
   TgxPictureImage = class(TgxTextureImage)
   private
     FBitmap: TgxImage;
@@ -267,12 +267,12 @@ type
     property Picture: TImage read GetPicture write SetPicture;
   end;
 
-  {Stores any image compatible with Delphi's TgxPicture mechanism.
+  (* Stores any image compatible with Delphi's TgxPicture mechanism.
    The picture's data is actually stored into the DFM, the original
    picture name or path is not remembered. It is similar in behaviour
    to Delphi's TImage.
    Note that if original image is for instance JPEG format, only the JPEG
-   data will be stored in the DFM (compact) }
+   data will be stored in the DFM (compact) *)
   TgxPersistentImage = class(TgxPictureImage)
   public
     constructor Create(AOwner: TPersistent); override;
@@ -320,9 +320,9 @@ type
 
  TgxCubeMapTarget = Integer;
 
-  {A texture image used for specifying and stroing a cube map.
-       Not unlike TgxPictureImage, but storing 6 of them instead of just one.
-       Saving & loading as a whole currently not supported. }
+  (* A texture image used for specifying and stroing a cube map.
+     Not unlike TgxPictureImage, but storing 6 of them instead of just one.
+     Saving & loading as a whole currently not supported. *)
   TgxCubeMapImage = class(TgxTextureImage)
   private
     FImage: TgxImage;
@@ -365,11 +365,11 @@ type
   TgxTextureMappingMode = (tmmUser, tmmObjectLinear, tmmEyeLinear, tmmSphere,
     tmmCubeMapReflection, tmmCubeMapNormal, tmmCubeMapLight0, tmmCubeMapCamera);
 
-  {Defines basic texturing properties.
-       You can control texture wrapping, smoothing/filtering and of course define
-       the texture map (note that texturing is disabled by default).
-       A built-in mechanism (through ImageAlpha) allows auto-generation of an
-       Alpha channel for all bitmaps (see TgxTextureImageAlpha). }
+  (* Defines basic texturing properties.
+     You can control texture wrapping, smoothing/filtering and of course define
+     the texture map (note that texturing is disabled by default).
+     A built-in mechanism (through ImageAlpha) allows auto-generation of an
+     Alpha channel for all bitmaps (see TgxTextureImageAlpha). *)
   TgxTexture = class(TgxUpdateAbleObject)
   private
     FTextureHandle: TgxTextureHandle;
@@ -470,7 +470,7 @@ type
     procedure UnApplyMappingMode;
     procedure Apply(var rci: TgxRenderContextInfo);
     procedure UnApply(var rci: TgxRenderContextInfo);
-    {Applies to TEXTURE1 }
+    // Applies to TEXTURE1
     procedure ApplyAsTexture2(var rci: TgxRenderContextInfo; textureMatrix: PMatrix = nil);
     procedure UnApplyAsTexture2(var rci: TgxRenderContextInfo;
       reloadIdentityTextureMatrix: boolean);
@@ -693,9 +693,9 @@ implementation
 //------------------------------------------------------------------------------
 
 uses
-  GXS.Scene, // TODO: remove dependancy on GXScene.pas unit (related to tmmCubeMapLight0)
+  GXS.Scene, // TODO: remove dependancy on Scene.pas unit (related to tmmCubeMapLight0)
   GXS.PictureRegisteredFormats,
-  XOpenGL;
+  Scene.XOpenGL;
 
 const
   cTextureMode: array[tmDecal..tmAdd] of Cardinal =

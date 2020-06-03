@@ -1,5 +1,5 @@
 //
-// The unit for GXScene Engine
+// Graphic Scene Engine, http://glscene.org
 //
 {
    Material Script Batch loader for TgxMaterialLibrary for runtime. 
@@ -9,7 +9,7 @@ unit GXS.MaterialScript;
 
 interface
 
-{$I GXS.Scene.inc}
+{$I Scene.inc}
 
 uses
   System.SysUtils,

@@ -1,15 +1,18 @@
 //
-// The unit for GXScene Engine
+// Graphic Scene Engine, http://glscene.org
 //
 
 unit GXS.FileZLIB;
 
-{$I GXS.Scene.inc}
+{$I Scene.inc}
 
 interface
 
 uses
-  System.Classes, System.SysUtils, GXS.ArchiveManager, GXS.zLibEx;
+  System.Classes, 
+  System.SysUtils, 
+  GXS.ArchiveManager, 
+  GXS.zLibEx;
 
 const
    SIGN = 'ZLIB'; //Signature for compressed zlib.

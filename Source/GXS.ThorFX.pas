@@ -1,5 +1,5 @@
 //
-// The unit is for GXScene Engine
+// Graphic Scene Engine, http://glscene.org
 //
 (*
   ThorFX  for GXScene
@@ -8,15 +8,15 @@ unit GXS.ThorFX;
 
 interface
 
-{$I GXS.Scene.inc}
+{$I Scene.inc}
 
 uses
   System.Classes,
   System.SysUtils,
   System.Math,
 
-  OpenGLx,
-  XCollection,
+  Import.OpenGLx,
+  Scene.XCollection,
   GXS.Scene,
   GXS.PipelineTransformation,
   Scene.VectorGeometry,

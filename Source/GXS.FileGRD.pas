@@ -1,15 +1,14 @@
 //
-// The unit for GXScene Engine
+// Graphic Scene Engine, http://glscene.org
 //
-{ 
+(*
   GRD (Grid Text Format) vector file format implementation.
-
-}
+*)
 unit GXS.FileGRD;
 
 interface
 
-{$I GXS.Scene.inc}
+{$I Scene.inc}
 
 uses
   System.Classes,
@@ -22,10 +21,10 @@ uses
   GXS.Graph;
 
 type
-  { The GRD file represents ascii grid formats in 2D/3D.
+  (*The GRD file represents ascii grid formats in 2D/3D.
     This is a format for storing regular grid values as a
     matrices of cell centers. The format supports variations and
-    subformats. This importer works for Sutfer, ArcInfo and GMS formats}
+    subformats. This importer works for Sutfer, ArcInfo and GMS formats *)
   TgxGRDVectorFile = class(TgxVectorFile)
    public
     HeightField: TgxHeightField;

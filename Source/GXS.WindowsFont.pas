@@ -1,5 +1,5 @@
 //
-// The unit for GXScene Engine
+// Graphic Scene Engine, http://glscene.org
 //
 {
   TFont Import into a BitmapFont using variable width... 
@@ -9,7 +9,7 @@ unit GXS.WindowsFont;
 
 interface
 
-{$I GXS.Scene.inc}
+{$I Scene.inc}
 
 uses
 {$IFDEF MSWINDOWS}
@@ -22,7 +22,7 @@ uses
   System.UITypes,
   FMX.Graphics,
 
-  OpenGLx,
+  Import.OpenGLx,
   GXS.Scene,
   GXS.Texture,
   GXS.BitmapFont,

@@ -1,14 +1,14 @@
 //
-// The unit is for GXScene Engine
+// Graphic Scene Engine, http://glscene.org
 //
-{
+(*
   Quake2 MD2 vector file format implementation.
-}
+*)
 unit GXS.FileMD2;
 
 interface
 
-{$I GXS.Scene.inc}
+{$I Scene.inc}
 
 uses
   System.Classes,
@@ -16,14 +16,14 @@ uses
   GXS.VectorFileObjects,
   GXS.ApplicationFileIO,
 
-  FileMD2;
+  Formats.FileMD2;
 
 type
-  { The MD2 vector file (Quake2 actor file).
+  (* The MD2 vector file (Quake2 actor file).
     Stores a set of "frames" describing the different postures of the actor,
     it may be animated by TgxActor. The "Skin" must be loaded indepentendly
     (the whole mesh uses a single texture bitmap).
-    Based on code by Roger Cao. }
+    Based on code by Roger Cao. *)
   TgxMD2VectorFile = class(TgxVectorFile)
   public
     class function Capabilities: TgxDataFileCapabilities; override;

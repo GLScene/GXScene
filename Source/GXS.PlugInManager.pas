@@ -1,5 +1,5 @@
 //
-// The unit for GXScene Engine
+// Graphic Scene Engine, http://glscene.org
 //
 {
   An old PlugIn Manager unit. Don't know if it ever was used...
@@ -9,7 +9,7 @@ unit GXS.PlugInManager;
 
 interface
 
-{$I GXS.Scene.inc}
+{$I Scene.inc}
 
 uses
   Winapi.Windows,

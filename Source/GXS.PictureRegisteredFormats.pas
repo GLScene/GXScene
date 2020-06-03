@@ -1,15 +1,14 @@
 //------------------------------------------------------------
-// The unit for GXScene Engine
+// Graphic Scene Engine, http://glscene.org
 //-------------------------------------------------------------
-{
-   Hacks into the FMX to access the list of TPicture registered TGraphic formats 
-    
-}
+(*
+   Hacks into the FMX to access the list of TPicture registered TGraphic formats
+*)
 unit GXS.PictureRegisteredFormats;
 
 interface
 
-{$I GXS.Scene.inc}
+{$I Scene.inc}
 
 uses
   System.Classes, 
@@ -18,13 +17,13 @@ uses
 
 {$DEFINE PRF_HACK_PASSES}
 
-{ Returns the TGraphicClass associated to the extension, if any. 
-   Accepts anExtension with or without the '.' }
+(* Returns the TGraphicClass associated to the extension, if any.
+   Accepts anExtension with or without the '.' *)
 function GraphicClassForExtension(const anExtension: string): TGraphicClass;
 
-{ Adds to the passed TStrings the list of registered formats. 
+(* Adds to the passed TStrings the list of registered formats.
    Convention is "extension=description" for the string, the Objects hold
-   the corresponding TGraphicClass (extensions do not include the '.'). }
+   the corresponding TGraphicClass (extensions do not include the '.'). *)
 procedure HackTPictureRegisteredFormats(destList: TStrings);
 
 // ------------------------------------------------------------------

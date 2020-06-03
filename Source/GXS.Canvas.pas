@@ -1,5 +1,5 @@
 //
-// The unit is for GXScene Engine
+// Graphic Scene Engine, http://glscene.org
 //
 {
    Implements a basic Canvas-like interface over for OpenVX
@@ -10,7 +10,7 @@ unit GXS.Canvas;
 
 interface
 
-{$I GXS.Scene.inc}
+{$I Scene.inc}
 
 uses
   System.Types,
@@ -19,7 +19,7 @@ uses
   System.Math,
   FMX.Graphics,
 
-  OpenGLx,
+  Import.OpenGLx,
   Scene.VectorGeometry,
   GXS.Color,
   GXS.Context,

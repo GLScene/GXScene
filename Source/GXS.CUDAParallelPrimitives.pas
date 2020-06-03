@@ -1,5 +1,5 @@
 //
-// The unit for GXScene Engine
+// Graphic Scene Engine, http://glscene.org
 //
 // -------------------------------------------------------------
 // cuDPP -- CUDA Data Parallel Primitives library
@@ -16,7 +16,7 @@ unit GXS.CUDAParallelPrimitives;
 interface
 
 uses
-  GXS.CL_Platform;
+  OpenCL_Platform;
 
 {$I cuda.inc}
 

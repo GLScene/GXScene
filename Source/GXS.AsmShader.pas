@@ -1,5 +1,5 @@
 //
-// The unit for GXScene Engine
+// Graphic Scene Engine, http://glscene.org
 //
 (*
     TgxAsmShader is a wrapper for all ARB shaders
@@ -12,13 +12,13 @@ unit GXS.AsmShader;
 
 interface
 
-{$I GXS.Scene.inc}
+{$I Scene.inc}
 
 uses
   System.Classes, 
   System.SysUtils,
   
-  OpenGLx,
+  Import.OpenGLx,
   GXS.Context,
   Scene.VectorGeometry, 
   Scene.VectorTypes, 

@@ -1,5 +1,5 @@
 //
-// The unit for GXScene Engine
+// Graphic Scene Engine, http://glscene.org
 //
 {
     A simple component written by request from someone at the www.glscene.ru forums. 
@@ -13,7 +13,7 @@ unit GXS.SimpleNavigation;
 
 interface
 
-{$I GXS.Scene.inc}
+{$I Scene.inc}
 
 uses
   System.Types,

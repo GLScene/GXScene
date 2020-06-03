@@ -1,5 +1,5 @@
 //
-// The unit is for GXScene Engine
+// Graphic Scene Engine, http://glscene.org
 //
 {
   A collection of components that generate post effects.
@@ -8,13 +8,13 @@ unit GXS.PostEffects;
 
 interface
 
-{$I GXS.Scene.inc}
+{$I Scene.inc}
 
 uses
   System.Classes,
   System.SysUtils,
 
-  OpenGLx,
+  Import.OpenGLx,
   GXS.Scene,
   Scene.PersistentClasses,
   GXS.Texture,

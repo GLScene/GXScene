@@ -1,10 +1,10 @@
 //
-// The unit for GXScene Engine
+// Graphic Scene Engine, http://glscene.org
 //
-{
+(*
    Cubic spline interpolation functions 
    
-}
+*)
 unit GXS.Spline;
 
 interface
@@ -12,14 +12,12 @@ interface
 uses
   Scene.VectorGeometry;
 
-{$I GXS.Scene.inc}
+{$I Scene.inc}
 
 type
 
    TCubicSplineMatrix = array of array [0..3] of Single;
 
-   // TCubicSpline
-   //
    { 3D cubic spline handler class. 
       This class allows to describe and calculate values of a time-based,
       three-dimensionnal cubic spline. 
@@ -28,12 +26,9 @@ type
       Note : X, Y & Z are actually interpolated independently. }
    TCubicSpline = class (TObject)
       private
-         
          matX, matY, matZ, matW : TCubicSplineMatrix;
          FNb : Integer;
-
       public
-         
          { Creates the spline and declares interpolation points. 
             Time references go from 0 (first point) to nb-1 (last point), the
             first and last reference matrices respectively are used when T is
@@ -91,15 +86,9 @@ type
    end;
 
 // ------------------------------------------------------------------
-// ------------------------------------------------------------------
-// ------------------------------------------------------------------
 implementation
 // ------------------------------------------------------------------
-// ------------------------------------------------------------------
-// ------------------------------------------------------------------
 
-// VECCholeskyTriDiagResol
-//
 procedure VECCholeskyTriDiagResol(const b : array of Single; const nb : Integer;
                                   var Result : array of Single);
 var
@@ -128,8 +117,6 @@ begin
       Result[I]:=(Y[I]-Result[I+1]*LssDiag[I])/LDiag[I];
 end;
 
-// MATInterpolationHermite
-//
 procedure MATInterpolationHermite(const ordonnees : PFloatArray; const nb : Integer;
                                   var Result : TCubicSplineMatrix); {$ifdef CLR}unsafe;{$endif}
 var
@@ -161,8 +148,6 @@ begin
    end;
 end;
 
-// MATValeurSpline
-//
 function MATValeurSpline(const spline : TCubicSplineMatrix; const x : Single;
                          const nb : Integer) : Single;
 var
@@ -180,8 +165,6 @@ begin
    end else Result:=0;
 end;
 
-// MATValeurSplineSlope
-//
 function MATValeurSplineSlope(const spline : TCubicSplineMatrix; const x : Single;
                               const nb : Integer) : Single;
 var
@@ -203,8 +186,6 @@ end;
 // ------------------ TCubicSpline ------------------
 // ------------------
 
-// Create
-//
 constructor TCubicSpline.Create(const X, Y, Z, W: PFloatArray; const nb : Integer); {$ifdef CLR}unsafe;{$endif}
 begin
    inherited Create;
@@ -215,51 +196,37 @@ begin
    FNb:=nb;
 end;
 
-// Destroy
-//
 destructor TCubicSpline.Destroy;
 begin
    inherited Destroy;
 end;
 
-// SplineX
-//
 function TCubicSpline.SplineX(const t : single): Single;
 begin
    Result:=MATValeurSpline(MatX, t, FNb);
 end;
 
-// SplineY
-//
 function TCubicSpline.SplineY(const t : single): Single;
 begin
    Result:=MATValeurSpline(MatY, t, FNb);
 end;
 
-// SplineZ
-//
 function TCubicSpline.SplineZ(const t : single): Single;
 begin
    Result:=MATValeurSpline(MatZ, t, FNb);
 end;
 
-// SplineW
-//
 function TCubicSpline.SplineW(const t : single): Single;
 begin
    Result:=MATValeurSpline(MatW, t, FNb);
 end;
 
-// SplineXY
-//
 procedure TCubicSpline.SplineXY(const t : single; var X, Y : Single);
 begin
    X:=MATValeurSpline(MatX, T, FNb);
    Y:=MATValeurSpline(MatY, T, FNb);
 end;
 
-// SplineXYZ
-//
 procedure TCubicSpline.SplineXYZ(const t : single; var X, Y, Z : Single);
 begin
    X:=MATValeurSpline(MatX, T, FNb);
@@ -267,8 +234,6 @@ begin
    Z:=MATValeurSpline(MatZ, T, FNb);
 end;
 
-// SplineXYZW
-//
 procedure TCubicSpline.SplineXYZW(const t : single; var X, Y, Z, W : Single);
 begin
    X:=MATValeurSpline(MatX, T, FNb);
@@ -277,8 +242,6 @@ begin
    W:=MATValeurSpline(MatW, T, FNb);
 end;
 
-// SplineAffineVector
-//
 function TCubicSpline.SplineAffineVector(const t : single) : TAffineVector;
 begin
    Result.X:=MATValeurSpline(MatX, t, FNb);
@@ -286,8 +249,6 @@ begin
    Result.Z:=MATValeurSpline(MatZ, t, FNb);
 end;
 
-// SplineAffineVector
-//
 procedure TCubicSpline.SplineAffineVector(const t : single; var vector : TAffineVector);
 begin
    vector.X:=MATValeurSpline(MatX, t, FNb);
@@ -295,8 +256,6 @@ begin
    vector.Z:=MATValeurSpline(MatZ, t, FNb);
 end;
 
-// SplineVector
-//
 function TCubicSpline.SplineVector(const t : single) : TVector;
 begin
    Result.X:=MATValeurSpline(MatX, t, FNb);
@@ -305,8 +264,6 @@ begin
    Result.W:=MATValeurSpline(MatW, t, FNb);
 end;
 
-// SplineVector
-//
 procedure TCubicSpline.SplineVector(const t : single; var vector : TVector);
 begin
    vector.X:=MATValeurSpline(MatX, t, FNb);
@@ -315,36 +272,26 @@ begin
    vector.W:=MATValeurSpline(MatW, t, FNb);
 end;
 
-// SplineSlopeX
-//
 function TCubicSpline.SplineSlopeX(const t : Single): Single;
 begin
    Result:=MATValeurSplineSlope(MatX, t, FNb);
 end;
 
-// SplineSlopeY
-//
 function TCubicSpline.SplineSlopeY(const t : single): Single;
 begin
    Result:=MATValeurSplineSlope(MatY, t, FNb);
 end;
 
-// SplineSlopeZ
-//
 function TCubicSpline.SplineSlopeZ(const t : single): Single;
 begin
    Result:=MATValeurSplineSlope(MatZ, t, FNb);
 end;
 
-// SplineSlopeW
-//
 function TCubicSpline.SplineSlopeW(const t : single): Single;
 begin
    Result:=MATValeurSplineSlope(MatW, t, FNb);
 end;
 
-// SplineSlopeVector
-//
 function TCubicSpline.SplineSlopeVector(const t : single) : TAffineVector;
 begin
    Result.X:=MATValeurSplineSlope(MatX, t, FNb);
@@ -352,8 +299,6 @@ begin
    Result.Z:=MATValeurSplineSlope(MatZ, t, FNb);
 end;
 
-// SplineIntersecYZ
-//
 function TCubicSpline.SplineIntersecYZ(X: Single; var Y, Z: Single): Boolean;
 var
    Sup, Inf, Mid : Single;
@@ -400,8 +345,6 @@ begin
    Result:=True;
 end;
 
-// SplineIntersecXZ
-//
 function TCubicSpline.SplineIntersecXZ(Y: Single; var X, Z: Single): Boolean;
 var
    Sup, Inf, Mid : Single;
@@ -448,8 +391,6 @@ begin
    Result:=True;
 end;
 
-// SplineIntersecXY
-//
 function TCubicSpline.SplineIntersecXY(Z: Single; var X, Y: Single): Boolean;
 var
    Sup, Inf, Mid : Single;

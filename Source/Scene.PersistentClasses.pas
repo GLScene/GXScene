@@ -1,5 +1,5 @@
 //
-// The unit is for GXScene Engine
+// Graphic Scene Engine, http://glscene.org
 //
 (*
    Base persistence classes.
@@ -14,7 +14,8 @@
 unit Scene.PersistentClasses;
 
 interface
-{$I GXS.Scene.inc}
+
+{$I Scene.inc}
 
 uses
   System.Classes,
@@ -25,7 +26,7 @@ uses
 type
   PObject = ^TObject;
 
-  { Virtual layer similar to VCL's TReader (but reusable) }
+  // Virtual layer similar to VCL's TReader (but reusable) }
   TVirtualReader = class
   private
     FStream: TStream;
@@ -45,7 +46,7 @@ type
     procedure ReadTStrings(aStrings: TStrings);
   end;
 
-  { Virtual layer similar to VCL's TWriter (but reusable) }
+  // Virtual layer similar to VCL's TWriter (but reusable)
   TVirtualWriter = class
   private
     FStream: TStream;
@@ -65,24 +66,24 @@ type
   TVirtualReaderClass = class of TVirtualReader;
   TVirtualWriterClass = class of TVirtualWriter;
 
-  { Interface for persistent objects.
+  (* Interface for persistent objects.
      This interface does not really allow polymorphic persistence,
      but is rather intended as a way to unify persistence calls
-     for iterators. }
+     for iterators. *)
   IPersistentObject = interface(IInterface)
   ['{A9A0198A-F11B-4325-A92C-2F24DB41652B}']
     procedure WriteToFiler(writer: TVirtualWriter);
     procedure ReadFromFiler(reader: TVirtualReader);
   end;
 
-    { Base class for persistent objects.
+    (* Base class for persistent objects.
        The base requirement is implementation of ReadFromFiler & WriteToFiler
        in sub-classes, the immediate benefits are support of streaming (to stream,
        file or string), assignment and cloning.
        The other requirement being the use of a virtual constructor, which allows
        polymorphic construction (don't forget to register your subclasses).
        Note that TPersistentObject implements IUnknown, but does *not* implement
-       reference counting. }
+       reference counting. *)
   TPersistentObject = class(TPersistent, IPersistentObject)
   protected
     procedure RaiseFilerException(const archiveVersion: Integer);
@@ -109,12 +110,11 @@ type
   end;
 
   TPersistentObjectClass = class of TPersistentObject;
-
   TPointerObjectList = array[0..MaxInt div (2*SizeOf(Pointer))] of TObject;
   PPointerObjectList = ^TPointerObjectList;
   TObjectListSortCompare = function(item1, item2: TObject): Integer;
 
-  { A persistent Object list.
+  (* A persistent Object list.
      Similar to TList but works on TObject items and has facilities for
      persistence of contained data. Unlike the VCL's TObjectList, this one
      does NOT free its objects upon destruction or Clear, use Clean and CleanFree
@@ -122,7 +122,7 @@ type
      But only TPersistentObject items will be streamed appropriately.
      The list can be used in a stack-like fashion with Push & Pop, and can
      perform basic boolean set operations.
-     Note: the IndexOf implementation is up to 3 times faster than that of TList }
+     Note: the IndexOf implementation is up to 3 times faster than that of TList *)
   TPersistentObjectList = class(TPersistentObject)
   private
     FList: PPointerObjectList;
@@ -167,35 +167,31 @@ type
     property Count: Integer read FCount write SetCount;
     property List: PPointerObjectList read FList;
     property Capacity: Integer read FCapacity write SetCapacity;
-    { Makes sure capacity is at least aCapacity. }
+    // Makes sure capacity is at least aCapacity.
     procedure RequiredCapacity(aCapacity: Integer);
-
-    { Removes all "nil" from the list.
+    (* Removes all "nil" from the list.
        Note: Capacity is unchanged, no memory us freed, the list is just
        made shorter. This functions is orders of magnitude faster than
-       its TList eponymous. }
+       its TList eponymous. *)
     procedure Pack;
-    { Empty the list without freeing the objects. }
+    // Empty the list without freeing the objects.
     procedure Clear; virtual;
-    { Empty the list and free the objects. }
+    // Empty the list and free the objects.
     procedure Clean; virtual;
-    { Empty the list, free the objects and Free self. }
+    // Empty the list, free the objects and Free self.
     procedure CleanFree;
-
     function IndexOf(Item: TObject): Integer;
-
     property First: TObject read GetFirst write SetFirst;
     property Last: TObject read GetLast write SetLast;
     procedure Push(item: TObject);
     function Pop: TObject;
     procedure PopAndFree;
-
     function AddObjects(const objectList: TPersistentObjectList): Integer;
     procedure RemoveObjects(const objectList: TPersistentObjectList);
     procedure Sort(compareFunc: TObjectListSortCompare);
   end;
 
-  { Wraps a TReader-compatible reader. }
+  // Wraps a TReader-compatible reader.
   TBinaryReader = class(TVirtualReader)
   protected
     function ReadValue: TValueType;
@@ -212,7 +208,7 @@ type
     function EndOfList: Boolean; override;
   end;
 
-  { Wraps a TWriter-compatible writer. }
+  // Wraps a TWriter-compatible writer.
   TBinaryWriter = class(TVirtualWriter)
   protected
     procedure WriteAnsiString(const aString: AnsiString); virtual;
@@ -227,7 +223,7 @@ type
     procedure WriteListEnd; override;
   end;
 
-  { Reads object persistence in Text format. }
+  // Reads object persistence in Text format.
   TTextReader = class(TVirtualReader)
   private
     FValueType: string;
@@ -246,7 +242,7 @@ type
     function EndOfList: Boolean; override;
   end;
 
-  { Writes object persistence in Text format. }
+  // Writes object persistence in Text format.
   TTextWriter = class(TVirtualWriter)
   private
     FIndentLevel: Integer;
@@ -264,7 +260,7 @@ type
     procedure WriteListEnd; override;
   end;
 
-  { TPersistent which has knowledge of its owner. }
+  // TPersistent which has knowledge of its owner.
   TgxOwnedPersistent = class(TPersistent)
   private
     FOwner: TPersistent;
@@ -274,7 +270,7 @@ type
     constructor Create(AOwner: TPersistent); virtual;
   end;
 
-  { TPersistent thet inplements IInterface. }
+  // TPersistent thet inplements IInterface.
   TgxInterfacedPersistent = class(TPersistent, IInterface)
   protected
     // Implementing IInterface.
@@ -283,7 +279,7 @@ type
     function _Release: Integer; stdcall;
   end;
 
-  { TCollectionItem thet inplements IInterface. }
+  // TCollectionItem thet inplements IInterface.
   TgxInterfacedCollectionItem = class(TCollectionItem, IInterface)
   protected
     // Implementing IInterface.
@@ -292,11 +288,11 @@ type
     function _Release: Integer; virtual; stdcall;
   end;
 
-  { Triggered when file signature does not match. }
+  // Triggered when file signature does not match.
   EInvalidFileSignature = class(Exception)
   end;
 
-  { Usually triggered when a filing error is detected. }
+  // Usually triggered when a filing error is detected.
   EFilerException = class(Exception)
   end;
 

@@ -1,5 +1,5 @@
 //
-// The unit is for GXScene Engine
+// Graphic Scene Engine, http://glscene.org
 //
 { 
   Invisible component for helping to Move, Rotate and Scale an Object
@@ -9,7 +9,7 @@ unit GXS.Gizmo;
 
 interface
 
-{$I GXS.Scene.inc}
+{$I Scene.inc}
 
 uses
   System.Classes,

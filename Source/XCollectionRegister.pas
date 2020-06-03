@@ -1,21 +1,21 @@
 //
 // This unit is part of the GLScene Engine, http://glscene.org
 //
-{
+(*
    Register TXCollection property editor 
-}
+*)
 unit XCollectionRegister;
 
 interface
 
-{$I GLScene.inc}
+{$I Scene.inc}
 
 uses
   System.Classes,
-  XCollection,
+  Scene.XCollection,
 
-  DesignEditors, 
-  DesignIntf;
+///  DesignEditors, 
+///  DesignIntf;
 
 type
 	TXCollectionProperty = class(TClassProperty)
@@ -31,7 +31,7 @@ implementation
 // ------------------------------------------------------------------
 
 uses
-  FXCollectionEditor;
+  GXS.FXCollectionEditor;
 
 
 //----------------- TXCollectionProperty ------------------------------------

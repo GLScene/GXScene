@@ -1,5 +1,5 @@
 //
-// The unit is for GXScene Engine
+// Graphic Scene Engine, http://glscene.org
 //
 {
   Objects that get rendered in 2D coordinates
@@ -8,13 +8,13 @@ unit GXS.HUDObjects;
 
 interface
 
-{$I GXS.Scene.inc}
+{$I Scene.inc}
 
 uses
   System.Classes,
 
-  OpenGLx,
-  XOpenGL,
+  Import.OpenGLx,
+  Scene.XOpenGL,
   Scene.VectorTypes,
   Scene.PersistentClasses,
   GXS.Scene,

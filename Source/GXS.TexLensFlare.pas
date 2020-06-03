@@ -1,5 +1,5 @@
 //
-// The unit is for GXScene Engine
+// Graphic Scene Engine, http://glscene.org
 //
 {
    Texture-based Lens flare object.
@@ -9,12 +9,12 @@ unit GXS.TexLensFlare;
 
 interface
 
-{$I GXS.Scene.inc}
+{$I Scene.inc}
 
 uses
   System.Classes,
 
-  OpenGLx,
+  Import.OpenGLx,
   GXS.Scene,
   Scene.VectorGeometry,
   Scene.PersistentClasses,

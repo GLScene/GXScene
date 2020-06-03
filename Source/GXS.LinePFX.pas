@@ -1,5 +1,5 @@
 //
-// The unit is for GXScene Engine
+// Graphic Scene Engine, http://glscene.org
 //
 {
   A PFX whose particles are lines
@@ -9,13 +9,13 @@ unit GXS.LinePFX;
 
 interface
 
-{$I GXS.Scene.inc}
+{$I Scene.inc}
 
 uses
   System.Classes,
   System.SysUtils,
 
-  OpenGLx,
+  Import.OpenGLx,
   Scene.PersistentClasses,
   Scene.VectorGeometry,
   GXS.ParticleFX,

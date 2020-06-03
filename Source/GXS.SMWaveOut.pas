@@ -1,5 +1,5 @@
 //
-// The unit for GXScene Engine
+// Graphic Scene Engine, http://glscene.org
 //
 (*
   Basic sound manager based on WinMM  
@@ -9,7 +9,7 @@ unit GXS.SMWaveOut;
 
 interface
 
-{$I GXS.Scene.inc}
+{$I Scene.inc}
 
 uses 
   System.Classes, 

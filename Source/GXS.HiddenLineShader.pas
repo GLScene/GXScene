@@ -1,5 +1,5 @@
 //
-// The unit is for GXScene Engine
+// Graphic Scene Engine, http://glscene.org
 //
 {
    A shader that renders hidden (back-faced) lines differently from visible
@@ -12,12 +12,12 @@ unit GXS.HiddenLineShader;
 
 interface
 
-{$I GXS.Scene.inc}
+{$I Scene.inc}
 
 uses
   System.Classes,
 
-  OpenGLx,
+  Import.OpenGLx,
   GXS.Material,
   GXS.CrossPlatform, 
   GXS.Scene, 

@@ -1,5 +1,5 @@
 //
-// The unit for GXScene Engine
+// Graphic Scene Engine, http://glscene.org
 //
 {
   Procedural textures. 
@@ -14,7 +14,7 @@ uses
   System.SysUtils,
   System.Math,
 
-  OpenGLx,
+  Import.OpenGLx,
   GXS.Texture,
   GXS.Graphics,
   GXS.CrossPlatform,

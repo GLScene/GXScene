@@ -8,15 +8,15 @@ unit GXS.AnimatedSprite;
 
 interface
 
-{$I GXS.Scene.inc}
+{$I Scene.inc}
 
 uses
   System.Classes,
   System.SysUtils,
   System.Math,
 
-  OpenGLx,
-  XCollection,
+  Import.OpenGLx,
+  Scene.XCollection,
   GXS.Scene,
   Scene.VectorTypes,
   Scene.VectorGeometry,

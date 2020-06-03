@@ -1,5 +1,5 @@
 //
-// The unit for GXScene Engine
+// Graphic Scene Engine, http://glscene.org
 //
 {
    A shader that passes control of the DoApply and DoUnApply
@@ -16,7 +16,8 @@ interface
 uses
   System.Classes, 
   
-  GXS.Material, GXS.RenderContextInfo;
+  GXS.Material, 
+  GXS.RenderContextInfo;
 
 type
   TOnDoApplyEvent = procedure (Sender : TObject; var rci : TgxRenderContextInfo) of Object;

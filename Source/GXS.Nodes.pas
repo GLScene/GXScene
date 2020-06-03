@@ -1,5 +1,5 @@
 //
-// The unit is for GXScene Engine
+// Graphic Scene Engine, http://glscene.org
 //
 (*
   Nodes are used to describe lines, polygons + more.
@@ -13,7 +13,7 @@ uses
   System.SysUtils,
   System.Math,
 
-  OpenGLx,
+  Import.OpenGLx,
   Scene.VectorGeometry,
   GXS.Context,
   GXS.BaseClasses,
@@ -22,7 +22,7 @@ uses
   Scene.VectorTypes,
   XOpenGL;
 
-{$I GXS.Scene.inc}
+{$I Scene.inc}
 
 type
   TgxNode = class(TCollectionItem)

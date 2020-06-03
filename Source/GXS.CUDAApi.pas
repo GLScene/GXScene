@@ -1,5 +1,5 @@
 //
-// The unit for GXScene Engine
+// Graphic Scene Engine, http://glscene.org
 //
 /// *
 // * Copyright 1993-2009 NVIDIA Corporation.  All rights reserved.

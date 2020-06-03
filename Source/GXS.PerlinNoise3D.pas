@@ -1,5 +1,5 @@
 //
-// The unit is for GXScene Engine
+// Graphic Scene Engine, http://glscene.org
 //
 {
   Classes and function for generation of PerlinNoise.
@@ -9,7 +9,7 @@ unit GXS.PerlinNoise3D;
 
 interface
 
-{$I GXS.Scene.inc}
+{$I Scene.inc}
 
 uses
   System.Math,

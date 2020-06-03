@@ -1,5 +1,5 @@
 ﻿//
-// The unit is for GXScene Engine
+// Graphic Scene Engine, http://glscene.org
 //
 {   Skydome object
 }
@@ -7,7 +7,7 @@ unit GXS.Skydome;
 
 interface
 
-{$I GXS.Scene.inc}
+{$I Scene.inc}
 
 uses
   System.Classes,
@@ -16,7 +16,7 @@ uses
   System.Math,
   FMX.Graphics,
 
-  OpenGLx,
+  Import.OpenGLx,
   GXS.Scene,
   Scene.VectorGeometry,
   GXS.Context,

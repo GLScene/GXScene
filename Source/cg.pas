@@ -1,5 +1,5 @@
 //
-// This unit is part of the GLScene Project, http://glscene.org
+// Graphic Scene Engine, http://glscene.org
 //
 {
    Conversion of cg NVIDIA header files to cg.pas
@@ -98,7 +98,7 @@ uses
   Winapi.Windows;
 {$ENDIF}
 
-{$I GXS.Scene.inc}
+{$I Scene.inc}
 
 {$MINENUMSIZE 4}
 

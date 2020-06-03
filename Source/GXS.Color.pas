@@ -1,5 +1,5 @@
 //
-// The unit is for GXScene Engine
+// Graphic Scene Engine, http://glscene.org
 //
 {
   All color types, constants and utilities should go here
@@ -8,7 +8,7 @@ unit GXS.Color;
 
 interface
 
-{$I GXS.Scene.inc}
+{$I Scene.inc}
 
 uses
   System.SysUtils,
@@ -18,7 +18,7 @@ uses
   FMX.Dialogs,
   FMX.Graphics,
 
-  OpenGLx,
+  Import.OpenGLx,
   Scene.VectorTypes,
   Scene.VectorGeometry,
   Scene.PersistentClasses,

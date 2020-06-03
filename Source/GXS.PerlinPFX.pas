@@ -1,5 +1,5 @@
 //
-// The unit is for GXScene Engine
+// Graphic Scene Engine, http://glscene.org
 //
 {
    PFX particle effects revolving around the use of Perlin noise.
@@ -8,13 +8,13 @@ unit GXS.PerlinPFX;
 
 interface
 
-{$I GXS.Scene.inc}
+{$I Scene.inc}
 
 uses
   System.Classes,
   System.Math,
 
-  OpenGLx,
+  Import.OpenGLx,
   GXS.ParticleFX,
   GXS.Graphics,
   GXS.PerlinNoise3D,

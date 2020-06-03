@@ -1,5 +1,5 @@
 //
-// The unit is for GXScene Engine
+// Graphic Scene Engine, http://glscene.org
 //
 (*
   Support for Windows WAV format.
@@ -8,18 +8,18 @@ unit GXS.FileWAV;
 
 interface
 
-{$I GXS.Scene.inc}
+{$I Scene.inc}
 
 uses
+  Winapi.MMSystem,
   System.Classes,
-  MMSystem,
 
   GXS.ApplicationFileIO,
   GXS.SoundFileObjects;
 
 type
 
-  { Support for Windows WAV format. }
+  // Support for Windows WAV format.
   TgxWAVFile = class(TgxSoundFile)
   private
 {$IFDEF MSWINDOWS}

@@ -1,15 +1,15 @@
 //
-// The unit is for GXScene Engine
+// Graphic Scene Engine, http://glscene.org
 //
-{
+(*
   Handles all the material + material library stuff.
-}
+*)
 
 unit GXS.Material;
 
 interface
 
-{$I GXS.Scene.inc}
+{$I Scene.inc}
 
 uses
   System.Classes,
@@ -18,24 +18,24 @@ uses
   FMX.Dialogs,
   FMX.Graphics,
 
-  OpenGLx,
+  Import.OpenGLx,
+  Scene.XOpenGL,
   Scene.VectorTypes,
+  Scene.VectorGeometry,
+  Scene.PersistentClasses,
+  Scene.Strings,
   GXS.RenderContextInfo,
   GXS.BaseClasses,
   GXS.Context,
   GXS.Texture,
   GXS.Color,
   GXS.Coordinates,
-  Scene.VectorGeometry,
-  Scene.PersistentClasses,
   GXS.CrossPlatform,
   GXS.State,
   GXS.TextureFormat,
-  Scene.Strings,
   GXS.ApplicationFileIO,
   GXS.Graphics,
-  GXS.Utils,
-  XOpenGL;
+  GXS.Utils;
 
 {$UNDEF USE_MULTITHREAD}
 
@@ -54,16 +54,16 @@ type
   TgxAbstractLibMaterial = class;
   TgxLibMaterial = class;
 
-  { Define VXShader style application relatively to a material.
+  (* Define VXShader style application relatively to a material.
     ssHighLevel: shader is applied before material application, and unapplied
          after material unapplication
     ssLowLevel: shader is applied after material application, and unapplied
          before material unapplication
     ssReplace: shader is applied in place of the material (and material
-         is completely ignored) }
+         is completely ignored) *)
   TgxShaderStyle = (ssHighLevel, ssLowLevel, ssReplace);
 
-  { Defines what to do if for some reason shader failed to initialize.
+  (* Defines what to do if for some reason shader failed to initialize.
     fiaSilentdisable:          just disable it
     fiaRaiseHandledException:  raise an exception, and handle it right away
     (usefull, when debigging within Delphi)
@@ -78,18 +78,16 @@ type
     create this event, it is left to user shaders
     which may chose to override this procedure.
     Commented out, because not sure if this
-    option should exist, let other generations of
-    developers decide ;)
-  }
+    option should exist, let other generations of developers decide ;) *)
   TgxShaderFailedInitAction = (fiaSilentDisable, fiaRaiseStandardException, fiaRaiseHandledException, fiaReRaiseException
-    { ,fiaGenerateEvent } );
+    (* ,fiaGenerateEvent *) );
 
-  { Generic, abstract shader class.
+  (* Generic, abstract shader class.
     Shaders are modeled here as an abstract material-altering entity with
     transaction-like behaviour. The base class provides basic context and user
     tracking, as well as setup/application facilities.
     Subclasses are expected to provide implementation for DoInitialize,
-    DoApply, DoUnApply and DoFinalize. }
+    DoApply, DoUnApply and DoFinalize. *)
   TgxShader = class(TgxUpdateAbleComponent)
   private
     FEnabled: Boolean;
@@ -100,18 +98,18 @@ type
     FShaderActive: Boolean;
     FFailedInitAction: TgxShaderFailedInitAction;
   protected
-    { Invoked once, before the first call to DoApply.
-      The call happens with the OpenVX context being active. }
+    (* Invoked once, before the first call to DoApply.
+      The call happens with the OpenVX context being active. *)
     procedure DoInitialize(var rci: TgxRenderContextInfo; Sender: TObject); virtual;
-    { Request to apply the shader.
-      Always followed by a DoUnApply when the shader is no longer needed. }
+    (* Request to apply the shader.
+      Always followed by a DoUnApply when the shader is no longer needed. *)
     procedure DoApply(var rci: TgxRenderContextInfo; Sender: TObject); virtual; abstract;
-    { Request to un-apply the shader.
+    (* Request to un-apply the shader.
       Subclasses can assume the shader has been applied previously.
-      Return True to request a multipass. }
+      Return True to request a multipass. *)
     function DoUnApply(var rci: TgxRenderContextInfo): Boolean; virtual; abstract;
-    { Invoked once, before the destruction of context or release of shader.
-      The call happens with the OpenVX context being active. }
+    (* Invoked once, before the destruction of context or release of shader.
+      The call happens with the OpenVX context being active. *)
     procedure DoFinalize; virtual;
     function GetShaderInitialized: Boolean;
     procedure InitializeShader(var rci: TgxRenderContextInfo; Sender: TObject);
@@ -123,44 +121,43 @@ type
     property ShaderActive: Boolean read FShaderActive;
     procedure RegisterUser(libMat: TgxLibMaterial);
     procedure UnRegisterUser(libMat: TgxLibMaterial);
-    { Used by the DoInitialize procedure of descendant classes to raise errors. }
+    // Used by the DoInitialize procedure of descendant classes to raise errors.
     procedure HandleFailedInitialization(const LastErrorMessage: string = ''); virtual;
-    { May be this should be a function inside HandleFailedInitialization... }
+    // May be this should be a function inside HandleFailedInitialization...
     function GetStardardNotSupportedMessage: string; virtual;
   public
     constructor Create(AOwner: TComponent); override;
     destructor Destroy; override;
-    { Subclasses should invoke this function when shader properties are altered.
-      This procedure can also be used to reset/recompile the shader. }
+    (* Subclasses should invoke this function when shader properties are altered.
+      This procedure can also be used to reset/recompile the shader. *)
     procedure NotifyChange(Sender: TObject); override;
     procedure BeginUpdate;
     procedure EndUpdate;
 
-    { Apply shader to OpenGL state machine. }
+    // Apply shader to OpenGL state machine.
     procedure Apply(var rci: TgxRenderContextInfo; Sender: TObject);
-    { UnApply shader.
+    (* UnApply shader.
       When returning True, the caller is expected to perform a multipass
       rendering by re-rendering then invoking UnApply again, until a
-      "False" is returned. }
+      "False" is returned. *)
     function UnApply(var rci: TgxRenderContextInfo): Boolean;
-    { Shader application style (default is ssLowLevel). }
+    // Shader application style (default is ssLowLevel).
     property ShaderStyle: TgxShaderStyle read FShaderStyle write FShaderStyle default ssLowLevel;
     procedure Assign(Source: TPersistent); override;
-    { Defines if shader is supported by hardware/drivers.
-      Default - always supported. Descendants are encouraged to override
-      this function. }
+    (* Defines if shader is supported by hardware/drivers.
+      Default - always supported. Descendants are encouraged to override this function. *)
     function ShaderSupported: Boolean; virtual;
-    { Defines what to do if for some reason shader failed to initialize.
+    (* Defines what to do if for some reason shader failed to initialize.
       Note, that in some cases it cannon be determined by just checking the
       required OpenVX extentions. You need to try to compile and link the
-      shader - only at that stage you might catch an error }
+      shader - only at that stage you might catch an error *)
     property FailedInitAction: TgxShaderFailedInitAction read FFailedInitAction write FFailedInitAction
       default fiaRaiseStandardException;
   published
-    { Turns on/off shader application.
+    (* Turns on/off shader application.
       Note that this only turns on/off the shader application, if the
       ShaderStyle is ssReplace, the material won't be applied even if
-      the shader is disabled. }
+      the shader is disabled. *)
     property Enabled: Boolean read FEnabled write SetEnabled default True;
   end;
 
@@ -168,11 +165,11 @@ type
 
   TgxShininess = 0 .. 128;
 
-  { Stores basic face lighting properties.
+  (* Stores basic face lighting properties.
     The lighting is described with the standard ambient/diffuse/emission/specular
     properties that behave like those of most rendering tools.
     You also have control over shininess (governs specular lighting) and
-    polygon mode (lines / fill). }
+    polygon mode (lines / fill). *)
   TgxFaceProperties = class(TgxUpdateAbleObject)
   private
     FAmbient, FDiffuse, FSpecular, FEmission: TgxColor;
@@ -218,33 +215,33 @@ type
     procedure Apply(var rci: TgxRenderContextInfo);
     procedure Assign(Source: TPersistent); override;
   published
-    { Specifies the mapping of the near clipping plane to
-      window coordinates.  The initial value is 0. }
+    (* Specifies the mapping of the near clipping plane to
+      window coordinates.  The initial value is 0. *)
     property ZNear: Single read FZNear write SetZNear stored StoreZNear;
-    { Specifies the mapping of the far clipping plane to
-      window coordinates.  The initial value is 1. }
+    (* Specifies the mapping of the far clipping plane to
+      window coordinates.  The initial value is 1. *)
     property ZFar: Single read FZFar write SetZFar stored StoreZFar;
-    { Specifies the function used to compare each
+    (* Specifies the function used to compare each
       incoming pixel depth value with the depth value present in
-      the depth buffer. }
+      the depth buffer. *)
     property DepthCompareFunction: TgxDepthfunction read FCompareFunc write SetCompareFunc default cfLequal;
-    { DepthTest enabling.
+    (* DepthTest enabling.
       When DepthTest is enabled, objects closer to the camera will hide
       farther ones (via use of Z-Buffering).
       When DepthTest is disabled, the latest objects drawn/rendered overlap
       all previous objects, whatever their distance to the camera.
       Even when DepthTest is enabled, objects may chose to ignore depth
-      testing through the osIgnoreDepthBuffer of their ObjectStyle property. }
+      testing through the osIgnoreDepthBuffer of their ObjectStyle property. *)
     property DepthTest: Boolean read FDepthTest write SetDepthTest default True;
-    { If True, object will not write to Z-Buffer. }
+    // If True, object will not write to Z-Buffer.
     property DepthWrite: Boolean read FDepthWrite write SetDepthWrite default False;
-    { Enable clipping depth to the near and far planes }
+    // Enable clipping depth to the near and far planes
     property DepthClamp: Boolean read FDepthClamp write SetDepthClamp default False;
   end;
 
   TgxLibMaterialName = string;
 
-  (* To show up in design-time editor vTGlAlphaFuncValues and 
+  (* To show up in design-time editor vTGlAlphaFuncValues and
     vTgxBlendFuncFactorValues arrays if you type smth
 	like af_GL_NEVER = GL_NEVER in the definition. *)
   TgxAlphaFunc = TgxComparisonFunction;
@@ -288,7 +285,7 @@ type
       default bfOneMinusSrcAlpha;
   end;
 
-  { Simplified blending options.
+  (* Simplified blending options.
     bmOpaque : disable blending
     bmTransparency : uses standard alpha blending
     bmAdditive : activates additive blending (with saturation)
@@ -296,17 +293,17 @@ type
     transparency if alpha is below 0.5, full opacity otherwise)
     bmAlphaTest100 : uses opaque blending, with alpha-testing at 100%
     bmModulate : uses modulation blending
-    bmCustom : uses TgxBlendingParameters options }
+    bmCustom : uses TgxBlendingParameters options *)
   TgxBlendingMode = (bmOpaque, bmTransparency, bmAdditive, bmAlphaTest50, bmAlphaTest100, bmModulate, bmCustom);
 
   TgxFaceCulling = (fcBufferDefault, fcCull, fcNoCull);
 
-  { Control special rendering options for a material.
-    moIgnoreFog : fog is deactivated when the material is rendered }
+  (* Control special rendering options for a material.
+    moIgnoreFog : fog is deactivated when the material is rendered *)
   TgxMaterialOption = (moIgnoreFog, moNoLighting);
   TgxMaterialOptions = set of TgxMaterialOption;
 
-  { Describes a rendering material.
+  (* Describes a rendering material.
     A material is basically a set of face properties (front and back) that take
     care of standard material rendering parameters (diffuse, ambient, emission
     and specular) and texture mapping.
@@ -314,7 +311,7 @@ type
     to allow quick definition of material properties. It can link to a
     TgxLibMaterial (taken for a material library).
     The TgxLibMaterial has more advanced properties (like texture transforms)
-    and provides a standard way of sharing definitions and texture maps }
+    and provides a standard way of sharing definitions and texture maps *)
   TgxMaterial = class(TgxUpdateAbleObject, IgxMaterialLibrarySupported, IgxNotifyAble, IgxTextureNotifyAble)
   private
     FFrontProperties, FBackProperties: TgxFaceProperties;
@@ -364,8 +361,8 @@ type
     procedure NotifyTexMapChange(Sender: TObject);
     procedure DestroyHandles;
     procedure Loaded;
-    { Returns True if the material is blended.
-      Will return the libmaterial's blending if it is linked to a material  library. }
+    (* Returns True if the material is blended.
+      Will return the libmaterial's blending if it is linked to a material  library. *)
     function Blended: Boolean;
     // True if the material has a secondary texture
     function HasSecondaryTexture: Boolean;
@@ -435,10 +432,10 @@ type
     property Tag: Integer read FTag write FTag;
   end;
 
-  { Material in a material library.
+  (* Material in a material library.
     Introduces Texture transformations (offset and scale). Those transformations
     are available only for lib materials to minimize the memory cost of basic
-    materials (which are used in almost all objects). }
+    materials (which are used in almost all objects). *)
   TgxLibMaterial = class(TgxAbstractLibMaterial, IgxTextureNotifyAble)
   private
     FMaterial: TgxMaterial;
@@ -479,22 +476,22 @@ type
     function Blended: Boolean; override;
   published
     property Material: TgxMaterial read FMaterial write SetMaterial;
-    { Texture offset in texture coordinates.
-      The offset is applied after scaling. }
+    (* Texture offset in texture coordinates.
+      The offset is applied after scaling. *)
     property TextureOffset: TgxCoordinates read FTextureOffset write SetTextureOffset;
-    { Texture coordinates scaling.
+    (* Texture coordinates scaling.
       Scaling is applied before applying the offset, and is applied
       to the texture coordinates, meaning that a scale factor of (2, 2, 2)
-      will make your texture look twice smaller }
+      will make your texture look twice smaller *)
     property TextureScale: TgxCoordinates read FTextureScale write SetTextureScale;
     property TextureRotate: Single read FTextureRotate write SetTextureRotate stored StoreTextureRotate;
-    { Reference to the second texture.
+    (* Reference to the second texture.
       The referred LibMaterial *must* be in the same material library.
       Second textures are supported only through ARB multitexturing (ignored
-      if not supported). }
+      if not supported). *)
     property Texture2Name: TgxLibMaterialName read FTexture2Name write SetTexture2Name;
 
-    { Optionnal shader for the material. }
+    // Optionnal shader for the material.
     property Shader: TgxShader read FShader write SetShader;
   end;
 
@@ -506,7 +503,7 @@ type
     function MakeUniqueName(const nameRoot: TgxLibMaterialName): TgxLibMaterialName; virtual;
   end;
 
-  { A collection of materials, mainly used in material libraries. }
+  // A collection of materials, mainly used in material libraries.
   TgxLibMaterials = class(TgxAbstractLibMaterials)
   protected
     procedure SetItems(index: Integer; const val: TgxLibMaterial);
@@ -520,18 +517,18 @@ type
     function FindItemID(ID: Integer): TgxLibMaterial;
     property Items[index: Integer]: TgxLibMaterial read GetItems write SetItems; default;
     function GetLibMaterialByName(const AName: TgxLibMaterialName): TgxLibMaterial;
-    { Returns index of this Texture if it exists. }
+    // Returns index of this Texture if it exists.
     function GetTextureIndex(const Texture: TgxTexture): Integer;
-    { Returns index of this Material if it exists. }
+    // Returns index of this Material if it exists.
     function GetMaterialIndex(const Material: TgxMaterial): Integer;
-    { Returns name of this Texture if it exists. }
+    // Returns name of this Texture if it exists.
     function GetNameOfTexture(const Texture: TgxTexture): TgxLibMaterialName;
-    { Returns name of this Material if it exists. }
+    // Returns name of this Material if it exists.
     function GetNameOfLibMaterial(const Material: TgxLibMaterial): TgxLibMaterialName;
     procedure PrepareBuildList;
-    { Deletes all the unused materials in the collection.
+    (* Deletes all the unused materials in the collection.
       A material is considered unused if no other material or updateable object references it.
-      WARNING: For this to work, objects that use the texture, have to REGISTER to the texture. }
+      WARNING: For this to work, objects that use the texture, have to REGISTER to the texture. *)
     procedure DeleteUnusedMaterials;
   end;
 
@@ -546,25 +543,25 @@ type
     procedure Loaded; override;
   public
     procedure SetNamesToTStrings(AStrings: TStrings);
-    { Applies the material of given name.
+    (* Applies the material of given name.
       Returns False if the material could not be found. ake sure this
       call is balanced with a corresponding UnApplyMaterial (or an
       assertion will be triggered in the destructor).
       If a material is already applied, and has not yet been unapplied,
-      an assertion will be triggered. }
+      an assertion will be triggered. *)
     function ApplyMaterial(const AName: string; var ARci: TgxRenderContextInfo): Boolean; virtual;
-    { Un-applies the last applied material.
+    (* Un-applies the last applied material.
       Use this function in conjunction with ApplyMaterial.
-      If no material was applied, an assertion will be triggered. }
+      If no material was applied, an assertion will be triggered. *)
     function UnApplyMaterial(var ARci: TgxRenderContextInfo): Boolean; virtual;
   end;
 
-  { Stores a set of materials, to be used and shared by scene objects.
+  (* Stores a set of materials, to be used and shared by scene objects.
     Use a material libraries for storing commonly used materials, it provides
     an efficient way to share texture and material data among many objects,
     thus reducing memory needs and rendering time.
     Materials in a material library also feature advanced control properties
-    like texture coordinates transforms. }
+    like texture coordinates transforms. *)
   TgxMaterialLibrary = class(TgxAbstractMaterialLibrary)
   private
     FDoNotClearMaterialsOnLoad: Boolean;
@@ -582,45 +579,45 @@ type
     procedure SaveToStream(aStream: TStream); virtual;
     procedure LoadFromStream(aStream: TStream); virtual;
     procedure AddMaterialsFromStream(aStream: TStream);
-    { Save library content to a file.
+    (* Save library content to a file.
       Recommended extension : .GLML
       Currently saves only texture, ambient, diffuse, emission
-      and specular colors. }
+      and specular colors. *)
     procedure SaveToFile(const fileName: string);
     procedure LoadFromFile(const fileName: string);
     procedure AddMaterialsFromFile(const fileName: string);
-    { Add a "standard" texture material.
+    (* Add a "standard" texture material.
       "standard" means linear texturing mode with mipmaps and texture
       modulation mode with default-strength color components.
       If persistent is True, the image will be loaded persistently in memory
       (via a TgxPersistentImage), if false, it will be unloaded after upload
-      to OpenVX (via TgxPicFileImage). }
+      to OpenRX (via TgxPicFileImage). *)
     function AddTextureMaterial(const MaterialName, fileName: string; persistent: Boolean = True): TgxLibMaterial; overload;
-    { Add a "standard" texture material.
-      TgxGraphic based variant. }
+    (* Add a "standard" texture material.
+      TgxGraphic based variant. *)
     function AddTextureMaterial(const MaterialName: string; Graphic: TBitmap): TgxLibMaterial; overload;
-    { Returns libMaterial of given name if any exists. }
+    // Returns libMaterial of given name if any exists.
     function LibMaterialByName(const AName: TgxLibMaterialName): TgxLibMaterial;
-    { Returns Texture of given material's name if any exists. }
+    // Returns Texture of given material's name if any exists.
     function TextureByName(const LibMatName: TgxLibMaterialName): TgxTexture;
-    { Returns name of texture if any exists. }
+    // Returns name of texture if any exists.
     function GetNameOfTexture(const Texture: TgxTexture): TgxLibMaterialName;
-    { Returns name of Material if any exists. }
+    // Returns name of Material if any exists.
     function GetNameOfLibMaterial(const libMat: TgxLibMaterial): TgxLibMaterialName;
   published
-    { The materials collection. }
+    // The materials collection.
     property Materials: TgxLibMaterials read GetMaterials write SetMaterials stored StoreMaterials;
-    { This event is fired whenever a texture needs to be loaded from disk.
+    (* This event is fired whenever a texture needs to be loaded from disk.
       The event is triggered before even attempting to load the texture,
-      and before TexturePaths is used. }
+      and before TexturePaths is used. *)
     property OnTextureNeeded: TgxTextureNeededEvent read FOnTextureNeeded write FOnTextureNeeded;
-    { Paths to lookup when attempting to load a texture.
+    (* Paths to lookup when attempting to load a texture.
       You can specify multiple paths when loading a texture, the separator
       being the semi-colon ';' character. Directories are looked up from
       first to last, the first file name match is used.
       The current directory is always implicit and checked last.
       Note that you can also use the OnTextureNeeded event to provide a
-      filename. }
+      filename. *)
     property TexturePaths;
   end;
 
@@ -634,7 +631,7 @@ implementation
 constructor TgxFaceProperties.Create(AOwner: TPersistent);
 begin
   inherited;
-  // OpenVX default colors
+  // default colors
   FAmbient := TgxColor.CreateInitialized(Self, clrGray20);
   FDiffuse := TgxColor.CreateInitialized(Self, clrGray80);
   FEmission := TgxColor.Create(Self);
@@ -826,9 +823,6 @@ end;
 // ------------------ TgxShader ------------------
 // ------------------
 
-// Create
-//
-
 constructor TgxShader.Create(AOwner: TComponent);
 begin
   FLibMatUsers := TList.Create;
@@ -840,9 +834,6 @@ begin
   FFailedInitAction := fiaRaiseStandardException;
   inherited;
 end;
-
-// Destroy
-//
 
 destructor TgxShader.Destroy;
 var
@@ -860,9 +851,6 @@ begin
   FVirtualHandle.Free;
 end;
 
-// NotifyChange
-//
-
 procedure TgxShader.NotifyChange(Sender: TObject);
 var
   i: Integer;
@@ -875,16 +863,10 @@ begin
   end;
 end;
 
-// BeginUpdate
-//
-
 procedure TgxShader.BeginUpdate;
 begin
   Inc(FUpdateCount);
 end;
-
-// EndUpdate
-//
 
 procedure TgxShader.EndUpdate;
 begin
@@ -893,32 +875,20 @@ begin
     NotifyChange(Self);
 end;
 
-// DoInitialize
-//
-
 procedure TgxShader.DoInitialize(var rci: TgxRenderContextInfo; Sender: TObject);
 begin
   // nothing here
 end;
-
-// DoFinalize
-//
 
 procedure TgxShader.DoFinalize;
 begin
   // nothing here
 end;
 
-// GetShaderInitialized
-//
-
 function TgxShader.GetShaderInitialized: Boolean;
 begin
   Result := (FVirtualHandle.handle <> 0);
 end;
-
-// InitializeShader
-//
 
 procedure TgxShader.InitializeShader(var rci: TgxRenderContextInfo; Sender: TObject);
 begin
@@ -930,17 +900,11 @@ begin
   end;
 end;
 
-// FinalizeShader
-//
-
 procedure TgxShader.FinalizeShader;
 begin
   FVirtualHandle.NotifyChangesOfData;
   DoFinalize;
 end;
-
-// Apply
-//
 
 procedure TgxShader.Apply(var rci: TgxRenderContextInfo; Sender: TObject);
 begin
@@ -958,9 +922,6 @@ begin
 
   FShaderActive := True;
 end;
-
-// UnApply
-//
 
 function TgxShader.UnApply(var rci: TgxRenderContextInfo): Boolean;
 begin
@@ -980,24 +941,15 @@ begin
   end;
 end;
 
-// OnVirtualHandleDestroy
-//
-
 procedure TgxShader.OnVirtualHandleDestroy(Sender: TgxVirtualHandle; var handle: Cardinal);
 begin
   handle := 0;
 end;
 
-// OnVirtualHandleAllocate
-//
-
 procedure TgxShader.OnVirtualHandleAllocate(Sender: TgxVirtualHandle; var handle: Cardinal);
 begin
   handle := 1;
 end;
-
-// SetEnabled
-//
 
 procedure TgxShader.SetEnabled(val: Boolean);
 begin
@@ -1011,9 +963,6 @@ begin
   end;
 end;
 
-// RegisterUser
-//
-
 procedure TgxShader.RegisterUser(libMat: TgxLibMaterial);
 var
   i: Integer;
@@ -1023,17 +972,11 @@ begin
     FLibMatUsers.Add(libMat);
 end;
 
-// UnRegisterUser
-//
-
 procedure TgxShader.UnRegisterUser(libMat: TgxLibMaterial);
 begin
   if Assigned(FLibMatUsers) then
     FLibMatUsers.Remove(libMat);
 end;
-
-// Assign
-//
 
 procedure TgxShader.Assign(Source: TPersistent);
 begin
@@ -1047,16 +990,10 @@ begin
     inherited Assign(Source); // to the pit of doom ;)
 end;
 
-// Assign
-//
-
 function TgxShader.ShaderSupported: Boolean;
 begin
   Result := True;
 end;
-
-// HandleFailedInitialization
-//
 
 procedure TgxShader.HandleFailedInitialization(const LastErrorMessage: string = '');
 begin
@@ -1083,9 +1020,6 @@ begin
     Assert(False, strErrorEx + strUnknownType);
   end;
 end;
-
-// GetStardardNotSupportedMessage
-//
 
 function TgxShader.GetStardardNotSupportedMessage: string;
 begin

@@ -1,5 +1,5 @@
 //
-// The unit is for GXScene Engine
+// Graphic Scene Engine, http://glscene.org
 //
 {
   Cross-platform context.
@@ -8,7 +8,7 @@ unit GXS.Win64Context;
 
 interface
 
-{$I GXS.Scene.inc}
+{$I Scene.inc}
 
 uses
   Winapi.Windows,
@@ -19,7 +19,7 @@ uses
   FMX.Dialogs,
   FMX.Platform.Win,
 
-  OpenGLx,
+  Import.OpenGLx,
   GXS.Context,
   GXS.State,
   Scene.Strings,

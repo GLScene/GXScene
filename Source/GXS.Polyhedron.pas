@@ -1,5 +1,5 @@
 //
-// The unit is for GXScene Engine
+// Graphic Scene Engine, http://glscene.org
 //
 {
    Standard polyhedrons
@@ -11,7 +11,7 @@ interface
 uses
   System.Classes,
 
-  OpenGLx,
+  Import.OpenGLx,
   GXS.Scene,
   GXS.VectorFileObjects,
   GXS.Objects,

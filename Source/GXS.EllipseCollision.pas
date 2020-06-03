@@ -1,5 +1,5 @@
 //
-// The unit is for GXScene Engine
+// Graphic Scene Engine, http://glscene.org
 //
 {
   Ellipsoid collision functions (mainly used by DCE).
@@ -8,7 +8,7 @@ unit GXS.EllipseCollision;
 
 interface
 
-{$I GXS.Scene.inc}
+{$I Scene.inc}
 
 uses
   Scene.VectorGeometry,

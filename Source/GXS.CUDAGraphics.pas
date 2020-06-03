@@ -1,5 +1,5 @@
 ﻿//
-// The unit is for GXScene Engine
+// Graphic Scene Engine, http://glscene.org
 //
 
 unit GXS.CUDAGraphics;
@@ -10,7 +10,7 @@ uses
   System.Classes,
   FMX.Dialogs,
 
-  OpenGLx,
+  Import.OpenGLx,
   GXS.CrossPlatform,
   GXS.CUDA,
   GXS.Context,

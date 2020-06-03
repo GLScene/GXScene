@@ -1,5 +1,5 @@
 //
-// The unit is for GXScene Engine
+// Graphic Scene Engine, http://glscene.org
 //
 (*
   DDS File support.
@@ -8,14 +8,14 @@ unit GXS.FileDDS;
 
 interface
 
-{$I GXS.Scene.inc}
+{$I Scene.inc}
 
 uses
   System.Classes,
   System.SysUtils,
   System.Math,
 
-  OpenGLx,
+  Import.OpenGLx,
   GXS.CrossPlatform,
   GXS.Context,
   GXS.Graphics,
@@ -24,7 +24,7 @@ uses
   GXS.ApplicationFileIO,
   Scene.VectorGeometry,
   Scene.Strings,
-  FileDXTC;
+  Formats.FileDXTC;
 
 type
 
@@ -35,7 +35,6 @@ type
     procedure flipSurface(chgData: PGLubyte; w, h, d: integer);
   public
     class function Capabilities: TgxDataFileCapabilities; override;
-
     procedure LoadFromFile(const filename: string); override;
     procedure SaveToFile(const filename: string); override;
     procedure LoadFromStream(stream: TStream); override;
@@ -46,10 +45,10 @@ type
   end;
 
 var
-  { Variable determines which resolution to use textures,
+  (* Variable determines which resolution to use textures,
     high - it loads all levels,
     midle - skipped the first level,
-    low - skipped the first two levels. }
+    low - skipped the first two levels. *)
   vDDSDetailLevel: TgxDDSDetailLevels = ddsHighDet;
 
 // ======================================================

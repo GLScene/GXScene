@@ -1,5 +1,5 @@
 //
-// The unit for GXScene Engine
+// Graphic Scene Engine, http://glscene.org
 //
 (*
    A GLSL shader that applies bump mapping. 
@@ -15,13 +15,13 @@ unit GXS.GLSLBumpShader;
 
 interface
 
-{$I GXS.Scene.inc}
+{$I Scene.inc}
 
 uses
   System.Classes,
   System.SysUtils,
 
-  OpenGLx,
+  Import.OpenGLx,
   GXS.Texture,
   GXS.Scene,
   Scene.VectorGeometry,

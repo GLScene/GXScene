@@ -1,14 +1,14 @@
 //
-// The unit is for GXScene Engine
+// Graphic Scene Engine, http://glscene.org
 //
-{
+(*
 	 ASE (ASCI Scene Export) file format support for GXScene
-}
+*)
 unit GXS.FileASE;
 
 interface
 
-{$I GXS.Scene.inc}
+{$I Scene.inc}
 
 uses
   System.Classes,

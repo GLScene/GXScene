@@ -1,5 +1,5 @@
 //
-// The unit is for GXScene Engine
+// Graphic Scene Engine, http://glscene.org
 //
 {
    Imposter building and rendering implementation.
@@ -8,14 +8,14 @@ unit GXS.Imposter;
 
 interface
 
-{$I GXS.Scene.inc}
+{$I Scene.inc}
 
 uses
   System.Types,
   System.Classes,
   System.SysUtils,
   
-  OpenGLx,
+  Import.OpenGLx,
   GXS.Scene,
   GXS.Context,
   Scene.VectorTypes,

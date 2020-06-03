@@ -1,5 +1,5 @@
 //
-// The unit for GXScene Engine
+// Graphic Scene Engine, http://glscene.org
 //
 (*
   Silhouette classes for BaseMesh and FaceGroups.
@@ -9,7 +9,7 @@ unit GXS.BaseMeshSilhouette;
 
 interface
 
-{$I GXS.Scene.inc}
+{$I Scene.inc}
 
 uses
   System.Classes,

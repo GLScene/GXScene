@@ -1,5 +1,5 @@
 //
-// The unit is for GXScene Engine
+// Graphic Scene Engine, http://glscene.org
 //
 {
   Line implementation by means of a Triangle strip.
@@ -13,7 +13,7 @@ uses
   System.Classes,
   System.SysUtils,
 
-  OpenGLx,
+  Import.OpenGLx,
   GXS.Scene,
   GXS.Objects,
   GXS.Texture,

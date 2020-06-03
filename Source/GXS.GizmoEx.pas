@@ -1,5 +1,5 @@
 //
-// The unit is for GXScene Engine
+// Graphic Scene Engine, http://glscene.org
 //
 {
    Invisible component for helping to Move, Rotate and Scale an Object
@@ -14,7 +14,7 @@ unit GXS.GizmoEx;
 
 interface
 
-{$I GXS.Scene.inc}
+{$I Scene.inc}
 
 uses
   Winapi.Windows,
@@ -24,7 +24,7 @@ uses
   System.Math,
   FMX.TextLayout,
 
-  OpenGLx,
+  Import.OpenGLx,
   GXS.Scene,
   GXS.Color,
   GXS.Objects,

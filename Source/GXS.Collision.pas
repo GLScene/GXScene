@@ -1,5 +1,5 @@
 //
-// The unit is for GXScene Engine
+// Graphic Scene Engine, http://glscene.org
 //
 {
   Collision-detection management
@@ -9,13 +9,13 @@ unit GXS.Collision;
 
 interface
 
-{$I GXS.Scene.inc}
+{$I Scene.inc}
 
 uses
   System.Classes,
   System.SysUtils,
 
-  XCollection,
+  Scene.XCollection,
   GXS.Scene,
   Scene.VectorGeometry,
   Scene.VectorLists,

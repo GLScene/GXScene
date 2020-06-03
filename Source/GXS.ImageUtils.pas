@@ -1,5 +1,5 @@
 //
-// The unit for GXScene Engine
+// Graphic Scene Engine, http://glscene.org
 //
 (*
   Main purpose is as a fallback in cases where there is no other way to process images.
@@ -17,18 +17,19 @@ unit GXS.ImageUtils;
 
 interface
 
-{$I GXS.Scene.inc}
+{$I Scene.inc}
 
 uses
   System.SysUtils,
   System.Classes,
   System.Math,
 
-  OpenGLx,
-  GXS.CrossPlatform,
   Scene.Strings,
-  GXS.TextureFormat,
-  Scene.VectorGeometry;
+  Scene.VectorGeometry,
+
+  Import.OpenGLx,
+  GXS.CrossPlatform,
+  GXS.TextureFormat;
 
 var
   vImageScaleFilterWidth: Integer = 5; // Relative sample radius for filtering

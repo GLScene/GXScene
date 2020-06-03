@@ -1,5 +1,5 @@
 //
-// The unit for GXScene Engine
+// Graphic Scene Engine, http://glscene.org
 //
 {
     This is a collection of GLSL Diffuse Specular shaders, comes in these variaties
@@ -21,13 +21,13 @@ unit GXS.GLSLDiffuseSpecularShader;
 
 interface
 
-{$I GXS.Scene.inc}
+{$I Scene.inc}
 
 uses
   System.Classes,
   System.SysUtils,
 
-  OpenGLx,
+  Import.OpenGLx,
   GXS.Texture,
   GXS.Scene,
   Scene.VectorGeometry,

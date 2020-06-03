@@ -1,5 +1,5 @@
 //
-// The unit is for GXScene Engine
+// Graphic Scene Engine, http://glscene.org
 //
 (*
   Edits a TXCollection
@@ -34,7 +34,7 @@ uses
   GXS.Scene,
   Scene.Strings,
   GXS.Behaviours,
-  XCollection;
+  Scene.XCollection;
 
 type
   IDesigner = interface //in designintf -> (IDesigner200)

@@ -1,5 +1,5 @@
 //
-// The unit for GXScene Engine
+// Graphic Scene Engine, http://glscene.org
 //
 {
    A scene object encapsulating the OpenGL feedback buffer. 
@@ -19,13 +19,13 @@ unit GXS.Feedback;
 
 interface
 
-{$I GXS.Scene.inc}
+{$I Scene.inc}
 
 uses
   System.Classes,
   System.SysUtils,
 
-  OpenGLx,
+  Import.OpenGLx,
   Scene.PersistentClasses,
   Scene.VectorGeometry,
   Scene.VectorLists,

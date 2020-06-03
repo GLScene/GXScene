@@ -1,21 +1,21 @@
 //
-// The unit is for GXScene Engine
+// Graphic Scene Engine, http://glscene.org
 //
-{
-   Graphic engine friendly loading of BMP image.
-}
+(*
+   Friendly loading of BMP image.
+*)
 
 unit GXS.FileBMP;
 
 interface
 
-{$I GXS.Scene.inc}
+{$I Scene.inc}
 
 uses
   System.Classes,
   System.SysUtils,
 
-  OpenGLx,
+  Import.OpenGLx,
   GXS.CrossPlatform,
   GXS.Context,
   GXS.Graphics,

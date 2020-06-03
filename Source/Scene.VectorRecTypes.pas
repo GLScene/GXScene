@@ -1,5 +1,5 @@
 //
-// This unit is part of the GLScene Project, http://glscene.org
+// Graphic Scene Engine, http://glscene.org
 //
 (*
    Defines vector types as advanced records.

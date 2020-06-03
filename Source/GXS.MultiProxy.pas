@@ -1,5 +1,5 @@
 //
-// The unit is for GXScene Engine
+// Graphic Scene Engine, http://glscene.org
 //
 {
   Implements a multi-proxy objects, useful for discreet LOD.
@@ -13,7 +13,7 @@ uses
   System.Classes,
   System.SysUtils,
 
-  OpenGLx,
+  Import.OpenGLx,
   Scene.PersistentClasses,
   GXS.Context,
   GXS.Scene,

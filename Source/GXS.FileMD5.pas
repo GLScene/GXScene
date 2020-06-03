@@ -1,9 +1,9 @@
 //
-// The unit is for GXScene Engine
+// Graphic Scene Engine, http://glscene.org
 //
-{
+(*
   Doom3 MD5 mesh and animation vector file format implementation.
-}
+*)
 unit GXS.FileMD5;
 
 interface

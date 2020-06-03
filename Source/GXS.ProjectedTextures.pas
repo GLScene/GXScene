@@ -1,5 +1,5 @@
 //
-// The unit for GXScene Engine
+// Graphic Scene Engine, http://glscene.org
 //
 (*
    Implements projected textures through a GLScene object.
@@ -9,13 +9,13 @@ unit GXS.ProjectedTextures;
 
 interface
 
-{$I GXS.Scene.inc}
+{$I Scene.inc}
 
 uses
   System.Classes,
 
-  OpenGLx,
-  XOpenGL,
+  Import.OpenGLx,
+  Scene.XOpenGL,
   Scene.VectorTypes,
   GXS.Scene,
   Scene.PersistentClasses,

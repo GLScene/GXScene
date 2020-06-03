@@ -1,5 +1,5 @@
 //
-// The unit for GXScene Engine
+// Graphic Scene Engine, http://glscene.org
 //
 (*
     Code to generate triangle strips and fans for polygons.
@@ -8,12 +8,12 @@ unit GXS.GLUTesselation;
 
 interface
 
-{$I GXS.Scene.inc}
+{$I Scene.inc}
 
 uses
   System.SysUtils,
 
-  OpenGLx,
+  Import.OpenGLx,
   GXS.VectorFileObjects,
   Scene.VectorLists,
   Scene.VectorGeometry,

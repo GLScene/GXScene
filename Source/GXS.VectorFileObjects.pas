@@ -1,5 +1,5 @@
 //
-// The unit is for GXScene Engine
+// Graphic Scene Engine, http://glscene.org
 //
 (*
   Vector File related objects for GLScene
@@ -9,7 +9,7 @@ unit GXS.VectorFileObjects;
 
 interface
 
-{$I GXS.Scene.inc}
+{$I Scene.inc}
 
 uses
   System.Classes,
@@ -17,15 +17,18 @@ uses
   System.SysUtils,
   System.Types,
 
-  OpenGLx,
-  XOpenGL,
+  Import.OpenGLx,
+  Scene.XOpenGL,
+  Scene.VectorLists,
+  Scene.PersistentClasses,
+  Scene.VectorTypes,
+
   GXS.Scene,
   Scene.VectorGeometry,
+  Scene.Strings,
   GXS.Texture,
   GXS.Material,
   GXS.Mesh,
-  Scene.VectorLists,
-  Scene.PersistentClasses,
   GXS.Octree,
   GXS.GeometryBB,
   GXS.ApplicationFileIO,
@@ -35,9 +38,7 @@ uses
   GXS.RenderContextInfo,
   GXS.Coordinates,
   GXS.BaseClasses,
-  Scene.Strings,
   GXS.TextureFormat,
-  Scene.VectorTypes,
   GXS.State,
   GXS.Utils;
 

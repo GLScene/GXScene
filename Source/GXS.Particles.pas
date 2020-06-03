@@ -1,5 +1,5 @@
 //
-// The unit for GXScene Engine
+// Graphic Scene Engine, http://glscene.org
 //
 (*
    Particle systems for GXS.Scene, based on replication of full-featured scene objects.
@@ -9,14 +9,14 @@ unit GXS.Particles;
 
 interface
 
-{$I GXS.Scene.inc}
+{$I Scene.inc}
 
 uses
   System.Classes,
   System.SysUtils,
 
-  OpenGLx,
-  XCollection,
+  Import.OpenGLx,
+  Scene.XCollection,
   GXS.Scene,
   Scene.PersistentClasses,
   Scene.VectorGeometry,

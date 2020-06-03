@@ -1,27 +1,31 @@
 //
-// The unit for GXScene Engine
+// Graphic Scene Engine, http://glscene.org
 //
-{
-  FMOD based sound-manager (http://www.fmod.org/, free for freeware). 
+(*
+  FMOD based sound-manager (http://www.fmod.org/, free for freeware).
 
-  Unsupported feature(s) : 
+  Unsupported feature(s) :
        sound source velocity
        looping (sounds are played either once or forever)
        sound cones
-    
- 
-}
+*)
+
 unit GXS.SMFMOD;
 
 interface
 
-{$I GXS.Scene.inc}
+{$I Scene.inc}
 
 uses
-  System.Classes, System.SysUtils,
-  
-  FMod, FmodTypes, FmodPresets,
-  GXS.Sound, GXS.Scene, Scene.VectorGeometry;
+  System.Classes,
+  System.SysUtils,
+
+  Import.FMod,
+  Import.FmodTypes,
+  Import.FmodPresets,
+  GXS.Sound,
+  GXS.Scene,
+  Scene.VectorGeometry;
 
 type
 

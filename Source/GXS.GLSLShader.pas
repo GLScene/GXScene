@@ -1,5 +1,5 @@
 //
-// The unit for GXScene Engine
+// Graphic Scene Engine, http://glscene.org
 //
 {
    TgxGLSLShader is a wrapper for GLS shaders.
@@ -8,13 +8,13 @@ unit GXS.GLSLShader;
 
 interface
 
-{$I GXS.Scene.inc}
+{$I Scene.inc}
 
 uses
   System.Classes,
   System.SysUtils,
 
-  OpenGLx,
+  Import.OpenGLx,
   Scene.VectorGeometry,
   Scene.VectorTypes,
   GXS.Texture,

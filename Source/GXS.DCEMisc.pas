@@ -1,5 +1,5 @@
 //
-// The unit for GXScene Engine
+// Graphic Scene Engine, http://glscene.org
 //
 (*
   Miscelaneous functions used by DCE (Dynamic Collision Engine).
@@ -8,7 +8,7 @@ unit GXS.DCEMisc;
 
 interface
 
-{$I GXS.Scene.inc}
+{$I Scene.inc}
 
 uses
   GXS.Coordinates,

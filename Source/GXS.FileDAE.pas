@@ -1,5 +1,5 @@
 //
-// The unit for GXScene Engine
+// Graphic Scene Engine, http://glscene.org
 //
 {
 	Quake2 MD2 vector file format implementation. 
@@ -9,13 +9,16 @@ unit GXS.FileDAE;
 
 interface
 
-{$I GXS.Scene.inc}
+{$I Scene.inc}
 
 uses
-  System.Classes, System.SysUtils,
-  FMX.DAE.Importer, FMX.DAE.Model,
+  System.Classes, 
+  System.SysUtils,
+  FMX.DAE.Importer, 
+  FMX.DAE.Model,
 
-  GXS.VectorFileObjects, GXS.ApplicationFileIO;
+  GXS.VectorFileObjects, 
+  GXS.ApplicationFileIO;
 
 type
    // TgxFileDAE

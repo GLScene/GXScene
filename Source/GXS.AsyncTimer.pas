@@ -1,5 +1,5 @@
 //
-// The unit for GXScene Engine
+// Graphic Scene Engine, http://glscene.org
 //
 {
   Asynchronous timer component (actual 1 ms resolution). 
@@ -9,7 +9,7 @@ unit GXS.AsyncTimer;
 
 interface
 
-{$I GXS.Scene.inc}
+{$I Scene.inc}
 
 uses
   System.Classes,

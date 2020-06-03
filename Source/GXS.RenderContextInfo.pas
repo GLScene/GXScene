@@ -1,5 +1,5 @@
 //
-// The unit for GXScene Engine
+// Graphic Scene Engine, http://glscene.org
 //
 {
    Stores contextual info useful during rendering methods.
@@ -8,7 +8,7 @@ unit GXS.RenderContextInfo;
 
 interface
 
-{$I GXS.Scene.inc}
+{$I Scene.inc}
 
 uses
   Scene.PersistentClasses,

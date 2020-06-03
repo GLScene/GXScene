@@ -1,5 +1,5 @@
 //
-// The unit for GXScene Engine
+// Graphic Scene Engine, http://glscene.org
 //
 {
    Implements projected textures through a GLScene object via GLSL.
@@ -22,7 +22,7 @@ unit GXS.GLSLProjectedTextures;
 
 interface
 
-{$I GXS.Scene.inc}
+{$I Scene.inc}
 
 uses
   System.Classes,

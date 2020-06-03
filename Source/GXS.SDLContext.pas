@@ -1,5 +1,5 @@
 //
-// The unit is for GXScene Engine
+// Graphic Scene Engine, http://glscene.org
 //
 {
    SDL specific Context and Viewer.
@@ -18,8 +18,8 @@ uses
   System.Classes,
   System.SysUtils,
 
-  OpenGLx,
-  XOpenGL,
+  Import.OpenGLx,
+  Scene.XOpenGL,
   GXS.Scene,
   GXS.CrossPlatform,
   GXS.Context,

@@ -1,5 +1,5 @@
 //
-// The unit for GXScene Engine
+// Graphic Scene Engine, http://glscene.org
 //
 {
     This shader allows to apply multiple textures, gathering them from existing materials.
@@ -19,7 +19,7 @@ uses
   System.Classes,
   System.SysUtils,
 
-  XOpenGL,
+  Scene.XOpenGL,
   GXS.Scene,
   Scene.VectorGeometry,
   GXS.Color,

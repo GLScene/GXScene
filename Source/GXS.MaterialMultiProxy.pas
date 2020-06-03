@@ -1,5 +1,5 @@
 //
-// The unit for GXScene Engine
+// Graphic Scene Engine, http://glscene.org
 //
 (*
    Implements a multi-proxy object, useful for discreet LOD.
@@ -24,13 +24,13 @@ unit GXS.MaterialMultiProxy;
 
 interface
 
-{$I GXS.Scene.inc}
+{$I Scene.inc}
 
 uses
   System.Classes,
   System.SysUtils,
 
-  OpenGLx,
+  Import.OpenGLx,
 
   Scene.VectorTypes,
 

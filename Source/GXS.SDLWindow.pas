@@ -1,5 +1,5 @@
 //
-// The unit is for GXScene Engine
+// Graphic Scene Engine, http://glscene.org
 //
 {
   Non visual wrapper around basic SDL window features.
@@ -15,14 +15,14 @@ unit GXS.SDLWindow;
 
 interface
 
-{$I GXS.Scene.inc}
+{$I Scene.inc}
 
 uses
   System.Classes,
   System.SysUtils,
   System.SyncObjs,
 
-  OpenGLx,
+  Import.OpenGLx,
   Scene.VectorTypes,
   GXS.Context,
   Scene.VectorGeometry,

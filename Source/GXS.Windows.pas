@@ -1,5 +1,5 @@
 //
-// The unit is for GXScene Engine
+// Graphic Scene Engine, http://glscene.org
 //
 {
   OpenGL windows management classes and structures
@@ -9,7 +9,7 @@ unit GXS.Windows;
 
 interface
 
-{$I GXS.Scene.inc}
+{$I Scene.inc}
 
 uses
   Winapi.Windows,
@@ -20,7 +20,7 @@ uses
   FMX.Graphics,
   FMX.Types,
 
-  OpenGLx,
+  Import.OpenGLx,
   GXS.Scene,
   Scene.PersistentClasses,
   Scene.Strings,

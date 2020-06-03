@@ -1,5 +1,5 @@
 //
-// The unit is for GXScene Engine
+// Graphic Scene Engine, http://glscene.org
 //
 (*
   Base classes and interface for GLScene Sound System
@@ -14,7 +14,7 @@ uses
   System.SysUtils,
   System.Types,
 
-  XCollection,
+  Scene.XCollection,
   Scene.VectorTypes,
   GXS.SoundFileObjects,
   GXS.Scene,
@@ -24,7 +24,7 @@ uses
   GXS.CrossPlatform,
   GXS.Utils;
 
-{$I GXS.Scene.inc}
+{$I Scene.inc}
 
 type
 

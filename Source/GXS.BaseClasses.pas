@@ -1,5 +1,5 @@
 //
-// The unit is for GXScene Engine
+// Graphic Scene Engine, http://glscene.org
 //
 (*
   Base classes
@@ -56,13 +56,13 @@ type
     property OnNotifyChange: TNotifyEvent read FOnNotifyChange write FOnNotifyChange;
   end;
 
-  { A base class describing the "cadenceing" interface.  }
+  // A base class describing the "cadenceing" interface.
   TgxCadenceAbleComponent = class(TComponent, IgxProgessAble)
   public
     procedure DoProgress(const progressTime: TgxProgressTimes); virtual;
   end;
 
-  { A base class describing the "update" interface.  }
+  // A base class describing the "update" interface.
   TgxUpdateAbleComponent = class(TgxCadenceAbleComponent, IgxNotifyAble)
   public
     procedure NotifyChange(Sender: TObject); virtual;

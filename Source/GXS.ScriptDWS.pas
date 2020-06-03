@@ -1,5 +1,5 @@
 //
-// The unit for GXScene Engine
+// Graphic Scene Engine, http://glscene.org
 //
 {
    DelphiWebScript implementation
@@ -16,7 +16,7 @@ uses
   DwsExprs, 
   DwsSymbols, 
 
-  GXS.XCollection, 
+  GXS.Scene.XCollection, 
   GXS.ScriptBase, 
   GXS.Manager;
 

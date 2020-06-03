@@ -1,5 +1,5 @@
 //
-// The unit for GXScene Engine
+// Graphic Scene Engine, http://glscene.org
 //
 /// *
 // * Copyright 1993-2009 NVIDIA Corporation.  All rights reserved.
@@ -40,7 +40,7 @@ unit GXS.CUDARuntime;
 
 interface
 
-{$I GXS.Scene.inc}
+{$I Scene.inc}
 
 uses
 {$IFDEF MSWINDOWS}
@@ -51,7 +51,7 @@ uses
   OpenCL,
   OpenCL_Platform,
 
-  OpenGLx,
+  Import.OpenGLx,
   GXS.CUDAAPI,
   GXS.CrossPlatform;
 

@@ -1,5 +1,5 @@
 //
-// The unit is for GXScene Engine
+// Graphic Scene Engine, http://glscene.org
 //
 { 
   Space Partition speeds up geometrical queries, like what objects does A
@@ -20,12 +20,17 @@ unit GXS.SpacePartition;
 
 interface
 
-{$I GXS.Scene.inc}
+{$I Scene.inc}
 
 uses
-  System.Classes, System.SysUtils, System.Math,
+  System.Classes, 
+  System.SysUtils, 
+  System.Math,
    
-  Scene.VectorTypes, Scene.VectorGeometry,  GXS.GeometryBB, Scene.PersistentClasses;
+  Scene.VectorTypes, 
+  Scene.VectorGeometry,  
+  GXS.GeometryBB, 
+  Scene.PersistentClasses;
 
 const
   COctree_LEAF_TRHESHOLD = 30;

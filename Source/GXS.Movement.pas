@@ -1,5 +1,5 @@
 //
-// The unit for GXScene Engine
+// Graphic Scene Engine, http://glscene.org
 //
 (*
    Movement path behaviour by Roger Cao
@@ -12,14 +12,14 @@ unit GXS.Movement;
 
 interface
 
-{$I GXS.Scene.inc}
+{$I Scene.inc}
 
 uses
   System.Classes,
   System.SysUtils,
 
-  OpenGLx,
-  XCollection,
+  Import.OpenGLx,
+  Scene.XCollection,
   Scene.PersistentClasses,
   GXS.Scene,
   Scene.VectorGeometry,

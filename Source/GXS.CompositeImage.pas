@@ -1,5 +1,5 @@
 //
-// The unit is for GXScene Engine
+// Graphic Scene Engine, http://glscene.org
 //
 {
     This class is required for loading images such classes as in DDSImage,
@@ -14,7 +14,7 @@ uses
   System.Classes,
   FMX.Graphics,
 
-  OpenGLx,
+  Import.OpenGLx,
   GXS.Graphics,
   GXS.Texture,
   GXS.TextureFormat,

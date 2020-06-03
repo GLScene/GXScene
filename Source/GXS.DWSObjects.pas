@@ -1,5 +1,5 @@
 //
-// The unit for GXScene Engine
+// Graphic Scene Engine, http://glscene.org
 //
 
 {
@@ -17,7 +17,7 @@ uses
   DwsExprs, 
   DwsSymbols,
   GXS.Scene, 
-  GXS.XCollection, 
+  GXS.Scene.XCollection, 
   GXS.ScriptDws, 
   GXS.BaseClasses, 
   GXS.Manager;

@@ -1,5 +1,5 @@
 ﻿//
-// The unit is for GXScene Engine
+// Graphic Scene Engine, http://glscene.org
 //
 (*
   Extrusion objects are solids defined by the
@@ -15,15 +15,15 @@ unit GXS.Extrusion;
 
 interface
 
-{$I GXS.Scene.inc}
+{$I Scene.inc}
 
 uses
   System.SysUtils,
   System.Classes,
   System.Math,
 
-  OpenGLx,
-  XOpenGL,
+  Import.OpenGLx,
+  Scene.XOpenGL,
   GXS.Context,
   GXS.Objects,
   GXS.Scene,

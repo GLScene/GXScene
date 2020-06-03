@@ -87,7 +87,7 @@
  *)
 unit cgGL;
 
-{$I GXS.Scene.inc}
+{$I Scene.inc}
 
 interface
 

@@ -1,17 +1,16 @@
 //
-// The unit is for GXScene Engine
+// Graphic Scene Engine, http://glscene.org
 //
-{
+(*
   Simple TGA formats supports for Delphi.
   Currently supports only 24 and 32 bits RGB formats (uncompressed
   and RLE compressed).
-
-}
+*)
 unit GXS.FileTGA;
 
 interface
 
-{$I GXS.Scene.inc}
+{$I Scene.inc}
 
 uses
   System.Classes,
@@ -23,9 +22,9 @@ uses
   GXS.CrossPlatform;
 
 type
-  { TGA image load/save capable class for Delphi.
+  (* TGA image load/save capable class for Delphi.
     TGA formats supported : 24 and 32 bits uncompressed or RLE compressed,
-    saves only to uncompressed TGA. }
+    saves only to uncompressed TGA. *)
   TTGAImage = class(TBitmap)
   public
     constructor Create; override;

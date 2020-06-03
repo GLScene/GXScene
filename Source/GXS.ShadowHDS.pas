@@ -1,5 +1,5 @@
 //
-// The unit is for GXScene Engine
+// Graphic Scene Engine, http://glscene.org
 //
 (*
    Implements an HDS that automatically generates a terrain lightmap texture
@@ -29,7 +29,7 @@ uses
   System.SysUtils,
   System.Math,
 
-  OpenGLx,
+  Import.OpenGLx,
   Scene.VectorLists,
   GXS.HeightData,
   GXS.Graphics,

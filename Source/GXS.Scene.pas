@@ -1,15 +1,15 @@
 //
-// The unit is for GXScene Engine
+// Graphic Scene Engine, http://glscene.org
 //
-{
+(*
   Base classes and structures for GXScene.
-}
+*)
 
 unit GXS.Scene;
 
 interface
 
-{$I GXS.Scene.inc}
+{$I Scene.inc}
 
 uses
   Winapi.Windows,
@@ -22,19 +22,21 @@ uses
   FMX.Types,
   FMX.Dialogs,
 
-  OpenGLx,
-  XCollection,
+  Import.OpenGLx,
+  Scene.XOpenGL,
+  Scene.XCollection,
   Scene.Strings,
-  GXS.Context,
+  Scene.VectorTypes,
+  Scene.VectorLists,
   Scene.VectorGeometry,
-  GXS.Silhouette,
   Scene.PersistentClasses,
+  GXS.Context,
+  GXS.Silhouette,
   GXS.PipeLineTransformation,
   GXS.State,
   GXS.Graphics,
   GXS.GeometryBB,
   GXS.CrossPlatform,
-  Scene.VectorLists,
   GXS.Texture,
   GXS.Color,
   GXS.BaseClasses,
@@ -43,11 +45,8 @@ uses
   GXS.Material,
   GXS.TextureFormat,
   GXS.Selection,
-
-  Scene.VectorTypes,
   GXS.ApplicationFileIO,
-  GXS.Utils,
-  XOpenGL;
+  GXS.Utils;
 
 type
   { Defines which features are taken from the master object. }
@@ -60,8 +59,8 @@ type
 
 const
   cDefaultProxyOptions = [pooEffects, pooObjects, pooTransformation];
-  VXSCENE_REVISION = '$Revision: 7100$';
-  VXSCENE_VERSION = '2.0.5.%s';
+  SCENE_REVISION = '$Revision: 0306$';
+  SCENE_VERSION = '2020.%s';
 
 type
 

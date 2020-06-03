@@ -1,5 +1,5 @@
 //
-// The unit is for GXScene Engine
+// Graphic Scene Engine, http://glscene.org
 //
 (*
   Simple X format support for Delphi (Microsoft's favorite format)
@@ -9,7 +9,7 @@ unit GXS.FileX;
 
 interface
 
-{$I GXS.Scene.inc}
+{$I Scene.inc}
 
 uses
   System.Classes,
@@ -23,7 +23,7 @@ uses
   Scene.VectorLists,
   GXS.Material,
 
-  FileX;
+  Formats.FileX;
 
 type
   TgxXVectorFile = class(TgxVectorFile)

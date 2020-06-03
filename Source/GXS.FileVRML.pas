@@ -1,9 +1,9 @@
 //
-// The unit is for GXScene Engine
+// Graphic Scene Engine, http://glscene.org
 //
-{
+(*
    Preliminary VRML vector file support.
-}
+*)
 unit GXS.FileVRML;
 
 interface
@@ -20,7 +20,7 @@ uses
   Scene.VectorLists, 
   GXS.MeshUtils,
 
-  FileVRMLParser;
+  Formats.FileVRMLParser;
 
 type
 

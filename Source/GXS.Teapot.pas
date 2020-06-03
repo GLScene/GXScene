@@ -1,5 +1,5 @@
 //
-// The unit for GXScene Engine
+// Graphic Scene Engine, http://glscene.org
 //
 {
    Implements the standard Teapot, build from evaluators.
@@ -8,12 +8,12 @@ unit GXS.Teapot;
 
 interface
 
-{$I GXS.Scene.inc}
+{$I Scene.inc}
 
 uses
   System.Classes,
 
-  OpenGLx,
+  Import.OpenGLx,
   GXS.Scene,
   Scene.PersistentClasses,
   GXS.State,

@@ -1,5 +1,5 @@
 //
-// This unit is part of the GXScene Engine, http://glscene.org
+// Graphic Scene Engine, http://glscene.org
 //
 { Viewer OpenGL for FMX
   The history is logged in a previous version of the unit
@@ -9,7 +9,7 @@ unit GXS.ViewerOpenGL;
 
 interface
 
-{$I GXS.Scene.inc}
+{$I Scene.inc}
 
 uses
   WinApi.Windows,
@@ -24,7 +24,7 @@ uses
   FMX.Controls,
   FMX.Graphics,
 
-  OpenGLx,
+  Import.OpenGLx,
   GXS.Scene,
   GXS.Win64Context,
   GXS.TextureFormat,

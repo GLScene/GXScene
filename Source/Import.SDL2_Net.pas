@@ -1,4 +1,4 @@
-unit SDL2_Net;
+unit Import.SDL2_Net;
 {*******************************************************************************
 
   SDL2_Net.pas    v1.0  29/07/2013 first version for DelphiXE
@@ -25,7 +25,7 @@ uses
 {$IFDEF MSWINDOWS}
   Winapi.Windows,
 {$ENDIF}
-  SDL2;
+  Import.SDL2;
 
 const
 

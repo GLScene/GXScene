@@ -1,4 +1,4 @@
-package SDL2Frame;
+package Import.SDL2Frame;
 
 {$R *.res}
 {$ALIGN 8}
@@ -29,7 +29,7 @@ requires
   vcl;
 
 contains
-  SDL2_Frame in 'SDL2_frame.pas',
-  SDL2;
+  Import.SDL2_Frame in 'Import.SDL2_frame.pas',
+  Import.SDL2;
 
 end.

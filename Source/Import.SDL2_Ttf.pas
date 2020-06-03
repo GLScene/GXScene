@@ -1,4 +1,4 @@
-﻿unit SDL2_Ttf;
+﻿unit Import.SDL2_Ttf;
 {*******************************************************************************
 
   SDL2_Ttf.pas    v1.0  29/07/2013 first version for DelphiXE
@@ -26,7 +26,7 @@ uses
 {$IFDEF MSWINDOWS}
   Winapi.Windows,
 {$ENDIF}
-  SDL2;
+  Import.SDL2;
 
 const
 

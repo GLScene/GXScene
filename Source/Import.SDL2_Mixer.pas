@@ -1,4 +1,4 @@
-﻿unit SDL2_Mixer;
+﻿unit Import.SDL2_Mixer;
 {*******************************************************************************
 
   SDL2_Mixer.pas  v1.0  29/07/2013 first version for DelphiXE
@@ -22,7 +22,7 @@
 interface
 
 uses
-  SDL2;
+  Import.SDL2;
 
 const
 

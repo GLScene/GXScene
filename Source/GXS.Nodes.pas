@@ -1,9 +1,9 @@
 //
 // The unit is for GXScene Engine
 //
-{
+(*
   Nodes are used to describe lines, polygons + more.
-}
+*)
 unit GXS.Nodes;
 
 interface
@@ -82,14 +82,14 @@ type
       const Center: TAffineVector);
     // Calculates and returns the barycenter of the nodes
     function Barycenter: TAffineVector;
-    { Computes normal based on the 1st three nodes.
-      Returns NullVector if there are less than 3 nodes. }
+    (* Computes normal based on the 1st three nodes.
+      Returns NullVector if there are less than 3 nodes. *)
     function Normal: TAffineVector;
     // Returns normalized vector Nodes[i+1]-Nodes[i]
     function Vector(I: Integer): TAffineVector;
-    { Calculates the extents of the nodes (min-max for all coordinates).
+    (* Calculates the extents of the nodes (min-max for all coordinates).
       The returned values are also the two corners of the axis-aligned
-      bounding box. }
+      bounding box. *)
     procedure GetExtents(var Min, Max: TAffineVector);
     // Translate all nodes
     procedure Translate(const Tv: TAffineVector);

@@ -317,9 +317,9 @@
         <DCCReference Include="..\..\Source\GXS.GLSLShader.pas"/>
         <DCCReference Include="..\..\Source\GXS.GLUTesselation.pas"/>
         <DCCReference Include="..\..\Source\GXS.GameMenu.pas"/>
-        <DCCReference Include="..\..\Source\GXS.Generics.pas"/>
+        <DCCReference Include="..\..\Source\Scene.Generics.pas"/>
         <DCCReference Include="..\..\Source\GXS.GeomObjects.pas"/>
-        <DCCReference Include="..\..\Source\GXS.GeometryBB.pas"/>
+        <DCCReference Include="..\..\Source\Scene.GeometryBB.pas"/>
         <DCCReference Include="..\..\Source\GXS.GeometryCoordinates.pas"/>
         <DCCReference Include="..\..\Source\GXS.Gizmo.pas"/>
         <DCCReference Include="..\..\Source\GXS.GizmoEx.pas"/>

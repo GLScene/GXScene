@@ -1,11 +1,11 @@
 //
 // Graphic Scene Engine, http://glscene.org
 //
-{
+(*
    Implements projected textures through a GLScene object via GLSL.
-}
+*)
 
-{; Known bugs/limitations
+(* Known bugs/limitations:
 
 1. Only 1 texture can be used for all emitters
 2. Only up to 6 Emitters can be used (more on better cards)
@@ -16,7 +16,7 @@
    anything, or set the brightness to 0. (?)
 4. All children of the ProjectedTextures must have use a texture.
    The shader can't be changed between rendering each seperate object..
-}
+*)
 
 unit GXS.GLSLProjectedTextures;
 
@@ -44,9 +44,9 @@ type
 
   TgxSLProjectedTextures = class;
 
-  { A projected texture emitter.
+  (* A projected texture emitter.
      Can be places anywhere in the scene.
-     Used to generate a modelview and texture matrix for the shader}
+     Used to generate a modelview and texture matrix for the shader *)
   TgxSLTextureEmitter = class(TgxBaseSceneObject)
   private
     FFOV: single;
@@ -98,7 +98,7 @@ type
     property Effects;
   end;
 
-  { Specifies an item on the TgxSLTextureEmitters collection. }
+  // Specifies an item on the TgxSLTextureEmitters collection.
   TgxSLTextureEmitterItem = class(TCollectionItem)
   private
     FEmitter: TgxSLTextureEmitter;
@@ -113,7 +113,7 @@ type
     property Emitter: TgxSLTextureEmitter read FEmitter write SetEmitter;
   end;
 
-  { Collection of TgxSLTextureEmitter. }
+  // Collection of TgxSLTextureEmitter.
   TgxSLTextureEmitters = class(TCollection)
   private
     FOwner: TgxSLProjectedTextures;
@@ -126,9 +126,9 @@ type
     property Items[index: Integer]: TgxSLTextureEmitterItem read GetItems; default;
   end;
 
-  { Projected Texture Manager.
+  (* Projected Texture Manager.
      Specifies active Emitters and receivers (children of this object).
-     At the moment, only 1 texture can be used.}
+     At the moment, only 1 texture can be used. *)
   TgxSLProjectedTextures = class(TgxSceneObject)
   private
     FEmitters: TgxSLTextureEmitters;

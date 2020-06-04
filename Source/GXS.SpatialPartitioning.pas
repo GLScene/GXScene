@@ -16,7 +16,7 @@ uses
   GXS.Win64Viewer,
   GXS.SpacePartition,
   Scene.VectorGeometry,
-  GXS.GeometryBB,
+  Scene.GeometryBB,
   GXS.RenderContextInfo,
   GXS.State;
 

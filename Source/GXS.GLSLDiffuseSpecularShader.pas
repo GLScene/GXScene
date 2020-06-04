@@ -1,7 +1,7 @@
 //
 // Graphic Scene Engine, http://glscene.org
 //
-{
+(*
     This is a collection of GLSL Diffuse Specular shaders, comes in these variaties
               (to know what these suffixes and prefixes mean see GXS.CustomShader.pas):
       - TgxSLDiffuseSpecularShader
@@ -15,7 +15,7 @@
       from OpenGL (that includes TgxMaterial's)
      2) TgxSLDiffuseSpecularShader takes all Light parameters directly
       from OpenGL (that includes TgxLightSource's)
-}
+*)
 
 unit GXS.GLSLDiffuseSpecularShader;
 
@@ -95,15 +95,14 @@ type
     procedure DoInitialize(var rci: TgxRenderContextInfo; Sender: TObject); override;
   end;
 
-                     {********  Multi Light  ************}
-
-  { Note: probably LightCount should be replaced by LightSources, like in
-     GLSLBumpShader.pas }
+//*******  Multi Light  *********
 
   TLightRecord = record
     Enabled: Boolean;
     Style: TLightStyle;
   end;
+
+// Note: probably LightCount should be replaced by LightSources, like in GLSLBumpShader.pas
 
   TgxCustomGLSLMLDiffuseSpecularShader = class(TgxBaseCustomGLSLDiffuseSpecular)
   private
@@ -156,12 +155,9 @@ type
     property LightPower;
     property FogSupport;
   end;
-//---------------------------------------------------------------------------
-//---------------------------------------------------------------------------
+
 //---------------------------------------------------------------------------
 implementation
-//---------------------------------------------------------------------------
-//---------------------------------------------------------------------------
 //---------------------------------------------------------------------------
 
 procedure GetVertexProgramCode(const Code: TStrings;

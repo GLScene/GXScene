@@ -38,7 +38,7 @@ uses
   GXS.CrossPlatform,
   GXS.Coordinates,
   GXS.RenderContextInfo,
-  GXS.GeometryBB,
+  Scene.GeometryBB,
   Scene.VectorTypes,
   GXS.Canvas,
   Scene.PersistentClasses,

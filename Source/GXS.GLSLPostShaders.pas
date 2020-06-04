@@ -1,9 +1,9 @@
 //
 // Graphic Scene Engine, http://glscene.org
 //
-{ 
-   Post shaders that simulate shader visions for a mask or the entire scene. 
-}
+(*
+   Post shaders that simulate shader visions for a mask or the entire scene.
+*)
 unit GXS.GLSLPostShaders;
 
 interface
@@ -15,14 +15,14 @@ uses
 
   GXS.Texture,
   GXS.Scene,
+  Scene.VectorTypes,
   Scene.VectorGeometry,
   GXS.Context,
   GXS.Material,
   GXS.GLSLShader,
   GXS.CustomShader,
   GXS.RenderContextInfo,
-  GXS.TextureFormat,
-  Scene.VectorTypes;
+  GXS.TextureFormat;
 
   { Custom class for GLSLPostBlurShader. A shader that blurs the entire scene }
 type
@@ -47,7 +47,7 @@ type
     property Threshold;
   end;
 
-  { A shader that simulate a Thermal Vision of the entire scene}
+  // A shader that simulate a Thermal Vision of the entire scene
   TgxCustomGLSLPostThermalVisionShader = class(TgxCustomGLSLShader, IVXPostShader)
   private
     FThreshold : Single;
@@ -72,7 +72,7 @@ type
     property Intensity;
   end;
 
-  { A shader that simulate a grayscale threshold vision (aka dream) of the entire scene}
+  // A shader that simulate a grayscale threshold vision (aka dream) of the entire scene
   TgxCustomGLSLPostDreamVisionShader = class(TgxCustomGLSLShader, IVXPostShader)
   private
     FThreshold : Single; // In percent 0..100;
@@ -93,8 +93,8 @@ type
     property Threshold;
   end;
 
-  { Custom shader that simulate a Night Vision of the scene throw a mask if enabled,
-   or of the entire scene}
+  (* Custom shader that simulate a Night Vision of the scene throw a mask if enabled,
+   or of the entire scene *)
   TgxCustomGLSLPostNightVisionShader = class(TgxCustomGLSLShader, IVXPostShader)
   private
     FMaterialLibrary: TgxAbstractMaterialLibrary;
@@ -146,7 +146,7 @@ type
     property UseMask;
   end;
 
-  { Custom shader that pixelate of the entire scene}
+  // Custom shader that pixelate of the entire scene
   TgxCustomGLSLPostPixelateShader = class(TgxCustomGLSLShader, IVXPostShader)
   private
     FPixelWidth  : Single;
@@ -170,7 +170,7 @@ type
     property PixelHeight;
   end;
 
- { Custom shader that posterize of the entire scene}
+  // Custom shader that posterize of the entire scene
   TgxCustomGLSLPostPosterizeShader = class(TgxCustomGLSLShader, IVXPostShader)
   private
     FGamma  : Single;
@@ -194,7 +194,7 @@ type
     property NumColors;
   end;
 
-  { Custom class for shader that frost of the entire scene}
+  // Custom class for shader that frost of the entire scene
   TgxCustomGLSLPostFrostShader = class(TgxCustomGLSLShader, IVXPostShader)
   private
     FRandScale  : Single;
@@ -218,11 +218,11 @@ type
     property RandFactor;
   end;
 
-  { Custom class for GLSLPostTroubleShader.
+  (* Custom class for GLSLPostTroubleShader.
    A shader that trouble of the entire scene. v2
    This Shader is experimental it can do smooth the scene or double the scene and it's
    depends of PixelX, PixelY and Freq values if they are less than 1 or greater
-   the effects will be very different}
+   the effects will be very different *)
   TgxCustomGLSLPostTroubleShader = class(TgxCustomGLSLShader, IVXPostShader)
   private
     FPixelX  : Single;
@@ -268,7 +268,9 @@ type
 implementation
 //----------------------------------------------------------------------
 
-{ TgxCustomGLSLPostBlurShader }
+//-------------------------------------
+// TgxCustomGLSLPostBlurShader
+//-------------------------------------
 
 constructor TgxCustomGLSLPostBlurShader.Create(
   AOwner: TComponent);
@@ -369,7 +371,9 @@ begin
   Result := Abs(FThreshold - 0.1) > 0.00001;
 end;
 
-{ TgxCustomGLSLPostThermalVisionShader }
+//-------------------------------------------
+// TgxCustomGLSLPostThermalVisionShader
+//-------------------------------------------
 
 constructor TgxCustomGLSLPostThermalVisionShader.Create(
   AOwner: TComponent);
@@ -750,7 +754,9 @@ begin
       end;
 end;
 
-{ TgxCustomGLSLPostPixelateShader }
+//----------------------------------------
+// TgxCustomGLSLPostPixelateShader
+//----------------------------------------
 
 constructor TgxCustomGLSLPostPixelateShader.Create(
   AOwner: TComponent);
@@ -1020,7 +1026,9 @@ begin
   Result := (Abs(FRandFactor) > 0) and (Abs(FRandFactor) <= 1000);
 end;
 
-{ TgxCustomGLSLPostTroubleShader }
+//----------------------------------------
+// TgxCustomGLSLPostTroubleShader
+//----------------------------------------
 
 constructor TgxCustomGLSLPostTroubleShader.Create( AOwner: TComponent);
 begin
@@ -1140,7 +1148,6 @@ begin
    Add('  tc = result.rgb; ');
    Add('  gl_FragColor = vec4(tc, 1.0); ');
    Add('} ');
-
   end;
 
   FPixelX  := 0.5;

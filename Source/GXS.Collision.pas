@@ -20,7 +20,7 @@ uses
   Scene.VectorGeometry,
   Scene.VectorLists,
   GXS.VectorFileObjects,
-  GXS.GeometryBB,
+  Scene.GeometryBB,
   GXS.Manager,
   Scene.VectorTypes;
 

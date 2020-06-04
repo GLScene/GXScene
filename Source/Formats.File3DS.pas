@@ -136,9 +136,9 @@ type
       read GetSpotLightMotion;
   end;
 
-  { TFile3DS is the  main class and supplies the user with all available data
+  (* TFile3DS is the  main class and supplies the user with all available data
    from a specific 3DS file. The data is currently read only, but the class might be
-   finished sometime later... }
+   finished sometime later... *)
   TFile3DS = class
   private
     FNodeList: PNodeList;
@@ -179,7 +179,7 @@ type
     constructor CreateFromFile(const FileName: String); virtual;
     destructor Destroy; override;
     procedure ClearLists;
-    { database methods }
+    // database methods
     procedure DumpDataBase(Strings: TStrings; DumpLevel: TDumpLevel);
     procedure LoadFromFile(const FileName: String);
     procedure LoadFromStream(const aStream: TStream);

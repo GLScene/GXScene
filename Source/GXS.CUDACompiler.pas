@@ -25,24 +25,18 @@ uses
 type
   TgxSCUDACompilerOutput = (codeUndefined, codePtx, codeCubin, codeGpu);
 
-  // TgxSCUDAVirtArch
-  //
-
-  {
+  (*
     compute_10 Basic features
     compute_11 + atomic memory operations on global memory
     compute_12 + atomic memory operations on shared memory
                + vote instructions
     compute_13 + double precision floating point support
     Compute_20 + FERMI support
-  }
+  *)
 
   TgxSCUDAVirtArch = (compute_10, compute_11, compute_12, compute_13, compute_20);
 
-  // TgxSCUDAGPUGeneration
-  //
-
-  {
+  (*
     sm_10 ISA_1 Basic features
     sm_11 + atomic memory operations on global memory
     sm_12 + atomic memory operations on shared memory
@@ -50,14 +44,14 @@ type
     sm_13 + double precision floating point support
     sm_20 + FERMI support.
     sm_21 + Unknown
-  }
+  *)
 
   TgxSCUDARealArch = (sm_10, sm_11, sm_12, sm_13, sm_20, sm_21);
   TgxSCUDARealArchs = set of TgxSCUDARealArch;
 
   TgxSCUDACompiler = class(TComponent)
   private
-    
+
     FNVCCPath: string;
     FCppCompilerPath: string;
     FProduct: TStringList;
@@ -83,17 +77,13 @@ type
     constructor Create(AOwner: TComponent); override;
     destructor Destroy; override;
     procedure Assign(Source: TPersistent); override;
-
     procedure SetSourceCodeFile(const AFileName: string);
-
     function Compile: Boolean;
     { Product of compilation. }
     property Product: TStringList read FProduct write FProduct;
-
     property ModuleInfo: TCUDAModuleInfo read FModuleInfo;
     property ConsoleContent: string read FConsoleContent;
   published
-    
     { NVidia CUDA Compiler. }
     property NVCCPath: string read FNVCCPath write SetNVCCPath;
     { Microsoft Visual Studio Compiler.
@@ -130,11 +120,13 @@ type
 var
   vFindCuFileFunc: TFindCuFileFunc;
 
+//=========================================
 implementation
+//=========================================
 
 uses
-  ShellAPI,
-  TlHelp32;
+  Winapi.ShellAPI,
+  Winapi.TlHelp32;
 
 
 // ------------------

@@ -48,8 +48,8 @@ uses
 {$ENDIF}
   System.SysUtils,
   FMX.Dialogs,
-  OpenCL,
-  OpenCL_Platform,
+  Import.OpenCL,
+  Import.OpenCL_Platform,
 
   Import.OpenGLx,
   GXS.CUDAAPI,

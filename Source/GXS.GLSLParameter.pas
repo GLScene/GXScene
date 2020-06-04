@@ -141,31 +141,33 @@ type
     property Name: string read GetName;
     property GLSLType: TgxSLDataType read GetGLSLType;
     property GLSLSamplerType: TgxSLSamplerType read GetGLSLSamplerType;
-    { Scalar types. }
+
+    // Scalar types.
     property float: Single read GetFloat write SetFloat;
     property int: GLint read GetInt write SetInt;
     property uint: GLuint read GetUInt write SetUInt;
 
-    { Float vector types. }
+    // Float vector types.
     property vec2: TVector2f read GetVec2 write SetVec2;
     property vec3: TVector3f read GetVec3 write SetVec3;
     property vec4: TVector4f read GetVec4 write SetVec4;
 
-    { Integer vector  types. }
+    // Integer vector  types.
     property ivec2: TVector2i read GetIVec2 write SetIVec2;
     property ivec3: TVector3i read GetIVec3 write SetIVec3;
     property ivec4: TVector4i read GetIVec4 write SetIVec4;
 
-    { Unsigned integer vector  types. }
+    // Unsigned integer vector  types.
     property uvec2: TVector2ui read GetUVec2 write SetUVec2;
     property uvec3: TVector3ui read GetUVec3 write SetUVec3;
     property uvec4: TVector4ui read GetUVec4 write SetUVec4;
 
-    { Matrix Types. }
+    // Matrix Types.
     property mat2: TMatrix2f read GetMat2 write SetMat2;
     property mat3: TMatrix3f read GetMat3 write SetMat3;
     property mat4: TMatrix4f read GetMat4 write SetMat4;
-    { Bindings. }
+
+    // Bindings.
     property AutoSetMethod: string read GetAutoSetMethod write SetAutoSetMethod;
     property TextureName: string read GetTextureName write SetTextureName;
     property SamplerName: string read GetSamplerName write SetSamplerName;

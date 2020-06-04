@@ -44,8 +44,8 @@ uses
   Winapi.Windows,
   System.SysUtils,
   FMX.Dialogs,
-  OpenCL,
-  OpenCL_Platform,
+  Import.OpenCL,
+  Import.OpenCL_Platform,
   GXS.CrossPlatform,
   Scene.Strings;
 

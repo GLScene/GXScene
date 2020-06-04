@@ -35,7 +35,7 @@ uses
   GXS.PipeLineTransformation,
   GXS.State,
   GXS.Graphics,
-  GXS.GeometryBB,
+  Scene.GeometryBB,
   GXS.CrossPlatform,
   GXS.Texture,
   GXS.Color,

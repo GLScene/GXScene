@@ -22,10 +22,10 @@ uses
   FMX.ExtCtrls,
   FMX.ActnList,
 
-  ToolsAPI,
+  ///ToolsAPI,
 
   GXS.Scene,
-  GXS.Generics;
+  Scene.Generics;
 
 const
   cGXSceneViewerToolbar = 'GXSceneViewerToolbar';

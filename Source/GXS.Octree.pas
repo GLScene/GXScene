@@ -16,7 +16,7 @@ uses
   Scene.VectorTypes,
   Scene.VectorGeometry,
   Scene.VectorLists,
-  GXS.GeometryBB,
+  Scene.GeometryBB,
   GXS.Context;
 
 type

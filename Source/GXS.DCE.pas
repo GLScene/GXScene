@@ -45,10 +45,10 @@ uses
   Scene.VectorTypes;
 
 type
-  { Only csEllipsoid can have dynamic behaviour }
+  // Only csEllipsoid can have dynamic behaviour 
   TDCEShape = (csEllipsoid, csBox, csFreeform, csTerrain);
 
-  { Indicates which type of layer comparison is made when trying to detect
+  (* Indicates which type of layer comparison is made when trying to detect
     collisions between 2 bodies (A and B). Possible values are:
     ccsDCEStandard: Collides bodies if A.layer <= B.layer
     ccsCollisionStandard: Collides bodies if either A or B have
@@ -57,7 +57,7 @@ type
     checks would pass (i.e. if the layer of either body  is
     equal to 0 or if A.layer <= B.layer) *and* if both
     layers are positive (that is, turns off collision
-    for bodies whose layer is < 0) }
+    for bodies whose layer is < 0) *)
   TDCECollisionSelection = (ccsDCEStandard, ccsCollisionStandard, ccsHybrid);
   // gak:20041119
 
@@ -250,7 +250,6 @@ function GetOrCreateDCEDynamic(obj: TgxBaseSceneObject): TgxDCEDynamic;
 
 // -------------------------------------------------------------------
 implementation
-
 // -------------------------------------------------------------------
 
 function RotateVectorByObject(obj: TgxBaseSceneObject; v: TAffineVector)

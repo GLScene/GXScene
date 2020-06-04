@@ -25,7 +25,7 @@ uses
   Scene.VectorGeometry,
   Scene.VectorLists,
   GXS.SpacePartition,
-  GXS.GeometryBB,
+  Scene.GeometryBB,
   Scene.VectorTypes;
 
 const

@@ -29,7 +29,7 @@ uses
    
   Scene.VectorTypes, 
   Scene.VectorGeometry,  
-  GXS.GeometryBB, 
+  Scene.GeometryBB, 
   Scene.PersistentClasses;
 
 const

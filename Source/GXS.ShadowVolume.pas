@@ -29,7 +29,7 @@ uses
   GXS.Context,
   GXS.Silhouette,
   Scene.PersistentClasses,
-  GXS.GeometryBB,
+  Scene.GeometryBB,
   GXS.Color,
   GXS.RenderContextInfo;
 

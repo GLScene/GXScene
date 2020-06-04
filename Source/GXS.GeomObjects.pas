@@ -23,7 +23,7 @@ uses
   GXS.Objects,
   GXS.Silhouette,
   Scene.VectorTypes,
-  GXS.GeometryBB,
+  Scene.GeometryBB,
   GXS.RenderContextInfo,
   GXS.Polynomials;
 

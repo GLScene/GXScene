@@ -1,9 +1,9 @@
 //
 // Graphic Scene Engine, http://glscene.org
 //
-{
-  Graph plotting objects for GLScene 
-}
+(*
+  Graph plotting objects for GLScene
+*)
 unit GXS.Graph;
 
 interface

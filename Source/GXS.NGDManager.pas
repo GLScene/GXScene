@@ -31,7 +31,7 @@ uses
   GXS.GeomObjects,
   GXS.VectorFileObjects, // cube cone freeform...
   GXS.Color,
-  GXS.GeometryBB; // For show debug
+  Scene.GeometryBB; // For show debug
 
 type
   NGDFloat = Import.Newton.Float;

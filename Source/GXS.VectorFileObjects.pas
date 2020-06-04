@@ -30,7 +30,7 @@ uses
   GXS.Material,
   GXS.Mesh,
   GXS.Octree,
-  GXS.GeometryBB,
+  Scene.GeometryBB,
   GXS.ApplicationFileIO,
   GXS.Silhouette,
   GXS.Context,

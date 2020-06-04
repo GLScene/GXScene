@@ -22,10 +22,10 @@ uses
   System.SysUtils,
 
   Import.OpenGLx,
-  GXS.Texture,
-  GXS.Scene,
   Scene.VectorGeometry,
   Scene.VectorTypes,
+  GXS.Texture,
+  GXS.Scene,
   GXS.Cadencer,
   Scene.Strings,
   GXS.CustomShader,
@@ -176,12 +176,10 @@ type
   public
     constructor Create(AOwner : TComponent); override;
     property LightSources: TgxLightSourceSet read FLightSources write SetLightSources default [1];
-    { Setting LightCompensation to a value less than 1 decreeses individual
-       light intensity when using multiple lights }
+    (* Setting LightCompensation to a value less than 1 decreeses individual
+       light intensity when using multiple lights *)
     property LightCompensation: Single read FLightCompensation write SetLightCompensation;
   end;
-
-   {************** Published **************}
 
   // One light shaders.
   TgxSLBumpShaderMT = class(TgxCustomGLSLBumpShaderMT)

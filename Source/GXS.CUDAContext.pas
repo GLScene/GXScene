@@ -13,10 +13,10 @@ uses
   System.SysUtils,
   FMX.Dialogs,
   Scene.Strings,
+  Scene.Generics,
   GXS.BaseClasses,
   GXS.CUDARunTime,
   GXS.Context,
-  GXS.Generics,
   OpenCL,
   OpenCL_Platform,
   GXS.CUDAAPI;

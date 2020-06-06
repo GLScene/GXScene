@@ -1,10 +1,12 @@
-//
-// Graphic Scene Engine, http://glscene.org
-//
-{
-    Mesh optimization
-}
+(*******************************************
+*                                          *
+* Graphic Scene Engine, http://glscene.org *
+*                                          *
+********************************************)
+
 unit GXS.MeshOptimizer;
+
+(* Mesh optimization *)
 
 interface
 

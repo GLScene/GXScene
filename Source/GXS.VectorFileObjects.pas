@@ -1,11 +1,15 @@
-//
-// Graphic Scene Engine, http://glscene.org
-//
+(*******************************************
+*                                          *
+* Graphic Scene Engine, http://glscene.org *
+*                                          *
+********************************************)
+
+unit GXS.VectorFileObjects;
+
 (*
   Vector File related objects for GLScene
   The history is logged in a former GLS version of the unit.
 *)
-unit GXS.VectorFileObjects;
 
 interface
 
@@ -22,10 +26,10 @@ uses
   Scene.VectorLists,
   Scene.PersistentClasses,
   Scene.VectorTypes,
-
-  GXS.Scene,
   Scene.VectorGeometry,
   Scene.Strings,
+
+  GXS.Scene,
   GXS.Texture,
   GXS.Material,
   GXS.Mesh,
@@ -37,7 +41,7 @@ uses
   GXS.Color,
   GXS.RenderContextInfo,
   GXS.Coordinates,
-  GXS.BaseClasses,
+  Scene.BaseClasses,
   GXS.TextureFormat,
   GXS.State,
   GXS.Utils;
@@ -52,9 +56,9 @@ type
 
   TgxMeshObjectMode = (momTriangles, momTriangleStrip, momFaceGroups);
 
-  { A base class for mesh objects.
+  (* A base class for mesh objects.
     The class introduces a set of vertices and normals for the object but
-    does no rendering of its own. }
+    does no rendering of its own. *)
   TgxBaseMeshObject = class(TPersistentObject)
   private
     FName: string;
@@ -71,11 +75,11 @@ type
     procedure Assign(Source: TPersistent); override;
     procedure WriteToFiler(writer: TVirtualWriter); override;
     procedure ReadFromFiler(reader: TVirtualReader); override;
-    { Clears all mesh object data, submeshes, facegroups, etc. }
+    // Clears all mesh object data, submeshes, facegroups, etc.
     procedure Clear; virtual;
-    { Translates all the vertices by the given delta. }
+    // Translates all the vertices by the given delta.
     procedure Translate(const delta: TAffineVector); virtual;
-    { Builds (smoothed) normals for the vertex list.
+    (* Builds (smoothed) normals for the vertex list.
       If normalIndices is nil, the method assumes a bijection between
       vertices and normals sets, and when performed, Normals and Vertices
       list will have the same number of items (whatever previously was in
@@ -84,15 +88,15 @@ type
       their indices will be added to normalIndices. Already defined
       normals and indices are preserved.
       The only valid modes are currently momTriangles and momTriangleStrip
-      (ie. momFaceGroups not supported). }
+      (ie. momFaceGroups not supported). *)
     procedure BuildNormals(vertexIndices: TIntegerList; mode: TgxMeshObjectMode; normalIndices: TIntegerList = nil);
-    { Extracts all mesh triangles as a triangles list.
+    (* Extracts all mesh triangles as a triangles list.
       The resulting list size is a multiple of 3, each group of 3 vertices
       making up and independant triangle.
       The returned list can be used independantly from the mesh object
       (all data is duplicated) and should be freed by caller.
       If texCoords is specified, per vertex texture coordinates will be
-      placed there, when available. }
+      placed there, when available. *)
     function ExtractTriangles(texCoords: TAffineVectorList = nil; normals: TAffineVectorList = nil): TAffineVectorList; virtual;
     property Name: string read FName write FName;
     property Visible: Boolean read FVisible write FVisible;
@@ -103,10 +107,10 @@ type
   TgxSkeletonFrameList = class;
   TgxSkeletonFrameTransform = (sftRotation, sftQuaternion);
 
-  { Stores position and rotation for skeleton joints.
+  (* Stores position and rotation for skeleton joints.
     If you directly alter some values, make sure to call FlushLocalMatrixList
     so that the local matrices will be recalculated (the call to Flush does
-    not recalculate the matrices, but marks the current ones as dirty). }
+    not recalculate the matrices, but marks the current ones as dirty). *)
   TgxSkeletonFrame = class(TPersistentObject)
   private
     FOwner: TgxSkeletonFrameList;
@@ -128,30 +132,30 @@ type
     procedure ReadFromFiler(reader: TVirtualReader); override;
     property Owner: TgxSkeletonFrameList read FOwner;
     property Name: string read FName write FName;
-    { Position values for the joints. }
+    // Position values for the joints.
     property Position: TAffineVectorList read FPosition write SetPosition;
-    { Rotation values for the joints. }
+    // Rotation values for the joints.
     property Rotation: TAffineVectorList read FRotation write SetRotation;
-    { Quaternions are an alternative to Euler rotations to build the
-      global matrices for the skeleton bones. }
+    (* Quaternions are an alternative to Euler rotations to build the
+      global matrices for the skeleton bones. *)
     property Quaternion: TQuaternionList read FQuaternion write SetQuaternion;
-    { TransformMode indicates whether to use Rotation or Quaternion to build
-      the local transform matrices. }
+    (* TransformMode indicates whether to use Rotation or Quaternion to build
+      the local transform matrices. *)
     property TransformMode: TgxSkeletonFrameTransform read FTransformMode write FTransformMode;
-    { Calculate or retrieves an array of local bone matrices.
+    (* Calculate or retrieves an array of local bone matrices.
       This array is calculated on the first call after creation, and the
       first call following a FlushLocalMatrixList. Subsequent calls return
-      the same arrays. }
+      the same arrays. *)
     function LocalMatrixList: PMatrixArray;
-    { Flushes (frees) then LocalMatrixList data.
-      Call this function to allow a recalculation of local matrices. }
+    (* Flushes (frees) then LocalMatrixList data.
+      Call this function to allow a recalculation of local matrices. *)
     procedure FlushLocalMatrixList;
     // As the name states; Convert Quaternions to Rotations or vice-versa.
     procedure ConvertQuaternionsToRotations(KeepQuaternions: Boolean = True);
     procedure ConvertRotationsToQuaternions(KeepRotations: Boolean = True);
   end;
 
-  { A list of TgxSkeletonFrame objects. }
+  // A list of TgxSkeletonFrame objects.
   TgxSkeletonFrameList = class(TPersistentObjectList)
   private
     FOwner: TPersistent;
@@ -172,7 +176,7 @@ type
   TgxSkeleton = class;
   TgxSkeletonBone = class;
 
-  { A list of skeleton bones. }
+  // A list of skeleton bones.
   TgxSkeletonBoneList = class(TPersistentObjectList)
   private
     FSkeleton: TgxSkeleton; // not persistent
@@ -188,18 +192,18 @@ type
     procedure ReadFromFiler(reader: TVirtualReader); override;
     property Skeleton: TgxSkeleton read FSkeleton;
     property Items[Index: Integer]: TgxSkeletonBone read GetSkeletonBone; default;
-    { Returns a bone by its BoneID, nil if not found. }
+    // Returns a bone by its BoneID, nil if not found.
     function BoneByID(anID: Integer): TgxSkeletonBone; virtual;
-    { Returns a bone by its Name, nil if not found. }
+    // Returns a bone by its Name, nil if not found.
     function BoneByName(const aName: string): TgxSkeletonBone; virtual;
-    { Number of bones (including all children and self). }
+    // Number of bones (including all children and self).
     function BoneCount: Integer;
     // Render skeleton wireframe
     procedure BuildList(var mrci: TgxRenderContextInfo); virtual; abstract;
     procedure PrepareGlobalMatrices; virtual;
   end;
 
-  { This list store skeleton root bones exclusively. }
+  // This list store skeleton root bones exclusively.
   TgxSkeletonRootBoneList = class(TgxSkeletonBoneList)
   public
     procedure WriteToFiler(writer: TVirtualWriter); override;
@@ -209,10 +213,10 @@ type
     property GlobalMatrix: TMatrix read FGlobalMatrix write FGlobalMatrix;
   end;
 
-  { A skeleton bone or node and its children.
+  (* A skeleton bone or node and its children.
     This class is the base item of the bones hierarchy in a skeletal model.
     The joint values are stored in a TgxSkeletonFrame, but the calculated bone
-    matrices are stored here. }
+    matrices are stored here. *)
   TgxSkeletonBone = class(TgxSkeletonBoneList)
   private
     FOwner: TgxSkeletonBoneList; // indirectly persistent
@@ -235,12 +239,12 @@ type
     property BoneID: Integer read FBoneID write FBoneID;
     property Color: Cardinal read FColor write SetColor;
     property Items[Index: Integer]: TgxSkeletonBone read GetSkeletonBone; default;
-    { Returns a bone by its BoneID, nil if not found. }
+    // Returns a bone by its BoneID, nil if not found.
     function BoneByID(anID: Integer): TgxSkeletonBone; override;
     function BoneByName(const aName: string): TgxSkeletonBone; override;
-    { Set the bone's matrix. Becareful using this. }
+    // Set the bone's matrix. Becareful using this.
     procedure SetGlobalMatrix(Matrix: TMatrix); // Ragdoll
-    { Set the bone's GlobalMatrix. Used for Ragdoll. }
+    // Set the bone's GlobalMatrix. Used for Ragdoll.
     procedure SetGlobalMatrixForRagDoll(RagDollMatrix: TMatrix); // Ragdoll
     { Calculates the global matrix for the bone and its sub-bone.
       Call this function directly only the RootBone. }
@@ -249,16 +253,16 @@ type
       Global matrices must be prepared by invoking PrepareGlobalMatrices
       on the root bone. }
     property GlobalMatrix: TMatrix read FGlobalMatrix;
-    { Free all sub bones and reset BoneID and Name. }
+    // Free all sub bones and reset BoneID and Name.
     procedure Clean; override;
   end;
 
   TgxSkeletonColliderList = class;
 
-  { A general class storing the base level info required for skeleton
+  (* A general class storing the base level info required for skeleton
     based collision methods. This class is meant to be inherited from
     to create skeleton driven Verlet Constraints, ODE Geoms, etc.
-    Overriden classes should be named as TSCxxxxx. }
+    Overriden classes should be named as TSCxxxxx. *)
   TgxSkeletonCollider = class(TPersistentObject)
   private
     FOwner: TgxSkeletonColliderList;
@@ -274,9 +278,9 @@ type
     constructor CreateOwned(aOwner: TgxSkeletonColliderList);
     procedure WriteToFiler(writer: TVirtualWriter); override;
     procedure ReadFromFiler(reader: TVirtualReader); override;
-    { This method is used to align the colliders and their
+    (* This method is used to align the colliders and their
       derived objects to their associated skeleton bone.
-      Override to set up descendant class alignment properties. }
+      Override to set up descendant class alignment properties. *)
     procedure AlignCollider; virtual;
     property Owner: TgxSkeletonColliderList read FOwner;
     // The bone that this collider associates with.
@@ -290,7 +294,7 @@ type
     property AutoUpdate: Boolean read FAutoUpdate write FAutoUpdate;
   end;
 
-  { List class for storing TgxSkeletonCollider objects. }
+  // List class for storing TgxSkeletonCollider objects.
   TgxSkeletonColliderList = class(TPersistentObjectList)
   private
     FOwner: TPersistent;
@@ -301,7 +305,7 @@ type
     destructor Destroy; override;
     procedure ReadFromFiler(reader: TVirtualReader); override;
     procedure Clear; override;
-    { Calls AlignCollider for each collider in the list. }
+    // Calls AlignCollider for each collider in the list.
     procedure AlignColliders;
     property Owner: TPersistent read FOwner;
     property Items[Index: Integer]: TgxSkeletonCollider read GetSkeletonCollider; default;
@@ -309,7 +313,7 @@ type
 
   TgxBaseMesh = class;
 
-  { Small structure to store a weighted lerp for use in blending. }
+  // Small structure to store a weighted lerp for use in blending.
   TgxBlendedLerpInfo = record
     frameIndex1, frameIndex2: Integer;
     lerpFactor: Single;
@@ -701,19 +705,19 @@ type
     property LightMapIndex: Integer read FLightMapIndex write FLightMapIndex;
   end;
 
-  { Known descriptions for face group mesh modes.
+  (* Known descriptions for face group mesh modes.
     - fgmmTriangles : issue all vertices with GL_TRIANGLES.
     - fgmmTriangleStrip : issue all vertices with GL_TRIANGLE_STRIP.
     - fgmmFlatTriangles : same as fgmmTriangles, but take advantage of having
     the same normal for all vertices of a triangle.
     - fgmmTriangleFan : issue all vertices with GL_TRIANGLE_FAN.
-    - fgmmQuads : issue all vertices with GL_QUADS. }
+    - fgmmQuads : issue all vertices with GL_QUADS. *)
   TgxFaceGroupMeshMode = (fgmmTriangles, fgmmTriangleStrip, fgmmFlatTriangles, fgmmTriangleFan, fgmmQuads);
 
-  { A face group based on an indexlist.
+  (* A face group based on an indexlist.
     The index list refers to items in the mesh object (vertices, normals, etc.),
     that are all considered in sync, the render is obtained issueing the items
-    in the order given by the vertices. }
+    in the order given by the vertices. *)
   TFGVertexIndexList = class(TgxFaceGroup)
   private
     FVertexIndices: TIntegerList;
@@ -736,7 +740,7 @@ type
     procedure Reverse; override;
     procedure Add(idx: Integer);
     procedure GetExtents(var min, max: TAffineVector);
-    { If mode is strip or fan, convert the indices to triangle list indices. }
+    // If mode is strip or fan, convert the indices to triangle list indices.
     procedure ConvertToList;
     // Return the normal from the 1st three points in the facegroup
     function GetNormal: TAffineVector;
@@ -744,9 +748,9 @@ type
     property vertexIndices: TIntegerList read FVertexIndices write SetVertexIndices;
   end;
 
-  { Adds normals and texcoords indices.
+  (* Adds normals and texcoords indices.
     Allows very compact description of a mesh. The Normals ad TexCoords
-    indices are optionnal, if missing (empty), VertexIndices will be used. }
+    indices are optionnal, if missing (empty), VertexIndices will be used. *)
   TFGVertexNormalTexIndexList = class(TFGVertexIndexList)
   private
     FNormalIndices: TIntegerList;
@@ -767,9 +771,9 @@ type
     property TexCoordIndices: TIntegerList read FTexCoordIndices write SetTexCoordIndices;
   end;
 
-  { Adds per index texture coordinates to its ancestor.
+  (* Adds per index texture coordinates to its ancestor.
     Per index texture coordinates allows having different texture coordinates
-    per triangle, depending on the face it is used in. }
+    per triangle, depending on the face it is used in. *)
   TFGIndexTexCoordList = class(TFGVertexIndexList)
   private
     FTexCoords: TAffineVectorList;
@@ -788,7 +792,7 @@ type
     property texCoords: TAffineVectorList read FTexCoords write SetTexCoords;
   end;
 
-  { A list of TgxFaceGroup objects. }
+  // A list of TgxFaceGroup objects.
   TgxFaceGroups = class(TPersistentObjectList)
   private
     FOwner: TgxMeshObject;
@@ -804,7 +808,7 @@ type
     procedure Clear; override;
     property Items[Index: Integer]: TgxFaceGroup read GetFaceGroup; default;
     procedure AddToTriangles(aList: TAffineVectorList; aTexCoords: TAffineVectorList = nil; aNormals: TAffineVectorList = nil);
-    { Material Library of the owner TgxBaseMesh. }
+    // Material Library of the owner TgxBaseMesh.
     function MaterialLibrary: TgxMaterialLibrary;
     { Sort faces by material.
       Those without material first in list, followed by opaque materials,
@@ -996,12 +1000,12 @@ type
     property OverlaySkeleton: Boolean read FOverlaySkeleton write SetOverlaySkeleton default False;
   end;
 
-  { Container objects for a vector file mesh.
+  (* Container objects for a vector file mesh.
     FreeForms allows loading and rendering vector files (like 3DStudio
     ".3DS" file) in GLScene.  Meshes can be loaded with the LoadFromFile
     method.
     A FreeForm may contain more than one mesh, but they will all be handled
-    as a single object in a scene. }
+    as a single object in a scene. *)
   TgxFreeForm = class(TgxBaseMesh)
   private
     FOctree: TgxOctree;
@@ -1034,10 +1038,10 @@ type
     property NormalsOrientation;
   end;
 
-  { Miscellanious actor options.
+  (* Miscellanious actor options.
     aoSkeletonNormalizeNormals : if set the normals of a skeleton-animated
     mesh will be normalized, this is not required if no normals-based texture
-    coordinates generation occurs, and thus may be unset to improve performance. }
+    coordinates generation occurs, and thus may be unset to improve performance. *)
   TgxActorOption = (aoSkeletonNormalizeNormals);
   TgxActorOptions = set of TgxActorOption;
 
@@ -1049,12 +1053,12 @@ type
   TgxActor = class;
   TgxActorAnimationReference = (aarMorph, aarSkeleton, aarNone);
 
-  { An actor animation sequence.
+  (* An actor animation sequence.
     An animation sequence is a named set of contiguous frames that can be used
     for animating an actor. The referred frames can be either morph or skeletal
     frames (choose which via the Reference property).
     An animation can be directly "played" by the actor by selecting it with
-    SwitchAnimation, and can also be "blended" via a TgxAnimationControler. }
+    SwitchAnimation, and can also be "blended" via a TgxAnimationControler. *)
   TgxActorAnimation = class(TCollectionItem)
   private
     FName: string;
@@ -1075,31 +1079,31 @@ type
     procedure Assign(Source: TPersistent); override;
     property AsString: string read GetAsString write SetAsString;
     function OwnerActor: TgxActor;
-    { Linearly removes the translation component between skeletal frames.
+    (* Linearly removes the translation component between skeletal frames.
       This function will compute the translation of the first bone (index 0)
       and linearly subtract this translation in all frames between startFrame
       and endFrame. Its purpose is essentially to remove the 'slide' that
-      exists in some animation formats (f.i. SMD). }
+      exists in some animation formats (f.i. SMD). *)
     procedure MakeSkeletalTranslationStatic;
-    { Removes the absolute rotation component of the skeletal frames.
+    (* Removes the absolute rotation component of the skeletal frames.
       Some formats will store frames with absolute rotation information,
       if this correct if the animation is the "main" animation.
       This function removes that absolute information, making the animation
-      frames suitable for blending purposes. }
+      frames suitable for blending purposes. *)
     procedure MakeSkeletalRotationDelta;
   published
     property Name: string read FName write FName;
-    { Index of the initial frame of the animation. }
+    // Index of the initial frame of the animation.
     property startFrame: Integer read FStartFrame write SetStartFrame;
-    { Index of the final frame of the animation. }
+    // Index of the final frame of the animation.
     property endFrame: Integer read FEndFrame write SetEndFrame;
-    { Indicates if this is a skeletal or a morph-based animation. }
+    // Indicates if this is a skeletal or a morph-based animation.
     property reference: TgxActorAnimationReference read FReference write SetReference default aarMorph;
   end;
 
   TgxActorAnimationName = string;
 
-  { Collection of actor animations sequences. }
+  // Collection of actor animations sequences.
   TgxActorAnimations = class(TCollection)
   private
     FOwner: TgxActor;
@@ -1122,7 +1126,7 @@ type
     function Last: TgxActorAnimation;
   end;
 
-  { Base class for skeletal animation control. }
+  // Base class for skeletal animation control.
   TgxBaseAnimationControler = class(TComponent)
   private
     FEnabled: Boolean;
@@ -1141,12 +1145,12 @@ type
     property Actor: TgxActor read FActor write SetActor;
   end;
 
-  { Controls the blending of an additionnal skeletal animation into an actor.
+  (* Controls the blending of an additionnal skeletal animation into an actor.
     The animation controler allows animating an actor with several animations
     at a time, for instance, you could use a "run" animation as base animation
     (in TgxActor), blend an animation that makes the arms move differently
     depending on what the actor is carrying, along with an animation that will
-    make the head turn toward a target. }
+    make the head turn toward a target. *)
   TgxAnimationControler = class(TgxBaseAnimationControler)
   private
     FAnimationName: TgxActorAnimationName;
@@ -1161,12 +1165,12 @@ type
     property Ratio: Single read FRatio write SetRatio;
   end;
 
-  { Actor frame-interpolation mode.
+  (* Actor frame-interpolation mode.
     - afpNone : no interpolation, display CurrentFrame only
-    - afpLinear : perform linear interpolation between current and next frame }
+    - afpLinear : perform linear interpolation between current and next frame *)
   TActorFrameInterpolation = (afpNone, afpLinear);
 
-  { Defines how an actor plays between its StartFrame and EndFrame.
+  (* Defines how an actor plays between its StartFrame and EndFrame.
     aamNone : no animation is performed
     aamPlayOnce : play from current frame to EndFrame, once end frame has
     been reached, switches to aamNone
@@ -1176,13 +1180,13 @@ type
     has been reached, switches to aamBounceBackward
     aamBounceBackward : play from current frame to StartFrame, once start
     frame has been reached, switches to aamBounceForward
-    aamExternal : Allows for external animation control }
+    aamExternal : Allows for external animation control *)
   TgxActorAnimationMode = (aamNone, aamPlayOnce, aamLoop, aamBounceForward, aamBounceBackward, aamLoopBackward, aamExternal);
 
-  { Mesh class specialized in animated meshes.
+  (* Mesh class specialized in animated meshes.
     The TgxActor provides a quick interface to animated meshes based on morph
     or skeleton frames, it is capable of performing frame interpolation and
-    animation blending (via TgxAnimationControler components). }
+    animation blending (via TgxAnimationControler components). *)
   TgxActor = class(TgxBaseMesh)
   private
     FStartFrame, FEndFrame: Integer;
@@ -1216,18 +1220,18 @@ type
     destructor Destroy; override;
     procedure Assign(Source: TPersistent); override;
     procedure BuildList(var rci: TgxRenderContextInfo); override;
-    procedure DoProgress(const progressTime: TgxProgressTimes); override;
+    procedure DoProgress(const progressTime: TProgressTimes); override;
     procedure LoadFromStream(const filename: string; aStream: TStream); override;
     procedure SwitchToAnimation(anAnimation: TgxActorAnimation; smooth: Boolean = False); overload;
     procedure SwitchToAnimation(const AnimationName: string; smooth: Boolean = False); overload;
     procedure SwitchToAnimation(animationIndex: Integer; smooth: Boolean = False); overload;
     function CurrentAnimation: string;
-    { Synchronize self animation with an other actor.
+    (* Synchronize self animation with an other actor.
       Copies Start/Current/End Frame values, CurrentFrameDelta,
-      AnimationMode and FrameInterpolation. }
+      AnimationMode and FrameInterpolation. *)
     procedure Synchronize(referenceActor: TgxActor);
-    { Provides a direct access to FCurrentFrame without any checks.
-      Used in TgxActorProxy. }
+    (* Provides a direct access to FCurrentFrame without any checks.
+      Used in TgxActorProxy. *)
     procedure SetCurrentFrameDirect(const Value: Integer);
     function NextFrameIndex: Integer;
     procedure NextFrame(nbSteps: Integer = 1);
@@ -7262,7 +7266,7 @@ begin
   end;
 end;
 
-procedure TgxActor.DoProgress(const progressTime: TgxProgressTimes);
+procedure TgxActor.DoProgress(const progressTime: TProgressTimes);
 var
   fDelta: Single;
 begin

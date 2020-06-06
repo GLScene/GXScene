@@ -1,10 +1,12 @@
-//
-// Graphic Scene Engine, http://glscene.org
-//
-{
-   Implements the standard Teapot, build from evaluators.
-}
+(*******************************************
+*                                          *
+* Graphic Scene Engine, http://glscene.org *
+*                                          *
+********************************************)
+
 unit GXS.Teapot;
+
+(* Implements the standard Teapot, build from evaluators *)
 
 interface
 
@@ -25,8 +27,8 @@ uses
 
 type
 
-  { The classic teapot.
-    The only use of this object is as placeholder for testing... }
+  (* The classic teapot.
+    The only use of this object is as placeholder for testing... *)
   TgxTeapot = class(TgxSceneObject)
   private
     FGrid: Cardinal;

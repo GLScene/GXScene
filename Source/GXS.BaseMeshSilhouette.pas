@@ -1,6 +1,8 @@
-//
-// Graphic Scene Engine, http://glscene.org
-//
+(*******************************************
+*                                          *
+* Graphic Scene Engine, http://glscene.org *
+*                                          *
+********************************************)
 (*
   Silhouette classes for BaseMesh and FaceGroups.
 *)

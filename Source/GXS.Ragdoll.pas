@@ -27,7 +27,6 @@ type
 
   TgxRagdolBoneList = class (TPersistentObjectList)
   private
-    
      FRagdoll : TgxRagdoll;
   protected
     function GetRagdollBone(Index: Integer) : TgxRagdolBone;

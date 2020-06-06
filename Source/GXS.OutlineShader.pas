@@ -1,6 +1,11 @@
-//
-// Graphic Scene Engine, http://glscene.org
-//
+(*******************************************
+*                                          *
+* Graphic Scene Engine, http://glscene.org *
+*                                          *
+********************************************)
+
+unit GXS.OutlineShader;
+
 (*
    A simple shader that adds an outline to an object.
 
@@ -11,7 +16,6 @@
                    color array.
        3. Doesn't Works with visible backfaces.
 *)
-unit GXS.OutlineShader;
 
 interface
 
@@ -47,7 +51,7 @@ type
     destructor Destroy; override;
   published
     property LineColor: TgxColor read FLineColor write FLineColor;
-    { Line smoothing control }
+    // Line smoothing control
     property LineSmooth: Boolean read FOutlineSmooth write SetOutlineSmooth
       default false;
     property LineWidth: Single read FOutlineWidth write SetOutlineWidth;

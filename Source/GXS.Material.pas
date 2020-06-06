@@ -1,6 +1,8 @@
-//
-// Graphic Scene Engine, http://glscene.org
-//
+(*******************************************
+*                                          *
+* Graphic Scene Engine, http://glscene.org *
+*                                          *
+********************************************)
 (*
   Handles all the material + material library stuff.
 *)
@@ -25,7 +27,7 @@ uses
   Scene.PersistentClasses,
   Scene.Strings,
   GXS.RenderContextInfo,
-  GXS.BaseClasses,
+  Scene.BaseClasses,
   GXS.Context,
   GXS.Texture,
   GXS.Color,
@@ -88,7 +90,7 @@ type
     tracking, as well as setup/application facilities.
     Subclasses are expected to provide implementation for DoInitialize,
     DoApply, DoUnApply and DoFinalize. *)
-  TgxShader = class(TgxUpdateAbleComponent)
+  TgxShader = class(TUpdateAbleComponent)
   private
     FEnabled: Boolean;
     FLibMatUsers: TList;
@@ -99,7 +101,7 @@ type
     FFailedInitAction: TgxShaderFailedInitAction;
   protected
     (* Invoked once, before the first call to DoApply.
-      The call happens with the OpenVX context being active. *)
+      The call happens with the OpenGL context being active. *)
     procedure DoInitialize(var rci: TgxRenderContextInfo; Sender: TObject); virtual;
     (* Request to apply the shader.
       Always followed by a DoUnApply when the shader is no longer needed. *)
@@ -109,7 +111,7 @@ type
       Return True to request a multipass. *)
     function DoUnApply(var rci: TgxRenderContextInfo): Boolean; virtual; abstract;
     (* Invoked once, before the destruction of context or release of shader.
-      The call happens with the OpenVX context being active. *)
+      The call happens with the OpenGL context being active. *)
     procedure DoFinalize; virtual;
     function GetShaderInitialized: Boolean;
     procedure InitializeShader(var rci: TgxRenderContextInfo; Sender: TObject);
@@ -149,7 +151,7 @@ type
     function ShaderSupported: Boolean; virtual;
     (* Defines what to do if for some reason shader failed to initialize.
       Note, that in some cases it cannon be determined by just checking the
-      required OpenVX extentions. You need to try to compile and link the
+      required OpenGL extentions. You need to try to compile and link the
       shader - only at that stage you might catch an error *)
     property FailedInitAction: TgxShaderFailedInitAction read FFailedInitAction write FFailedInitAction
       default fiaRaiseStandardException;
@@ -170,7 +172,7 @@ type
     properties that behave like those of most rendering tools.
     You also have control over shininess (governs specular lighting) and
     polygon mode (lines / fill). *)
-  TgxFaceProperties = class(TgxUpdateAbleObject)
+  TgxFaceProperties = class(TUpdateAbleObject)
   private
     FAmbient, FDiffuse, FSpecular, FEmission: TgxColor;
     FShininess: TgxShininess;
@@ -194,7 +196,7 @@ type
     property Specular: TgxColor read FSpecular write SetSpecular;
   end;
 
-  TgxDepthProperties = class(TgxUpdateAbleObject)
+  TgxDepthProperties = class(TUpdateAbleObject)
   private
     FDepthTest: Boolean;
     FDepthWrite: Boolean;
@@ -246,7 +248,7 @@ type
 	like af_GL_NEVER = GL_NEVER in the definition. *)
   TgxAlphaFunc = TgxComparisonFunction;
 
-  TgxBlendingParameters = class(TgxUpdateAbleObject)
+  TgxBlendingParameters = class(TUpdateAbleObject)
   private
     FUseAlphaFunc: Boolean;
     FUseBlendFunc: Boolean;
@@ -312,7 +314,7 @@ type
     TgxLibMaterial (taken for a material library).
     The TgxLibMaterial has more advanced properties (like texture transforms)
     and provides a standard way of sharing definitions and texture maps *)
-  TgxMaterial = class(TgxUpdateAbleObject, IgxMaterialLibrarySupported, IgxNotifyAble, IgxTextureNotifyAble)
+  TgxMaterial = class(TUpdateAbleObject, IgxMaterialLibrarySupported, INotifyAble, IgxTextureNotifyAble)
   private
     FFrontProperties, FBackProperties: TgxFaceProperties;
     FDepthProperties: TgxDepthProperties;
@@ -390,7 +392,7 @@ type
     property PolygonMode: TgxPolygonMode read FPolygonMode write SetPolygonMode default pmFill;
   end;
 
-  TgxAbstractLibMaterial = class(TCollectionItem, IgxMaterialLibrarySupported, IgxNotifyAble)
+  TgxAbstractLibMaterial = class(TCollectionItem, IgxMaterialLibrarySupported, INotifyAble)
   protected
     FUserList: TList;
     FName: TgxLibMaterialName;
@@ -415,10 +417,10 @@ type
     procedure Apply(var ARci: TgxRenderContextInfo); virtual; abstract;
     // Restore non-standard material states that were altered
     function UnApply(var ARci: TgxRenderContextInfo): Boolean; virtual; abstract;
-    procedure RegisterUser(Obj: TgxUpdateAbleObject); overload;
-    procedure UnRegisterUser(Obj: TgxUpdateAbleObject); overload;
-    procedure RegisterUser(comp: TgxUpdateAbleComponent); overload;
-    procedure UnRegisterUser(comp: TgxUpdateAbleComponent); overload;
+    procedure RegisterUser(Obj: TUpdateAbleObject); overload;
+    procedure UnRegisterUser(Obj: TUpdateAbleObject); overload;
+    procedure RegisterUser(comp: TUpdateAbleComponent); overload;
+    procedure UnRegisterUser(comp: TUpdateAbleComponent); overload;
     procedure RegisterUser(libMaterial: TgxLibMaterial); overload;
     procedure UnRegisterUser(libMaterial: TgxLibMaterial); overload;
     procedure NotifyUsers;
@@ -532,7 +534,7 @@ type
     procedure DeleteUnusedMaterials;
   end;
 
-  TgxAbstractMaterialLibrary = class(TgxCadenceAbleComponent)
+  TgxAbstractMaterialLibrary = class(TCadenceAbleComponent)
   protected
     FMaterials: TgxAbstractLibMaterials;
     FLastAppliedMaterial: TgxAbstractLibMaterial;
@@ -1404,9 +1406,9 @@ end;
 
 procedure TgxMaterial.NotifyChange(Sender: TObject);
 var
-  intf: IgxNotifyAble;
+  intf: INotifyAble;
 begin
-  if Supports(Owner, IgxNotifyAble, intf) then
+  if Supports(Owner, INotifyAble, intf) then
     intf.NotifyChange(Self);
 end;
 
@@ -1550,24 +1552,24 @@ begin
   Result := -1; // ignore
 end;
 
-procedure TgxAbstractLibMaterial.RegisterUser(Obj: TgxUpdateAbleObject);
+procedure TgxAbstractLibMaterial.RegisterUser(Obj: TUpdateAbleObject);
 begin
   Assert(FUserList.IndexOf(Obj) < 0);
   FUserList.Add(Obj);
 end;
 
-procedure TgxAbstractLibMaterial.UnRegisterUser(Obj: TgxUpdateAbleObject);
+procedure TgxAbstractLibMaterial.UnRegisterUser(Obj: TUpdateAbleObject);
 begin
   FUserList.Remove(Obj);
 end;
 
-procedure TgxAbstractLibMaterial.RegisterUser(comp: TgxUpdateAbleComponent);
+procedure TgxAbstractLibMaterial.RegisterUser(comp: TUpdateAbleComponent);
 begin
   Assert(FUserList.IndexOf(comp) < 0);
   FUserList.Add(comp);
 end;
 
-procedure TgxAbstractLibMaterial.UnRegisterUser(comp: TgxUpdateAbleComponent);
+procedure TgxAbstractLibMaterial.UnRegisterUser(comp: TUpdateAbleComponent);
 begin
   FUserList.Remove(comp);
 end;
@@ -1600,10 +1602,10 @@ begin
     for i := 0 to FUserList.Count - 1 do
     begin
       Obj := TObject(FUserList[i]);
-      if Obj is TgxUpdateAbleObject then
-        TgxUpdateAbleObject(FUserList[i]).NotifyChange(Self)
-      else if Obj is TgxUpdateAbleComponent then
-        TgxUpdateAbleComponent(FUserList[i]).NotifyChange(Self)
+      if Obj is TUpdateAbleObject then
+        TUpdateAbleObject(FUserList[i]).NotifyChange(Self)
+      else if Obj is TUpdateAbleComponent then
+        TUpdateAbleComponent(FUserList[i]).NotifyChange(Self)
       else
       begin
         Assert(Obj is TgxAbstractLibMaterial);
@@ -1871,10 +1873,10 @@ begin
         TgxMaterial(FUserList[i]).NotifyTexMapChange(Self)
       else if Obj is TgxLibMaterial then
         TgxLibMaterial(FUserList[i]).NotifyUsersOfTexMapChange
-      else if Obj is TgxUpdateAbleObject then
-        TgxUpdateAbleObject(FUserList[i]).NotifyChange(Self)
-      else if Obj is TgxUpdateAbleComponent then
-        TgxUpdateAbleComponent(FUserList[i]).NotifyChange(Self);
+      else if Obj is TUpdateAbleObject then
+        TUpdateAbleObject(FUserList[i]).NotifyChange(Self)
+      else if Obj is TUpdateAbleComponent then
+        TUpdateAbleComponent(FUserList[i]).NotifyChange(Self);
     end;
   finally
     FNotifying := False;

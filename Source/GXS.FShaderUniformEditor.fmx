@@ -1,4 +1,4 @@
-object gxShaderUniformEditorForm: TgxShaderUniformEditorForm
+object ShaderUniformEditorForm: TShaderUniformEditorForm
   Left = 0
   Top = 0
   Caption = 'Autofill of uniforms'

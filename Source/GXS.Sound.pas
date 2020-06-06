@@ -1,6 +1,8 @@
-//
-// Graphic Scene Engine, http://glscene.org
-//
+(*******************************************
+*                                          *
+* Graphic Scene Engine, http://glscene.org *
+*                                          *
+********************************************)
 (*
   Base classes and interface for GLScene Sound System
 *)
@@ -20,7 +22,7 @@ uses
   GXS.Scene,
   Scene.VectorGeometry,
   GXS.Cadencer,
-  GXS.BaseClasses,
+  Scene.BaseClasses,
   GXS.CrossPlatform,
   GXS.Utils;
 
@@ -231,7 +233,7 @@ type
        Subclass should override the DoActivate and DoDeActivate protected methods
        to "initialize/unitialize" their sound layer, actual data releases should
        occur in destructor however. }
-  TgxSoundManager = class(TgxCadenceAbleComponent)
+  TgxSoundManager = class(TCadenceAbleComponent)
   private
     FActive: Boolean;
     FMute: Boolean;
@@ -316,7 +318,7 @@ type
     { Progress notification for time synchronization.
        This method will call UpdateSources depending on the last time
        it was performed and the value of the UpdateFrequency property. }
-    procedure DoProgress(const progressTime: TgxProgressTimes); override;
+    procedure DoProgress(const progressTime: TProgressTimes); override;
     { Sound manager API reported CPU Usage.
        Returns -1 when unsupported. }
     function CPUUsagePercent: Single; virtual;
@@ -409,7 +411,7 @@ type
     class function FriendlyName: string; override;
     class function FriendlyDescription: string; override;
     class function UniqueItem: Boolean; override;
-    procedure DoProgress(const progressTime: TgxProgressTimes); override;
+    procedure DoProgress(const progressTime: TProgressTimes); override;
     property PlayingSource: TgxSoundSource read FPlayingSource;
   published
     property Source: TgxBaseSoundSource read FSource write SetSource;
@@ -1390,7 +1392,7 @@ begin
     Sources.Delete(i);
 end;
 
-procedure TgxSoundManager.DoProgress(const progressTime: TgxProgressTimes);
+procedure TgxSoundManager.DoProgress(const progressTime: TProgressTimes);
 begin
   if not Active then
     Exit;
@@ -1484,7 +1486,7 @@ begin
   Result := False;
 end;
 
-procedure TgxBSoundEmitter.DoProgress(const progressTime: TgxProgressTimes);
+procedure TgxBSoundEmitter.DoProgress(const progressTime: TProgressTimes);
 begin
   // nothing, yet
 end;
@@ -1535,7 +1537,7 @@ end;
 initialization
 // ------------------------------------------------------------------
 
-   // class registrations
+   
   RegisterClasses([TgxSoundLibrary]);
   RegisterXCollectionItemClass(TgxBSoundEmitter);
   vSoundLibraries := TList.Create;

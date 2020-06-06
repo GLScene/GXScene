@@ -1,10 +1,12 @@
-//
-// Graphic Scene Engine, http://glscene.org
-//
-{
-   A shader that allows texture combiner setup. 
-}
+(*******************************************
+*                                          *
+* Graphic Scene Engine, http://glscene.org *
+*                                          *
+********************************************)
+
 unit GXS.TexCombineShader;
+
+(* A shader that allows texture combiner setup *)
 
 interface
 
@@ -26,7 +28,7 @@ uses
 
 type
 
-  { A shader that can setup the texture combiner.  }
+  // A shader that can setup the texture combiner.
   TgxTexCombineShader = class(TgxShader)
   private
     FCombiners: TStringList;

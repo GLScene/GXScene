@@ -20,7 +20,7 @@ uses
   Import.OpenGL1x, 
   GXS.Scene, 
   GXS.CrossPlatform, 
-  GXS.BaseClasses, 
+  Scene.BaseClasses, 
   GXS.State, 
   GXS.Context, 
   GXS.RenderContextInfo, 

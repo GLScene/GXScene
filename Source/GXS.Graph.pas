@@ -1,10 +1,12 @@
-//
-// Graphic Scene Engine, http://glscene.org
-//
-(*
-  Graph plotting objects for GLScene
-*)
+(*******************************************
+*                                          *
+* Graphic Scene Engine, http://glscene.org *
+*                                          *
+********************************************)
+
 unit GXS.Graph;
+
+(* Graph plotting objects for Scene *)
 
 interface
 
@@ -23,14 +25,14 @@ uses
   GXS.Objects,
   Scene.VectorLists,
   GXS.Color,
-  GXS.BaseClasses,
+  Scene.BaseClasses,
   GXS.RenderContextInfo,
   GXS.State,
   Scene.VectorTypes;
 
 type
 
-  TgxSamplingScale = class(TgxUpdateAbleObject)
+  TgxSamplingScale = class(TUpdateAbleObject)
   private
     FMin: Single;
     FMax: Single;

@@ -51,7 +51,7 @@ type
   TInstPropList = array[0..1023] of TInstProp;
 
 type
-  TXCollectionEditor = class(TForm)
+  TXCollectionEditorForm = class(TForm)
     ToolBar1: TToolBar;
     TBAdd: TButton;
     ListView: TListView;
@@ -85,7 +85,7 @@ type
     procedure SetXCollection(aXCollection: TXCollection; designer: IDesigner);
   end;
 
-function XCollectionEditor: TXCollectionEditor;
+function XCollectionEditorForm: TXCollectionEditorForm;
 procedure ReleaseXCollectionEditor;
 
 //=======================================================================
@@ -97,10 +97,10 @@ implementation
 var
   vXCollectionEditor: TXCollectionEditor;
 
-function XCollectionEditor: TXCollectionEditor;
+function XCollectionEditorForm: TXCollectionEditorForm;
 begin
   if not Assigned(vXCollectionEditor) then
-    vXCollectionEditor := TXCollectionEditor.Create(nil);
+    vXCollectionEditor := TXCollectionEditorForm.Create(nil);
   Result := vXCollectionEditor;
 end;
 
@@ -116,25 +116,25 @@ end;
 //--------------------------------------------
 // TXCollectionEditorForm
 //--------------------------------------------
-procedure TXCollectionEditor.FormCreate(Sender: TObject);
+procedure TXCollectionEditorForm.FormCreate(Sender: TObject);
 begin
   RegisterBehaviourNameChangeEvent(OnNameChanged);
   RegisterXCollectionDestroyEvent(OnXCollectionDestroyed);
 end;
 
-procedure TXCollectionEditor.FormDestroy(Sender: TObject);
+procedure TXCollectionEditorForm.FormDestroy(Sender: TObject);
 begin
   DeRegisterBehaviourNameChangeEvent(OnNameChanged);
   DeRegisterXCollectionDestroyEvent(OnXCollectionDestroyed);
 end;
 
-procedure TXCollectionEditor.FormHide(Sender: TObject);
+procedure TXCollectionEditorForm.FormHide(Sender: TObject);
 begin
   SetXCollection(nil, nil);
   ReleaseXCollectionEditor;
 end;
 
-procedure TXCollectionEditor.SetXCollection(aXCollection: TXCollection; designer: IDesigner);
+procedure TXCollectionEditorForm.SetXCollection(aXCollection: TXCollection; designer: IDesigner);
 begin
   // if Assigned(ownerComponent) then
   // ownerComponent.RemoveFreeNotification(Self);
@@ -156,7 +156,7 @@ begin
   PrepareListView;
 end;
 
-procedure TXCollectionEditor.ListViewChange(Sender: TObject);
+procedure TXCollectionEditorForm.ListViewChange(Sender: TObject);
 var
   sel: Boolean;
 begin
@@ -180,7 +180,7 @@ begin
   end;
 end;
 
-procedure TXCollectionEditor.ACMoveDownExecute(Sender: TObject);
+procedure TXCollectionEditorForm.ACMoveDownExecute(Sender: TObject);
 begin
   if ListView.Selected <> nil then
   begin
@@ -188,7 +188,7 @@ begin
   end;
 end;
 
-procedure TXCollectionEditor.ACMoveUpExecute(Sender: TObject);
+procedure TXCollectionEditorForm.ACMoveUpExecute(Sender: TObject);
 begin
   if ListView.Selected <> nil then
   begin
@@ -196,7 +196,7 @@ begin
   end;
 end;
 
-procedure TXCollectionEditor.ACRemoveExecute(Sender: TObject);
+procedure TXCollectionEditorForm.ACRemoveExecute(Sender: TObject);
 begin
   if ListView.Selected <> nil then
   begin
@@ -204,23 +204,23 @@ begin
   end;
 end;
 
-procedure TXCollectionEditor.OnAddXCollectionItemClick(Sender: TObject);
+procedure TXCollectionEditorForm.OnAddXCollectionItemClick(Sender: TObject);
 begin
   /// to do
 end;
 
-procedure TXCollectionEditor.OnNameChanged(Sender: TObject);
+procedure TXCollectionEditorForm.OnNameChanged(Sender: TObject);
 begin
   /// to do
 end;
 
-procedure TXCollectionEditor.OnXCollectionDestroyed(Sender: TObject);
+procedure TXCollectionEditorForm.OnXCollectionDestroyed(Sender: TObject);
 begin
   if TXCollection(Sender) = FXCollection then
     Close;
 end;
 
-procedure TXCollectionEditor.PrepareListView;
+procedure TXCollectionEditorForm.PrepareListView;
 var
   i: Integer;
   prevSelData: TValue;   // prev Pointer;
@@ -267,7 +267,7 @@ begin
   ListViewChange(Self);
 end;
 
-procedure TXCollectionEditor.PrepareXCollectionItemPopup(parent: TMenuItem);
+procedure TXCollectionEditorForm.PrepareXCollectionItemPopup(parent: TMenuItem);
 var
   i: Integer;
   list: TList;

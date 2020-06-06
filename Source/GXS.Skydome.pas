@@ -1,7 +1,10 @@
-﻿//
-// Graphic Scene Engine, http://glscene.org
-//
-{   Skydome object
+﻿(*******************************************
+*                                          *
+* Graphic Scene Engine, http://glscene.org *
+*                                          *
+********************************************)
+{
+   Skydome object
 }
 unit GXS.Skydome;
 

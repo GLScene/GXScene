@@ -1,20 +1,20 @@
-//
-// Graphic Scene Engine, http://glscene.org
-//
-{
-   Constructive Solid Geometry in GLScene. 
+(*******************************************
+*                                          *
+* Graphic Scene Engine, http://glscene.org *
+*                                          *
+********************************************)
+
+unit GXS.MeshCSG;
+
+(*
+   Constructive Solid Geometry in Scene.
 
    The CSG system uses BSP to optimize what triangles it considers.
    Its kept on a mesh basis to simplyfy things, it allways generates new BSP's,
    even if the meshes allready had BSP optimization.
 
-   Author: Joen Joensen.
-   Contributed to the GLScene community.
-
    Features: CSG_Union, CSG_Subtraction, CSG_Intersection.
-
-}
-unit GXS.MeshCSG;
+*)
 
 interface
 

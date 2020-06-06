@@ -1,10 +1,12 @@
-//
-// Graphic Scene Engine, http://glscene.org
-//
-(*
-  Nodes are used to describe lines, polygons + more.
-*)
+(*******************************************
+*                                          *
+* Graphic Scene Engine, http://glscene.org *
+*                                          *
+********************************************)
+
 unit GXS.Nodes;
+
+(* Nodes are used to describe lines, polygons + more *)
 
 interface
 
@@ -14,13 +16,13 @@ uses
   System.Math,
 
   Import.OpenGLx,
+  Scene.VectorTypes,
+  Scene.XOpenGL,
   Scene.VectorGeometry,
   GXS.Context,
-  GXS.BaseClasses,
+  Scene.BaseClasses,
   GXS.Coordinates,
-  GXS.Spline,
-  Scene.VectorTypes,
-  XOpenGL;
+  Scene.Spline;
 
 {$I Scene.inc}
 
@@ -42,14 +44,14 @@ type
     destructor Destroy; override;
     procedure Assign(Source: TPersistent); override;
     function AsAddress: PGLFloat;
-    { The coordinates viewed as a vector.
+    (* The coordinates viewed as a vector.
       Assigning a value to this property will trigger notification events,
-      if you don't want so, use DirectVector instead. }
+      if you don't want so, use DirectVector instead. *)
     property AsVector: TVector read FCoords write SetAsVector;
-    { The coordinates viewed as an affine vector.
+    (* The coordinates viewed as an affine vector.
       Assigning a value to this property will trigger notification events,
       if you don't want so, use DirectVector instead.
-      The W component is automatically adjustes depending on style. }
+      The W component is automatically adjustes depending on style. *)
     property AsAffineVector: TAffineVector read GetAsAffineVector write SetAsAffineVector;
     property W: Single index 3 read GetCoordinate write SetCoordinate stored StoreCoordinate;
     property TagObject: TObject read FTagObject write FTagObject;
@@ -255,8 +257,8 @@ end;
 
 procedure TgxNodes.NotifyChange;
 begin
-  if (UpdateCount = 0) and (GetOwner <> nil) and (GetOwner is TgxUpdateAbleComponent) then
-    TgxUpdateAbleComponent(GetOwner).NotifyChange(Self);
+  if (UpdateCount = 0) and (GetOwner <> nil) and (GetOwner is TUpdateAbleComponent) then
+    TUpdateAbleComponent(GetOwner).NotifyChange(Self);
 end;
 
 procedure TgxNodes.EndUpdate;

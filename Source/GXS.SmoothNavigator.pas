@@ -1,6 +1,8 @@
-//
-// Graphic Scene Engine, http://glscene.org
-//
+(*******************************************
+*                                          *
+* Graphic Scene Engine, http://glscene.org *
+*                                          *
+********************************************)
 {
    An extention of TgxNavigator, which allows to move objects with inertia
    Note: it is not completely FPS-independant. Only Moving code is, but

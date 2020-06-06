@@ -1,7 +1,12 @@
-//
-// Graphic Scene Engine, http://glscene.org
-//
-{
+(*******************************************
+*                                          *
+* Graphic Scene Engine, http://glscene.org *
+*                                          *
+********************************************)
+
+unit GXS.Objects;
+
+(*
   Implementation of basic scene objects plus some management routines.
 
   All objects declared in this unit are part of the basic GLScene package,
@@ -10,9 +15,7 @@
   More complex or more specialized versions should be placed in dedicated
   units where they can grow and prosper untammed. "Generic" geometrical
   objects can be found GXS.GeomObjects.
-}
-
-unit GXS.Objects;
+*)
 
 interface
 
@@ -36,7 +39,7 @@ uses
   GXS.Silhouette,
   GXS.Color,
   GXS.RenderContextInfo,
-  GXS.BaseClasses,
+  Scene.BaseClasses,
   GXS.Nodes,
   GXS.PipelineTransformation,
   GXS.Coordinates;
@@ -96,7 +99,7 @@ type
       The default behaviour of the dummycube is to be visible at design-time
       only, and invisible at runtime. }
     property VisibleAtRunTime: Boolean read FVisibleAtRunTime write SetVisibleAtRunTime default False;
-    { Amalgamate the dummy's children in a single OpenVX entity.
+    { Amalgamate the dummy's children in a single OpenGL entity.
       This activates a special rendering mode, which will compile
       the rendering of all of the dummycube's children objects into a
       single display list. This may provide a significant speed up in some
@@ -220,7 +223,7 @@ type
   { Point parameters as in ARB_point_parameters.
     Make sure to read the ARB_point_parameters spec if you want to understand
     what each parameter does. }
-  TgxPointParameters = class(TgxUpdateAbleObject)
+  TgxPointParameters = class(TUpdateAbleObject)
   private
     FEnabled: Boolean;
     FMinSize, FMaxSize: Single;
@@ -346,7 +349,7 @@ type
     procedure SetLineWidth(const val: Single);
     function StoreLineWidth: Boolean; inline;
     procedure SetAntiAliased(const val: Boolean);
-    { Setup OpenVX states according to line style.
+    { Setup OpenGL states according to line style.
       You must call RestoreLineStyle after drawing your lines.
       You may use nested calls with SetupLineStyle/RestoreLineStyle. }
     procedure SetupLineStyle(var rci: TgxRenderContextInfo);
@@ -356,7 +359,7 @@ type
     procedure Assign(Source: TPersistent); override;
     procedure NotifyChange(Sender: TObject); override;
   published
-    { Indicates if OpenVX should smooth line edges.
+    { Indicates if OpenGL should smooth line edges.
       Smoothed lines looks better but are poorly implemented in most OpenGL
       drivers and take *lots* of rendering time. }
     property AntiAliased: Boolean read FAntiAliased write SetAntiAliased default False;
@@ -644,7 +647,7 @@ type
     property TopCap: TgxCapType read FTopCap write SetTopCap default ctNone;
   end;
 
-{ Issues OpenVX for a unit-size cube stippled wireframe. }
+// Issues for a unit-size cube stippled wireframe.
 procedure CubeWireframeBuildList(var rci: TgxRenderContextInfo; Size: Single;
   Stipple: Boolean; const Color: TColorVector);
 
@@ -657,7 +660,7 @@ implementation
 // -------------------------------------------------------------
 
 uses
-  GXS.Spline,
+  Scene.Spline,
   GXS.State;
 
 procedure CubeWireframeBuildList(var rci: TgxRenderContextInfo; Size: Single;

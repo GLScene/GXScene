@@ -1,9 +1,11 @@
-//
-// Graphic Scene Engine, http://glscene.org
-//
+(*******************************************
+*                                          *
+* Graphic Scene Engine, http://glscene.org *
+*                                          *
+********************************************)
 {
-   Implements a basic Canvas-like interface over for OpenVX
-   This class can be used for generic OpenVX applications and has no dependencies
+   Implements a basic Canvas-like interface over for OpenGL
+   This class can be used for generic OpenGL applications and has no dependencies
    to the GXScene core units (only to base units).
 }
 unit GXS.Canvas;
@@ -30,15 +32,15 @@ type
 
   TArcDirection = (adCounterClockWise, adClockWise);
 
-    { A simple Canvas-like interface for OpenVX.
-       This class implements a small "shell" for 2D operations in OpenVX,
-       it operates over the current OpenVX context and provides methods
+    { A simple Canvas-like interface for OpenGL.
+       This class implements a small "shell" for 2D operations in OpenGL,
+       it operates over the current OpenGL context and provides methods
        for drawing lines, ellipses and points. 
        This class is typically used by creating an instance, using it for drawing,
        and freeing the instance. When drawing (0, 0) is the top left corner. 
        All coordinates are internally maintained with floating point precision. 
        Several states are cached and it is of primary importance not to invoke
-       OpenVX directly throughout the life of an instance (at the cost of
+       OpenGL directly throughout the life of an instance (at the cost of
        unexpected behaviour). }
   TgxCanvas = class
   private
@@ -74,7 +76,7 @@ type
       This function is invoked automatically by TgxCanvas when changeing
       primitives, you should directly call if you want to render your
       own stuff intertwined with TgxCanvas drawings. In that case, call
-      it before your own OpenVX calls. }
+      it before your own OpenGL calls. }
     procedure StopPrimitive;
     { Inverts the orientation of the Y Axis.
       If (0, 0) was in the top left corner, it will move to the bottom
@@ -137,7 +139,7 @@ type
     procedure FillEllipse(const x, y: Single; const xRadius, yRadius: Single); overload;
     procedure FillEllipse(const x, y: Single; const Radius: Single); overload;
     { Draw a filled gradient ellipse.
-    OpenVX will use the last PenColor and PenAlpha as the center color and do gradient to edge of ellipse using the edgeColor parameter. }
+    OpenGL will use the last PenColor and PenAlpha as the center color and do gradient to edge of ellipse using the edgeColor parameter. }
     procedure FillEllipseGradient(const x, y, xRadius, yRadius: Single;
       const edgeColor: TColorVector); overload;
     procedure FillEllipseGradient(const x, y: Integer;
@@ -567,7 +569,7 @@ begin
   // the center will use the last set PenColor and PenAlpha
   glVertex2f(x, y); // really necessary now :)
 
-  // then OpenVX will do a gradient from the center to the edge using the edgeColor
+  // then OpenGL will do a gradient from the center to the edge using the edgeColor
   glColor4f(edgeColor.X, edgeColor.Y, edgeColor.Z, edgeColor.W);
   EllipseVertices(x, y, xRadius, yRadius);
   StopPrimitive;

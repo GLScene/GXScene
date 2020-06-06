@@ -1,6 +1,11 @@
-﻿//
-// Graphic Scene Engine, http://glscene.org
-//
+﻿(*******************************************
+*                                          *
+* Graphic Scene Engine, http://glscene.org *
+*                                          *
+********************************************)
+
+unit GXS.Extrusion;
+
 (*
   Extrusion objects are solids defined by the
   surface described by a moving curve.
@@ -10,8 +15,6 @@
   All extrusion objects use actually the same kind of "parts",
   one common type should do.
 *)
-
-unit GXS.Extrusion;
 
 interface
 
@@ -24,17 +27,19 @@ uses
 
   Import.OpenGLx,
   Scene.XOpenGL,
+  Scene.VectorTypes,
+  Scene.VectorLists,
+  Scene.VectorGeometry,
+  Scene.Spline,
+
   GXS.Context,
   GXS.Objects,
   GXS.Scene,
   GXS.MultiPolygon,
   GXS.Color,
-  Scene.VectorGeometry,
   GXS.RenderContextInfo,
   GXS.Nodes,
-  GXS.State,
-  Scene.VectorTypes,
-  Scene.VectorLists;
+  GXS.State;
 
 type
 
@@ -76,7 +81,7 @@ type
     destructor Destroy; override;
     procedure Assign(Source: TPersistent); override;
     procedure BuildList(var rci: TgxRenderContextInfo); override;
-    { Number of triangles used for rendering. }
+    // Number of triangles used for rendering.
     property TriangleCount: Integer read FTriangleCount;
     function AxisAlignedDimensionsUnscaled: TVector; override;
     procedure StructureChanged; override;
@@ -134,7 +139,7 @@ type
     destructor Destroy; override;
     procedure Assign(Source: TPersistent); override;
     procedure BuildList(var rci: TgxRenderContextInfo); override;
-    { Number of triangles used for rendering. }
+    // Number of triangles used for rendering.
     property TriangleCount: Integer read FTriangleCount;
     function AxisAlignedDimensionsUnscaled: TVector; override;
     procedure StructureChanged; override;
@@ -239,9 +244,6 @@ type
 // ------------------------------------------------------------------
 implementation
 // ------------------------------------------------------------------
-
-uses
-  GXS.Spline;
 
 // ------------------
 // ------------------ TgxRevolutionSolid ------------------
@@ -1675,7 +1677,7 @@ end;
 initialization
 // ------------------------------------------------------------------
 
-// class registrations
+
 RegisterClasses([TgxRevolutionSolid, TgxExtrusionSolid, TgxPipe]);
 
 end.

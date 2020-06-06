@@ -72,7 +72,9 @@ type
       default fftRealToComplex;
   end;
 
+//-----------------------------------------
 implementation
+//-----------------------------------------
 
 constructor TCUDAFFTPlan.Create(AOwner: TComponent);
 begin

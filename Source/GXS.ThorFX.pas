@@ -1,10 +1,12 @@
-//
-// Graphic Scene Engine, http://glscene.org
-//
-(*
-  ThorFX  for GXScene
-*)
+(*********************************************
+ *                                           *
+ *  Graphic Scene Engine, http://glscene.org *
+ *                                           *
+ *********************************************)
+
 unit GXS.ThorFX;
+
+(* ThorFX  for Scene *)
 
 interface
 
@@ -25,10 +27,10 @@ uses
   Scene.VectorTypes,
   GXS.Cadencer,
   GXS.Color,
-  GXS.BaseClasses,
+  Scene.BaseClasses,
   GXS.Coordinates,
   GXS.RenderContextInfo,
-  GXS.Manager,
+  Scene.Manager,
   GXS.State,
   GXS.TextureFormat;
 
@@ -48,8 +50,8 @@ type
   TCalcPointEvent = procedure(Sender: TObject; PointNo: integer; var x: single;
     var y: single; var z: single) of object;
 
-  { Thor special effect manager. }
-  TgxThorFXManager = class(TgxCadenceAbleComponent)
+  // Thor special effect manager.
+  TgxThorFXManager = class(TCadenceAbleComponent)
   private
     FClients: TList;
     FThorpoints: PThorpointArray;
@@ -83,7 +85,7 @@ type
   public
     constructor Create(AOwner: TComponent); override;
     destructor Destroy; override;
-    procedure DoProgress(const progressTime: TgxProgressTimes); override;
+    procedure DoProgress(const progressTime: TProgressTimes); override;
   published
     property Target: TgxCoordinates read FTarget write SetTarget;
     property Cadencer: TgxCadencer read FCadencer write SetCadencer;
@@ -103,7 +105,7 @@ type
     property OnCalcPoint: TCalcPointEvent read FOnCalcPoint write FOnCalcPoint;
   end;
 
-  { Thor special effect }
+  // Thor special effect
   TgxBThorFX = class(TgxObjectPostEffect)
   private
     FManager: TgxThorFXManager;
@@ -276,7 +278,7 @@ begin
   inherited;
 end;
 
-procedure TgxThorFXManager.DoProgress(const progressTime: TgxProgressTimes);
+procedure TgxThorFXManager.DoProgress(const progressTime: TProgressTimes);
 var
   i: integer;
 
@@ -631,7 +633,7 @@ end;
 initialization
 // ------------------------------------------------------------------
 
-// class registrations
+
 RegisterXCollectionItemClass(TgxBThorFX);
 
 finalization

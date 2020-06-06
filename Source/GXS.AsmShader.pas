@@ -1,14 +1,17 @@
-//
-// Graphic Scene Engine, http://glscene.org
-//
+(*******************************************
+*                                          *
+* Graphic Scene Engine, http://glscene.org *
+*                                          *
+********************************************)
+
+unit GXS.AsmShader;
+
 (*
     TgxAsmShader is a wrapper for all ARB shaders
     This component is only a template and has to be replaced with a
     proper version by someone who uses ARB shaders more then me.
     The history is logged in a former GLS version of the unit.
 *)
- 
-unit GXS.AsmShader;
 
 interface
 
@@ -17,13 +20,13 @@ interface
 uses
   System.Classes, 
   System.SysUtils,
-  
+
   Import.OpenGLx,
   GXS.Context,
-  Scene.VectorGeometry, 
-  Scene.VectorTypes, 
+  Scene.VectorGeometry,
+  Scene.VectorTypes,
   GXS.Texture,
-  GXS.CustomShader, 
+  GXS.CustomShader,
   GXS.RenderContextInfo;
 
 type
@@ -32,8 +35,6 @@ type
   TgxAsmShaderUnUplyEvent = procedure(Shader: TgxCustomAsmShader; var ThereAreMorePasses: Boolean) of object;
 
   TgxAsmShaderParameter = class(TgxCustomShaderParameter)
-  private
-    
   protected
 {
     function GetAsVector1f: Single; override;
@@ -117,7 +118,7 @@ type
     property FailedInitAction;
   end;
 
-//==============================  
+//==============================
 implementation
 //==============================
 

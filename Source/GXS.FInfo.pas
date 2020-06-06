@@ -24,9 +24,11 @@ uses
   FMX.Memo,
   FMX.ScrollBox,
   FMX.Controls.Presentation,
+  FMX.Objects,
 
   GXS.Scene,
-  GXS.Context;
+  GXS.Context,
+  Scene.Strings;
 
 type
   TInfoForm = class(TForm)
@@ -104,7 +106,7 @@ type
     LabelDevelopment: TLabel;
     DevSiteLbl: TLabel;
     Label10: TLabel;
-    VersionLbl: TLabel;
+    TextInfo: TText;
     procedure ButtonCloseClick(Sender: TObject);
     procedure WebSiteLblClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -113,6 +115,7 @@ type
       Shift: TShiftState);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure ListBoxExtensionsDblClick(Sender: TObject);
+    procedure TextInfoClick(Sender: TObject);
   protected
     procedure LoadContributors;
     function GetSceneVersion: string;
@@ -353,19 +356,24 @@ begin
     MemoContributors.Lines.Add( ContributorsFileName) }
 end;
 
+procedure TInfoForm.TextInfoClick(Sender: TObject);
+begin
+
+end;
+
 // -------------------------------------------------------------------
 
 function TInfoForm.GetSceneVersion: string;
 var
   FExePath, FgxSceneRevision: string;
 begin
-  FgxSceneRevision := Copy('GXScene_REVISION', 12, 4);
+  FgxSceneRevision := Copy('Scene_REVISION', 12, 4);
   FExePath := ExtractFilePath(ParamStr(0));
-  if FileExists(FExePath + 'GXSceneRevision') then
+  if FileExists(FExePath + 'SceneRevision') then
   try
     with TStringList.Create do
     try
-      LoadFromFile(FExePath + 'GXSceneRevision');
+      LoadFromFile(FExePath + 'SceneRevision');
       if (Count >= 1) and (trim(Strings[0]) <> '') then
         FgxSceneRevision:= trim(Strings[0]);
     finally

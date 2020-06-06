@@ -1,11 +1,12 @@
-//
-// Graphic Scene Engine, http://glscene.org
-//
-(*
-   Cross-platform viewer.
-*)
+(*******************************************
+*                                          *
+* Graphic Scene Engine, http://glscene.org *
+*                                          *
+********************************************)
 
 unit GXS.Win64Viewer;
+
+(* Cross-platform viewer *)
 
 interface
 
@@ -42,7 +43,7 @@ type
   TTouchEvent = procedure(X, Y, TouchWidth, TouchHeight : integer; TouchID : Cardinal; MultiTouch : boolean) of object;
 
   (* Component where the GLScene objects get rendered.
-     This component delimits the area where OpenVX renders the scene,
+     This component delimits the area where OpenGL renders the scene,
      it represents the 3D scene viewed from a camera (specified in the
      camera property). This component can also render to a file or to a bitmap.
      It is primarily a windowed component, but it can handle full-screen
@@ -97,8 +98,8 @@ type
     destructor Destroy; override;
     procedure Notification(AComponent: TComponent; Operation: TOperation); override;
     (* Makes TWinControl's RecreateWnd public.
-       This procedure allows to work around limitations in some OpenVX
-       drivers (like MS Software OpenVX) that are not able to share lists
+       This procedure allows to work around limitations in some OpenGL
+       drivers (like MS Software OpenGL) that are not able to share lists
        between RCs that already have display lists. *)
     procedure RecreateWnd;
     property IsRenderingContextAvailable: Boolean read GetIsRenderingContextAvailable;
@@ -115,19 +116,19 @@ type
     // Camera from which the scene is rendered.
     property Camera: TgxCamera read GetCamera write SetCamera;
     (* Specifies if the refresh should be synchronized with the VSync signal.
-       If the underlying OpenVX ICD does not support the WGL_EXT_swap_control
+       If the underlying OpenGL ICD does not support the WGL_EXT_swap_control
        extension, this property is ignored.  *)
     property VSync: TgxSyncMode read FVSync write FVSync default vsmNoSync;
     (* Triggered before the scene's objects get rendered.
-       You may use this event to execute your own OpenVX rendering. *)
+       You may use this event to execute your own OpenGL rendering. *)
     property BeforeRender: TNotifyEvent read GetBeforeRender write SetBeforeRender;
     { Triggered just after all the scene's objects have been rendered.
-       The OpenVX context is still active in this event, and you may use it
-       to execute your own OpenVX rendering.  }
+       The OpenGL context is still active in this event, and you may use it
+       to execute your own OpenGL rendering.  }
     property PostRender: TNotifyEvent read GetPostRender write SetPostRender;
     { Called after rendering.
-       You cannot issue OpenVX calls in this event, if you want to do your own
-       OpenVX stuff, use the PostRender event. }
+       You cannot issue OpenGL calls in this event, if you want to do your own
+       OpenGL stuff, use the PostRender event. }
     property AfterRender: TNotifyEvent read GetAfterRender write SetAfterRender;
     { Access to buffer properties. }
     property Buffer: TgxSceneBuffer read FBuffer write SetBuffer;

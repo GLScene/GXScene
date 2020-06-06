@@ -1,7 +1,7 @@
-object gxShaderMemoForm: TgxShaderMemoForm
+object ShaderMemoForm: TShaderMemoForm
   Left = 0
   Top = 0
-  Caption = 'Form1'
+  Caption = 'Shader memo'
   ClientHeight = 547
   ClientWidth = 471
   FormFactor.Width = 320

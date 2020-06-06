@@ -1,11 +1,12 @@
-//
-// Graphic Scene Engine, http://glscene.org
-//
-(*
- Fire special effect
-*)
+(*********************************************
+ *                                           *
+ *  Graphic Scene Engine, http://glscene.org *
+ *                                           *
+ *********************************************)
 
 unit GXS.FireFX;
+
+(* Fire special effect *)
 
 interface
 
@@ -24,9 +25,9 @@ uses
   Scene.VectorTypes,
   GXS.Cadencer,
   GXS.Color,
-  GXS.BaseClasses,
+  Scene.BaseClasses,
   GXS.Coordinates,
-  GXS.Manager,
+  Scene.Manager,
   GXS.RenderContextInfo,
   GXS.State,
   GXS.PipelineTransformation,
@@ -49,7 +50,7 @@ type
   { Fire special effect manager.
     Defines the looks and behaviour of a particle system that can be made
     to look fire-like. }
-  TgxFireFXManager = class(TgxCadenceAbleComponent)
+  TgxFireFXManager = class(TCadenceAbleComponent)
   private
     FClients: TList;
     FFireParticles: PFireParticleArray;
@@ -99,7 +100,7 @@ type
       nbParticles: Integer = -1);
     { Current Nb of particles. }
     property ParticleCount: Integer read NP;
-    procedure DoProgress(const progressTime: TgxProgressTimes); override;
+    procedure DoProgress(const progressTime: TProgressTimes); override;
   published
     { Adjusts the acceleration direction (abs coordinates). }
     property FireDir: TgxCoordinates read FFireDir write SetFireDir;
@@ -352,7 +353,7 @@ begin
   inherited;
 end;
 
-procedure TgxFireFXManager.DoProgress(const progressTime: TgxProgressTimes);
+procedure TgxFireFXManager.DoProgress(const progressTime: TProgressTimes);
 var
   i: Integer;
 begin
@@ -698,7 +699,7 @@ end;
 initialization
 // ------------------------------------------------------------------
 
-   // class registrations
+   
   RegisterXCollectionItemClass(TgxBFireFX);
 
 finalization

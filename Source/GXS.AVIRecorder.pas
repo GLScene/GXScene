@@ -1,11 +1,12 @@
-//
-// Graphic Scene Engine, http://glscene.org
-//
-(*
-  Component to make it easy to record frames into an AVI file
-*)
+(*******************************************
+*                                          *
+* Graphic Scene Engine, http://glscene.org *
+*                                          *
+********************************************)
 
 unit GXS.AVIRecorder;
+
+(* Component to make it easy to record frames into an AVI file *)
 
 interface
 
@@ -13,7 +14,6 @@ interface
 
 uses
   Winapi.Windows,
-  WinApi.Messages,
   System.Classes,
   System.SysUtils,
   System.UITypes,

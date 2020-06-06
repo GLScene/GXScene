@@ -1,6 +1,11 @@
-//
-// Graphic Scene Engine, http://glscene.org
-//
+(*******************************************
+*                                          *
+* Graphic Scene Engine, http://glscene.org *
+*                                          *
+********************************************)
+
+unit GXS.Isosurface;
+
 (*
   Polygonising a scalar field by construction of isosurfaces
   Algorithms
@@ -25,13 +30,11 @@ Overall
    or even more often.
 *)
 
-unit GXS.Isosurface;
+interface
 
 // uncomment next line to memorize vertex Density value to further use
 // (i.e. mesh color generation)
 {.$Define UseDensity}
-
-interface
 
 uses
   Scene.VectorGeometry,
@@ -1602,7 +1605,5 @@ begin
         VertexIndices.Add(v3, v2, v1);
   end;
 end;
-
-
 
 end.

@@ -1,14 +1,17 @@
-//
-// Graphic Scene Engine, http://glscene.org
-//
+(*******************************************
+*                                          *
+* Graphic Scene Engine, http://glscene.org *
+*                                          *
+********************************************)
+
+unit GXS.Movement;
+
 (*
    Movement path behaviour by Roger Cao
-
    Note: It is recommended to set TgxMovementPath.RotationMode = rmUpDirection,
    but the default value is rmTurnPitchRoll for backwards compatibility.
 
 *)
-unit GXS.Movement;
 
 interface
 
@@ -21,14 +24,15 @@ uses
   Import.OpenGLx,
   Scene.XCollection,
   Scene.PersistentClasses,
-  GXS.Scene,
+  Scene.BaseClasses,
+  Scene.VectorTypes,
   Scene.VectorGeometry,
-  GXS.Spline,
-  GXS.Objects,
-  GXS.CrossPlatform,
+  Scene.Spline,
   Scene.Strings,
-  GXS.BaseClasses,
-  Scene.VectorTypes;
+
+  GXS.Scene,
+  GXS.Objects,
+  GXS.CrossPlatform;
 
 type
 
@@ -66,9 +70,9 @@ type
     function ScaleAsAddress: PGLFloat;
     procedure Assign(Source: TPersistent); override;
     procedure InitializeByObject(const Obj: TgxBaseSceneObject);
-    { Warning: does not take speed into account. }
+    // Warning: does not take speed into account.
     function EqualNode(const aNode: TgxPathNode): boolean;
-    { Rotation.X means PitchAngle, Rotation.Y means TurnAngle, Rotation.Z means RollAngle.}
+    // Rotation.X means PitchAngle, Rotation.Y means TurnAngle, Rotation.Z means RollAngle.
     property RotationAsVector: TVector Read FRotation Write SetRotationAsVector;
     property PositionAsVector: TVector Read FPosition Write SetPositionAsVector;
     property ScaleAsVector: TVector Read FScale Write SetScaleAsVector;
@@ -78,9 +82,9 @@ type
     property X: Single index 0 Read GetPositionCoordinate Write SetPositionCoordinate;
     property Y: Single index 1 Read GetPositionCoordinate Write SetPositionCoordinate;
     property Z: Single index 2 Read GetPositionCoordinate Write SetPositionCoordinate;
-    //Rotation.X means PitchAngle;
-    //Rotation.Y means TurnAngle;
-    //Rotation.Z means RollAngle;
+    (* Rotation.X means PitchAngle;
+       Rotation.Y means TurnAngle;
+       Rotation.Z means RollAngle; *)
     property PitchAngle: Single index 0 Read GetRotationCoordinate Write SetRotationCoordinate;
     property TurnAngle: Single index 1 Read GetRotationCoordinate Write SetRotationCoordinate;
     property RollAngle: Single index 2 Read GetRotationCoordinate Write SetRotationCoordinate;
@@ -217,10 +221,10 @@ type
     FOnAllPathTravelledOver: TNotifyEvent;
     FOnPathTravelStart: TPathTravelStartEvent;
     FOnPathTravelStop: TPathTravelStopEvent;
-    {
-    function GetMovementPath(Index: integer): TgxMovementPath;
-    procedure SetMovementPath(Index: integer; AValue: TgxMovementPath);
-    }
+
+    ///function GetMovementPath(Index: integer): TgxMovementPath;
+    ///procedure SetMovementPath(Index: integer; AValue: TgxMovementPath);
+
     function GetPathCount: integer;
     procedure SetActivePathIndex(Value: integer);
     function GetActivePath: TgxMovementPath;
@@ -234,7 +238,7 @@ type
   public
     constructor Create(aOwner: TXCollection); override;
     destructor Destroy; override;
-      //add an empty path;
+    //add an empty path;
     function AddPath: TgxMovementPath; overload;
     //add an path with one node, and the node is based on aObject
     function AddPath(aObject: TgxBaseSceneObject): TgxMovementPath; overload;
@@ -251,7 +255,7 @@ type
     class function UniqueItem: boolean; override;
     procedure StartPathTravel;
     procedure StopPathTravel;
-    procedure DoProgress(const progressTime : TgxProgressTimes); override;
+    procedure DoProgress(const progressTime : TProgressTimes); override;
     function NextPath: integer;
     function PrevPath: integer;
     function FirstPath: integer;
@@ -1513,7 +1517,7 @@ begin
 end;
 
 //Calculate functions add into this method
-procedure TgxMovement.DoProgress(const progressTime : TgxProgressTimes);
+procedure TgxMovement.DoProgress(const progressTime : TProgressTimes);
 var
   Path: TgxMovementPath;
 begin
@@ -1631,7 +1635,7 @@ end;
 initialization
 // ------------------------------------------------------------------
 
-  // class registrations
+  
   RegisterXCollectionItemClass(TgxMovement);
 
 finalization

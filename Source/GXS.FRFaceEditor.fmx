@@ -1,4 +1,4 @@
-object RFaceEditor: TRFaceEditor
+object FaceEditorFrame: TFaceEditorFrame
   Size.Width = 424.000000000000000000
   Size.Height = 230.000000000000000000
   Size.PlatformDefault = False
@@ -41,7 +41,7 @@ object RFaceEditor: TRFaceEditor
       Text = 'Ambient'
       ExplicitSize.cx = 65.000000000000000000
       ExplicitSize.cy = 24.000000000000000000
-      inline CEAmbiant: TRColorEditor
+      inline CEAmbiant: TColorEditorFrame
         Align = Client
         Size.Width = 401.000000000000000000
         Size.Height = 127.000000000000000000
@@ -82,7 +82,7 @@ object RFaceEditor: TRFaceEditor
       Text = 'Diffuse'
       ExplicitSize.cx = 57.000000000000000000
       ExplicitSize.cy = 24.000000000000000000
-      inline CEDiffuse: TRColorEditor
+      inline CEDiffuse: TColorEditorFrame
         Align = Client
         Size.Width = 401.000000000000000000
         Size.Height = 127.000000000000000000
@@ -123,7 +123,7 @@ object RFaceEditor: TRFaceEditor
       Text = 'Emission'
       ExplicitSize.cx = 66.000000000000000000
       ExplicitSize.cy = 24.000000000000000000
-      inline CEEmission: TRColorEditor
+      inline CEEmission: TColorEditorFrame
         Align = Client
         Size.Width = 401.000000000000000000
         Size.Height = 127.000000000000000000
@@ -164,7 +164,7 @@ object RFaceEditor: TRFaceEditor
       Text = 'Specular'
       ExplicitSize.cx = 66.000000000000000000
       ExplicitSize.cy = 24.000000000000000000
-      inline CESpecular: TRColorEditor
+      inline CESpecular: TColorEditorFrame
         Align = Client
         Size.Width = 401.000000000000000000
         Size.Height = 127.000000000000000000

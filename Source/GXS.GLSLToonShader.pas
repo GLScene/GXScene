@@ -18,7 +18,7 @@ uses
   System.Classes,
   GXS.Scene, 
   GXS.CrossPlatform, 
-  GXS.BaseClasses, 
+  Scene.BaseClasses, 
   GXS.State, 
   Import.OpenGLx, 
   GXS.Context, 

@@ -1,10 +1,12 @@
-//
-// Graphic Scene Engine, http://glscene.org
-//
-{ 
+(*******************************************
+*                                          *
+* Graphic Scene Engine, http://glscene.org *
+*                                          *
+********************************************)
+(*
   Invisible component for helping to Move, Rotate and Scale an Object
   (usefull for an Editor).
-}
+*)
 unit GXS.Gizmo;
 
 interface

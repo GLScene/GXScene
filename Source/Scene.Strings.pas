@@ -1,11 +1,12 @@
-//
-// Graphic Scene Engine, http://glscene.org
-//
-(*
-   String constants that are used in many GXScene units
-*)
+(*******************************************
+*                                          *
+* Graphic Scene Engine, http://glscene.org *
+*                                          *
+********************************************)
 
 unit Scene.Strings;
+
+(* String constants that are used in many GXScene units *)
 
 interface
 
@@ -21,11 +22,11 @@ resourcestring
   strUnknownArchiveVersion = 'Unknown archive version: ';
 
   // SceneEdit
-  strGXSceneEditor = 'GXScene Editor';
+  strSceneEditor = 'Scene Editor';
 
   // SceneViewer
   strNoRenderingContext = 'Could not create a rendering context';
-  strWrongVersion       = 'Need at least OpenVX version 1.1';
+  strWrongVersion       = 'Need at least OpenGL version 1.1';
   strTooManyLights      = 'Too many lights in the scene';
   strDisplayList        = 'Failed to create a new display list for object ''%s''';
   strWrongBitmapCanvas  = 'Couldn''t create a rendering context for the given bitmap';
@@ -52,8 +53,8 @@ resourcestring
   strUnbalancedContexActivations = 'Unbalanced context activations';
   strUnableToCreateLegacyContext = 'Unable to create legacy context';
 
-  // GXS.InitOpenVX
-  strOpenVXError = 'OpenVX error - %s';
+  // GXS.InitOpenGX
+  strOpenGXError = 'OpenGX error - %s';
 
   // File3DS
   str3DSMapNotFound = 'Loading %s map texture failed: %s in %s';
@@ -112,15 +113,15 @@ resourcestring
   strFailHWRC = 'Unable to create rendering context with hardware acceleration - down to software';
   strTmpRC_Created = 'Temporary rendering context created';
   strDriverNotSupportFRC = 'Driver not support creating of forward context';
-  strDriverNotSupportOESRC = 'Driver not support creating of OpenVX ES 2.0 context';
+  strDriverNotSupportOESRC = 'Driver not support creating of OpenGL ES 2.0 context';
   strDriverNotSupportDebugRC = 'Driver not support creating of debug context';
-  strOESvsForwardRC = 'OpenVX ES 2.0 context incompatible with Forward context - flag ignored';
+  strOESvsForwardRC = 'OpenGL ES 2.0 context incompatible with Forward context - flag ignored';
   strFRC_created = 'Forward core context seccussfuly created';
-  strOESRC_created = 'OpenVX ES 2.0 context seccussfuly created';
+  strOESRC_created = 'OpenGL ES 2.0 context seccussfuly created';
   strPBufferRC_created = 'Backward compatible core PBuffer context successfully created';
 
   // SceneRegister string parameters
-  strOpenVXCategoryName = 'OpenVX';
+  strOpenVXCategoryName = 'OpenGL';
   strLayoutCategoryName = 'Layout';
   strLocalizableCategoryName = 'Localizable';
   strVisualCategoryName = 'Visual';
@@ -211,10 +212,10 @@ resourcestring
   strThreadBusy = 'Unable to create CUDA context - thread is busy by another context';
   strMakeFloatingFail = 'Unable to make context floating after creation';
   strUnbalansedUsage = 'Unbalansed CUDA context usage';
-  strInvalidGLContext = 'Unable to create CUDA context with OpenVX interop' +
-    ' - OpenVX context not ready';
+  strInvalidGLContext = 'Unable to create CUDA context with OpenGL interop' +
+    ' - OpenGL context not ready';
   strFFTFuncRetErr = '%s return error: %s';
-  strFailToBindArrayToTex = 'Unable to bind CUDA array to OpenVX unmaped t' + 'exture';
+  strFailToBindArrayToTex = 'Unable to bind CUDA array to OpenGL unmaped t' + 'exture';
   strOutOfAttribSize = 'The amount of device''s data less then size of att' + 'ribute''s data.';
   strOutOfElementSize = 'The amount of device''s data less then size of in' + 'dexes data.';
   strSourceFileNotFound = 'Source file not found';

@@ -1,9 +1,9 @@
 //
 // Graphic Scene Engine, http://glscene.org
 //
-{
+(*
   RGB+Alpha color editor.
-}
+*)
 unit GXS.FRColorEditor;
 
 interface
@@ -32,7 +32,7 @@ uses
   GXS.Crossplatform;
 
 type
-  TRColorEditor = class(TFrame)
+  TColorEditorFrame = class(TFrame)
     Label1: TLabel;
     Label2: TLabel;
     Label3: TLabel;
@@ -111,14 +111,14 @@ const
   AlphaChecksHigh = 4;
   AlphaChecksWide = 7;
 
-procedure TRColorEditor.TBEChange(Sender: TObject);
+procedure TColorEditorFrame.TBEChange(Sender: TObject);
 begin
   PAPreview.Color := RedValue + (GreenValue Shl 8) + (BlueValue Shl 16); //RGB(RedValue, GreenValue, BlueValue);
   if (not Updating) and Assigned(FOnChange) then
     FOnChange(Self);
 end;
 
-procedure TRColorEditor.SetColor(const val: THomogeneousFltVector);
+procedure TColorEditorFrame.SetColor(const val: THomogeneousFltVector);
 begin
   RedValue := Round(val.X * 255);
   GreenValue := Round(val.Y * 255);
@@ -128,13 +128,13 @@ begin
   ContentsChanged;
 end;
 
-function TRColorEditor.GetColor: THomogeneousFltVector;
+function TColorEditorFrame.GetColor: THomogeneousFltVector;
 begin
   Result := VectorMake(RedValue / 255, GreenValue / 255, BlueValue / 255,
     AlphaVAlue / 1000);
 end;
 
-procedure TRColorEditor.ColorEditorPaintBoxPaint(Sender: TObject;
+procedure TColorEditorFrame.ColorEditorPaintBoxPaint(Sender: TObject;
   Canvas: TCanvas);
 begin
   ColorEditorPaintBox.Canvas.Bitmap.Assign(WorkBitmap);
@@ -144,7 +144,7 @@ begin
   AlphaEdit.Height := 16;
 end;
 
-constructor TRColorEditor.Create(AOwner: TComponent);
+constructor TColorEditorFrame.Create(AOwner: TComponent);
 begin
   inherited;
   WorkBitmap := TBitmap.Create;
@@ -158,13 +158,13 @@ begin
   AlphaVAlue := 450;
 end;
 
-destructor TRColorEditor.Destroy;
+destructor TColorEditorFrame.Destroy;
 begin
   inherited;
   WorkBitmap.Free;
 end;
 
-procedure TRColorEditor.FrameResize(Sender: TObject);
+procedure TColorEditorFrame.FrameResize(Sender: TObject);
 begin
   WorkBitmap.Width := Round(ColorEditorPaintBox.Width);
   WorkBitmap.Height := Round(ColorEditorPaintBox.Height);
@@ -217,7 +217,7 @@ begin
   Result := Round(ColorViewPosition / (ColorSliderMaxValue / (MaxAlphaValue)));
 end;
 
-procedure TRColorEditor.DrawContents;
+procedure TColorEditorFrame.DrawContents;
 var
   Position: Integer;
   tx, ty: Integer;
@@ -370,7 +370,7 @@ begin
   *)
 end;
 
-procedure TRColorEditor.ColorEditorPaintBoxMouseDown(Sender: TObject;
+procedure TColorEditorFrame.ColorEditorPaintBoxMouseDown(Sender: TObject;
   Button: TMouseButton; Shift: TShiftState; X, Y: Single);
 begin
   DraggingValue := None;
@@ -395,7 +395,7 @@ begin
   end;
 end;
 
-procedure TRColorEditor.DragColorSliderToPosition(XPos: Integer);
+procedure TColorEditorFrame.DragColorSliderToPosition(XPos: Integer);
 begin
   case DraggingValue of
     Red:
@@ -410,7 +410,7 @@ begin
   ContentsChanged;
 end;
 
-procedure TRColorEditor.ContentsChanged;
+procedure TColorEditorFrame.ContentsChanged;
 var
   ARect: TRectF;
 begin
@@ -435,21 +435,21 @@ begin
   end;
 end;
 
-procedure TRColorEditor.ColorEditorPaintBoxMouseMove(Sender: TObject;
+procedure TColorEditorFrame.ColorEditorPaintBoxMouseMove(Sender: TObject;
   Shift: TShiftState; X, Y: Single);
 begin
   if DraggingValue <> None then
     DragColorSliderToPosition(Round(X) - ColorSliderLeft - 1);
 end;
 
-procedure TRColorEditor.ColorEditorPaintBoxMouseUp(Sender: TObject;
+procedure TColorEditorFrame.ColorEditorPaintBoxMouseUp(Sender: TObject;
   Button: TMouseButton; Shift: TShiftState; X, Y: Single);
 begin
   if Button = TMouseButton.mbLeft then
     DraggingValue := None;
 end;
 
-procedure TRColorEditor.RedEditChange(Sender: TObject);
+procedure TColorEditorFrame.RedEditChange(Sender: TObject);
 var
   IntValue: Integer;
 begin
@@ -467,7 +467,7 @@ begin
   end;
 end;
 
-procedure TRColorEditor.GreenEditChange(Sender: TObject);
+procedure TColorEditorFrame.GreenEditChange(Sender: TObject);
 var
   IntValue: Integer;
 begin
@@ -485,12 +485,12 @@ begin
   end;
 end;
 
-procedure TRColorEditor.PAPreviewDblClick(Sender: TObject);
+procedure TColorEditorFrame.PAPreviewDblClick(Sender: TObject);
 begin
   SetColor(ConvertWinColor(PAPreview.Color));
 end;
 
-procedure TRColorEditor.BlueEditChange(Sender: TObject);
+procedure TColorEditorFrame.BlueEditChange(Sender: TObject);
 var
   IntValue: Integer;
 begin
@@ -508,7 +508,7 @@ begin
   end;
 end;
 
-procedure TRColorEditor.AlphaEditChange(Sender: TObject);
+procedure TColorEditorFrame.AlphaEditChange(Sender: TObject);
 var
   IntValue: Integer;
 begin

@@ -1,11 +1,15 @@
-//
-// Graphic Scene Engine, http://glscene.org
-//
+(*******************************************
+*                                          *
+* Graphic Scene Engine, http://glscene.org *
+*                                          *
+********************************************)
+
+unit GXS.Utils;
+
 (*
    Miscellaneous support utilities & classes.
    The history is logged in a former GLS version of the unit.
 *)
-unit GXS.Utils;
 
 interface
 

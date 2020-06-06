@@ -22,7 +22,7 @@ uses
   Scene.VectorGeometry,
   GXS.Context,
   GXS.Color,
-  GXS.BaseClasses,
+  Scene.BaseClasses,
   GXS.RenderContextInfo,
   GXS.State;
 
@@ -76,7 +76,7 @@ type
     procedure BuildList(var ARci: TgxRenderContextInfo); override;
     procedure DoRender(var ARci: TgxRenderContextInfo;
       ARenderSelf, ARenderChildren: Boolean); override;
-    procedure DoProgress(const progressTime: TgxProgressTimes); override;
+    procedure DoProgress(const progressTime: TProgressTimes); override;
     { Request creation of a new particle.
      Particle will be either created or retrieved from the particlePool. }
     function CreateParticle: TgxBaseSceneObject;
@@ -245,7 +245,7 @@ begin
     FOnAfterRenderParticles(Self, ARci);
 end;
 
-procedure TgxParticles.DoProgress(const progressTime: TgxProgressTimes);
+procedure TgxParticles.DoProgress(const progressTime: TProgressTimes);
 var
   i: Integer;
 begin

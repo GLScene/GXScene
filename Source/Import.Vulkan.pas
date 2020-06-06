@@ -1,10 +1,11 @@
-//
-// Graphic Scene Engine, http://glscene.org
-//
-{
-   This file is converted from header vulkan.h
-   of Vulkan API Registry at http://www.khronos.org/vulkan/
-}
+(*******************************************
+*                                          *
+* Graphic Scene Engine, http://glscene.org *
+*                                          *
+********************************************)
+
+unit Import.Vulkan;
+
 (*
 ** Copyright (c) 2015-2017 The Khronos Group Inc.
 **
@@ -22,7 +23,6 @@
 ** This header is generated from the Khronos Vulkan XML API Registry.
 *)
 
-unit Import.Vulkan;
 
 interface
 

@@ -1,10 +1,9 @@
 //
 // Graphic Scene Engine, http://glscene.org
 //
-{
+(*
   An old PlugIn Manager unit. Don't know if it ever was used...
-  
-}
+*)
 unit GXS.PlugInManager;
 
 interface
@@ -18,7 +17,7 @@ uses
   FMX.Dialogs,
   FMX.Forms,
 
-  GXS.PlugInIntf;
+  Scene.PlugInInterface;
 
 
 type

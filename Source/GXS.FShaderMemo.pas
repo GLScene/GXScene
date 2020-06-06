@@ -33,7 +33,7 @@ uses
   FMX.Controls.Presentation;
 
 type
-  TgxShaderMemoForm = class(TForm)
+  TShaderMemoForm = class(TForm)
     ToolBar1: TToolBar;
     Panel1: TPanel;
     ButtonOK: TButton;
@@ -52,7 +52,7 @@ type
     procedure FormCreate(Sender: TObject);
   end;
 
-function ShaderEditorForm: TgxShaderMemoForm;
+function ShaderEditorForm: TShaderMemoForm;
 procedure ReleaseShaderEditor;
 
 //=====================================================================
@@ -93,7 +93,7 @@ begin
 end;
 
 
-procedure TgxShaderMemoForm.FormCreate(Sender: TObject);
+procedure TShaderMemoForm.FormCreate(Sender: TObject);
 var
   reg: TRegistry;
   No: Integer;

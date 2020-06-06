@@ -1,10 +1,12 @@
-//
-// Graphic Scene Engine, http://glscene.org
-//
-(*
-   Misc. lists of vectors and entities
-*)
+(*******************************************
+*                                          *
+* Graphic Scene Engine, http://glscene.org *
+*                                          *
+********************************************)
+
 unit Scene.VectorLists;
+
+(* Misc. lists of vectors and entities *)
 
 interface
 

@@ -1,6 +1,8 @@
-//
-// Graphic Scene Engine, http://glscene.org
-//
+(*******************************************
+*                                          *
+* Graphic Scene Engine, http://glscene.org *
+*                                          *
+********************************************)
 
 unit GXS.PipelineTransformation;
 
@@ -14,7 +16,8 @@ uses
 
   Import.OpenGLx,
   Scene.VectorGeometry,
-  Scene.VectorTypes;
+  Scene.VectorTypes,
+  Scene.Strings;
 
 const
   MAX_MATRIX_STACK_DEPTH = 128;
@@ -230,8 +233,6 @@ begin
     LoadProjectionMatrix;
   end;
 end;
-
-
 
 function TgxTransformation.GetModelMatrix: PMatrix;
 begin

@@ -29,12 +29,12 @@ const
   GL_ASE_MAX_TEXTURE_MAPS =    12; // maximum texture maps
 
 type
-  { face texture channel indices}
+  // face texture channel indices
   TgxASEFaceTexure = record
     Idx0, Idx1, Idx2: Integer;
   end;
 
-  { face texture channels }
+  // face texture channels
   TgxASEFaceTexureChannels = record
     Count: Integer;
     ChanelTexture: array [0..GL_ASE_MAX_TEXURE_CHANNELS - 1] of TgxASEFaceTexure;
@@ -45,7 +45,7 @@ type
     Groups: array [0..GL_ASE_MAX_SMOOTH_GROUPS] of Integer;
   end;
 
-  { ASE mesh face }
+  // ASE mesh face
   TgxASEFace = class(TObject)
   private
     FV: array [0..2] of Integer;
@@ -68,7 +68,7 @@ type
     property SubMaterialID: Integer read FSubMaterialID; // submaterial ID
   end;
 
-  { ASE mesh faces list }
+  // ASE mesh faces list
   TgxASEFaceList = class(TObject)
   private
     FItems: TList;

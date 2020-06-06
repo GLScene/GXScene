@@ -1,11 +1,13 @@
-//
-// Graphic Scene Engine, http://glscene.org
-//
-(*
-   Cross IDE generic classes collection.
-*)
+(*******************************************
+*                                          *
+* Graphic Scene Engine, http://glscene.org *
+*                                          *
+********************************************)
 
 unit Scene.Generics;
+
+(* Cross IDE generic classes collection *)
+
 
 interface
 

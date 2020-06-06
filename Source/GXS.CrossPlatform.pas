@@ -1,13 +1,11 @@
 ﻿//
 // Graphic Scene Engine, http://glscene.org
 //
-{
+(*
    Cross platform support functions and types.
-
    Ultimately, *no* cross-platform or cross-version defines should be present
    in the core units, and have all moved here instead.
-
-}
+*)
 unit GXS.CrossPlatform;
 
 interface
@@ -57,54 +55,54 @@ var
   vProjectTargetName: TProjectTargetNameFunc;
 
 function GetRectangle(const aLeft, aTop, aRight, aBottom: Integer): TRect;
-{ Increases or decreases the width and height of the specified rectangle.
+(* Increases or decreases the width and height of the specified rectangle.
    Adds dx units to the left and right ends of the rectangle and dy units to
-   the top and bottom. }
+   the top and bottom. *)
 procedure InflateRectangle(var aRect: TRect; dx, dy: Integer);
 procedure IntersectRectangle(var aRect: TRect; const rect2: TRect);
 
 procedure RaiseLastOSError;
 
-{ Number of pixels per logical inch along the screen width for the device.
-   Under Win32 awaits a HDC and returns its LOGPIXELSX. }
+(* Number of pixels per logical inch along the screen width for the device.
+   Under Win32 awaits a HDC and returns its LOGPIXELSX. *)
 function GetDeviceLogicalPixelsX(device: THandle): Integer; ///in VCL -> HDC
-{ Number of bits per pixel for the current desktop resolution. }
+// Number of bits per pixel for the current desktop resolution.
 function GetCurrentColorDepth: Integer;
-{ Returns the number of color bits associated to the given pixel format. }
+// Returns the number of color bits associated to the given pixel format.
 function PixelFormatToColorBits(aPixelFormat: TPixelFormat): Integer;
 
-{ Returns the bitmap's scanline for the specified row. }
+// Returns the bitmap's scanline for the specified row.
 function BitmapScanLine(aBitmap: TBitmap; aRow: Integer): Pointer;
 
-{ Replace path delimiter to delimiter of the current platform. }
+// Replace path delimiter to delimiter of the current platform.
 procedure FixPathDelimiter(var S: string);
-{ Remove if possible part of path witch leads to project executable. }
+// Remove if possible part of path witch leads to project executable.
 function RelativePath(const S: string): string;
-{ Returns the current value of the highest-resolution counter.
+(* Returns the current value of the highest-resolution counter.
    If the platform has none, should return a value derived from the highest
    precision time reference available, avoiding, if possible, timers that
-   allocate specific system resources. }
+   allocate specific system resources. *)
 procedure QueryPerformanceCounter(var val: Int64);
-{ Returns the frequency of the counter used by QueryPerformanceCounter.
+(* Returns the frequency of the counter used by QueryPerformanceCounter.
    Return value is in ticks per second (Hz), returns False if no precision
-   counter is available. }
+   counter is available. *)
 function QueryPerformanceFrequency(var val: Int64): Boolean;
 
-{ Starts a precision timer.
+(* Starts a precision timer.
    Returned value should just be considered as 'handle', even if it ain't so.
    Default platform implementation is to use QueryPerformanceCounter and
    QueryPerformanceFrequency, if higher precision references are available,
    they should be used. The timer will and must be stopped/terminated/released
-   with StopPrecisionTimer. }
+   with StopPrecisionTimer. *)
 function StartPrecisionTimer: Int64;
-{ Computes time elapsed since timer start.
-   Return time lap in seconds. }
+(* Computes time elapsed since timer start.
+   Return time lap in seconds. *)
 function PrecisionTimerLap(const precisionTimer: Int64): Double;
-{ Computes time elapsed since timer start and stop timer.
-   Return time lap in seconds. }
+(* Computes time elapsed since timer start and stop timer.
+   Return time lap in seconds. *)
 function StopPrecisionTimer(const precisionTimer: Int64): Double;
 
-{ Returns time in millisecond from application start. }
+// Returns time in millisecond from application start.
 function AppTime: Double;
 
 function MessageBoxOK(const Text, Caption: string): Integer;
@@ -128,7 +126,7 @@ function HalfToFloat(Half: THalfFloat): Single;
 
 function GetValueFromStringsIndex(const AStrings: TStrings; const AIndex: Integer): string;
 
-{ Determine if the directory is writable.  }
+// Determine if the directory is writable.
 function IsDirectoryWriteable(const AName: string): Boolean;
 
 function CharToWideChar(const AChar: AnsiChar): WideChar;
@@ -569,8 +567,6 @@ function GetValueFromStringsIndex(const AStrings: TStrings; const AIndex: Intege
 begin
   Result := AStrings.ValueFromIndex[AIndex];
 end;
-
-
 
 function IsDirectoryWriteable(const AName: string): Boolean;
 var

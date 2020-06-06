@@ -1,6 +1,8 @@
-//
-// Graphic Scene Engine, http://glscene.org
-//
+(*******************************************
+*                                          *
+* Graphic Scene Engine, http://glscene.org *
+*                                          *
+********************************************)
 {
    Support classes for loading various fileformats.
    These classes work together like vector file formats or Delphi's TGraphic classes.

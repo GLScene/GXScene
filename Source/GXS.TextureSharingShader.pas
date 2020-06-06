@@ -34,7 +34,7 @@ uses
 type
   TgxTextureSharingShader = class;
 
-  TgxTextureSharingShaderMaterial = class(TgxInterfacedCollectionItem, IgxMaterialLibrarySupported)
+  TgxTextureSharingShaderMaterial = class(TInterfacedCollectionItem, IgxMaterialLibrarySupported)
   private
     FTextureMatrix: TMatrix;
     FNeedToUpdateTextureMatrix: Boolean;

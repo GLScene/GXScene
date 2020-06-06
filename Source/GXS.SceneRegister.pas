@@ -307,7 +307,7 @@ uses
   GXS.AsyncTimer,
   GXS.Atmosphere,
   GXS.AVIRecorder,
-  GXS.BaseClasses,
+  Scene.BaseClasses,
   GXS.BitmapFont,
   GXS.Blur,
   GXS.BumpmapHDS,
@@ -1328,17 +1328,15 @@ end;
 // ******************************************************************************
 procedure GLRegisterPropertiesInCategories;
 begin
-
-  { GXS.SceneViewer }
-  // property types
+  // GXS.SceneViewer 
 {$IFDEF WIN32}
   RegisterPropertiesInCategory(sOpenGLCategoryName, [TypeInfo(TgxCamera), TypeInfo(TgxSceneBuffer),
     TypeInfo(TVSyncMode), TypeInfo(TgxScreenDepth)]);
 {$ENDIF}
   RegisterPropertiesInCategory(sOpenGLCategoryName, TgxSceneViewer, ['*Render']);
 
-  { GXS.Scene }
-  RegisterPropertiesInCategory(sOpenGLCategoryName, [TypeInfo(Tgxx.ObjectsSorting), TypeInfo(TgxProgressEvent),
+  // GXS.Scene 
+  RegisterPropertiesInCategory(sOpenGLCategoryName, [TypeInfo(Tgxx.ObjectsSorting), TypeInfo(TProgressEvent),
     TypeInfo(TgxBehaviours), TypeInfo(TgxEffects), TypeInfo(TDirectRenderEvent), TypeInfo(TgxCameraStyle),
     TypeInfo(TOnCustomPerspective), TypeInfo(TgxScene)]);
   RegisterPropertiesInCategory(sLayoutCategoryName, [TypeInfo(Tgxx.ObjectsSorting), TypeInfo(TgxNormalDirection)]);
@@ -1354,7 +1352,7 @@ begin
   RegisterPropertiesInCategory(sVisualCategoryName, TgxCamera, ['DepthOfView', 'SceneScale']);
   RegisterPropertiesInCategory(sOpenGLCategoryName, TgxNonVisualViewer, ['*Render']);
 
-  { GXS.Objects }
+  // GXS.Objects 
   RegisterPropertiesInCategory(sOpenGLCategoryName, [TypeInfo(TgxLinesNodes), TypeInfo(TLineNodesAspect),
     TypeInfo(TgxLineSplineMode), TypeInfo(TgxLinesOptions)]);
 {$IFDEF WIN32}
@@ -1414,8 +1412,7 @@ begin
   RegisterPropertiesInCategory(sLayoutCategoryName, TgxParticles, ['VisibleAtRunTime']);
   RegisterPropertiesInCategory(sVisualCategoryName, TgxParticles, ['*Size', 'VisibleAtRunTime']);
 
-  RegisterPropertiesInCategory(sOpenGLCategoryName, [TypeInfo(TgxSkyDomeBands), TypeInfo(TgxSkyDomeOptions),
-    TypeInfo(TgxSkyDomeStars)]);
+  RegisterPropertiesInCategory(sOpenGLCategoryName, [TypeInfo(TgxSkyDomeBands), TypeInfo(TgxSkyDomeOptions), TypeInfo(TgxSkyDomeStars)]);
   RegisterPropertiesInCategory(sVisualCategoryName, TgxSkyDomeBand, ['Slices', 'Stacks', '*Angle']);
   RegisterPropertiesInCategory(sVisualCategoryName, TgxSkyDomeStar, ['Dec', 'Magnitude', 'RA']);
   RegisterPropertiesInCategory(sOpenGLCategoryName, TgxEarthSkyDome, ['Slices', 'Stacks', 'SunElevation', 'Turbidity']);

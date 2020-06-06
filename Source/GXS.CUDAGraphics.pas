@@ -1,6 +1,8 @@
-﻿//
-// Graphic Scene Engine, http://glscene.org
-//
+﻿(*******************************************
+*                                          *
+* Graphic Scene Engine, http://glscene.org *
+*                                          *
+********************************************)
 
 unit GXS.CUDAGraphics;
 
@@ -26,12 +28,12 @@ uses
 
 type
 
-  TgxVertexAttribute = class;
-  TgxVertexAttributes = class;
+  TCUDAVertexAttribute = class;
+  TCUDAVertexAttributes = class;
 
-  TOnBeforeKernelLaunch = procedure(Sender: TgxVertexAttribute) of object;
+  TOnBeforeKernelLaunch = procedure(Sender: TCUDAVertexAttribute) of object;
 
-  TgxVertexAttribute = class(TCollectionItem)
+  TCUDAVertexAttribute = class(TCollectionItem)
   private
     FName: string;
     FType: TgxSLDataType;
@@ -42,7 +44,7 @@ type
     procedure SetType(AType: TgxSLDataType);
     procedure SetFunc(AFunc: TCUDAFunction);
     function GetLocation: Integer;
-    function GetOwner: TgxVertexAttributes; reintroduce;
+    function GetOwner: TCUDAVertexAttributes; reintroduce;
   public
     constructor Create(ACollection: TCollection); override;
     procedure NotifyChange(Sender: TObject);
@@ -55,18 +57,17 @@ type
       FOnBeforeKernelLaunch write FOnBeforeKernelLaunch;
   end;
 
-  TgxVertexAttributes = class(TOwnedCollection)
+  TCUDAVertexAttributes = class(TOwnedCollection)
   private
-    procedure SetItems(Index: Integer; const AValue: TgxVertexAttribute);
-    function GetItems(Index: Integer): TgxVertexAttribute;
+    procedure SetItems(Index: Integer; const AValue: TCUDAVertexAttribute);
+    function GetItems(Index: Integer): TCUDAVertexAttribute;
   public
-
-    constructor Create(AOwner: TComponent);
+   constructor Create(AOwner: TComponent);
     procedure NotifyChange(Sender: TObject);
     function MakeUniqueName(const ANameRoot: string): string;
-    function GetAttributeByName(const AName: string): TgxVertexAttribute;
-    function Add: TgxVertexAttribute;
-    property Attributes[Index: Integer]: TgxVertexAttribute read GetItems
+    function GetAttributeByName(const AName: string): TCUDAVertexAttribute;
+    function Add: TCUDAVertexAttribute;
+    property Attributes[Index: Integer]: TCUDAVertexAttribute read GetItems
       write SetItems; default;
   end;
 
@@ -75,9 +76,8 @@ type
 
   TgxCustomFeedBackMesh = class(TgxBaseSceneObject)
   private
-
     FGeometryResource: TCUDAGraphicResource;
-    FAttributes: TgxVertexAttributes;
+    FAttributes: TCUDAVertexAttributes;
     FVAO: TgxVertexArrayHandle;
     FVBO: TgxVBOArrayBufferHandle;
     FEBO: TgxVBOElementArrayHandle;
@@ -88,7 +88,7 @@ type
     FCommonFunc: TCUDAFunction;
     FLaunching: TFeedBackMeshLaunching;
     FBlend: Boolean;
-    procedure SetAttributes(AValue: TgxVertexAttributes);
+    procedure SetAttributes(AValue: TCUDAVertexAttributes);
     procedure SetPrimitiveType(AValue: TFeedBackMeshPrimitive);
     procedure SetVertexNumber(AValue: Integer);
     procedure SetElementNumber(AValue: Integer);
@@ -101,31 +101,28 @@ type
     procedure AllocateHandles;
     procedure LaunchKernels;
   protected
-    property Attributes: TgxVertexAttributes read FAttributes write SetAttributes;
-    { GLSL shader as material. If it absent or disabled - nothing be drawen. }
+    property Attributes: TCUDAVertexAttributes read FAttributes write SetAttributes;
+    // GLSL shader as material. If it absent or disabled - nothing be drawen.
     property Shader: TgxGLSLShader read FShader write SetShader;
-    { Primitive type. }
+    // Primitive type.
     property PrimitiveType: TFeedBackMeshPrimitive read FPrimitiveType
       write SetPrimitiveType default fbmpPoint;
-    { Number of vertexes in array buffer. }
+    // Number of vertexes in array buffer.
     property VertexNumber: Integer read FVertexNumber
       write SetVertexNumber default 1;
-    { Number of indexes in element buffer. Zero to disable. }
+    // Number of indexes in element buffer. Zero to disable.
     property ElementNumber: Integer read FElementNumber
       write SetElementNumber default 0;
-    { Used for all attributes and elements if Launching = fblCommon
-       otherwise used own attribute function and this for elements. }
+    (* Used for all attributes and elements if Launching = fblCommon
+       otherwise used own attribute function and this for elements. *)
     property CommonKernelFunction: TCUDAFunction read FCommonFunc
       write SetCommonFunc;
-    { Define mode of manufacturer launching:
+    (* Define mode of manufacturer launching:
       fblCommon - single launch for all,
-      flOnePerAtttribute - one launch per attribute and elements }
+      flOnePerAtttribute - one launch per attribute and elements *)
     property Launching: TFeedBackMeshLaunching read FLaunching
       write FLaunching default fblCommon;
-    { Defines if the object uses blending for object
-       sorting purposes. }
-    { Defines if the object uses blending for object
-       sorting purposes. }
+    // Defines if the object uses blending for object sorting purposes.
     property Blend: Boolean read FBlend write FBlend default False;
   public
     constructor Create(AOwner: TComponent); override;
@@ -194,7 +191,7 @@ type
   private
     FFeedBackMesh: TgxCustomFeedBackMesh;
     procedure SetFeedBackMesh(const Value: TgxCustomFeedBackMesh);
-    function GetAttribArraySize(AAttr: TgxVertexAttribute): LongWord;
+    function GetAttribArraySize(AAttr: TCUDAVertexAttribute): LongWord;
   protected
     procedure AllocateHandles; override;
     procedure DestroyHandles; override;
@@ -221,15 +218,15 @@ type
     property Mapping;
   end;
 
+//-----------------------------------------
 implementation
+//-----------------------------------------
 
 uses
   System.SysUtils,
   Scene.Strings,
   GXS.TextureFormat;
 
-
-{ TCUDAImageResource}
 
 // ------------------
 // ------------------ TCUDAImageResource ------------------
@@ -579,7 +576,7 @@ begin
   end;
 end;
 
-function TCUDAGeometryResource.GetAttribArraySize(AAttr: TgxVertexAttribute): LongWord;
+function TCUDAGeometryResource.GetAttribArraySize(AAttr: TCUDAVertexAttribute): LongWord;
 var
   typeSize: LongWord;
 begin
@@ -611,7 +608,7 @@ end;
 function TCUDAGeometryResource.GetAttributeArraySize(
   const AName: string): LongWord;
 var
-  LAttr: TgxVertexAttribute;
+  LAttr: TCUDAVertexAttribute;
 begin
   Result := 0;
   LAttr := FFeedBackMesh.Attributes.GetAttributeByName(AName);
@@ -628,7 +625,7 @@ var
   i: Integer;
   Size: Cardinal;
   MapPtr: Pointer;
-  LAttr: TgxVertexAttribute;
+  LAttr: TCUDAVertexAttribute;
 begin
   Result := nil;
   if FMapCounter = 0 then
@@ -690,10 +687,10 @@ begin
 end;
 
 // -----------------------
-// ----------------------- TgxVertexAttribute -------------------
+// ----------------------- TCUDAVertexAttribute -------------------
 // -----------------------
 
-constructor TgxVertexAttribute.Create(ACollection: TCollection);
+constructor TCUDAVertexAttribute.Create(ACollection: TCollection);
 begin
   inherited;
   FName := GetOwner.MakeUniqueName('Attrib');
@@ -701,7 +698,7 @@ begin
   FLocation := -1;
 end;
 
-procedure TgxVertexAttribute.SetFunc(AFunc: TCUDAFunction);
+procedure TCUDAVertexAttribute.SetFunc(AFunc: TCUDAFunction);
 var
   LMesh: TgxCustomFeedBackMesh;
 begin
@@ -713,7 +710,7 @@ begin
     FFunc.FreeNotification(LMesh);
 end;
 
-procedure TgxVertexAttribute.SetName(const AName: string);
+procedure TCUDAVertexAttribute.SetName(const AName: string);
 begin
   if AName <> FName then
   begin
@@ -723,7 +720,7 @@ begin
   end;
 end;
 
-procedure TgxVertexAttribute.SetType(AType: TgxSLDataType);
+procedure TCUDAVertexAttribute.SetType(AType: TgxSLDataType);
 begin
   if AType <> FType then
   begin
@@ -732,7 +729,7 @@ begin
   end;
 end;
 
-function TgxVertexAttribute.GetLocation: Integer;
+function TCUDAVertexAttribute.GetLocation: Integer;
 begin
   if FLocation < 0 then
     FLocation := glGetAttribLocation(
@@ -741,52 +738,52 @@ begin
   Result := FLocation;
 end;
 
-function TgxVertexAttribute.GetOwner: TgxVertexAttributes;
+function TCUDAVertexAttribute.GetOwner: TCUDAVertexAttributes;
 begin
-  Result := TgxVertexAttributes(Collection);
+  Result := TCUDAVertexAttributes(Collection);
 end;
 
-procedure TgxVertexAttribute.NotifyChange(Sender: TObject);
+procedure TCUDAVertexAttribute.NotifyChange(Sender: TObject);
 begin
   GetOwner.NotifyChange(Self);
 end;
 
 // -----------------------
-// ----------------------- TgxVertexAttributes -------------------
+// ----------------------- TCUDAVertexAttributes -------------------
 // -----------------------
 
-function TgxVertexAttributes.Add: TgxVertexAttribute;
+function TCUDAVertexAttributes.Add: TCUDAVertexAttribute;
 begin
-  Result := (inherited Add) as TgxVertexAttribute;
+  Result := (inherited Add) as TCUDAVertexAttribute;
 end;
 
-constructor TgxVertexAttributes.Create(AOwner: TComponent);
+constructor TCUDAVertexAttributes.Create(AOwner: TComponent);
 begin
-  inherited Create(AOwner, TgxVertexAttribute);
+  inherited Create(AOwner, TCUDAVertexAttribute);
 end;
 
-function TgxVertexAttributes.GetAttributeByName(
-  const AName: string): TgxVertexAttribute;
+function TCUDAVertexAttributes.GetAttributeByName(
+  const AName: string): TCUDAVertexAttribute;
 var
   I: Integer;
-  A: TgxVertexAttribute;
+  A: TCUDAVertexAttribute;
 begin
   // Brute-force, there no need optimization
   for I := 0 to Count - 1 do
   begin
-    A := TgxVertexAttribute(Items[i]);
+    A := TCUDAVertexAttribute(Items[i]);
     if A.Name = AName then
       Exit(A);
   end;
   Result := nil;
 end;
 
-function TgxVertexAttributes.GetItems(Index: Integer): TgxVertexAttribute;
+function TCUDAVertexAttributes.GetItems(Index: Integer): TCUDAVertexAttribute;
 begin
-  Result := TgxVertexAttribute(inherited Items[index]);
+  Result := TCUDAVertexAttribute(inherited Items[index]);
 end;
 
-function TgxVertexAttributes.MakeUniqueName(const ANameRoot: string): string;
+function TCUDAVertexAttributes.MakeUniqueName(const ANameRoot: string): string;
 var
   I: Integer;
 begin
@@ -799,13 +796,13 @@ begin
   end;
 end;
 
-procedure TgxVertexAttributes.NotifyChange(Sender: TObject);
+procedure TCUDAVertexAttributes.NotifyChange(Sender: TObject);
 begin
   TgxCustomFeedBackMesh(GetOwner).NotifyChange(Self);
 end;
 
-procedure TgxVertexAttributes.SetItems(Index: Integer;
-  const AValue: TgxVertexAttribute);
+procedure TCUDAVertexAttributes.SetItems(Index: Integer;
+  const AValue: TCUDAVertexAttribute);
 begin
   inherited Items[index] := AValue;
 end;
@@ -920,7 +917,7 @@ constructor TgxCustomFeedBackMesh.Create(AOwner: TComponent);
 begin
   inherited;
   ObjectStyle := ObjectStyle + [osDirectDraw];
-  FAttributes := TgxVertexAttributes.Create(Self);
+  FAttributes := TCUDAVertexAttributes.Create(Self);
   FVAO := TgxVertexArrayHandle.Create;
   FVBO := TgxVBOArrayBufferHandle.Create;
   FEBO := TgxVBOElementArrayHandle.Create;
@@ -1097,7 +1094,7 @@ begin
   end;
 end;
 
-procedure TgxCustomFeedBackMesh.SetAttributes(AValue: TgxVertexAttributes);
+procedure TgxCustomFeedBackMesh.SetAttributes(AValue: TCUDAVertexAttributes);
 begin
   FAttributes.Assign(AValue);
 end;

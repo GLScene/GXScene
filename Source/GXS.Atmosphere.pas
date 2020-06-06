@@ -1,6 +1,11 @@
-//
-// Graphic Scene Engine, http://glscene.org
-//
+(*******************************************
+*                                          *
+* Graphic Scene Engine, http://glscene.org *
+*                                          *
+********************************************)
+
+unit GXS.Atmosphere;
+
 (*
    This unit contains classes that imitate an atmosphere around a planet.
 
@@ -8,8 +13,6 @@
       1) Eats a lot of CPU (reduces FPS from 1240 to 520 on my PC with cSlices=100)
       2) Alpha in LowAtmColor, HighAtmColor is ignored.
 *)
-
-unit GXS.Atmosphere;
 
 interface
 

@@ -1,9 +1,9 @@
 //
 // Graphic Scene Engine, http://glscene.org
 //
-{
-   Editor for Gui skin. 
-}
+(*
+   Editor for Gui skin.
+*)
 unit GXS.FGuiSkinEditor;
 
 interface
@@ -31,7 +31,7 @@ uses
 
   GXS.Gui,
   GXS.Texture,
-  GXS.BaseClasses,
+  Scene.BaseClasses,
   GXS.Material;
 
 type

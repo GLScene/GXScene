@@ -1,10 +1,12 @@
-//
-// Graphic Scene Engine, http://glscene.org
-//
-{
-   Some useful methods for setting up bump maps.
-}
+(*******************************************
+*                                          *
+* Graphic Scene Engine, http://glscene.org *
+*                                          *
+********************************************)
+
 unit GXS.BumpMapping;
+
+(* Some useful methods for setting up bump maps *)
 
 interface
 

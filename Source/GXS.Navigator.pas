@@ -1,11 +1,12 @@
-//
-// Graphic Scene Engine, http://glscene.org
-//
-{
-  Unit for navigating TgxBaseObjects.
+(*******************************************
+*                                          *
+* Graphic Scene Engine, http://glscene.org *
+*                                          *
+********************************************)
 
-}
 unit GXS.Navigator;
+
+(* Unit for navigating TgxBaseObjects *)
 
 interface
 
@@ -26,14 +27,15 @@ uses
 
 type
 
-	{ TgxNavigator is the component for moving a TgxBaseSceneObject, and all Classes based on it,
-      this includes all the objects from the Scene Editor.
+	(* TgxNavigator is the component for moving a TgxBaseSceneObject, and all Classes based on it,
+     this includes all the objects from the Scene Editor.
 	   The four calls to get you started is
 	    TurnHorisontal : it turns left and right.
 	    TurnVertical : it turns up and down.
 	    MoveForward :	moves back and forth.
       FlyForward : moves back and forth in the movingobject's direction
-  	   The three properties to get you started is
+
+  	 The three properties to get you started is
 	    MovingObject : The Object that you are moving.
 	    UseVirtualUp : When UseVirtualUp is set you navigate Quake style. If it isn't
    		it's more like Descent.
@@ -43,7 +45,7 @@ type
       (no tilt and flying)
 	    InvertHorizontalSteeringWhenUpsideDown : When using virtual up, and vertically
       rotating beyond 90 degrees, will make steering seem inverted, so we "invert" back
-      to normal.  }
+      to normal.  *)
   TgxNavigator = class(TComponent)
   private
     FObject: TgxBaseSceneObject;
@@ -90,7 +92,7 @@ type
     property AngleLock: boolean read FAngleLock write FAngleLock default False;
   end;
 
-	{ TgxUserInterface is the component which reads the userinput and transform it into action.
+	(* TgxUserInterface is the component which reads the userinput and transform it into action.
  	   The four calls to get you started is
  	    MouseLookActivate : set us up the bomb.
  	    MouseLookDeActivate : defuses it.
@@ -99,8 +101,8 @@ type
  	   The four properties to get you started are:
  	    InvertMouse     : Inverts the mouse Y axis.
 	    MouseSpeed      : Also known as mouse sensitivity.
-	    GLNavigator     : The Navigator which receives the user movement.
-	    GLVertNavigator : The Navigator which if set receives the vertical user movement. Used mostly for cameras....   }
+	    GXNavigator     : The Navigator which receives the user movement.
+	    GXVertNavigator : The Navigator which if set receives the vertical user movement. Used mostly for cameras....   *)
   TgxUserInterface = class(TComponent)
   private
     FPrevPoint: TPoint;

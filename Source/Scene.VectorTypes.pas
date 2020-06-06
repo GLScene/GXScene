@@ -1,11 +1,16 @@
-//
-// Graphic Scene Engine, http://glscene.org
-//
+(*******************************************
+*                                          *
+* Graphic Scene Engine, http://glscene.org *
+*                                          *
+********************************************)
+
+unit Scene.VectorTypes;
+
 (*
    Defines base vector types for use in VectorGeometry.pas
 
    The sole aim of this unit is to limit dependency between the VXVectorGeometry
-   and OpenVX units by introducing the base compatibility types
+   and OpenGL units by introducing the base compatibility types
    (and only the *base* types).
 
    Conventions:
@@ -15,7 +20,6 @@
         s  is uses for 16 bits signed integers (smallint)
    Note : D3D types untested.
 *)
-unit Scene.VectorTypes;
 
 interface
 

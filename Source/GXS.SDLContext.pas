@@ -1,15 +1,19 @@
-//
-// Graphic Scene Engine, http://glscene.org
-//
-{
+(*******************************************
+*                                          *
+* Graphic Scene Engine, http://glscene.org *
+*                                          *
+********************************************)
+
+unit GXS.SDLContext;
+
+(*
    SDL specific Context and Viewer.
    NOTA: SDL notifies use of context destruction *after* it happened, this prevents
          clean release of allocated stuff and requires a temporary switch to
-         "ignore OpenVX errors" mode during destruction, thus potentially
+         "ignore OpenGL errors" mode during destruction, thus potentially
          leaking memory (depending on hardware drivers willingness to perform
          automatic releases)
-}
-unit GXS.SDLContext;
+*)
 
 interface
 
@@ -19,13 +23,12 @@ uses
   System.SysUtils,
 
   Import.OpenGLx,
+  Import.SDL2,
   Scene.XOpenGL,
   GXS.Scene,
   GXS.CrossPlatform,
   GXS.Context,
-  GXS.SDLWindow,
-  
-  SDL2;
+  GXS.SDLWindow;
 
 type
 
@@ -214,13 +217,13 @@ destructor TgxSDLContext.Destroy;
 var
   oldIgnore: Boolean;
 begin
-  oldIgnore := vIgnoreOpenVXErrors;
+  oldIgnore := vIgnoreOpenGXErrors;
   FSimulatedValidity := True;
-  vIgnoreOpenVXErrors := True;
+  vIgnoreOpenGXErrors := True;
   try
     inherited Destroy;
   finally
-    vIgnoreOpenVXErrors := oldIgnore;
+    vIgnoreOpenGXErrors := oldIgnore;
     FSimulatedValidity := False;
   end;
   FreeAndNil(FSDLWin);

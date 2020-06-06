@@ -1,14 +1,18 @@
-//
-// Graphic Scene Engine, http://glscene.org
-//
-{ 
+(*******************************************
+*                                          *
+* Graphic Scene Engine, http://glscene.org *
+*                                          *
+********************************************)
+
+unit GXS.Mesh;
+
+(*
   Raw Mesh support.
 
-  This unit is for simple meshes and legacy support, GXS.VectorFileObjects
+  This unit is for simple meshes and legacy support, VectorFileObjects
   implements more efficient (though more complex) mesh tools.
 
-}
-unit GXS.Mesh;
+*)
 
 interface
 
@@ -20,15 +24,15 @@ uses
 
   Import.OpenGLx,
   Scene.XOpenGL,
+  Scene.BaseClasses,
+  Scene.VectorTypes,
   Scene.Strings,
   GXS.Context,
   GXS.Scene,
   Scene.VectorGeometry,
   GXS.State,
-  GXS.Color, 
-  GXS.BaseClasses,  
-  GXS.RenderContextInfo, 
-  Scene.VectorTypes;
+  GXS.Color,
+  GXS.RenderContextInfo;
 
 type
   TMeshMode = (mmTriangleStrip, mmTriangleFan, mmTriangles, mmQuadStrip,
@@ -52,13 +56,13 @@ type
     coord: TVertex;
   end;
 
-  PVKVertexData = ^TgxVertexData;
+  PgxVertexData = ^TgxVertexData;
   TgxVertexDataArray = array[0..(MAXINT shr 6)] of TgxVertexData;
   PVKVertexDataArray = ^TgxVertexDataArray;
 
   { Stores an interlaced vertex list for direct use in OpenGL.
     Locking (hardware passthrough) is supported, see "Locked" property for details. }
-  TgxVertexList = class(TgxUpdateAbleObject)
+  TgxVertexList = class(TUpdateAbleObject)
   private
     FValues: PVKVertexDataArray;
     FCount: Integer;
@@ -142,7 +146,7 @@ type
 
     { Locking state of the vertex list.
       You can "Lock" a list to increase rendering performance on some
-      OpenVX implementations (NVidia's). A Locked list size shouldn't be
+      OpenGL implementations (NVidia's). A Locked list size shouldn't be
       changed and calculations should be avoided.
       Performance can only be gained from a lock for osDirectDraw object,
       ie. meshes that are updated for each frame (the default build list
@@ -762,7 +766,7 @@ end;
 initialization
 // ------------------------------------------------------------------
 
-  // class registrations
+  
   RegisterClasses([TgxMesh]);
 
 end.

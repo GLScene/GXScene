@@ -1,12 +1,12 @@
-//
-// Graphic Scene Engine, http://glscene.org
-//
-{ 
-   Methods for turning a TgxBaseMesh into a Verlet cloth / jelly 
-    
-}
+(*******************************************
+*                                          *
+* Graphic Scene Engine, http://glscene.org *
+*                                          *
+********************************************)
 
 unit GXS.VerletClothify;
+
+(* Methods for turning a TgxBaseMesh into a Verlet cloth / jelly *)
 
 interface
 

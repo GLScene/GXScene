@@ -1,6 +1,8 @@
-//
-// Graphic Scene Engine, http://glscene.org
-//
+(*******************************************
+*                                          *
+* Graphic Scene Engine, http://glscene.org *
+*                                          *
+********************************************)
 
 unit GXS.TextureFormat;
 
@@ -194,7 +196,7 @@ type
     );
 
   (* Texture compression option.
-     If OpenVX supports it, this will activate a compressed texture format:
+     If OpenGL supports it, this will activate a compressed texture format:
       tcDefault : uses global default compression option
       tcNone : do not use compression
       tcStandard : use standard compression, average quality, average rate
@@ -210,18 +212,18 @@ var
 const
   cDefaultSwizzleVector: TSwizzleVector = (tswRed, tswGreen, tswBlue, tswAlpha);
 
-// Give a OpenVX texture format from texture format.
+// Give a OpenGL texture format from texture format.
 function InternalFormatToOpenVXFormat(intFormat: TgxInternalFormat): Cardinal;
-// Give a GXScene texture format from OpenVX texture format.
+// Give a GXScene texture format from OpenGL texture format.
 function OpenVXFormatToInternalFormat(glFormat: Cardinal): TgxInternalFormat;
 // Give a pixel size in bytes from texture format or data format.
 function GetTextureElementSize(intFormat: TgxInternalFormat): Integer; overload;
 function GetTextureElementSize(colorFormat: Cardinal; dataType: Cardinal):
   Integer; overload;
-// Give compatible OpenVX image format and data type.
+// Give compatible OpenGL image format and data type.
 procedure FindCompatibleDataFormat(intFormat: TgxInternalFormat; out dFormat:
   Cardinal; out dType: Cardinal);
-(* Give a compressed OpenVX texture format from GLScene texture format
+(* Give a compressed OpenGL texture format from GLScene texture format
   if format is have not compression than return same openGL format. *)
 function CompressedInternalFormatToOpenVX(intFormat: TgxInternalFormat): Integer;
 // True if texture target supported.
@@ -238,10 +240,10 @@ function IsDepthFormat(glFormat: Cardinal): Boolean; overload;
 // True if texture compressed.
 function IsCompressedFormat(intFormat: TgxInternalFormat): Boolean; overload;
 function IsCompressedFormat(glFormat: Cardinal): Boolean; overload;
-// Give generic compressed OpenVX texture format.
+// Give generic compressed OpenGL texture format.
 function GetGenericCompressedFormat(const intFormat: TgxInternalFormat;
   const colorFormat: Cardinal; out internalFormat: Cardinal): Boolean;
-// Give uncompressed texture format and OpenVX color format.
+// Give uncompressed texture format and OpenGL color format.
 function GetUncompressedFormat(const intFormat: TgxInternalFormat;
   out internalFormat: TgxInternalFormat; out colorFormat: Cardinal): Boolean;
 function DecodeTextureTarget(const TextureTarget: TgxTextureTarget): Cardinal;

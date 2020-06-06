@@ -1,14 +1,18 @@
-//
-// Graphic Scene Engine, http://glscene.org
-//
-{
+(*******************************************
+*                                          *
+* Graphic Scene Engine, http://glscene.org *
+*                                          *
+********************************************)
+
+unit GXS.VerletTypes;
+
+(*
   Base Verlet modelling/simulation classes.
 
   Note that currently, the SatisfyConstraintForEdge methods push the nodes in
   the edge uniformly - it should push the closer node more for correct physics.
   It's a matter of leverage.
-}
-unit GXS.VerletTypes;
+*)
 
 interface
 
@@ -24,7 +28,7 @@ uses
   GXS.Coordinates,
   Scene.VectorGeometry,
   Scene.VectorLists,
-  GXS.SpacePartition,
+  Scene.SpacePartition,
   Scene.GeometryBB,
   Scene.VectorTypes;
 
@@ -36,12 +40,12 @@ type
   TgxVerletEdgeList = class;
   TgxVerletWorld = class;
 
-  TVerletProgressTimes = packed record
+  TVerleTsnProgressTimes = packed record
     deltaTime, newTime: Double;
     sqrDeltaTime, invSqrDeltaTime: Single;
   end;
 
-  { Basic verlet node }
+  // Basic verlet node
   TVerletNode = class(TSpacePartitionLeaf)
   private
     FForce: TAffineVector;
@@ -60,46 +64,46 @@ type
   public
     constructor CreateOwned(const aOwner: TgxVerletWorld); virtual;
     destructor Destroy; override;
-    { Applies friction }
+    // Applies friction
     procedure ApplyFriction(const friction, penetrationDepth: Single; const surfaceNormal: TAffineVector);
-    { Simple and less accurate method for friction }
+    // Simple and less accurate method for friction
     procedure OldApplyFriction(const friction, penetrationDepth: Single);
-    { Perform Verlet integration }
-    procedure Verlet(const vpt: TVerletProgressTimes); virtual;
-    { Initlializes the node. For the base class, it just makes sure that
-      FOldPosition = FPosition, so that speed is zero }
+    // Perform Verlet integration
+    procedure Verlet(const vpt: TVerleTsnProgressTimes); virtual;
+    (* Initlializes the node. For the base class, it just makes sure that
+      FOldPosition = FPosition, so that speed is zero *)
     procedure Initialize; virtual;
-    { Calculates the distance to another node }
+    // Calculates the distance to another node
     function DistanceToNode(const node: TVerletNode): Single;
-    { Calculates the movement of the node }
+    // Calculates the movement of the node
     function GetMovement: TAffineVector;
-    { The TVerletNode inherits from TSpacePartitionLeaf, and it needs to
+    (* The TVerletNode inherits from TSpacePartitionLeaf, and it needs to
       know how to publish itself. The owner ( a TgxVerletWorld ) has a spatial
-      partitioning object }
+      partitioning object *)
     procedure UpdateCachedAABBAndBSphere; override;
-    { The VerletWorld that owns this verlet }
+    // The VerletWorld that owns this verlet
     property Owner: TgxVerletWorld read FOwner;
-    { The location of the verlet }
+    // The location of the verlet
     property Location: TAffineVector read FLocation write SetLocation;
-    { The old location of the verlet. This is used for verlet integration }
+    // The old location of the verlet. This is used for verlet integration
     property OldLocation: TAffineVector read FOldLocation write FOldLocation;
-    { The radius of the verlet node - this has been more or less deprecated }
+    // The radius of the verlet node - this has been more or less deprecated
     property Radius: Single read FRadius write FRadius;
-    { A sum of all forces that has been applied to this verlet node during a step }
+    // A sum of all forces that has been applied to this verlet node during a step
     property Force: TAffineVector read FForce write FForce;
-    { If the node is nailed down, it can't be moved by either force,
-      constraint or verlet integration - but you can still move it by hand }
+    (* If the node is nailed down, it can't be moved by either force,
+      constraint or verlet integration - but you can still move it by hand *)
     property NailedDown: Boolean read FNailedDown write FNailedDown;
-    { The weight of a node determines how much it's affected by a force }
+    // The weight of a node determines how much it's affected by a force
     property Weight: Single read FWeight write SetWeight;
-    { InvWeight is 1/Weight, and is kept up to date automatically }
+    // InvWeight is 1/Weight, and is kept up to date automatically
     property InvWeight: Single read FInvWeight;
-    { Returns the speed of the verlet node. Speed = Movement / deltatime }
+    // Returns the speed of the verlet node. Speed = Movement / deltatime
     property Speed: TAffineVector read GetSpeed;
-    { Each node has a friction that effects how it reacts during contacts. }
+    // Each node has a friction that effects how it reacts during contacts.
     property friction: Single read FFriction write FFriction;
-    { What phyisics step was this node last changed? Used to keep track
-      of when the spatial partitioning needs to be updated }
+    (* What phyisics step was this node last changed? Used to keep track
+      of when the spatial partitioning needs to be updated *)
     property ChangedOnStep: Integer read FChangedOnStep;
   end;
 
@@ -121,18 +125,18 @@ type
   public
     constructor Create(const aOwner: TgxVerletWorld); virtual;
     destructor Destroy; override;
-    { Updates the position of one or several nodes to make sure that they
-      don't violate the constraint }
+    (* Updates the position of one or several nodes to make sure that they
+      don't violate the constraint *)
     procedure SatisfyConstraint(const iteration, maxIterations: Integer); virtual; abstract;
-    { Notifies removal of a node }
+    // Notifies removal of a node
     procedure RemoveNode(const aNode: TVerletNode); virtual; abstract;
-    { Method that's fired before the physics iterations are performed }
+    // Method that's fired before the physics iterations are performed
     procedure BeforeIterations; virtual;
-    { Onwer of the constraint }
+    // Onwer of the constraint
     property Owner: TgxVerletWorld read FOwner;
-    { Determines if the constraint should be enforced or not }
+    // Determines if the constraint should be enforced or not
     property Enabled: Boolean read FEnabled write FEnabled;
-    { Tag field reserved for the user. }
+    // Tag field reserved for the user.
     property Tag: Integer read FTag write FTag;
   end;
 
@@ -141,9 +145,9 @@ type
     FNodeA, FNodeB: TVerletNode;
   public
     procedure RemoveNode(const aNode: TVerletNode); override;
-    { Reference to NodeA. }
+    // Reference to NodeA.
     property NodeA: TVerletNode read FNodeA write FNodeA;
-    { Reference to NodeB. }
+    // Reference to NodeB.
     property NodeB: TVerletNode read FNodeB write FNodeB;
   end;
 
@@ -154,7 +158,7 @@ type
     constructor Create(const aOwner: TgxVerletWorld); override;
     destructor Destroy; override;
     procedure RemoveNode(const aNode: TVerletNode); override;
-    { The list of nodes that this constraint will effect }
+    // The list of nodes that this constraint will effect
     property Nodes: TVerletNodeList read FNodes;
   end;
 
@@ -164,14 +168,14 @@ type
     FNodeA: TVerletNode;
     FNodeB: TVerletNode;
   public
-    { The TgxVerletEdge inherits from TSpacePartitionLeaf, and it needs to
+    (* The TgxVerletEdge inherits from TSpacePartitionLeaf, and it needs to
       know how to publish itself. The owner ( a TgxVerletWorld ) has a spatial
-      partitioning object }
+      partitioning object *)
     procedure UpdateCachedAABBAndBSphere; override;
     constructor CreateEdgeOwned(const aNodeA, aNodeB: TVerletNode);
-    { One of the nodes in the edge }
+    // One of the nodes in the edge
     property NodeA: TVerletNode read FNodeA write FNodeA;
-    { One of the nodes in the edge }
+    // One of the nodes in the edge
     property NodeB: TVerletNode read FNodeB write FNodeB;
   end;
 
@@ -198,15 +202,14 @@ type
     procedure SatisfyConstraintForNode(const aNode: TVerletNode; const iteration, maxIterations: Integer); virtual; abstract;
     procedure SatisfyConstraintForEdge(const aEdge: TgxVerletEdge; const iteration, maxIterations: Integer); virtual;
     property Location: TAffineVector read FLocation write SetLocation;
-    { The force that this collider has experienced while correcting the
-      verlet possitions. This force can be applied to ODE bodies, for
-      instance }
+    (* The force that this collider has experienced while correcting the
+      verlet possitions. This force can be applied to ODE bodies, for instance *)
     property KickbackForce: TAffineVector read FKickbackForce write FKickbackForce;
-    { The torque that this collider has experienced while correcting the
+    (* The torque that this collider has experienced while correcting the
       verlet possitions, in reference to the center of the collider. The
       torque  force can be applied to ODE bodies, but it must first be
       translated. A torque can be trasnalted by EM(b) = EM(a) + EF x VectorSubtract(b, a).
-      Simply adding the torque to the body will NOT work correctly. See TranslateKickbackTorque }
+      Simply adding the torque to the body will NOT work correctly. See TranslateKickbackTorque *)
     property KickbackTorque: TAffineVector read FKickbackTorque write FKickbackTorque;
     procedure AddKickbackForceAt(const Pos: TAffineVector; const Force: TAffineVector);
     function TranslateKickbackTorque(const TorqueCenter: TAffineVector): TAffineVector;
@@ -256,7 +259,7 @@ type
     property Items[i: Integer]: TVerletConstraint read GetItems write SetItems; default;
   end;
 
-  { Generic verlet force. }
+  // Generic verlet force.
   TgxVerletForce = class(TObject)
   private
     FOwner: TgxVerletWorld;
@@ -264,25 +267,25 @@ type
     constructor Create(const aOwner: TgxVerletWorld); virtual;
     destructor Destroy; override;
     // Implementation should add force to force resultant for all relevant nodes
-    procedure AddForce(const vpt: TVerletProgressTimes); virtual; abstract;
+    procedure AddForce(const vpt: TVerleTsnProgressTimes); virtual; abstract;
     // Notifies removal of a node
     procedure RemoveNode(const aNode: TVerletNode); virtual; abstract;
     property Owner: TgxVerletWorld read FOwner;
   end;
 
-  { A verlet force that applies to two specified nodes. }
+  // A verlet force that applies to two specified nodes.
   TgxVerletDualForce = class(TgxVerletForce)
   private
     FNodeA, FNodeB: TVerletNode;
   public
     procedure RemoveNode(const aNode: TVerletNode); override;
-    { Reference to NodeA. }
+    // Reference to NodeA.
     property NodeA: TVerletNode read FNodeA write FNodeA;
-    { Reference to NodeB. }
+    // Reference to NodeB.
     property NodeB: TVerletNode read FNodeB write FNodeB;
   end;
 
-  { A verlet force that applies to a specified group of nodes. }
+  // A verlet force that applies to a specified group of nodes.
   TVerletGroupForce = class(TgxVerletForce)
   private
     FNodes: TVerletNodeList;
@@ -290,15 +293,15 @@ type
     constructor Create(const aOwner: TgxVerletWorld); override;
     destructor Destroy; override;
     procedure RemoveNode(const aNode: TVerletNode); override;
-    { Nodes of the force group, referred, NOT owned. }
+    // Nodes of the force group, referred, NOT owned.
     property Nodes: TVerletNodeList read FNodes;
   end;
 
-  { A global force (applied to all verlet nodes). }
+  // A global force (applied to all verlet nodes).
   TgxVerletGlobalForce = class(TgxVerletForce)
   public
     procedure RemoveNode(const aNode: TVerletNode); override;
-    procedure AddForce(const vpt: TVerletProgressTimes); override;
+    procedure AddForce(const vpt: TVerleTsnProgressTimes); override;
     procedure AddForceToNode(const aNode: TVerletNode); virtual; abstract;
   end;
 
@@ -338,9 +341,9 @@ type
     FInertia: Boolean;
     FInertaPauseSteps: Integer;
   protected
-    procedure AccumulateForces(const vpt: TVerletProgressTimes); virtual;
-    procedure Verlet(const vpt: TVerletProgressTimes); virtual;
-    procedure SatisfyConstraints(const vpt: TVerletProgressTimes); virtual;
+    procedure AccumulateForces(const vpt: TVerleTsnProgressTimes); virtual;
+    procedure Verlet(const vpt: TVerleTsnProgressTimes); virtual;
+    procedure SatisfyConstraints(const vpt: TVerleTsnProgressTimes); virtual;
     procedure DoUpdateSpacePartition;
   public
     constructor Create; virtual;
@@ -417,7 +420,7 @@ type
   protected
     procedure SetSlack(const Value: Single);
   public
-    procedure AddForce(const vpt: TVerletProgressTimes); override;
+    procedure AddForce(const vpt: TVerleTsnProgressTimes); override;
     // Must be invoked after adjust node locations or strength
     procedure SetRestLengthToCurrent;
     property Strength: Single read FStrength write FStrength;
@@ -425,7 +428,7 @@ type
     property Slack: Single read FSlack write SetSlack;
   end;
 
-  { Floor collision constraint }
+  // Floor collision constraint
   TVCFloor = class(TgxVerletGlobalFrictionConstraintSP)
   private
     FBounceRatio, FFloorLevel: Single;
@@ -444,7 +447,7 @@ type
   TVCHeightField = class;
   TVCHeightFieldOnNeedHeight = function(hfConstraint: TVCHeightField; node: TVerletNode): Single of object;
 
-  { HeightField collision constraint (punctual!) }
+  // HeightField collision constraint (punctual!)
   TVCHeightField = class(TVCFloor)
   private
     FOnNeedHeight: TVCHeightFieldOnNeedHeight;
@@ -453,7 +456,7 @@ type
     property OnNeedHeight: TVCHeightFieldOnNeedHeight read FOnNeedHeight write FOnNeedHeight;
   end;
 
-  { Stick constraint. Imposes a fixed distance between two nodes. }
+  // Stick constraint. Imposes a fixed distance between two nodes.
   TVCStick = class(TgxVerletDualConstraint)
   private
     FSlack: Single;
@@ -465,9 +468,9 @@ type
     property RestLength: Single read FRestLength write FRestLength;
   end;
 
-  { Rigid body constraint. Regroups several nodes in a rigid body conformation, somewhat similar
+  (* Rigid body constraint. Regroups several nodes in a rigid body conformation, somewhat similar
     to a stick but for multiple nodes.
-    EXPERIMENTAL, DOES NOT WORK! }
+    EXPERIMENTAL, DOES NOT WORK! *)
   TVCRigidBody = class(TVerletGroupConstraint)
   private
     FNodeParams: array of TAffineVector;
@@ -481,8 +484,8 @@ type
     procedure SatisfyConstraint(const iteration, maxIterations: Integer); override;
   end;
 
-  { Slider constraint. Imposes that two nodes be aligned on a defined direction, on which they
-    can slide freely. Note that the direction is fixed and won't rotate with the verlet assembly!. }
+  (* Slider constraint. Imposes that two nodes be aligned on a defined direction, on which they
+    can slide freely. Note that the direction is fixed and won't rotate with the verlet assembly!. *)
   TVCSlider = class(TgxVerletDualConstraint)
   private
     FSlideDirection: TAffineVector;
@@ -492,11 +495,11 @@ type
   public
     procedure SatisfyConstraint(const iteration, maxIterations: Integer); override;
     property SlideDirection: TAffineVector read FSlideDirection write SetSlideDirection;
-    { Constrain NodeB to the halfplane defined by NodeA and SlideDirection. }
+    // Constrain NodeB to the halfplane defined by NodeA and SlideDirection.
     property Constrained: Boolean read FConstrained write FConstrained;
   end;
 
-  { Sphere collision constraint. }
+  // Sphere collision constraint.
   TVCSphere = class(TgxVerletGlobalFrictionConstraintSphere)
   private
     FRadius: Single;
@@ -507,7 +510,7 @@ type
     property Radius: Single read FRadius write FRadius;
   end;
 
-  { Cylinder collision constraint. The cylinder is considered infinite by this constraint. }
+  // Cylinder collision constraint. The cylinder is considered infinite by this constraint.
   TVCCylinder = class(TgxVerletGlobalFrictionConstraint)
   private
     FAxis: TAffineVector;
@@ -516,17 +519,17 @@ type
     procedure SetRadius(const val: Single);
   public
     procedure SatisfyConstraintForNode(const aNode: TVerletNode; const iteration, maxIterations: Integer); override;
-    { A base point on the cylinder axis.
+    (* A base point on the cylinder axis.
       Can theoretically be anywhere, however, to reduce floating point
-      precision issues, choose it in the area where collision detection will occur. }
-    // property Base : TAffineVector read FBase write FBase;
-    { Cylinder axis vector. Must be normalized. }
+      precision issues, choose it in the area where collision detection will occur. *)
+    /// property Base : TAffineVector read FBase write FBase;
+    (* Cylinder axis vector. Must be normalized. *)
     property Axis: TAffineVector read FAxis write FAxis;
-    { Cylinder radius. }
+    // Cylinder radius
     property Radius: Single read FRadius write SetRadius;
   end;
 
-  { Cube collision constraint. }
+  // Cube collision constraint
   TVCCube = class(TgxVerletGlobalFrictionConstraintBox)
   private
     FHalfSides: TAffineVector;
@@ -542,7 +545,7 @@ type
     property Sides: TAffineVector read FSides write SetSides;
   end;
 
-  { Capsule collision constraint. }
+  // Capsule collision constraint.
   TVCCapsule = class(TgxVerletGlobalFrictionConstraintSphere)
   private
     FAxis: TAffineVector;
@@ -561,9 +564,9 @@ type
     property Length: Single read FLength write SetLength;
   end;
 
-  { Specialized verlet node that can be anchored to a GLScene object. If it's
+  (* Specialized verlet node that can be anchored to a GLScene object. If it's
      anchored and has the property "NailedDown" set, it will remain in the same
-     relative position to the GLScene object.}
+     relative position to the GLScene object.*)
   TgxVerletNode = class(TVerletNode)
   private
     FRelativePosition: TAffineVector;
@@ -572,7 +575,7 @@ type
   protected
     procedure SetLocation(const Value: TAffineVector);override;
   public
-    procedure Verlet(const vpt : TVerletProgressTimes); override;
+    procedure Verlet(const vpt : TVerleTsnProgressTimes); override;
     property VXBaseSceneObject : TgxBaseSceneObject read FBaseSceneObject write SetBaseSceneObject;
     property RelativePosition : TAffineVector read FRelativePosition write FRelativePosition;
   end;
@@ -608,7 +611,7 @@ begin
   inherited;
 end;
 
-{ TODO: Improve the friction calculations
+(* TODO: Improve the friction calculations
   Friction = - NormalForce * FrictionConstant
   To compute the NormalForce, which is the force acting on the normal of the
   collider, we can use the fact that F = m*a.
@@ -617,7 +620,7 @@ end;
   Acceleration := - PenetrationDepth / Owner.FCurrentDeltaTime;
   The force with which the node has been "stopped" from penetration
   NormalForce := Weight * Acceleration;
-  This force should be applied to stopping the movement. }
+  This force should be applied to stopping the movement. *)
 procedure TVerletNode.ApplyFriction(const friction, penetrationDepth: Single; const surfaceNormal: TAffineVector);
 var
   frictionMove, move, moveNormal: TAffineVector;
@@ -676,7 +679,7 @@ begin
     FInvWeight := 1;
 end;
 
-procedure TVerletNode.Verlet(const vpt: TVerletProgressTimes);
+procedure TVerletNode.Verlet(const vpt: TVerleTsnProgressTimes);
 var
   newLocation, temp, move, accel: TAffineVector;
 begin
@@ -1076,7 +1079,7 @@ begin
   inherited;
 end;
 
-procedure TgxVerletWorld.AccumulateForces(const vpt: TVerletProgressTimes);
+procedure TgxVerletWorld.AccumulateForces(const vpt: TVerleTsnProgressTimes);
 var
   i: Integer;
 begin
@@ -1220,7 +1223,7 @@ var
   i: Integer;
   ticks: Integer;
   myDeltaTime: Single;
-  vpt: TVerletProgressTimes;
+  vpt: TVerleTsnProgressTimes;
 begin
   ticks := 0;
   myDeltaTime := FMaxDeltaTime;
@@ -1273,7 +1276,7 @@ begin
   end;
 end;
 
-procedure TgxVerletWorld.SatisfyConstraints(const vpt: TVerletProgressTimes);
+procedure TgxVerletWorld.SatisfyConstraints(const vpt: TVerleTsnProgressTimes);
 var
   i, j: Integer;
   Constraint: TVerletConstraint;
@@ -1302,7 +1305,7 @@ begin
     DoUpdateSpacePartition; // }
 end;
 
-procedure TgxVerletWorld.Verlet(const vpt: TVerletProgressTimes);
+procedure TgxVerletWorld.Verlet(const vpt: TVerleTsnProgressTimes);
 var
   i: Integer;
 begin
@@ -1674,7 +1677,7 @@ begin
   natural[1] := VectorTransform(natural[1], FInvNatMatrix);
   natural[2] := VectorTransform(natural[2], FInvNatMatrix);
   // make the natural axises orthonormal, by picking the longest two
-  { for i:=0 to 2 do
+  (* for i:=0 to 2 do
     vectNorm[i]:=VectorNorm(natural[i]);
     if (vectNorm[0]<vectNorm[1]) and (vectNorm[0]<vectNorm[2]) then begin
     natural[0]:=VectorCrossProduct(natural[1], natural[2]);
@@ -1685,7 +1688,7 @@ begin
     end else begin
     natural[2]:=VectorCrossProduct(natural[0], natural[1]);
     natural[0]:=VectorCrossProduct(natural[1], natural[2]);
-    end; }
+    end; *)
 
   // now the axises are back, recompute the position of all points
   SetLength(deltas, Nodes.Count);
@@ -1988,8 +1991,8 @@ begin
   begin
     // contactNormal := VectorScale(shortestMove, 1/shortestDeltaLength);
 
-    { aEdge.NodeA.ApplyFriction(FFrictionRatio, shortestDeltaLength, contactNormal);
-      aEdge.NodeB.ApplyFriction(FFrictionRatio, shortestDeltaLength, contactNormal);// }
+    (* aEdge.NodeA.ApplyFriction(FFrictionRatio, shortestDeltaLength, contactNormal);
+      aEdge.NodeB.ApplyFriction(FFrictionRatio, shortestDeltaLength, contactNormal);// *)
 
     AddVector(aEdge.NodeA.FLocation, shortestMove);
     AddVector(aEdge.NodeB.FLocation, shortestMove); // }
@@ -2273,7 +2276,7 @@ begin
   FCachedAABB := GetAABB;
 end;
 
-{ TgxVerletGlobalFrictionConstraintSphere }
+// TgxVerletGlobalFrictionConstraintSphere
 
 procedure TgxVerletGlobalFrictionConstraintSphere.PerformSpaceQuery;
 begin
@@ -2335,7 +2338,7 @@ begin
     FRelativePosition := VXBaseSceneObject.AbsoluteToLocal(Value);
 end;
 
-procedure TgxVerletNode.Verlet(const vpt : TVerletProgressTimes);
+procedure TgxVerletNode.Verlet(const vpt : TVerleTsnProgressTimes);
 begin
   if Assigned(VXBaseSceneObject) and NailedDown then
   begin

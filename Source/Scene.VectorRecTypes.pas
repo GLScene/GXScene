@@ -1,10 +1,12 @@
-//
-// Graphic Scene Engine, http://glscene.org
-//
-(*
-   Defines vector types as advanced records.
-*)
+(*******************************************
+*                                          *
+* Graphic Scene Engine, http://glscene.org *
+*                                          *
+********************************************)
+
 unit Scene.VectorRecTypes;
+
+(* Defines vector types as advanced records *)
 
 interface
 

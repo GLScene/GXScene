@@ -1,14 +1,18 @@
-//
-// Graphic Scene Engine, http://glscene.org
-//
-{
+(*******************************************
+*                                          *
+* Graphic Scene Engine, http://glscene.org *
+*                                          *
+********************************************)
+
+unit GXS.Perlin;
+
+(*
   Classes for generating perlin noise.
 
   The components and classes in the unit are a base to generate textures and heightmaps from,
-  A Perlin Height Data Source have been included as an example. Use this combined with a terrain renderer for an infinite random landscape
-
-}
-unit GXS.Perlin;
+  A Perlin Height Data Source have been included as an example. 
+  Use this combined with a terrain renderer for an infinite random landscape
+*)
 
 interface
 
@@ -22,7 +26,7 @@ uses
 
   GXS.CrossPlatform,
   Scene.VectorGeometry,
-  GXS.PerlinBase, 
+  Scene.PerlinBase,
   GXS.HeightData;
 
 Type
@@ -175,7 +179,7 @@ begin
         Perlin_Random1(int_x + 1), frac_x);
   else
     raise exception.Create
-      ('TgxBasePerlin.PerlinNoise_1D, Interpolation not implemented!');
+      ('PerlinNoise_1D, Interpolation not implemented!');
   End;
 end;
 
@@ -207,7 +211,7 @@ Begin
         Perlin_Random1(int_x + 1), frac_x);
   else
     raise exception.Create
-      ('TgxBasePerlin.PerlinNoise_1D, Interpolation not implemented!');
+      ('PerlinNoise_1D, Interpolation not implemented!');
   End;
 End;
 
@@ -301,7 +305,7 @@ Begin
   Result := total;
 End;
 
-Procedure Tgx2DPerlinOctav.Generate;
+procedure Tgx2DPerlinOctav.Generate;
 
 Var
   YC: Integer;

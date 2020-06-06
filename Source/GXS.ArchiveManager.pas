@@ -1,7 +1,8 @@
-﻿//
-// Graphic Scene Engine, http://glscene.org
-//
-{  The history is logged in GLS version of the unit }
+﻿(*******************************************
+*                                          *
+* Graphic Scene Engine, http://glscene.org *
+*                                          *
+********************************************)
 
 unit GXS.ArchiveManager;
 

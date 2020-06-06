@@ -1,10 +1,12 @@
-//
-// Graphic Scene Engine, http://glscene.org
-//
-(*
-  TIN (Triangular Irregular Network) vector file format implementation.
-*)
+(*******************************************
+*                                          *
+* Graphic Scene Engine, http://glscene.org *
+*                                          *
+********************************************)
+
 unit GXS.FileTIN;
+
+(* TIN (Triangular Irregular Network) vector file format implementation *)
 
 interface
 
@@ -22,10 +24,10 @@ uses
 
 
 type
-  { The TIN vector file (triangle irregular network).
+  (* The TIN vector file (triangle irregular network).
     It is a simple text format, with one triangle record per line, no materials,
     no texturing (there may be more, but I never saw anything in this files).
-    This format is encountered in the DEM/DTED world and used in place of grids. }
+    This format is encountered in the DEM/DTED world and used in place of grids. *)
   TgxTINVectorFile = class(TgxVectorFile)
   public
     class function Capabilities: TgxDataFileCapabilities; override;

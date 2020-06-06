@@ -1,8 +1,13 @@
-//
-// Graphic Scene Engine, http://glscene.org
-//
+(*******************************************
+*                                          *
+* Graphic Scene Engine, http://glscene.org *
+*                                          *
+********************************************)
+
+unit GXS.ExplosionFx;
+
 (*
-  TgxBExplosionFX Effect
+  ExplosionFX Effect
 
   Description: this effect explodes a mesh object into triangles
   that fly over. You can define a default direction, in wich case
@@ -18,8 +23,6 @@
   so if you'll need the mesh after exploding it, you'll have to save the
   MeshObjects property of the mesh, OR load it again.
 *)
-
-unit GXS.ExplosionFx;
 
 interface
 
@@ -70,8 +73,8 @@ type
     constructor Create(aOwner : TXCollection); override;
     destructor Destroy; override;
     procedure Render(var rci : TgxRenderContextInfo); override;
-    { resets the behaviour, so the information can be re-cached and
-      the mesh can be exploded again }
+    (* Resets the behaviour, so the information can be re-cached and
+      the mesh can be exploded again *)
     procedure Reset;
     class function FriendlyName : String; override;
     class function FriendlyDescription : String; override;
@@ -280,8 +283,10 @@ begin
   end;
 end;
 
+//------------------------------------
 initialization
-	// class registrations
+//------------------------------------
+	
 	RegisterXCollectionItemClass(TgxBExplosionFX);
 
 finalization

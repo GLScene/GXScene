@@ -1,9 +1,9 @@
 //
 // Graphic Scene Engine, http://glscene.org
 //
-{
+(*
   A collection of components that generate post effects.
-}
+*)
 unit GXS.PostEffects;
 
 interface
@@ -57,9 +57,9 @@ type
     property Items[const Index: Integer]: TgxPostShaderCollectionItem read GetItems write SetItems; default;
   end;
 
-  { A class that allows several post-shaders to be applied to the scene,
+  (* A class that allows several post-shaders to be applied to the scene,
     one after another. It does not provide any optimizations related to
-    multi-shader rendering, just a convenient interface. }
+    multi-shader rendering, just a convenient interface. *)
   TgxPostShaderHolder = class(TgxBaseSCeneObject)
   private
     FShaders: TgxPostShaderCollection;
@@ -93,7 +93,7 @@ type
 
   TgxOnCustomPostEffectEvent = procedure(Sender: TObject; var rci : TgxRenderContextInfo; var Buffer: TgxPostEffectBuffer) of object;
 
-  { Some presets for TgxPostEffect:
+  (* Some presets for TgxPostEffect:
        pepNone - does nothing.
        pepGray - makes picture gray.
        pepNegative - inverts all colors.
@@ -101,12 +101,12 @@ type
        pepNoise - just adds random niose.
        pepNightVision - simulates nightvision goggles.
        pepBlur - blurs the scene.
-       pepCustom - calls the OnCustomEffect event. }
+       pepCustom - calls the OnCustomEffect event. *)
   TgxPostEffectPreset = (pepNone, pepGray, pepNegative, pepDistort, pepNoise,
                          pepNightVision, pepBlur, pepCustom);
 
-  { Provides a simple way to producing post-effects without shaders. 
-     It is slow as hell, but it's worth it in some cases.}
+  (* Provides a simple way to producing post-effects without shaders.
+     It is slow as hell, but it's worth it in some cases.*)
   TgxPostEffect = class(TgxBaseSCeneObject)
   private
     FOnCustomEffect: TgxOnCustomPostEffectEvent;
@@ -138,7 +138,9 @@ type
 implementation
 //-----------------------------------------------------------------------------
 
-{ TgxPostEffect }
+//-------------------------------
+// TgxPostEffect
+//-------------------------------
 
 procedure TgxPostEffect.Assign(Source: TPersistent);
 begin
@@ -292,7 +294,9 @@ begin
   end;
 end;
 
-{ TgxPostShaderCollectionItem }
+//-------------------------------
+// TgxPostShaderCollectionItem
+//-------------------------------
 
 procedure TgxPostShaderCollectionItem.Assign(Source: TPersistent);
 begin
@@ -354,7 +358,9 @@ begin
       FShader.FreeNotification(RealOwner);
 end;
 
-{ TgxPostShaderHolder }
+//-------------------------------
+// TgxPostShaderHolder
+//-------------------------------
 
 procedure TgxPostShaderHolder.Assign(Source: TPersistent);
 begin
@@ -437,7 +443,9 @@ begin
   FShaders.Assign(Value);
 end;
 
-{ TgxPostShaderCollection }
+//-------------------------------
+// TgxPostShaderCollection
+//-------------------------------
 
 function TgxPostShaderCollection.Add: TgxPostShaderCollectionItem;
 begin

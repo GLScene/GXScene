@@ -1,10 +1,12 @@
-//
-// Graphic Scene Engine, http://glscene.org
-//
-(*
-  PLY (Stanford Triangle Format) vector file format implementation.
-*)
+(*******************************************
+*                                          *
+* Graphic Scene Engine, http://glscene.org *
+*                                          *
+********************************************)
+
 unit GXS.FilePLY;
+
+(* PLY (Stanford Triangle Format) vector file format implementation *)
 
 interface
 
@@ -18,14 +20,13 @@ uses
   GXS.Utils;
 
 type
-  { The PLY vector file aka Stanford Triangle Format.
+  (* The PLY vector file aka Stanford Triangle Format.
     This is a format for storing graphical objects that are described as a
     collection of polygons. The format is extensible, supports variations and
     subformats. This importer only works for the simplest variant (triangles
-    without specified normals, and will ignore most header specifications. }
+    without specified normals, and will ignore most header specifications. *)
   TgxPLYVectorFile = class(TgxVectorFile)
   public
-
     class function Capabilities: TgxDataFileCapabilities; override;
     procedure LoadFromStream(aStream: TStream); override;
   end;

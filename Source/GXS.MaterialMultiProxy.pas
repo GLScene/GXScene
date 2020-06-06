@@ -1,6 +1,8 @@
-//
-// Graphic Scene Engine, http://glscene.org
-//
+(*******************************************
+*                                          *
+* Graphic Scene Engine, http://glscene.org *
+*                                          *
+********************************************)
 (*
    Implements a multi-proxy object, useful for discreet LOD.
    Allows assign a unique material for each proxy master.
@@ -43,7 +45,7 @@ uses
   GXS.CrossPlatform,
   Scene.PersistentClasses,
   GXS.RenderContextInfo,
-  GXS.BaseClasses,
+  Scene.BaseClasses,
   GXS.Context,
   GXS.PipelineTransformation;
 
@@ -52,7 +54,7 @@ type
   TgxMaterialMultiProxy = class;
 
   // MasterObject description for a MultiProxy object.
-  TgxMaterialMultiProxyMaster = class(TgxInterfacedCollectionItem, IgxMaterialLibrarySupported)
+  TgxMaterialMultiProxyMaster = class(TInterfacedCollectionItem, IgxMaterialLibrarySupported)
   private
     FMasterObject: TgxBaseSceneObject;
     FMasterLibMaterial: TgxLibMaterial;
@@ -339,8 +341,8 @@ end;
 
 procedure TgxMaterialMultiProxyMasters.NotifyChange;
 begin
-  if (UpdateCount = 0) and (GetOwner <> nil) and (GetOwner is TgxUpdateAbleComponent) then
-    TgxUpdateAbleComponent(GetOwner).NotifyChange(Self);
+  if (UpdateCount = 0) and (GetOwner <> nil) and (GetOwner is TUpdateAbleComponent) then
+    TUpdateAbleComponent(GetOwner).NotifyChange(Self);
 end;
 
 procedure TgxMaterialMultiProxyMasters.EndUpdate;

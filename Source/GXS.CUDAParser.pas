@@ -1,18 +1,23 @@
-//
-// Graphic Scene Engine, http://glscene.org
-//
-{
-   Helper unit for parsing CU modules and get information about. 
-   kernel's functions, textures, shared and constants memory. 
-     
-}
+(*******************************************
+*                                          *
+* Graphic Scene Engine, http://glscene.org *
+*                                          *
+********************************************)
+
 unit GXS.CUDAParser;
+
+(*
+   Helper unit for parsing CU modules and get information about.
+   kernel's functions, textures, shared and constants memory.
+*)
 
 interface
 
 uses
-  System.Classes, 
+  System.Classes,
   System.SysUtils,
+
+  Scene.Strings,
   GXS.CUDARunTime;
 
 type
@@ -127,17 +132,10 @@ type
 
     procedure ParseModule(ASource, AProduct: TStrings);
   end;
-  
-//----------------------------------------------------------------  
-//----------------------------------------------------------------  
-//----------------------------------------------------------------  
-implementation
-//----------------------------------------------------------------  
-//----------------------------------------------------------------  
-//----------------------------------------------------------------  
 
-uses
-  Scene.Strings;
+//----------------------------------------------------------------
+implementation
+//----------------------------------------------------------------
 
 const
   WordDelimiters: set of AnsiChar = [#0..#255] - ['a'..'z','A'..'Z','1'..'9','0','_'];

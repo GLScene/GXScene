@@ -1,10 +1,12 @@
-//
-// Graphic Scene Engine, http://glscene.org
-//
-(*
-  HeightDataSource for the HTF (HeightTileFile) format.
-*)
+(*******************************************
+*                                          *
+* Graphic Scene Engine, http://glscene.org *
+*                                          *
+********************************************)
+
 unit GXS.HeightTileFileHDS;
+
+(* HeightDataSource for the HTF (HeightTileFile) format *)
 
 interface
 
@@ -230,7 +232,7 @@ end;
 initialization
 // ------------------------------------------------------------------
 
-// class registrations
+
 RegisterClasses([TgxHeightTileFileHDS]);
 
 end.

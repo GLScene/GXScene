@@ -1,11 +1,12 @@
-//
-// Graphic Scene Engine, http://glscene.org
-//
-{
-   An ARBvp1.0 + ARBfp1.0 shader that implements phong shading.
+(*******************************************
+*                                          *
+* Graphic Scene Engine, http://glscene.org *
+*                                          *
+********************************************)
 
-}
 unit GXS.PhongShader;
+
+(* An ARBvp1.0 + ARBfp1.0 shader that implements phong shading *)
 
 interface
 

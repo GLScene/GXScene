@@ -1,10 +1,12 @@
-//
-// Graphic Scene Engine, http://glscene.org
-//
-{
-  All color types, constants and utilities should go here
-}
+(*******************************************
+*                                          *
+* Graphic Scene Engine, http://glscene.org *
+*                                          *
+********************************************)
+
 unit GXS.Color;
+
+(* All color types, constants and utilities should go here *)
 
 interface
 
@@ -16,13 +18,12 @@ uses
   System.Types,
   System.UITypes,
   FMX.Dialogs,
-  FMX.Graphics,
 
   Import.OpenGLx,
   Scene.VectorTypes,
   Scene.VectorGeometry,
   Scene.PersistentClasses,
-  GXS.BaseClasses;
+  Scene.BaseClasses;
 
 type
   PColorVector = ^TColorVector;
@@ -31,10 +32,9 @@ type
   PRGBColor = ^TRGBColor;
   TRGBColor = TVector3b;
 
-  { Wraps an OpenVX color. }
-  TgxColor = class(TgxUpdateAbleObject)
+  // Wraps an OpenGL color. 
+  TgxColor = class(TUpdateAbleObject)
   private
-    { Private Properties }
     FColor: TColorVector;
     FPDefaultColor: PColorVector;
     procedure SetColorVector(const aColor: TColorVector); overload;
@@ -90,15 +90,15 @@ type
     procedure EnumColors(Proc: TGetStrProc); overload;
     procedure EnumColors(AValues: TStrings); overload;
     function FindColor(const aName: String): TColorVector;
-    { Convert a clrXxxx or a '<red green blue alpha> to a color vector }
+    // Convert a clrXxxx or a '<red green blue alpha> to a color vector 
     function GetColor(const aName: String): TColorVector;
     function GetColorName(const aColor: TColorVector): String;
     procedure RegisterDefaultColors;
     procedure RemoveColor(const aName: String);
   end;
 
-{ Builds a TColor from Red Green Blue components,
-  there is a Vcl.Imaging.GIFImg.TGIFColorMap.RGB2Color }
+(* Builds a TColor from Red Green Blue components,
+  there is a Vcl.Imaging.GIFImg.TGIFColorMap.RGB2Color *)
 function RGB2Color(const r, g, b: Byte): TColor;
 function ColorManager: TgxColorManager;
 procedure RegisterColor(const aName: String; const aColor: TColorVector);
@@ -107,13 +107,13 @@ function GetRValue(RGB: DWORD): Byte; {$NODEFINE GetRValue}
 function GetGValue(RGB: DWORD): Byte; {$NODEFINE GetGValue}
 function GetBValue(RGB: DWORD): Byte; {$NODEFINE GetBValue}
 procedure InitGXSceneColors;
-{ Converts a delphi color into its RGB fragments and correct range. }
+// Converts a delphi color into its RGB fragments and correct range. 
 function ConvertWinColor(AColor: TColor; alpha: Single = 1): TColorVector;
 
 // Converts a color vector (containing float values)
 function ConvertColorVector(const AColor: TColorVector): TColor; overload;
-{ Converts a color vector (containing float values) and alter intensity.
-  intensity is in [0..1] }
+(* Converts a color vector (containing float values) and alter intensity.
+  intensity is in [0..1] *)
 function ConvertColorVector(const AColor: TColorVector; intensity: Single): TColor; overload;
 // Converts RGB components into a color vector with correct range
 function ConvertRGBColor(const AColor: array of Byte): TColorVector;
@@ -193,8 +193,8 @@ const
   clMask = TColorRec.White;
   clDontMask = TColorRec.Black;
 
-  // Window's colors (must be filled at program
-  // startup, since they depend on the desktop scheme)
+(* Window's colors (must be filled at program startup, 
+   since they depend on the desktop scheme) *)
 const
 {$J+ - allow change of the following typed constants}
   clrScrollBar: TColorVector = (X: 0; Y: 0; Z: 0; W: 1);
@@ -224,8 +224,7 @@ const
   clrInfoBk: TColorVector = (X: 0; Y: 0; Z: 0; W: 1);
 
 {$J- - disable change of other typed constants}
-  // 'static' color definitions
-  // sort of grays
+  // 'static' color definitions sort of grays
   clrTransparent: TColorVector = (X: 0; Y: 0; Z: 0; W: 0);
   clrBlack: TColorVector = (X: 0; Y: 0; Z: 0; W: 1);
   clrGray05: TColorVector = (X: 0.05; Y: 0.05; Z: 0.05; W: 1);
@@ -364,8 +363,8 @@ const
 {$J- - disallow change of the following typed constants}
 
 var
-  // Specifies if TgxColor should allocate memory for
-  // their default values (ie. design-time) or not (run-time)
+  (* Specifies if TgxColor should allocate memory for
+   their default values (ie. design-time) or not (run-time) *)
   vUseDefaultColorSets: Boolean = False;
 
 //------------------------------------------------
@@ -582,11 +581,11 @@ end;
 
 procedure TgxColor.NotifyChange(Sender: TObject);
 var
-  intf: IgxNotifyable;
+  intf: INotifyable;
 begin
   if Assigned(Owner) then
   begin
-    if Supports(Owner, IgxNotifyable, intf) then
+    if Supports(Owner, INotifyable, intf) then
       intf.NotifyChange(Self);
     //  if Owner is TgxBaseSceneObject then
     // TgxBaseSceneObject(Owner).StructureChanged;

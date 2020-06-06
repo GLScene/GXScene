@@ -1,9 +1,9 @@
 //
 // Graphic Scene Engine, http://glscene.org
 //
-{
+(*
  Constants for commonly used structures
-}
+*)
 unit Formats.File3DSConst;
 
 interface
@@ -155,7 +155,7 @@ const // Flags used by the flag field of the Mesh3DS structure
       ShadowRangeMin3DS     = 0;                 // noninclusive minimum value for shadow range
 
       // SHADOW_FILTER chunk
-      ShadowFilterMin3DS    = 1;                 // inclusive minimum value for shadow filter 
+      ShadowFilterMin3DS    = 1;                 // inclusive minimum value for shadow filter
       ShadowFilterMax3DS    = 10;                // inclusive maximum value for shadow filter
 
       // BITMAP chunk

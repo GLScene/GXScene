@@ -1,10 +1,12 @@
-//
-// Graphic Scene Engine, http://glscene.org
-//
-(*
-   FPS-like movement behaviour and manager.
-*)
+(*******************************************
+*                                          *
+* Graphic Scene Engine, http://glscene.org *
+*                                          *
+********************************************)
+
 unit GXS.FPSMovement;
+
+(* FPS-like movement behaviour and manager *)
 
 interface
 
@@ -29,8 +31,8 @@ uses
   GXS.GeomObjects,
   GXS.Navigator,
   GXS.RenderContextInfo,
-  GXS.BaseClasses,
-  GXS.Manager,
+  Scene.BaseClasses,
+  Scene.Manager,
   GXS.State;
 
 type
@@ -156,7 +158,7 @@ type
     Velocity: TVector;
     constructor Create(aOwner: TXCollection); override;
     destructor Destroy; override;
-    procedure DoProgress(const progressTime: TgxProgressTimes); override;
+    procedure DoProgress(const progressTime: TProgressTimes); override;
     class function FriendlyName: string; override;
     Procedure TurnHorizontal(Angle: single);
     Procedure TurnVertical(Angle: single);
@@ -809,7 +811,7 @@ begin
   Manager.Navigator.MovingObject := prevObj;
 end;
 
-procedure TgxBFPSMovement.DoProgress(const progressTime: TgxProgressTimes);
+procedure TgxBFPSMovement.DoProgress(const progressTime: TProgressTimes);
 var
   newPosition: TVector;
   CollisionState: TCollisionState;
@@ -916,7 +918,7 @@ initialization
 // ------------------------------------------------------------------
 // ------------------------------------------------------------------
 
-// class registrations
+
 RegisterXCollectionItemClass(TgxMapCollectionItem);
 RegisterXCollectionItemClass(TgxBFPSMovement);
 

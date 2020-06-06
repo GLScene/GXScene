@@ -1,6 +1,8 @@
-//
-// Graphic Scene Engine, http://glscene.org
-//
+(*******************************************
+*                                          *
+* Graphic Scene Engine, http://glscene.org *
+*                                          *
+********************************************)
 {
    Tools for managing an application-side cache of OpenGL state.
 }
@@ -86,7 +88,7 @@ const
 
 type
 
-// Reflects all relevant (binary) states of OpenVX subsystem
+// Reflects all relevant (binary) states of OpenGL subsystem
   TgxState = (stAlphaTest, stAutoNormal,
     stBlend, stColorMaterial, stCullFace, stDepthTest, stDither,
     stFog, stLighting, stLineSmooth, stLineStipple,
@@ -181,10 +183,10 @@ type
 
   TgxMaterialLevel = (mlAuto, mlFixedFunction, mlMultitexturing, mlSM3, mlSM4, mlSM5);
 
-  { Manages an application-side cache of OpenVX states and parameters.
+  { Manages an application-side cache of OpenGL states and parameters.
      Purpose of this class is to eliminate redundant state and parameter
      changes, and there will typically be no more than one state cache per
-     OpenVX context. }
+     OpenGL context. }
   TgxStateCache = class
   private
     // Legacy state

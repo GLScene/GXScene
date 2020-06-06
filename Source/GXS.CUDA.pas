@@ -1,6 +1,8 @@
-//
-// Graphic Scene Engine, http://glscene.org
-//
+(*******************************************
+*                                          *
+* Graphic Scene Engine, http://glscene.org *
+*                                          *
+********************************************)
 (*
   CUDA Integface
 *)
@@ -14,7 +16,7 @@ uses
   FMX.Dialogs,
   
   Scene.PersistentClasses,
-  GXS.BaseClasses,
+  Scene.BaseClasses,
   GXS.CrossPlatform,
   GXS.Context,
   Scene.VectorGeometry,
@@ -29,8 +31,8 @@ uses
   GXS.CUDADataAccess,
   Scene.Strings,
   GXS.Utils,
-  OpenCL,
-  OpenCL_Platform,
+  Import.OpenCL,
+  Import.OpenCL_Platform,
   GXS.CUDAApi;
 
 type

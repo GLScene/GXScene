@@ -19,26 +19,25 @@ uses
   GXS.Scene,
   Scene.PersistentClasses,
   Scene.VectorGeometry,
+  Scene.VectorTypes,
   GXS.Texture,
   GXS.VectorFileObjects,
   Scene.Strings,
   GXS.RenderContextInfo,
-  GXS.BaseClasses,
+  Scene.BaseClasses,
   GXS.Material,
   GXS.Context,
-  GXS.PipelineTransformation,
-  Scene.VectorTypes;
+  GXS.PipelineTransformation;
 
 type
-  EGLProxyException = class(Exception);
+  EProxyException = class(Exception);
 
-  { A proxy object with its own color.
+  (* A proxy object with its own color.
      This proxy object can have a unique color. Note that multi-material
      objects (Freeforms linked to a material library f.i.) won't honour
-     the color. }
+     the color. *)
   TgxColorProxy = class(TgxProxyObject)
   private
-    
     FFrontColor: TgxFaceProperties;
     function GetMasterMaterialObject: TgxCustomSceneObject;
     procedure SetMasterMaterialObject(const Value: TgxCustomSceneObject);
@@ -87,26 +86,26 @@ type
     
     property MaterialLibrary: TgxMaterialLibrary read FMaterialLibrary write
       SetMaterialLibrary;
-    { Specifies the Material, that current master object will use. }
+    // Specifies the Material, that current master object will use.
     property MasterLibMaterialName: TgxLibMaterialName read
       GetMasterLibMaterialName write SetMasterLibMaterialName;
-    { Redeclare as TgxCustomSceneObject. }
+    // Redeclare as TgxCustomSceneObject.
     property MasterObject: TgxCustomSceneObject read GetMasterMaterialObject
       write SetMasterMaterialObject;
   end;
 
-  { A proxy object specialized for FreeForms.  }
+  // A proxy object specialized for FreeForms.
   TgxFreeFormProxy = class(TgxProxyObject)
   private
     function GetMasterFreeFormObject: TgxFreeForm;
     procedure SetMasterFreeFormObject(const Value: TgxFreeForm);
   public
-    { If the MasterObject is a FreeForm, you can raycast against the Octree,
-       which is alot faster.  You must build the octree before using. }
+    (* If the MasterObject is a FreeForm, you can raycast against the Octree,
+       which is alot faster.  You must build the octree before using. *)
     function OctreeRayCastIntersect(const rayStart, rayVector: TVector;
       intersectPoint: PVector = nil;
       intersectNormal: PVector = nil): Boolean;
-    { WARNING: This function is not yet 100% reliable with scale+rotation. }
+    // WARNING: This function is not yet 100% reliable with scale+rotation.
     function OctreeSphereSweepIntersect(const rayStart, rayVector: TVector;
       const velocity, radius, modelscale: Single;
       intersectPoint: PVector = nil;
@@ -117,7 +116,7 @@ type
       SetMasterFreeFormObject;
   end;
 
-  { An object containing the bone matrix for TgxActorProxy.  }
+  // An object containing the bone matrix for TgxActorProxy.
   TBoneMatrixObj = class
   public
     Matrix: TMatrix;
@@ -129,7 +128,7 @@ type
   // pamPlayOnce only works if Actor.AnimationMode <> aamNone.
   TgxActorProxyAnimationMode = (pamInherited, pamNone, pamPlayOnce);
 
-  { A proxy object specialized for Actors.  }
+  // A proxy object specialized for Actors.
   TgxActorProxy = class(TgxProxyObject, IgxMaterialLibrarySupported)
   private
     FCurrentFrame: Integer;
@@ -137,7 +136,7 @@ type
     FEndFrame: Integer;
     FLastFrame: Integer;
     FCurrentFrameDelta: Single;
-    FCurrentTime: TgxProgressTimes;
+    FCurrentTime: TProgressTimes;
     FAnimation: TgxActorAnimationName;
     FTempLibMaterialName: string;
     FMasterLibMaterial: TgxLibMaterial;
@@ -145,7 +144,7 @@ type
     FBonesMatrices: TStringList;
     FStoreBonesMatrix: boolean;
     FStoredBoneNames: TStrings;
-    FOnBeforeRender: TgxProgressEvent;
+    FOnBeforeRender: TProgressEvent;
     FAnimationMode: TgxActorProxyAnimationMode;
     procedure SetAnimation(const Value: TgxActorAnimationName);
     procedure SetMasterActorObject(const Value: TgxActor);
@@ -157,7 +156,7 @@ type
     function GetMaterialLibrary: TgxAbstractMaterialLibrary;
     procedure SetStoreBonesMatrix(const Value: boolean);
     procedure SetStoredBoneNames(const Value: TStrings);
-    procedure SetOnBeforeRender(const Value: TgxProgressEvent);
+    procedure SetOnBeforeRender(const Value: TProgressEvent);
   protected
     procedure DoStoreBonesMatrices;
       // stores matrices of bones of the current frame rendered
@@ -168,12 +167,12 @@ type
       override;
     procedure DoRender(var ARci: TgxRenderContextInfo;
       ARenderSelf, ARenderChildren: Boolean); override;
-    procedure DoProgress(const progressTime: TgxProgressTimes); override;
+    procedure DoProgress(const progressTime: TProgressTimes); override;
     property CurrentFrame: Integer read FCurrentFrame;
     property StartFrame: Integer read FStartFrame;
     property EndFrame: Integer read FEndFrame;
     property CurrentFrameDelta: Single read FCurrentFrameDelta;
-    property CurrentTime: TgxProgressTimes read FCurrentTime;
+    property CurrentTime: TProgressTimes read FCurrentTime;
     { Gets the Bones Matrix in the current animation frame.
      (since the masterobject is shared between all proxies, each proxy will have it's bones matrices) }
     function BoneMatrix(BoneIndex: integer): TMatrix; overload;
@@ -183,12 +182,12 @@ type
     function RayCastIntersect(const rayStart, rayVector: TVector;
       intersectPoint: PVector = nil;
       intersectNormal: PVector = nil): Boolean; override;
-    { Raycasts on self, but actually on the "RefActor" Actor.
+    (* Raycasts on self, but actually on the "RefActor" Actor.
        Note that the "RefActor" parameter does not necessarily have to be
        the same Actor refernced by the MasterObject property:
        This allows to pass a low-low-low-poly Actor to raycast in the "RefActor" parameter,
        while using a high-poly Actor in the "MasterObject" property,
-       of course we assume that the two Masterobject Actors have same animations. }
+       of course we assume that the two Masterobject Actors have same animations. *)
     function RayCastIntersectEx(RefActor: TgxActor; const rayStart, rayVector:
       TVector;
       intersectPoint: PVector = nil;
@@ -200,26 +199,26 @@ type
     // Redeclare as TgxActor.
     property MasterObject: TgxActor read GetMasterActorObject write
       SetMasterActorObject;
-    // Redeclare without pooTransformation
-    // (Don't know why it causes the object to be oriented incorrecly.)
+    (* Redeclare without pooTransformation
+      (Don't know why it causes the object to be oriented incorrecly.) *)
     property ProxyOptions default [pooEffects, pooObjects];
-    { Specifies the MaterialLibrary, that current proxy will use. }
+    // Specifies the MaterialLibrary, that current proxy will use.
     property MaterialLibrary: TgxMaterialLibrary read FMaterialLibrary write
       SetMaterialLibrary;
-    { Specifies the Material, that current proxy will use. }
+    // Specifies the Material, that current proxy will use.
     property LibMaterialName: TgxLibMaterialName read GetLibMaterialName write
       SetLibMaterialName;
-    { Specifies if it will store the Bones Matrices, accessible via the BoneMatrix function
-     (since the masterobject is shared between all proxies, each proxy will have it's bones matrices) }
+    (* Specifies if it will store the Bones Matrices, accessible via the BoneMatrix function
+     (since the masterobject is shared between all proxies, each proxy will have it's bones matrices) *)
     property StoreBonesMatrix: boolean read FStoreBonesMatrix write
       SetStoreBonesMatrix;
-    { Specifies the names of the bones we want the matrices to be stored. If empty, all bones will be stored
-     (since the masterobject is shared between all proxies, each proxy will have it's bones matrices) }
+    (* Specifies the names of the bones we want the matrices to be stored. If empty, all bones will be stored
+     (since the masterobject is shared between all proxies, each proxy will have it's bones matrices) *)
     property StoredBoneNames: TStrings read FStoredBoneNames write
       SetStoredBoneNames;
-    { Event allowing to apply extra transformations (f.ex: bone rotations) to the referenced
-       Actor on order to have the proxy render these changes.  }
-    property OnBeforeRender: TgxProgressEvent read FOnBeforeRender write
+    (* Event allowing to apply extra transformations (f.ex: bone rotations) to the referenced
+       Actor on order to have the proxy render these changes.  *)
+    property OnBeforeRender: TProgressEvent read FOnBeforeRender write
       SetOnBeforeRender;
   end;
 
@@ -442,7 +441,7 @@ begin
   inherited;
 end;
 
-procedure TgxActorProxy.DoProgress(const progressTime: TgxProgressTimes);
+procedure TgxActorProxy.DoProgress(const progressTime: TProgressTimes);
 begin
   inherited;
   FCurrentTime := progressTime;
@@ -781,7 +780,7 @@ begin
   end;
 end;
 
-procedure TgxActorProxy.SetOnBeforeRender(const Value: TgxProgressEvent);
+procedure TgxActorProxy.SetOnBeforeRender(const Value: TProgressEvent);
 begin
   FOnBeforeRender := Value;
 end;

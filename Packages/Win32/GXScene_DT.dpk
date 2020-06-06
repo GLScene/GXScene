@@ -35,21 +35,21 @@ requires
   GXScene_RT;
 
 contains
-  GXS.FGUILayoutEditor in '..\..\Source\GXS.FGUILayoutEditor.pas' {FGUILayoutEditor: T},
+  GXS.FGUILayoutEditor in '..\..\Source\GXS.FGUILayoutEditor.pas' {GUILayoutsForm: T},
   GXS.FInfo in '..\..\Source\GXS.FInfo.pas' {FInfo: TForm},
   GXS.FRTextureEdit in '..\..\Source\GXS.FRTextureEdit.pas' {FRTextureEdit: TFrame},
-  GXS.FXCollectionEditor in '..\..\Source\GXS.FXCollectionEditor.pas' {FXCollectionEditor},
+  GXS.FXCollectionEditor in '..\..\Source\GXS.FXCollectionEditor.pas' {XCollectionEditorForm},
   GXS.FLibMaterialPicker in '..\..\Source\GXS.FLibMaterialPicker.pas' {FLibMaterialPicker},
   GXS.FRMaterialPreview in '..\..\Source\GXS.FRMaterialPreview.pas' {FRMaterialPreview: TFrame},
-  GXS.FRFaceEditor in '..\..\Source\GXS.FRFaceEditor.pas' {FRFaceEditor: TFrame},
-  GXS.FRColorEditor in '..\..\Source\GXS.FRColorEditor.pas' {FRColorEditor: TFrame},
+  GXS.FRFaceEditor in '..\..\Source\GXS.FRFaceEditor.pas' {FaceEditorFrame: TFrame},
+  GXS.FRColorEditor in '..\..\Source\GXS.FRColorEditor.pas' {ColorEditorFrame: TFrame},
   GXS.FPlugInManagerEditor in '..\..\Source\GXS.FPlugInManagerEditor.pas' {FPlugInManagerEditor},
   GXS.FMaterialEditorForm in '..\..\Source\GXS.FMaterialEditorForm.pas' {FMaterialEditorForm},
-  GXS.FShaderMemo in '..\..\Source\GXS.FShaderMemo.pas' {FShaderMemoForm},
-  GXS.FShaderUniformEditor in '..\..\Source\GXS.FShaderUniformEditor.pas' {FShaderUniformEditorForm},
+  GXS.FShaderMemo in '..\..\Source\GXS.FShaderMemo.pas' {ShaderMemoForm},
+  GXS.FShaderUniformEditor in '..\..\Source\GXS.FShaderUniformEditor.pas' {ShaderUniformEditorForm},
   GXS.FGuiSkinEditor in '..\..\Source\GXS.FGuiSkinEditor.pas' {FGUISkinEditor: TForm},
-  GXS.FSceneEditor in '..\..\Source\GXS.FSceneEditor.pas' {FSceneEditor: TForm},
-  GXS.RegisterXCollection in '..\..\Source\GXS.RegisterXCollection.pas',
-  GXS.SceneRegister in '..\..\Source\GXS.SceneRegister.pas';
+  GXS.FSceneEditor in '..\..\Source\GXS.FSceneEditor.pas' {SceneEditorForm: TForm},
+  GXS.SceneRegister in '..\..\Source\GXS.SceneRegister.pas',
+  GXS.XCollectionRegister in '..\..\Source\GXS.XCollectionRegister.pas';
 
 end.

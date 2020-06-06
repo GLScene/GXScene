@@ -1,12 +1,12 @@
-//
-// Graphic Scene Engine, http://glscene.org
-//
-{
-  Geometric objects.
-}
+(*******************************************
+*                                          *
+* Graphic Scene Engine, http://glscene.org *
+*                                          *
+********************************************)
 
 unit GXS.GeomObjects;
 
+(* Geometric objects *)
 
 interface
 
@@ -17,20 +17,20 @@ uses
 
   Import.OpenGLx,
   Scene.PersistentClasses,
-  GXS.Scene,
+  Scene.VectorTypes,
+  Scene.GeometryBB,
   Scene.VectorGeometry,
+  Scene.Polynomials,
+  GXS.Scene,
   GXS.Context,
   GXS.Objects,
   GXS.Silhouette,
-  Scene.VectorTypes,
-  Scene.GeometryBB,
-  GXS.RenderContextInfo,
-  GXS.Polynomials;
+  GXS.RenderContextInfo;
 
 type
-  { A Disk object.  The disk may not be complete, it can have a hole (controled by the
+  (* A Disk object.  The disk may not be complete, it can have a hole (controled by the
     InnerRadius property) and can only be a slice (controled by the StartAngle
-    and SweepAngle properties). }
+    and SweepAngle properties). *)
   TgxDisk = class(TgxQuadricObject)
   private
     FStartAngle, FSweepAngle, FOuterRadius, FInnerRadius: Single;
@@ -64,11 +64,11 @@ type
     property SweepAngle: Single read FSweepAngle write SetSweepAngle;
   end;
 
-  { Base class to cylinder-like objects.
+  (* Base class to cylinder-like objects.
     Introduces the basic cylinder description properties.
     Be aware teh default slices and stacks make up for a high-poly cylinder,
     unless you're after high-quality lighting it is recommended to reduce the
-    Stacks property to 1. }
+    Stacks property to 1. *)
   TgxCylinderBase = class(TgxQuadricObject)
   private
     FBottomRadius: Single;
@@ -98,7 +98,7 @@ type
   TgxConePart = (coSides, coBottom);
   TgxConeParts = set of TgxConePart;
 
-  { A cone object. }
+  // A cone object
   TgxCone = class(TgxCylinderBase)
   private
     FParts: TgxConeParts;
@@ -123,7 +123,7 @@ type
 
   TgxCylinderAlignment = (caCenter, caTop, caBottom);
 
-  { Cylinder object, can also be used to make truncated cones }
+  // Cylinder object, can also be used to make truncated cones
   TgxCylinder = class(TgxCylinderBase)
   private
     FParts: TgxCylinderParts;
@@ -153,7 +153,7 @@ type
       default caCenter;
   end;
 
-  { Capsule object, can also be used to make truncated cones }
+  // Capsule object, can also be used to make truncated cones
   TgxCapsule = class(TgxSceneObject)
   private
     FParts: TgxCylinderParts;
@@ -194,7 +194,7 @@ type
   TgxAnnulusPart = (anInnerSides, anOuterSides, anBottom, anTop);
   TgxAnnulusParts = set of TgxAnnulusPart;
 
-  { An annulus is a cylinder that can be made hollow (pipe-like). }
+  // An annulus is a cylinder that can be made hollow (pipe-like).
   TgxAnnulus = class(TgxCylinderBase)
   private
     FParts: TgxAnnulusParts;
@@ -227,7 +227,7 @@ type
   TgxTorusPart = (toSides, toStartDisk, toStopDisk);
   TgxTorusParts = set of TgxTorusPart;
 
-  { A Torus object. }
+  // A Torus object
   TgxTorus = class(TgxSceneObject)
   private
     FParts: TgxTorusParts;
@@ -397,11 +397,11 @@ const
   cAllFrustrumParts = [fpTop, fpBottom, fpFront, fpBack, fpLeft, fpRight];
 
 type
-  { A frustrum is a pyramid with the top chopped off.
+  (* A frustrum is a pyramid with the top chopped off.
     The height of the imaginary pyramid is ApexHeight, the height of the
     frustrum is Height. If ApexHeight and Height are the same, the frustrum
     degenerates into a pyramid.
-    Height cannot be greater than ApexHeight. }
+    Height cannot be greater than ApexHeight. *)
   TgxFrustrum = class(TgxSceneObject)
   private
     FApexHeight, FBaseDepth, FBaseWidth, FHeight: Single;

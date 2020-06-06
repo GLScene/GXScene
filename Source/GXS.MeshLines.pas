@@ -1,11 +1,12 @@
-//
-// Graphic Scene Engine, http://glscene.org
-//
-{
-  Line implementation by means of a Triangle strip.
-}
+(*******************************************
+*                                          *
+* Graphic Scene Engine, http://glscene.org *
+*                                          *
+********************************************)
 
 unit GXS.MeshLines;
+
+(* Line implementation by means of a Triangle strip *)
 
 interface
 
@@ -14,10 +15,14 @@ uses
   System.SysUtils,
 
   Import.OpenGLx,
+  Scene.VectorTypes,
+  Scene.VectorGeometry,
+  Scene.VectorLists,
+  Scene.Spline,
+
   GXS.Scene,
   GXS.Objects,
   GXS.Texture,
-  Scene.VectorTypes,
   GXS.VectorFileObjects,
   GXS.Coordinates,
   GXS.Context,
@@ -25,14 +30,10 @@ uses
   GXS.Color,
   GXS.State,
   GXS.Nodes,
-  Scene.VectorGeometry,
-  GXS.Spline,
-  Scene.VectorLists,
   GXS.RenderContextInfo;
 
 type
-   { Specialized Node for use in a TgxLines objects.
-      Adds a Width property }
+   // Specialized Node for use in a TgxLines objects. Adds a Width property
    TLineNode = class(TgxNode)
    private
      FData: Pointer;

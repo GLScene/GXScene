@@ -1,12 +1,15 @@
-//
-// Graphic Scene Engine, http://glscene.org
-//
-{
+(*******************************************
+*                                          *
+* Graphic Scene Engine, http://glscene.org *
+*                                          *
+********************************************)
+
+unit GXS.MultiMaterialShader;
+
+(*
   A shader that applies a render pass for each material in
   its assigned MaterialLibrary.
-
-}
-unit GXS.MultiMaterialShader;
+*)
 
 interface
 

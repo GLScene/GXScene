@@ -1,11 +1,15 @@
-//
-// Graphic Scene Engine, http://glscene.org
-//
+(* ********************************************
+  *                                           *
+  *  Graphic Scene Engine, http://glscene.org *
+  *                                           *
+  ******************************************** *)
+
+unit GXS.Context;
+
 (*
   Prototypes and base implementation of TgxContext.
   The history is logged in a former version of the unit.
 *)
-unit GXS.Context;
 
 interface
 
@@ -25,7 +29,7 @@ uses
   FMX.Dialogs,
 
   Import.OpenGLx,
-  GXS.Generics,
+  Scene.Generics,
   Scene.VectorGeometry,
   Scene.Strings,
   Scene.VectorTypes,
@@ -143,39 +147,39 @@ type
     property PipelineTransformation: TgxTransformation read FTransformation;
     // Context manager reference
     property Manager: TgxContextManager read FManager;
-    { Color bits for the rendering context }
+    // Color bits for the rendering context
     property ColorBits: Integer read FColorBits write SetColorBits;
-    { Alpha bits for the rendering context }
+    // Alpha bits for the rendering context
     property AlphaBits: Integer read FAlphaBits write SetAlphaBits;
-    { Depth bits for the rendering context }
+    // Depth bits for the rendering context
     property DepthBits: Integer read FDepthBits write SetDepthBits;
-    { Stencil bits for the rendering context }
+    // Stencil bits for the rendering context
     property StencilBits: Integer read FStencilBits write SetStencilBits;
-    { Accumulation buffer bits for the rendering context }
+    // Accumulation buffer bits for the rendering context
     property AccumBits: Integer read FAccumBits write SetAccumBits;
-    { Auxiliary buffers bits for the rendering context }
+    // Auxiliary buffers bits for the rendering context
     property AuxBuffers: Integer read FAuxBuffers write SetAuxBuffers;
-    { AntiAliasing option.  Ignored if not hardware supported, currently based on ARB_multisample. }
+    // AntiAliasing option.  Ignored if not hardware supported, currently based on ARB_multisample.
     property AntiAliasing: TgxAntiAliasing read FAntiAliasing write SetAntiAliasing;
-    { Specifies the layer plane that the rendering context is bound to. }
+    // Specifies the layer plane that the rendering context is bound to.
     property Layer: TgxContextLayer read FLayer write SetLayer;
-    { Rendering context options. }
+    // Rendering context options.
     property Options: TgxRCOptions read FOptions write SetOptions;
-    { Allows reading and defining the activity for the context.
-      The methods of this property are just wrappers around calls to Activate and Deactivate. }
+    (* Allows reading and defining the activity for the context.
+      The methods of this property are just wrappers around calls to Activate and Deactivate. *)
     property Active: Boolean read GetActive write SetActive;
-    { Indicates if the context is hardware-accelerated. }
+    // Indicates if the context is hardware-accelerated.
     property Acceleration: TgxContextAcceleration read FAcceleration write SetAcceleration;
-    { Triggered whenever the context is destroyed.
+    (* Triggered whenever the context is destroyed.
       This events happens *before* the context has been
-      actually destroyed, OpenGL resource cleanup can still occur here. }
+      actually destroyed, OpenGL resource cleanup can still occur here. *)
     property OnDestroyContext: TNotifyEvent read FOnDestroyContext write FOnDestroyContext;
     { Creates the context.
       This method must be invoked before the context can be used. }
     procedure CreateContext(ADeviceHandle: THandle); overload; // VCL -> HDC
     { Creates an in-memory context.
       The function should fail if no hardware-accelerated memory context
-      can be created (the CreateContext method can handle software OpenVX
+      can be created (the CreateContext method can handle software OpenGL
       contexts). }
     procedure CreateMemoryContext(OutputDevice: THandle; Width, Height: // VCL -> HWND
       Integer; BufferCount: Integer = 1);
@@ -217,12 +221,12 @@ type
 
   TgxContextClass = class of TgxContext;
 
-  { Context with screen control property and methods.
+  (* Context with screen control property and methods.
     This variety of contexts is for drivers that access windows and OpenGL
     through an intermediate opaque cross-platform API.
     TgxSceneViewer won't use them, TgxMemoryViewer may be able to use them,
     but most of the time they will be accessed through a specific viewer
-    class/subclass. }
+    class/subclass. *)
   TgxScreenControlingContext = class(TgxContext)
   strict private
     FWidth, FHeight: Integer;
@@ -244,10 +248,10 @@ type
 
   TOnPrepareHandleData = procedure(aContext: TgxContext) of object;
 
-  { Wrapper around an OpenGL context handle.
+  (* Wrapper around an OpenGL context handle.
     This wrapper also takes care of context registrations and data releases
     related to context releases an cleanups. This is an abstract class,
-    use the TgxListHandle and TgxTextureHandle subclasses. }
+    use the TgxListHandle and TgxTextureHandle subclasses. *)
   TgxContextHandle = class
   private
     FHandles: TList;
@@ -310,13 +314,13 @@ type
     property Tag: Integer read FTag write FTag;
   end;
 
-  { Transferable virtual handle. }
+  // Transferable virtual handle.
   TgxVirtualHandleTransf = class(TgxVirtualHandle)
   protected
     class function Transferable: Boolean; override;
   end;
 
-  { Manages a handle to a display list. }
+  // Manages a handle to a display list.
   TgxListHandle = class(TgxContextHandle)
   protected
     function DoAllocateHandle: LongWord; override;
@@ -328,7 +332,7 @@ type
     procedure CallList;
   end;
 
-  { Manages a handle to a texture. }
+  // Manages a handle to a texture.
   TgxTextureHandle = class(TgxContextHandle)
   private
     FTarget: TgxTextureTarget;
@@ -341,7 +345,7 @@ type
     property Target: TgxTextureTarget read FTarget write SetTarget;
   end;
 
-  { Manages a handle to a sampler. }
+  // Manages a handle to a sampler.
   TgxSamplerHandle = class(TgxContextHandle)
   protected
     function DoAllocateHandle: LongWord; override;
@@ -384,7 +388,7 @@ type
   end;
 
   { Manages a handle to an occlusion query.
-    Requires OpenVX 1.5+
+    Requires OpenGL 1.5+
     Does *NOT* check for extension availability, this is assumed to have been
     checked by the user. }
   TgxOcclusionQueryHandle = class(TgxQueryHandle)
@@ -423,7 +427,7 @@ type
   end;
 
   { Manages a handle to a primitive query.
-    Requires OpenVX 3.0+
+    Requires OpenGL 3.0+
     Does *NOT* check for extension availability, this is assumed to have been
     checked by the user. }
   TgxPrimitiveQueryHandle = class(TgxQueryHandle)
@@ -455,7 +459,7 @@ type
     { Note that it is not necessary to UnBind before Binding another buffer. }
     procedure UnBind; virtual; abstract;
     { Bind a buffer object to an indexed target, used by transform feedback
-      buffer objects and uniform buffer objects. (OpenVX 3.0+) }
+      buffer objects and uniform buffer objects. (OpenGL 3.0+) }
     procedure BindRange(index: LongWord; offset: PGLint; size: PGLsizei); virtual;
     { Equivalent to calling BindRange with offset = 0, and size = the size of buffer. }
     procedure BindBase(index: LongWord); virtual;
@@ -611,7 +615,7 @@ type
     fsIncompleteDimensions, fsIncompleteFormats, fsIncompleteDrawBuffer, fsIncompleteReadBuffer, fsUnsupported,
     fsIncompleteMultisample, fsStatusError);
 
-  { Manages a handle to a Framebuffer Object (FBO).
+  (* Manages a handle to a Framebuffer Object (FBO).
     Framebuffer objects provide a way of drawing to rendering
     destinations other than the buffers provided to the GL by the
     window-system.  One or more "framebuffer-attachable images" can be attached
@@ -626,7 +630,7 @@ type
     Additionally, an entire level of a 3D texture, cube map texture,
     or 1D or 2D array texture can be attached to an attachment point.
     Such attachments are treated as an array of 2D images, arranged in
-    layers, and the corresponding attachment point is considered to be layered. }
+    layers, and the corresponding attachment point is considered to be layered. *)
   TgxFramebufferHandle = class(TgxContextHandle)
   protected
     class function Transferable: Boolean; override;
@@ -888,7 +892,7 @@ type
     Event: TNotifyEvent;
   end;
 
-  { Stores and manages all the TgxContext objects. }
+  // Stores and manages all the TgxContext objects.
   TgxContextManager = class
   private
     FList: TThreadList;
@@ -914,7 +918,7 @@ type
       The returned context should be freed by caller. }
     function CreateContext(AClass: TgxContextClass = nil): TgxContext;
     { Returns the number of TgxContext object.
-      This is *not* the number of OpenVX rendering contexts! }
+      This is *not* the number of OpenGL rendering contexts! }
     function ContextCount: Integer;
     { Registers a new object to notify when the last context is destroyed.
       When the last rendering context is destroyed, the 'anEvent' will
@@ -947,8 +951,8 @@ function IsServiceContextAvaible: Boolean;
 function GetServiceWindow: TForm;
 
 var
-  VXContextManager: TgxContextManager;
-  vIgnoreOpenVXErrors: Boolean = False;
+  GXContextManager: TgxContextManager;
+  vIgnoreOpenGXErrors: Boolean = False;
   vContextActivationFailureOccurred: Boolean = False;
   vMultitextureCoordinatorClass: TgxAbstractMultitextureCoordinatorClass;
   vCurrentContext: TgxContext;
@@ -987,7 +991,7 @@ end;
 
 function IsServiceContextAvaible: Boolean;
 begin
-  Result := VXContextManager.FHandles <> nil;
+  Result := GXContextManager.FHandles <> nil;
 end;
 
 function GetServiceWindow: TForm;
@@ -1034,7 +1038,7 @@ begin
   FgxStates := TgxStateCache.Create;
   FTransformation := TgxTransformation.Create;
   FTransformation.LoadMatricesEnabled := True;
-  VXContextManager.RegisterContext(Self);
+  GXContextManager.RegisterContext(Self);
   FIsPraparationNeed := True;
 end;
 
@@ -1042,7 +1046,7 @@ destructor TgxContext.Destroy;
 begin
   if IsValid then
     DestroyContext;
-  VXContextManager.UnRegisterContext(Self);
+  GXContextManager.UnRegisterContext(Self);
   FOwnedHandles.Free;
   
   FSharedContexts.Free;
@@ -1435,7 +1439,7 @@ end;
 
 class function TgxContext.ServiceContext: TgxContext;
 begin
-  Result := VXContextManager.FServiceContext;
+  Result := GXContextManager.FServiceContext;
 end;
 
 procedure TgxContext.MakeGLCurrent;
@@ -1462,7 +1466,7 @@ begin
   new(FLastHandle);
   FillChar(FLastHandle^, sizeof(FLastHandle^), 0);
   FHandles.Add(FLastHandle);
-  VXContextManager.FHandles.Add(Self);
+  GXContextManager.FHandles.Add(Self);
 end;
 
 constructor TgxContextHandle.CreateAndAllocate(failIfAllocationFailed: Boolean = True);
@@ -1481,8 +1485,8 @@ begin
   for I := 0 to FHandles.Count - 1 do
     Dispose(RCItem(I));
   FHandles.Free;
-  if Assigned(VXContextManager) then
-    VXContextManager.FHandles.Remove(Self);
+  if Assigned(GXContextManager) then
+    GXContextManager.FHandles.Remove(Self);
   inherited Destroy;
 end;
 
@@ -1555,7 +1559,7 @@ begin
   if not bSucces then
     /// ShowMessages(cNoActiveRC)
   else if Assigned(FOnPrepare) then
-    VXContextManager.NotifyPreparationNeed;
+    GXContextManager.NotifyPreparationNeed;
 end;
 
 function TgxContextHandle.IsAllocatedForContext(aContext: TgxContext = nil): Boolean;
@@ -1789,7 +1793,7 @@ begin
   for I := FHandles.Count - 1 downto 1 do
     RCItem(I).FChanged := True;
   if Assigned(FOnPrepare) then
-    VXContextManager.NotifyPreparationNeed;
+    GXContextManager.NotifyPreparationNeed;
 end;
 
 function TgxContextHandle.IsShared: Boolean;
@@ -3549,7 +3553,7 @@ begin
   FTerminated := True;
   if ContextCount = 0 then
   begin
-    VXContextManager := nil;
+    GXContextManager := nil;
     Free;
   end;
 end;
@@ -3577,11 +3581,11 @@ initialization
 // ------------------------------------------------------------------
 
 vMainThread := True;
-VXContextManager := TgxContextManager.Create;
+GXContextManager := TgxContextManager.Create;
 
 finalization
 
-VXContextManager.Terminate;
+GXContextManager.Terminate;
 vContextClasses.Free;
 vContextClasses := nil;
 

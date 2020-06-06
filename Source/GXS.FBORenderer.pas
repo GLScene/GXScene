@@ -1,11 +1,12 @@
-//
-// Graphic Scene Engine, http://glscene.org
-//
-{
-  Implements FBO support.
-  Original author of the unit is Riz.
-}
+(*******************************************
+*                                          *
+* Graphic Scene Engine, http://glscene.org *
+*                                          *
+********************************************)
+
 unit GXS.FBORenderer;
+
+(* Implements FBO support *)
 
 interface
 
@@ -123,11 +124,11 @@ type
     constructor Create(AOwner: TComponent); override;
     destructor Destroy; override;
     procedure DoRender(var ARci: TgxRenderContextInfo; ARenderSelf: Boolean; ARenderChildren: Boolean); override;
-    { Layer (also cube map face) is activated only on
+    (* Layer (also cube map face) is activated only on
       the volume textures, texture array and cube map.
-      You can select the layer during the drawing to. }
+      You can select the layer during the drawing to. *)
     property Layer: Integer read GetLayer write SetLayer;
-    { Mipmap Level where will be rendering }
+    // Mipmap Level where will be rendering
     property Level: Integer read GetLevel write SetLevel;
   published
     property Active: Boolean read GetVisible write SetVisible default True;
@@ -187,7 +188,9 @@ type
 implementation
 //------------------------------------------------------------------------------
 
-{ TgxFBORenderer }
+//------------------------------------------------------------------------------
+// TgxFBORenderer
+//------------------------------------------------------------------------------
 
 procedure TgxFBORenderer.ApplyCamera(var ARci: TgxRenderContextInfo);
 var

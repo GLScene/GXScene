@@ -1,6 +1,11 @@
-//
-// Graphic Scene Engine, http://glscene.org
-//
+(*******************************************
+*                                          *
+* Graphic Scene Engine, http://glscene.org *
+*                                          *
+********************************************)
+
+unit Scene.XOpenGL;
+
 (*
    "Alternate" OpenGL functions to handle multi-texturing.
    Using this functions allows specifying none/one/multiple ARB multi-texture
@@ -10,7 +15,6 @@
    This unit is Open-Source under MPL
    The history is logged in a former GLS version of the unit.
 *)
-unit Scene.XOpenGL;
 
 interface
 

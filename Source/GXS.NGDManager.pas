@@ -1,13 +1,16 @@
-//
-// Graphic Scene Engine, http://glscene.org
-//
+(*******************************************
+*                                          *
+* Graphic Scene Engine, http://glscene.org *
+*                                          *
+********************************************)
+
+unit GXS.NGDManager;
+
 (*
   A Newton Game Dynamics Manager for GXScene.
   Notes:
   This code is still under development so any part of it may change at anytime.
 *)
-
-unit GXS.NGDManager;
 
 interface
 
@@ -22,9 +25,9 @@ uses
   Scene.XCollection,  //TXCollection file function
   Scene.VectorGeometry, // PVector TVector TMatrix PMatrix NullHmgVector...
   Scene.VectorLists, // TaffineVectorList for Tree
-  GXS.BaseClasses,
+  Scene.BaseClasses,
   GXS.Scene,
-  GXS.Manager,
+  Scene.Manager,
   GXS.CrossPlatform,
   GXS.Coordinates,
   GXS.Objects,

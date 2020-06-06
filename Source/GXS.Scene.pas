@@ -1,11 +1,12 @@
-//
-// Graphic Scene Engine, http://glscene.org
-//
-(*
-  Base classes and structures for GXScene.
-*)
+(*******************************************
+*                                          *
+* Graphic Scene Engine, http://glscene.org *
+*                                          *
+********************************************)
 
 unit GXS.Scene;
+
+(* Base classes and structures for GXScene *)
 
 interface
 
@@ -25,21 +26,22 @@ uses
   Import.OpenGLx,
   Scene.XOpenGL,
   Scene.XCollection,
-  Scene.Strings,
+  Scene.BaseClasses,
   Scene.VectorTypes,
   Scene.VectorLists,
   Scene.VectorGeometry,
   Scene.PersistentClasses,
+  Scene.GeometryBB,
+  Scene.Strings,
+
   GXS.Context,
   GXS.Silhouette,
   GXS.PipeLineTransformation,
   GXS.State,
   GXS.Graphics,
-  Scene.GeometryBB,
   GXS.CrossPlatform,
   GXS.Texture,
   GXS.Color,
-  GXS.BaseClasses,
   GXS.Coordinates,
   GXS.RenderContextInfo,
   GXS.Material,
@@ -49,7 +51,7 @@ uses
   GXS.Utils;
 
 type
-  { Defines which features are taken from the master object. }
+  // Defines which features are taken from the master object.
   TgxProxyObjectOption = (pooEffects, pooObjects, pooTransformation);
   TgxProxyObjectOptions = set of TgxProxyObjectOption;
 
@@ -91,13 +93,13 @@ type
     roNoSwapBuffers: don't perform RenderingContext.SwapBuffers after rendering
     roNoDepthBufferClear: do not clear the depth buffer automatically. Useful for
     early-z culling.
-    roForwardContext: force OpenVX forward context *)
+    roForwardContext: force OpenGL forward context *)
   TContextOption = (roSoftwareMode, roDoubleBuffer, roStencilBuffer, roRenderToWindow, roTwoSideLighting, roStereo,
     roDestinationAlpha, roNoColorBuffer, roNoColorBufferClear, roNoSwapBuffers, roNoDepthBufferClear, roDebugContext,
     roForwardContext, roOpenVX_ES2_Context);
   TContextOptions = set of TContextOption;
 
-  { IDs for limit determination }
+  // IDs for limit determination
   TLimitType = (limClipPlanes, limEvalOrder, limLights, limListNesting, limModelViewStack, limNameStack, limPixelMapTable,
     limProjectionStack, limTextureSize, limTextureStack, limViewportDims, limAccumAlphaBits, limAccumBlueBits,
     limAccumGreenBits, limAccumRedBits, limAlphaBits, limAuxBuffers, limBlueBits, limGreenBits, limRedBits, limIndexBits,
@@ -127,22 +129,22 @@ type
   TgxObjectStyles = set of TgxObjectStyle;
 
   // Interface to objects that need initialization
-  IGLInitializable = interface
+  IgxInitializable = interface
     ['{EA40AE8E-79B3-42F5-ADF1-7A901B665E12}']
     procedure InitializeObject(ASender: TObject; const ARci: TgxRenderContextInfo);
   end;
 
-  { Just a list of objects that support IGLInitializable. }
+  // Just a list of objects that support IGLInitializable.
   TgxInitializableObjectList = class(TList)
   private
-    function GetItems(const Index: Integer): IGLInitializable;
-    procedure PutItems(const Index: Integer; const Value: IGLInitializable);
+    function GetItems(const Index: Integer): IgxInitializable;
+    procedure PutItems(const Index: Integer; const Value: IgxInitializable);
   public
-    function Add(const Item: IGLInitializable): Integer;
-    property Items[const Index: Integer]: IGLInitializable read GetItems write PutItems; default;
+    function Add(const Item: IgxInitializable): Integer;
+    property Items[const Index: Integer]: IgxInitializable read GetItems write PutItems; default;
   end;
 
-  { Base class for all scene objects.
+  (* Base class for all scene objects.
     A scene object is part of scene hierarchy (each scene object can have
     multiple children), this hierarchy primarily defines transformations
     (each child coordinates are relative to its parent), but is also used
@@ -154,7 +156,7 @@ type
     To add children at runtime, use the AddNewChild method of TgxBaseSceneObject;
     other children manipulations methods and properties are provided (to browse,
     move and delete them). Using the regular TComponent methods is not
-    encouraged. }
+    encouraged. *)
   TgxBaseSceneObject = class(TgxCoordinatesUpdateAbleComponent)
   private
     FAbsoluteMatrix, FInvAbsoluteMatrix: TMatrix;
@@ -178,7 +180,7 @@ type
     FIsCalculating: Boolean;
     FObjectsSorting: TgxObjectsSorting;
     FVisibilityCulling: TgxVisibilityCulling;
-    FOnProgress: TgxProgressEvent;
+    FOnProgress: TProgressEvent;
     FOnAddedToParent: TNotifyEvent;
     FBehaviours: TgxBehaviours;
     FEffects: TgxEffects;
@@ -189,9 +191,9 @@ type
 
     objList: TPersistentObjectList;
     distList: TSingleList;
-    // FOriginalFiler: TFiler;   //used to allow persistent events in behaviours & effects
-    { If somebody could look at DefineProperties, ReadBehaviours, ReadEffects
-      and verify code is safe to use then it could be uncommented }
+    /// FOriginalFiler: TFiler;   //used to allow persistent events in behaviours & effects
+    (* If somebody could look at DefineProperties, ReadBehaviours, ReadEffects
+      and verify code is safe to use then it could be uncommented *)
     function Get(Index: Integer): TgxBaseSceneObject; inline;
     function GetCount: Integer; inline;
     function GetIndex: Integer; inline;
@@ -264,40 +266,40 @@ type
     procedure DestroyHandles;
     procedure DeleteChildCameras;
     procedure DoOnAddedToParent; virtual;
-    { Used to re-calculate BoundingBoxes every time we need it.
+    (* Used to re-calculate BoundingBoxes every time we need it.
       GetLocalUnscaleBB() must return the local BB, not the axis-aligned one.
       By default it is calculated from AxisAlignedBoundingBoxUnscaled and
       BarycenterAbsolutePosition, but for most objects there is a more
-      efficient method, that's why it is virtual. }
+      efficient method, that's why it is virtual. *)
     procedure CalculateBoundingBoxPersonalUnscaled(var ANewBoundingBox: THmgBoundingBox); virtual;
   public
     constructor Create(AOwner: TComponent); override;
     constructor CreateAsChild(aParentOwner: TgxBaseSceneObject);
     destructor Destroy; override;
     procedure Assign(Source: TPersistent); override;
-    { Controls and adjusts internal optimizations based on object's style.
-      Advanced user only. }
+    (* Controls and adjusts internal optimizations based on object's style.
+      Advanced user only. *)
     property ObjectStyle: TgxObjectStyles read FObjectStyle write FObjectStyle;
-    { Returns the handle to the object's build list.
-      Use with caution! Some objects don't support buildlists! }
+    (* Returns the handle to the object's build list.
+      Use with caution! Some objects don't support buildlists! *)
     function GetHandle(var rci: TgxRenderContextInfo): Cardinal;
     function ListHandleAllocated: Boolean; inline;
-    { The local transformation (relative to parent).
+    (* The local transformation (relative to parent).
       If you're *sure* the local matrix is up-to-date, you may use LocalMatrix
-      for quicker access. }
+      for quicker access. *)
     procedure SetMatrix(const aValue: TMatrix); inline;
     property Matrix: PMatrix read GetMatrix;
-    { Holds the local transformation (relative to parent).
-      If you're not *sure* the local matrix is up-to-date, use Matrix property. }
+    (* Holds the local transformation (relative to parent).
+      If you're not *sure* the local matrix is up-to-date, use Matrix property. *)
     property LocalMatrix: PMatrix read GetLocalMatrix;
-    { Forces the local matrix to the specified value.
+    (* Forces the local matrix to the specified value.
       AbsoluteMatrix, InverseMatrix, etc. will honour that change, but
       may become invalid if the specified matrix isn't orthonormal (can
       be used for specific rendering or projection effects).
       The local matrix will be reset by the next TransformationChanged,
-      position or attitude change. }
+      position or attitude change. *)
     procedure ForceLocalMatrix(const aMatrix: TMatrix); inline;
-    { See AbsoluteMatrix. }
+    // See AbsoluteMatrix.
     function AbsoluteMatrixAsAddress: PMatrix;
     { Holds the absolute transformation matrix.
       If you're not *sure* the absolute matrix is up-to-date,
@@ -308,7 +310,7 @@ type
       The current implem uses transposition(AbsoluteMatrix), which is true
       unless you're using some scaling... }
     function InvAbsoluteMatrix: TMatrix; inline;
-    { See InvAbsoluteMatrix. }
+    // See InvAbsoluteMatrix.
     function InvAbsoluteMatrixAsAddress: PMatrix;
     { The object's absolute matrix by composing all local matrices.
       Multiplying a local coordinate with this matrix gives an absolute coordinate. }
@@ -457,12 +459,12 @@ type
       and calls FChildren.Exchange directly. User should/can perform range
       checks manualy. }
     procedure ExchangeChildren(anIndex1, anIndex2: Integer);
-    { These procedures are safe. }
+    // These procedures are safe.
     procedure MoveChildUp(anIndex: Integer);
     procedure MoveChildDown(anIndex: Integer);
     procedure MoveChildFirst(anIndex: Integer);
     procedure MoveChildLast(anIndex: Integer);
-    procedure DoProgress(const progressTime: TgxProgressTimes); override;
+    procedure DoProgress(const progressTime: TProgressTimes); override;
     procedure MoveTo(newParent: TgxBaseSceneObject); virtual;
     procedure MoveUp;
     procedure MoveDown;
@@ -470,9 +472,9 @@ type
     procedure MoveLast;
     procedure BeginUpdate; inline;
     procedure EndUpdate; inline;
-    { Make object-specific geometry description here.
-      Subclasses should MAINTAIN OpenVX states (restore the states if
-      they were altered). }
+    (* Make object-specific geometry description here.
+      Subclasses should MAINTAIN OpenGL states (restore the states if
+      they were altered). *)
     procedure BuildList(var rci: TgxRenderContextInfo); virtual;
     function GetParentComponent: TComponent; override;
     function HasParent: Boolean; override; final;
@@ -511,7 +513,7 @@ type
     procedure RenderChildren(firstChildIndex, lastChildIndex: Integer; var rci: TgxRenderContextInfo);
     procedure StructureChanged; virtual;
     procedure ClearStructureChanged; inline;
-    { Recalculate an orthonormal system }
+    // Recalculate an orthonormal system
     procedure CoordinateChanged(Sender: TgxCustomCoordinates); override;
     procedure TransformationChanged; inline;
     procedure NotifyChange(Sender: TObject); override;
@@ -532,7 +534,7 @@ type
     property Pickable: Boolean read FPickable write SetPickable default True;
     property ObjectsSorting: TgxObjectsSorting read FObjectsSorting write SetObjectsSorting default osInherited;
     property VisibilityCulling: TgxVisibilityCulling read FVisibilityCulling write SetVisibilityCulling default vcInherited;
-    property OnProgress: TgxProgressEvent read FOnProgress write FOnProgress;
+    property OnProgress: TProgressEvent read FOnProgress write FOnProgress;
     property OnPicked: TNotifyEvent read FOnPicked write FOnPicked;
     property OnAddedToParent: TNotifyEvent read FOnAddedToParent write FOnAddedToParent;
     property Behaviours: TgxBehaviours read GetBehaviours write SetBehaviours stored False;
@@ -542,7 +544,7 @@ type
     property TagFloat: Single read FTagFloat write FTagFloat;
   end;
 
-  { Base class for implementing behaviours in TgxScene.
+  (* Base class for implementing behaviours in TgxScene.
     Behaviours are regrouped in a collection attached to a TgxBaseSceneObject,
     and are part of the "Progress" chain of events. Behaviours allows clean
     application of time-based alterations to objects (movements, shape or
@@ -558,21 +560,21 @@ type
     or unique (e.g. only one inertia behaviour per object).
     NOTES : Don't forget to override the ReadFromFiler/WriteToFiler persistence
     methods if you add data in a subclass !
-    Subclasses must be registered using the RegisterXCollectionItemClass function }
+    Subclasses must be registered using the RegisterXCollectionItemClass function *)
   TgxBaseBehaviour = class(TXCollectionItem)
   protected
     procedure SetName(const val: string); override;
-    { Override this function to write subclass data. }
+    // Override this function to write subclass data.
     procedure WriteToFiler(writer: TWriter); override;
-    { Override this function to read subclass data. }
+    // Override this function to read subclass data.
     procedure ReadFromFiler(reader: TReader); override;
-    { Returns the TgxBaseSceneObject on which the behaviour should be applied.
-      Does NOT check for nil owners. }
+    (* Returns the TgxBaseSceneObject on which the behaviour should be applied.
+      Does NOT check for nil owners. *)
     function OwnerBaseSceneObject: TgxBaseSceneObject;
   public
     constructor Create(AOwner: TXCollection); override;
     destructor Destroy; override;
-    procedure DoProgress(const progressTime: TgxProgressTimes); virtual;
+    procedure DoProgress(const progressTime: TProgressTimes); virtual;
   end;
 
   { Ancestor for non-rendering behaviours.
@@ -597,7 +599,7 @@ type
     class function ItemsClass: TXCollectionItemClass; override;
     property Behaviour[index: Integer]: TgxBehaviour read GetBehaviour; default;
     function CanAdd(aClass: TXCollectionItemClass): Boolean; override;
-    procedure DoProgress(const progressTimes: TgxProgressTimes); inline;
+    procedure DoProgress(const progressTimes: TProgressTimes); inline;
   end;
 
   { A rendering effect that can be applied to SceneObjects.
@@ -627,16 +629,16 @@ type
   end;
 
   { An object effect that gets rendered before owner object's render.
-    The current OpenVX matrices and material are that of the owner object. }
+    The current OpenGL matrices and material are that of the owner object. }
   TgxObjectPreEffect = class(TgxEffect)
   end;
   { An object effect that gets rendered after owner object's render.
-    The current OpenVX matrices and material are that of the owner object. }
+    The current OpenGL matrices and material are that of the owner object. }
   TgxObjectPostEffect = class(TgxEffect)
   end;
 
   { An object effect that gets rendered at scene's end.
-    No particular OpenVX matrices or material should be assumed. }
+    No particular OpenGL matrices or material should be assumed. }
   TgxObjectAfterEffect = class(TgxEffect)
   end;
 
@@ -651,7 +653,7 @@ type
     class function ItemsClass: TXCollectionItemClass; override;
     property ObjectEffect[index: Integer]: TgxEffect read GetEffect; default;
     function CanAdd(aClass: TXCollectionItemClass): Boolean; override;
-    procedure DoProgress(const progressTime: TgxProgressTimes);
+    procedure DoProgress(const progressTime: TProgressTimes);
     procedure RenderPreEffects(var rci: TgxRenderContextInfo); inline;
     { Also take care of registering after effects with the GXSceneViewer. }
     procedure RenderPostEffects(var rci: TgxRenderContextInfo); inline;
@@ -677,11 +679,11 @@ type
     property Hint: string read FHint write FHint;
   end;
 
-  { This class shall be used only as a hierarchy root.
+  (* This class shall be used only as a hierarchy root.
     It exists only as a container and shall never be rotated/scaled etc. as
     the class type is used in parenting optimizations.
     Shall never implement or add any functionality, the "Create" override
-    only take cares of disabling the build list. }
+    only take cares of disabling the build list. *)
   TgxSceneRootObject = class(TgxBaseSceneObject)
   public
     constructor Create(AOwner: TComponent); override;
@@ -731,7 +733,7 @@ type
     procedure DoRender(var ARci: TgxRenderContextInfo; ARenderSelf, ARenderChildren: Boolean); override;
   end;
 
-  { Base class for standard scene objects. Publishes the Material property. }
+  // Base class for standard scene objects. Publishes the Material property.
   TgxSceneObject = class(TgxCustomSceneObject)
   published
     property Material;
@@ -757,9 +759,9 @@ type
   { Event for user-specific rendering in a TgxDirectOpenVX object. }
   TDirectRenderEvent = procedure(Sender: TObject; var rci: TgxRenderContextInfo) of object;
 
-  { Provides a way to issue direct OpenVX calls during the rendering.
+  { Provides a way to issue direct OpenGL calls during the rendering.
     You can use this object to do your specific rendering task in its OnRender
-    event. The OpenVX calls shall restore the OpenVX states they found when
+    event. The OpenGL calls shall restore the OpenGL states they found when
     entering, or exclusively use the GLMisc utility functions to alter the
     states. }
   TgxDirectOpenVX = class(TgxImmaterialSceneObject)
@@ -785,13 +787,13 @@ type
       If false, OnRender will be invoked for each render. This is suitable
       for dynamic geometry (things that change often or constantly). }
     property UseBuildList: Boolean read FUseBuildList write SetUseBuildList;
-    { Place your specific OpenVX code here.
-      The OpenVX calls shall restore the OpenVX states they found when
+    { Place your specific OpenGL code here.
+      The OpenGL calls shall restore the OpenGL states they found when
       entering, or exclusively use the GLMisc utility functions to alter
       the states. }
     property OnRender: TDirectRenderEvent read FOnRender write FOnRender;
     { Defines if the object uses blending.
-      This property will allow direct OpenVX objects to be flagged as
+      This property will allow direct OpenGL objects to be flagged as
       blended for object sorting purposes. }
     property Blend: Boolean read FBlend write SetBlend;
   end;
@@ -878,7 +880,7 @@ type
     on/off through their Shining property.
     Lightsources are managed in a specific object by the TgxScene for rendering
     purposes. The maximum number of light source in a scene is limited by the
-    OpenVX implementation (8 lights are supported under most ICDs), though the
+    OpenGL implementation (8 lights are supported under most ICDs), though the
     more light you use, the slower rendering may get. If you want to render
     many more light/lightsource, you may have to resort to other techniques
     like lightmapping. }
@@ -935,10 +937,10 @@ type
   TOnCustomPerspective = procedure(const viewport: TRectangle; width, height: Integer; DPI: Integer; var viewPortRadius: Single)
     of object;
 
-  { Camera object.
+  (* Camera object.
     This object is commonly referred by TgxSceneViewer and defines a position,
     direction, focal length, depth of view... all the properties needed for
-    defining a point of view and optical characteristics. }
+    defining a point of view and optical characteristics. *)
   TgxCamera = class(TgxBaseSceneObject)
   private
     FFocalLength: Single;
@@ -972,7 +974,7 @@ type
     procedure Assign(Source: TPersistent); override;
     { Nearest clipping plane for the frustum.
       This value depends on the FocalLength and DepthOfView fields and
-      is calculated to minimize Z-Buffer crawling as suggested by the OpenVX documentation. }
+      is calculated to minimize Z-Buffer crawling as suggested by the OpenGL documentation. }
     property NearPlane: Single read FNearPlane;
 
     // Apply camera transformation
@@ -1105,7 +1107,7 @@ type
     components), but those are edited with a specific editor (double-click
     on the TgxScene component at design-time to invoke it). To add objects
     at runtime, use the AddNewChild method of TgxBaseSceneObject. }
-  TgxScene = class(TgxUpdateAbleComponent)
+  TgxScene = class(TUpdateAbleComponent)
   private
     FUpdateCount: Integer;
     FObjects: TgxSceneRootObject;
@@ -1115,8 +1117,8 @@ type
     FCurrentBuffer: TgxSceneBuffer;
     FObjectsSorting: TgxObjectsSorting;
     FVisibilityCulling: TgxVisibilityCulling;
-    FOnBeforeProgress: TgxProgressEvent;
-    FOnProgress: TgxProgressEvent;
+    FOnBeforeProgress: TProgressEvent;
+    FOnProgress: TProgressEvent;
     FCurrentDeltaTime: Double;
     FInitializableObjects: TgxInitializableObjectList;
   protected
@@ -1179,14 +1181,14 @@ type
     property ObjectsSorting: TgxObjectsSorting read FObjectsSorting write SetObjectsSorting default osRenderBlendedLast;
     { Defines default VisibilityCulling option for scene objects. }
     property VisibilityCulling: TgxVisibilityCulling read FVisibilityCulling write SetVisibilityCulling default vcNone;
-    property OnBeforeProgress: TgxProgressEvent read FOnBeforeProgress write FOnBeforeProgress;
-    property OnProgress: TgxProgressEvent read FOnProgress write FOnProgress;
+    property OnBeforeProgress: TProgressEvent read FOnBeforeProgress write FOnBeforeProgress;
+    property OnProgress: TProgressEvent read FOnProgress write FOnProgress;
   end;
 
   TFogMode = (fmLinear, fmExp, fmExp2);
 
   { Fog distance calculation mode.
-    fdDefault: let OpenVX use its default formula
+    fdDefault: let OpenGL use its default formula
     fdEyeRadial: uses radial "true" distance (best quality)
     fdEyePlane: uses the distance to the projection plane (same as Z-Buffer, faster)
     Requires support of GL_NV_fog_distance extension, otherwise, it is ignored. }
@@ -1196,7 +1198,7 @@ type
     The fog descibed by this object is a distance-based fog, ie. the "intensity"
     of the fog is given by a formula depending solely on the distance, this
     intensity is used for blending to a fixed color. }
-  TgxFogEnvironment = class(TgxUpdateAbleObject)
+  TgxFogEnvironment = class(TUpdateAbleObject)
   private
     FSceneBuffer: TgxSceneBuffer;
     FFogColor: TgxColor; // alpha value means the fog density
@@ -1225,9 +1227,9 @@ type
     { The formula used for converting distance to fog intensity. }
     property FogMode: TFogMode read FFogMode write SetFogMode default fmLinear;
     { Adjusts the formula used for calculating fog distances.
-      This option is honoured if and only if the OpenVX ICD supports the
+      This option is honoured if and only if the OpenGL ICD supports the
       GL_NV_fog_distance extension, otherwise, it is ignored.
-      fdDefault: let OpenVX use its default formula
+      fdDefault: let OpenGL use its default formula
       fdEyeRadial: uses radial "true" distance (best quality)
       fdEyePlane: uses the distance to the projection plane  (same as Z-Buffer, faster) }
     property FogDistance: TFogDistance read FFogDistance write SetFogDistance default fdDefault;
@@ -1239,8 +1241,8 @@ type
 
   TgxShadeModel = (smDefault, smSmooth, smFlat);
 
-  { Encapsulates an OpenVX frame/rendering buffer. }
-  TgxSceneBuffer = class(TgxUpdateAbleObject)
+  { Encapsulates an OpenGL frame/rendering buffer. }
+  TgxSceneBuffer = class(TUpdateAbleObject)
   private
     // Internal state
     FRendering: Boolean;
@@ -1376,12 +1378,12 @@ type
     { Renders to bitmap of given size, then saves it to a file.
       DPI is adjusted to make the bitmap similar to the viewer. }
     procedure RenderToFile(const AFile: string; bmpWidth, bmpHeight: Integer); overload;
-    { Creates a TgxBitmap32 that is a snapshot of current OpenVX content.
+    { Creates a TgxBitmap32 that is a snapshot of current OpenGL content.
       When possible, use this function instead of RenderToBitmap, it won't
       request a redraw and will be significantly faster.
       The returned TgxBitmap32 should be freed by calling code. }
     function CreateSnapShot: TgxImage;
-    { Creates a FMX bitmap that is a snapshot of current OpenVX content. }
+    { Creates a FMX bitmap that is a snapshot of current OpenGL content. }
     function CreateSnapShotBitmap: TBitmap;
     procedure CopyToTexture(aTexture: TgxTexture); overload;
     procedure CopyToTexture(aTexture: TgxTexture; xSrc, ySrc, AWidth, AHeight: Integer; xDest, yDest: Integer;
@@ -1401,7 +1403,7 @@ type
     procedure Freeze;
     { Restarts rendering after it was freezed. }
     procedure Melt;
-    { Displays a window with info on current OpenVX ICD and context. }
+    { Displays a window with info on current OpenGL ICD and context. }
     procedure ShowInfo(Modal: Boolean = False);
     { Currently Rendering? }
     property Rendering: Boolean read FRendering;
@@ -1499,8 +1501,8 @@ type
     { Resets the perfomance monitor and begin a new statistics set.
       See FramesPerSecond. }
     procedure ResetPerformanceMonitor;
-    { Retrieve one of the OpenVX limits for the current viewer.
-      Limits include max texture size, OpenVX stack depth, etc. }
+    { Retrieve one of the OpenGL limits for the current viewer.
+      Limits include max texture size, OpenGL stack depth, etc. }
     property LimitOf[Which: TLimitType]: Integer read GetLimit;
     { Current rendering context.
       The context is a wrapper around platform-specific contexts
@@ -1546,7 +1548,7 @@ type
       When lighting is enabled, objects will be lit according to lightsources,
       when lighting is disabled, objects are rendered in their own colors,
       without any shading.
-      Lighting does NOT generate shadows in OpenVX. }
+      Lighting does NOT generate shadows in OpenGL. }
     property Lighting: Boolean read FLighting write SetLighting default True;
     { AntiAliasing option.
       Ignored if not hardware supported, currently based on ARB_multisample. }
@@ -1567,7 +1569,7 @@ type
       changes (this may lead to a driver switch or lengthy operations). }
     property OnStructuralChange: TNotifyEvent read FOnStructuralChange write FOnStructuralChange stored False;
     { Triggered before the scene's objects get rendered.
-      You may use this event to execute your own OpenVX rendering
+      You may use this event to execute your own OpenGL rendering
       (usually background stuff). }
     property BeforeRender: TNotifyEvent read FBeforeRender write FBeforeRender stored False;
     { Triggered after BeforeRender, before rendering objects.
@@ -1580,13 +1582,13 @@ type
       the Sender is the buffer. }
     property WrapUpRendering: TDirectRenderEvent read FWrapUpRendering write FWrapUpRendering stored False;
     { Triggered just after all the scene's objects have been rendered.
-      The OpenVX context is still active in this event, and you may use it
-      to execute your own OpenVX rendering (usually for HUD, 2D overlays
+      The OpenGL context is still active in this event, and you may use it
+      to execute your own OpenGL rendering (usually for HUD, 2D overlays
       or after effects). }
     property PostRender: TNotifyEvent read FPostRender write FPostRender stored False;
     { Called after rendering.
-      You cannot issue OpenVX calls in this event, if you want to do your own
-      OpenVX stuff, use the PostRender event. }
+      You cannot issue OpenGL calls in this event, if you want to do your own
+      OpenGL stuff, use the PostRender event. }
     property AfterRender: TNotifyEvent read FAfterRender write FAfterRender stored False;
   end;
 
@@ -1635,7 +1637,7 @@ type
       of the cube, from the absolute position of the camera.
       This does NOT alter the content of the Pictures in the image,
       and will only change or define the content of textures as
-      registered by OpenVX. }
+      registered by OpenGL. }
     procedure RenderCubeMapTextures(cubeMapTexture: TgxTexture; zNear: Single = 0; zFar: Single = 0);
   published
     { Camera from which the scene is rendered. }
@@ -1643,22 +1645,22 @@ type
     property width: Integer read FWidth write SetWidth default 256;
     property height: Integer read FHeight write SetHeight default 256;
     { Triggered before the scene's objects get rendered.
-      You may use this event to execute your own OpenVX rendering. }
+      You may use this event to execute your own OpenGL rendering. }
     property BeforeRender: TNotifyEvent read GetBeforeRender write SetBeforeRender;
     { Triggered just after all the scene's objects have been rendered.
-      The OpenVX context is still active in this event, and you may use it
-      to execute your own OpenVX rendering. }
+      The OpenGL context is still active in this event, and you may use it
+      to execute your own OpenGL rendering. }
     property PostRender: TNotifyEvent read GetPostRender write SetPostRender;
     { Called after rendering.
-      You cannot issue OpenVX calls in this event, if you want to do your own
-      OpenVX stuff, use the PostRender event. }
+      You cannot issue OpenGL calls in this event, if you want to do your own
+      OpenGL stuff, use the PostRender event. }
     property AfterRender: TNotifyEvent read GetAfterRender write SetAfterRender;
     { Access to buffer properties. }
     property Buffer: TgxSceneBuffer read FBuffer write SetBuffer;
   end;
 
   { Component to render a scene to memory only.
-    This component curently requires that the OpenVX ICD supports the
+    This component curently requires that the OpenGL ICD supports the
     WGL_ARB_pbuffer extension (indirectly). }
   TgxMemoryViewer = class(TgxNonVisualViewer)
   private
@@ -1692,7 +1694,7 @@ procedure RegisterBehaviourNameChangeEvent(notifyEvent: TNotifyEvent);
   See RegisterVKBaseSceneObjectNameChangeEvent. }
 procedure DeRegisterBehaviourNameChangeEvent(notifyEvent: TNotifyEvent);
 
-{ Issues OpenVX calls for drawing X, Y, Z axes in a standard style. }
+{ Issues OpenGL calls for drawing X, Y, Z axes in a standard style. }
 procedure AxesBuildList(var rci: TgxRenderContextInfo; pattern: Word; AxisLen: Single);
 
 { Registers the procedure call used to invoke the info form. }
@@ -3372,7 +3374,7 @@ begin
   end;
 end;
 
-procedure TgxBaseSceneObject.DoProgress(const progressTime: TgxProgressTimes);
+procedure TgxBaseSceneObject.DoProgress(const progressTime: TProgressTimes);
 var
   i: Integer;
 begin
@@ -4014,7 +4016,7 @@ begin
   Result := TgxBaseSceneObject(Owner.Owner);
 end;
 
-procedure TgxBaseBehaviour.DoProgress(const progressTime: TgxProgressTimes);
+procedure TgxBaseBehaviour.DoProgress(const progressTime: TProgressTimes);
 begin
   // does nothing
 end;
@@ -4060,7 +4062,7 @@ begin
   Result := (not aClass.InheritsFrom(TgxEffect)) and (inherited CanAdd(aClass));
 end;
 
-procedure TgxBehaviours.DoProgress(const progressTimes: TgxProgressTimes);
+procedure TgxBehaviours.DoProgress(const progressTimes: TProgressTimes);
 var
   i: Integer;
 begin
@@ -4138,7 +4140,7 @@ begin
   Result := (aClass.InheritsFrom(TgxEffect)) and (inherited CanAdd(aClass));
 end;
 
-procedure TgxEffects.DoProgress(const progressTime: TgxProgressTimes);
+procedure TgxEffects.DoProgress(const progressTime: TProgressTimes);
 var
   i: Integer;
 begin
@@ -5679,7 +5681,7 @@ end;
 
 procedure TgxScene.Progress(const deltaTime, newTime: Double);
 var
-  pt: TgxProgressTimes;
+  pt: TProgressTimes;
 begin
   pt.deltaTime := deltaTime;
   pt.newTime := newTime;
@@ -6185,7 +6187,7 @@ begin
 
   try
     // will be freed in DestroyWindowHandle
-    FRenderingContext := VXContextManager.CreateContext;
+    FRenderingContext := GXContextManager.CreateContext;
     if not Assigned(FRenderingContext) then
       raise Exception.Create('Failed to create RenderingContext.');
     SetupRCOptions(FRenderingContext);
@@ -6619,7 +6621,7 @@ begin
     aColorBits := PixelFormatToColorBits(ABitmap.PixelFormat);
     if aColorBits < 8 then
       aColorBits := 8;
-    FRenderingContext := VXContextManager.CreateContext;
+    FRenderingContext := GXContextManager.CreateContext;
     SetupRCOptions(FRenderingContext);
     with FRenderingContext do
     begin
@@ -7836,17 +7838,17 @@ end;
 // ------------------ TgxInitializableObjectList ------------------
 // ------------------
 
-function TgxInitializableObjectList.Add(const Item: IGLInitializable): Integer;
+function TgxInitializableObjectList.Add(const Item: IgxInitializable): Integer;
 begin
   Result := inherited Add(Pointer(Item));
 end;
 
-function TgxInitializableObjectList.GetItems(const Index: Integer): IGLInitializable;
+function TgxInitializableObjectList.GetItems(const Index: Integer): IgxInitializable;
 begin
-  Result := IGLInitializable(inherited Get(Index));
+  Result := IgxInitializable(inherited Get(Index));
 end;
 
-procedure TgxInitializableObjectList.PutItems(const Index: Integer; const Value: IGLInitializable);
+procedure TgxInitializableObjectList.PutItems(const Index: Integer; const Value: IgxInitializable);
 begin
   inherited Put(Index, Pointer(Value));
 end;

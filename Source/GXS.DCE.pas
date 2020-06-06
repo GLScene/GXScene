@@ -1,6 +1,11 @@
-//
-// Graphic Scene Engine, http://glscene.org
-//
+(*********************************************
+ *                                           *
+ *  Graphic Scene Engine, http://glscene.org *
+ *                                           *
+ *********************************************)
+
+unit GXS.DCE;
+
 (*
   How to use:
   - Add a DCEManager to you form and configure its properties
@@ -20,8 +25,6 @@
   - BounceFactor: Restituition factor, 1 means that it will bounce forever
 *)
 
-unit GXS.DCE;
-
 interface
 
 {$I Scene.inc}
@@ -40,8 +43,8 @@ uses
   GXS.EllipseCollision,
   GXS.TerrainRenderer,
   GXS.Coordinates,
-  GXS.BaseClasses,
-  GXS.Manager,
+  Scene.BaseClasses,
+  Scene.Manager,
   Scene.VectorTypes;
 
 type
@@ -219,7 +222,7 @@ type
     procedure Move(deltaS: TAffineVector; deltaTime: Double);
     procedure MoveTo(Position: TAffineVector; Amount: single); // gak:20041119
     procedure DoMove(deltaTime: Double);
-    procedure DoProgress(const progressTime: TgxProgressTimes); override;
+    procedure DoProgress(const progressTime: TProgressTimes); override;
     // Runtime only
     property Speed: TAffineVector read FSpeed write FSpeed;
     property InGround: Boolean read FInGround;
@@ -943,7 +946,7 @@ begin
   FAbsAccel := NullVector;
 end;
 
-procedure TgxDCEDynamic.DoProgress(const progressTime: TgxProgressTimes);
+procedure TgxDCEDynamic.DoProgress(const progressTime: TProgressTimes);
 begin
   inherited DoProgress(progressTime);
   Assert(Assigned(Manager), 'DCE Manager not assigned to behaviour.');
@@ -1141,7 +1144,7 @@ initialization
 
 // ------------------------------------------------------------------
 
-// class registrations
+
 RegisterXCollectionItemClass(TgxDCEStatic);
 RegisterXCollectionItemClass(TgxDCEDynamic);
 

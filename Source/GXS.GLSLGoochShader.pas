@@ -23,7 +23,7 @@ uses
   
   GXS.Scene, 
   GXS.CrossPlatform, 
-  GXS.BaseClasses, 
+  Scene.BaseClasses, 
   GXS.State, 
   Winapi.OpenGL, 
   Winapi.OpenGLext,  

@@ -1,11 +1,12 @@
-//
-// Graphic Scene Engine, http://glscene.org
-//
-{
-   A cross-platform full-screen viewer.
+(*******************************************
+*                                          *
+* Graphic Scene Engine, http://glscene.org *
+*                                          *
+********************************************)
 
-}
 unit GXS.FullScreenViewer;
+
+(* A cross-platform full-screen viewer *)
 
 interface
 

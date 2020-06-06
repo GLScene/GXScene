@@ -1,24 +1,26 @@
-//
-// Graphic Scene Engine, http://glscene.org
-//
-(*
-  Skeleton colliders for defining and controlling ODE geoms.
-*)
+(*******************************************
+*                                          *
+* Graphic Scene Engine, http://glscene.org *
+*                                          *
+********************************************)
+
 unit GXS.ODESkeletonColliders;
+
+(* Skeleton colliders for defining and controlling ODE geoms *)
 
 interface
 
 uses
   System.Classes,
 
-  ODEImport,
+  Import.ODE,
   Scene.PersistentClasses,
   Scene.VectorGeometry,
   GXS.VectorFileObjects;
 
 type
 
-  { Base ODE skeleton collider class. }
+  // Base ODE skeleton collider class.
   TSCODEBase = class(TgxSkeletonCollider)
   private
     FGeom: PdxGeom;
@@ -27,8 +29,7 @@ type
     procedure ReadFromFiler(reader: TVirtualReader); override;
     procedure AddToSpace(Space: PdxSpace); virtual;
     procedure AlignCollider; override;
-
-    { The geoms are created through the AddToSpace procedure. }
+    // The geoms are created through the AddToSpace procedure
     property Geom: PdxGeom read FGeom;
   end;
 
@@ -43,7 +44,6 @@ type
     procedure WriteToFiler(writer: TVirtualWriter); override;
     procedure ReadFromFiler(reader: TVirtualReader); override;
     procedure AddToSpace(Space: PdxSpace); override;
-
     property Radius: TdReal read FRadius write SetRadius;
   end;
 
@@ -81,14 +81,13 @@ type
     property BoxDepth: TdReal read FBoxDepth write SetBoxDepth;
   end;
 
-  { After loading call this function to add all the geoms in a
-    skeleton collider list to a given ODE space. }
+(* After loading call this function to add all the geoms in a
+   skeleton collider list to a given ODE space. *)
 procedure AddSCODEGeomsToODESpace(colliders: TgxSkeletonColliderList;
   Space: PdxSpace);
 
 // ------------------------------------------------------------------
 implementation
-
 // ------------------------------------------------------------------
 
 
@@ -168,8 +167,6 @@ end;
 // ------------------ TSCODESphere ------------------
 // ------------------
 
-// Create
-//
 constructor TSCODESphere.Create;
 begin
   inherited;
@@ -177,8 +174,6 @@ begin
   AlignCollider;
 end;
 
-// WriteToFiler
-//
 procedure TSCODESphere.WriteToFiler(writer: TVirtualWriter);
 begin
   inherited WriteToFiler(writer);

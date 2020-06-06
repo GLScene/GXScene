@@ -1,9 +1,13 @@
-//
-// Graphic Scene Engine, http://glscene.org
-//
-(*
-   Object with support for complex polygons.
-*)
+(*******************************************
+*                                          *
+* Graphic Scene Engine, http://glscene.org *
+*                                          *
+********************************************)
+
+unit GXS.MultiPolygon;
+
+(* Object with support for complex polygons *)
+
 (* TODO
 
   And I reactivated the TgxVectorPool object. The Scene.VectorLists are not suitable for this job.
@@ -16,7 +20,6 @@
   If anyone feels responsible: it would be fine to have a method ImportFromFile (dxf?) in
   the TgxContour and TgxMultiPolygonBase objects...
 *)
-unit GXS.MultiPolygon;
 
 interface
 
@@ -28,7 +31,7 @@ uses
 
   Import.OpenGLx,
   Scene.XOpenGL,
-  GXS.Spline,
+  Scene.Spline,
   GXS.Context,
   Scene.VectorTypes,
   Scene.VectorGeometry,
@@ -38,7 +41,7 @@ uses
   GXS.Objects,
   GXS.GeomObjects,
   GXS.Nodes,
-  GXS.BaseClasses,
+  Scene.BaseClasses,
   GXS.Coordinates,
   GXS.RenderContextInfo;
 
@@ -80,7 +83,7 @@ type
 
   TgxContourClass = class of TgxContour;
 
-  TgxContours = class(TgxNotifyCollection)
+  TgxContours = class(TNotifyCollection)
   private
     function GetItems(index: Integer): TgxContour;
     procedure SetItems(index: Integer; const Value: TgxContour);
@@ -476,7 +479,7 @@ begin
 end;
 
 //
-// Tessellation routines (OpenVX callbacks)
+// Tessellation routines (OpenGL callbacks)
 //
 
 var

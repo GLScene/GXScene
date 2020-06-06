@@ -1,11 +1,12 @@
-//
-// Graphic Scene Engine, http://glscene.org
-//
-(*
-  Coordinate related classes.
-*)
+(* ********************************************
+  *                                           *
+  *  Graphic Scene Engine, http://glscene.org *
+  *                                           *
+  ******************************************** *)
 
 unit GXS.Coordinates;
+
+(* Coordinate related classes *)
 
 interface
 
@@ -17,24 +18,24 @@ uses
 
   Import.OpenGLx,
   Scene.VectorGeometry,
-  Scene.VectorTypes, 
-  GXS.BaseClasses,
-  GXS.CrossPlatform;
+  Scene.VectorTypes,
+  Scene.BaseClasses,
+  Scene.Strings;
 
 type
-  { Identifie le type de données stockées au sein d'un TgxCustomCoordinates.
+  (* Identifie le type de données stockées au sein d'un TgxCustomCoordinates.
     csPoint2D : a simple 2D point (Z=0, W=0)
     csPoint : un point (W=1)
     csVector : un vecteur (W=0)
-    csUnknown : aucune contrainte  }
+    csUnknown : aucune contrainte  *)
   TgxCoordinatesStyle = (csPoint2D, csPoint, csVector, csUnknown);
 
-  { Stores and homogenous vector.
+  (* Stores and homogenous vector.
     This class is basicly a container for a TVector, allowing proper use of
     delphi property editors and editing in the IDE. Vector/Coordinates
-    manipulation methods are only minimal. 
-    Handles dynamic default values to save resource file space.  }
-  TgxCustomCoordinates = class(TgxUpdateAbleObject)
+    manipulation methods are only minimal.
+    Handles dynamic default values to save resource file space.  *)
+  TgxCustomCoordinates = class(TUpdateAbleObject)
   private
     FCoords: TVector;
     FStyle: TgxCoordinatesStyle; // NOT Persistent
@@ -63,12 +64,12 @@ type
     procedure ReadFromFiler(Reader: TReader);
     procedure Initialize(const Value: TVector);
     procedure NotifyChange(Sender: TObject); override;
-    { Identifies the coordinates styles.
+    (* Identifies the coordinates styles.
       The property is NOT persistent, csUnknown by default, and should be
       managed by owner object only (internally).
       It is used by the TgxCustomCoordinates for internal "assertion" checks
       to detect "misuses" or "misunderstandings" of what the homogeneous
-      coordinates system implies. }
+      coordinates system implies. *)
     property Style: TgxCoordinatesStyle read FStyle write FStyle;
     procedure Translate(const TranslationVector: TVector); overload;
     procedure Translate(const TranslationVector: TAffineVector); overload;
@@ -96,25 +97,25 @@ type
     procedure SetPoint2D(const Vector: TVector2f); overload;
     procedure SetToZero;
     function AsAddress: PGLFloat; inline;
-    { The coordinates viewed as a vector.
+    (* The coordinates viewed as a vector.
       Assigning a value to this property will trigger notification events,
-      if you don't want so, use DirectVector instead. }
+      if you don't want so, use DirectVector instead. *)
     property AsVector: TVector read FCoords write SetAsVector;
-    { The coordinates viewed as an affine vector.
+    (* The coordinates viewed as an affine vector.
       Assigning a value to this property will trigger notification events,
       if you don't want so, use DirectVector instead.
-      The W component is automatically adjustes depending on style. }
+      The W component is automatically adjustes depending on style. *)
     property AsAffineVector: TAffineVector read GetAsAffineVector  write SetAsAffineVector;
-    { The coordinates viewed as a 2D point.
+    (* The coordinates viewed as a 2D point.
       Assigning a value to this property will trigger notification events,
-      if you don't want so, use DirectVector instead. }
+      if you don't want so, use DirectVector instead. *)
     property AsPoint2D: TVector2f read GetAsPoint2D write SetAsPoint2D;
     property X: Single index 0 read GetCoordinate write SetCoordinate;
     property Y: Single index 1 read GetCoordinate write SetCoordinate;
     property Z: Single index 2 read GetCoordinate write SetCoordinate;
     property W: Single index 3 read GetCoordinate write SetCoordinate;
     property Coordinate[const AIndex: Integer]: Single read GetCoordinate write SetCoordinate; default;
-    { The coordinates, in-between brackets, separated by semi-colons. }
+    // The coordinates, in-between brackets, separated by semi-colons.
     property AsString: String read GetAsString;
     // Similar to AsVector but does not trigger notification events
     property DirectVector: TVector read FCoords write SetDirectVector;
@@ -124,14 +125,14 @@ type
     property DirectW: Single index 3 read GetDirectCoordinate write SetDirectCoordinate;
   end;
 
-  { A TgxCustomCoordinates that publishes X, Y properties. }
+  // A TgxCustomCoordinates that publishes X, Y properties.
   TgxCoordinates2 = class(TgxCustomCoordinates)
   published
     property X stored False;
     property Y stored False;
   end;
 
-  { A TgxCustomCoordinates that publishes X, Y, Z properties. }
+  // A TgxCustomCoordinates that publishes X, Y, Z properties.
   TgxCoordinates3 = class(TgxCustomCoordinates)
   published
     property X stored False;
@@ -139,7 +140,7 @@ type
     property Z stored False;
   end;
 
-  { A TgxCustomCoordinates that publishes X, Y, Z, W properties. }
+  // A TgxCustomCoordinates that publishes X, Y, Z, W properties.
   TgxCoordinates4 = class(TgxCustomCoordinates)
   published
     property X stored False;
@@ -150,24 +151,24 @@ type
 
   TgxCoordinates = TgxCoordinates3;
 
-  { Actually Sender should be TgxCustomCoordinates, but that would require
+  (* Actually Sender should be TgxCustomCoordinates, but that would require
    changes in a some other GXScene units and some other projects that use
-   TgxCoordinatesUpdateAbleComponent }
-  IVXCoordinatesUpdateAble = interface(IInterface)
+   TsnCoordinatesUpdateAbleComponent *)
+  ICoordinatesUpdateAble = interface(IInterface)
     ['{ACB98D20-8905-43A7-AFA5-225CF5FA6FF5}']
     procedure CoordinateChanged(Sender: TgxCustomCoordinates);
   end;
 
-  TgxCoordinatesUpdateAbleComponent = class(TgxUpdateAbleComponent,
-    IVXCoordinatesUpdateAble)
+  TgxCoordinatesUpdateAbleComponent = class(TUpdateAbleComponent,
+    ICoordinatesUpdateAble)
   public
     procedure CoordinateChanged(Sender: TgxCustomCoordinates); virtual;
       abstract;
   end;
 
 var
-  { Specifies if TgxCustomCoordinates should allocate memory for
-   their default values (ie. design-time) or not (run-time) }
+  (* Specifies if TgxCustomCoordinates should allocate memory for
+   their default values (ie. design-time) or not (run-time) *)
   VUseDefaultCoordinateSets: Boolean = False;
 
 //==================================================================
@@ -273,9 +274,9 @@ end;
 
 procedure TgxCustomCoordinates.NotifyChange(Sender: TObject);
 var
-  Int: IVXCoordinatesUpdateAble;
+  Int: ICoordinatesUpdateAble;
 begin
-  if Supports(Owner, IVXCoordinatesUpdateAble, Int) then
+  if Supports(Owner, ICoordinatesUpdateAble, Int) then
     Int.CoordinateChanged(TgxCoordinates(Self));
   inherited NotifyChange(Sender);
 end;

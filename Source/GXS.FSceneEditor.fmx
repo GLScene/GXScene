@@ -1,7 +1,7 @@
-object gxSceneEditorForm: TgxSceneEditorForm
+object SceneEditorForm: TSceneEditorForm
   Left = 0
   Top = 0
-  Caption = 'Form1'
+  Caption = 'Scene Editor'
   ClientHeight = 633
   ClientWidth = 600
   FormFactor.Width = 320

@@ -1,14 +1,16 @@
-//
-// Graphic Scene Engine, http://glscene.org
-//
-{
+(*******************************************
+*                                          *
+* Graphic Scene Engine, http://glscene.org *
+*                                          *
+********************************************)
+
+unit GXS.HiddenLineShader;
+
+(*
    A shader that renders hidden (back-faced) lines differently from visible
    (front) lines. Polygon offset is used to displace fragments depths a little
    so that there is no z-fighting in rendering the same geometry multiple times.
-
-
-}
-unit GXS.HiddenLineShader;
+*)
 
 interface
 
@@ -22,21 +24,18 @@ uses
   GXS.CrossPlatform, 
   GXS.Scene, 
   GXS.Color,
-  GXS.BaseClasses, 
+  Scene.BaseClasses, 
   GXS.RenderContextInfo, 
   GXS.State, 
   GXS.Context;
 
 type
-  TgxLineSettings = class(TgxUpdateAbleObject)
+  TgxLineSettings = class(TUpdateAbleObject)
   private
-    
     FColor: TgxColor;
     FWidth: Single;
     FPattern: GLushort;
-
     FForceMaterial: Boolean;
-
     procedure SetPattern(const value: GLushort);
     procedure SetColor(const v: TgxColor);
     procedure SetWidth(const Value: Single);
@@ -50,8 +49,8 @@ type
     property Width: Single read FWidth write SetWidth;
     property Color: TgxColor read FColor write SetColor;
     property Pattern: GLushort read FPattern write SetPattern default $FFFF;
-    { Set ForceMaterial to true to enforce the application of the line settings
-       for objects that sets their own color, line width and pattern. }
+    (* Set ForceMaterial to true to enforce the application of the line settings
+       for objects that sets their own color, line width and pattern. *)
     property ForceMaterial: Boolean read FForceMaterial write SetForceMaterial
       default false;
   end;
@@ -80,18 +79,17 @@ type
   published
     property FrontLine: TgxLineSettings read FFrontLine write FFrontLine;
     property BackLine: TgxLineSettings read FBackLine write FBackLine;
-    { Line smoothing control }
+    // Line smoothing control
     property LineSmooth: Boolean read FlineSmooth write SetlineSmooth default
       false;
-    { Solid controls if you can see through the front-line wireframe. }
+    // Solid controls if you can see through the front-line wireframe.
     property Solid: Boolean read FSolid write SetSolid default false;
-    { Color used for solid fill. }
+    // Color used for solid fill.
     property BackgroundColor: TgxColor read FBackgroundColor write
       SetBackgroundColor;
-    { When Solid is True, determines if lighting or background color is used. }
+    // When Solid is True, determines if lighting or background color is used.
     property SurfaceLit: Boolean read FLighting write SetLighting default true;
-    { Shade model.
-       Default is "Smooth".  }
+    // Shade model. Default is "Smooth".
     property ShadeModel: TgxShadeModel read FShadeModel write SetShadeModel
       default smDefault;
   end;
@@ -99,6 +97,7 @@ type
 // ------------------------------------------------------------------
 implementation
 // ------------------
+
 // ------------------ TgxLineSettings ------------------
 // ------------------
 

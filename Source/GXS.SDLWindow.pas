@@ -1,7 +1,12 @@
-//
-// Graphic Scene Engine, http://glscene.org
-//
-{
+(*******************************************
+*                                          *
+* Graphic Scene Engine, http://glscene.org *
+*                                          *
+********************************************)
+
+unit GXS.SDLWindow;
+
+(*
   Non visual wrapper around basic SDL window features.
 
   Notes to Self:
@@ -10,8 +15,7 @@
   SDL-specifics should also be avoided in the "interface" section.
 
   This component uses a Delphi header conversion for SDL from http://libsdl.org
-}
-unit GXS.SDLWindow;
+*)
 
 interface
 
@@ -26,12 +30,12 @@ uses
   Scene.VectorTypes,
   GXS.Context,
   Scene.VectorGeometry,
-  SDL2;
+  Import.SDL2;
 
 type
-  { Pixel Depth options.
+  (* Pixel Depth options.
     vpd16bits: 16bpp graphics (565) (and 16 bits depth buffer for OpenGL)
-    vpd24bits: 24bpp graphics (565) (and 24 bits depth buffer for OpenGL) }
+    vpd24bits: 24bpp graphics (565) (and 24 bits depth buffer for OpenGL) *)
   TgxSDLWindowPixelDepth = (vpd16bits, vpd24bits);
 
   (*  Specifies optional settings for the SDL window.
@@ -49,11 +53,11 @@ const
   cDefaultSDLWindowOptions = [voDoubleBuffer, voOpenGL, voResizable];
 
 type
-  {  A basic SDL-based window (non-visual component).
+  (*  A basic SDL-based window (non-visual component).
     Only a limited subset of SDL's features are available, and this window
     is heavily oriented toward using it for OpenGL rendering.
     Be aware SDL is currently limited to a single window at any time...
-    so you may have multiple components, but only one can be used. }
+    so you may have multiple components, but only one can be used. *)
   TgxSDLWindow = class(TComponent)
   private
     FWidth: Integer;
@@ -94,10 +98,10 @@ type
   public
     constructor Create(AOwner: TComponent); override;
     destructor Destroy; override;
-    {  Initializes and Opens an SDL window }
+    //  Initializes and Opens an SDL window
     procedure Open;
-    {  Closes an already opened SDL Window.
-      NOTE: will also kill the app due to an SDL limitation... }
+    (*  Closes an already opened SDL Window.
+      NOTE: will also kill the app due to an SDL limitation... *)
     procedure Close;
     {  Applies changes (size, pixeldepth...) to the opened window. }
     procedure UpdateWindow;

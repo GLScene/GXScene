@@ -1,7 +1,12 @@
-//
-// Graphic Scene Engine, http://glscene.org
-//
-{
+(*******************************************
+*                                          *
+* Graphic Scene Engine, http://glscene.org *
+*                                          *
+********************************************)
+
+unit GXS.HeightData;
+
+(*
   Classes for height data access.
 
   The components and classes in the unit are the core data providers for
@@ -13,9 +18,7 @@
   cacheing and manipulation to provide TgxHeightData objects. A TgxHeightData
   is basicly a square, power of two dimensionned raster heightfield, and
   holds the data a renderer needs.
-
-}
-unit GXS.HeightData;
+*)
 
 interface
 
@@ -28,9 +31,12 @@ uses
   FMX.Objects,
   FMX.Graphics,
 
+  Scene.VectorGeometry,
+  Scene.BaseClasses,
   GXS.ApplicationFileIO,
   GXS.Utils,
-  Scene.VectorGeometry, GXS.CrossPlatform, GXS.Material, GXS.BaseClasses;
+  GXS.CrossPlatform,
+  GXS.Material;
 
 type
   TByteArray = array [0 .. MaxInt div (2 * SizeOf(Byte))] of Byte;
@@ -47,14 +53,14 @@ type
   TgxHeightData = class;
   TgxHeightDataClass = class of TgxHeightData;
 
-  { Determines the type of data stored in a TgxHeightData.
+  (* Determines the type of data stored in a TgxHeightData.
     There are 3 data types (8 bits unsigned, signed 16 bits and 32 bits).
     Conversions: (128*(ByteValue-128)) = SmallIntValue = Round(SingleValue).
     The 'hdtDefault' type is used for request only, and specifies that the
-    default type for the source should be used. }
+    default type for the source should be used. *)
   TgxHeightDataType = (hdtByte, hdtSmallInt, hdtSingle, hdtDefault);
 
-  { Base class for height datasources.
+  (* Base class for height datasources.
     This class is abstract and presents the standard interfaces for height
     data retrieval (TgxHeightData objects). The class offers the following
     features (that a subclass may decide to implement or not, what follow
@@ -63,7 +69,7 @@ type
      Pooling / Cacheing (return a TgxHeightData with its "Release" method)
      Pre-loading : specify a list of TgxHeightData you want to preload
      Multi-threaded preload/queueing : specified list can be loaded in
-    a background task }
+    a background task *)
 
   TgxHeightDataSource = class(TComponent)
   private
@@ -78,49 +84,48 @@ type
   protected
     procedure SetMaxThreads(const Val: Integer);
     function HashKey(XLeft, YTop: Integer): Integer;
-    { Adjust this property in you subclasses. }
+    // Adjust this property in you subclasses.
     property HeightDataClass: TgxHeightDataClass read FHeightDataClass
       write FHeightDataClass;
-    { Looks up the list and returns the matching TgxHeightData, if any. }
+    (* Looks up the list and returns the matching TgxHeightData, if any. *)
     function FindMatchInList(XLeft, YTop, size: Integer;
       DataType: TgxHeightDataType): TgxHeightData;
   public
     constructor Create(AOwner: TComponent); override;
     destructor Destroy; override;
-    { Access to currently pooled TgxHeightData objects, and Thread locking }
+    (* Access to currently pooled TgxHeightData objects, and Thread locking *)
     property Data: TThreadList read FData;
-    { Empties the Data list, terminating thread if necessary.
+    (* Empties the Data list, terminating thread if necessary.
       If some TgxHeightData are hdsInUse, triggers an exception and does
-      nothing. }
+      nothing. *)
     procedure Clear;
-    { Removes less used TDataHeight objects from the pool.
+    (* Removes less used TDataHeight objects from the pool.
       Only removes objects whose state is hdsReady and UseCounter is zero,
       starting from the end of the list until total data size gets below
-      MaxPoolSize (or nothing can be removed). }
+      MaxPoolSize (or nothing can be removed). *)
     procedure CleanUp;
-    { Base TgxHeightData requester method.
+    (* Base TgxHeightData requester method.
       Returns (by rebuilding it or from the cache) a TgxHeightData
       corresponding to the given area. Size must be a power of two.
       Subclasses may choose to publish it or just publish datasource-
-      specific requester method using specific parameters. }
+      specific requester method using specific parameters. *)
     function GetData(XLeft, YTop, size: Integer; DataType: TgxHeightDataType)
       : TgxHeightData; virtual;
-    { Preloading request.
-      See GetData for details. }
+    // Preloading request. See GetData for details.
     function PreLoad(XLeft, YTop, size: Integer; DataType: TgxHeightDataType)
       : TgxHeightData; virtual;
-    { Replacing dirty tiles. }
+    // Replacing dirty tiles.
     procedure PreloadReplacement(aHeightData: TgxHeightData);
-    { Notification that the data is no longer used by the renderer.
+    (* Notification that the data is no longer used by the renderer.
       Default behaviour is just to change DataState to hdsReady (ie. return
-      the data to the pool) }
+      the data to the pool) *)
     procedure Release(aHeightData: TgxHeightData); virtual;
-    { Marks the given area as "dirty" (ie source data changed).
-      All loaded and in-cache tiles overlapping the area are flushed. }
+    (* Marks the given area as "dirty" (ie source data changed).
+      All loaded and in-cache tiles overlapping the area are flushed. *)
     procedure MarkDirty(const Area: TRect); overload; virtual;
     procedure MarkDirty(XLeft, YTop, xRight, yBottom: Integer); overload;
     procedure MarkDirty; overload;
-    { Maximum number of background threads.
+    (* Maximum number of background threads.
       If 0 (zero), multithreading is disabled and StartPreparingData
       will be called from the mainthread, and all preload requirements
       (queued TgxHeightData objects) will be loaded in sequence from
@@ -130,36 +135,36 @@ type
       thread only (ie. there is no need to implement a TgxHeightDataThread,
       just make sure StartPreparingData code is thread-safe).
       Other values (2 and more) are relevant only if you implement
-      a TgxHeightDataThread subclass and fire it in StartPreparingData. }
+      a TgxHeightDataThread subclass and fire it in StartPreparingData. *)
     property MaxThreads: Integer read FMaxThreads write SetMaxThreads;
-    { Maximum Size of TDataHeight pool in bytes.
+    (* Maximum Size of TDataHeight pool in bytes.
       The pool (cache) can actually get larger if more data than the pool
       can accomodate is used, but as soon as data gets released and returns
       to the pool, TDataHeight will be freed until total pool Size gets
       below this figure.
       The pool manager frees TDataHeight objects who haven't been requested
       for the longest time first.
-      The default value of zero effectively disables pooling. }
+      The default value of zero effectively disables pooling. *)
     property MaxPoolSize: Integer read FMaxPoolSize write FMaxPoolSize;
-    { Height to return for undefined tiles. }
+    // Height to return for undefined tiles.
     property DefaultHeight: Single read FDefaultHeight write FDefaultHeight;
-    { Interpolates height for the given point. }
+    // Interpolates height for the given point.
     function InterpolatedHeight(x, y: Single; tileSize: Integer)
       : Single; virtual;
     function Width: Integer; virtual; abstract;
     function Height: Integer; virtual; abstract;
     procedure ThreadIsIdle; virtual;
-    { This is called BEFORE StartPreparing Data, but always from the main thread. }
+    (* This is called BEFORE StartPreparing Data, but always from the main thread. *)
     procedure BeforePreparingData(HeightData: TgxHeightData); virtual;
-    { Request to start preparing data.
+    (* Request to start preparing data.
       If your subclass is thread-enabled, this is here that you'll create
       your thread and fire it (don't forget the requirements), if not,
       that'll be here you'll be doing your work.
       Either way, you are responsible for adjusting the DataState to
       hdsReady when you're done (DataState will be hdsPreparing when this
-      method will be invoked). }
+      method will be invoked). *)
     procedure StartPreparingData(HeightData: TgxHeightData); virtual;
-    { This is called After "StartPreparingData", but always from the main thread. }
+    (* This is called After "StartPreparingData", but always from the main thread. *)
     procedure AfterPreparingData(HeightData: TgxHeightData); virtual;
     procedure TextureCoordinates(HeightData: TgxHeightData;
       Stretch: boolean = false);
@@ -167,11 +172,11 @@ type
 
   THDTextureCoordinatesMode = (tcmWorld, tcmLocal);
 
-  { Possible states for a TgxHeightData.
+  (* Possible states for a TgxHeightData.
      hdsQueued : the data has been queued for loading
      hdsPreparing : the data is currently loading or being prepared for use
      hdsReady : the data is fully loaded and ready for use
-     hdsNone : the height data does not exist for this tile }
+     hdsNone : the height data does not exist for this tile *)
   TgxHeightDataState = (hdsQueued, hdsPreparing, hdsReady, hdsNone);
 
   TgxHeightDataThread = class;
@@ -182,7 +187,7 @@ type
     event: TOnHeightDataDirtyEvent;
   end;
 
-  { Base class for height data, stores a height-field raster.
+  (* Base class for height data, stores a height-field raster.
     The raster is a square, whose Size must be a power of two. Data can be
     accessed through a base pointer ("ByteData[n]" f.i.), or through pointer
     indirections ("ByteRaster[y][x]" f.i.), this are the fastest way to access
@@ -194,9 +199,9 @@ type
     conversion), but in any case, the TgxHeightData should be directly requested
     from the TgxHeightDataSource with the appropriate format.
     Though this class can be instantiated, you will usually prefer to subclass
-    it in real-world cases, f.i. to add texturing data. }
+    it in real-world cases, f.i. to add texturing data. *)
   /// TgxHeightData = class (TObject)
-  TgxHeightData = class(TgxUpdateAbleObject)
+  TgxHeightData = class(TUpdateAbleObject)
   private
     FUsers: array of TgxHeightDataUser;
     FOwner: TgxHeightDataSource;
@@ -2044,7 +2049,7 @@ end;
 initialization
 // ------------------------------------------------------------------
 
-// class registrations
+
 RegisterClasses([TgxBitmapHDS, TgxCustomHDS, TgxHeightDataSourceFilter]);
 
 end.

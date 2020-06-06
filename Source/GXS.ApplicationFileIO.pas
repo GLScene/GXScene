@@ -1,12 +1,15 @@
-//
-// Graphic Scene Engine, http://glscene.org
-//
+(* ******************************************
+  *                                          *
+  * Graphic Scene Engine, http://glscene.org *
+  *                                          *
+  ******************************************* *)
+
+unit GXS.ApplicationFileIO;
+
 (*
   Components and functions that abstract file I/O access for an application.
   Allows re-routing file reads to reads from a single archive file f.i.
 *)
-
-unit GXS.ApplicationFileIO;
 
 interface
 
@@ -19,7 +22,8 @@ uses
 
   FMX.Dialogs,
 
-  GXS.BaseClasses;
+  Scene.BaseClasses,
+  Scene.Strings;
 
 const
   VXS_RC_DDS_Type = RT_RCDATA;
@@ -73,7 +77,7 @@ type
     file-based one just call these, and stream-based behaviours allow for more
     enhancement (such as other I/O abilities, compression, cacheing, etc.)
     to this class, without the need to rewrite subclasses. *)
-  TgxDataFile = class(TgxUpdateAbleObject)
+  TgxDataFile = class(TUpdateAbleObject)
   private
     FResourceName: string;
     procedure SetResourceName(const AName: string);
@@ -98,7 +102,7 @@ type
   TgxDataFileClass = class of TgxDataFile;
   TgxResourceStream = TResourceStream;
 
-// Returns true if an ApplicationFileIO has been defined
+  // Returns true if an ApplicationFileIO has been defined
 function ApplicationFileIODefined: Boolean;
 (* Creates a file stream corresponding to the fileName.
   If the file does not exists, an exception will be triggered.

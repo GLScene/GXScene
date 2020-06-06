@@ -1,13 +1,17 @@
-//
-// Graphic Scene Engine, http://glscene.org
-//
+(*******************************************
+*                                          *
+* Graphic Scene Engine, http://glscene.org *
+*                                          *
+********************************************)
+
+unit GXS.MeshBuilder;
+
 (*
   Build mesh objects.
   How often do you miss a BuildSphereMesh function for testing or editors?
   Well this unit is intended to solve that problem. We want fast,
   flexible functions with lots of options...
 *)
-unit GXS.MeshBuilder;
 
 interface
 

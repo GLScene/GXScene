@@ -136,7 +136,7 @@ type
     List: PChunkList; // contents of List
   end;
 
-  { replaced by a TStringList
+  (* replaced by a TStringList
     PNameList = ^TNameList;
     TNameList = array[0..0] of String;
 
@@ -145,7 +145,7 @@ type
     Count  : Integer;          // how many entries are in list
     Spaces : Integer;          // how much space for entries
     Names  : PNameList;        // to access pointers
-    end; }
+    end; *)
 
   // Database type settings
   TDBType3DS = (dbUnknown, // database has not been created yet
@@ -397,7 +397,6 @@ type
 
 
   // Mesh definition
-
   PMeshMatrix = ^TMeshMatrix;
   TMeshMatrix = array [0 .. 11] of Single;
 
@@ -702,9 +701,8 @@ type
   TM3dVersion = Cardinal;
 
 
-  // inner datatypes not followed by a '3DS' to show they are locally used
-  // (mostly as a part of another chunk or while collecting specific data)
-
+  (* inner datatypes not followed by a '3DS' to show they are locally used
+    (mostly as a part of another chunk or while collecting specific data) *)
   PColorF = ^TColorF;
   TColorF = record
     Red, Green, Blue: Single;
@@ -1176,10 +1174,10 @@ type
 
   TReleaseLevel = (rlRelease1, rlRelease2, rlRelease3, rlReleaseNotKnown);
 
-  // to avoid zillion type casts, we use this variant record for
-  // chunk data, effectively this defines the same pointer differently
-  // for different chunk types
-  // this is only possible because all types are just pointers
+  (* To avoid zillion type casts, we use this variant record for
+   chunk data, effectively this defines the same pointer differently
+   for different chunk types
+   this is only possible because all types are just pointers *)
   TChunkData = record
     case Integer of
       0:

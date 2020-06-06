@@ -1,12 +1,15 @@
-//
-// Graphic Scene Engine, http://glscene.org
-//
-{
-   Time based events mannager using the Cadencer
-   can be useful to make animations
-}
+(*********************************************
+ *                                           *
+ *  Graphic Scene Engine, http://glscene.org *
+ *                                           *
+ *********************************************)
 
 unit GXS.TimeEventsMgr;
+
+(*
+   Time based events mannager using the Cadencer
+   can be useful to make animations
+*)
 
 interface
 
@@ -15,14 +18,14 @@ uses
   System.SysUtils,
 
   GXS.Cadencer,
-  GXS.BaseClasses;
+  Scene.BaseClasses;
 
 type
 
   TgxTimeEvent = class;
   TgxTimeEvents = class;
 
-  TgxTimeEventsMGR = class(TgxUpdateAbleComponent)
+  TgxTimeEventsMGR = class(TUpdateAbleComponent)
   private
     FCadencer: TgxCadencer;
     FEnabled: boolean;
@@ -35,7 +38,7 @@ type
   public
     constructor Create(aOwner: TComponent); override;
     destructor Destroy; override;
-    procedure DoProgress(const progressTime: TgxProgressTimes); override;
+    procedure DoProgress(const progressTime: TProgressTimes); override;
     procedure Reset();
   published
     property Cadencer: TgxCadencer read FCadencer write SetCadencer;
@@ -139,7 +142,7 @@ begin
   FEvents.Assign(val);
 end;
 
-procedure TgxTimeEventsMGR.DoProgress(const progressTime: TgxProgressTimes);
+procedure TgxTimeEventsMGR.DoProgress(const progressTime: TProgressTimes);
 var
   i: Integer;
 begin

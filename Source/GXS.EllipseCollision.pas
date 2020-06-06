@@ -1,9 +1,11 @@
-//
-// Graphic Scene Engine, http://glscene.org
-//
-{
+(*******************************************
+*                                          *
+* Graphic Scene Engine, http://glscene.org *
+*                                          *
+********************************************)
+(*
   Ellipsoid collision functions (mainly used by DCE).
-}
+*)
 unit GXS.EllipseCollision;
 
 interface

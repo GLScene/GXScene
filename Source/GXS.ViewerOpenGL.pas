@@ -1,11 +1,12 @@
-//
-// Graphic Scene Engine, http://glscene.org
-//
-{ Viewer OpenGL for FMX
-  The history is logged in a previous version of the unit
-}
+(*******************************************
+*                                          *
+* Graphic Scene Engine, http://glscene.org *
+*                                          *
+********************************************)
 
 unit GXS.ViewerOpenGL;
+
+(* Viewer OpenGL for FMX *)
 
 interface
 
@@ -58,19 +59,19 @@ type
     //procedure Realign; override; - E2179, removed override;
     procedure Realign;
   published
-    { Triggered before the scene's objects get rendered.
-       You may use this event to execute your own OpenGL rendering. }
+    (* Triggered before the scene's objects get rendered.
+       You may use this event to execute your own OpenGL rendering. *)
     property BeforeRender: TNotifyEvent read GetBeforeRender write SetBeforeRender;
-    { Triggered just after all the scene's objects have been rendered.
+    (* Triggered just after all the scene's objects have been rendered.
        The OpenGL context is still active in this event, and you may use it
-       to execute your own OpenGL rendering. }
+       to execute your own OpenGL rendering. *)
     property PostRender: TNotifyEvent read FPostRender write FPostRender;
-    { Called after rendering. You cannot issue OpenGL calls in this event, if you want
-      to do your own OpenGL stuff, use the PostRender event. }
+    (* Called after rendering. You cannot issue OpenGL calls in this event, if you want
+      to do your own OpenGL stuff, use the PostRender event. *)
     property AfterRender: TNotifyEvent read GetAfterRender write SetAfterRender;
-    { Access to buffer properties. }
+    // Access to buffer properties.
     property Buffer: TgxSceneBuffer read FGLSBuffer write SetBuffer;
-    { Camera from which the scene is rendered. }
+    // Camera from which the scene is rendered.
     property SceneCamera: TgxCamera read GetSceneCamera write SetSceneCamera;
   end;
 

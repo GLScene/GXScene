@@ -1,13 +1,12 @@
-//
-// Graphic Scene Engine, http://glscene.org
-//
-(*
-  A plane simulating animated water
-  The Original Code is part of Cosmos4D
-  http://users.hol.gr/~sternas/
-  Sternas Stefanos 2003
-*)
+(*******************************************
+*                                          *
+* Graphic Scene Engine, http://glscene.org *
+*                                          *
+********************************************)
+
 unit GXS.WaterPlane;
+
+(* A plane simulating animated water *)
 
 interface
 
@@ -21,14 +20,14 @@ uses
 
   Import.OpenGLx,
   Scene.VectorGeometry,
-  GXS.Scene,
+  Scene.VectorTypes,
   Scene.VectorLists,
-  GXS.CrossPlatform,
   Scene.PersistentClasses,
-  GXS.BaseClasses,
+  Scene.BaseClasses,
+  GXS.Scene,
+  GXS.CrossPlatform,
   GXS.Context,
-  GXS.RenderContextInfo,
-  Scene.VectorTypes;
+  GXS.RenderContextInfo;
 
 type
 
@@ -78,7 +77,7 @@ type
   public
     constructor Create(AOwner: TComponent); override;
     destructor Destroy; override;
-    procedure DoProgress(const progressTime: TgxProgressTimes); override;
+    procedure DoProgress(const progressTime: TProgressTimes); override;
     procedure BuildList(var rci: TgxRenderContextInfo); override;
     procedure Assign(Source: TPersistent); override;
     function AxisAlignedDimensionsUnscaled: TVector; override;
@@ -87,7 +86,7 @@ type
     procedure CreateRippleAtWorldPos(const pos: TVector); overload;
     procedure CreateRippleRandom;
     procedure Reset;
-    { CPU time (in seconds) taken by the last iteration step. }
+    // CPU time (in seconds) taken by the last iteration step.
     property LastIterationStepTime: Single read FLastIterationStepTime;
   published
     property Active: Boolean read FActive write FActive default True;
@@ -155,7 +154,7 @@ begin
   inherited;
 end;
 
-procedure TgxWaterPlane.DoProgress(const progressTime: TgxProgressTimes);
+procedure TgxWaterPlane.DoProgress(const progressTime: TProgressTimes);
 var
   i: Integer;
 begin

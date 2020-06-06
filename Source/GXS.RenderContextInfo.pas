@@ -1,9 +1,9 @@
 //
 // Graphic Scene Engine, http://glscene.org
 //
-{
+(*
    Stores contextual info useful during rendering methods.
-}
+*)
 unit GXS.RenderContextInfo;
 
 interface
@@ -26,17 +26,17 @@ type
     cy: Longint;
   end;
 
-  { Determines if objects are sorted, and how. Sorting is done level by level (and not for all entities), values are :
+  (* Determines if objects are sorted, and how. Sorting is done level by level (and not for all entities), values are :
    osInherited : use inherited sorting mode, defaults to osRenderFarthestFirst
    osNone : do not sort objects.
    osRenderFarthestFirst : render objects whose Position is the farthest from the camera first.
    osRenderBlendedLast : opaque objects are not sorted and rendered first, blended ones are rendered afterwards and depth sorted.
-   osRenderNearestFirst : render objects whose Position is the nearest to the camera first.  }
+   osRenderNearestFirst : render objects whose Position is the nearest to the camera first.  *)
   TgxObjectsSorting = (osInherited, osNone,
     osRenderFarthestFirst, osRenderBlendedLast,
     osRenderNearestFirst);
 
-  { Determines the visibility culling mode.
+  (* Determines the visibility culling mode.
      Culling is done level by level, allowed values are:
       vcInherited : use inherited culling value, if selected for the root level, defaults to vcNone
       vcNone : no visibility culling is performed
@@ -49,7 +49,7 @@ type
        Depending on the structure of your scene the most efficient culling
      method will be either vcObjectBased or vcHierarchical. Also note that if
      you use many objects with "static" geometry and have a T&amp;L graphics
-     board, it may be faster not to cull at all (ie. leave this to the hardware). }
+     board, it may be faster not to cull at all (ie. leave this to the hardware). *)
   TgxVisibilityCulling = (vcInherited, vcNone, vcObjectBased, vcHierarchical);
 
   TgxRenderContextClippingInfo = record
@@ -61,7 +61,7 @@ type
     frustum: TFrustum;
   end;
 
-  { Stores contextual info useful during rendering methods. }
+  // Stores contextual info useful during rendering methods.
   TgxRenderContextInfo = record
     scene: TObject; //usually TgxScene
     buffer: TObject; //usually TgxSceneBuffer
@@ -96,7 +96,9 @@ type
   end;
   PRenderContextInfo = ^TgxRenderContextInfo;
 
+//------------------------------------------
 implementation
+//------------------------------------------
 
 end.
 

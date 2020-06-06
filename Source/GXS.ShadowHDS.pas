@@ -360,7 +360,7 @@ var HD    : TgxHeightData;
     libMat: TgxLibMaterial;
     bmp32 : TgxBitmap32;
     MatName:string;
-    Hold:TgxUpdateAbleObject;
+    Hold:TUpdateAbleObject;
     lst:TList;
 begin
 
@@ -370,7 +370,7 @@ begin
   //Uno.Acquire;
   HD:=HeightData;
   MatName:='ShadowHDS_x'+IntToStr(HD.XLeft)+'y'+IntToStr(HD.YTop)+'.'; //name contains xy coordinates of the current tile
-  Hold:=TgxUpdateAbleObject.Create(self);
+  Hold:=TUpdateAbleObject.Create(self);
 
   LibMat:=FShadowmapLibrary.Materials.GetLibMaterialByName(MatName);   //Check if Tile Texture already exists
   //if assigned(libmat) then LibMat.Name:='Dirty';
@@ -702,7 +702,7 @@ end;
 initialization
 // ------------------------------------------------------------------
 
-	// class registrations
+	
  RegisterClass(TgxShadowHDS);
 
 end.

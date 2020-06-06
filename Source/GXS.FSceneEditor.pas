@@ -1,9 +1,9 @@
 //
 // Graphic Scene Engine, http://glscene.org
 //
-{
+(*
    Scene Editor, for adding + removing scene objects within the Delphi IDE.
-}
+*)
 
 unit GXS.FSceneEditor;
 
@@ -37,11 +37,11 @@ uses
   GXS.SceneRegister,
   Scene.Strings,
   GXS.FInfo,
-  GXS.Scene.XCollection,
-  GXS.CrossPlatform;
+  GXS.CrossPlatform,
+  Scene.XCollection;
 
 type
-  TgxSceneEditorForm = class(TForm)
+  TSceneEditorForm = class(TForm)
     ToolBar: TToolBar;
     PATree: TPanel;
     PAGallery: TPanel;
@@ -129,8 +129,8 @@ type
     procedure ACInfoExecute(Sender: TObject);
   end;
 
-function GXSceneEditorForm: TgxSceneEditorForm;
-procedure ReleaseGXSceneEditorForm;
+function SceneEditorForm: TSceneEditorForm;
+procedure ReleaseSceneEditorForm;
 
 //==================================================================
 implementation
@@ -139,24 +139,24 @@ implementation
 {$R *.fmx}
 
 const
-  cRegistryKey = 'Software\GXScene\GXSceneEdit';
+  cRegistryKey = 'Software\SceneEngine\SceneEditor';
 
 var
-  vGXSceneEditorForm: TgxSceneEditorForm;
+  vSceneEditorForm: TSceneEditorForm;
 
-function GXSceneEditorForm: TgxSceneEditorForm;
+function SceneEditorForm: TSceneEditorForm;
 begin
-  if not Assigned(vGXSceneEditorForm) then
-    vGXSceneEditorForm := TgxSceneEditorForm.Create(nil);
-  Result := vGXSceneEditorForm;
+  if not Assigned(vSceneEditorForm) then
+    vSceneEditorForm := TSceneEditorForm.Create(nil);
+  Result := vSceneEditorForm;
 end;
 
-procedure ReleaseGXSceneEditorForm;
+procedure ReleaseSceneEditorForm;
 begin
-  if Assigned(vGXSceneEditorForm) then
+  if Assigned(vSceneEditorForm) then
   begin
-    vGXSceneEditorForm.Free;
-    vGXSceneEditorForm := nil;
+    vSceneEditorForm.Free;
+    vSceneEditorForm := nil;
   end;
 end;
 
@@ -169,12 +169,12 @@ begin
     Result := defaultValue;
 end;
 
-procedure TgxSceneEditorForm.FormCreate(Sender: TObject);
+procedure TSceneEditorForm.FormCreate(Sender: TObject);
 var
   CurrentNode: TTreeNode;
   reg: TRegistry;
 begin
-  RegisterGLBaseSceneObjectNameChangeEvent(OnBaseSceneObjectNameChanged);
+  RegisterBaseSceneObjectNameChangeEvent(OnBaseSceneObjectNameChanged);
   Tree.Images := ObjectManager.ObjectIcons;
   Tree.Indent := ObjectManager.ObjectIcons.Width;
   with Tree.Items do
@@ -231,11 +231,11 @@ begin
   Tree.OnEdited := TreeEdited;
 end;
 
-procedure TgxSceneEditorForm.FormDestroy(Sender: TObject);
+procedure TSceneEditorForm.FormDestroy(Sender: TObject);
 var
   reg: TRegistry;
 begin
-  DeRegisterGLBaseSceneObjectNameChangeEvent(OnBaseSceneObjectNameChanged);
+  DeRegisterBaseSceneObjectNameChangeEvent(OnBaseSceneObjectNameChanged);
 
   reg := TRegistry.Create;
   try
@@ -253,12 +253,12 @@ begin
   end;
 end;
 
-procedure TgxSceneEditorForm.ACInfoExecute(Sender: TObject);
+procedure TSceneEditorForm.ACInfoExecute(Sender: TObject);
 var
   AScene: TgxSceneViewer;
 begin
   AScene := TgxSceneViewer.Create(Self);
-  AScene.Name := 'GXSceneEditor';
+  AScene.Name := 'SceneEditor';
   AScene.Width := 0;
   AScene.Height := 0;
   AScene.parent := Self;

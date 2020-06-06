@@ -1,13 +1,12 @@
-//
-// Graphic Scene Engine, http://glscene.org
-//
-(*
-   Implements FBO support
-   Original author of the unit is Riz.
-   Modified by C4 and YarUnderoaker (hope, I didn't miss anybody).
-*)
+(*******************************************
+*                                          *
+* Graphic Scene Engine, http://glscene.org *
+*                                          *
+********************************************)
 
 unit GXS.FBO;
+
+(* Implements FBO support *)
 
 interface
 
@@ -44,19 +43,16 @@ type
     procedure SetHeight(const Value: Integer);
     procedure SetWidth(const Value: Integer);
   protected
-
     function GetInternalFormat: cardinal; virtual; abstract;
-
     procedure InvalidateStorage;
   public
     constructor Create;
     destructor Destroy; override;
-
     procedure Bind;
     procedure Unbind;
-    { Handle to the OpenGL render buffer object. 
+    (* Handle to the OpenGL render buffer object.
       If the handle hasn't already been allocated, it will be allocated
-      by this call (ie. do not use if no OpenGL context is active!) }
+      by this call (ie. do not use if no OpenGL context is active!) *)
     property Handle: GLuint read GetHandle;
     property Width: Integer read FWidth write SetWidth;
     property Height: Integer read FHeight write SetHeight;
@@ -70,7 +66,6 @@ type
     function GetInternalFormat: cardinal; override;
   public
     constructor Create;
-
     property DepthPrecision: TgxDepthPrecision read FDepthPrecision write
       SetDepthPrecision;
   end;
@@ -85,7 +80,6 @@ type
     function GetInternalFormat: cardinal; override;
   public
     constructor Create;
-
     property StencilPrecision: TgxStencilPrecision read FStencilPrecision write
       SetStencilPrecision;
   end;
@@ -103,7 +97,6 @@ type
     FDepthTexture: TgxTexture;
     FDRBO: TgxDepthRBO;
     FSRBO: TgxStencilRBO;
-
     function GetStatus: TgxFramebufferStatus;
     procedure SetHeight(const Value: Integer);
     procedure SetWidth(const Value: Integer);
@@ -120,37 +113,30 @@ type
   public
     constructor Create;
     destructor Destroy; override;
-
     // attaches a depth rbo to the fbo
     // the depth buffer must have the same dimentions as the fbo
     procedure AttachDepthBuffer(DepthBuffer: TgxDepthRBO); overload;
     // detaches depth attachment from the fbo
     procedure DetachDepthBuffer;
-
     // attaches a stencil rbo to the fbo
     // the stencil buffer must have the same dimentions as the fbo
     procedure AttachStencilBuffer(StencilBuffer: TgxStencilRBO); overload;
     // detaches stencil attachment from the fbo
     procedure DetachStencilBuffer;
-
     // attaches a depth texture to the fbo
     // the depth texture must have the same dimentions as the fbo
     procedure AttachDepthTexture(Texture: TgxTexture); overload;
     procedure DetachDepthTexture;
-
     procedure AttachTexture(n: Cardinal; Texture: TgxTexture); overload;
     procedure DetachTexture(n: Cardinal);
-
     function GetStringStatus(out clarification: string): TgxFramebufferStatus;
     property Status: TgxFramebufferStatus read GetStatus;
     procedure Bind;
     procedure Unbind;
-
     procedure PreRender;
     procedure Render(var rci: TgxRenderContextInfo; baseObject:
       TgxBaseSceneObject);
     procedure PostRender(const PostGenerateMipmap: Boolean);
-
     property Handle: TgxFramebufferHandle read FFrameBufferHandle;
     property Width: Integer read FWidth write SetWidth;
     property Height: Integer read FHeight write SetHeight;
@@ -158,9 +144,13 @@ type
     property Level: Integer read FLevel write SetLevel;
   end;
 
+//------------------------------------------
 implementation
+//------------------------------------------
 
-{ TgxRenderbuffer }
+//------------------------------------------
+// TgxRenderbuffer
+//------------------------------------------
 
 constructor TgxRenderbuffer.Create;
 begin

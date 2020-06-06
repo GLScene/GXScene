@@ -1,3 +1,9 @@
+(*******************************************
+*                                          *
+* Graphic Scene Engine, http://glscene.org *
+*                                          *
+********************************************)
+
 package GXScene_Physics_RT;
 
 {$R *.res}
@@ -37,13 +43,13 @@ requires
 contains
   GXS.ODEManager in '..\..\Source\GXS.ODEManager.pas',
   GXS.ODESkeletonColliders in '..\..\Source\GXS.ODESkeletonColliders.pas',
-  ODEImport in '..\..\Source\ODEImport.pas',
-  ODEUtils in '..\..\Source\ODEUtils.pas',
+  Import.ODE in '..\..\Source\Import.ODE.pas',
+  Import.ODEUtils in '..\..\Source\Import.ODEUtils.pas',
   GXS.ODERagdoll in '..\..\Source\GXS.ODERagdoll.pas',
   GXS.ModuleLoader in '..\..\Source\GXS.ModuleLoader.pas',
   GXS.NGDManager in '..\..\Source\GXS.NGDManager.pas',
-  NGDImport in '..\..\Source\NGDImport.pas',
-  NGDImport_Joints in '..\..\Source\NGDImport_Joints.pas',
+  Import.Newton in '..\..\Source\Import.Newton.pas',
+  Import.Newton_Joints in '..\..\Source\Import.Newton_Joints.pas',
   GXS.PhysX in '..\..\Source\GXS.PhysX.pas',
   GXS.NGDRagdoll in '..\..\Source\GXS.NGDRagdoll.pas';
 

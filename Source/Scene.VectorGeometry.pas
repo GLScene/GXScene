@@ -1,6 +1,11 @@
-//
-// Graphic Scene Engine, http://glscene.org
-//
+(*******************************************
+*                                          *
+* Graphic Scene Engine, http://glscene.org *
+*                                          *
+********************************************)
+
+unit Scene.VectorGeometry;
+
 (*
   Base classes and structures.
 
@@ -20,14 +25,8 @@
   (the single-based functions have been optimized and are up to 100% faster,
   than extended-based ones from "Math").
 
-  History:
-
-   Based on Geometry.pas v.2.5 by Mike Lischke from 04. January 2000
-   The history is logged in a former GLS version of the unit.
+  History: Based on Geometry.pas v.2.5 by Mike Lischke
 *)
-
-unit Scene.VectorGeometry;
-
 
 interface
 

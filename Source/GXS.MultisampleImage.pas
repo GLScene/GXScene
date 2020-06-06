@@ -1,14 +1,17 @@
-//
-// Graphic Scene Engine, http://glscene.org
-//
-{
+(*******************************************
+*                                          *
+* Graphic Scene Engine, http://glscene.org *
+*                                          *
+********************************************)
+
+unit GXS.MultisampleImage;
+
+(*
     This unit provides support for two new types of "multisample
     textures" - two-dimensional and two-dimensional array - as well as
     mechanisms to fetch a specific sample from such a texture in a shader,
     and to attach such textures to FBOs for rendering.
-    
-}
-unit GXS.MultisampleImage;
+*)
 
 interface
 
@@ -27,7 +30,6 @@ type
 
   TgxMultisampleImage = class(TgxTextureImage)
   private
-    
     FBitmap: TgxBitmap32;
     FSamplesCount: Integer;
     FWidth, FHeight, FDepth: Integer;
@@ -38,7 +40,6 @@ type
     procedure SetSamplesCount(val: Integer);
     procedure SetFixedSamplesLocation(val: GLboolean);
   protected
-    
     function GetWidth: Integer; override;
     function GetHeight: Integer; override;
     function GetDepth: Integer; override;
@@ -57,9 +58,9 @@ type
     class function FriendlyDescription: string; override;
     property NativeTextureTarget;
   published
-    { Width of the blank image (for memory allocation). }
+    // Width of the blank image (for memory allocation).
     property Width: Integer read GetWidth write SetWidth default 256;
-    { Width of the blank image (for memory allocation). }
+    // Width of the blank image (for memory allocation).
     property Height: Integer read GetHeight write SetHeight default 256;
     property Depth: Integer read GetDepth write SetDepth default 0;
     property SamplesCount: Integer read FSamplesCount write SetSamplesCount
@@ -68,7 +69,9 @@ type
       SetFixedSamplesLocation;
   end;
 
+//------------------------------------------
 implementation
+//------------------------------------------
 
 // ------------------
 // ------------------ TgxMultisampleImage ------------------

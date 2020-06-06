@@ -1,16 +1,15 @@
-//
-// Graphic Scene Engine, http://glscene.org
-//
-{
-   Invisible component for helping to Move, Rotate and Scale an Object
-   (usefull for an Editor).
+(*******************************************
+*                                          *
+* Graphic Scene Engine, http://glscene.org *
+*                                          *
+********************************************)
 
-   This is an enhanced version of TgxGizmo, which was originally created and
-   modified by Adirex, J.Delauney, Degiovani, Marcus Oblak and Da Stranger
-   Rustam Asmandiarov (aka Predator) re-wrote TgxGizmo from scratch.
-
-}
 unit GXS.GizmoEx;
+
+(*
+   Invisible component for helping to Move, Rotate and Scale an Object
+   This is an enhanced version of TgxGizmo usefull for an Editor.
+*)
 
 interface
 
@@ -418,18 +417,18 @@ type
     property ScaleCoef: Single read FScaleCoef write FScaleCoef;
     property NoZWrite: Boolean read FNoZWrite write SetNoZWrite default True;
     property GizmoThickness: Single read FGizmoThickness write SetGizmoExThickness;
-    { Indicates whether the gizmo is enabled or not.
+    (* Indicates whether the gizmo is enabled or not.
        WARNING: When loading/editing (possibly whenever a structureChanged
        call is made) a model, sometimes the gizmo will trigger a
        bug if the mouse is inside the glscene Viewer. To prevent that,
        remember to disable the gizmo before loading, then process windows
        messages (i.e. application.processMessage) and then enable the gizmo
-       again. }
+       again. *)
 
-    { Warning Enable is ReadOnly property if you set to False, Gizmo is not Hidden
+    (* Warning Enable is ReadOnly property if you set to False, Gizmo is not Hidden
       use Visible instead if you want to Hide, if you want to Hide but keep enabled
-      see the VisibleGizmo property }
-    { Use the property OperationMode=gomNone to unactivate gizmo and make it invisible}
+      see the VisibleGizmo property *)
+    (* Use the property OperationMode=gomNone to unactivate gizmo and make it invisible *)
     property Enabled: Boolean read FEnabled write FEnabled default True;
     property LabelFont: TgxCustomBitmapFont read FLabelFont write SetLabelFont default nil;
     property OnSelectionLost: TNotifyEvent read FOnSelectionLost write FOnSelectionLost;

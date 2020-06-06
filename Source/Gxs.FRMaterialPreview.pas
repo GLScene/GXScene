@@ -32,7 +32,7 @@ uses
   FMX.Layers3D,
 
   GXS.Scene,
-  GXS.BaseClasses,
+  Scene.BaseClasses,
 //  GXS.SceneViewer,
   GXS.Material,
   GXS.Teapot,

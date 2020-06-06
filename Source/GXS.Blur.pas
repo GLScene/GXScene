@@ -1,11 +1,12 @@
-//
-// Graphic Scene Engine, http://glscene.org
-//
-{
-  Applies a blur effect over the viewport.
-}
+(*******************************************
+*                                          *
+* Graphic Scene Engine, http://glscene.org *
+*                                          *
+********************************************)
 
 unit GXS.Blur;
+
+(* Applies a blur effect over the viewport *)
 
 interface
 
@@ -34,7 +35,7 @@ uses
   GXS.State,
   Scene.Strings,
   GXS.TextureFormat,
-  GXS.BaseClasses,
+  Scene.BaseClasses,
   GXS.RenderContextInfo;
 
 type
@@ -99,7 +100,7 @@ type
   public
     constructor Create(AOwner: TComponent); override;
     destructor Destroy; override;
-    procedure DoProgress(const progressTime: TgxProgressTimes); override;
+    procedure DoProgress(const progressTime: TProgressTimes); override;
     procedure DoRender(var ARci: TgxRenderContextInfo;
       ARenderSelf, ARenderChildren: Boolean); override;
     procedure Notification(AComponent: TComponent; Operation: TOperation); override;
@@ -138,7 +139,7 @@ type
     I've seen this effect in different Bruring components, even in shaders, but if
     anyone knows another way to fix this issue - please post it on the glscene
     newsgroup. }
-  TgxMotionBlur = class(TgxCustomSceneObject, IGLInitializable)
+  TgxMotionBlur = class(TgxCustomSceneObject, IgxInitializable)
   private
     FIntensity: Single;
     function StoreIntensity: Boolean;
@@ -225,7 +226,7 @@ begin
   SetLength(Pixelbuffer, RenderWidth * RenderHeight);
 end;
 
-procedure TgxBlur.DoProgress(const progressTime: TgxProgressTimes);
+procedure TgxBlur.DoProgress(const progressTime: TProgressTimes);
 begin
   inherited;
   if self.Visible and (progressTime.newTime - OldTime > FBlurDeltaTime) then
@@ -836,7 +837,7 @@ end;
 initialization
 // ------------------------------------------------------------------
 
-  // class registrations
+  
   RegisterClass(TgxBlur);
   RegisterClass(TgxMotionBlur);
 

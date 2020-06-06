@@ -1,9 +1,9 @@
 //
 // Graphic Scene Engine, http://glscene.org
 //
-{
-  Procedural textures. 
-}
+(*
+  Procedural textures.
+*)
 
 unit GXS.ProcTextures;
 
@@ -15,11 +15,13 @@ uses
   System.Math,
 
   Import.OpenGLx,
+  Scene.VectorGeometry,
+  Scene.Strings,
+
   GXS.Texture,
   GXS.Graphics,
   GXS.CrossPlatform,
-  GXS.TextureFormat,
-  Scene.VectorGeometry;
+  GXS.TextureFormat;
 
 const
   GRADIENT_TABLE_SIZE = 256;
@@ -75,19 +77,15 @@ type
     property NoiseRandSeed: Longint read FNoiseRandSeed write SetNoiseRandSeed;
   end;
 
-  // ------------------------------------------------------------------
-  // ------------------------------------------------------------------
-  // ------------------------------------------------------------------
+// ------------------------------------------------------------------
 implementation
-// ------------------------------------------------------------------
-// ------------------------------------------------------------------
 // ------------------------------------------------------------------
 
 constructor TgxProcTextureNoise.Create(AOwner: TPersistent);
-{ PERM array Borrowed from Darwyn Peachey.
+(* PERM array Borrowed from Darwyn Peachey.
   The gradient table is indexed with an XYZ triplet, which is first turned
   into a single random index using a lookup in PERM array. The PERM array simply
-  contains all numbers in [0..255] in random order. }
+  contains all numbers in [0..255] in random order. *)
 //Can now be set to a different set of Random arrangement
 var
   i: Integer;
@@ -204,16 +202,10 @@ begin
   Result := FNoiseMap;
 end;
 
-// FriendlyName
-//
-
 class function TgxProcTextureNoise.FriendlyName: string;
 begin
   Result := 'Procedural Noise';
 end;
-
-// FriendlyDescription
-//
 
 class function TgxProcTextureNoise.FriendlyDescription: string;
 begin
@@ -245,7 +237,7 @@ end;
 
 procedure TgxProcTextureNoise.SaveToFile(const fileName: string);
 begin
-  {Nothing here}
+  // Nothing here
 end;
 
 function TgxProcTextureNoise.GetHeight: Integer;
@@ -262,9 +254,6 @@ function TgxProcTextureNoise.GetDepth: Integer;
 begin
   Result := 1;
 end;
-
-// GetTextureTarget
-//
 
 function TgxProcTextureNoise.GetTextureTarget: TgxTextureTarget;
 begin
@@ -373,8 +362,8 @@ var
 
   function Smooth(x: Single): Single;
   begin
-    { Smoothing curve. This is used to calculate interpolants so that the noise
-      doesn't look blocky when the frequency is low. }
+    (* Smoothing curve. This is used to calculate interpolants so that the noise
+      doesn't look blocky when the frequency is low. *)
     Result := x * x * (3 - 2 * x);
   end;
 
@@ -409,9 +398,9 @@ var
   end;
 
 begin
-  { The main noise function. Looks up the pseudorandom gradients at the nearest
+  (* The main noise function. Looks up the pseudorandom gradients at the nearest
     lattice points, dots them with the input vector, and interpolates the
-    results to produce a single output value in [0, 1] range. }
+    results to produce a single output value in [0, 1] range. *)
 
   ix := Floor(x);
   fx0 := x - ix;
@@ -736,12 +725,8 @@ begin
 end;
 
 // ------------------------------------------------------------------
-// ------------------------------------------------------------------
-// ------------------------------------------------------------------
 initialization
-  // ------------------------------------------------------------------
-  // ------------------------------------------------------------------
-  // ------------------------------------------------------------------
+// ------------------------------------------------------------------
 
   RegisterTextureImageClass(TgxProcTextureNoise);
 

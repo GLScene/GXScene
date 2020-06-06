@@ -28,17 +28,17 @@ uses
   GXS.Material;
 
 type
-  TRFaceEditor = class(TFrame)
+  TFaceEditorFrame = class(TFrame)
     TabControl: TTabControl;
     TIAmbient: TTabItem;
     TIDiffuse: TTabItem;
     TIEmission: TTabItem;
     TISpecular: TTabItem;
-    CEAmbiant: TRColorEditor;
+    CEAmbiant: TColorEditorFrame;
     Label1: TLabel;
-    CEDiffuse: TRColorEditor;
-    CEEmission: TRColorEditor;
-    CESpecular: TRColorEditor;
+    CEDiffuse: TColorEditorFrame;
+    CEEmission: TColorEditorFrame;
+    CESpecular: TColorEditorFrame;
     TrackBar: TTrackBar;
     Edit: TEdit;
     procedure TrackBarChange(Sender: TObject);
@@ -73,7 +73,7 @@ implementation
 // TRFaceEditor
 //---------------------------------------------------------
 
-constructor TRFaceEditor.Create(AOwner: TComponent);
+constructor TFaceEditorFrame.Create(AOwner: TComponent);
 begin
   inherited;
   FFaceProperties := TgxFaceProperties.Create(nil);
@@ -85,13 +85,13 @@ begin
   (*TabControl.DoubleBuffered := True;*)
 end;
 
-destructor TRFaceEditor.Destroy;
+destructor TFaceEditorFrame.Destroy;
 begin
   FFaceProperties.Free;
   inherited;
 end;
 
-procedure TRFaceEditor.EditChange(Sender: TObject);
+procedure TFaceEditorFrame.EditChange(Sender: TObject);
 var
    I : Integer;
 begin
@@ -103,41 +103,41 @@ begin
    end;
 end;
 
-function TRFaceEditor.GetValue: Single;
+function TFaceEditorFrame.GetValue: Single;
 begin
   Result := TrackBar.Value;
 end;
 
-function TRFaceEditor.GetValueMax: Single;
+function TFaceEditorFrame.GetValueMax: Single;
 begin
   Result := TrackBar.Max;
 end;
 
-function TRFaceEditor.GetValueMin: Single;
+function TFaceEditorFrame.GetValueMin: Single;
 begin
   Result := TrackBar.Min;
 end;
 
-procedure TRFaceEditor.SetValue(const val: Single);
+procedure TFaceEditorFrame.SetValue(const val: Single);
 begin
    TrackBar.Value := val;
    TrackBarChange(Self);
 end;
 
-procedure TRFaceEditor.SetValueMax(const val: Single);
+procedure TFaceEditorFrame.SetValueMax(const val: Single);
 begin
   TrackBar.Max := val;
   TrackBarChange(Self);
 end;
 
-procedure TRFaceEditor.SetValueMin(const val: Single);
+procedure TFaceEditorFrame.SetValueMin(const val: Single);
 begin
   TrackBar.Min := val;
   TrackBarChange(Self);
 end;
 
 
-procedure TRFaceEditor.OnColorChange(Sender: TObject);
+procedure TFaceEditorFrame.OnColorChange(Sender: TObject);
 var
   bmp: TBitmap;
   bmpRect: TRectF;
@@ -183,7 +183,7 @@ begin
   end;
 end;
 
-procedure TRFaceEditor.TrackBarChange(Sender: TObject);
+procedure TFaceEditorFrame.TrackBarChange(Sender: TObject);
 begin
   Edit.Text:=FloatToStr(TrackBar.Value);
   if not Updating then
@@ -194,7 +194,7 @@ begin
   end;
 end;
 
-procedure TRFaceEditor.SetFaceProperties(const val: TgxFaceProperties);
+procedure TFaceEditorFrame.SetFaceProperties(const val: TgxFaceProperties);
 begin
   Updating := True;
   try

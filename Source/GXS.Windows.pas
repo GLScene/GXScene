@@ -36,7 +36,7 @@ uses
   GXS.CrossPlatform,
   GXS.Color,
   GXS.RenderContextInfo,
-  GXS.BaseClasses,
+  Scene.BaseClasses,
   GXS.Objects,
   GXS.State,
   GXS.Utils;
@@ -87,7 +87,7 @@ type
     procedure DoChanges; virtual;
     procedure MoveGUI(XRel, YRel: Single);
     procedure PlaceGUI(XPos, YPos: Single);
-    procedure DoProgress(const progressTime: TgxProgressTimes); override;
+    procedure DoProgress(const progressTime: TProgressTimes); override;
     procedure DoRender(var rci: TgxRenderContextInfo; renderSelf, renderChildren:
       Boolean); override;
     procedure InternalRender(var rci: TgxRenderContextInfo; renderSelf,
@@ -3876,7 +3876,7 @@ begin
   inherited;
 end;
 
-procedure TgxBaseComponent.DoProgress(const progressTime: TgxProgressTimes);
+procedure TgxBaseComponent.DoProgress(const progressTime: TProgressTimes);
 begin
   inherited;
   if FDoChangesOnProgress then

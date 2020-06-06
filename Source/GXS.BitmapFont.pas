@@ -1,6 +1,8 @@
-//
-// Graphic Scene Engine, http://glscene.org
-//
+(*******************************************
+*                                          *
+* Graphic Scene Engine, http://glscene.org *
+*                                          *
+********************************************)
 {
   Bitmap Fonts management classes
 }
@@ -31,7 +33,7 @@ uses
   GXS.Utils,
   GXS.Graphics,
   GXS.Color,
-  GXS.BaseClasses,
+  Scene.BaseClasses,
   GXS.RenderContextInfo,
   GXS.TextureFormat,
   Scene.VectorTypes;
@@ -109,7 +111,7 @@ type
     dimensions should be close to a power of two, and have at least 1 pixel
     spacing between characters (horizontally and vertically) to avoid artefacts
     when rendering with linear filtering. }
-  TgxCustomBitmapFont = class(TgxUpdateAbleComponent)
+  TgxCustomBitmapFont = class(TUpdateAbleComponent)
   private
     FRanges: TgxBitmapFontRanges;
     FGlyphs: TImage;

@@ -1,6 +1,8 @@
-//
-// Graphic Scene Engine, http://glscene.org
-//
+(*******************************************
+*                                          *
+* Graphic Scene Engine, http://glscene.org *
+*                                          *
+********************************************)
 
 unit GXS.CUDAContext;
 
@@ -14,16 +16,16 @@ uses
   FMX.Dialogs,
   Scene.Strings,
   Scene.Generics,
-  GXS.BaseClasses,
+  Scene.BaseClasses,
   GXS.CUDARunTime,
   GXS.Context,
-  OpenCL,
-  OpenCL_Platform,
+  Import.OpenCL,
+  Import.OpenCL_Platform,
   GXS.CUDAAPI;
 
 type
 
-  TCUDADimensions = class(TgxUpdateAbleObject)
+  TCUDADimensions = class(TUpdateAbleObject)
   private
     
     FXYZ: TDim3;
@@ -58,7 +60,6 @@ type
 
   TCUDADevice = class(TPersistent)
   private
-    
     fID: Integer;
     fHandle: TCUdevice;
     fGFlops: Integer;
@@ -73,8 +74,8 @@ type
     constructor Create; reintroduce;
     destructor Destroy; override;
     procedure Assign(Source: TPersistent); override;
-    { Returns in bytes the total amount of memory
-      available on the device dev in bytes. }
+    (* Returns in bytes the total amount of memory
+      available on the device dev in bytes. *)
     function TotalMemory: Cardinal;
   published
     property Name: string read GetName;
@@ -99,7 +100,6 @@ type
 
   TgxSCUDADevice = class(TComponent)
   private
-    
     FSelectDeviceName: string;
     function GetDevice: TCUDADevice;
     procedure SetDevice(AValue: TCUDADevice);

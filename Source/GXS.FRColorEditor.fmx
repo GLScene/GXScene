@@ -1,4 +1,4 @@
-object RColorEditor: TRColorEditor
+object ColorEditorFrame: TColorEditorFrame
   Size.Width = 371.000000000000000000
   Size.Height = 134.000000000000000000
   Size.PlatformDefault = False

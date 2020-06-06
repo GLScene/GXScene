@@ -1,10 +1,12 @@
-//
-// Graphic Scene Engine, http://glscene.org
-//
-{
-  Cross-platform context.
-}
+(*******************************************
+*                                          *
+* Graphic Scene Engine, http://glscene.org *
+*                                          *
+********************************************)
+
 unit GXS.Win64Context;
+
+(* Cross-platform context. *)
 
 interface
 
@@ -26,7 +28,7 @@ uses
   Scene.VectorGeometry;
 
 type
-  { A context driver for standard Windows OpenGL }
+  // A context driver for standard Windows OpenGL
   TgxWinContext = class(TgxContext)
   protected
     FDC: HDC;
@@ -55,8 +57,8 @@ type
     procedure DoDestroyContext; override;
     procedure DoActivate; override;
     procedure DoDeactivate; override;
-    { DoGetHandles must be implemented in child classes,
-      and return the display + window }
+    (* DoGetHandles must be implemented in child classes,
+      and return the display + window *)
   public
     constructor Create; override;
     destructor Destroy; override;
@@ -70,10 +72,10 @@ type
 function CreateTempWnd: HWND;
 
 var
-  { This boolean controls a hook-based tracking of top-level forms destruction,
+  (* This boolean controls a hook-based tracking of top-level forms destruction,
     with the purpose of being able to properly release OpenGL contexts before
     they are (improperly) released by some drivers upon top-level form
-    destruction. }
+    destruction. *)
   vUseWindowTrackingHook: Boolean = True;
 
 // ------------------------------------------------------------------

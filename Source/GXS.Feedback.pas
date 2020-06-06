@@ -1,21 +1,23 @@
-//
-// Graphic Scene Engine, http://glscene.org
-//
-{
-   A scene object encapsulating the OpenGL feedback buffer. 
+(*******************************************
+*                                          *
+* Graphic Scene Engine, http://glscene.org *
+*                                          *
+********************************************)
+
+unit GXS.Feedback;
+
+(*
+   A scene object encapsulating the OpenGL feedback buffer.
 
    This object, when Active, will render it's children using
    the GL_FEEDBACK render mode. This will render the children
-   into the feedback Buffer rather than into the frame buffer. 
+   into the feedback Buffer rather than into the frame buffer.
 
    Mesh data can be extracted from the buffer using the
    BuildMeshFromBuffer procedure. For custom parsing of the
    buffer use the Buffer SingleList. The Buffered property
-   will indicate if there is valid data in the buffer. 
-
-}
-
-unit GXS.Feedback;
+   will indicate if there is valid data in the buffer.
+*)
 
 interface
 

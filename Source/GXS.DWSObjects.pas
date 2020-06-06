@@ -19,7 +19,7 @@ uses
   GXS.Scene, 
   GXS.Scene.XCollection, 
   GXS.ScriptDws, 
-  GXS.BaseClasses, 
+  Scene.BaseClasses, 
   GXS.Manager;
 
 type

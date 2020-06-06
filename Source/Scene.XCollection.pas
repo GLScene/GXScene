@@ -1,16 +1,18 @@
-//
-// This unit is part of the GLScene Engine, http://glscene.org
-//
-(*
-  A polymorphism-enabled TCollection-like set of classes 
-*)
+(*******************************************
+*                                          *
+* Graphic Scene Engine, http://glscene.org *
+*                                          *
+********************************************)
+
 unit Scene.XCollection;
 
-{.$DEFINE DEBUG_XCOLLECTION }  // on define the most apps will not work
+(* A polymorphism-enabled TCollection-like set of classes *)
 
 interface
 
 {$I Scene.inc}
+
+{.$DEFINE DEBUG_XCOLLECTION }  // on define the most apps will not work
 
 uses
   System.Classes,
@@ -18,7 +20,7 @@ uses
   System.Types,
   Scene.Strings,
   Scene.PersistentClasses
-  {$IFDEF DEBUG_XCOLLECTION}, TypInfo {$ENDIF};
+  {$IFDEF DEBUG_XCOLLECTION}, System.TypInfo {$ENDIF};
 
 type
   TXCollection = class;

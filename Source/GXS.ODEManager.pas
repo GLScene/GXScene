@@ -1,13 +1,16 @@
-//
-// Graphic Scene Engine, http://glscene.org
-//
+(* ******************************************
+  *                                          *
+  * Graphic Scene Engine, http://glscene.org *
+  *                                          *
+  ******************************************* *)
+
+unit GXS.ODEManager;
+
 (*
   An ODE Manager for GXScene.
   Notes:
   This code is still under development so any part of it may change at anytime.
 *)
-
-unit GXS.ODEManager;
 
 interface
 
@@ -20,11 +23,11 @@ uses
 
   Import.OpenGLx,
   Scene.XOpenGL,
-
-
   Scene.XCollection,
-  GXS.Scene,
   Scene.VectorGeometry,
+  Scene.Manager,
+
+  GXS.Scene,
   GXS.Texture,
   GXS.Objects,
   Scene.PersistentClasses,
@@ -32,7 +35,6 @@ uses
   GXS.Color,
   GXS.Coordinates,
   GXS.RenderContextInfo,
-  GXS.Manager,
   GXS.State,
   Scene.VectorTypes,
   GXS.TerrainRenderer,

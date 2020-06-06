@@ -1,4 +1,11 @@
-﻿unit Import.SDL2;
+﻿(*******************************************
+*                                          *
+* Graphic Scene Engine, http://glscene.org *
+*                                          *
+********************************************)
+
+unit Import.SDL2;
+
 {*******************************************************************************
 
   SDL2.pas        v1.0  29/07/2013 first version for DelphiXE
@@ -15,7 +22,6 @@
 
   The initial developer of this Pascal code was :
   Dominqiue Louis <Dominique@SavageSoftware.com.au>
-
 
 *******************************************************************************}
 

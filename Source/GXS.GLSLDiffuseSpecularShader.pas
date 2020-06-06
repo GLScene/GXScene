@@ -1,6 +1,8 @@
-//
-// Graphic Scene Engine, http://glscene.org
-//
+(*******************************************
+*                                          *
+* Graphic Scene Engine, http://glscene.org *
+*                                          *
+********************************************)
 (*
     This is a collection of GLSL Diffuse Specular shaders, comes in these variaties
               (to know what these suffixes and prefixes mean see GXS.CustomShader.pas):

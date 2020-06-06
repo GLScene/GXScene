@@ -1,4 +1,4 @@
-object Layouts_Form: TLayouts_Form
+object GUILayoutsForm: TGUILayoutsForm
   Left = 0
   Top = 0
   Caption = 'Form1'

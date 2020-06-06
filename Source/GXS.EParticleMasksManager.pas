@@ -1,6 +1,11 @@
-//
-// Graphic Scene Engine, http://glscene.org
-//
+(*******************************************
+*                                          *
+* Graphic Scene Engine, http://glscene.org *
+*                                          *
+********************************************)
+
+unit GXS.EParticleMasksManager;
+
 (*
    A pretty particle mask effect manager.
    Original Header:
@@ -23,8 +28,6 @@
              Theft of code also is not allowed, although alterations are allowed.
  *)
 
-unit GXS.EParticleMasksManager;
-
 interface
 
 {$I Scene.inc}
@@ -32,7 +35,7 @@ interface
 uses
   System.Types,
   System.SysUtils,
-  System.Classes, 
+  System.Classes,
   System.UITypes,
   FMX.Graphics,
 
@@ -55,7 +58,7 @@ type
 
   TgxEParticleMask = class(TCollectionItem, IgxMaterialLibrarySupported)
   private
-    
+
     FName: string;
     FScale: TgxCoordinates;
     FPosition: TgxCoordinates;
@@ -106,7 +109,6 @@ type
     procedure GenerateMaskFromProjection(FromMask, ToMask:
       TgxEProjectedParticleMask; Depth: Integer);
   published
-    
     // scales and positions
     property Scale: TgxCoordinates read FScale write FScale;
     property Position: TgxCoordinates read FPosition write FPosition;
@@ -131,14 +133,11 @@ type
 
   TgxEParticleMasks = class(TCollection)
   protected
-    
     Owner: TComponent;
     function GetOwner: TPersistent; override;
     procedure SetItems(Index: Integer; const Val: TgxEParticleMask);
     function GetItems(Index: Integer): TgxEParticleMask;
-
   public
-    
     function Add: TgxEParticleMask;
     constructor Create(AOwner: TComponent);
     property Items[Index: Integer]: TgxEParticleMask read GetItems write
@@ -148,9 +147,7 @@ type
   TgxEParticleMasksManager = class(TComponent)
   private
     FParticleMasks: TgxEParticleMasks;
-    
   protected
-    
     procedure ApplyOrthoGraphic(var Vec: TVector3f; Mask: TgxEParticleMask);
     procedure ApplyRotation(var Vec: TVector3f; Mask: TgxEParticleMask);
     procedure ApplyRotationTarget(var Vec: TVector3f; Mask: TgxEParticleMask;
@@ -160,7 +157,6 @@ type
       TgxEParticleMask; TargetObject: TgxBaseSceneObject);
     procedure FindParticlePosition(var Vec: TVector3f; Mask: TgxEParticleMask);
   public
-    
     constructor Create(AOwner: TComponent); override;
     destructor Destroy; override;
     function CreateParticlePositionFromMask(MaskName: string): TVector3f;
@@ -171,16 +167,18 @@ type
     procedure SetParticlePositionFromMaskTarget(Particle: TgxParticle; MaskName:
       string; TargetObject: TgxBaseSceneObject);
     function ParticleMaskByName(MaskName: string): TgxEParticleMask;
-
   published
-    
     property ParticleMasks: TgxEParticleMasks read FParticleMasks write
       FParticleMasks;
   end;
 
+//----------------------------------------
 implementation
+//----------------------------------------
 
-{ TgxEParticleMasks }
+//----------------------------------------
+// TgxEParticleMasks
+//----------------------------------------
 
 function TgxEParticleMasks.Add: TgxEParticleMask;
 begin

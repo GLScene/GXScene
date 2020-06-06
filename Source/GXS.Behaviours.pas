@@ -1,10 +1,12 @@
-//
-// Graphic Scene Engine, http://glscene.org
-//
-{
-  Standard TgxBehaviour subclasses
-}
+(*******************************************
+*                                          *
+* Graphic Scene Engine, http://glscene.org *
+*                                          *
+********************************************)
+
 unit GXS.Behaviours;
+
+(* Standard TgxBehaviour subclasses *)
 
 interface
 
@@ -18,7 +20,7 @@ uses
   Scene.VectorTypes,
   GXS.Scene,
   Scene.VectorGeometry,
-  GXS.BaseClasses,
+  Scene.BaseClasses,
   GXS.Coordinates;
 
 type
@@ -33,7 +35,7 @@ type
       decreasing its speed.
     linear : linear friction damping.
     quadratic : expresses viscosity. *)
-  TgxDamping = class(TgxUpdateAbleObject)
+  TgxDamping = class(TUpdateAbleObject)
   private
     FConstant: single;
     FLinear: single;
@@ -44,13 +46,13 @@ type
     procedure WriteToFiler(writer: TWriter);
     procedure ReadFromFiler(reader: TReader);
     procedure Assign(Source: TPersistent); override;
-      { Calculates attenuated speed over deltaTime.
-            Integration step is 0.01 sec, and the following formula is applied
-            at each step: constant+linear*speed+quadratic*speed^2 }
+    (* Calculates attenuated speed over deltaTime.
+       Integration step is 0.01 sec, and the following formula is applied
+       at each step: constant+linear*speed+quadratic*speed^2 *)
     function Calculate(speed, deltaTime: double): double;
     // Returns a "[constant; linear; quadractic]" string
     function AsString(const damping: TgxDamping): string;
-    { Sets all damping parameters in a single call. }
+    // Sets all damping parameters in a single call.
     procedure SetDamping(const constant: single = 0; const linear: single = 0;
       const quadratic: single = 0);
   published
@@ -59,12 +61,12 @@ type
     property Quadratic: single read FQuadratic write FQuadratic;
   end;
 
-  { Simple translation and rotation Inertia behaviour.
+  (* Simple translation and rotation Inertia behaviour.
     Stores translation and rotation speeds, to which you can apply
     accelerations.
     Note that the rotation model is not physical, so feel free to contribute
     a "realworld" inertia class with realistic, axis-free, rotation inertia
-    if this approximation does not suits your needs :). }
+    if this approximation does not suits your needs :). *)
   TgxBInertia = class(TgxBehaviour)
   private
     FMass: single;
@@ -85,21 +87,21 @@ type
     class function FriendlyName: string; override;
     class function FriendlyDescription: string; override;
     class function UniqueItem: boolean; override;
-    procedure DoProgress(const progressTime: TgxProgressTimes); override;
-    { Adds time-proportionned acceleration to the speed. }
+    procedure DoProgress(const progressTime: TProgressTimes); override;
+    // Adds time-proportionned acceleration to the speed.
     procedure ApplyTranslationAcceleration(const deltaTime: double;
       const accel: TVector);
-    { Applies a timed force to the inertia. If Mass is null, nothing is done. }
+    // Applies a timed force to the inertia. If Mass is null, nothing is done.
     procedure ApplyForce(const deltaTime: double; const force: TVector);
-    { Applies a timed torque to the inertia (yuck!).
-      This gets a "yuck!" because it is as false as the rest of the rotation  model. }
+    (* Applies a timed torque to the inertia (yuck!).
+      This gets a "yuck!" because it is as false as the rest of the rotation  model. *)
     procedure ApplyTorque(const deltaTime: double;
       const turnTorque, rollTorque, pitchTorque: single);
-    { Inverts the translation vector. }
+    // Inverts the translation vector.
     procedure MirrorTranslation;
-    { Bounce speed as if hitting a surface.
+    (* Bounce speed as if hitting a surface.
       restitution is the coefficient of restituted energy (1=no energy loss,
-      0=no bounce). The normal is NOT assumed to be normalized. }
+      0=no bounce). The normal is NOT assumed to be normalized. *)
     procedure SurfaceBounce(const surfaceNormal: TVector; restitution: single);
   published
     property Mass: single read FMass write FMass;
@@ -108,24 +110,24 @@ type
     property TurnSpeed: single read FTurnSpeed write FTurnSpeed;
     property RollSpeed: single read FRollSpeed write FRollSpeed;
     property PitchSpeed: single read FPitchSpeed write FPitchSpeed;
-    { Enable/Disable damping (damping has a high cpu-cycle cost).
-      Damping is enabled by default. }
+    (* Enable/Disable damping (damping has a high cpu-cycle cost).
+      Damping is enabled by default. *)
     property DampingEnabled: boolean read FDampingEnabled write FDampingEnabled;
-    { Damping applied to translation speed.
+    (* Damping applied to translation speed.
       Note that it is not "exactly" applied, ie. if damping would stop
       your object after 0.5 time unit, and your progression steps are
-      of 1 time unit, there will be an integration error of 0.5 time unit. }
+      of 1 time unit, there will be an integration error of 0.5 time unit. *)
     property TranslationDamping: TgxDamping read FTranslationDamping write SetTranslationDamping;
-      { Damping applied to rotation speed (yuck!).
+     (* Damping applied to rotation speed (yuck!).
         Well, this one is not "exact", like TranslationDamping, and neither
         it is "physical" since I'm reusing the mass and... and... well don't
         show this to your science teacher 8).
         Anyway that's easier to use than the realworld formulas, calculated
-        faster, and properly used can give a good illusion of reality. }
+        faster, and properly used can give a good illusion of reality. *)
     property RotationDamping: TgxDamping read FRotationDamping write SetRotationDamping;
   end;
 
-  { Applies a constant acceleration to a TgxBInertia. }
+  // Applies a constant acceleration to a TgxBInertia.
   TgxBAcceleration = class(TgxBehaviour)
   private
     FAcceleration: TgxCoordinates;
@@ -140,19 +142,19 @@ type
     class function FriendlyName: string; override;
     class function FriendlyDescription: string; override;
     class function UniqueItem: boolean; override;
-    procedure DoProgress(const progressTime: TgxProgressTimes); override;
+    procedure DoProgress(const progressTime: TProgressTimes); override;
   published
     property Acceleration: TgxCoordinates read FAcceleration write FAcceleration;
   end;
 
-{ Returns or creates the TgxBInertia within the given behaviours.
-  This helper function is convenient way to access a TgxBInertia. }
+(* Returns or creates the TgxBInertia within the given behaviours.
+  This helper function is convenient way to access a TgxBInertia. *)
 function GetInertia(const AGXSceneObject: TgxBaseSceneObject): TgxBInertia;
 function GetOrCreateInertia(behaviours: TgxBehaviours): TgxBInertia; overload;
 function GetOrCreateInertia(obj: TgxBaseSceneObject): TgxBInertia; overload;
 
-{ Returns or creates the TgxBAcceleration within the given behaviours.
-  This helper function is convenient way to access a TgxBAcceleration. }
+(* Returns or creates the TgxBAcceleration within the given behaviours.
+  This helper function is convenient way to access a TgxBAcceleration. *)
 function GetOrCreateAcceleration(behaviours: TgxBehaviours): TgxBAcceleration;
   overload;
 function GetOrCreateAcceleration(obj: TgxBaseSceneObject): TgxBAcceleration; overload;
@@ -404,7 +406,7 @@ begin
   Result := True;
 end;
 
-procedure TgxBInertia.DoProgress(const progressTime: TgxProgressTimes);
+procedure TgxBInertia.DoProgress(const progressTime: TProgressTimes);
 var
   trnVector: TVector;
   speed, newSpeed: double;
@@ -580,7 +582,7 @@ begin
   Result := False;
 end;
 
-procedure TgxBAcceleration.DoProgress(const progressTime: TgxProgressTimes);
+procedure TgxBAcceleration.DoProgress(const progressTime: TProgressTimes);
 var
   i: integer;
   Inertia: TgxBInertia;
@@ -605,7 +607,6 @@ end;
 initialization
 // ------------------------------------------------------------------
 
-  // class registrations
   RegisterXCollectionItemClass(TgxBInertia);
   RegisterXCollectionItemClass(TgxBAcceleration);
 

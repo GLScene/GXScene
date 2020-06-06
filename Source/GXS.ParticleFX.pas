@@ -1,15 +1,18 @@
-//
-// Graphic Scene Engine, http://glscene.org
-//
-{
-   Base classes for scene-wide blended particles FX. 
+(*******************************************
+*                                          *
+* Graphic Scene Engine, http://glscene.org *
+*                                          *
+********************************************)
+
+unit GXS.ParticleFX;
+
+(*
+   Base classes for scene-wide blended particles FX.
 
    These provide a mechanism to render heterogenous particles systems with per
    particle depth-sorting (allowing correct rendering of interwoven separate
-   fire and smoke particle systems for instance). 
-    
-}
-unit GXS.ParticleFX;
+   fire and smoke particle systems for instance).
+*)
 
 interface
 
@@ -29,16 +32,16 @@ uses
   Scene.VectorTypes,
   Scene.PersistentClasses,
   Scene.VectorGeometry,
+  Scene.Manager,
   GXS.Material,
   GXS.Cadencer,
   Scene.VectorLists,
   GXS.Graphics,
   GXS.Context,
-  GXS.Color, 
-  GXS.BaseClasses,
-  GXS.Coordinates, 
-  GXS.RenderContextInfo, 
-  GXS.Manager,
+  GXS.Color,
+  Scene.BaseClasses,
+  GXS.Coordinates,
+  GXS.RenderContextInfo,
   GXS.PipelineTransformation,
   GXS.TextureFormat;
 
@@ -75,19 +78,19 @@ type
     procedure WriteToFiler(writer: TVirtualWriter); override;
     procedure ReadFromFiler(reader: TVirtualReader); override;
     property Manager: TgxParticleFXManager read FManager write FManager;
-    { Particle's ID, given at birth. 
-       ID is a value unique per manager. }
+    (* Particle's ID, given at birth.
+       ID is a value unique per manager. *)
     property ID: Integer read FID;
-    { Particle's absolute position. 
+    (* Particle's absolute position.
        Note that this property is read-accessed directly at rendering time
-       in the innards of the depth-sorting code. }
+       in the innards of the depth-sorting code. *)
     property Position: TAffineVector read FPosition write FPosition;
-    { Particle's velocity.
+    (* Particle's velocity.
        This velocity is indicative and is NOT automatically applied
        to the position during progression events by this class (subclasses
-       may implement that). }
+       may implement that). *)
     property Velocity: TAffineVector read FVelocity write FVelocity;
-    { Time at which particle was created }
+    // Time at which particle was created
     property CreationTime: Double read FCreationTime write FCreationTime;
 
     property PosX : Single index 0 read GetPosition write WritePosition;
@@ -103,9 +106,9 @@ type
   TgxParticleArray = array[0..MaxInt shr 4] of TgxParticle;
   PGLParticleArray = ^TgxParticleArray;
 
-  { List of particles.
+  (* List of particles.
      This list is managed with particles and performance in mind, make sure to
-     check methods doc. }
+     check methods doc. *)
   TgxParticleList = class(TPersistentObject)
   private
     FOwner: TgxParticleFXManager; // NOT persistent
@@ -120,24 +123,24 @@ type
     destructor Destroy; override;
     procedure WriteToFiler(writer: TVirtualWriter); override;
     procedure ReadFromFiler(reader: TVirtualReader); override;
-    { Refers owner manager }
+    // Refers owner manager
     property Owner: TgxParticleFXManager read FOwner write FOwner;
     property Items[index: Integer]: TgxParticle read GetItems write SetItems; default;
     function ItemCount: Integer;
-    { Adds a particle to the list.
+    (* Adds a particle to the list.
        Particle owneship is defined blindly, if the particle was previously
-       in another list, it won't be automatically removed from that list. }
+       in another list, it won't be automatically removed from that list. *)
     function AddItem(aItem: TgxParticle): Integer;
-    { Removes and frees a particular item for the list.
+    (* Removes and frees a particular item for the list.
        If the item is not part of the list, nothing is done.
        If found in the list, the item's "slot" is set to nil and item is
        freed (after setting its ownership to nil). The nils can be removed
-       with a call to Pack. }
+       with a call to Pack. *)
     procedure RemoveAndFreeItem(aItem: TgxParticle);
     function IndexOfItem(aItem: TgxParticle): Integer;
-    { Packs the list by removing all "nil" items.
+    (* Packs the list by removing all "nil" items.
        Note: this functions is orders of magnitude faster than the TList
-       version. }
+       version. *)
     procedure Pack;
     property List: PGLParticleArray read FDirectList;
   end;
@@ -145,13 +148,13 @@ type
   TgxParticleFXRenderer = class;
   TPFXCreateParticleEvent = procedure(Sender: TObject; aParticle: TgxParticle) of object;
 
-  { Base class for particle FX managers.
+  (* Base class for particle FX managers.
      Managers take care of life and death of particles for a particular
      particles FX system. You can have multiple scene-wide particle
      FX managers in a scene, handled by the same ParticleFxRenderer.
      Before subclassing, make sure you understood how the Initialize/Finalize
      Rendering, Begin/End Particles and RenderParticles methods (and also
-     understood that rendering of manager's particles may be interwoven). }
+     understood that rendering of manager's particles may be interwoven). *)
   TgxParticleFXManager = class(TgxCadencedComponent)
   private
     FBlendingMode: TgxBlendingMode;
@@ -164,44 +167,44 @@ type
   protected
     procedure SetRenderer(const val: TgxParticleFXRenderer);
     procedure SetParticles(const aParticles: TgxParticleList);
-    { Texturing mode for the particles.
+    (* Texturing mode for the particles.
        Subclasses should return GL_TEXTURE_1D, 2D or 3D depending on their
        needs, and zero if they don't use texturing. This method is used
-       to reduce the number of texturing activations/deactivations. }
+       to reduce the number of texturing activations/deactivations. *)
     function TexturingMode: Cardinal; virtual; abstract;
-    { Invoked when the particles of the manager will be rendered.
-       This method is fired with the "base" OpenVX states and matrices
+    (* Invoked when the particles of the manager will be rendered.
+       This method is fired with the "base" OpenGL states and matrices
        that will be used throughout the whole rendering, per-frame
        initialization should take place here.
-       OpenVX states/matrices should not be altered in any way here. }
+       OpenGL states/matrices should not be altered in any way here. *)
     procedure InitializeRendering(var rci: TgxRenderContextInfo); virtual; abstract;
-    { Triggered just before rendering a set of particles.
-       The current OpenVX state should be assumed to be the "base" one as
+    (* Triggered just before rendering a set of particles.
+       The current OpenGL state should be assumed to be the "base" one as
        was found during InitializeRendering. Manager-specific states should
        be established here.
        Multiple BeginParticles can occur during a render (but all will be
        between InitializeRendering and Finalizerendering, and at least one
-       particle will be rendered before EndParticles is invoked). }
+       particle will be rendered before EndParticles is invoked). *)
     procedure BeginParticles(var rci: TgxRenderContextInfo); virtual; abstract;
-    { Request to render a particular particle.
+    (* Request to render a particular particle.
        Due to the nature of the rendering, no particular order should be
-       assumed. If possible, no OpenVX state changes should be made in this
-       method, but should be placed in Begin/EndParticles. }
+       assumed. If possible, no OpenGL state changes should be made in this
+       method, but should be placed in Begin/EndParticles. *)
     procedure RenderParticle(var rci: TgxRenderContextInfo; aParticle: TgxParticle); virtual; abstract;
-    { Triggered after a set of particles as been rendered.
-       If OpenVX state were altered directly (ie. not through the states
-       caches of GLMisc), it should be restored back to the "base" state. }
+    (* Triggered after a set of particles as been rendered.
+       If OpenGL state were altered directly (ie. not through the states
+       caches of GLMisc), it should be restored back to the "base" state. *)
     procedure EndParticles(var rci: TgxRenderContextInfo); virtual; abstract;
-    { Invoked when rendering of particles for this manager is done. }
+    // Invoked when rendering of particles for this manager is done.
     procedure FinalizeRendering(var rci: TgxRenderContextInfo); virtual; abstract;
-    { ID for the next created particle. }
+    // ID for the next created particle.
     property NextID: Integer read FNextID write FNextID;
-    { Blending mode for the particles.
-       Protected and unused in the base class. }
+    (* Blending mode for the particles.
+       Protected and unused in the base class. *)
     property BlendingMode: TgxBlendingMode read FBlendingMode write FBlendingMode;
-    { Apply BlendingMode relatively to the renderer's blending mode. }
+    // Apply BlendingMode relatively to the renderer's blending mode.
     procedure ApplyBlendingMode(var rci: TgxRenderContextInfo);
-    { Unapply BlendingMode relatively by restoring the renderer's blending mode. }
+    // Unapply BlendingMode relatively by restoring the renderer's blending mode.
     procedure UnapplyBlendingMode(var rci: TgxRenderContextInfo);
     procedure registerUser(obj: TgxParticleFXEffect);
     procedure unregisterUser(obj: TgxParticleFXEffect);
@@ -209,35 +212,35 @@ type
     constructor Create(aOwner: TComponent); override;
     destructor Destroy; override;
     procedure NotifyChange(Sender: TObject); override;
-    procedure DoProgress(const progressTime: TgxProgressTimes); override;
+    procedure DoProgress(const progressTime: TProgressTimes); override;
     // Class of particles created by this manager. }
     class function ParticlesClass: TgxParticleClass; virtual;
-    { Creates a new particle controlled by the manager. }
+    // Creates a new particle controlled by the manager.
     function CreateParticle: TgxParticle; virtual;
-    { Create several particles at once. }
+    // Create several particles at once.
     procedure CreateParticles(nbParticles: Integer);
-    { A TgxParticleList property. }
+    // A TgxParticleList property.
     property Particles: TgxParticleList read FParticles write SetParticles;
-    { Return the number of particles. 
+    (* Return the number of particles.
        Note that subclasses may decide to return a particle count inferior
        to Particles.ItemCount, and the value returned by this method will
-       be the one honoured at render time. }
+       be the one honoured at render time. *)
     function ParticleCount: Integer; virtual;
-    { If True the manager will free itself when its particle count reaches zero. 
+    (* If True the manager will free itself when its particle count reaches zero.
        Check happens in the progression event, use with caution and only
-       if you know what you're doing! }
+       if you know what you're doing! *)
     property AutoFreeWhenEmpty: Boolean read FAutoFreeWhenEmpty write FAutoFreeWhenEmpty;
   published
-    { References the renderer. 
+    (* References the renderer.
       The renderer takes care of ordering the particles of the manager
-      (and other managers linked to it) and rendering them all depth-sorted. }
+      (and other managers linked to it) and rendering them all depth-sorted. *)
     property Renderer: TgxParticleFXRenderer read FRenderer write SetRenderer;
-    { Event triggered after standard particle creation and initialization. }
+    // Event triggered after standard particle creation and initialization.
     property OnCreateParticle: TPFXCreateParticleEvent read FOnCreateParticle write FOnCreateParticle;
     property Cadencer;
   end;
 
-  { Base class for linking scene objects to a particle FX manager.  }
+  // Base class for linking scene objects to a particle FX manager.
   TgxParticleFXEffect = class(TgxObjectPostEffect)
   private
     FManager: TgxParticleFXManager;
@@ -254,7 +257,7 @@ type
     constructor Create(aOwner: TXCollection); override;
     destructor Destroy; override;
   published
-    { Reference to the Particle FX manager }
+    // Reference to the Particle FX manager
     property Manager: TgxParticleFXManager read FManager write SetManager;
     property EffectScale: single read FEffectScale write SetEffectScale;
   end;
@@ -278,13 +281,13 @@ type
 
   TPFXSortAccuracy = (saLow, saOneTenth, saOneThird, saOneHalf, saHigh);
 
-  { Rendering interface for scene-wide particle FX. 
+  (* Rendering interface for scene-wide particle FX.
      A renderer can take care of rendering any number of particle systems,
      its main task being to depth-sort the particles so that they are blended
-     appropriately. 
+     appropriately.
      This object will usually be placed at the end of the scene hierarchy,
      just before the HUD overlays, its position, rotation etc. is of no
-     importance and has no effect on the rendering of the particles. }
+     importance and has no effect on the rendering of the particles. *)
   TgxParticleFXRenderer = class(TgxBaseSceneObject)
   private
     FManagerList: TList;
@@ -297,15 +300,15 @@ type
     FRegions: array[0..cPFXNbRegions - 1] of TPFXRegion;
   protected
     function StoreZMaxDistance: Boolean;
-    { Register a manager }
+    // Register a manager
     procedure RegisterManager(aManager: TgxParticleFXManager);
-    { UnRegister a manager }
+    // UnRegister a manager
     procedure UnRegisterManager(aManager: TgxParticleFXManager);
     procedure UnRegisterAll;
   public
     constructor Create(aOwner: TComponent); override;
     destructor Destroy; override;
-   { Quick Explanation of what is below:
+   (* Quick Explanation of what is below:
    The purpose is to depth-sort a large number (thousandths) of particles and
    render them back to front. The rendering part is not particularly complex,
    it just invokes the various PFX managers involved and request particle
@@ -316,34 +319,34 @@ type
    The QuickSort itself is the regular classic variant, but the comparison is
    made on singles as if they were integers, this is allowed by the IEEE format
    in a very efficient manner if all values are superior to 1, which is ensured
-   by the distance calculation and a fixed offset of 1 }
+   by the distance calculation and a fixed offset of 1 *)
     procedure BuildList(var rci: TgxRenderContextInfo); override;
-    { Time (in msec) spent sorting the particles for last render. }
+    // Time (in msec) spent sorting the particles for last render.
     property LastSortTime: Double read FLastSortTime;
-    { Amount of particles during the last render. }
+    // Amount of particles during the last render.
     property LastParticleCount: Integer read FLastParticleCount;
   published
-    {Specifies if particles should write to ZBuffer.
+    (*Specifies if particles should write to ZBuffer.
      If the PFXRenderer is the last object to be rendered in the scene,
      it is not necessary to write to the ZBuffer since the particles
-     are depth-sorted. Writing to the ZBuffer has a performance penalty. }
+     are depth-sorted. Writing to the ZBuffer has a performance penalty. *)
     property ZWrite: Boolean read FZWrite write FZWrite default False;
-    { Specifies if particles should write to test ZBuffer.  }
+    // Specifies if particles should write to test ZBuffer.
     property ZTest: Boolean read FZTest write FZTest default True;
-    { If true the renderer will cull particles that are behind the camera. }
+    // If true the renderer will cull particles that are behind the camera.
     property ZCull: Boolean read FZCull write FZCull default True;
-    { If true particles will be accurately sorted back to front. 
+    (* If true particles will be accurately sorted back to front.
        When false, only a rough ordering is used, which can result in
-       visual glitches but may be faster. }
+       visual glitches but may be faster. *)
     property ZSortAccuracy: TPFXSortAccuracy read FZSortAccuracy write FZSortAccuracy default saHigh;
-    { Maximum distance for rendering PFX particles. 
-       If zero, camera's DepthOfView is used. }
+    (* Maximum distance for rendering PFX particles.
+      If zero, camera's DepthOfView is used. *)
     property ZMaxDistance: Single read FZMaxDistance write FZMaxDistance stored StoreZMaxDistance;
-    { Default blending mode for particles. 
+    (* Default blending mode for particles.
        "Additive" blending is the usual mode (increases brightness and
        saturates), "transparency" may be used for smoke or systems that
-       opacify view, "opaque" is more rarely used. 
-       Note: specific PFX managers may override/ignore this setting. }
+       opacify view, "opaque" is more rarely used.
+       Note: specific PFX managers may override/ignore this setting. *)
     property BlendingMode: TgxBlendingMode read FBlendingMode write FBlendingMode default bmAdditive;
     property Visible;
   end;
@@ -352,7 +355,7 @@ type
   TgxSourcePFXPositionMode = (spmAbsoluteOffset, spmRelative);
   TgxSourcePFXDispersionMode = (sdmFast, sdmIsotropic);
 
-  { Simple Particles Source.  }
+  // Simple Particles Source.
   TgxSourcePFXEffect = class(TgxParticleFXEffect)
   private
     FInitialVelocity: TgxCoordinates;
@@ -381,7 +384,7 @@ type
     destructor Destroy; override;
     class function FriendlyName: string; override;
     class function FriendlyDescription: string; override;
-    procedure DoProgress(const progressTime: TgxProgressTimes); override;
+    procedure DoProgress(const progressTime: TProgressTimes); override;
     // Instantaneously creates nb particles
     procedure Burst(time: Double; nb: Integer);
     procedure RingExplosion(time: Double;
@@ -402,9 +405,9 @@ type
     property DisabledIfOwnerInvisible: boolean read FDisabledIfOwnerInvisible write FDisabledIfOwnerInvisible;
   end;
 
-  { An abstract PFX manager for simple dynamic particles. 
+  (* An abstract PFX manager for simple dynamic particles.
      Adds properties and progress implementation for handling moving particles
-     (simple velocity and const acceleration integration). }
+     (simple velocity and const acceleration integration). *)
   TgxDynamicPFXManager = class(TgxParticleFXManager)
   private
     FAcceleration: TgxCoordinates;
@@ -413,22 +416,22 @@ type
     //FRotationCenter: TAffineVector;
   protected
     procedure SetAcceleration(const val: TgxCoordinates);
-    { Returns the maximum age for a particle.
-       Particles older than that will be killed by DoProgress. }
+    (* Returns the maximum age for a particle.
+       Particles older than that will be killed by DoProgress. *)
     function MaxParticleAge: Single; virtual; abstract;
     property CurrentTime: Double read FCurrentTime;
   public
     constructor Create(aOwner: TComponent); override;
     destructor Destroy; override;
-    procedure DoProgress(const progressTime: TgxProgressTimes); override;
+    procedure DoProgress(const progressTime: TProgressTimes); override;
   published
-      { Oriented acceleration applied to the particles. }
+    // Oriented acceleration applied to the particles.
     property Acceleration: TgxCoordinates read FAcceleration write SetAcceleration;
-    { Friction applied to the particles. 
+    (* Friction applied to the particles.
        Friction is applied as a speed scaling factor over 1 second, ie.
        a friction of 0.5 will half speed over 1 second, a friction of 3
        will triple speed over 1 second, and a friction of 1 (default
-       value) will have no effect. }
+       value) will have no effect. *)
     property Friction: Single read FFriction write FFriction;
   end;
 
@@ -453,9 +456,9 @@ type
     constructor Create(Collection: TCollection); override;
     destructor Destroy; override;
     procedure Assign(Source: TPersistent); override;
-    { Stores 1/LifeTime }
+    // Stores 1/LifeTime
     property InvLifeTime: Single read FInvLifeTime;
-    { Stores 1/(LifeTime[Next]-LifeTime[Self]) }
+    // Stores 1/(LifeTime[Next]-LifeTime[Self])
     property InvIntervalRatio: Single read FIntervalRatio;
   published
     property ColorInner: TgxColor read FColorInner write SetColorInner;
@@ -480,8 +483,8 @@ type
     procedure PrepareIntervalRatios;
   end;
 
-  { Base PFX manager for particles with life colors. 
-     Particles have a core and edge color, for subclassing. }
+  (* Base PFX manager for particles with life colors.
+     Particles have a core and edge color, for subclassing. *)
   TgxLifeColoredPFXManager = class(TgxDynamicPFXManager)
   private
     FLifeColors: TPFXLifeColors;
@@ -518,18 +521,18 @@ type
 
   TPFXDirectRenderEvent = procedure(Sender: TObject; aParticle: TgxParticle;
     var rci: TgxRenderContextInfo) of object;
-  TPFXProgressEvent = procedure(Sender: TObject; const progressTime: TgxProgressTimes;
+  TPFXProgressEvent = procedure(Sender: TObject; const progressTime: TProgressTimes;
     var defaultProgress: Boolean) of object;
-  TPFXParticleProgress = procedure(Sender: TObject; const progressTime: TgxProgressTimes;
+  TPFXParticleProgress = procedure(Sender: TObject; const progressTime: TProgressTimes;
     aParticle: TgxParticle; var killParticle: Boolean) of object;
   TPFXGetParticleCountEvent = function(Sender: TObject): Integer of object;
 
-  { A particles FX manager offering events for customization/experimentation. 
+  (* A particles FX manager offering events for customization/experimentation.
      This manager essentially surfaces the PFX methods as events, and is best
      suited when you have specific particles that don't fall into any existing
      category, or when you want to experiment with particles and later plan to
-     wrap things up in a full-blown manager. 
-     If the events aren't handled, nothing will be rendered. }
+     wrap things up in a full-blown manager.
+     If the events aren't handled, nothing will be rendered. *)
   TgxCustomPFXManager = class(TgxLifeColoredPFXManager)
   private
     FOnInitializeRendering: TDirectRenderEvent;
@@ -548,7 +551,7 @@ type
     procedure EndParticles(var rci: TgxRenderContextInfo); override;
     procedure FinalizeRendering(var rci: TgxRenderContextInfo); override;
   public
-    procedure DoProgress(const progressTime: TgxProgressTimes); override;
+    procedure DoProgress(const progressTime: TProgressTimes); override;
     function ParticleCount: Integer; override;
   published
     property OnInitializeRendering: TDirectRenderEvent read FOnInitializeRendering write FOnInitializeRendering;
@@ -565,11 +568,11 @@ type
     property LifeColors;
   end;
 
-  { Polygonal particles FX manager. 
+  (* Polygonal particles FX manager.
      The particles of this manager are made of N-face regular polygon with
-     a core and edge color. No texturing is available. 
+     a core and edge color. No texturing is available.
      If you render large particles and don't have T&L acceleration, consider
-     using TgxPointLightPFXManager. }
+     using TgxPointLightPFXManager. *)
   TgxPolygonPFXManager = class(TgxLifeColoredPFXManager)
   private
     FNbSides: Integer;
@@ -595,18 +598,18 @@ type
     property LifeColors;
   end;
 
-  { Sprite color modes. 
+  (* Sprite color modes.
       scmFade: vertex coloring is used to fade inner-outer
       scmInner: vertex coloring uses inner color only
       scmOuter: vertex coloring uses outer color only
-      scmNone: vertex coloring is NOT used (colors are ignored). }
+      scmNone: vertex coloring is NOT used (colors are ignored). *)
   TSpriteColorMode = (scmFade, scmInner, scmOuter, scmNone);
 
-  { Sprites per sprite texture for the SpritePFX. }
+  // Sprites per sprite texture for the SpritePFX.
   TSpritesPerTexture = (sptOne, sptFour);
 
-  { Base class for sprite-based particles FX managers. 
-     The particles are made of optionally centered single-textured quads. }
+  (* Base class for sprite-based particles FX managers.
+     The particles are made of optionally centered single-textured quads. *)
   TgxBaseSpritePFXManager = class(TgxLifeColoredPFXManager)
   private
     FTexHandle: TgxTextureHandle;
@@ -619,7 +622,7 @@ type
     FSpritesPerTexture: TSpritesPerTexture;
     FColorMode: TSpriteColorMode;
   protected
-    { Subclasses should draw their stuff in this bmp32. }
+    // Subclasses should draw their stuff in this bmp32.
     procedure PrepareImage(bmp32: TgxBitmap32; var texFormat: Integer); virtual; abstract;
     procedure BindTexture(var rci: TgxRenderContextInfo);
     procedure SetSpritesPerTexture(const val: TSpritesPerTexture); virtual;
@@ -640,25 +643,26 @@ type
     destructor Destroy; override;
     property ColorMode: TSpriteColorMode read FColorMode write SetColorMode;
   published
-      { Ratio between width and height. 
-         An AspectRatio of 1 (default) will result in square sprite particles,
-         values higher than one will result in horizontally stretched sprites,
-         values below one will stretch vertically (assuming no rotation is applied). }
+    (* Ratio between width and height.
+       An AspectRatio of 1 (default) will result in square sprite particles,
+       values higher than one will result in horizontally stretched sprites,
+       values below one will stretch vertically (assuming no rotation is applied). *)
     property AspectRatio: Single read FAspectRatio write SetAspectRatio stored StoreAspectRatio;
-    { Particle sprites rotation (in degrees). 
-       All particles of the PFX manager share this rotation. }
+    (* Particle sprites rotation (in degrees).
+       All particles of the PFX manager share this rotation. *)
     property Rotation: Single read FRotation write SetRotation;
-    { If specified the manager will reuse the other manager's sprites. 
+    (* If specified the manager will reuse the other manager's sprites.
        Sharing sprites between PFX managers can help at the rendering stage
        if particles of the managers are mixed by helping reduce the number
        of texture switches. Note that only the texture is shared, not the
-       colors, sizes or other dynamic parameters.  }
+       colors, sizes or other dynamic parameters.  *)
     property ShareSprites: TgxBaseSpritePFXManager read FShareSprites write FShareSprites;
   end;
 
   TPFXPrepareTextureImageEvent = procedure(Sender: TObject; destBmp32: TgxBitmap32; var texFormat: Integer) of object;
 
-  { A sprite-based particles FX managers using user-specified code to prepare the texture.  }
+  (* A sprite-based particles FX managers using user-specified
+     code to prepare the texture .*)
   TgxCustomSpritePFXManager = class(TgxBaseSpritePFXManager)
   private
     FOnPrepareTextureImage: TPFXPrepareTextureImageEvent;
@@ -668,7 +672,7 @@ type
     constructor Create(aOwner: TComponent); override;
     destructor Destroy; override;
   published
-      { Place your texture rendering code in this event.  }
+    // Place your texture rendering code in this event.
     property OnPrepareTextureImage: TPFXPrepareTextureImageEvent read FOnPrepareTextureImage write FOnPrepareTextureImage;
     property ColorMode default scmInner;
     property SpritesPerTexture default sptOne;
@@ -678,15 +682,15 @@ type
     property LifeColors;
   end;
 
-  { A sprite-based particles FX managers using point light maps. 
+  (* A sprite-based particles FX managers using point light maps.
      The texture map is a round, distance-based transparency map (center "opaque"),
      you can adjust the quality (size) of the underlying texture map with the
-     TexMapSize property. 
+     TexMapSize property.
      This PFX manager renders particles similar to what you can get with
      TgxPolygonPFXManager but stresses fillrate more than T&L rate (and will
      usually be slower than the PolygonPFX when nbSides is low or T&L acceleration
      available). Consider this implementation as a sample for your own PFX managers
-     that may use particles with more complex textures. }
+     that may use particles with more complex textures. *)
   TgxPointLightPFXManager = class(TgxBaseSpritePFXManager)
   private
     FTexMapSize: Integer;
@@ -697,8 +701,8 @@ type
     constructor Create(aOwner: TComponent); override;
     destructor Destroy; override;
   published
-      { Underlying texture map size, as a power of two. 
-         Min value is 3 (size=8), max value is 9 (size=512). }
+    (* Underlying texture map size, as a power of two.
+       Min value is 3 (size=8), max value is 9 (size=512). *)
     property TexMapSize: Integer read FTexMapSize write SetTexMapSize default 5;
     property ColorMode default scmInner;
     property ParticleSize;
@@ -741,8 +745,6 @@ begin
     end;
   end;
 end;
-
-// RndVector
 
 procedure RndVector(const dispersion: TgxSourcePFXDispersionMode;
   var v: TAffineVector; var f: Single;
@@ -974,7 +976,7 @@ begin
     Renderer.StructureChanged;
 end;
 
-procedure TgxParticleFXManager.DoProgress(const progressTime: TgxProgressTimes);
+procedure TgxParticleFXManager.DoProgress(const progressTime: TProgressTimes);
 begin
   inherited;
   if FAutoFreeWhenEmpty and (FParticles.ItemCount = 0) then
@@ -1033,7 +1035,7 @@ procedure TgxParticleFXManager.ApplyBlendingMode;
 begin
   if Renderer.BlendingMode <> BlendingMode then
   begin
-    // case disjunction to minimize OpenVX State changes
+    // case disjunction to minimize OpenGL State changes
     if Renderer.BlendingMode in [bmAdditive, bmTransparency] then
     begin
       case BlendingMode of
@@ -1069,7 +1071,7 @@ procedure TgxParticleFXManager.UnapplyBlendingMode;
 begin
   if Renderer.BlendingMode <> BlendingMode then
   begin
-    // case disjunction to minimize OpenVX State changes
+    // case disjunction to minimize OpenGL State changes
     if BlendingMode in [bmAdditive, bmTransparency] then
     begin
       case Renderer.BlendingMode of
@@ -1252,7 +1254,7 @@ end;
 
 // (beware, large and complex stuff below... this is the heart of the ParticleFX)
 procedure TgxParticleFXRenderer.BuildList(var rci: TgxRenderContextInfo);
- { Quick Explanation of what is below:
+ (* Quick Explanation of what is below:
    The purpose is to depth-sort a large number (thousandths) of particles and
    render them back to front. The rendering part is not particularly complex,
    it just invokes the various PFX managers involved and request particle
@@ -1263,7 +1265,7 @@ procedure TgxParticleFXRenderer.BuildList(var rci: TgxRenderContextInfo);
    The QuickSort itself is the regular classic variant, but the comparison is
    made on singles as if they were integers, this is allowed by the IEEE format
    in a very efficient manner if all values are superior to 1, which is ensured
-   by the distance calculation and a fixed offset of 1.}
+   by the distance calculation and a fixed offset of 1.*)
 var
   dist, distDelta, invRegionSize: Single;
   managerIdx, particleIdx, regionIdx: Integer;
@@ -1637,7 +1639,7 @@ begin
   end;
 end;
 
-procedure TgxSourcePFXEffect.DoProgress(const progressTime: TgxProgressTimes);
+procedure TgxSourcePFXEffect.DoProgress(const progressTime: TProgressTimes);
 var
   n: Integer;
 begin
@@ -1925,7 +1927,7 @@ begin
   inherited Destroy;
 end;
 
-procedure TgxDynamicPFXManager.DoProgress(const progressTime: TgxProgressTimes);
+procedure TgxDynamicPFXManager.DoProgress(const progressTime: TProgressTimes);
 var
   i: Integer;
   curParticle: TgxParticle;
@@ -2323,7 +2325,7 @@ end;
 // ------------------ TgxCustomPFXManager ------------------
 // ------------------
 
-procedure TgxCustomPFXManager.DoProgress(const progressTime: TgxProgressTimes);
+procedure TgxCustomPFXManager.DoProgress(const progressTime: TProgressTimes);
 var
   i: Integer;
   list: PGLParticleArray;
@@ -2906,7 +2908,6 @@ end;
 initialization
 // ------------------------------------------------------------------
 
-     // class registrations
   RegisterClasses([TgxParticle, TgxParticleList,
     TgxParticleFXEffect, TgxParticleFXRenderer,
       TgxCustomPFXManager,

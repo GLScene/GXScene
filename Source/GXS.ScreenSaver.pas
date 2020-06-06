@@ -1,11 +1,12 @@
-//
-// Graphic Scene Engine, http://glscene.org
-//
-(*
-  Component for making screen-savers an easy task
-*)
+(*******************************************
+*                                          *
+* Graphic Scene Engine, http://glscene.org *
+*                                          *
+********************************************)
 
 unit GXS.ScreenSaver;
+
+(* Component for making screen-savers an easy task *)
 
 interface
 
@@ -27,7 +28,7 @@ uses
 
 type
 
-  { Options of screen-saver.
+  (* Options of screen-saver.
 
     ssoAutoAdjustFormProperties : all relevant properties of main form
     will be auto-adjusted (form style, border style, form size and for
@@ -38,8 +39,7 @@ type
     screen saver when mouse is moved (you mays have to handle other mouse
     move events manually if you have placed components on the form)
     - ssoEnhancedMouseMoveDetection : gets the mouse position every half-second
-    and closes the saver if position changed (uses GetCursorPos and a TTimer)
-  }
+    and closes the saver if position changed (uses GetCursorPos and a TTimer) *)
   TScreenSaverOption = (ssoAutoAdjustFormProperties, ssoAutoHookKeyboardEvents,
     ssoAutoHookMouseEvents, ssoEnhancedMouseMoveDetection);
   TScreenSaverOptions = set of TScreenSaverOption;
@@ -49,14 +49,14 @@ const
     ssoAutoHookKeyboardEvents, ssoEnhancedMouseMoveDetection];
 
 type
-  { This event is fired when screen saver should start in preview mode.
+  (* This event is fired when screen saver should start in preview mode.
     The passed hwnd is that of the small preview window in Windows Display
     Properties (or any other screen-saver previewing utility, so don't
-    assume width/height is constant/universal or whatever). }
+    assume width/height is constant/universal or whatever). *)
   TScreenSaverPreviewEvent = procedure(Sender: TObject; previewHwnd: HWND)
     of object;
 
-  { Drop this component on your main form to make it a screensaver.
+  (* Drop this component on your main form to make it a screensaver.
     You'll also need to change the extension from ".exe" to ".scr" (in the
     project options / application tab).
     How this component works :
@@ -70,7 +70,7 @@ type
     client area (in a resolution/size independant way if possible)
 
     There is no real difference between execution and preview modes, except
-    for the events fired... and the size of the form :). }
+    for the events fired... and the size of the form :). *)
   TgxScreenSaver = class(TComponent)
   private
     mouseEventsToIgnore: Integer;
@@ -96,57 +96,55 @@ type
   public
     constructor Create(AOwner: TComponent); override;
     destructor Destroy; override;
-    { Invokes the standard Windows dialog to set the password.
-      May be invoked from your Properties/Configuration dialog. }
+    (* Invokes the standard Windows dialog to set the password.
+      May be invoked from your Properties/Configuration dialog. *)
     procedure SetPassword;
-    { Properly handles request to close the main window.
+    (* Properly handles request to close the main window.
       Returns True if the Close request wasn't canceled (by event or
       password fail) and will actually happen.
       Use this if you implemented specific screen-saver exiting in your
       main form.
       It first triggers the OnCloseQuery, where the close request can be
       canceled, if this passed, the password is checked if there is any,
-      then sends a WM_CLOSE to the saver windows. }
+      then sends a WM_CLOSE to the saver windows. *)
     function CloseSaver: Boolean;
-    { True if the screen-save is in preview mode.
-      Valid only when the TScreenSaver has completed loading. }
+    (* True if the screen-save is in preview mode.
+      Valid only when the TScreenSaver has completed loading. *)
     property InPreviewMode: Boolean read FInPreviewMode;
   published
     property Options: TScreenSaverOptions read FOptions write FOptions
       default cDefaultScreenSaverOptions;
-    { If True, windows screen-saver password is checked before closing.
+    (* If True, windows screen-saver password is checked before closing.
       You may be wanting to set this prop to false if you're using your
-      own password scheme or do not want any password to be set. }
+      own password scheme or do not want any password to be set. *)
     property HonourWindowsPassword: Boolean read FHonourWindowsPassword
       write FHonourWindowsPassword default True;
-    { This string is displayed if OnPropertiesRequested is not used.
-      You may use it as a quick "AboutBox". }
+    (* This string is displayed if OnPropertiesRequested is not used.
+      You may use it as a quick "AboutBox". *)
     property AboutString: String read FAboutString write FAboutString;
-    { Display the properties dialog when this event is triggered.
+    (* Display the properties dialog when this event is triggered.
       This event may be called before Delphi's form auto-creation is complete,
-      and should not rely on auto-created dialogs/forms but create what
-      needs be. }
+      and should not rely on auto-created dialogs/forms but create what needs be *)
     property OnPropertiesRequested: TNotifyEvent read FOnPropertiesRequested
       write FOnPropertiesRequested;
-    { Fired when the saver should start executing, after form props are adjusted. }
+    // Fired when the saver should start executing, after form props are adjusted
     property OnExecute: TNotifyEvent read FOnExecute write FOnExecute;
-    { Fired when preview is requested, after form props are adjusted. }
+    // Fired when preview is requested, after form props are adjusted.
     property OnPreview: TScreenSaverPreviewEvent read FOnPreview
       write FOnPreview;
-    { Fired when screen-saver execution should close.
-      It is invoked before querying for password (if there is a password). }
+    (* Fired when screen-saver execution should close.
+      It is invoked before querying for password (if there is a password). *)
     property OnCloseQuery: TCloseQueryEvent read FOnCloseQuery
       write FOnCloseQuery;
 
   end;
 
-  { Invokes the standard Windows dialog to set the password.
-    May be invoked from your Properties/Configuration dialog. }
+(* Invokes the standard Windows dialog to set the password.
+   May be invoked from your Properties/Configuration dialog. *)
 procedure SetScreenSaverPassword;
 
 // ---------------------------------------------------------------------
 implementation
-
 // ---------------------------------------------------------------------
 
 { Returns system path and makes sure there is a trailing '\'. }
@@ -184,8 +182,6 @@ end;
 // ------------------ TScreenSaver ------------------
 // ------------------
 
-// Create
-//
 constructor TgxScreenSaver.Create(AOwner: TComponent);
 begin
   inherited;
@@ -323,8 +319,6 @@ begin
     Application.Terminate;
 end;
 
-// CloseSaver
-//
 function TgxScreenSaver.CloseSaver: Boolean;
 type
   TPwdProc = function(Parent: THandle): Boolean; stdcall;
@@ -404,7 +398,9 @@ begin
   lastMousePosition := mousePos;
 end;
 
+//---------------------------------
 initialization
+//---------------------------------
 
 RegisterClasses([TgxScreenSaver]);
 

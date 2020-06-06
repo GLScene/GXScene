@@ -1,11 +1,12 @@
-//
-// Graphic Scene Engine, http://glscene.org
-//
-{
-  Collision-detection management
+(*********************************************
+ *                                           *
+ *  Graphic Scene Engine, http://glscene.org *
+ *                                           *
+ *********************************************)
 
-}
 unit GXS.Collision;
+
+(* Collision-detection management *)
 
 interface
 
@@ -21,14 +22,15 @@ uses
   Scene.VectorLists,
   GXS.VectorFileObjects,
   Scene.GeometryBB,
-  GXS.Manager,
+  Scene.Manager,
   Scene.VectorTypes;
 
 type
   TgxBCollision = class;
-  TObjectCollisionEvent = procedure(Sender: TObject; object1, object2: TgxBaseSceneObject) of object;
+  TObjectCollisionEvent = procedure(Sender: TObject;
+    object1, object2: TgxBaseSceneObject) of object;
 
-  { Defines how fine collision bounding is for a particular object.
+  (* Defines how fine collision bounding is for a particular object.
     Possible values are :
     cbmPoint : the object is punctual and may only collide with volumes
     cbmSphere : the object is defined by its bounding sphere (sphere radius
@@ -36,8 +38,9 @@ type
     cbmEllipsoid the object is defined by its bounding axis-aligned ellipsoid
     cbmCube : the object is defined by a bounding axis-aligned "cube"
     cbmFaces : the object is defined by its faces (needs object-level support,
-    if unavalaible, uses cbmCube code) }
-  TCollisionBoundingMode = (cbmPoint, cbmSphere, cbmEllipsoid, cbmCube, cbmFaces);
+    if unavalaible, uses cbmCube code) *)
+  TCollisionBoundingMode = (cbmPoint, cbmSphere, cbmEllipsoid, cbmCube,
+    cbmFaces);
   TFastCollisionChecker = function(obj1, obj2: TgxBaseSceneObject): Boolean;
   PFastCollisionChecker = ^TFastCollisionChecker;
 
@@ -54,15 +57,16 @@ type
     destructor Destroy; override;
     procedure CheckCollisions;
   published
-    property OnCollision: TObjectCollisionEvent read FOnCollision write FOnCollision;
+    property OnCollision: TObjectCollisionEvent read FOnCollision
+      write FOnCollision;
   end;
 
-  { Collision detection behaviour.
+  (* Collision detection behaviour.
     Allows an object to register to a TCollisionManager and be accounted for
     in collision-detection and distance calculation mechanisms.
     An object may have multiple TgxBCollision, registered to multiple collision
     managers, however if multiple behaviours share the same manager, only one
-    of them will be accounted for, others will be ignored. }
+    of them will be accounted for, others will be ignored. *)
   TgxBCollision = class(TgxBehaviour)
   private
     FBoundingMode: TCollisionBoundingMode;
@@ -89,7 +93,8 @@ type
     property GroupIndex: Integer read FGroupIndex write SetGroupIndex;
   end;
 
-{ Fast Collision detection routines that are heavily specialized and just return a boolean }
+(* Fast Collision detection routines that are heavily
+   specialized and just return a boolean *)
 function FastCheckPointVsPoint(obj1, obj2: TgxBaseSceneObject): Boolean;
 function FastCheckPointVsSphere(obj1, obj2: TgxBaseSceneObject): Boolean;
 function FastCheckPointVsEllipsoid(obj1, obj2: TgxBaseSceneObject): Boolean;
@@ -112,15 +117,17 @@ function FastCheckFaceVsCube(obj1, obj2: TgxBaseSceneObject): Boolean;
 // experimental
 function FastCheckFaceVsFace(obj1, obj2: TgxBaseSceneObject): Boolean;
 
-{ Returns true when the bounding box cubes does intersect the other.
-  Also true when the one cube does contain the other completely. }
+(* Returns true when the bounding box cubes does intersect the other.
+  Also true when the one cube does contain the other completely. *)
 function IntersectCubes(obj1, obj2: TgxBaseSceneObject): Boolean; overload;
 
-{ Returns or creates the TgxBCollision within the given behaviours.
-  This helper function is convenient way to access a TgxBCollision. }
-function GetOrCreateCollision(behaviours: TgxBehaviours): TgxBCollision; overload;
-{ Returns or creates the TgxBCollision within the given object's behaviours.
-  This helper function is convenient way to access a TgxBCollision. }
+(* Returns or creates the TgxBCollision within the given behaviours.
+  This helper function is convenient way to access a TgxBCollision. *)
+function GetOrCreateCollision(behaviours: TgxBehaviours)
+  : TgxBCollision; overload;
+
+(* Returns or creates the TgxBCollision within the given object's behaviours.
+  This helper function is convenient way to access a TgxBCollision. *)
 function GetOrCreateCollision(obj: TgxBaseSceneObject): TgxBCollision; overload;
 
 // ------------------------------------------------------------------
@@ -131,8 +138,8 @@ const
   cEpsilon: Single = 1E-6;
 
 const
-  cFastCollisionChecker: array [cbmPoint .. cbmFaces, cbmPoint .. cbmFaces] of TFastCollisionChecker = (
-    (FastCheckPointVsPoint, FastCheckPointVsSphere,
+  cFastCollisionChecker: array [cbmPoint .. cbmFaces, cbmPoint .. cbmFaces]
+    of TFastCollisionChecker = ((FastCheckPointVsPoint, FastCheckPointVsSphere,
     FastCheckPointVsEllipsoid, FastCheckPointVsCube, FastCheckPointVsCube),
     (FastCheckSphereVsPoint, FastCheckSphereVsSphere,
     FastCheckSphereVsEllipsoid, FastCheckSphereVsCube, FastCheckSphereVsCube),
@@ -143,7 +150,7 @@ const
     (FastCheckCubeVsPoint, FastCheckCubeVsSphere, FastCheckCubeVsEllipsoid,
     FastCheckFaceVsCube, FastCheckFaceVsFace));
 
-// Collision utility routines
+  // Collision utility routines
 
 function FastCheckPointVsPoint(obj1, obj2: TgxBaseSceneObject): Boolean;
 begin
@@ -169,7 +176,8 @@ begin
   // ScaleVector();
   v.W := 0;
   // if norm is below 1, collision
-  Result := (VectorNorm(v) <= 1 { Sqr(obj2.BoundingSphereRadius) } ); // since radius*radius = 1/2*1/2 = 1/4 for unit sphere
+  Result := (VectorNorm(v) <= 1 { Sqr(obj2.BoundingSphereRadius) } );
+  // since radius*radius = 1/2*1/2 = 1/4 for unit sphere
 end;
 
 function FastCheckPointVsCube(obj1, obj2: TgxBaseSceneObject): Boolean;
@@ -186,7 +194,8 @@ end;
 
 function FastCheckSphereVsPoint(obj1, obj2: TgxBaseSceneObject): Boolean;
 begin
-  Result := (obj1.SqrDistanceTo(obj2.AbsolutePosition) <= Sqr(obj1.BoundingSphereRadius));
+  Result := (obj1.SqrDistanceTo(obj2.AbsolutePosition) <=
+    Sqr(obj1.BoundingSphereRadius));
 end;
 
 function FastCheckSphereVsSphere(obj1, obj2: TgxBaseSceneObject): Boolean;
@@ -225,7 +234,7 @@ begin
   v.X := abs(v.X);
   v.Y := abs(v.Y);
   v.Z := abs(v.Z);
-  ScaleVector(v, obj2.Scale.AsVector); 
+  ScaleVector(v, obj2.Scale.AsVector);
 
   aad := obj2.AxisAlignedDimensions; // should be abs at all!
 
@@ -333,7 +342,8 @@ begin
   // express in local coordinates (for obj2)
   v := VectorTransform(obj1.AbsolutePosition, obj2.InvAbsoluteMatrix);
   // calc local vector, and rescale to unit dimensions
-  aad := VectorAdd(obj2.AxisAlignedDimensionsUnscaled, obj1.BoundingSphereRadius);
+  aad := VectorAdd(obj2.AxisAlignedDimensionsUnscaled,
+    obj1.BoundingSphereRadius);
   DivideVector(v, aad);
   v.W := 0;
   // if norm is below 1, collision
@@ -402,24 +412,24 @@ function DoCubesIntersectPrim(obj1, obj2: TgxBaseSceneObject): Boolean;
       begin
         j := (i + 1) mod 3;
         k := (j + 1) mod 3;
-        t := (pl.C[i]-p0.C[i])/d.C[i];   // t: line parameter of intersection
-        if IsInRange(t, 0, 1) then
-        begin
-          s := p0;
-          CombineVector(s, d, t); // calculate intersection
-          // if the other two coordinates lie within the ranges, collision
-          if IsInRange(s.C[j],-pl.C[j],pl.C[j]) and
-             IsInRange(s.C[k],-pl.C[k],pl.C[k]) then 
-            Exit;
-        end;
-        t := (-pl.C[i]-p0.C[i])/d.C[i];   // t: parameter of intersection
+        t := (pl.C[i] - p0.C[i]) / d.C[i]; // t: line parameter of intersection
         if IsInRange(t, 0, 1) then
         begin
           s := p0;
           CombineVector(s, d, t); // calculate intersection
           // if the other two coordinates lie within the ranges, collision
           if IsInRange(s.C[j], -pl.C[j], pl.C[j]) and
-             IsInRange(s.C[k], -pl.C[k], pl.C[k]) then 
+            IsInRange(s.C[k], -pl.C[k], pl.C[k]) then
+            Exit;
+        end;
+        t := (-pl.C[i] - p0.C[i]) / d.C[i]; // t: parameter of intersection
+        if IsInRange(t, 0, 1) then
+        begin
+          s := p0;
+          CombineVector(s, d, t); // calculate intersection
+          // if the other two coordinates lie within the ranges, collision
+          if IsInRange(s.C[j], -pl.C[j], pl.C[j]) and
+            IsInRange(s.C[k], -pl.C[k], pl.C[k]) then
             Exit;
         end;
       end;
@@ -428,10 +438,8 @@ function DoCubesIntersectPrim(obj1, obj2: TgxBaseSceneObject): Boolean;
   end;
 
 const
-  cWires: array [0 .. 11, 0 .. 1] of Integer = 
-    ((0, 1), (1, 2), (2, 3), (3, 0),
-     (4, 5), (5, 6), (6, 7), (7, 4), 
-	 (0, 4), (1, 5), (2, 6), (3, 7));
+  cWires: array [0 .. 11, 0 .. 1] of Integer = ((0, 1), (1, 2), (2, 3), (3, 0),
+    (4, 5), (5, 6), (6, 7), (7, 4), (0, 4), (1, 5), (2, 6), (3, 7));
 var
   pt1: array [0 .. 7] of TVector;
   M: TMatrix;
@@ -489,16 +497,15 @@ begin
   }
 end;
 
+{ Behaviour - Checks for collisions between Faces and cube by Checking
+  whether triangles on the mesh have a point inside the cube,
+  or a triangle intersects the side
 
-{Behaviour - Checks for collisions between Faces and cube by Checking
- whether triangles on the mesh have a point inside the cube,
- or a triangle intersects the side
-
- Issues -  Checks whether triangles on the mesh have a point inside the cube
- 1)  When the cube is completely inside a mesh, it will contain
- no triangles hence no collision detected
- 2)  When the mesh is (almost) completely inside the cube
- Octree.GetTrianglesInCube returns no points, why? }
+  Issues -  Checks whether triangles on the mesh have a point inside the cube
+  1)  When the cube is completely inside a mesh, it will contain
+  no triangles hence no collision detected
+  2)  When the mesh is (almost) completely inside the cube
+  Octree.GetTrianglesInCube returns no points, why? }
 function FastCheckCubeVsFace(obj1, obj2: TgxBaseSceneObject): Boolean;
 // var
 // triList : TAffineVectorList;
@@ -827,8 +834,6 @@ end;
 
 // new CheckCollisions / Dan Bartlett -----]
 
-
-
 // ------------------
 // ------------------ TgxBCollision ------------------
 // ------------------
@@ -950,6 +955,7 @@ end;
 
 // ------------------------------------------------------------------
 initialization
+
 // ------------------------------------------------------------------
 
 RegisterXCollectionItemClass(TgxBCollision);

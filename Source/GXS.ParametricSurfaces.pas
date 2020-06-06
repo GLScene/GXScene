@@ -1,7 +1,7 @@
 //
 // Graphic Scene Engine, http://glscene.org
 //
-{
+(*
   Parametric surface implementation (like Bezier and BSpline surfaces)
 
   Notes:
@@ -22,8 +22,8 @@
   The MinU, MaxU, MinV and MaxV properties allow for drawing specific
   parts of the bezier surface, which can be used to blend a patch with
   other patches.
+*)
 
-}
 unit GXS.ParametricSurfaces;
 
 interface
@@ -34,7 +34,7 @@ uses
   Import.OpenGLx,
   Scene.VectorTypes,
   GXS.VectorFileObjects,
-  GXS.CurvesAndSurfaces,
+  Scene.CurvesAndSurfaces,
   Scene.VectorGeometry,
   Scene.VectorLists,
   Scene.PersistentClasses,
@@ -45,16 +45,16 @@ uses
 
 type
 
-  { psrGXScene tells the surface to render using GLScene code to build
+  (* psrGXScene tells the surface to render using GLScene code to build
     the mesh, whereas, psrOpenVX uses glEvalMesh2 or gluNurbsRenderer
-    calls to render the surface. }
+    calls to render the surface. *)
   TParametricSurfaceRenderer = (psrGXScene, psrOpenVX);
 
-  { psbBezier indicates building the surface with Bernstein basis
+  (* psbBezier indicates building the surface with Bernstein basis
     functions, no knot or order properties are used.
     psbBSpline indicates building the surface using BSpline basis
     functions, these require orders and knot vectors to define the
-    control point influences on the surface. }
+    control point influences on the surface. *)
   TParametricSurfaceBasis = (psbBezier, psbBSpline);
 
   TMOParametricSurface = class(TgxMeshObject)
@@ -80,11 +80,11 @@ type
     procedure BuildList(var mrci: TgxRenderContextInfo); override;
     procedure Prepare; override;
     procedure Clear; override;
-    { Generates a mesh approximation of the surface defined by the
+    (* Generates a mesh approximation of the surface defined by the
       properties below. This is used to construct the mesh when using
       Renderer = psrGXScene. If you want to render using OpenGL calls
       but would like to obtain the mesh data also use this call to
-      generate the mesh data. Fills in Vertices, Normals, etc. }
+      generate the mesh data. Fills in Vertices, Normals, etc. *)
     procedure GenerateMesh;
     // Control points define the parametric surface.
     property ControlPoints: TAffineVectorList read FControlPoints write SetControlPoints;
@@ -120,14 +120,14 @@ type
     property Basis: TParametricSurfaceBasis read FBasis write SetBasis;
   end;
 
-  { A 3d bezier surface implemented through facegroups. The ControlPointIndices
+  (* A 3d bezier surface implemented through facegroups. The ControlPointIndices
     is an index to control points stored in the MeshObject.Vertices affine
     vector list. Similarly the TexCoordIndices point to the owner
     MeshObject.TexCoords, one for each control point.
     CountU and CountV define the width and height of the surface.
     Resolution sets the detail level of the mesh evaluation.
     MinU, MaxU, MinV and MaxV define the region of the surface to be rendered,
-    this is especially useful for blending with neighbouring patches. }
+    this is especially useful for blending with neighbouring patches. *)
   TFGBezierSurface = class(TgxFaceGroup)
   private
     FCountU, FCountV: Integer;

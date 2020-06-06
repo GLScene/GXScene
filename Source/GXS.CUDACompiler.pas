@@ -1,11 +1,11 @@
 //
 // Graphic Scene Engine, http://glscene.org
 //
-{
+(*
   Component allows to compile the CUDA-source (*.cu) file.
   in design- and runtime.
   To work requires the presence of CUDA Toolkit 3.X and MS Visual Studio C++.
-}
+*)
 unit GXS.CUDACompiler;
 
 interface
@@ -51,7 +51,6 @@ type
 
   TgxSCUDACompiler = class(TComponent)
   private
-
     FNVCCPath: string;
     FCppCompilerPath: string;
     FProduct: TStringList;
@@ -70,47 +69,45 @@ type
     procedure SetNVCCPath(const AValue: string);
     procedure SetCppCompilerPath(const AValue: string);
   protected
-    
     procedure Loaded; override;
   public
-    
     constructor Create(AOwner: TComponent); override;
     destructor Destroy; override;
     procedure Assign(Source: TPersistent); override;
     procedure SetSourceCodeFile(const AFileName: string);
     function Compile: Boolean;
-    { Product of compilation. }
+    // Product of compilation.
     property Product: TStringList read FProduct write FProduct;
     property ModuleInfo: TCUDAModuleInfo read FModuleInfo;
     property ConsoleContent: string read FConsoleContent;
   published
-    { NVidia CUDA Compiler. }
+    // NVidia CUDA Compiler.
     property NVCCPath: string read FNVCCPath write SetNVCCPath;
-    { Microsoft Visual Studio Compiler.
-      Pascal compiler is still not done. }
+    (* Microsoft Visual Studio Compiler.
+      Pascal compiler is still not done. *)
     property CppCompilerPath: string read FCppCompilerPath
       write SetCppCompilerPath;
-    { Full file name of source code file. }
+    // Full file name of source code file.
     property SourceCodeFile: string read FSourceCodeFile;
-    { Disign-time only property.
-      Make choose of one of the Project module as CUDA kernel source }
+    (* Disign-time only property.
+      Make choose of one of the Project module as CUDA kernel source *)
     property ProjectModule: string read FProjectModule write FProjectModule
       stored StoreProjectModule;
-    { Output code type for module kernel
+    (* Output code type for module kernel
       - Ptx - Parallel Thread Execution
-      - Cubin - CUDA Binary }
+      - Cubin - CUDA Binary *)
     property OutputCodeType: TgxSCUDACompilerOutput read FOutputCodeType
       write setOutputCodeType default codePtx;
-    { In the CUDA naming scheme,
+    (* In the CUDA naming scheme,
         GPUs are named sm_xy,
         where x denotes the GPU generation number,
-        and y the version in that generation. }
+        and y the version in that generation. *)
     property RealArchitecture: TgxSCUDARealArchs read FRealArch
       write SetRealArch default [sm_13];
-    { Virtual architecture. }
+    // Virtual architecture.
     property VirtualArchitecture: TgxSCUDAVirtArch read FVirtualArch
       write FVirtualArch default compute_13;
-    { Maximum registers that kernel can use. }
+    // Maximum registers that kernel can use.
     property MaxRegisterCount: Integer read FMaxRegisterCount
       write SetMaxRegisterCount default 32;
   end;

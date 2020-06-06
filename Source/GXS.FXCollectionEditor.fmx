@@ -1,7 +1,7 @@
-object XCollectionEditor: TXCollectionEditor
+object XCollectionEditorForm: TXCollectionEditorForm
   Left = 0
   Top = 0
-  Caption = 'Form1'
+  Caption = 'FCollection Editor'
   ClientHeight = 451
   ClientWidth = 310
   FormFactor.Width = 320

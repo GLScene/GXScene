@@ -1,11 +1,12 @@
-﻿//
-// This unit is part of the GXScene Project http://glscene.org
-//
-{ OpenGL for FMX
-  Adapted from https://github.com/LUXOPHIA }
-
+﻿(*******************************************
+*                                          *
+* Graphic Scene Engine, http://glscene.org *
+*                                          *
+********************************************)
 
 unit GXS.OpenGLFMX;
+
+(* OpenGL for FMX. Adapted from https://github.com/LUXOPHIA *)
 
 interface
 

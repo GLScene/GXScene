@@ -1,10 +1,12 @@
-//
-// Graphic Scene Engine, http://glscene.org
-//
-(*
-  Class and routines to output isolines.
-*)
+(*******************************************
+*                                          *
+* Graphic Scene Engine, http://glscene.org *
+*                                          *
+********************************************)
+
 unit GXS.Isolines;
+
+(* Class and routines to output isolines *)
 
 interface
 
@@ -23,7 +25,7 @@ uses
   GXS.MultiPolygon,
   GXS.Coordinates,
   GXS.Color,
-  GXS.Spline,
+  Scene.Spline,
   GXS.SpaceText,
   GXS.VectorFileObjects;
 

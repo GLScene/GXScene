@@ -1,6 +1,8 @@
-//
-// Graphic Scene Engine, http://glscene.org
-//
+(* ********************************************
+  *                                           *
+  *  Graphic Scene Engine, http://glscene.org *
+  *                                           *
+  ******************************************** *)
 
 unit GXS.Selection;
 
@@ -16,7 +18,7 @@ uses
   GXS.Context,
   Scene.VectorLists,
   Scene.VectorGeometry,
-  GXS.BaseClasses,
+  Scene.BaseClasses,
   Scene.PersistentClasses;
 
  const
@@ -28,15 +30,15 @@ type
 
   TPickRecord = class
   public
-    AObject: TgxUpdateAbleComponent;
+    AObject: TUpdateAbleComponent;
     SubObjects: TPickSubObjects;
     ZMin, ZMax: Single;
   end;
 
   TPickSortType = (psDefault, psName, psMinDepth, psMaxDepth);
 
-  { List class for object picking.
-     This list is used to store the results of a PickObjects call. }
+  (* List class for object picking.
+     This list is used to store the results of a PickObjects call. *)
   TgxPickList = class(TPersistentObjectList)
   private
     function GetFar(aValue: Integer): Single;
@@ -180,7 +182,7 @@ var
   newRecord: TPickRecord;
 begin
   newRecord := TPickRecord.Create;
-  newRecord.AObject := TgxUpdateAbleComponent(obj);
+  newRecord.AObject := TUpdateAbleComponent(obj);
   newRecord.SubObjects := subObj;
   newRecord.zMin := zMin;
   newRecord.zMax := zMax;

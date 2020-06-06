@@ -1,27 +1,31 @@
-//
-// Graphic Scene Engine, http://glscene.org
-//
-{
-  Spatial partitioning related code that also uses scene objects
-}
+(*******************************************
+*                                          *
+* Graphic Scene Engine, http://glscene.org *
+*                                          *
+********************************************)
 
 unit GXS.SpatialPartitioning;
+
+(* Spatial partitioning related code that also uses scene objects *)
 
 interface
 
 uses
   Import.OpenGLx,
+  Scene.VectorTypes,
+  Scene.VectorGeometry,
+  Scene.GeometryBB,
+  Scene.SpacePartition,
+
   GXS.Scene,
   GXS.Coordinates,
   GXS.Win64Viewer,
-  GXS.SpacePartition,
-  Scene.VectorGeometry,
-  Scene.GeometryBB,
+
   GXS.RenderContextInfo,
   GXS.State;
 
 type
-  { Object for holding scene objects in a spatial partitioning }
+  // Object for holding scene objects in a spatial partitioning
   TgxSceneObj = class(TSpacePartitionLeaf)
   public
     Obj: TgxBaseSceneObject;
@@ -30,19 +34,19 @@ type
     destructor Destroy; override;
   end;
 
-  { Render a spacial partitioning descending from TSectoredSpacePartition
-    (octree and quadtree) as a grid - great for debugging and visualisation }
+(* Render a spacial partitioning descending from TSectoredSpacePartition
+   (octree and quadtree) as a grid - great for debugging and visualisation *)
 procedure RenderSpatialPartitioning(var rci: TgxRenderContextInfo; const Space: TSectoredSpacePartition);
 
-{ Create an extended frustum from a SceneViewer - this makes the unit
-  specific to the windows platform! }
+(* Create an extended frustum from a SceneViewer - this makes the unit
+  specific to the windows platform! *)
 function ExtendedFrustumMakeFromSceneViewer(const AFrustum: TFrustum; const vWidth, vHeight: integer; AVKCamera: TgxCamera)
   : TExtendedFrustum; overload;
 
 function ExtendedFrustumMakeFromSceneViewer(const AFrustum: TFrustum; const AGXSceneViewer: TgxSceneViewer)
   : TExtendedFrustum; overload;
 
-{ Renders an AABB as a line }
+// Renders an AABB as a line
 procedure RenderAABB(var rci: TgxRenderContextInfo; AABB: TAABB; w, r, g, b: single); overload;
 procedure RenderAABB(var rci: TgxRenderContextInfo; AABB: TAABB); overload;
 
@@ -51,7 +55,6 @@ implementation
 // -------------------------------------------------------------------
 
 uses
-  Scene.VectorTypes,
   GXS.Context;
 
 procedure RenderAABB(var rci: TgxRenderContextInfo; AABB: TAABB);

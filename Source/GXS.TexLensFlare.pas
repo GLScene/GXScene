@@ -1,11 +1,12 @@
-//
-// Graphic Scene Engine, http://glscene.org
-//
-{
-   Texture-based Lens flare object.
+(*******************************************
+*                                          *
+* Graphic Scene Engine, http://glscene.org *
+*                                          *
+********************************************)
 
-}
 unit GXS.TexLensFlare;
+
+(* Texture-based Lens flare object *)
 
 interface
 
@@ -22,7 +23,7 @@ uses
   GXS.Texture,
   GXS.Context,
   GXS.RenderContextInfo,
-  GXS.BaseClasses,
+  Scene.BaseClasses,
   GXS.State,
   Scene.VectorTypes;
 
@@ -54,7 +55,7 @@ type
     constructor Create(AOwner: TComponent); override;
     destructor Destroy; override;
     procedure BuildList(var rci: TgxRenderContextInfo); override;
-    procedure DoProgress(const progressTime: TgxProgressTimes); override;
+    procedure DoProgress(const progressTime: TProgressTimes); override;
   published
     // MaxRadius of the flare.
     property Size: integer read FSize write SetSize default 50;
@@ -300,7 +301,7 @@ begin
     Self.RenderChildren(0, Count - 1, rci);
 end;
 
-procedure TgxTextureLensFlare.DoProgress(const progressTime: TgxProgressTimes);
+procedure TgxTextureLensFlare.DoProgress(const progressTime: TProgressTimes);
 begin
   FDeltaTime := progressTime.deltaTime;
   inherited;

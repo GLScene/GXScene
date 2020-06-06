@@ -1,11 +1,12 @@
-//
-// Graphic Scene Engine, http://glscene.org
-//
-(*
-  Calculations and manipulations on Bounding Boxes.
-*)
+(*******************************************
+*                                          *
+* Graphic Scene Engine, http://glscene.org *
+*                                          *
+********************************************)
 
 unit Scene.GeometryBB;
+
+(* Calculations and manipulations on Bounding Boxes *)
 
 interface
 

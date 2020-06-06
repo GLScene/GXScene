@@ -72,7 +72,7 @@ const
   //   If you choose to run in Double mode, you must deploy the double precision
   //   dll (named ode_double.dll and located in the dll directory)
 
-  {$define cSINGLE}  //Insert . before "$" to make ODEImport double based
+  {$define cSINGLE}  //Insert . before "$" to make ODE double based
   {$IFDEF WIN32}
     {$IFDEF cSINGLE}
       ODEDLL = 'ode32s.dll';

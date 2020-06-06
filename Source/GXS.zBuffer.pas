@@ -1299,7 +1299,7 @@ end;
 initialization
 // ------------------------------------------------------------------
 
-  // class registrations
+  
   RegisterClasses([TgxZShadows]);
 
 end.

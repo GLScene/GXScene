@@ -1,6 +1,8 @@
-//
-// Graphic Scene Engine, http://glscene.org
-//
+(*******************************************
+*                                          *
+* Graphic Scene Engine, http://glscene.org *
+*                                          *
+********************************************)
 {
   Objects that get rendered in 2D coordinates
 }
@@ -431,7 +433,7 @@ end;
 initialization
 //=======================================================================
 
-// class registrations
+
 RegisterClasses([TgxHUDText, TgxHUDSprite, TgxResolutionIndependantHUDText,
   TgxAbsoluteHUDText]);
 

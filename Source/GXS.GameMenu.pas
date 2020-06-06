@@ -1,11 +1,12 @@
-//
-// Graphic Scene Engine, http://glscene.org
-//
-{
-  Manages a basic game menu UI
+(*******************************************
+*                                          *
+* Graphic Scene Engine, http://glscene.org *
+*                                          *
+********************************************)
 
-}
 unit GXS.GameMenu;
+
+(* Manages a basic game menu UI *)
 
 interface
 

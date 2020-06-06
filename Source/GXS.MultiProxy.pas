@@ -1,11 +1,12 @@
-//
-// Graphic Scene Engine, http://glscene.org
-//
-{
-  Implements a multi-proxy objects, useful for discreet LOD.
+(*******************************************
+*                                          *
+* Graphic Scene Engine, http://glscene.org *
+*                                          *
+********************************************)
 
-}
 unit GXS.MultiProxy;
+
+(* Implements a multi-proxy objects, useful for discreet LOD *)
 
 interface
 
@@ -20,7 +21,7 @@ uses
   Scene.VectorGeometry,
   GXS.Silhouette,
   GXS.RenderContextInfo,
-  GXS.BaseClasses,
+  Scene.BaseClasses,
   Scene.VectorTypes;
 
 type
@@ -266,8 +267,8 @@ end;
 
 procedure TgxMultiProxyMasters.NotifyChange;
 begin
-  if (UpdateCount = 0) and (GetOwner <> nil) and (GetOwner is TgxUpdateAbleComponent) then
-    TgxUpdateAbleComponent(GetOwner).NotifyChange(Self);
+  if (UpdateCount = 0) and (GetOwner <> nil) and (GetOwner is TUpdateAbleComponent) then
+    TUpdateAbleComponent(GetOwner).NotifyChange(Self);
 end;
 
 procedure TgxMultiProxyMasters.EndUpdate;

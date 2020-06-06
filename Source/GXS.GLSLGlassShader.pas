@@ -21,7 +21,7 @@ uses
   
   GXS.Scene, 
   GXS.CrossPlatform, 
-  GXS.BaseClasses, 
+  Scene.BaseClasses, 
   GXS.State, 
   GXS.OpenGL1x, 
   GXS.Context, 

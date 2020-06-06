@@ -1,6 +1,11 @@
-//
-// Graphic Scene Engine, http://glscene.org
-//
+(*******************************************
+*                                          *
+* Graphic Scene Engine, http://glscene.org *
+*                                          *
+********************************************)
+
+unit Scene.PersistentClasses;
+
 (*
    Base persistence classes.
 
@@ -11,7 +16,6 @@
 
    Internal Note: stripped down versions of XClasses & XLists.
 *)
-unit Scene.PersistentClasses;
 
 interface
 
@@ -271,7 +275,7 @@ type
   end;
 
   // TPersistent thet inplements IInterface.
-  TgxInterfacedPersistent = class(TPersistent, IInterface)
+  TInterfacedPersistent = class(TPersistent, IInterface)
   protected
     // Implementing IInterface.
     function QueryInterface(const IID: TGUID; out Obj): HResult; stdcall;
@@ -280,7 +284,7 @@ type
   end;
 
   // TCollectionItem thet inplements IInterface.
-  TgxInterfacedCollectionItem = class(TCollectionItem, IInterface)
+  TInterfacedCollectionItem = class(TCollectionItem, IInterface)
   protected
     // Implementing IInterface.
     function QueryInterface(const IID: TGUID; out Obj): HResult; virtual; stdcall;
@@ -1767,20 +1771,20 @@ begin
 end;
 
 // ------------------
-// ------------------ TgxInterfacedPersistent ------------------
+// ------------------ TInterfacedPersistent ------------------
 // ------------------
 
-function TgxInterfacedPersistent._AddRef: Integer; stdcall;
+function TInterfacedPersistent._AddRef: Integer; stdcall;
 begin
   Result := -1; //ignore
 end;
 
-function TgxInterfacedPersistent._Release: Integer; stdcall;
+function TInterfacedPersistent._Release: Integer; stdcall;
 begin
   Result := -1; //ignore
 end;
 
-function TgxInterfacedPersistent.QueryInterface(const IID: TGUID;
+function TInterfacedPersistent.QueryInterface(const IID: TGUID;
   out Obj): HResult; stdcall;
 begin
   if GetInterface(IID, Obj) then
@@ -1790,21 +1794,21 @@ begin
 end;
 
 // ------------------
-// ------------------ TgxInterfacedCollectionItem ------------------
+// ------------------ TInterfacedCollectionItem ------------------
 // ------------------
 
 
-function TgxInterfacedCollectionItem._AddRef: Integer; stdcall;
+function TInterfacedCollectionItem._AddRef: Integer; stdcall;
 begin
   Result := -1; //ignore
 end;
 
-function TgxInterfacedCollectionItem._Release: Integer; stdcall;
+function TInterfacedCollectionItem._Release: Integer; stdcall;
 begin
   Result := -1; //ignore
 end;
 
-function TgxInterfacedCollectionItem.QueryInterface(const IID: TGUID;
+function TInterfacedCollectionItem.QueryInterface(const IID: TGUID;
     out Obj): HResult; stdcall;
 begin
   if GetInterface(IID, Obj) then
@@ -1817,6 +1821,6 @@ end;
 initialization
 // ------------------------------------------------------------------
 
-   // class registrations
+   
   RegisterClass(TPersistentObjectList);
 end.

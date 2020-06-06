@@ -32,7 +32,7 @@ uses
   FMX.ScrollBox;
 
 type
-  TLayouts_Form = class(TForm)
+  TGUILayoutsForm = class(TForm)
     Panel1: TPanel;
     OpenDialog1: TOpenDialog;
     SaveDialog1: TSaveDialog;
@@ -86,7 +86,7 @@ type
   end;
 
 var
-  Layouts_Form: TLayouts_Form;
+  GUILayoutsForm: TGUILayoutsForm;
 
 //======================================================================
 implementation
@@ -95,13 +95,13 @@ implementation
 {$R *.fmx}
 
 var
-  vGUILayoutEditor: Tlayouts_form;
+  vGUILayoutEditor: TGUILayoutsForm;
   Zoom: integer = 1;
 
 //---------------------------------------------------------------
-{ TLayouts_Form }
+// TLayouts_Form
 //---------------------------------------------------------------
-procedure TLayouts_Form.DrawCurrentElement;
+procedure TGUILayoutsForm.DrawCurrentElement;
 begin
   with Elements_Grid do
     if (Items_List.ItemIndex > -1) and (Sorted_elements[ColumnIndex + 3 * Selected] <> nil)
@@ -115,12 +115,12 @@ begin
       end;
 end;
 
-function TLayouts_Form.GetEnabledSpins: Boolean;
+function TGUILayoutsForm.GetEnabledSpins: Boolean;
 begin
   Result := Left_Edit.Enabled;
 end;
 
-procedure TLayouts_Form.Items_ListClick(Sender: TObject);
+procedure TGUILayoutsForm.Items_ListClick(Sender: TObject);
 var
   i, p: integer;
 begin
@@ -150,7 +150,7 @@ begin
   *)
 end;
 
-procedure TLayouts_Form.RefreshComponentBox;
+procedure TGUILayoutsForm.RefreshComponentBox;
 var
   i: integer;
 begin
@@ -164,7 +164,7 @@ begin
   Items_ListClick(nil);
 end;
 
-procedure TLayouts_Form.SetEnabledSpins(Value: Boolean);
+procedure TGUILayoutsForm.SetEnabledSpins(Value: Boolean);
 begin
   Left_Edit.Enabled := Value;
   Top_Edit.Enabled := Value;
@@ -172,7 +172,7 @@ begin
   Width_Edit.Enabled := Value;
 end;
 
-procedure TLayouts_Form.SyncImages;
+procedure TGUILayoutsForm.SyncImages;
 begin
   Image2.Width := Image1.Width;
   Image2.Height := Image1.Height;

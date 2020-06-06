@@ -1,12 +1,15 @@
-//
-// Graphic Scene Engine, http://glscene.org
-//
-{ 
-   Creates a single strand of hair using verlet classes. Can be used to simulate
-   ropes, fur or hair. 
-     
-}
+(*******************************************
+*                                          *
+* Graphic Scene Engine, http://glscene.org *
+*                                          *
+********************************************)
+
 unit GXS.VerletHairClasses;
+
+(*
+   Creates a single strand of hair using verlet classes. Can be used to simulate
+   ropes, fur or hair.
+*)
 
 interface
 

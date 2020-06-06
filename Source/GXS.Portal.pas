@@ -1,13 +1,16 @@
-//
-// Graphic Scene Engine, http://glscene.org
-//
-{
+(*******************************************
+*                                          *
+* Graphic Scene Engine, http://glscene.org *
+*                                          *
+********************************************)
+
+unit GXS.Portal;
+
+(*
   Portal Rendering support.
   The portal structures are subclasses of the Mesh structures, with a "sector"
   being assimilated to a "MeshObject" and sector polygons to facegroups.
-
-}
-unit GXS.Portal;
+*)
 
 interface
 
@@ -18,25 +21,25 @@ uses
   System.SysUtils,
 
   Scene.VectorTypes,
+  Scene.VectorGeometry,
   GXS.VectorFileObjects,
   GXS.Scene,
   GXS.Material,
-  Scene.VectorGeometry,
   GXS.RenderContextInfo;
 
 type
 
-  { A mesh object list that handles portal rendering.
-    The items are treated as being sectors. }
-  TPortalMeshObjectList = class(TgxMeshObjectList)
+  (* A mesh object list that handles portal rendering.
+    The items are treated as being sectors. *)
+  TgxPortalMeshObjectList = class(TgxMeshObjectList)
   public
     constructor CreateOwned(AOwner: TgxBaseMesh);
     destructor Destroy; override;
     procedure BuildList(var mrci: TgxRenderContextInfo); override;
   end;
 
-  { A portal renderer sector. }
-  TSectorMeshObject = class(TgxMorphableMeshObject)
+  // A portal renderer sector.
+  TgxSectorMeshObject = class(TgxMorphableMeshObject)
   private
     FRenderDone: Boolean;
   public
@@ -47,9 +50,9 @@ type
     property RenderDone: Boolean read FRenderDone write FRenderDone;
   end;
 
-  { A portal polygon.
+  (* A portal polygon.
     This is the base class for portal polygons, the TFGPortalPolygon class
-    implements the portal. }
+    implements the portal. *)
   TFGPolygon = class(TFGVertexNormalTexIndexList)
   public
     constructor CreateOwned(AOwner: TgxFaceGroups); override;
@@ -57,9 +60,9 @@ type
     procedure Prepare; override;
   end;
 
-  { A portal polygon.
+  (* A portal polygon.
     This is the base class for portal polygons, the TFGPortalPolygon class
-    implements the portal. }
+    implements the portal. *)
   TFGPortalPolygon = class(TFGPolygon)
   private
     FDestinationSectorIndex: Integer;
@@ -73,7 +76,7 @@ type
     property DestinationSectorIndex: Integer read FDestinationSectorIndex write FDestinationSectorIndex;
   end;
 
-  { Portal Renderer class. }
+  // Portal Renderer class.
   TgxPortal = class(TgxBaseMesh)
   public
     constructor Create(AOwner: TComponent); override;
@@ -82,33 +85,32 @@ type
     property MaterialLibrary;
   end;
 
-  // ------------------------------------------------------------------
+// ------------------------------------------------------------------
 implementation
-
 // ------------------------------------------------------------------
 
 // ------------------
-// ------------------ TPortalMeshObjectList ------------------
+// ------------------ TgxPortalMeshObjectList ------------------
 // ------------------
 
-constructor TPortalMeshObjectList.CreateOwned(AOwner: TgxBaseMesh);
+constructor TgxPortalMeshObjectList.CreateOwned(AOwner: TgxBaseMesh);
 begin
   inherited CreateOwned(AOwner);
 end;
 
-destructor TPortalMeshObjectList.Destroy;
+destructor TgxPortalMeshObjectList.Destroy;
 begin
   inherited;
 end;
 
-procedure TPortalMeshObjectList.BuildList(var mrci: TgxRenderContextInfo);
+procedure TgxPortalMeshObjectList.BuildList(var mrci: TgxRenderContextInfo);
 var
   i: Integer;
   startSector: TgxMeshObject;
 begin
   for i := 0 to Count - 1 do
-    with TSectorMeshObject(Items[i]) do
-      if InheritsFrom(TSectorMeshObject) then
+    with TgxSectorMeshObject(Items[i]) do
+      if InheritsFrom(TgxSectorMeshObject) then
         RenderDone := False;
   startSector := nil;
   for i := 0 to Count - 1 do
@@ -127,21 +129,21 @@ begin
 end;
 
 // ------------------
-// ------------------ TSectorMeshObject ------------------
+// ------------------ TgxSectorMeshObject ------------------
 // ------------------
 
-constructor TSectorMeshObject.CreateOwned(AOwner: TgxMeshObjectList);
+constructor TgxSectorMeshObject.CreateOwned(AOwner: TgxMeshObjectList);
 begin
   inherited;
   Mode := momFaceGroups;
 end;
 
-destructor TSectorMeshObject.Destroy;
+destructor TgxSectorMeshObject.Destroy;
 begin
   inherited;
 end;
 
-procedure TSectorMeshObject.BuildList(var mrci: TgxRenderContextInfo);
+procedure TgxSectorMeshObject.BuildList(var mrci: TgxRenderContextInfo);
 var
   i: Integer;
   libMat: TgxLibMaterial;
@@ -178,7 +180,7 @@ begin
   end;
 end;
 
-procedure TSectorMeshObject.Prepare;
+procedure TgxSectorMeshObject.Prepare;
 var
   i: Integer;
 begin
@@ -252,7 +254,7 @@ end;
 
 constructor TgxPortal.Create(AOwner: TComponent);
 begin
-  FMeshObjects := TPortalMeshObjectList.CreateOwned(Self);
+  FMeshObjects := TgxPortalMeshObjectList.CreateOwned(Self);
   inherited;
   ObjectStyle := ObjectStyle + [osDirectDraw];
   UseMeshMaterials := True;
@@ -265,10 +267,8 @@ end;
 
 // ------------------------------------------------------------------
 initialization
-
 // ------------------------------------------------------------------
 
-// class registrations
-RegisterClasses([TgxPortal, TSectorMeshObject, TFGPolygon, TFGPortalPolygon]);
+  RegisterClasses([TgxPortal, TgxSectorMeshObject, TFGPolygon, TFGPortalPolygon]);
 
 end.

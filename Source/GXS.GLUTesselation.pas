@@ -1,10 +1,12 @@
-//
-// Graphic Scene Engine, http://glscene.org
-//
-(*
-    Code to generate triangle strips and fans for polygons.
- *)
+(*******************************************
+*                                          *
+* Graphic Scene Engine, http://glscene.org *
+*                                          *
+********************************************)
+
 unit GXS.GLUTesselation;
+
+(* Code to generate triangle strips and fans for polygons *)
 
 interface
 
@@ -19,8 +21,8 @@ uses
   Scene.VectorGeometry,
   Scene.VectorTypes;
 
-{ Tesselates the polygon outlined by the Vertexes.
-  And addeds them to the first facegroup of the Mesh. }
+(* Tesselates the polygon outlined by the Vertexes.
+  And addeds them to the first facegroup of the Mesh. *)
 procedure DoTesselate(Vertexes: TAffineVectorList;
   Mesh: TgxBaseMesh; normal: PAffineVector = nil; invertNormals: Boolean = False);
 

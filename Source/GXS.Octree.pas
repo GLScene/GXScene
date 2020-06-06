@@ -1,11 +1,15 @@
-//
-// Graphic Scene Engine, http://glscene.org
-//
-(* 
+(*******************************************
+*                                          *
+* Graphic Scene Engine, http://glscene.org *
+*                                          *
+********************************************)
+
+unit GXS.Octree;
+
+(*
   Octree management classes and structures.
   TODO: move the many public vars/fields to private/protected
 *)
-unit GXS.Octree;
 
 interface
 
@@ -45,7 +49,7 @@ type
     ChildArray: array [0 .. 7] of POctreeNode; // Octree's 8 children
   end;
 
-  { Manages an Octree containing references to triangles.  }
+  // Manages an Octree containing references to triangles.
   TgxOctree = class(TObject)
   private
 {$IFDEF DEBUG}
@@ -70,14 +74,14 @@ type
     procedure WalkRayToLeafx(Onode: POctreeNode; const P, V: TVector);
     function GetExtent(const Flags: array of Byte; ParentNode: POctreeNode)
       : TAffineFLTVector;
-    { Recursive routine to build nodes from parent to max depth level. }
+    // Recursive routine to build nodes from parent to max depth level.
     procedure Refine(ParentNode: POctreeNode; Level: Integer);
-    { Main "walking" routines.  Walks the item through the Octree down to a leaf node.}
+    // Main "walking" routines.  Walks the item through the Octree down to a leaf node.
     procedure WalkPointToLeaf(ONode: POctreeNode; const P: TAffineVector);
     procedure WalkTriToLeaf(Onode: POctreeNode;
       const V1, V2, V3: TAffineVector);
     procedure WalkRayToLeaf(Onode: POctreeNode; const P, V: TVector);
-    { Example of how to process each node in the tree }
+    // Example of how to process each node in the tree
     procedure ConvertR4(ONode: POctreeNode; const Scale: TAffineFLTVector);
     procedure CreateTree(Depth: Integer);
     procedure CutMesh;
@@ -86,18 +90,18 @@ type
     RootNode: POctreeNode; // always points to root node
     MaxOlevel: Integer; // max depth level of TOctreeNode
     NodeCount: Integer;
-    { number of nodes (ex: 8 for level 1, 72 for level 2 etc).}
+    // number of nodes (ex: 8 for level 1, 72 for level 2 etc).
     TriCountMesh: Integer; // total number of triangles in the mesh
     TriCountOctree: Integer; // total number of triangles cut into the octree
     MeshCount: Integer; // number of meshes currently cut into the Octree
     ResultArray: array of POctreeNode; // holds the result nodes of various calls
-    { 19/06/2004 - Lucas G. - Needed this change - Used in ECMisc.pas }
+    // Needed this change - Used in ECMisc.pas
     TriangleFiler: TAffineVectorList;
     procedure WalkSphereToLeaf(Onode: POctreeNode; const P: TVector;
       Radius: Single);
-    { Initializes the tree from the triangle list.
+    (* Initializes the tree from the triangle list.
       All triangles must be contained in the world extent to be properly
-      taken into account. }
+      taken into account. *)
     procedure InitializeTree(const AWorldMinExtent, AWorldMaxExtent
       : TAffineVector; const ATriangles: TAffineVectorList;
       const ATreeDepth: Integer);
@@ -110,13 +114,13 @@ type
       const Velocity, Radius: Single; IntersectPoint: PVector = nil;
       IntersectNormal: PVector = nil): Boolean;
     function TriangleIntersect(const V1, V2, V3: TAffineVector): Boolean;
-    { Returns all triangles in the AABB. }
+    // Returns all triangles in the AABB.
     function GetTrianglesFromNodesIntersectingAABB(const ObjAABB: TAABB)
       : TAffineVectorList;
-    { Returns all triangles in an arbitrarily placed cube }
+    // Returns all triangles in an arbitrarily placed cube
     function GetTrianglesFromNodesIntersectingCube(const ObjAABB: TAABB;
       const ObjToSelf, SelfToObj: TMatrix): TAffineVectorList;
-    { Checks if an AABB intersects a face on the octree }
+    // Checks if an AABB intersects a face on the octree
     function AABBIntersect(const AABB: TAABB; M1to2, M2to1: TMatrix;
       Triangles: TAffineVectorList = nil): Boolean;
     // function SphereIntersect(position:TAffineVector; radius:single);

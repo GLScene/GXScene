@@ -1,7 +1,7 @@
 //
 // Graphic Scene Engine, http://glscene.org
 //
-{
+(*
   USAGE
   The TRedBlackTree generic class behaves somewhat like a TList:
   it stores _Value_ by _Key_
@@ -27,8 +27,7 @@
   given a _Key_, NextKey replace it with the smallest key that
   is larger than _Key_, PrevKey returns the largest key that is
   smaller than _Key_. For Last and First key result not returned.
-
-}
+*)
 
 unit GXS.RedBlackTree;
 
@@ -83,7 +82,7 @@ type
     constructor Create(KeyCompare: TKeyCompareFunc; ValueCompare: TValueCompareFunc);
     destructor Destroy; override;
     procedure Clear;
-    { Find value by key. }
+    // Find value by key.
     function Find(const key: TKey; out Value: TValue): Boolean;
     function NextKey(var key: TKey; out Value: TValue): Boolean;
     function PrevKey(var key: TKey; out Value: TValue): Boolean;

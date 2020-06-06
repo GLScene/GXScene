@@ -1,6 +1,8 @@
-//
-// Graphic Scene Engine, http://glscene.org
-//
+(*******************************************
+*                                          *
+* Graphic Scene Engine, http://glscene.org *
+*                                          *
+********************************************)
 (*
   Implementation of an universal 3DS file reader (and writer). This is the main file of the
   3DS import library. Currently only loading of 3DS files (Mesh files  * .3ds, Project files  * .prj
@@ -54,12 +56,11 @@ type
   // Progress.Position := StreamPos;
   // end;
 
-  // ----- support classes -----
-  // All structure data of a 3DS file is actually held in TFile3DS.FDatabase as a
-  // tree with lots of links across the various chunks.
-  // For convinience and speed the data of the chunks is collected into some
-  // special structures (FMaterialList etc.) and presented to the user
-  // by the following helper classes:
+  (* All structure data of a 3DS file is actually held in TFile3DS.FDatabase as a
+     tree with lots of links across the various chunks.
+     For convinience and speed the data of the chunks is collected into some
+     special structures (FMaterialList etc.) and presented to the user
+     by the following helper classes: *)
   TMaterialList = class
   private
     FOwner: TFile3DS;

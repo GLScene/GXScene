@@ -1,7 +1,12 @@
-//
-// Graphic Scene Engine, http://glscene.org
-//
-{
+(*******************************************
+*                                          *
+* Graphic Scene Engine, http://glscene.org *
+*                                          *
+********************************************)
+
+unit GXS.SpaceText;
+
+(*
   3D Text component.
 
   Note: You can get valid extents (including AABB's) of this component only
@@ -10,13 +15,11 @@
 
   Also extents are valid only when SpaceText has one line.
 
-}
-unit GXS.SpaceText;
+*)
 
 interface
 
 {$I Scene.inc}
-{$IFDEF UNIX}{$MESSAGE Error 'Unit not supported'}{$ENDIF}
 
 uses
   Winapi.Windows,
@@ -24,16 +27,15 @@ uses
   System.Classes,
   System.UITypes,
   System.SysUtils,
-  FMX.Dialogs,
   FMX.Graphics,
-  FMX.Controls,
 
   Import.OpenGLx,
-  GXS.Scene, 
-  GXS.Texture,
-  GXS.Context,
   Scene.VectorGeometry,
   Scene.Strings,
+
+  GXS.Scene,
+  GXS.Texture,
+  GXS.Context,
   GXS.RenderContextInfo,
   GXS.State;
 
@@ -42,7 +44,6 @@ type
   TgxSpaceTextCharRange = (stcrDefault, stcrAlphaNum, stcrNumbers, stcrWide);
 
   // Note: haAligned, haCentrically, haFitIn have not been implemented!
-  //
   TgxTextHorzAdjust = (haLeft, haCenter, haRight, haAligned,
     haCentrically, haFitIn);
 
@@ -64,7 +65,7 @@ type
     property Vert: TgxTextVertAdjust read FVert write SetVert default vaBaseLine;
   end;
 
-  // holds an entry in the font manager list (used in TgxSpaceText)
+  // Holds an entry in the font manager list (used in TgxSpaceText)
   PFontEntry = ^TFontEntry;
 
   TFontEntry = record
@@ -79,7 +80,7 @@ type
     FClients: TList;
   end;
 
-  { Renders a text in 3D. }
+  // Renders a text in 3D.
   TgxSpaceText = class(TgxSceneObject)
   private
     FFont: TFont;
@@ -119,8 +120,8 @@ type
     function TextWidth(const str: WideString = ''): Single;
     function TextMaxHeight(const str: WideString = ''): Single;
     function TextMaxUnder(const str: WideString = ''): Single;
-    { Note: this fuction is valid only after text has been rendered
-      the first time. Before that it returns zeros. }
+    (* Note: this fuction is valid only after text has been rendered
+      the first time. Before that it returns zeros. *)
     procedure TextMetrics(const str: WideString; out width, maxHeight, maxUnder: Single);
     procedure NotifyFontChanged;
     procedure NotifyChange(sender: TObject); override;
@@ -128,17 +129,16 @@ type
     function AxisAlignedDimensionsUnscaled: TVector; override;
     function BarycenterAbsolutePosition: TVector; override;
   published
-    { Adjusts the 3D font extrusion. 
+    (* Adjusts the 3D font extrusion.
       If Extrusion=0, the characters will be flat (2D), values >0 will
-      give them a third dimension. }
+      give them a third dimension. *)
     property Extrusion: Single read FExtrusion write SetExtrusion;
     property Font: TFont read FFont write SetFont;
     property Text: WideString read GetText write SetText stored False;
     property Lines: TStringList read FLines write SetLines;
-    { Quality related, see Win32 help for wglUseFontOutlines }
+    // Quality related, see Win32 help for wglUseFontOutlines
     property allowedDeviation: Single read FAllowedDeviation write SetAllowedDeviation;
-    { Character range to convert. 
-      Converting less characters saves time and memory... }
+    // Character range to convert. Converting less characters saves time and memory...
     property CharacterRange: TgxSpaceTextCharRange read FCharacterRange
       write SetCharacterRange default stcrDefault;
     property AspectRatio: Single read FAspectRatio write SetAspectRatio;
@@ -147,7 +147,7 @@ type
     property Adjust: TgxTextAdjust read FAdjust write SetAdjust;
   end;
 
-  { Manages a list of fonts for which display lists were created. }
+  // Manages a list of fonts for which display lists were created.
   TFontManager = class(TList)
   private
     FCurrentBase: Integer;
@@ -176,7 +176,7 @@ implementation
 // ------------------------------------------------------------------
 
 const
-  cFontManagerMsg = 'GXScene FontManagerMessage';
+  cFontManagerMsg = 'Scene FontManagerMessage';
 
 var
   vFontManager: TFontManager;
@@ -501,9 +501,6 @@ begin
   end;
 end;
 
-// SetAllowedDeviation
-//
-
 procedure TgxSpaceText.SetAllowedDeviation(const val: Single);
 begin
   if FAllowedDeviation <> val then
@@ -516,9 +513,6 @@ begin
   end;
 end;
 
-// SetCharacterRange
-//
-
 procedure TgxSpaceText.SetCharacterRange(const val: TgxSpaceTextCharRange);
 begin
   if FCharacterRange <> val then
@@ -528,26 +522,17 @@ begin
   end;
 end;
 
-// SetFont
-//
-
 procedure TgxSpaceText.SetFont(AFont: TFont);
 begin
   FFont.Assign(AFont);
   OnFontChange(nil);
 end;
 
-// OnFontChange
-//
-
 procedure TgxSpaceText.OnFontChange(sender: TObject);
 begin
   FontChanged := True;
   StructureChanged;
 end;
-
-// SetText
-//
 
 procedure TgxSpaceText.SetText(const AText: WideString);
 begin
@@ -563,9 +548,6 @@ begin
   StructureChanged;
 end;
 
-// SetAdjust
-//
-
 function TgxSpaceText.GetText: WideString;
 begin
   if FLines.Count = 1 then
@@ -574,25 +556,16 @@ begin
     Result := FLines.Text;
 end;
 
-// SetAdjust
-//
-
 procedure TgxSpaceText.SetLines(const Value: TStringList);
 begin
   FLines.Assign(Value);
 end;
-
-// SetAdjust
-//
 
 procedure TgxSpaceText.SetAdjust(const Value: TgxTextAdjust);
 begin
   FAdjust.Assign(Value);
   StructureChanged;
 end;
-
-// SetAspectRatio
-//
 
 procedure TgxSpaceText.SetAspectRatio(const Value: Single);
 begin
@@ -603,9 +576,6 @@ begin
   end;
 end;
 
-// SetOblique
-//
-
 procedure TgxSpaceText.SetOblique(const Value: Single);
 begin
   if FOblique <> Value then
@@ -614,9 +584,6 @@ begin
     StructureChanged;
   end;
 end;
-
-// SetTextHeight
-//
 
 procedure TgxSpaceText.SetTextHeight(const Value: Single);
 begin
@@ -627,17 +594,11 @@ begin
   end;
 end;
 
-// NotifyFontChanged
-//
-
 procedure TgxSpaceText.NotifyFontChanged;
 begin
   FTextFontEntry := nil;
   FontChanged := True;
 end;
-
-// NotifyChange
-//
 
 procedure TgxSpaceText.NotifyChange(sender: TObject);
 begin
@@ -646,9 +607,6 @@ begin
   else
     inherited;
 end;
-
-// DefaultHandler
-//
 
 procedure TgxSpaceText.DefaultHandler(var Message);
 begin
@@ -660,9 +618,6 @@ begin
       inherited;
   end;
 end;
-
-// BarycenterAbsolutePosition
-//
 
 function TgxSpaceText.BarycenterAbsolutePosition: TVector;
 var
@@ -706,9 +661,6 @@ begin
   Result := LocalToAbsolute(AdjustVector);
 end;
 
-// AxisAlignedDimensionsUnscaled
-//
-
 function TgxSpaceText.AxisAlignedDimensionsUnscaled: TVector;
 var
   lWidth, lHeightMax, lHeightMin: Single;
@@ -731,16 +683,10 @@ end;
 // ------------------ TFontManager ------------------
 // ------------------
 
-// Create
-//
-
 constructor TFontManager.Create;
 begin
   inherited;
 end;
-
-// Destroy
-//
 
 destructor TFontManager.Destroy;
 var
@@ -757,17 +703,11 @@ begin
   inherited Destroy;
 end;
 
-// VirtualHandleAlloc
-//
-
 procedure TFontManager.VirtualHandleAlloc(sender: TgxVirtualHandle;
   var handle: Cardinal);
 begin
   handle := FCurrentBase;
 end;
-
-// VirtualHandleDestroy
-//
 
 procedure TFontManager.VirtualHandleDestroy(sender: TgxVirtualHandle;
   var handle: Cardinal);
@@ -775,9 +715,6 @@ begin
   if handle <> 0 then
     glDeleteLists(handle, sender.Tag);
 end;
-
-// FindFond
-//
 
 function TFontManager.FindFont(AName: string; FStyles: TFontStyles;
   FExtrusion: Single; FAllowedDeviation: Single; FFirstChar, FLastChar: Integer)
@@ -798,9 +735,6 @@ begin
         Break;
       end;
 end;
-
-// GetFontBase
-//
 
 function TFontManager.GetFontBase(AName: string; FStyles: TFontStyles;
   FExtrusion: Single; allowedDeviation: Single; firstChar, lastChar: Integer;
@@ -882,9 +816,6 @@ begin
   end;
 end;
 
-// Release
-//
-
 procedure TFontManager.Release(entry: PFontEntry; client: TObject);
 var
   hMsg: TMessage;
@@ -909,9 +840,6 @@ begin
   end;
 end;
 
-// NotifyClients
-//
-
 procedure TFontManager.NotifyClients(Clients: TList);
 var
   i: Integer;
@@ -923,12 +851,7 @@ begin
 end;
 
 // -------------------------------------------------------------
-// -------------------------------------------------------------
-// -------------------------------------------------------------
 initialization
-
-// -------------------------------------------------------------
-// -------------------------------------------------------------
 // -------------------------------------------------------------
 
 vFontManagerMsgID := RegisterWindowMessage(cFontManagerMsg);

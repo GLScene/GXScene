@@ -1,13 +1,16 @@
-//
-// Graphic Scene Engine, http://glscene.org
-//
+(*******************************************
+*                                          *
+* Graphic Scene Engine, http://glscene.org *
+*                                          *
+********************************************)
+
+unit GXS.Mirror;
+
 (*
    Implements a basic, stencil-based mirror (as in Mark Kilgard's demo).
     It is strongly recommended to read and understand the explanations in the
    materials/mirror demo before using this component.
 *)
-
-unit GXS.Mirror;
 
 interface
 

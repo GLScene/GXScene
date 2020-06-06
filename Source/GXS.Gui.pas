@@ -1,12 +1,12 @@
-//
-// Graphic Scene Engine, http://glscene.org
-//
-{
-  In GL windows management classes and structures 
- 
-}
+(*******************************************
+*                                          *
+* Graphic Scene Engine, http://glscene.org *
+*                                          *
+********************************************)
 
 unit GXS.Gui;
+
+(* In GL windows management classes and structures *)
 
 interface
 
@@ -26,7 +26,7 @@ uses
   Scene.PersistentClasses,
   Scene.VectorGeometry,
   GXS.Coordinates,
-  GXS.BaseClasses;
+  Scene.BaseClasses;
 
 type
 
@@ -51,13 +51,13 @@ type
     constructor Create(AOwner: TComponent); override;
     procedure AddChild(AChild: TgxBaseSceneObject); override;
     procedure Insert(aIndex: Integer; aChild: TgxBaseSceneObject); override;
-    { GuiComponent Width in 3D world units. }
+    // GuiComponent Width in 3D world units.
     property Width: Single read FWidth write SetWidth;
-    { GuiComponent Height in 3D world units. }
+    // GuiComponent Height in 3D world units.
     property Height: Single read FHeight write SetHeight;
-    { GuiComponent Left in 3D world units. }
+    // GuiComponent Left in 3D world units.
     property Left: Single read GetLeft write SetLeft;
-    { GuiComponent Top in 3D world units. }
+    // GuiComponent Top in 3D world units.
     property Top: Single read GetTop write SetTop;
     property RecursiveVisible: Boolean read FRecursiveVisible;
   end;
@@ -147,14 +147,13 @@ type
     function GetItems(index: Integer): TgxGuiComponent;
   public
     constructor Create(AOwner: TgxGuiLayout);
-
     function GetOwner: TPersistent; override;
     function FindItem(name: TgxGuiComponentName): TgxGuiComponent;
     property Items[index: Integer]: TgxGuiComponent read GetItems write
       SetItems; default;
   end;
 
-  TgxGuiLayout = class(TgxUpdateableComponent)
+  TgxGuiLayout = class(TUpdateAbleComponent)
   private
     FBitmapFont: TgxCustomBitmapFont;
     FMaterial: TgxMaterial;
@@ -164,23 +163,18 @@ type
   protected
     procedure Notification(AComponent: TComponent; Operation: TOperation);
       override;
-
     procedure SetFileName(newName: string);
   public
     constructor Create(AOwner: TComponent); override;
     destructor Destroy; override;
     procedure Assign(Source: TPersistent); override;
-
     procedure LoadFromStream(Stream: TStream);
     procedure LoadFromFile(FN: string);
-
     procedure Clear;
-
     procedure SaveToStream(Stream: TStream);
     procedure SaveToFile(FN: string);
-    procedure AddGuiComponent(Component: TgxUpdateableComponent);
-    procedure RemoveGuiComponent(Component: TgxUpdateableComponent);
-
+    procedure AddGuiComponent(Component: TUpdateAbleComponent);
+    procedure RemoveGuiComponent(Component: TUpdateAbleComponent);
     procedure NotifyChange(Sender: TObject); override;
   published
     property BitmapFont: TgxCustomBitmapFont read FBitmapFont write FBitmapFont;
@@ -196,7 +190,9 @@ const
 
 function IsInRect(const R: TGUIRect; X, Y: Single): Boolean;
 
+//-----------------------------------
 implementation
+//-----------------------------------
 
 function IsInRect(const R: TGUIRect; X, Y: Single): Boolean;
 
@@ -208,17 +204,11 @@ end;
 // ------------------ TgxBaseGuiObject ------------------
 // ------------------
 
-// Create
-//
-
 constructor TgxBaseGuiObject.Create(AOwner: TComponent);
 begin
   inherited Create(AOwner);
   FRecursiveVisible := Visible;
 end;
-
-// SetLeft
-//
 
 procedure TgxBaseGuiObject.SetLeft(const Value: Single);
 var
@@ -245,9 +235,6 @@ begin
   end;
 end;
 
-// GetLeft
-//
-
 function TgxBaseGuiObject.GetLeft: Single;
 begin
   if Assigned(Parent) and (Parent is TgxBaseGuiObject) then
@@ -255,9 +242,6 @@ begin
   else
     Result := Position.X;
 end;
-
-// SetTop
-//
 
 procedure TgxBaseGuiObject.SetTop(const Value: Single);
 var
@@ -284,9 +268,6 @@ begin
   end;
 end;
 
-// GetTop
-//
-
 function TgxBaseGuiObject.GetTop: Single;
 begin
   if Assigned(Parent) and (Parent is TgxBaseGuiObject) then
@@ -294,9 +275,6 @@ begin
   else
     Result := Position.Y;
 end;
-
-// SetWidth
-//
 
 procedure TgxBaseGuiObject.SetWidth(const val: Single);
 begin
@@ -307,9 +285,6 @@ begin
   end;
 end;
 
-// SetHeight
-//
-
 procedure TgxBaseGuiObject.SetHeight(const val: Single);
 begin
   if FHeight <> val then
@@ -318,9 +293,6 @@ begin
     NotifyChange(Self);
   end;
 end;
-
-// NotifyHide
-//
 
 procedure TgxBaseGuiObject.NotifyHide;
 var
@@ -339,9 +311,6 @@ begin
   end;
 end;
 
-// NotifyShow
-//
-
 procedure TgxBaseGuiObject.NotifyShow;
 var
   child: TgxBaseSceneObject;
@@ -359,9 +328,6 @@ begin
   end;
 end;
 
-// AddChild
-//
-
 procedure TgxBaseGuiObject.AddChild(aChild: TgxBaseSceneObject);
 begin
   inherited;
@@ -374,9 +340,6 @@ begin
   end;
 end;
 
-// Insert
-//
-
 procedure TgxBaseGuiObject.Insert(aIndex: Integer; aChild: TgxBaseSceneObject);
 begin
   inherited;
@@ -388,9 +351,6 @@ begin
       TgxBaseGuiObject(AChild).NotifyHide;
   end;
 end;
-
-// SetVisible
-//
 
 procedure TgxBaseGuiObject.SetVisible(aValue: Boolean);
 begin
@@ -478,7 +438,7 @@ begin
   end;
 end;
 
-procedure TgxGuiLayout.AddGuiComponent(Component: TgxUpdateableComponent);
+procedure TgxGuiLayout.AddGuiComponent(Component: TUpdateAbleComponent);
 begin
   if FGuiComponentList.IndexOf(Component) < 0 then
   begin
@@ -487,7 +447,7 @@ begin
   end;
 end;
 
-procedure TgxGuiLayout.RemoveGuiComponent(Component: TgxUpdateableComponent);
+procedure TgxGuiLayout.RemoveGuiComponent(Component: TUpdateAbleComponent);
 begin
   FGuiComponentList.Remove(Component);
   RemoveFreeNotification(Component);
@@ -513,10 +473,10 @@ begin
       LComponent.Name := LLayout.FGuiComponents[I].Name;
     end;
     for I := 0 to FGuiComponentList.Count - 1 do
-      TgxUpdateAbleComponent(FGuiComponentList[I]).RemoveFreeNotification(Self);
+      TUpdateAbleComponent(FGuiComponentList[I]).RemoveFreeNotification(Self);
     FGuiComponentList.Assign(LLayout.FGuiComponentList);
     for I := 0 to FGuiComponentList.Count - 1 do
-      TgxUpdateAbleComponent(FGuiComponentList[I]).FreeNotification(Self);
+      TUpdateAbleComponent(FGuiComponentList[I]).FreeNotification(Self);
   end
   else
     inherited; // Assign Error
@@ -541,7 +501,7 @@ begin
   inherited;
 
   for XC := FGuiComponentList.Count - 1 downto 0 do
-    TgxUpdateAbleComponent(FGuiComponentList[XC]).NotifyChange(Self);
+    TUpdateAbleComponent(FGuiComponentList[XC]).NotifyChange(Self);
 end;
 
 procedure TgxGuiLayout.LoadFromStream(Stream: TStream);

@@ -1,6 +1,8 @@
-//
-// Graphic Scene Engine, http://glscene.org
-//
+(*******************************************
+*                                          *
+* Graphic Scene Engine, http://glscene.org *
+*                                          *
+********************************************)
 {
   A PFX whose particles are lines
 
@@ -214,7 +216,7 @@ end;
 initialization
 // ------------------------------------------------------------------
 
-   // class registrations
+   
    RegisterClasses([TgxLineParticle, TgxLinePFXManager]);
 
 end.

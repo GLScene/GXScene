@@ -1,10 +1,12 @@
-//
-// Graphic Scene Engine, http://glscene.org
-//
-{
-  Implements a tiled texture plane.
-}
+(*********************************************
+ *                                           *
+ *  Graphic Scene Engine, http://glscene.org *
+ *                                           *
+ *********************************************)
+
 unit GXS.TilePlane;
+
+(* Implements a tiled texture plane *)
 
 interface
 

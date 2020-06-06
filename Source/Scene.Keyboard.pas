@@ -1,6 +1,11 @@
-//
-// Graphic Scene Engine, http://glscene.org
-//
+(*******************************************
+*                                          *
+* Graphic Scene Engine, http://glscene.org *
+*                                          *
+********************************************)
+
+unit Scene.Keyboard;
+
 (*
   Provides on demand state of any key on the keyboard as well as a set of
   utility functions for working with virtual keycodes.
@@ -10,7 +15,6 @@
   See "Virtual-Key Codes" in the Win32 programmers references for a list of
   key code constants (VK_* constants are declared in the "Windows" unit).
 *)
-unit Scene.Keyboard;
 
 interface
 

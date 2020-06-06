@@ -1,10 +1,12 @@
-//
-// Graphic Scene Engine, http://glscene.org
-//
-{
+(*******************************************
+*                                          *
+* Graphic Scene Engine, http://glscene.org *
+*                                          *
+********************************************)
+(*
   Asynchronous timer component (actual 1 ms resolution). 
   This component is based on ThreadedTimer by Carlos Barbosa. 
-}
+*)
 unit GXS.AsyncTimer;
 
 interface
@@ -109,7 +111,7 @@ begin
 end;
 
 //-----------------------------------------
-{ TgxAsyncTimer }
+// TgxAsyncTimer 
 //-----------------------------------------
 
 constructor TgxAsyncTimer.Create(AOwner: TComponent);

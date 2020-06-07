@@ -135,58 +135,58 @@
         <DCCReference Include="rtl.dcp"/>
         <DCCReference Include="fmx.dcp"/>
         <DCCReference Include="GXScene_RT.dcp"/>
-        <DCCReference Include="..\..\Source\GXS.FGUILayoutEditor.pas">
-            <Form>GUILayoutsForm</Form>
+        <DCCReference Include="..\..\Source\Design.FLayoutEditor.pas">
+            <Form>GUILayoutForm</Form>
             <DesignClass>T</DesignClass>
         </DCCReference>
-        <DCCReference Include="..\..\Source\GXS.FInfo.pas">
+        <DCCReference Include="..\..\Source\Design.FInfo.pas">
             <Form>FInfo</Form>
             <DesignClass>TForm</DesignClass>
         </DCCReference>
-        <DCCReference Include="..\..\Source\GXS.FRTextureEdit.pas">
-            <Form>FRTextureEdit</Form>
+        <DCCReference Include="..\..\Source\Design.FRTextureEdit.pas">
+            <Form>TextureEditFrame</Form>
             <DesignClass>TFrame</DesignClass>
         </DCCReference>
-        <DCCReference Include="..\..\Source\GXS.FXCollectionEditor.pas">
+        <DCCReference Include="..\..\Source\Design.FXCollectionEditor.pas">
             <Form>XCollectionEditorForm</Form>
         </DCCReference>
-        <DCCReference Include="..\..\Source\GXS.FLibMaterialPicker.pas">
+        <DCCReference Include="..\..\Source\Design.FLibMaterialPicker.pas">
             <Form>FLibMaterialPicker</Form>
         </DCCReference>
-        <DCCReference Include="..\..\Source\GXS.FRMaterialPreview.pas">
-            <Form>FRMaterialPreview</Form>
+        <DCCReference Include="..\..\Source\Design.FRMaterialPreview.pas">
+            <Form>MaterialPreviewFrame</Form>
             <DesignClass>TFrame</DesignClass>
         </DCCReference>
-        <DCCReference Include="..\..\Source\GXS.FRFaceEditor.pas">
+        <DCCReference Include="..\..\Source\Design.FRFaceEditor.pas">
             <Form>FaceEditorFrame</Form>
             <DesignClass>TFrame</DesignClass>
         </DCCReference>
-        <DCCReference Include="..\..\Source\GXS.FRColorEditor.pas">
+        <DCCReference Include="..\..\Source\Design.FRColorEditor.pas">
             <Form>ColorEditorFrame</Form>
             <DesignClass>TFrame</DesignClass>
         </DCCReference>
-        <DCCReference Include="..\..\Source\GXS.FPlugInManagerEditor.pas">
+        <DCCReference Include="..\..\Source\Design.FPlugInManagerEditor.pas">
             <Form>FPlugInManagerEditor</Form>
         </DCCReference>
-        <DCCReference Include="..\..\Source\GXS.FMaterialEditorForm.pas">
+        <DCCReference Include="..\..\Source\Design.FMaterialEditorForm.pas">
             <Form>FMaterialEditorForm</Form>
         </DCCReference>
-        <DCCReference Include="..\..\Source\GXS.FShaderMemo.pas">
+        <DCCReference Include="..\..\Source\Design.FShaderMemo.pas">
             <Form>ShaderMemoForm</Form>
         </DCCReference>
-        <DCCReference Include="..\..\Source\GXS.FShaderUniformEditor.pas">
+        <DCCReference Include="..\..\Source\Design.FShaderUniformEditor.pas">
             <Form>ShaderUniformEditorForm</Form>
         </DCCReference>
-        <DCCReference Include="..\..\Source\GXS.FGuiSkinEditor.pas">
-            <Form>FGUISkinEditor</Form>
+        <DCCReference Include="..\..\Source\Design.FSkinEditor.pas">
+            <Form>SkinEditorForm</Form>
             <DesignClass>TForm</DesignClass>
         </DCCReference>
-        <DCCReference Include="..\..\Source\GXS.FSceneEditor.pas">
+        <DCCReference Include="..\..\Source\Design.FSceneEditor.pas">
             <Form>SceneEditorForm</Form>
             <DesignClass>TForm</DesignClass>
         </DCCReference>
-        <DCCReference Include="..\..\Source\GXS.SceneRegister.pas"/>
-        <DCCReference Include="..\..\Source\GXS.XCollectionRegister.pas"/>
+        <DCCReference Include="..\..\Source\Design.SceneRegister.pas"/>
+        <DCCReference Include="..\..\Source\Design.XCollectionRegister.pas"/>
         <RcCompile Include="..\..\Resources\GXSceneObjects.rc">
             <Form>GXSceneObjects.res</Form>
         </RcCompile>

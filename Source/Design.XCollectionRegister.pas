@@ -1,10 +1,13 @@
-//
-// This unit is part of the GLScene Engine, http://glscene.org
-//
-(*
-   Register TXCollection property editor 
-*)
-unit GXS.XCollectionRegister;
+(*******************************************
+*                                          *
+* Graphic Scene Engine, http://glscene.org *
+*                                          *
+********************************************)
+
+unit Design.XCollectionRegister;
+
+(* Register TXCollection property editor *)
+(* TODO *)
 
 interface
 
@@ -14,10 +17,11 @@ uses
   System.Classes,
   System.TypInfo,
 
-///  DesignEditors, 
+///  DesignEditors,
 ///  DesignIntf,
 
-   Scene.XCollection;
+    Scene.XCollection,
+    Design.FXCollectionEditor;
 
 type
 	TXCollectionProperty = class(TClassProperty)
@@ -31,10 +35,6 @@ procedure Register;
 // ------------------------------------------------------------------
 implementation
 // ------------------------------------------------------------------
-
-uses
-  GXS.FXCollectionEditor;
-
 
 //----------------- TXCollectionProperty ------------------------------------
 

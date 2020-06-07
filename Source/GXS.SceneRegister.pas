@@ -1,12 +1,15 @@
-//
-// Graphic Scene Engine, http://glscene.org
-//
+(*******************************************
+*                                          *
+* Graphic Scene Engine, http://glscene.org *
+*                                          *
+********************************************)
+
+unit GXS.SceneRegister;
+
 (*
   Registration unit for library components, property editors and
   IDE experts.
 *)
-
-unit GXS.SceneRegister;
 
 interface
 
@@ -192,15 +195,15 @@ type
     procedure RequiresUnits(Proc: TGetStrProc); override;
   end;
 
-  { Selection editor for TgxBaseSceneObject.
+  (* Selection editor for TgxBaseSceneObject.
     Allows units to be added to the uses clause automatically when
-    behaviours/effects are added to a TgxBaseSceneObject at design-time. }
+    behaviours/effects are added to a TgxBaseSceneObject at design-time. *)
   TgxBaseSceneObjectSelectionEditor = class(TSelectionEditor)
   public
     procedure RequiresUnits(Proc: TGetStrProc); override;
   end;
 
-  { Editor for Archive Manager.  }
+  // Editor for Archive Manager.
   TgxSArchiveManagerEditor = class(TReuseableDefaultEditor, IDefaultEditor)
   protected
     procedure EditProperty(const Prop: IProperty;
@@ -396,7 +399,7 @@ uses
   GXS.TimeEventsMgr,
   GXS.Trail,
   GXS.Tree,
-  GXS.Types,
+  Scene.VectorRecTypes,
   GXS.FileTIN,
   GXS.UserShader,
   GXS.Utils,
@@ -409,12 +412,12 @@ uses
   Scene.VectorTypes,
   Scene.VectorGeometry,
   // Image file formats
-  FileDDSImage,
-  GXS.FileTGA,
+  Formats.FileDDSImage,
+  Formats.FileTGA,
   // Vector file formats
-  GXS.File3DS,
-  GXS.FileASE,
-  GXS.FileB3D,
+  Formats.File3DS,
+  Formats.FileASE,
+  Formats.FileB3D,
   GXS.FileGL2,
   GXS.FileGTS,
   GXS.FileLMTS,

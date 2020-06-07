@@ -1,10 +1,12 @@
-//
-// Graphic Scene Engine, http://glscene.org
-//
-(*
-  3DStudio 3DS vector file format implementation.
-*)
+(*******************************************
+*                                          *
+* Graphic Scene Engine, http://glscene.org *
+*                                          *
+********************************************)
+
 unit GXS.File3DS;
+
+(* 3DStudio 3DS vector file format implementation *)
 
 interface
 
@@ -39,7 +41,7 @@ type
 
   EGLFile3DS = class(Exception);
 
-  { A record that holds all the information that is used during 3ds animation. }
+  // A record that holds all the information that is used during 3ds animation.
   TgxFile3DSAnimationData = packed record
     ModelMatrix: TMatrix;
     Color: TVector;            // Omni Light.
@@ -49,7 +51,7 @@ type
     Roll: single;
   end;
 
-  {  An abstract class that describes how to interpolate animation keys. }
+  //  An abstract class that describes how to interpolate animation keys.
   TgxFile3DSAnimationKeys = class(TPersistentObject)
   private
     FNumKeys: integer;
@@ -191,11 +193,11 @@ type
     destructor Destroy; override;
   end;
 
-  { Used only for serialization. There probably is a more efficient way to do it. }
+  // Used only for serialization. There probably is a more efficient way to do it.
   TgxFile3DSAnimKeysClassType = (ctScale, ctRot, ctPos, ctCol, ctTPos,
     ctFall, ctHot, ctRoll);
 
-  { A 3ds-specific TgxMorphableMeshObject. }
+  // A 3ds-specific TgxMorphableMeshObject.
   TgxFile3DSDummyObject = class(TgxMorphableMeshObject)
   private
     FAnimList: TgxFile3DSAnimationKeyList;
@@ -225,7 +227,7 @@ type
     property RefrenceTransf: TgxFile3DSAnimationData read FRefTranf write FRefTranf;
   end;
 
-  { A 3ds-specific mesh object. }
+  // A 3ds-specific mesh object.
   TgxFile3DSMeshObject = class(TgxFile3DSDummyObject)
   public
     procedure LoadAnimation(const AData: Pointer); override;
@@ -248,7 +250,7 @@ type
     destructor Destroy; override;
   end;
 
-  {  A 3ds-specific spot light. }
+  //  A 3ds-specific spot light.
   TgxFile3DSSpotLightObject = class(TgxFile3DSOmniLightObject)
   public
     procedure LoadData(const AOwner: TgxBaseMesh; const AData: PLight3DS); override;
@@ -256,7 +258,7 @@ type
     procedure SetFrame(const AFrame: real); override;
   end;
 
-  { A 3ds-specific camera. }
+  // A 3ds-specific camera.
   TgxFile3DSCameraObject = class(TgxFile3DSDummyObject)
   private
     FTargetObj: TgxDummyCube;
@@ -272,10 +274,9 @@ type
     destructor Destroy; override;
   end;
 
-  { The 3DStudio vector file.
-     Uses an upgraded version if a 3DS import library by Mike Lischke.
-     (http://www.lishcke-online.de). A 3DS file may contain material
-     information and require textures when loading. }
+  (* The 3DStudio vector file.
+     A 3DS file may contain material
+     information and require textures when loading. *)
   Tgx3DSVectorFile = class(TgxVectorFile)
   public
 
@@ -284,34 +285,31 @@ type
   end;
 
 var
-  { If enabled, advanced parameters will be loaded from a 3ds file
+  (* If enabled, advanced parameters will be loaded from a 3ds file
      (TextureScale, TextureOffset), but it might break backwards compatibility.
      If disabled, it won't break anything, but some parameters will not be
      loaded correctly from a 3ds file.
      Also there is a significant drop in FPS when this option is on
-     (for unknown reasons), so it is off by default. }
+     (for unknown reasons), so it is off by default. *)
   vFile3DS_UseTextureEx: boolean = False;
 
-  { If enabled, allows 3ds animation and fixes loading of some 3ds models,
+  (* If enabled, allows 3ds animation and fixes loading of some 3ds models,
      but has a few bugs:
      - TgxFreeForm.AutoCentering does now work correctly.
      - TgxMeshObject.vertices return values different from
-        TgxMeshObject.ExtractTriangles()
-     }
+        TgxMeshObject.ExtractTriangles() *)
   vFile3DS_EnableAnimation: boolean = False;
 
-  { If enabled, a -90 degrees (-PI/2) rotation will occured on X Axis.
+  (* If enabled, a -90 degrees (-PI/2) rotation will occured on X Axis.
      By design 3dsmax has a Z Up-Axis, after the rotation the Up axis will
-     be Y. (Note: you need vFile3DS_EnableAnimation = true)
-  }
+     be Y. (Note: you need vFile3DS_EnableAnimation = true) *)
   vFile3DS_FixDefaultUpAxisY: boolean = False;
 
 
-  { If >= 0, then the vertices list will be updated with selected frame
+  (* If >= 0, then the vertices list will be updated with selected frame
      animation data. (Note: you need vFile3DS_EnableAnimation = true).
      Be aware that in that case animation will not be usable, it is made
-     to be used with a static mesh like GLFreeForm.
-  }
+     to be used with a static mesh like GLFreeForm. *)
   vFile3DS_LoadedStaticFrame: integer = -1;
 
 // ------------------------------------------------------------------
@@ -345,7 +343,6 @@ begin
     end;
   end;
 end;
-
 
 // ClassToAnimKeysClassType
 
@@ -442,10 +439,6 @@ end;
 // ------------------
 // ------------------ Support classes ------------------
 // ------------------
-
-{$IFDEF VXS_REGIONS}{$ENDREGION}{$ENDIF}
-
-{$IFDEF VXS_REGIONS}{$REGION 'TgxFile3DSAnimationKeys'}{$ENDIF}
 
 procedure TgxFile3DSAnimationKeys.InterpolateFrame(var I: integer;
   var w: real; const AFrame: real);
@@ -580,10 +573,6 @@ begin
     Reader.Read(FKeys[0], FNumKeys * SizeOf(TKeyHeader3DS));
 end;
 
-{$IFDEF VXS_REGIONS}{$ENDREGION}{$ENDIF}
-
-{$IFDEF VXS_REGIONS}{$REGION 'TgxFile3DSScaleAnimationKeys'}{$ENDIF}
-
 procedure TgxFile3DSScaleAnimationKeys.LoadData(const ANumKeys: integer;
   const Keys: PKeyHeaderList; const AData: Pointer);
 var
@@ -622,8 +611,6 @@ begin
   if FNumKeys > 0 then
     DataTransf.ModelMatrix := MatrixMultiply(DataTransf.ModelMatrix,
       CreateScaleMatrix(InterpolateValue(FScale, AFrame)));
-
-
 end;
 
 procedure TgxFile3DSScaleAnimationKeys.Assign(Source: TPersistent);
@@ -653,10 +640,6 @@ begin
   if FNumKeys > 0 then
     Reader.Read(FScale[0], FNumKeys * SizeOf(TPoint3DS));
 end;
-
-{$IFDEF VXS_REGIONS}{$ENDREGION}{$ENDIF}
-
-{$IFDEF VXS_REGIONS}{$REGION 'TgxFile3DSRotationAnimationKeys'}{$ENDIF}
 
 procedure TgxFile3DSRotationAnimationKeys.LoadData(const ANumKeys: integer;
   const Keys: PKeyHeaderList; const AData: Pointer);
@@ -697,11 +680,8 @@ begin
       FRot[I].Y := AffVect.Y;
       FRot[I].Z := AffVect.Z;
     end;
-
-
   end;
 end;
-
 
 procedure TgxFile3DSRotationAnimationKeys.Apply(var DataTransf: TgxFile3DSAnimationData;
   const AFrame: real);
@@ -716,7 +696,6 @@ var
   I: integer;
 begin
   inherited;
-
   SetLength(FRot, FNumKeys);
   for I := 0 to FNumKeys - 1 do
     FRot[I] := (Source as TgxFile3DSRotationAnimationKeys).FRot[I];
@@ -725,7 +704,6 @@ end;
 procedure TgxFile3DSRotationAnimationKeys.WriteToFiler(Writer: TVirtualWriter);
 begin
   inherited;
-
   if FNumKeys > 0 then
     Writer.Write(FRot[0], FNumKeys * SizeOf(TKFRotKey3DS));
 end;
@@ -733,15 +711,10 @@ end;
 procedure TgxFile3DSRotationAnimationKeys.ReadFromFiler(Reader: TVirtualReader);
 begin
   inherited;
-
   SetLength(FRot, FNumKeys);
   if FNumKeys > 0 then
     Reader.Read(FRot[0], FNumKeys * SizeOf(TKFRotKey3DS));
 end;
-
-{$IFDEF VXS_REGIONS}{$ENDREGION}{$ENDIF}
-
-{$IFDEF VXS_REGIONS}{$REGION 'TgxFile3DSPositionAnimationKeys'}{$ENDIF}
 
 procedure TgxFile3DSPositionAnimationKeys.LoadData(const ANumKeys: integer;
   const Keys: PKeyHeaderList; const AData: Pointer);
@@ -753,7 +726,6 @@ begin
   for I := 0 to FNumKeys - 1 do
   begin
     FPos[I] := TAffineVector(PPointList(AData)[I]);
-
     if vFile3DS_FixDefaultUpAxisY then
     begin
       FPos[I] := VectorRotateAroundX(FPos[I], cGLFILE3DS_FIXDEFAULTUPAXISY_ROTATIONVALUE);
@@ -774,7 +746,6 @@ var
   I: integer;
 begin
   inherited;
-
   SetLength(FPos, FNumKeys);
   for I := 0 to FNumKeys - 1 do
     FPos[I] := (Source as TgxFile3DSPositionAnimationKeys).FPos[I];
@@ -783,7 +754,6 @@ end;
 procedure TgxFile3DSPositionAnimationKeys.WriteToFiler(Writer: TVirtualWriter);
 begin
   inherited;
-
   if FNumKeys > 0 then
     Writer.Write(FPos[0], FNumKeys * SizeOf(TPoint3DS));
 end;
@@ -797,17 +767,12 @@ begin
     Reader.Read(FPos[0], FNumKeys * SizeOf(TPoint3DS));
 end;
 
-{$IFDEF VXS_REGIONS}{$ENDREGION}{$ENDIF}
-
-{$IFDEF VXS_REGIONS}{$REGION 'TgxFile3DSColorAnimationKeys'}{$ENDIF}
-
 procedure TgxFile3DSColorAnimationKeys.LoadData(const ANumKeys: integer;
   const Keys: PKeyHeaderList; const AData: Pointer);
 var
   I: integer;
 begin
   inherited;
-
   SetLength(FCol, FNumKeys);
   for I := 0 to FNumKeys - 1 do
     FCol[I] := TaffineVector(PFColorList(AData)[I]);
@@ -826,7 +791,6 @@ var
   I: integer;
 begin
   inherited;
-
   SetLength(FCol, FNumKeys);
   for I := 0 to FNumKeys - 1 do
     FCol[I] := (Source as TgxFile3DSColorAnimationKeys).FCol[I];
@@ -835,7 +799,6 @@ end;
 procedure TgxFile3DSColorAnimationKeys.WriteToFiler(Writer: TVirtualWriter);
 begin
   inherited;
-
   if FNumKeys > 0 then
     Writer.Write(FCol[0], FNumKeys * SizeOf(TFColor3DS));
 end;
@@ -849,22 +812,16 @@ begin
     Reader.Read(FCol[0], FNumKeys * SizeOf(TFColor3DS));
 end;
 
-{$IFDEF VXS_REGIONS}{$ENDREGION}{$ENDIF}
-
-{$IFDEF VXS_REGIONS}{$REGION 'TTgxFile3DSPositionAnimationKeys'}{$ENDIF}
-
 procedure TTgxFile3DSPositionAnimationKeys.LoadData(const ANumKeys: integer;
   const Keys: PKeyHeaderList; const AData: Pointer);
 var
   I: integer;
 begin
   inherited;
-
   SetLength(FTPos, FNumKeys);
   for I := 0 to FNumKeys - 1 do
   begin
     FTPos[I] := TaffineVector(PPointList(AData)[I]);
-
     if vFile3DS_FixDefaultUpAxisY then
     begin
       FTPos[I] := VectorRotateAroundX(FTPos[I], cGLFILE3DS_FIXDEFAULTUPAXISY_ROTATIONVALUE);
@@ -885,7 +842,6 @@ var
   I: integer;
 begin
   inherited;
-
   SetLength(FTPos, FNumKeys);
   for I := 0 to FNumKeys - 1 do
     FTPos[I] := (Source as TTgxFile3DSPositionAnimationKeys).FTPos[I];
@@ -894,7 +850,6 @@ end;
 procedure TTgxFile3DSPositionAnimationKeys.WriteToFiler(Writer: TVirtualWriter);
 begin
   inherited;
-
   if FNumKeys > 0 then
     Writer.Write(FTPos[0], FNumKeys * SizeOf(TPoint3DS));
 end;
@@ -908,17 +863,12 @@ begin
     Reader.Read(FTPos[0], FNumKeys * SizeOf(TPoint3DS));
 end;
 
-{$IFDEF VXS_REGIONS}{$ENDREGION}{$ENDIF}
-
-{$IFDEF VXS_REGIONS}{$REGION 'TgxFile3DSSpotLightCutOffAnimationKeys'}{$ENDIF}
-
 procedure TgxFile3DSSpotLightCutOffAnimationKeys.LoadData(const ANumKeys: integer;
   const Keys: PKeyHeaderList; const AData: Pointer);
 var
   I: integer;
 begin
   inherited;
-
   SetLength(FFall, FNumKeys);
   for I := 0 to FNumKeys - 1 do
     FFall[I] := PSingleList(AData)[I];
@@ -937,7 +887,6 @@ var
   I: integer;
 begin
   inherited;
-
   SetLength(FFall, FNumKeys);
   for I := 0 to FNumKeys - 1 do
     FFall[I] := (Source as TgxFile3DSSpotLightCutOffAnimationKeys).FFall[I];
@@ -946,7 +895,6 @@ end;
 procedure TgxFile3DSSpotLightCutOffAnimationKeys.WriteToFiler(Writer: TVirtualWriter);
 begin
   inherited;
-
   if FNumKeys > 0 then
     Writer.Write(FFall[0], FNumKeys * SizeOf(single));
 end;
@@ -960,17 +908,12 @@ begin
     Reader.Read(FFall[0], FNumKeys * SizeOf(single));
 end;
 
-{$IFDEF VXS_REGIONS}{$ENDREGION}{$ENDIF}
-
-{$IFDEF VXS_REGIONS}{$REGION 'TgxFile3DSLightHotSpotAnimationKeys'}{$ENDIF}
-
 procedure TgxFile3DSLightHotSpotAnimationKeys.LoadData(const ANumKeys: integer;
   const Keys: PKeyHeaderList; const AData: Pointer);
 var
   I: integer;
 begin
   inherited;
-
   SetLength(FHot, FNumKeys);
   for I := 0 to FNumKeys - 1 do
     FHot[I] := PSingleList(AData)[I];
@@ -988,7 +931,6 @@ var
   I: integer;
 begin
   inherited;
-
   SetLength(FHot, FNumKeys);
   for I := 0 to FNumKeys - 1 do
     FHot[I] := (Source as TgxFile3DSLightHotSpotAnimationKeys).FHot[I];
@@ -997,7 +939,6 @@ end;
 procedure TgxFile3DSLightHotSpotAnimationKeys.WriteToFiler(Writer: TVirtualWriter);
 begin
   inherited;
-
   if FNumKeys > 0 then
     Writer.Write(FHot[0], FNumKeys * SizeOf(single));
 end;
@@ -1005,15 +946,10 @@ end;
 procedure TgxFile3DSLightHotSpotAnimationKeys.ReadFromFiler(Reader: TVirtualReader);
 begin
   inherited;
-
   SetLength(FHot, FNumKeys);
   if FNumKeys > 0 then
     Reader.Read(FHot[0], FNumKeys * SizeOf(single));
 end;
-
-{$IFDEF VXS_REGIONS}{$ENDREGION}{$ENDIF}
-
-{$IFDEF VXS_REGIONS}{$REGION 'TgxFile3DSRollAnimationKeys'}{$ENDIF}
 
 procedure TgxFile3DSRollAnimationKeys.LoadData(const ANumKeys: integer;
   const Keys: PKeyHeaderList; const AData: Pointer);
@@ -1021,7 +957,6 @@ var
   I: integer;
 begin
   inherited;
-
   SetLength(FRoll, FNumKeys);
   for I := 0 to FNumKeys - 1 do
     FRoll[I] := PSingleList(AData)[I];
@@ -1039,7 +974,6 @@ var
   I: integer;
 begin
   inherited;
-
   SetLength(FRoll, FNumKeys);
   for I := 0 to FNumKeys - 1 do
     FRoll[I] := (Source as TgxFile3DSRollAnimationKeys).FRoll[I];
@@ -1048,7 +982,6 @@ end;
 procedure TgxFile3DSRollAnimationKeys.WriteToFiler(Writer: TVirtualWriter);
 begin
   inherited;
-
   if FNumKeys > 0 then
     Writer.Write(FRoll[0], FNumKeys * SizeOf(single));
 end;
@@ -1056,7 +989,6 @@ end;
 procedure TgxFile3DSRollAnimationKeys.ReadFromFiler(Reader: TVirtualReader);
 begin
   inherited;
-
   SetLength(FRoll, FNumKeys);
   if FNumKeys > 0 then
     Reader.Read(FRoll[0], FNumKeys * SizeOf(single));
@@ -1072,10 +1004,6 @@ begin
   SetLength(FAnimKeysList, ind + 1);
   FAnimKeysList[ind] := AItem;
 end;
-
-{$IFDEF VXS_REGIONS}{$ENDREGION}{$ENDIF}
-
-{$IFDEF VXS_REGIONS}{$REGION 'TgxFile3DSAnimationKeyList'}{$ENDIF}
 
 procedure TgxFile3DSAnimationKeyList.ApplyAnimKeys(
   var DataTransf: TgxFile3DSAnimationData; const AFrame: real);
@@ -1150,10 +1078,6 @@ begin
   ClearKeys;
   inherited Destroy;
 end;
-
-{$IFDEF VXS_REGIONS}{$ENDREGION}{$ENDIF}
-
-{$IFDEF VXS_REGIONS}{$REGION 'TgxFile3DSDummyObject'}{$ENDIF}
 
 constructor TgxFile3DSDummyObject.Create;
 begin
@@ -1281,10 +1205,6 @@ begin
   inherited;
 end;
 
-{$IFDEF VXS_REGIONS}{$ENDREGION}{$ENDIF}
-
-{$IFDEF VXS_REGIONS}{$REGION 'TgxFile3DSMeshObject'}{$ENDIF}
-
 procedure TgxFile3DSMeshObject.LoadAnimation(const AData: Pointer);
 var
   aScale: TgxFile3DSScaleAnimationKeys;
@@ -1315,7 +1235,6 @@ begin
 
     with FRefTranf do
     begin
-
       if vFile3DS_FixDefaultUpAxisY then
       begin
         RotMat := CreateRotationMatrixX(cGLFILE3DS_FIXDEFAULTUPAXISY_ROTATIONVALUE);
@@ -1356,10 +1275,6 @@ begin
   inherited;
   glPopMatrix;
 end;
-
-{$IFDEF VXS_REGIONS}{$ENDREGION}{$ENDIF}
-
-{$IFDEF VXS_REGIONS}{$REGION 'TgxFile3DSOmniLightObject'}{$ENDIF}
 
 constructor TgxFile3DSOmniLightObject.Create;
 begin
@@ -1470,10 +1385,6 @@ begin
   inherited;
 end;
 
-{$IFDEF VXS_REGIONS}{$ENDREGION}{$ENDIF}
-
-{$IFDEF VXS_REGIONS}{$REGION 'TgxFile3DSSpotLightObject'}{$ENDIF}
-
 procedure TgxFile3DSSpotLightObject.LoadData(const AOwner: TgxBaseMesh;
   const AData: PLight3DS);
 begin
@@ -1520,20 +1431,14 @@ end;
 procedure TgxFile3DSSpotLightObject.SetFrame(const AFrame: real);
 begin
   inherited;
-
   FLightSrc.SpotTargetPos.SetPoint(FAnimTransf.TargetPos);
   FLightSrc.SpotCutOff := FAnimTransf.SpotLightCutOff / 2;
   FLightSrc.HotSpot := FAnimTransf.HotSpot / 2;
 end;
 
-{$IFDEF VXS_REGIONS}{$ENDREGION}{$ENDIF}
-
-{$IFDEF VXS_REGIONS}{$REGION 'TgxFile3DSCameraObject'}{$ENDIF}
-
 constructor TgxFile3DSCameraObject.Create;
 begin
   inherited;
-
   FCameraSrc := TgxFile3DSCamera.Create(nil);
   FTargetObj := TgxDummyCube.Create(nil);
   FCameraSrc.TargetObject := FTargetObj;
@@ -1632,10 +1537,6 @@ begin
   inherited;
 end;
 
-{$IFDEF VXS_REGIONS}{$ENDREGION}{$ENDIF}
-
-{$IFDEF VXS_REGIONS}{$REGION 'Tgx3DSVectorFile'}{$ENDIF}
-
 // Capabilities
 
 class function Tgx3DSVectorFile.Capabilities: TgxDataFileCapabilities;
@@ -1658,7 +1559,6 @@ var
   hasLightmap: boolean;
 
 
-  {$IFDEF VXS_REGIONS}{$REGION 'Tgx3DSVectorFile.LoadFromStream Local functions'}{$ENDIF}
   //--------------- local functions -------------------------------------------
 
   function GetOrAllocateMaterial(materials: TMaterialList; const Name: string): string;
@@ -1939,7 +1839,7 @@ var
 
   //----------------------------------------------------------------------
 
-{$IFDEF VXS_NO_ASM}
+{$IFDEF USE_NO_ASM}
   function IsVertexMarked(P: PByteArray; Index: word): boolean; inline;
     // tests the Index-th bit, returns True if set else False
   var
@@ -1960,7 +1860,7 @@ var
 
   //---------------------------------------------------------------------------
 
-{$IFDEF VXS_NO_ASM}
+{$IFDEF USE_NO_ASM}
   function MarkVertex(P: PByteArray; Index: word): boolean; inline;
     // sets the Index-th bit and return True if it was already set else False
   var
@@ -1981,7 +1881,6 @@ var
 {$ENDIF}
 
   //---------------------------------------------------------------------------
-
   // Stores new vertex index (NewIndex) into the smooth index array of vertex ThisIndex
   // using field SmoothingGroup, which must not be 0.
   // For each vertex in the vertex array (also for duplicated vertices) an array of 32 cardinals
@@ -2093,8 +1992,6 @@ var
           Break;
         end;
   end;
-
-  {$IFDEF VXS_REGIONS}{$ENDREGION}{$ENDIF}
 
 var
   CurrentMotionIndex, iMaterial, i, j, x: integer;
@@ -2364,7 +2261,6 @@ begin
           end;
         end;
 
-
       // Lights Omni.
       for I := 0 to Objects.OmniLightCount - 1 do
       begin
@@ -2419,15 +2315,10 @@ begin
     end;
 end;
 
-{$IFDEF VXS_REGIONS}{$ENDREGION}{$ENDIF}
-
-// ------------------------------------------------------------------
-// ------------------------------------------------------------------
 // ------------------------------------------------------------------
 initialization
-  // ------------------------------------------------------------------
-  // ------------------------------------------------------------------
-  // ------------------------------------------------------------------
+// ------------------------------------------------------------------
+
   RegisterClasses([TgxFile3DSDummyObject, TgxFile3DSMeshObject,
     TgxFile3DSOmniLightObject, TgxFile3DSSpotLightObject,
     TgxFile3DSCameraObject]);

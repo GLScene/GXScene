@@ -1,17 +1,20 @@
-//
-// Graphic Scene Engine, http://glscene.org
-//
+(*******************************************
+*                                          *
+* Graphic Scene Engine, http://glscene.org *
+*                                          *
+********************************************)
+
+unit GXS.FileDXF;
+
 (*
   Support-Code to load DXF (Drawing eXchange Files) TgxFreeForm or
-  TgxActor Components.  
+  TgxActor Components.
 
   Note that you must manually add this unit to one of your project's uses
-  to enable support for DXF at run-time. 
+  to enable support for DXF at run-time.
   Turn on TwoSideLighting in your Buffer! DXF-Faces have no defined winding order
 
 *)
-
-unit GXS.FileDXF;
 
 interface
 
@@ -31,11 +34,11 @@ uses
 type
   TgxDXFVectorFile = class(TgxVectorFile)
   private
-    FSourceStream: TStream; { Load from this stream }
-    FBuffer: String; { Buffer and current line }
-    FLineNo: Integer; { current Line number - for error messages }
-    FEof: Boolean; { Stream done? }
-    FBufPos: Integer; { Position in the buffer }
+    FSourceStream: TStream; // Load from this stream
+    FBuffer: String; // Buffer and current line
+    FLineNo: Integer; // current Line number - for error messages
+    FEof: Boolean; // Stream done?
+    FBufPos: Integer; // Position in the buffer
     HasPushedCode: Boolean;
     PushedCode: Integer;
     FLayers: TStringList;
@@ -122,7 +125,7 @@ const
   end;
 
   function StreamEOF(S: TStream): Boolean;
-  begin { Is the stream at its end? }
+  begin // Is the stream at its end?
     result := (S.Position >= S.Size);
   end;
 

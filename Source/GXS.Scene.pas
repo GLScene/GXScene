@@ -840,7 +840,7 @@ type
     function AxisAlignedDimensionsUnscaled: TVector; override;
     function RayCastIntersect(const rayStart, rayVector: TVector; intersectPoint: PVector = nil; intersectNormal: PVector = nil)
       : Boolean; override;
-    function GenerateSilhouette(const silhouetteParameters: TgxSilhouetteParameters): TgxSilhouette; override;
+    function GenerateSilhouette(const SilhouetteParameters: TgxSilhouetteParameters): TgxSilhouette; override;
   published
     { Specifies the Master object which will be proxy'ed. }
     property MasterObject: TgxBaseSceneObject read FMasterObject write SetMasterObject;
@@ -2647,7 +2647,7 @@ begin
     Result := False;
 end;
 
-function TgxBaseSceneObject.GenerateSilhouette(const silhouetteParameters: TgxSilhouetteParameters): TgxSilhouette;
+function TgxBaseSceneObject.GenerateSilhouette(const SilhouetteParameters: TgxSilhouetteParameters): TgxSilhouette;
 const
   cNbSegments = 21;
 var
@@ -5387,7 +5387,7 @@ begin
     TransformationChanged;
 end;
 
-function TgxLightSource.GenerateSilhouette(const silhouetteParameters: TgxSilhouetteParameters): TgxSilhouette;
+function TgxLightSource.GenerateSilhouette(const SilhouetteParameters: TgxSilhouetteParameters): TgxSilhouette;
 begin
   Result := nil;
 end;

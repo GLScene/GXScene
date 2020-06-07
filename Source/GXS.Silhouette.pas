@@ -282,36 +282,26 @@ end;
 constructor TConnectivity.Create(APrecomputeFaceNormal: Boolean);
 begin
   FFaceVisible := TByteList.Create;
-
   FFaceVertexIndex := TIntegerList.Create;
   FFaceNormal := TAffineVectorList.Create;
-
   FEdgeVertices := TIntegerList.Create;
   FEdgeFaces := TIntegerList.Create;
-
   FPrecomputeFaceNormal := APrecomputeFaceNormal;
-
   FVertexMemory := TIntegerList.Create;
-
   FVertices := TAffineVectorList.Create;
 end;
 
 destructor TConnectivity.Destroy;
 begin
   Clear;
-
   FFaceVisible.Free;
   FFaceVertexIndex.Free;
   FFaceNormal.Free;
-
   FEdgeVertices.Free;
   FEdgeFaces.Free;
-
   FVertexMemory.Free;
-
   if Assigned(FVertices) then
     FVertices.Free;
-
   inherited;
 end;
 
@@ -323,7 +313,6 @@ begin
   FFaceVertexIndex.Clear;
   FFaceNormal.Clear;
   FVertexMemory.Clear;
-
   if FVertices <> nil then
     FVertices.Clear;
 end;
@@ -343,10 +332,8 @@ begin
     ASilhouette := TgxSilhouette.Create
   else if not AddToSilhouette then
     ASilhouette.Flush;
-
   // Clear the vertex memory
   FVertexMemory.Flush;
-
   // Update visibility information for all Faces
   vis := FFaceVertexIndex.List;
   for i := 0 to FaceCount - 1 do
@@ -361,7 +348,6 @@ begin
     end;
 
     FFaceVisible[i] := Byte(faceIsVisible);
-
     if (not faceIsVisible) and silhouetteParameters.CappingRequired then
       ASilhouette.CapIndices.Add(ReuseOrFindVertexID(silhouetteParameters.SeenFrom, ASilhouette, vis^[0]),
         ReuseOrFindVertexID(silhouetteParameters.SeenFrom, ASilhouette, vis^[1]),
@@ -471,17 +457,14 @@ var
   FaceID: integer;
 begin
   FFaceVertexIndex.Add(Vi0, Vi1, vi2);
-
   if FPrecomputeFaceNormal then
     FFaceNormal.Add(CalcPlaneNormal(FVertices.List^[Vi0], FVertices.List^[Vi1], FVertices.List^[vi2]));
-
   FaceID := FFaceVisible.Add(0);
-
   AddIndexedEdge(Vi0, Vi1, FaceID);
   AddIndexedEdge(Vi1, vi2, FaceID);
   AddIndexedEdge(vi2, Vi0, FaceID);
 
-  result := FaceID;
+  Result := FaceID;
 end;
 
 function TConnectivity.AddFace(const vertex0, vertex1, vertex2: TAffineVector): integer;
@@ -492,7 +475,7 @@ begin
   Vi1 := FVertices.FindOrAdd(vertex1);
   vi2 := FVertices.FindOrAdd(vertex2);
 
-  result := AddIndexedFace(Vi0, Vi1, vi2);
+  Result := AddIndexedFace(Vi0, Vi1, vi2);
 end;
 
 function TConnectivity.AddQuad(const vertex0, vertex1, vertex2, vertex3: TAffineVector): integer;
@@ -503,10 +486,8 @@ begin
   Vi1 := FVertices.FindOrAdd(vertex1);
   vi2 := FVertices.FindOrAdd(vertex2);
   Vi3 := FVertices.FindOrAdd(vertex3);
-
   // First face
   result := AddIndexedFace(Vi0, Vi1, vi2);
-
   // Second face
   AddIndexedFace(vi2, Vi3, Vi0);
 end;

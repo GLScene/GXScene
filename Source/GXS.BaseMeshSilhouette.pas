@@ -52,7 +52,7 @@ type
     procedure Clear(SaveFaceGroupConnectivity: boolean);
     // Builds the connectivity information. 
     procedure RebuildEdgeList;
-    procedure CreateSilhouette(const silhouetteParameters: TgxSilhouetteParameters; var aSilhouette: TgxSilhouette; 
+    procedure CreateSilhouette(const SilhouetteParameters: TgxSilhouetteParameters; var aSilhouette: TgxSilhouette;
 	  AddToSilhouette: boolean); 
     constructor Create(APrecomputeFaceNormal: boolean); override;
     constructor CreateFromMesh(aBaseMesh: TgxBaseMesh);
@@ -225,7 +225,7 @@ procedure TgxBaseMeshConnectivity.SetBaseMesh(const Value: TgxBaseMesh);
     end;
   end;
 
-procedure TgxBaseMeshConnectivity.CreateSilhouette(const silhouetteParameters: TgxSilhouetteParameters; var aSilhouette: TgxSilhouette; AddToSilhouette: boolean);
+procedure TgxBaseMeshConnectivity.CreateSilhouette(const SilhouetteParameters: TgxSilhouetteParameters; var aSilhouette: TgxSilhouette; AddToSilhouette: boolean);
 var
   i: integer;
 begin

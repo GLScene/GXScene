@@ -32,8 +32,8 @@ uses
   Scene.VectorGeometry,
   GXS.Graphics,
   GXS.Context,
-  GXS.FileDDS,
   GXS.TextureFormat,
+  GXS.FileDDS,
   Formats.FileDXTC;
 
 

@@ -918,7 +918,7 @@ type
     // BEWARE! Utterly inefficient implementation!
     function RayCastIntersect(const rayStart, rayVector: TVector; intersectPoint: PVector = nil; intersectNormal: PVector = nil)
       : Boolean; override;
-    function GenerateSilhouette(const silhouetteParameters: TgxSilhouetteParameters): TgxSilhouette; override;
+    function GenerateSilhouette(const SilhouetteParameters: TgxSilhouetteParameters): TgxSilhouette; override;
     (* This method allows fast shadow volumes for GLActors.
       If your actor/mesh doesn't change, you don't need to call this.
       It basically caches the connectivity data. *)
@@ -6309,7 +6309,7 @@ begin
   end;
 end;
 
-function TgxBaseMesh.GenerateSilhouette(const silhouetteParameters: TgxSilhouetteParameters): TgxSilhouette;
+function TgxBaseMesh.GenerateSilhouette(const SilhouetteParameters: TgxSilhouetteParameters): TgxSilhouette;
 var
   mc: TgxBaseMeshConnectivity;
   sil: TgxSilhouette;

@@ -1,10 +1,12 @@
-//
-// Graphic Scene Engine, http://glscene.org
-//
-(*
-	 ASE (ASCI Scene Export) file format support for GXScene
-*)
+(*******************************************
+*                                          *
+* Graphic Scene Engine, http://glscene.org *
+*                                          *
+********************************************)
+
 unit GXS.FileASE;
+
+(* ASE (ASCI Scene Export) file format support for Scene *)
 
 interface
 

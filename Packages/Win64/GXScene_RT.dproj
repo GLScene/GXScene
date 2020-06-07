@@ -370,7 +370,6 @@
         <DCCReference Include="..\..\Source\GXS.ProcTextures.pas"/>
         <DCCReference Include="..\..\Source\GXS.ProjectedTextures.pas"/>
         <DCCReference Include="..\..\Source\GXS.ProxyObjects.pas"/>
-        <DCCReference Include="..\..\Source\GXS.RGBE.pas"/>
         <DCCReference Include="..\..\Source\GXS.ROAMPatch.pas"/>
         <DCCReference Include="..\..\Source\GXS.Ragdoll.pas"/>
         <DCCReference Include="..\..\Source\GXS.RandomHDS.pas"/>
@@ -427,6 +426,8 @@
         <DCCReference Include="..\..\Source\GXS.WindowsFont.pas"/>
         <DCCReference Include="..\..\Source\GXS.zBuffer.pas"/>
         <DCCReference Include="..\..\Source\GXS.ViewerOpenGL.pas"/>
+        <DCCReference Include="..\..\Source\Import.OpenGLx.pas"/>
+        <DCCReference Include="..\..\Source\Import.Vulkan.pas"/>
         <DCCReference Include="..\..\Source\Scene.Keyboard.pas"/>
         <DCCReference Include="..\..\Source\Scene.PersistentClasses.pas"/>
         <DCCReference Include="..\..\Source\Scene.Strings.pas"/>
@@ -444,10 +445,9 @@
         <DCCReference Include="..\..\Source\Scene.PerlinBase.pas"/>
         <DCCReference Include="..\..\Source\Scene.PerlinNoise3D.pas"/>
         <DCCReference Include="..\..\Source\Scene.PlugInInterface.pas"/>
+        <DCCReference Include="..\..\Source\Scene.RGBE.pas"/>
         <DCCReference Include="..\..\Source\Scene.SpacePartition.pas"/>
         <DCCReference Include="..\..\Source\Scene.Spline.pas"/>
-        <DCCReference Include="..\..\Source\Import.OpenGLx.pas"/>
-        <DCCReference Include="..\..\Source\Import.Vulkan.pas"/>
         <DCCReference Include="..\..\Source\Scene.XOpenGL.pas"/>
         <DCCReference Include="..\..\Source\Scene.XCollection.pas"/>
         <BuildConfiguration Include="Debug">

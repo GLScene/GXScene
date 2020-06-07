@@ -1,12 +1,16 @@
-﻿//
-// Graphic Scene Engine, http://glscene.org
-//
+﻿(* ********************************************
+  *                                           *
+  *  Graphic Scene Engine, http://glscene.org *
+  *                                           *
+  ******************************************** *)
+
+unit GXS.CrossPlatform;
+
 (*
    Cross platform support functions and types.
    Ultimately, *no* cross-platform or cross-version defines should be present
    in the core units, and have all moved here instead.
 *)
-unit GXS.CrossPlatform;
 
 interface
 
@@ -163,8 +167,8 @@ end;
 
 procedure GLLoadBitmapFromInstance(Instance: LongInt; ABitmap: TBitmap; AName: string);
 begin
-  { TODO : Cannot assign to a read-only property E2129 }
-  { ABitmap.Handle := LoadBitmap(Instance, PChar(AName));}
+  /// TODO : Cannot assign to a read-only property E2129
+  /// ABitmap.Handle := LoadBitmap(Instance, PChar(AName));
 end;
 
 function GLGetTickCount: int64;

@@ -1,11 +1,12 @@
-//
-// Graphic Scene Engine, http://glscene.org
-//
-(*
-   Implements projected textures through a GLScene object.
+(*******************************************
+*                                          *
+* Graphic Scene Engine, http://glscene.org *
+*                                          *
+********************************************)
 
-*)
 unit GXS.ProjectedTextures;
+
+(* Implements projected textures through a GLScene object *)
 
 interface
 
@@ -26,7 +27,8 @@ uses
   GXS.Context;
 
 type
-  { Possible styles of texture projection. Possible values: 
+
+  (* Possible styles of texture projection. Possible values:
     ptsOriginal: Original projection method (first pass,
     is default scene render, second pass is texture  projection).
     ptsInverse: Inverse projection method (first pass
@@ -34,33 +36,33 @@ type
     This method is useful if you want to simulate
     lighting only through projected textures (the textures
     of the scene are "masked" into the white areas of
-    the projection textures). }
+    the projection textures). *)
   TgxProjectedTexturesStyle = (ptsOriginal, ptsInverse);
 
   TgxProjectedTextures = class;
 
-  { A projected texture emmiter.
+  (* A projected texture emmiter.
      It's material property will be used as the projected texture.
-     Can be places anywhere in the scene. }
+     Can be places anywhere in the scene. *)
   TgxTextureEmitter = class(TgxSceneObject)
   private
     FFOVy: single;
     FAspect: single;
   protected
-    { Sets up the base texture matrix for this emitter
-       Should be called whenever a change on its properties is made.}
+    (* Sets up the base texture matrix for this emitter
+       Should be called whenever a change on its properties is made.*)
     procedure SetupTexMatrix(var ARci: TgxRenderContextInfo);
   public
     constructor Create(AOwner: TComponent); override;
   published
-    { Indicates the field-of-view of the projection frustum.}
+    // Indicates the field-of-view of the projection frustum.
     property FOVy: single read FFOVy write FFOVy;
-    { x/y ratio. For no distortion, this should be set to
-       texture.width/texture.height.}
+    (* x/y ratio. For no distortion, this should be set to
+       texture.width/texture.height.*)
     property Aspect: single read FAspect write FAspect;
   end;
 
-  { Specifies an item on the TgxTextureEmitters collection. }
+  // Specifies an item on the TgxTextureEmitters collection.
   TgxTextureEmitterItem = class(TCollectionItem)
   private
     FEmitter: TgxTextureEmitter;
@@ -75,7 +77,7 @@ type
     property Emitter: TgxTextureEmitter read FEmitter write SetEmitter;
   end;
 
-  { Collection of TgxTextureEmitter. }
+  // Collection of TgxTextureEmitter.
   TgxTextureEmitters = class(TCollection)
   private
     FOwner: TgxProjectedTextures;
@@ -88,9 +90,9 @@ type
     property Items[index: Integer]: TgxTextureEmitterItem read GetItems; default;
   end;
 
-  { Projected Textures Manager.
+  (* Projected Textures Manager.
     Specifies active texture Emitters (whose texture will be projected)
-    and receivers (children of this object). }
+    and receivers (children of this object). *)
   TgxProjectedTextures = class(TgxImmaterialSceneObject)
   private
     FEmitters: TgxTextureEmitters;
@@ -101,9 +103,9 @@ type
     procedure DoRender(var ARci: TgxRenderContextInfo;
       ARenderSelf, ARenderChildren: Boolean); override;
   published
-    { List of texture emitters. }
+    // List of texture emitters.
     property Emitters: TgxTextureEmitters read FEmitters write FEmitters;
-    { Indicates the style of the projected textures. }
+    // Indicates the style of the projected textures.
     property Style: TgxProjectedTexturesStyle read FStyle write FStyle;
   end;
 
@@ -167,17 +169,11 @@ begin
   end;
 end;
 
-// RemoveNotification
-//
-
 procedure TgxTextureEmitterItem.RemoveNotification(aComponent: TComponent);
 begin
   if aComponent = FEmitter then
     FEmitter := nil;
 end;
-
-// GetDisplayName
-//
 
 function TgxTextureEmitterItem.GetDisplayName: string;
 begin
@@ -193,24 +189,15 @@ end;
 // ------------------ TgxTextureEmitters ------------------
 // ------------------
 
-// GetOwner
-//
-
 function TgxTextureEmitters.GetOwner: TPersistent;
 begin
   Result := FOwner;
 end;
 
-// GetItems
-//
-
 function TgxTextureEmitters.GetItems(index: Integer): TgxTextureEmitterItem;
 begin
   Result := TgxTextureEmitterItem(inherited Items[index]);
 end;
-
-// RemoveNotification
-//
 
 procedure TgxTextureEmitters.RemoveNotification(aComponent: TComponent);
 var
@@ -219,9 +206,6 @@ begin
   for i := 0 to Count - 1 do
     Items[i].RemoveNotification(aComponent);
 end;
-
-// AddEmitter
-//
 
 procedure TgxTextureEmitters.AddEmitter(texEmitter: TgxTextureEmitter);
 var
@@ -235,9 +219,6 @@ end;
 // ------------------ TgxProjectedTextures ------------------
 // ------------------
 
-// Create
-//
-
 constructor TgxProjectedTextures.Create(AOwner: TComponent);
 begin
   inherited Create(aOWner);
@@ -245,17 +226,11 @@ begin
   FEmitters.FOwner := self;
 end;
 
-// Destroy
-//
-
 destructor TgxProjectedTextures.Destroy;
 begin
   FEmitters.Free;
   inherited destroy;
 end;
-
-// DoRender
-//
 
 procedure TgxProjectedTextures.DoRender(var ARci: TgxRenderContextInfo;
   ARenderSelf, ARenderChildren: boolean);
@@ -371,7 +346,9 @@ begin
   end;
 end;
 
+//------------------------------------------
 initialization
+//------------------------------------------
 
   RegisterClasses([TgxTextureEmitter, TgxProjectedTextures]);
 

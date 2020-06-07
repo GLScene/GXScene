@@ -1,10 +1,12 @@
-//
-// Graphic Scene Engine, http://glscene.org
-//
-{
-   Texture combiners setup utility functions. 
-}
+(*******************************************
+*                                          *
+* Graphic Scene Engine, http://glscene.org *
+*                                          *
+********************************************)
+
 unit GXS.TextureCombiners;
+
+(* Texture combiners setup utility functions *)
 
 interface
 
@@ -29,7 +31,7 @@ type
 
   EVXTextureCombinerError = class(Exception);
 
-  { Parses a TC text description and setups combiners accordingly.
+  (* Parses a TC text description and setups combiners accordingly.
      *experimental*
      Knowledge of texture combiners is a requirement
      Syntax: pascal-like, one instruction per line, use '//' for comment.
@@ -48,7 +50,7 @@ type
 
      Tokens can be qualified with '.a' or '.alpha' to specify the alpha channel
      explicitly, and '.rgb' to specify color channels (default). You cannot mix
-     alpha and rgb tokens in the same line. }
+     alpha and rgb tokens in the same line. *)
 function GetTextureCombiners(const tcCode: TStringList): TgxCombinerCache;
 
 // ------------------------------------------------------------------

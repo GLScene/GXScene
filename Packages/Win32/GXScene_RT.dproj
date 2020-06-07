@@ -377,7 +377,7 @@
         <DCCReference Include="..\..\Source\GXS.ProcTextures.pas"/>
         <DCCReference Include="..\..\Source\GXS.ProjectedTextures.pas"/>
         <DCCReference Include="..\..\Source\GXS.ProxyObjects.pas"/>
-        <DCCReference Include="..\..\Source\GXS.RGBE.pas"/>
+        <DCCReference Include="..\..\Source\Scene.RGBE.pas"/>
         <DCCReference Include="..\..\Source\GXS.ROAMPatch.pas"/>
         <DCCReference Include="..\..\Source\GXS.Ragdoll.pas"/>
         <DCCReference Include="..\..\Source\GXS.RandomHDS.pas"/>

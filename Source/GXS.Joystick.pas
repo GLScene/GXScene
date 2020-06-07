@@ -3,10 +3,10 @@
 * Graphic Scene Engine, http://glscene.org *
 *                                          *
 ********************************************)
-(*
-  Component for handling joystick messages
-*)
+
 unit GXS.Joystick;
+
+(* Component for handling joystick messages *)
 
 interface
 

@@ -3,7 +3,10 @@
 * Graphic Scene Engine, http://glscene.org *
 *                                          *
 ********************************************)
-{
+
+unit GXS.SmoothNavigator;
+
+(*
    An extention of TgxNavigator, which allows to move objects with inertia
    Note: it is not completely FPS-independant. Only Moving code is, but
    MoveAroundTarget, Turn[Vertical/Horizontal] and AdjustDistanceTo[..] is not.
@@ -16,10 +19,7 @@
       1) Scale "Old values" too, when callin the Scale parameter procedure to
          avoid the temporary "freeze" of controls.
       2) AddImpulse procedures.
-
-}
-
-unit GXS.SmoothNavigator;
+*)
 
 interface
 

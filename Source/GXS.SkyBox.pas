@@ -3,12 +3,13 @@
 * Graphic Scene Engine, http://glscene.org *
 *                                          *
 ********************************************)
-{
-   A TgxImmaterialSceneObject drawing 6 quads (plus another quad as "Cloud" plane)
-   for use as a skybox always centered on the camera. 
-    
-}
+
 unit GXS.SkyBox;
+
+(*
+   A TgxImmaterialSceneObject drawing 6 quads (plus another quad as "Cloud" plane)
+   for use as a skybox always centered on the camera.
+*)
 
 interface
 

@@ -1,11 +1,12 @@
-//
-// Graphic Scene Engine, http://glscene.org
-//
-(*
-  Ragdoll extended using Open Dynamics Engine (ODE).
-*)
+(*******************************************
+*                                          *
+* Graphic Scene Engine, http://glscene.org *
+*                                          *
+********************************************)
 
 unit GXS.ODERagdoll;
+
+(* Ragdoll extended using Open Dynamics Engine (ODE) *)
 
 interface
 

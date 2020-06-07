@@ -3,10 +3,10 @@
 * Graphic Scene Engine, http://glscene.org *
 *                                          *
 ********************************************)
-{
-   Skydome object
-}
+
 unit GXS.Skydome;
+
+(* Skydome object *)
 
 interface
 

@@ -201,7 +201,6 @@ contains
   GXS.ProcTextures in '..\..\Source\GXS.ProcTextures.pas',
   GXS.ProjectedTextures in '..\..\Source\GXS.ProjectedTextures.pas',
   GXS.ProxyObjects in '..\..\Source\GXS.ProxyObjects.pas',
-  GXS.RGBE in '..\..\Source\GXS.RGBE.pas',
   GXS.ROAMPatch in '..\..\Source\GXS.ROAMPatch.pas',
   GXS.Ragdoll in '..\..\Source\GXS.Ragdoll.pas',
   GXS.RandomHDS in '..\..\Source\GXS.RandomHDS.pas',
@@ -258,6 +257,8 @@ contains
   GXS.WindowsFont in '..\..\Source\GXS.WindowsFont.pas',
   GXS.zBuffer in '..\..\Source\GXS.zBuffer.pas',
   GXS.ViewerOpenGL in '..\..\Source\GXS.ViewerOpenGL.pas',
+  Import.OpenGLx in '..\..\Source\Import.OpenGLx.pas',
+  Import.Vulkan in '..\..\Source\Import.Vulkan.pas',
   Scene.Keyboard in '..\..\Source\Scene.Keyboard.pas',
   Scene.PersistentClasses in '..\..\Source\Scene.PersistentClasses.pas',
   Scene.Strings in '..\..\Source\Scene.Strings.pas',
@@ -275,10 +276,9 @@ contains
   Scene.PerlinBase in '..\..\Source\Scene.PerlinBase.pas',
   Scene.PerlinNoise3D in '..\..\Source\Scene.PerlinNoise3D.pas',
   Scene.PlugInInterface in '..\..\Source\Scene.PlugInInterface.pas',
+  Scene.RGBE in '..\..\Source\Scene.RGBE.pas',
   Scene.SpacePartition in '..\..\Source\Scene.SpacePartition.pas',
   Scene.Spline in '..\..\Source\Scene.Spline.pas',
-  Import.OpenGLx in '..\..\Source\Import.OpenGLx.pas',
-  Import.Vulkan in '..\..\Source\Import.Vulkan.pas',
   Scene.XOpenGL in '..\..\Source\Scene.XOpenGL.pas',
   Scene.XCollection in '..\..\Source\Scene.XCollection.pas';
 

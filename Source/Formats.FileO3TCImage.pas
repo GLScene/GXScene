@@ -1,12 +1,15 @@
-//
-// Graphic Scene Engine, http://glscene.org
-//
+(* ******************************************
+  *                                          *
+  * Graphic Scene Engine, http://glscene.org *
+  *                                          *
+  ******************************************* *)
+
+unit Formats.FileO3TCImage;
+
 (*
     Good for preview picture in OpenDialog,
     so you may include both FileO3TCImage (preview) and GLFileO3TC (loading)
 *)
-
-unit Formats.FileO3TCImage;
 
 interface
 

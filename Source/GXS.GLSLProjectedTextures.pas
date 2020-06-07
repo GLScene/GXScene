@@ -3,9 +3,10 @@
 * Graphic Scene Engine, http://glscene.org *
 *                                          *
 ********************************************)
-(*
-   Implements projected textures through a GLScene object via GLSL.
-*)
+
+unit GXS.GLSLProjectedTextures;
+
+(* Implements projected textures through a GLScene object via GLSL *)
 
 (* Known bugs/limitations:
 
@@ -19,8 +20,6 @@
 4. All children of the ProjectedTextures must have use a texture.
    The shader can't be changed between rendering each seperate object..
 *)
-
-unit GXS.GLSLProjectedTextures;
 
 interface
 

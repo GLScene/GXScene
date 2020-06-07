@@ -1,6 +1,11 @@
-//
-// Graphic Scene Engine, http://glscene.org
-//
+(*******************************************
+*                                          *
+* Graphic Scene Engine, http://glscene.org *
+*                                          *
+********************************************)
+
+unit GXS.ParametricSurfaces;
+
 (*
   Parametric surface implementation (like Bezier and BSpline surfaces)
 
@@ -24,8 +29,6 @@
   other patches.
 *)
 
-unit GXS.ParametricSurfaces;
-
 interface
 
 {$I Scene.inc}
@@ -33,11 +36,11 @@ interface
 uses
   Import.OpenGLx,
   Scene.VectorTypes,
-  GXS.VectorFileObjects,
   Scene.CurvesAndSurfaces,
   Scene.VectorGeometry,
   Scene.VectorLists,
   Scene.PersistentClasses,
+  GXS.VectorFileObjects,
   GXS.Texture,
   GXS.State,
   GXS.Context,

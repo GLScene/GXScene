@@ -3,11 +3,10 @@
 * Graphic Scene Engine, http://glscene.org *
 *                                          *
 ********************************************)
-(*
-  Base classes and interface for GLScene Sound System
-*)
 
 unit GXS.Sound;
+
+(* Base classes and interface for GLScene Sound System *)
 
 interface
 

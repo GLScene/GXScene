@@ -3,6 +3,7 @@
 * Graphic Scene Engine, http://glscene.org *
 *                                          *
 ********************************************)
+
 unit GXS.Texture;
 
 (* Handles all the color and texture stuff *)

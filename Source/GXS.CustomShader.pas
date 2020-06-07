@@ -1,14 +1,17 @@
-//
-// Graphic Scene Engine, http://glscene.org
-//
+(* ********************************************
+  *                                           *
+  *  Graphic Scene Engine, http://glscene.org *
+  *                                           *
+  ******************************************** *)
+
+unit GXS.CustomShader;
+
 (*
     A collection of pure abstract classes - descendants of TgxShader, which are
     used for purpose of not having to write the same stuff all over and over
     again in your own shader classes.
     It also contains a procedures and function that can be used in all shaders.
  *)
-
-unit GXS.CustomShader;
 
 interface
 
@@ -52,29 +55,24 @@ type
   TgxLightSourceEnum = 1..vxsShaderMaxLightSources;
   TgxLightSourceSet = set of TgxLightSourceEnum;
 
-  { This interface describes user shaders, in order to be able to access them
+  (* This interface describes user shaders, in order to be able to access them
     via a unified interface. If user shader does not support some option, don't
-    raise an axception, just ignore it.
-  }
-  IGLShaderDescription = interface
+    raise an axception, just ignore it. *)
+  IgxShaderDescription = interface
   ['{04089C64-60C2-43F5-AC9C-38ED46264812}']
     procedure SetShaderTextures(const Textures: array of TgxTexture);
     procedure GetShaderTextures(var Textures: array of TgxTexture);
-
     procedure SetShaderColorParams(const AAmbientColor, ADiffuseColor, ASpecularcolor: TVector4f);
     procedure GetShaderColorParams(var AAmbientColor, ADiffuseColor, ASpecularcolor: TVector4f);
-
     procedure SetShaderMiscParameters(const ACadencer: TgxCadencer; const AMatLib: TgxMaterialLibrary; const ALightSources: TgxLightSourceSet);
     procedure GetShaderMiscParameters(var ACadencer: TgxCadencer; var AMatLib: TgxMaterialLibrary; var ALightSources: TgxLightSourceSet);
-
     function GetShaderAlpha: Single;
     procedure SetShaderAlpha(const Value: Single);
-
     function GetShaderDescription: string;
   end;
 
   { Used in the TgxPostShaderHolder component. }
-  IVXPostShader = interface
+  IgxPostShader = interface
   ['{68A62362-AF0A-4CE8-A9E1-714FE02AFA4A}']
     { Called on every pass. }
     procedure DoUseTempTexture(const TempTexture: TgxTextureHandle;

@@ -1,10 +1,12 @@
-//
-// Graphic Scene Engine, http://glscene.org
-//
-(*
-  Quake2 MD2 vector file format implementation.
-*)
+(*******************************************
+*                                          *
+* Graphic Scene Engine, http://glscene.org *
+*                                          *
+********************************************)
+
 unit GXS.FileMD2;
+
+(* Quake2 MD2 vector file format implementation *)
 
 interface
 

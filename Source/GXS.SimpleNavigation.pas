@@ -1,15 +1,17 @@
-//
-// Graphic Scene Engine, http://glscene.org
-//
-{
-    A simple component written by request from someone at the www.glscene.ru forums. 
-    Allows to view the FPS and do the usual Zoom and MoveAroundTarget stuff  
-    that all demos usually have in themselves. All that is just by dropping  
-    this component on the form. 
-
-}
+(*******************************************
+*                                          *
+* Graphic Scene Engine, http://glscene.org *
+*                                          *
+********************************************)
 
 unit GXS.SimpleNavigation;
+
+(*
+    A simple component written by request from someone at the www.glscene.ru forums.
+    Allows to view the FPS and do the usual Zoom and MoveAroundTarget stuff
+    that all demos usually have in themselves. All that is just by dropping
+    this component on the form.
+*)
 
 interface
 
@@ -82,7 +84,6 @@ type
     FTimer: TTimer;
     FForm: TCustomForm;
     FGXSceneViewer: TgxSceneViewer;
-
     FOldX, FOldY: Single;
     FFormCaption: string;
     FMoveAroundTargetSpeed: Single;
@@ -96,7 +97,6 @@ type
       Shift: TShiftState; X, Y: Single);
     procedure ViewerMouseWheel(Sender: TObject; Shift: TShiftState;
       WheelDelta: Integer; MousePos: TPoint; var Handled: Boolean);
-
     procedure SetGXSceneViewer(const Value: TgxSceneViewer);
     procedure SetForm(const Value: TCustomForm);
     function StoreFormCaption: Boolean;
@@ -114,19 +114,18 @@ type
   published
     property Form: TCustomForm read FForm write SetForm;
     property GXSceneViewer: TgxSceneViewer read FGXSceneViewer write SetGXSceneViewer;
-
     property ZoomSpeed: Single read FZoomSpeed write FZoomSpeed stored StoreZoomSpeed;
     property MoveAroundTargetSpeed: Single read FMoveAroundTargetSpeed write FMoveAroundTargetSpeed stored StoreMoveAroundTargetSpeed;
     property RotateTargetSpeed: Single read FRotateTargetSpeed write FRotateTargetSpeed stored StoreRotateTargetSpeed;
-
     property FormCaption: string read FFormCaption write FFormCaption stored StoreFormCaption;
     property Options: TgxSimpleNavigationOptions read FOptions write SetOptions default [snoMouseWheelHandled, snoShowFPS];
     property KeyCombinations: TgxSimpleNavigationKeyCombinations read FKeyCombinations write SetKeyCombinations;
-
     property OnMouseMove: TMouseMoveEvent read FOnMouseMove write FOnMouseMove;
   end;
 
+//----------------------------------------------
 implementation
+//----------------------------------------------
 
 const
   vFPSString = '%FPS';
@@ -145,7 +144,6 @@ begin
     FZoomSpeed := TgxSimpleNavigation(Source).FZoomSpeed;
     FMoveAroundTargetSpeed := TgxSimpleNavigation(Source).FMoveAroundTargetSpeed;
     FRotateTargetSpeed := TgxSimpleNavigation(Source).FRotateTargetSpeed;
-
     FFormCaption := TgxSimpleNavigation(Source).FFormCaption;
     FOptions := TgxSimpleNavigation(Source).FOptions;
     FKeyCombinations.Assign(TgxSimpleNavigation(Source).FKeyCombinations);

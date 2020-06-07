@@ -3,11 +3,12 @@
 * Graphic Scene Engine, http://glscene.org *
 *                                          *
 ********************************************)
+
+unit GXS.ImageUtils;
+
 (*
   Main purpose is as a fallback in cases where there is no other way to process images.
 *)
-
-unit GXS.ImageUtils;
 
 // TODO: Complite InfToXXX
 // TODO: BPTC decompression

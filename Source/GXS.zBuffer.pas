@@ -1,6 +1,11 @@
-//
-// Graphic Scene Engine, http://glscene.org
-//
+(*******************************************
+*                                          *
+* Graphic Scene Engine, http://glscene.org *
+*                                          *
+********************************************)
+
+unit GXS.zBuffer;
+
 (*
    ZBuffer retrieval and computations.
    See readme.txt in the Demos/SpecialsFX/Shadows directory.
@@ -19,8 +24,6 @@
    //z  :=(1-np/d)/(1-np/fp);  //calc from frustrum depth to z-buffer value
    //------------------------  z:=1-(fp/d-1)/(fp/np-1); //old FtoZ
    //------------------------------------------------------------------------
-
-unit GXS.zBuffer;
 
 interface
 

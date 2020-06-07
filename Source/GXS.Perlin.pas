@@ -24,9 +24,9 @@ uses
   System.Math,
   FMX.Graphics,
 
-  GXS.CrossPlatform,
   Scene.VectorGeometry,
   Scene.PerlinBase,
+  GXS.CrossPlatform,
   GXS.HeightData;
 
 Type

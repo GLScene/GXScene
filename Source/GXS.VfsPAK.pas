@@ -1,6 +1,11 @@
-//
-// Graphic Scene Engine, http://glscene.org
-//
+(*******************************************
+*                                          *
+* Graphic Scene Engine, http://glscene.org *
+*                                          *
+********************************************)
+
+unit GXS.VfsPAK;
+
 (*
    Support-code for loading files from Quake II PAK Files.
    When instance is created all LoadFromFile methods using
@@ -8,14 +13,12 @@
    You can change current PAK file by ActivePak variable.
 *)
 
-unit GXS.VfsPAK;
+interface
 
 {$I Scene.inc}
-// Activate support for LZRW1 compression. 
+// Activate support for LZRW1 compression.
 // Remove the "." characted in order to activate compression features.
 {.$DEFINE GXS_LZRW_SUPPORT}
-
-interface
 
 uses
   System.Classes,

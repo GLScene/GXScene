@@ -3,6 +3,9 @@
 * Graphic Scene Engine, http://glscene.org *
 *                                          *
 ********************************************)
+
+unit GXS.BumpShader;
+
 (*
    A shader that applies bump mapping.
 
@@ -25,8 +28,6 @@
    the secondary texture coordinates for the diffuse and specular
    texture lookups.
 *)
-
-unit GXS.BumpShader;
 
 interface
 

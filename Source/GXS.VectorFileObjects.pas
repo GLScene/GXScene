@@ -246,12 +246,12 @@ type
     procedure SetGlobalMatrix(Matrix: TMatrix); // Ragdoll
     // Set the bone's GlobalMatrix. Used for Ragdoll.
     procedure SetGlobalMatrixForRagDoll(RagDollMatrix: TMatrix); // Ragdoll
-    { Calculates the global matrix for the bone and its sub-bone.
-      Call this function directly only the RootBone. }
+    (* Calculates the global matrix for the bone and its sub-bone.
+      Call this function directly only the RootBone. *)
     procedure PrepareGlobalMatrices; override;
-    { Global Matrix for the bone in the current frame.
+    (* Global Matrix for the bone in the current frame.
       Global matrices must be prepared by invoking PrepareGlobalMatrices
-      on the root bone. }
+      on the root bone. *)
     property GlobalMatrix: TMatrix read FGlobalMatrix;
     // Free all sub bones and reset BoneID and Name.
     procedure Clean; override;
@@ -285,11 +285,11 @@ type
     property Owner: TgxSkeletonColliderList read FOwner;
     // The bone that this collider associates with.
     property Bone: TgxSkeletonBone read FBone write SetBone;
-    { Offset and orientation of the collider in the associated
-      bone's space. }
+    (* Offset and orientation of the collider in the associated
+      bone's space. *)
     property LocalMatrix: TMatrix read FLocalMatrix write SetLocalMatrix;
-    { Global offset and orientation of the collider. This
-      gets set in the AlignCollider method. }
+    (* Global offset and orientation of the collider. This
+      gets set in the AlignCollider method. *)
     property GlobalMatrix: TMatrix read FGlobalMatrix;
     property AutoUpdate: Boolean read FAutoUpdate write FAutoUpdate;
   end;
@@ -323,10 +323,10 @@ type
     externalQuaternions: TQuaternionList;
   end;
 
-  { Main skeleton object.
+  (* Main skeleton object.
     This class stores the bones hierarchy and animation frames.
     It is also responsible for maintaining the "CurrentFrame" and allowing
-    various frame blending operations. }
+    various frame blending operations. *)
   TgxSkeleton = class(TPersistentObject)
   private
     FOwner: TgxBaseMesh;
@@ -362,48 +362,48 @@ type
     procedure MorphTo(frame: TgxSkeletonFrame); overload;
     procedure Lerp(frameIndex1, frameIndex2: Integer; lerpFactor: Single);
     procedure BlendedLerps(const lerpInfos: array of TgxBlendedLerpInfo);
-    { Linearly removes the translation component between skeletal frames.
+    (* Linearly removes the translation component between skeletal frames.
       This function will compute the translation of the first bone (index 0)
       and linearly subtract this translation in all frames between startFrame
       and endFrame. Its purpose is essentially to remove the 'slide' that
-      exists in some animation formats (f.i. SMD). }
+      exists in some animation formats (f.i. SMD). *)
     procedure MakeSkeletalTranslationStatic(startFrame, endFrame: Integer);
-    { Removes the absolute rotation component of the skeletal frames.
+    (* Removes the absolute rotation component of the skeletal frames.
       Some formats will store frames with absolute rotation information,
       if this correct if the animation is the "main" animation.
       This function removes that absolute information, making the animation
-      frames suitable for blending purposes. }
+      frames suitable for blending purposes. *)
     procedure MakeSkeletalRotationDelta(startFrame, endFrame: Integer);
-    { Applies current frame to morph all mesh objects. }
+    // Applies current frame to morph all mesh objects.
     procedure MorphMesh(normalize: Boolean);
-    { Copy bone rotations from reference skeleton. }
+    // Copy bone rotations from reference skeleton.
     procedure Synchronize(reference: TgxSkeleton);
-    { Release bones and frames info. }
+    // Release bones and frames info.
     procedure Clear;
-    { Backup and prepare the BoneMatrixInvertedMeshes to use with ragdolls }
+    // Backup and prepare the BoneMatrixInvertedMeshes to use with ragdolls
     procedure StartRagdoll; // ragdoll
-    { Restore the BoneMatrixInvertedMeshes to stop the ragdoll }
+    // Restore the BoneMatrixInvertedMeshes to stop the ragdoll
     procedure StopRagdoll; // ragdoll
-    { Turning this option off (by default) alows to increase FPS,
+    (* Turning this option off (by default) alows to increase FPS,
       but may break backwards-compatibility, because some may choose to
-      attach other objects to invisible parts. }
+      attach other objects to invisible parts. *)
     property MorphInvisibleParts: Boolean read FMorphInvisibleParts write FMorphInvisibleParts;
   end;
 
-  { Rendering options per TgxMeshObject.
+  (* Rendering options per TgxMeshObject.
     moroGroupByMaterial : if set, the facegroups will be rendered by material
     in batchs, this will optimize rendering by reducing material switches, but
     also implies that facegroups will not be rendered in the order they are in
-    the list. }
+    the list. *)
   TgxMeshObjectRenderingOption = (moroGroupByMaterial);
   TgxMeshObjectRenderingOptions = set of TgxMeshObjectRenderingOption;
 
   TVBOBuffer = (vbVertices, vbNormals, vbColors, vbTexCoords, vbLightMapTexCoords, vbTexCoordsEx);
   TVBOBuffers = set of TVBOBuffer;
 
-  { Base mesh class.
+  (* Base mesh class.
     Introduces base methods and properties for mesh objects.
-    Subclasses are named "TMOxxx". }
+    Subclasses are named "TMOxxx". *)
   TgxMeshObject = class(TgxBaseMeshObject)
   private
     FOwner: TgxMeshObjectList;
@@ -450,7 +450,7 @@ type
     procedure SetTangentsTexCoordIndex(const val: Integer);
     property ValidBuffers: TVBOBuffers read FValidBuffers write SetValidBuffers;
   public
-    { Creates, assigns Owner and adds to list. }
+    // Creates, assigns Owner and adds to list.
     constructor CreateOwned(aOwner: TgxMeshObjectList);
     constructor Create; override;
     destructor Destroy; override;
@@ -460,12 +460,12 @@ type
     procedure Clear; override;
     function ExtractTriangles(texCoords: TAffineVectorList = nil; normals: TAffineVectorList = nil): TAffineVectorList;
       override;
-    { Returns number of triangles in the mesh object. }
+    // Returns number of triangles in the mesh object.
     function TriangleCount: Integer; virtual;
     procedure PrepareMaterialLibraryCache(matLib: TgxMaterialLibrary);
     procedure DropMaterialLibraryCache;
-    { Prepare the texture and materials before rendering.
-      Invoked once, before building the list and NOT while building the list. }
+    (* Prepare the texture and materials before rendering.
+      Invoked once, before building the list and NOT while building the list. *)
     procedure PrepareBuildList(var mrci: TgxRenderContextInfo); virtual;
     // Similar to regular scene object's BuildList method
     procedure BuildList(var mrci: TgxRenderContextInfo); virtual;
@@ -483,9 +483,9 @@ type
     // Sets the triangle data of a given triangle
     procedure SetTriangleData(tri: Integer; list: TAffineVectorList; const v0, v1, v2: TAffineVector); overload;
     procedure SetTriangleData(tri: Integer; list: TVectorList; const v0, v1, v2: TVector); overload;
-    { Build the tangent space from the mesh object's vertex, normal
+    (* Build the tangent space from the mesh object's vertex, normal
       and texcoord data, filling the binormals and tangents where
-      specified. }
+      specified. *)
     procedure BuildTangentSpace(buildBinormals: Boolean = True; buildTangents: Boolean = True);
     property Owner: TgxMeshObjectList read FOwner;
     property mode: TgxMeshObjectMode read FMode write FMode;
@@ -494,9 +494,9 @@ type
     property Colors: TVectorList read FColors write SetColors;
     property FaceGroups: TgxFaceGroups read FFaceGroups;
     property RenderingOptions: TgxMeshObjectRenderingOptions read FRenderingOptions write FRenderingOptions;
-    { If set, rendering will use VBO's instead of vertex arrays. }
+    // If set, rendering will use VBO's instead of vertex arrays.
     property UseVBO: Boolean read FUseVBO write SetUseVBO;
-    { The TexCoords Extension is a list of vector lists that are used
+    (* The TexCoords Extension is a list of vector lists that are used
       to extend the vertex data applied during rendering.
       The lists are applied to the GL_TEXTURE0_ARB + index texture
       environment. This means that if TexCoordsEx 0 or 1 have data it
@@ -504,13 +504,13 @@ type
       Lists are created on demand, meaning that if you request
       TexCoordsEx[4] it will create the list up to and including 4.
       The extensions are only applied to the texture environment if
-      they contain data. }
+      they contain data. *)
     property TexCoordsEx[index: Integer]: TVectorList read GetTexCoordsEx write SetTexCoordsEx;
-    { A TexCoordsEx list wrapper for binormals usage,
-      returns TexCoordsEx[BinormalsTexCoordIndex]. }
+    (* A TexCoordsEx list wrapper for binormals usage,
+      returns TexCoordsEx[BinormalsTexCoordIndex]. *)
     property Binormals: TVectorList read GetBinormals write SetBinormals;
-    { A TexCoordsEx list wrapper for tangents usage,
-      returns TexCoordsEx[BinormalsTexCoordIndex]. }
+    (* A TexCoordsEx list wrapper for tangents usage,
+      returns TexCoordsEx[BinormalsTexCoordIndex]. *)
     property Tangents: TVectorList read GetTangents write SetTangents;
     // Specify the texcoord extension index for binormals (default = 2)
     property BinormalsTexCoordIndex: Integer read FBinormalsTexCoordIndex write SetBinormalsTexCoordIndex;
@@ -518,11 +518,11 @@ type
     property TangentsTexCoordIndex: Integer read FTangentsTexCoordIndex write SetTangentsTexCoordIndex;
   end;
 
-  { A list of TgxMeshObject objects. }
+  // A list of TgxMeshObject objects.
   TgxMeshObjectList = class(TPersistentObjectList)
   private
     FOwner: TgxBaseMesh;
-    { Resturns True if all its MeshObjects use VBOs. }
+    // Resturns True if all its MeshObjects use VBOs.
     function GetUseVBO: Boolean;
     procedure SetUseVBO(const Value: Boolean);
   protected
@@ -533,8 +533,8 @@ type
     procedure ReadFromFiler(reader: TVirtualReader); override;
     procedure PrepareMaterialLibraryCache(matLib: TgxMaterialLibrary);
     procedure DropMaterialLibraryCache;
-    { Prepare the texture and materials before rendering.
-      Invoked once, before building the list and NOT while building the list. }
+    (* Prepare the texture and materials before rendering.
+      Invoked once, before building the list and NOT while building the list. *)
     procedure PrepareBuildList(var mrci: TgxRenderContextInfo); virtual;
     // Similar to regular scene object's BuildList method
     procedure BuildList(var mrci: TgxRenderContextInfo); virtual;
@@ -544,14 +544,14 @@ type
     procedure GetExtents(out min, max: TAffineVector);
     procedure Translate(const delta: TAffineVector);
     function ExtractTriangles(texCoords: TAffineVectorList = nil; normals: TAffineVectorList = nil): TAffineVectorList;
-    { Returns number of triangles in the meshes of the list. }
+    // Returns number of triangles in the meshes of the list.
     function TriangleCount: Integer;
-    { Build the tangent space from the mesh object's vertex, normal
+    (* Build the tangent space from the mesh object's vertex, normal
       and texcoord data, filling the binormals and tangents where
-      specified. }
+      specified. *)
     procedure BuildTangentSpace(buildBinormals: Boolean = True; buildTangents: Boolean = True);
-    { If set, rendering will use VBO's instead of vertex arrays.
-      Resturns True if all its MeshObjects use VBOs. }
+    (* If set, rendering will use VBO's instead of vertex arrays.
+      Resturns True if all its MeshObjects use VBOs. *)
     property UseVBO: Boolean read GetUseVBO write SetUseVBO;
     // Precalculate whatever is needed for rendering, called once
     procedure Prepare; virtual;
@@ -564,7 +564,7 @@ type
   TgxMeshObjectListClass = class of TgxMeshObjectList;
   TgxMeshMorphTargetList = class;
 
-  { A morph target, stores alternate lists of vertices and normals. }
+  // A morph target, stores alternate lists of vertices and normals.
   TgxMeshMorphTarget = class(TgxBaseMeshObject)
   private
     FOwner: TgxMeshMorphTargetList;
@@ -576,7 +576,7 @@ type
     property Owner: TgxMeshMorphTargetList read FOwner;
   end;
 
-  { A list of TgxMeshMorphTarget objects. }
+  // A list of TgxMeshMorphTarget objects.
   TgxMeshMorphTargetList = class(TPersistentObjectList)
   private
     FOwner: TPersistent;
@@ -592,9 +592,9 @@ type
     property Items[Index: Integer]: TgxMeshMorphTarget read GeTgxMeshMorphTarget; default;
   end;
 
-  { Mesh object with support for morph targets.
+  (* Mesh object with support for morph targets.
     The morph targets allow to change vertices and normals according to pre-
-    existing "morph targets". }
+    existing "morph targets". *)
   TgxMorphableMeshObject = class(TgxMeshObject)
   private
     FMorphTargets: TgxMeshMorphTargetList;
@@ -621,13 +621,13 @@ type
   PVerticesBoneWeights = ^TVerticesBoneWeights;
   TVertexBoneWeightDynArray = array of TVertexBoneWeight;
 
-  { A mesh object with vertice bone attachments.
+  (* A mesh object with vertice bone attachments.
     The class adds per vertex bone weights to the standard morphable mesh.
     The TVertexBoneWeight structures are accessed via VerticesBonesWeights,
     they must be initialized by adjusting the BonesPerVertex and
     VerticeBoneWeightCount properties, you can also add vertex by vertex
     by using the AddWeightedBone method.
-    When BonesPerVertex is 1, the weight is ignored (set to 1.0). }
+    When BonesPerVertex is 1, the weight is ignored (set to 1.0). *)
   TgxSkeletonMeshObject = class(TgxMorphableMeshObject)
   private
     FVerticesBonesWeights: PVerticesBoneWeights;
@@ -661,12 +661,12 @@ type
     procedure ApplyCurrentSkeletonFrame(normalize: Boolean);
   end;
 
-  { Describes a face group of a TgxMeshObject.
+  (* Describes a face group of a TgxMeshObject.
     Face groups should be understood as "a way to use mesh data to render
     a part or the whole mesh object".
     Subclasses implement the actual behaviours, and should have at least
     one "Add" method, taking in parameters all that is required to describe
-    a single base facegroup element. }
+    a single base facegroup element. *)
   TgxFaceGroup = class(TPersistentObject)
   private
     FOwner: TgxFaceGroups;
@@ -686,15 +686,15 @@ type
     procedure PrepareMaterialLibraryCache(matLib: TgxMaterialLibrary);
     procedure DropMaterialLibraryCache;
     procedure BuildList(var mrci: TgxRenderContextInfo); virtual; abstract;
-    { Add to the list the triangles corresponding to the facegroup.
+    (* Add to the list the triangles corresponding to the facegroup.
       This function is used by TgxMeshObjects ExtractTriangles to retrieve
-      all the triangles in a mesh. }
+      all the triangles in a mesh. *)
     procedure AddToTriangles(aList: TAffineVectorList; aTexCoords: TAffineVectorList = nil;
       aNormals: TAffineVectorList = nil); virtual;
-    { Returns number of triangles in the facegroup. }
+    // Returns number of triangles in the facegroup.
     function TriangleCount: Integer; virtual; abstract;
-    { Reverses the rendering order of faces.
-      Default implementation does nothing }
+    (* Reverses the rendering order of faces.
+      Default implementation does nothing *)
     procedure Reverse; virtual;
     // Precalculate whatever is needed for rendering, called once
     procedure Prepare; virtual;
@@ -810,23 +810,23 @@ type
     procedure AddToTriangles(aList: TAffineVectorList; aTexCoords: TAffineVectorList = nil; aNormals: TAffineVectorList = nil);
     // Material Library of the owner TgxBaseMesh.
     function MaterialLibrary: TgxMaterialLibrary;
-    { Sort faces by material.
+    (* Sort faces by material.
       Those without material first in list, followed by opaque materials,
-      then transparent materials. }
+      then transparent materials. *)
     procedure SortByMaterial;
   end;
 
-  { Determines how normals orientation is defined in a mesh.
+  (* Determines how normals orientation is defined in a mesh.
     - mnoDefault : uses default orientation
     - mnoInvert : inverse of default orientation
     - mnoAutoSolid : autocalculate to make the mesh globally solid
-    - mnoAutoHollow : autocalculate to make the mesh globally hollow }
+    - mnoAutoHollow : autocalculate to make the mesh globally hollow *)
   TMeshNormalsOrientation = (mnoDefault, mnoInvert); // , mnoAutoSolid, mnoAutoHollow);
 
-  { Abstract base class for different vector file formats.
+  (* Abstract base class for different vector file formats.
     The actual implementation for these files (3DS, DXF..) must be done
     seperately. The concept for TgxVectorFile is very similar to TGraphic
-    (see Delphi Help). }
+    (see Delphi Help). *)
   TgxVectorFile = class(TgxDataFile)
   private
     FNormalsOrientation: TMeshNormalsOrientation;
@@ -840,10 +840,10 @@ type
 
   TgxVectorFileClass = class of TgxVectorFile;
 
-  { GLSM ( GXScene Mesh) vector file.
+  (* GLSM ( GXScene Mesh) vector file.
     This corresponds to the 'native' Scene format, and object persistence
     stream, which should be the 'fastest' of all formats to load, and supports
-    all of GXScene features. }
+    all of GXScene features. *)
   TgxGLSMVectorFile = class(TgxVectorFile)
   public
     class function Capabilities: TgxDataFileCapabilities; override;
@@ -851,7 +851,7 @@ type
     procedure SaveToStream(aStream: TStream); override;
   end;
 
-  { Base class for mesh objects. }
+  // Base class for mesh objects.
   TgxBaseMesh = class(TgxSceneObject)
   private
     FNormalsOrientation: TMeshNormalsOrientation;
@@ -878,25 +878,25 @@ type
     procedure SetOverlaySkeleton(const val: Boolean);
     procedure SetAutoScaling(const Value: TgxCoordinates);
     procedure DestroyHandle; override;
-    { Invoked after creating a TgxVectorFile and before loading.
+    (* Invoked after creating a TgxVectorFile and before loading.
       Triggered by LoadFromFile/Stream and AddDataFromFile/Stream.
-      Allows to adjust/transfer subclass-specific features. }
+      Allows to adjust/transfer subclass-specific features. *)
     procedure PrepareVectorFile(aFile: TgxVectorFile); virtual;
-    { Invoked after a mesh has been loaded/added.
+    (* Invoked after a mesh has been loaded/added.
       Triggered by LoadFromFile/Stream and AddDataFromFile/Stream.
-      Allows to adjust/transfer subclass-specific features. }
+      Allows to adjust/transfer subclass-specific features. *)
     procedure PrepareMesh; virtual;
-    { Recursively propagated to mesh object and facegroups.
-      Notifies that they all can establish their material library caches. }
+    (* Recursively propagated to mesh object and facegroups.
+      Notifies that they all can establish their material library caches. *)
     procedure PrepareMaterialLibraryCache;
-    { Recursively propagated to mesh object and facegroups.
-      Notifies that they all should forget their material library caches. }
+    (* Recursively propagated to mesh object and facegroups.
+      Notifies that they all should forget their material library caches. *)
     procedure DropMaterialLibraryCache;
-    { Prepare the texture and materials before rendering.
+    (* Prepare the texture and materials before rendering.
       Invoked once, before building the list and NOT while building the list,
       MaterialLibraryCache can be assumed to having been prepared if materials
       are active. Default behaviour is to prepare build lists for the
-      meshobjects. }
+      meshobjects. *)
     procedure PrepareBuildList(var mrci: TgxRenderContextInfo); virtual;
   public
     constructor Create(aOwner: TComponent); override;
@@ -910,93 +910,92 @@ type
     procedure BuildList(var rci: TgxRenderContextInfo); override;
     procedure DoRender(var rci: TgxRenderContextInfo; renderSelf, renderChildren: Boolean); override;
     procedure StructureChanged; override;
-    { Notifies that geometry data changed, but no re-preparation is needed.
+    (* Notifies that geometry data changed, but no re-preparation is needed.
       Using this method will usually be faster, but may result in incorrect
       rendering, reduced performance and/or invalid bounding box data
-      (ie. invalid collision detection). Use with caution. }
+      (ie. invalid collision detection). Use with caution. *)
     procedure StructureChangedNoPrepare;
-    { BEWARE! Utterly inefficient implementation! }
+    // BEWARE! Utterly inefficient implementation!
     function RayCastIntersect(const rayStart, rayVector: TVector; intersectPoint: PVector = nil; intersectNormal: PVector = nil)
       : Boolean; override;
     function GenerateSilhouette(const silhouetteParameters: TgxSilhouetteParameters): TgxSilhouette; override;
-    { This method allows fast shadow volumes for GLActors.
+    (* This method allows fast shadow volumes for GLActors.
       If your actor/mesh doesn't change, you don't need to call this.
-      It basically caches the connectivity data. }
+      It basically caches the connectivity data. *)
     procedure BuildSilhouetteConnectivityData;
     property MeshObjects: TgxMeshObjectList read FMeshObjects;
     property Skeleton: TgxSkeleton read FSkeleton;
-    { Computes the extents of the mesh. }
+    // Computes the extents of the mesh.
     procedure GetExtents(out min, max: TAffineVector);
-    { Computes the barycenter of the mesh. }
+    // Computes the barycenter of the mesh.
     function GetBarycenter: TAffineVector;
-    { Invoked after a mesh has been loaded.
-      Should auto-center according to the AutoCentering property. }
+    (* Invoked after a mesh has been loaded.
+      Should auto-center according to the AutoCentering property. *)
     procedure PerformAutoCentering; virtual;
-    { Invoked after a mesh has been loaded.
-      Should auto-scale the vertices of the meshobjects to AutoScaling the property. }
+    (* Invoked after a mesh has been loaded.
+      Should auto-scale the vertices of the meshobjects to AutoScaling the property. *)
     procedure PerformAutoScaling; virtual;
-    { Loads a vector file.
+    (* Loads a vector file.
       A vector files (for instance a ".3DS") stores the definition of
       a mesh as well as materials property.
-      Loading a file replaces the current one (if any). }
+      Loading a file replaces the current one (if any). *)
     procedure LoadFromFile(const filename: string); virtual;
-    { Loads a vector file from a stream.
+    (* Loads a vector file from a stream.
       See LoadFromFile.
       The filename attribute is required to identify the type data you're
-      streaming (3DS, OBJ, etc.) }
+      streaming (3DS, OBJ, etc.) *)
     procedure LoadFromStream(const filename: string; aStream: TStream); virtual;
-    { Saves to a vector file.
-      Note that only some of the vector files formats can be written. }
+    (* Saves to a vector file.
+      Note that only some of the vector files formats can be written. *)
     procedure SaveToFile(const filename: string); virtual;
-    { Saves to a vector file in a stream.
-      Note that only some of the vector files formats can be written. }
+    (* Saves to a vector file in a stream.
+      Note that only some of the vector files formats can be written. *)
     procedure SaveToStream(const filename: string; aStream: TStream); virtual;
-    { Loads additionnal data from a file.
+    (* Loads additionnal data from a file.
       Additionnal data could be more animation frames or morph target.
       The VectorFile importer must be able to handle addition of data
-      flawlessly. }
+      flawlessly. *)
     procedure AddDataFromFile(const filename: string); virtual;
-    { Loads additionnal data from stream.
-      See AddDataFromFile. }
+    // Loads additionnal data from stream. See AddDataFromFile.
     procedure AddDataFromStream(const filename: string; aStream: TStream); virtual;
-    { Returns the filename of the last loaded file, or a blank string if not
+    (* Returns the filename of the last loaded file, or a blank string if not
       file was loaded (or if the mesh was dinamically built). This does not
       take into account the data added to the mesh (through AddDataFromFile)
-      or saved files. }
+      or saved files. *)
     function LastLoadedFilename: string;
-    { Determines if a mesh should be centered and how.
+    (* Determines if a mesh should be centered and how.
       AutoCentering is performed  only  after loading a mesh, it has
       no effect on already loaded mesh data or when adding from a file/stream.
       If you want to alter mesh data, use direct manipulation methods
-      (on the TgxMeshObjects). }
+      (on the TgxMeshObjects). *)
     property AutoCentering: TgxMeshAutoCenterings read FAutoCentering write FAutoCentering default [];
-    { Scales vertices to a AutoScaling.
+    (* Scales vertices to a AutoScaling.
       AutoScaling is performed  only  after loading a mesh, it has
       no effect on already loaded mesh data or when adding from a file/stream.
       If you want to alter mesh data, use direct manipulation methods
-      (on the TgxMeshObjects). }
+      (on the TgxMeshObjects). *)
     property AutoScaling: TgxCoordinates read FAutoScaling write FAutoScaling;
-    { Material library where mesh materials will be stored/retrieved.
+    (* Material library where mesh materials will be stored/retrieved.
       If this property is not defined or if UseMeshMaterials is false,
       only the FreeForm's material will be used (and the mesh's materials
-      will be ignored. }
+      will be ignored. *)
     property MaterialLibrary: TgxMaterialLibrary read FMaterialLibrary write SetMaterialLibrary;
-    { Defines wether materials declared in the vector file mesh are used.
-      You must also define the MaterialLibrary property. }
+    (* Defines wether materials declared in the vector file mesh are used.
+      You must also define the MaterialLibrary property. *)
     property UseMeshMaterials: Boolean read FUseMeshMaterials write SetUseMeshMaterials default True;
-    { LightMap library where lightmaps will be stored/retrieved.
+    (* LightMap library where lightmaps will be stored/retrieved.
       If this property is not defined, lightmaps won't be used.
       Lightmaps currently *always* use the second texture unit (unit 1),
-      and may interfere with multi-texture materials. }
+      and may interfere with multi-texture materials. *)
     property LightmapLibrary: TgxMaterialLibrary read FLightmapLibrary write SetLightmapLibrary;
-    { If True, exceptions about missing textures will be ignored.
+    (* If True, exceptions about missing textures will be ignored.
       Implementation is up to the file loader class (ie. this property
-      may be ignored by some loaders) }
+      may be ignored by some loaders) *)
     property IgnoreMissingTextures: Boolean read FIgnoreMissingTextures write FIgnoreMissingTextures default False;
-    { Normals orientation for owned mesh. }
+    // Normals orientation for owned mesh.
     property NormalsOrientation: TMeshNormalsOrientation read FNormalsOrientation write SetNormalsOrientation
       default mnoDefault;
-    { Request rendering of skeleton bones over the mesh. }
+    // Request rendering of skeleton bones over the mesh.
     property OverlaySkeleton: Boolean read FOverlaySkeleton write SetOverlaySkeleton default False;
   end;
 
@@ -1025,8 +1024,8 @@ type
     function OctreeAABBIntersect(const aabb: TAABB; objMatrix, invObjMatrix: TMatrix;
       triangles: TAffineVectorList = nil): Boolean;
     // TODO:  function OctreeSphereIntersect
-    { Octree support *experimental*.
-      Use only if you understand what you're doing! }
+    (* Octree support *experimental*.
+      Use only if you understand what you're doing! *)
     property Octree: TgxOctree read GetOctree;
     procedure BuildOctree(TreeDepth: Integer = 3);
   published
@@ -1237,34 +1236,34 @@ type
     procedure NextFrame(nbSteps: Integer = 1);
     procedure PrevFrame(nbSteps: Integer = 1);
     function FrameCount: Integer;
-    { Indicates whether the actor is currently swithing animations (with
-      smooth interpolation). }
+    (* Indicates whether the actor is currently swithing animations (with
+      smooth interpolation). *)
     function isSwitchingAnimation: Boolean;
   published
     property startFrame: Integer read FStartFrame write SetStartFrame default 0;
     property endFrame: Integer read FEndFrame write SetEndFrame default 0;
-    { Reference Frame Animation mode.
-      Allows specifying if the model is primarily morph or skeleton based. }
+    (* Reference Frame Animation mode.
+      Allows specifying if the model is primarily morph or skeleton based. *)
     property reference: TgxActorAnimationReference read FReference write FReference default aarMorph;
-    { Current animation frame. }
+    // Current animation frame.
     property CurrentFrame: Integer read FCurrentFrame write SetCurrentFrame default 0;
-    { Value in the [0; 1] range expressing the delta to the next frame. }
+    // Value in the [0; 1] range expressing the delta to the next frame.
     property CurrentFrameDelta: Single read FCurrentFrameDelta write FCurrentFrameDelta;
-    { Frame interpolation mode (afpNone/afpLinear). }
+    // Frame interpolation mode (afpNone/afpLinear).
     property FrameInterpolation: TActorFrameInterpolation read FFrameInterpolation write FFrameInterpolation default afpLinear;
-    { See TgxActorAnimationMode. }
+    // See TgxActorAnimationMode.
     property AnimationMode: TgxActorAnimationMode read FAnimationMode write FAnimationMode default aamNone;
-    { Interval between frames, in milliseconds. }
+    // Interval between frames, in milliseconds.
     property Interval: Integer read FInterval write FInterval;
-    { Actor and animation miscellanious options. }
+    // Actor and animation miscellanious options.
     property Options: TgxActorOptions read FOptions write SetOptions default cDefaultActorOptions;
-    { Triggered after each CurrentFrame change. }
+    // Triggered after each CurrentFrame change.
     property OnFrameChanged: TNotifyEvent read FOnFrameChanged write FOnFrameChanged;
-    { Triggered after EndFrame has been reached by progression or "nextframe" }
+    // Triggered after EndFrame has been reached by progression or "nextframe"
     property OnEndFrameReached: TNotifyEvent read FOnEndFrameReached write FOnEndFrameReached;
-    { Triggered after StartFrame has been reached by progression or "nextframe" }
+    // Triggered after StartFrame has been reached by progression or "nextframe"
     property OnStartFrameReached: TNotifyEvent read FOnStartFrameReached write FOnStartFrameReached;
-    { Collection of animations sequences. }
+    // Collection of animations sequences.
     property Animations: TgxActorAnimations read FAnimations write SetAnimations stored StoreAnimations;
     property AutoCentering;
     property MaterialLibrary;
@@ -1282,7 +1281,7 @@ type
     DescResID: Integer;
   end;
 
-  { Stores registered vector file formats. }
+  // Stores registered vector file formats.
   TgxVectorFileFormatsList = class(TPersistentObjectList)
   public
     destructor Destroy; override;
@@ -1304,8 +1303,8 @@ function GetVectorFileFormats: TgxVectorFileFormatsList;
 function VectorFileFormatsFilter: string;
 // A file extension filter suitable for a savedialog's 'Filter' property
 function VectorFileFormatsSaveFilter: string;
-{ Returns an extension by its index in the vector files dialogs filter.
-  Use VectorFileFormatsFilter to obtain the filter. }
+(* Returns an extension by its index in the vector files dialogs filter.
+  Use VectorFileFormatsFilter to obtain the filter. *)
 function VectorFileFormatExtensionByIndex(Index: Integer): string;
 
 procedure RegisterVectorFileFormat(const aExtension, aDescription: string; AClass: TgxVectorFileClass);
@@ -1313,7 +1312,7 @@ procedure UnregisterVectorFileClass(AClass: TgxVectorFileClass);
 
 var
   vVectorFileObjectsAllocateMaterials: Boolean = True;
-  // Mrqzzz : Flag to avoid loading materials (useful for IDE Extentions or scene editors)
+  // Flag to avoid loading materials (useful for IDE Extentions or scene editors)
   vVectorFileObjectsEnableVBOByDefault: Boolean = True;
 
 // ===========================================================================

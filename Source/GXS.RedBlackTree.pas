@@ -1,6 +1,11 @@
-//
-// Graphic Scene Engine, http://glscene.org
-//
+(*******************************************
+*                                          *
+* Graphic Scene Engine, http://glscene.org *
+*                                          *
+********************************************)
+
+unit GXS.RedBlackTree;
+
 (*
   USAGE
   The TRedBlackTree generic class behaves somewhat like a TList:
@@ -29,21 +34,19 @@
   smaller than _Key_. For Last and First key result not returned.
 *)
 
-unit GXS.RedBlackTree;
-
 interface
 
 {$I Scene.inc}
 
 uses
-  System.Classes, 
+  System.Classes,
   GXS.CrossPlatform;
 
 type
 
   TRBColor = (clRed, clBlack);
 
-{$IFDEF VXS_GENERIC_PREFIX}
+{$IFDEF GENERIC_PREFIX}
   generic
 {$ENDIF}
   GRedBlackTree < TKey, TValue > = class

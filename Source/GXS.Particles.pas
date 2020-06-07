@@ -1,11 +1,12 @@
-//
-// Graphic Scene Engine, http://glscene.org
-//
-(*
-   Particle systems for GXS.Scene, based on replication of full-featured scene objects.
-*)
+(*******************************************
+*                                          *
+* Graphic Scene Engine, http://glscene.org *
+*                                          *
+********************************************)
 
 unit GXS.Particles;
+
+(* Particle systems based on replication of full-featured scene objects *)
 
 interface
 
@@ -29,9 +30,9 @@ uses
 type
   TgxParticleEvent = procedure(Sender: TObject; particle: TgxBaseSceneObject) of object;
 
-  { Manager object of a particle system.
+  (* Manager object of a particle system.
    Particles in a TgxParticles system are described as normal scene objects,
-   however their children are to be : 
+   however their children are to be :
     "particle template" : the first object (index=0), this one will be
     duplicated to create new particles, it does not receive progression
     events and is visible at design-time only.
@@ -49,8 +50,7 @@ type
    All direct access to a TgxParticles children should be avoided.
    For high-performance particle systems of basic particles, you should
    look into GXS.ParticleFX instead, TgxParticles being rather focused on
-   complex particles.
-  }
+   complex particles. *)
   TgxParticles = class(TgxImmaterialSceneObject)
   private
     FCubeSize: Single;
@@ -77,41 +77,39 @@ type
     procedure DoRender(var ARci: TgxRenderContextInfo;
       ARenderSelf, ARenderChildren: Boolean); override;
     procedure DoProgress(const progressTime: TProgressTimes); override;
-    { Request creation of a new particle.
-     Particle will be either created or retrieved from the particlePool. }
+    (* Request creation of a new particle.
+     Particle will be either created or retrieved from the particlePool. *)
     function CreateParticle: TgxBaseSceneObject;
-    { Kill given particle.
+    (* Kill given particle.
      If particlePool is not full, particle will be sent to the pool,
-     if not, it will be freed. }
+     if not, it will be freed. *)
     procedure KillParticle(aParticle: TgxBaseSceneObject);
-    { Kill all particles. }
+    // Kill all particles.
     procedure KillParticles;
   published
     property CubeSize: Single read FCubeSize write SetCubeSize;
     property EdgeColor: TgxColor read FEdgeColor write SetEdgeColor;
     property VisibleAtRunTime: Boolean read FVisibleAtRunTime write SetVisibleAtRunTime default False;
-    { Size of the particle pool (for storing killed particles).
-             Default size is zero, meaning the particlePool is disabled. }
+    (* Size of the particle pool (for storing killed particles).
+       Default size is zero, meaning the particlePool is disabled. *)
     property ParticlePoolSize: Integer read FParticlePoolSize write SetParticlePoolSize default 0;
-    { Fired a particle has been created as a template duplicate.
-       When the event is triggered, the particle has yet been added  to
-       the scene. }
+    (* Fired a particle has been created as a template duplicate.
+       When the event is triggered, the particle has yet been added  to the scene. *)
     property OnCreateParticle: TgxParticleEvent read FOnCreateParticle write FOnCreateParticle;
-    { Fired when a particle will get in the "live" list.
+    (* Fired when a particle will get in the "live" list.
        The particle has just been "Assigned" with the template, may happen
-       after a creation or a pick from the particle pool. }
+       after a creation or a pick from the particle pool. *)
     property OnActivateParticle: TgxParticleEvent read FOnActivateParticle write FOnActivateParticle;
-    { Triggered when a particle is killed.
-             When the event is fired, the particle is still parented, after this
-             event, the particle will either go to the pool or be destroyed if
-             the pool is full. }
+    (* Triggered when a particle is killed.
+       When the event is fired, the particle is still parented, after this
+       event, the particle will either go to the pool or be destroyed if the pool is full. *)
     property OnKillParticle: TgxParticleEvent read FOnKillParticle write FOnKillParticle;
-    { Triggered just before destroying a particle.
-       The particle can be in the pool (ie. not parented). }
+    (* Triggered just before destroying a particle.
+       The particle can be in the pool (ie. not parented). *)
     property OnDestroyParticle: TgxParticleEvent read FOnDestroyParticle write FOnDestroyParticle;
-    { Fired before rendering the first of the particles. }
+    // Fired before rendering the first of the particles.
     property OnBeforeRenderParticles: TDirectRenderEvent read FOnBeforeRenderParticles write FOnBeforeRenderParticles;
-    { Fired after rendering the last of the particles. }
+    // Fired after rendering the last of the particles.
     property OnAfterRenderParticles: TDirectRenderEvent read FOnAfterRenderParticles write FOnAfterRenderParticles;
   end;
 

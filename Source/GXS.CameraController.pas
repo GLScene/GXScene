@@ -4,6 +4,8 @@
 *                                          *
 ********************************************)
 
+unit GXS.CameraController;
+
 (*
   Component for animating camera movement.
   Can be used to zoom in/out, for linear movement, orbiting and Google Earth - like "fly-to"
@@ -20,10 +22,6 @@ do whatever you want on mouse move, form wheel etc
 methods and properties are explained in the interface section (through comments)
 additional comments might apear in implementation section where needed
 *)
-
-
-
-unit GXS.CameraController;
 
 interface
 

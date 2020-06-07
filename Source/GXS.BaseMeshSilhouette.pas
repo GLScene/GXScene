@@ -3,11 +3,10 @@
 * Graphic Scene Engine, http://glscene.org *
 *                                          *
 ********************************************)
-(*
-  Silhouette classes for BaseMesh and FaceGroups.
-*)
 
 unit GXS.BaseMeshSilhouette;
+
+(* Silhouette classes for BaseMesh and FaceGroups *)
 
 interface
 

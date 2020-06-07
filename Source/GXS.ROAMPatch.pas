@@ -1,10 +1,12 @@
-//
-// Graphic Scene Engine, http://glscene.org
-//
-(*
-  Class for managing a ROAM (square) patch.
-*)
+(*******************************************
+*                                          *
+* Graphic Scene Engine, http://glscene.org *
+*                                          *
+********************************************)
+
 unit GXS.ROAMPatch;
+
+(* Class for managing a ROAM (square) patch *)
 
 interface
 

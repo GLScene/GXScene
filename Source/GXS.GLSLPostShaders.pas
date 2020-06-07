@@ -3,10 +3,11 @@
 * Graphic Scene Engine, http://glscene.org *
 *                                          *
 ********************************************)
-(*
-   Post shaders that simulate shader visions for a mask or the entire scene.
-*)
+
 unit GXS.GLSLPostShaders;
+
+(* Post shaders that simulate shader visions for a mask or the entire scene *)
+
 
 interface
 
@@ -28,7 +29,7 @@ uses
 
   { Custom class for GLSLPostBlurShader. A shader that blurs the entire scene }
 type
-  TgxCustomGLSLPostBlurShader = class(TgxCustomGLSLShader, IVXPostShader)
+  TgxCustomGLSLPostBlurShader = class(TgxCustomGLSLShader, IgxPostShader)
   private
     FThreshold: Single;
     // Implementing IGLPostShader.
@@ -50,7 +51,7 @@ type
   end;
 
   // A shader that simulate a Thermal Vision of the entire scene
-  TgxCustomGLSLPostThermalVisionShader = class(TgxCustomGLSLShader, IVXPostShader)
+  TgxCustomGLSLPostThermalVisionShader = class(TgxCustomGLSLShader, IgxPostShader)
   private
     FThreshold : Single;
     Fintensity : Single;
@@ -75,7 +76,7 @@ type
   end;
 
   // A shader that simulate a grayscale threshold vision (aka dream) of the entire scene
-  TgxCustomGLSLPostDreamVisionShader = class(TgxCustomGLSLShader, IVXPostShader)
+  TgxCustomGLSLPostDreamVisionShader = class(TgxCustomGLSLShader, IgxPostShader)
   private
     FThreshold : Single; // In percent 0..100;
     // Implementing IGLPostShader.
@@ -97,7 +98,7 @@ type
 
   (* Custom shader that simulate a Night Vision of the scene throw a mask if enabled,
    or of the entire scene *)
-  TgxCustomGLSLPostNightVisionShader = class(TgxCustomGLSLShader, IVXPostShader)
+  TgxCustomGLSLPostNightVisionShader = class(TgxCustomGLSLShader, IgxPostShader)
   private
     FMaterialLibrary: TgxAbstractMaterialLibrary;
     FLuminanceThreshold: Single;
@@ -149,7 +150,7 @@ type
   end;
 
   // Custom shader that pixelate of the entire scene
-  TgxCustomGLSLPostPixelateShader = class(TgxCustomGLSLShader, IVXPostShader)
+  TgxCustomGLSLPostPixelateShader = class(TgxCustomGLSLShader, IgxPostShader)
   private
     FPixelWidth  : Single;
     FPixelHeight : Single;
@@ -173,7 +174,7 @@ type
   end;
 
   // Custom shader that posterize of the entire scene
-  TgxCustomGLSLPostPosterizeShader = class(TgxCustomGLSLShader, IVXPostShader)
+  TgxCustomGLSLPostPosterizeShader = class(TgxCustomGLSLShader, IgxPostShader)
   private
     FGamma  : Single;
     FNumColors : Single;
@@ -197,7 +198,7 @@ type
   end;
 
   // Custom class for shader that frost of the entire scene
-  TgxCustomGLSLPostFrostShader = class(TgxCustomGLSLShader, IVXPostShader)
+  TgxCustomGLSLPostFrostShader = class(TgxCustomGLSLShader, IgxPostShader)
   private
     FRandScale  : Single;
     FRandFactor : Single;
@@ -225,7 +226,7 @@ type
    This Shader is experimental it can do smooth the scene or double the scene and it's
    depends of PixelX, PixelY and Freq values if they are less than 1 or greater
    the effects will be very different *)
-  TgxCustomGLSLPostTroubleShader = class(TgxCustomGLSLShader, IVXPostShader)
+  TgxCustomGLSLPostTroubleShader = class(TgxCustomGLSLShader, IgxPostShader)
   private
     FPixelX  : Single;
     FPixelY : Single;

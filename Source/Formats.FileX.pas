@@ -1,10 +1,11 @@
-//
-// Graphic Scene Engine, http://glscene.org
-//
-(*
-  Simple X format support for Delphi (Microsoft's favorite format)
-*)
+(* ******************************************
+  *                                          *
+  * Graphic Scene Engine, http://glscene.org *
+  *                                          *
+  ******************************************* *)
 unit Formats.FileX;
+
+(* Simple X format support for Delphi (Microsoft's favorite format) *)
 
 interface
 
@@ -18,6 +19,7 @@ uses
   Scene.VectorGeometry,
   Scene.VectorLists,
   Scene.PersistentClasses,
+  Scene.Strings,
   GXS.Utils;
 
 type
@@ -644,15 +646,11 @@ begin
     FOwner.Add(Self);
 end;
 
-// GetItem
-//
 function TDXNode.GetItem(index: Integer): TDXNode;
 begin
   Result := TDXNode(Get(index));
 end;
 
-// Clear
-//
 procedure TDXNode.Clear;
 var
   i: Integer;
@@ -668,16 +666,12 @@ end;
 // TDXFrame
 // ----------------------------------------------------------------------
 
-// Create
-//
 constructor TDXFrame.Create;
 begin
   inherited;
   FMatrix := IdentityHMGMatrix;
 end;
 
-// GlobalMatrix
-//
 function TDXFrame.GlobalMatrix: TMatrix;
 begin
   if Owner is TDXFrame then
@@ -691,7 +685,6 @@ end;
 // TDXMaterial
 // ----------------------------------------------------------------------
 
-// CreateOwned
 constructor TDXMaterial.CreateOwned(AOwner: TDXMaterialList);
 begin
   Create;

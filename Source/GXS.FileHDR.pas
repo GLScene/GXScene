@@ -1,12 +1,12 @@
-//
-// Graphic Scene Engine, http://glscene.org
-//
-{
-   HDR File support.
-}
+(*******************************************
+*                                          *
+* Graphic Scene Engine, http://glscene.org *
+*                                          *
+********************************************)
+
 unit GXS.FileHDR;
 
-{$I Scene.inc}
+(* HDR File support *)
 
 interface
 
@@ -15,6 +15,10 @@ uses
   System.SysUtils,
 
   Import.OpenGLx,
+  Scene.VectorTypes,
+  Scene.VectorGeometry,
+  Scene.RGBE,
+
   GXS.Context,
   GXS.Graphics,
   GXS.TextureFormat,
@@ -50,11 +54,6 @@ type
 //====================================================================
 implementation
 //====================================================================
-
-uses
-  GXS.RGBE,
-  Scene.VectorTypes,
-  Scene.VectorGeometry;
 
 // ------------------
 // ------------------ TgxHDRImage ------------------

@@ -1,16 +1,19 @@
-//
-// Graphic Scene Engine, http://glscene.org
-//
-{
+(*******************************************
+*                                          *
+* Graphic Scene Engine, http://glscene.org *
+*                                          *
+********************************************)
+
+unit GXS.ShaderCombiner;
+
+(*
     Allows to combine shaders in different sequences.
     Note, that can't just take 2 random shaders and combine them, because
     shaders often override the objects material and vertex data with a total
     disregard to what existed before it. But in some cases, especially with
     multipass shaders, this unit does magic and allows to reuse and upgrade
-    previously written shaders. 
-            
-}
-unit GXS.ShaderCombiner;
+    previously written shaders.
+*)
 
 interface
 
@@ -18,7 +21,7 @@ interface
 
 uses
   System.Classes,
-  
+
   GXS.Material,
   GXS.Scene,
   Scene.VectorGeometry,
@@ -26,7 +29,7 @@ uses
   GXS.RenderContextInfo;
 
 type
-  { MP - multipass, SP-singlepass, AP - anypass (single or multi)
+  (* MP - multipass, SP-singlepass, AP - anypass (single or multi)
      One-Two or Two-One determines the order of how the shaders should be applied
      For example, sctTwoMPOneSP means that first one will be applied Shader Two,
      which can be a multipass shader, then Shader One is applied, which should be
@@ -39,8 +42,7 @@ type
            default one.
 
      By the way, I admit - the names do look stupid, and if someone gives them
-     proper names, I will be only glad.
-  }
+     proper names, I will be only glad. *)
   TgxShaderCombinerType = (sctOneSPTwoAP, sctTwoSPOneAP,
                            sctOneMPTwoSP, sctTwoMPOneSP
                            );
@@ -57,7 +59,6 @@ type
     procedure DoApply(var rci : TgxRenderContextInfo; Sender : TObject); override;
     function DoUnApply(var rci: TgxRenderContextInfo): Boolean; override;
     procedure Notification(AComponent: TComponent; Operation: TOperation); override;
-
     property CombinerType: TgxShaderCombinerType read FCombinerType write FCombinerType default sctOneSPTwoAP;
     property ShaderOne: TgxShader read FShaderOne write SetShaderOne;
     property ShaderTwo: TgxShader read FShaderTwo write SetShaderTwo;
@@ -76,10 +77,14 @@ type
     property ShaderStyle;
   end;
 
+//-------------------------------------------------
 implementation
+//-------------------------------------------------
 
 
-{ TgxCustomShaderCombiner }
+//-------------------------------------------------
+// TgxCustomShaderCombiner
+//-------------------------------------------------
 
 procedure TgxCustomShaderCombiner.Assign(Source: TPersistent);
 begin

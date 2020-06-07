@@ -36,25 +36,23 @@ uses
 type
   TFile3DS = class;
 
-  // gw:
   TLoadProgress = procedure(StreamPos, StreamMax: Longint) of object;
-  // Progress : TProgressBar;
-  //
-  // This allows to use something like that:
-  //
-  // procedure TSomeForm.CreateForm(Sender: TObject);
-  // begin
-  // ....
-  // 3DSReader.OnProgress := LoadProgress;
-  // ....
-  // end;
+  (* Progress : TProgressBar;
+   This allows to use something like that:
 
-  // procedure TSomeForm.LoadProgress(StreamPos, StreamMax : Longint);
-  // begin
-  // if StreamMax <> 0 then
-  // Progress.MaxValue := StreamMax;
-  // Progress.Position := StreamPos;
-  // end;
+   procedure TSomeForm.CreateForm(Sender: TObject);
+   begin
+   ....
+   3DSReader.OnProgress := LoadProgress;
+   ....
+   end;
+
+   procedure TSomeForm.LoadProgress(StreamPos, StreamMax : Longint);
+   begin
+   if StreamMax <> 0 then
+   Progress.MaxValue := StreamMax;
+   Progress.Position := StreamPos;
+   end; *)
 
   (* All structure data of a 3DS file is actually held in TFile3DS.FDatabase as a
      tree with lots of links across the various chunks.

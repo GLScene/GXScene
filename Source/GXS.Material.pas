@@ -3,11 +3,10 @@
 * Graphic Scene Engine, http://glscene.org *
 *                                          *
 ********************************************)
-(*
-  Handles all the material + material library stuff.
-*)
 
 unit GXS.Material;
+
+(* Handles all the material + material library stuff *)
 
 interface
 

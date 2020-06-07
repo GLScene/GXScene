@@ -3,6 +3,9 @@
 * Graphic Scene Engine, http://glscene.org *
 *                                          *
 ********************************************)
+
+unit GXS.MaterialMultiProxy;
+
 (*
    Implements a multi-proxy object, useful for discreet LOD.
    Allows assign a unique material for each proxy master.
@@ -19,10 +22,7 @@
       (they are connected on assigning, not while rendering; full persistency support;
        allows to assign directly to TgxLibMaterial)
     9) FMX-style code formating
-
 *)
-
-unit GXS.MaterialMultiProxy;
 
 interface
 

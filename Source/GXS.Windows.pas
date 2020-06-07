@@ -1,11 +1,12 @@
-//
-// Graphic Scene Engine, http://glscene.org
-//
-{
-  OpenGL windows management classes and structures
-}
+(*******************************************
+*                                          *
+* Graphic Scene Engine, http://glscene.org *
+*                                          *
+********************************************)
 
 unit GXS.Windows;
+
+(* OpenGL windows management classes and structures *)
 
 interface
 
@@ -21,22 +22,22 @@ uses
   FMX.Types,
 
   Import.OpenGLx,
-  GXS.Scene,
+  Scene.VectorTypes,
+  Scene.VectorGeometry,
   Scene.PersistentClasses,
+  Scene.BaseClasses,
   Scene.Strings,
+  GXS.Scene,
   GXS.Coordinates,
   GXS.HUDObjects,
   GXS.Material,
   GXS.Context,
   GXS.BitmapFont,
   GXS.WindowsFont,
-  Scene.VectorTypes,
-  Scene.VectorGeometry,
   GXS.Gui,
   GXS.CrossPlatform,
   GXS.Color,
   GXS.RenderContextInfo,
-  Scene.BaseClasses,
   GXS.Objects,
   GXS.State,
   GXS.Utils;
@@ -100,14 +101,14 @@ type
     property GuiLayout: TgxGuiLayout read FGuiLayout write SetGuiLayout;
     property GuiLayoutName: TgxGuiComponentName read FGuiLayoutName write
       SetGuiLayoutName;
-    { This the ON-SCREEN rotation of the GuiComponent.
-       Rotatation=0 is handled faster. }
+    (* This the ON-SCREEN rotation of the GuiComponent.
+       Rotatation=0 is handled faster. *)
     property Rotation: Single read FRotation write SetRotation;
-    { If different from 1, this value will replace that of Diffuse.Alpha }
+    // If different from 1, this value will replace that of Diffuse.Alpha
     property AlphaChannel: Single read FAlphaChannel write SetAlphaChannel stored
       StoreAlphaChannel;
-    { If True, GuiComponent will not write to Z-Buffer.
-       GuiComponent will STILL be maskable by ZBuffer test. }
+    (* If True, GuiComponent will not write to Z-Buffer.
+       GuiComponent will STILL be maskable by ZBuffer test. *)
     property NoZWrite: Boolean read FNoZWrite write SetNoZWrite;
     property DoChangesOnProgress: Boolean read FDoChangesOnProgress write
       SetDoChangesOnProgress;

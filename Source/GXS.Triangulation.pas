@@ -1,11 +1,12 @@
-//
-// Graphic Scene Engine, http://glscene.org
-//
-{
-	Classes and methods for 2D triangulation of scatter points.
-}
+(*******************************************
+*                                          *
+* Graphic Scene Engine, http://glscene.org *
+*                                          *
+********************************************)
 
 unit GXS.Triangulation;
+
+(* Classes and methods for 2D triangulation of scatter points *)
 
 interface
 

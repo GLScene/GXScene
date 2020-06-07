@@ -1,11 +1,12 @@
-//
-// Graphic Scene Engine, http://glscene.org
-//
-(*
-   DXTC (also S3TC) decoding.
-   Adapted from DevIL image library (http://openil.sourceforge.net)
-*)
+(* ******************************************
+  *                                          *
+  * Graphic Scene Engine, http://glscene.org *
+  *                                          *
+  ******************************************* *)
+
 unit Formats.FileDXTC;
+
+(* DXTC (also S3TC) decoding *)
 
 interface
 

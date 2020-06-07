@@ -28,7 +28,7 @@ type
 
   TgxMultiProxy = class;
 
-  { MasterObject description for a MultiProxy object. }
+  // MasterObject description for a MultiProxy object.
   TgxMultiProxyMaster = class(TCollectionItem)
   private
     FMasterObject: TgxBaseSceneObject;
@@ -48,19 +48,19 @@ type
     function OwnerObject: TgxMultiProxy;
     procedure NotifyChange;
   published
-    { Specifies the Master object which will be proxy'ed. }
+    // Specifies the Master object which will be proxy'ed.
     property MasterObject: TgxBaseSceneObject read FMasterObject write SetMasterObject;
-    { Minimum visibility distance (inclusive). }
+    // Minimum visibility distance (inclusive).
     property DistanceMin: Single read FDistanceMin write SetDistanceMin;
-    { Maximum visibility distance (exclusive). }
+    // Maximum visibility distance (exclusive).
     property DistanceMax: Single read FDistanceMax write SetDistanceMax;
-    { Determines if the master object can be visible (proxy'ed).
+    (* Determines if the master object can be visible (proxy'ed).
       Note: the master object's distance also has to be within DistanceMin
-      and DistanceMax. }
+      and DistanceMax. *)
     property Visible: Boolean read FVisible write SetVisible default True;
   end;
 
-  { Collection of TgxMultiProxyMaster. }
+  // Collection of TgxMultiProxyMaster.
   TgxMultiProxyMasters = class(TOwnedCollection)
   protected
     procedure SetItems(index: Integer; const val: TgxMultiProxyMaster);
@@ -76,13 +76,13 @@ type
     procedure EndUpdate; override;
   end;
 
-  { Multiple Proxy object.
+  (* Multiple Proxy object.
     This proxy has multiple master objects, which are individually made visible
     depending on a distance to the camera criterion. It can be used to implement
     discreet level of detail directly for static objects, or objects that
     go through cyclic animation.
     For dimensionsn raycasting and silhouette purposes, the first master is used
-    (item zero in the MasterObjects collection). }
+    (item zero in the MasterObjects collection). *)
   TgxMultiProxy = class(TgxSceneObject)
   private
     FMasterObjects: TgxMultiProxyMasters;

@@ -1,6 +1,11 @@
-//
-// Graphic Scene Engine, http://glscene.org
-//
+(* ******************************************
+  *                                          *
+  * Graphic Scene Engine, http://glscene.org *
+  *                                          *
+  ******************************************* *)
+
+unit Formats.File3DSTypes;
+
 (*
   Implements the standard Teapot, build from evaluators.
   This unit contains all of the data types used by the core routines.
@@ -8,14 +13,11 @@
   created when a file is loaded.
 *)
 
-unit Formats.File3DSTypes;
-
-{$ALIGN ON}
-{$MINENUMSIZE 4}
-
 interface
 
 {$I Scene.inc}
+{$ALIGN ON}
+{$MINENUMSIZE 4}
 
 uses
   System.Classes; // for TStringList

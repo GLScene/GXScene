@@ -1,10 +1,12 @@
-//
-// Graphic Scene Engine, http://glscene.org
-//
-(*
-  File streaming class for the B3D loader
-*)
+(* ******************************************
+  *                                          *
+  * Graphic Scene Engine, http://glscene.org *
+  *                                          *
+  ******************************************* *)
+
 unit Formats.FileB3D;
+
+(* File streaming class for the B3D loader *)
 
 interface
 

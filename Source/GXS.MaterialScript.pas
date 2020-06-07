@@ -3,11 +3,10 @@
 * Graphic Scene Engine, http://glscene.org *
 *                                          *
 ********************************************)
-{
-   Material Script Batch loader for TgxMaterialLibrary for runtime. 
-}
 
 unit GXS.MaterialScript;
+
+(* Material Script Batch loader for TgxMaterialLibrary for runtime *)
 
 interface
 

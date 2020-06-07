@@ -44,17 +44,14 @@ type
     property ShaderStyle: TgxShaderStyle read FShaderStyle write SetShaderStyle;
   end;
 
-  // ------------------------------------------------------------------
-  // ------------------------------------------------------------------
-  // ------------------------------------------------------------------
+// ------------------------------------------------------------------
 implementation
+// ------------------------------------------------------------------
 
 // ------------------
 // ------------------ TgxMultiMaterialShader ------------------
 // ------------------
 
-// Create
-//
 constructor TgxMultiMaterialShader.Create(aOwner: TComponent);
 begin
   inherited;
@@ -62,16 +59,12 @@ begin
   FVisibleAtDesignTime := False;
 end;
 
-// DoApply
-//
 procedure TgxMultiMaterialShader.DoApply(var rci: TgxRenderContextInfo;
   Sender: TObject);
 begin
   if not Assigned(FMaterialLibrary) then
     exit;
-
   FShaderActiveAtDesignTime := FVisibleAtDesignTime;
-
   FPass := 1;
   if (not(csDesigning in ComponentState)) or FShaderActiveAtDesignTime then
   begin
@@ -84,8 +77,6 @@ begin
   end;
 end;
 
-// DoUnApply
-//
 function TgxMultiMaterialShader.DoUnApply
   (var rci: TgxRenderContextInfo): boolean;
 begin
@@ -112,8 +103,6 @@ begin
   end;
 end;
 
-// SetMaterialLibrary
-//
 procedure TgxMultiMaterialShader.SetMaterialLibrary
   (const val: TgxMaterialLibrary);
 begin

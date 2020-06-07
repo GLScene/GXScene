@@ -1,10 +1,13 @@
 //------------------------------------------------------------
 // Graphic Scene Engine, http://glscene.org
 //-------------------------------------------------------------
+
+unit GXS.PictureRegisteredFormats;
+
 (*
    Hacks into the FMX to access the list of TPicture registered TGraphic formats
 *)
-unit GXS.PictureRegisteredFormats;
+
 
 interface
 

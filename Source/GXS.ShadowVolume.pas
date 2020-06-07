@@ -1,15 +1,18 @@
-//
-// Graphic Scene Engine, http://glscene.org
-//
-{
+(*******************************************
+*                                          *
+* Graphic Scene Engine, http://glscene.org *
+*                                          *
+********************************************)
+
+unit GXS.ShadowVolume;
+
+(*
    Implements basic shadow volumes support.
 
    Be aware that only objects that support silhouette determination have a chance
    to cast correct shadows. Transparent/blended/shader objects among the receivers
    or the casters will be rendered incorrectly.
-
-}
-unit GXS.ShadowVolume;
+*)
 
 interface
 
@@ -37,34 +40,34 @@ type
 
   TgxShadowVolume = class;
 
-  { Determines when a shadow volume should generate a cap at the beginning and
+  (* Determines when a shadow volume should generate a cap at the beginning and
    end of the volume. This is ONLY necessary when there's a chance that the
    camera could end up inside the shadow _or_ between the light source and
    the camera. If those two situations can't occur then not using capping is
-   the best option. 
+   the best option.
    Note that if you use the capping, you must either set the depth of view of
    your camera to something very large (f.i. 1e9), or you could use the infinite
    mode (csInfinitePerspective) of your camera.
-    
+
       svcDefault : Default behaviour
       svcAlways : Always generates caps
-      svcNever : Never generates caps  }
+      svcNever : Never generates caps  *)
   TgxShadowVolumeCapping = (svcDefault, svcAlways, svcNever);
 
-  { Determines when a caster should actually produce a shadow;
-   
+  (* Determines when a caster should actually produce a shadow;
+
     scmAlways : Caster always produces a shadow, ignoring visibility
     scmVisible : Caster casts shadow if the object has visible=true
     scmRecursivelyVisible : Caster casts shadow if ancestors up the hierarchy
      all have visible=true
     scmParentVisible : Caster produces shadow if parent has visible=true
     scmParentRecursivelyVisible : Caster casts shadow if ancestors up the hierarchy
-     all have visible=true, starting from the parent (ignoring own visible setting) }
+    all have visible=true, starting from the parent (ignoring own visible setting) *)
   TgxShadowCastingMode = (scmAlways, scmVisible, scmRecursivelyVisible,
     scmParentVisible, scmParentRecursivelyVisible);
 
-  { Specifies an individual shadow caster. 
-     Can be a light or an opaque object. }
+  (* Specifies an individual shadow caster.
+     Can be a light or an opaque object. *)
   TgxShadowVolumeCaster = class(TCollectionItem)
   private
     FCaster: TgxBaseSceneObject;
@@ -84,27 +87,27 @@ type
     property Caster: TgxBaseSceneObject read FCaster write SetCaster;
     property GLShadowVolume: TgxShadowVolume read GetGLShadowVolume;
   published
-    { Radius beyond which the caster can be ignored. 
-      Zero (default value) means the caster can never be ignored. }
+    (* Radius beyond which the caster can be ignored.
+      Zero (default value) means the caster can never be ignored. *)
     property EffectiveRadius: Single read FEffectiveRadius write  FEffectiveRadius;
-    { Specifies if the shadow volume should be capped. 
-       Capping helps solve shadowing artefacts, at the cost of performance. }
+    (* Specifies if the shadow volume should be capped.
+       Capping helps solve shadowing artefacts, at the cost of performance. *)
     property Capping: TgxShadowVolumeCapping read FCapping write FCapping default  svcDefault;
-    { Determines when an object should cast a shadow or not. Typically, objects
+    (* Determines when an object should cast a shadow or not. Typically, objects
     should only cast shadows when recursively visible. But if you're using
     dummy shadow casters which are less complex than their parent objects,
-    you should use scmParentRecursivelyVisible.}
+    you should use scmParentRecursivelyVisible.*)
     property CastingMode: TgxShadowCastingMode read FCastingMode write
       FCastingMode default scmRecursivelyVisible;
   end;
 
-  { Specifies an individual shadow casting occluder.  }
+  // Specifies an individual shadow casting occluder.
   TgxShadowVolumeOccluder = class(TgxShadowVolumeCaster)
   published
     property Caster;
   end;
 
-  { Specifies an individual shadow casting light.  }
+  // Specifies an individual shadow casting light.
   TgxShadowVolumeLight = class(TgxShadowVolumeCaster)
   private
     FSilhouettes: TPersistentObjectList;
@@ -113,19 +116,19 @@ type
     procedure SetLightSource(const ls: TgxLightSource);
     function GetCachedSilhouette(AIndex: Integer): TgxSilhouette; inline;
     procedure StoreCachedSilhouette(AIndex: Integer; ASil: TgxSilhouette);
-    { Compute and setup scissor clipping rect for the light. 
-       Returns true if a scissor rect was setup }
+    (* Compute and setup scissor clipping rect for the light.
+       Returns true if a scissor rect was setup *)
     function SetupScissorRect(worldAABB: PAABB; var rci: TgxRenderContextInfo): Boolean;
   public
     constructor Create(ACollection: TCollection); override;
     destructor Destroy; override;
     procedure FlushSilhouetteCache;
   published
-    { Shadow casting lightsource.  }
+    // Shadow casting lightsource.
     property LightSource: TgxLightSource read GetLightSource write SetLightSource;
   end;
 
-  { Collection of TgxShadowVolumeCaster. }
+  // Collection of TgxShadowVolumeCaster.
   TgxShadowVolumeCasters = class(TOwnedCollection)
   protected
     function GetItems(index: Integer): TgxShadowVolumeCaster;
@@ -139,7 +142,7 @@ type
     property Items[index: Integer]: TgxShadowVolumeCaster read GetItems; default;
   end;
 
-  { Shadow volume rendering options/optimizations. 
+  (* Shadow volume rendering options/optimizations.
       svoShowVolumes : make the shadow volumes visible
       svoDesignVisible : the shadow are visible at design-time
       svoCacheSilhouettes : cache shadow volume silhouettes, beneficial when
@@ -147,31 +150,30 @@ type
       svoScissorClips : use scissor clipping per light, beneficial when
         lights are attenuated and don't illuminate the whole scene
       svoWorldScissorClip : use scissor clipping for the world, beneficial
-        when shadow receivers don't cover the whole viewer surface  }
+        when shadow receivers don't cover the whole viewer surface  *)
   TgxShadowVolumeOption = (svoShowVolumes, svoCacheSilhouettes, svoScissorClips,
     svoWorldScissorClip, svoDesignVisible);
   TgxShadowVolumeOptions = set of TgxShadowVolumeOption;
 
-  { Shadow rendering modes. 
+  (* Shadow rendering modes.
       svmAccurate : will render the scene with ambient lighting only, then
         for each light will make a diffuse+specular pass
       svmDarkening : renders the scene with lighting on as usual, then darkens
         shadowed areas (i.e. inaccurate lighting, but will "shadow" objects
         that don't honour to diffuse or specular lighting)
-      svmOff : no shadowing will take place }
+      svmOff : no shadowing will take place *)
   TgxShadowVolumeMode = (svmAccurate, svmDarkening, svmOff);
 
-  { Simple shadow volumes. 
+  (* Simple shadow volumes.
      Shadow receiving objects are the ShadowVolume's children, shadow casters
      (opaque objects or lights) must be explicitly specified in the Casters
-     collection. 
+     collection.
      Shadow volumes require that the buffer allows stencil buffers,
      GXSceneViewer.Buffer.ContextOptions contain roStencinBuffer. Without stencil
-     buffers, shadow volumes will not work properly. 
+     buffers, shadow volumes will not work properly.
      Another issue to look out for is the fact that shadow volume capping requires
      that the camera depth of view is either very high (fi 1e9) or that the
-     camera style is csInfinitePerspective.
-      }
+     camera style is csInfinitePerspective. *)
   TgxShadowVolume = class(TgxImmaterialSceneObject)
   private
     FActive: Boolean;
@@ -198,24 +200,24 @@ type
     procedure Assign(Source: TPersistent); override;
     procedure FlushSilhouetteCache;
   published
-    { Determines if shadow volume rendering is active. 
+    (* Determines if shadow volume rendering is active.
       When set to false, children will be rendered without any shadowing
-             or multipass lighting. }
+             or multipass lighting. *)
     property Active: Boolean read FActive write SetActive default True;
-    { Lights that cast shadow volumes. }
+    // Lights that cast shadow volumes.
     property Lights: TgxShadowVolumeCasters read FLights write SetLights;
-    { Occluders that cast shadow volumes. }
+    // Occluders that cast shadow volumes.
     property Occluders: TgxShadowVolumeCasters read FOccluders write SetOccluders;
-    { Specifies if the shadow volume should be capped. 
-       Capping helps solve shadowing artefacts, at the cost of performance. }
+    (* Specifies if the shadow volume should be capped.
+      Capping helps solve shadowing artefacts, at the cost of performance. *)
     property Capping: TgxShadowVolumeCapping read FCapping write FCapping default
       svcAlways;
-    { Shadow volume rendering options. }
+    // Shadow volume rendering options.
     property Options: TgxShadowVolumeOptions read FOptions write SetOptions
       default [svoCacheSilhouettes, svoScissorClips];
-    { Shadow rendering mode. }
+    // Shadow rendering mode.
     property Mode: TgxShadowVolumeMode read FMode write SetMode default svmAccurate;
-    { Darkening color used in svmDarkening mode. }
+    // Darkening color used in svmDarkening mode.
     property DarkeningColor: TgxColor read FDarkeningColor write SetDarkeningColor;
   end;
 
@@ -237,9 +239,6 @@ end;
 type
   // Required for Delphi 5 support.
   THackOwnedCollection = class(TOwnedCollection);
-
-  // GetGLShadowVolume
-  //
 
 function TgxShadowVolumeCaster.GetGLShadowVolume: TgxShadowVolume;
 begin

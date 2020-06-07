@@ -1,6 +1,11 @@
-//
-// Graphic Scene Engine, http://glscene.org
-//
+(*******************************************
+*                                          *
+* Graphic Scene Engine, http://glscene.org *
+*                                          *
+********************************************)
+
+unit GXS.RandomHDS;
+
 (*
   This unit provides tools and objects to generate random Height Data Sources
   that can be used with TgxTerrainRenderer. General properties are defined in
@@ -39,7 +44,6 @@
   create this component manually in your code and link it to a TgxTerrainRenderer.
   If you know how to make a registered component, please do it.
 *)
-unit GXS.RandomHDS;
 
 interface
 
@@ -52,7 +56,7 @@ uses
   System.UIConsts,
   System.Contnrs,
   Fmx.Graphics,
-//  Fmx.Imaging.jpeg,
+///  Fmx.Imaging.jpeg,
   Fmx.Forms,
 
   Import.OpenGLx,
@@ -111,10 +115,10 @@ type
   TSingleClamp = procedure(var x, y: single) of object;
   TIntegerClamp = procedure(var x, y: integer) of object;
 
-  { This class introduces all the basic properties of random landscape. No method
+  (* This class introduces all the basic properties of random landscape. No method
     implemented though. It is used as a descendant for
     - TgxCustomRandomLandscape: one tile landscape (cyclic or not)
-    - TgxTiledRndLandscape: "infinite" landscapes (grids of TgxCustomRandomLandscape) }
+    - TgxTiledRndLandscape: "infinite" landscapes (grids of TgxCustomRandomLandscape) *)
   TgxBaseRandomHDS = class(TgxHeightDataSource)
   private
     FSteps: TSteps;
@@ -178,15 +182,15 @@ type
     property LightColor: TColorVector read FLightColor write SetLightColor;
     // Light is parallel (sun light)
     property LightDirection: TVector read FLightDirection write SetLightDirection;
-    { This function must be supplied by the user. Here he/she can define which
+    (* This function must be supplied by the user. Here he/she can define which
       colour to use depending on coordinates, elevation and normal. This provides
       a great flexibility. If no function is supplied (OnDrawTexture=nil), a default
-      texture function is used (very basic, just blue and green). }
+      texture function is used (very basic, just blue and green). *)
     property OnDrawTexture: TOnDrawTexture read FOnDrawTexture write SetOnDrawTexture;
   published
     property AmbientLight: single read FAmbientLight write SetAmbientLight;
-    { If true, the landscape can be tiled to itself seamlessly.
-      If false, the landscape is an isolated square. }
+    (* If true, the landscape can be tiled to itself seamlessly.
+      If false, the landscape is an isolated square. *)
     property Cyclic: boolean read FCyclic write SetCyclic;
     // Erosion parameters. See associated record types
     property ErosionByFraction: TFractionErosion read FErosionByFraction write SetErosionByFraction;
@@ -209,22 +213,22 @@ type
     property SeaLevel: single read GetSeaLevel write SetSeaLevel;
     // Depth at which the sea bottom becomes invisible. See DoSea for more information
     property SeaTransparency: single read GetSeaTransparency write SetSeaTransparency;
-    { Seed used by the random generator. Each seed generate a different
-      reproductible landscape. }
+    (* Seed used by the random generator. Each seed generate a different
+      reproductible landscape. *)
     property Seed: integer read FSeed write SetSeed;
     // Enable shadow casting. May take some time for large Depth.
     property Shadows: boolean read FShadows write SetShadows;
     property Steps: TSteps read FSteps write SetSteps;
     // TerrainRenderer used to render the HDS.
     property TerrainRenderer: TgxTerrainRenderer read FTerrainRenderer write SetTerrainRenderer;
-    { Defines how many texture pixels are drawn per height-field cell. The larger
+    (* Defines how many texture pixels are drawn per height-field cell. The larger
       this number the better the quality of the resulting image, but it takes a
-      more time to compute. Good results are got between 1 and 5. }
+      more time to compute. Good results are got between 1 and 5. *)
     property TextureScale: integer read FTextureScale write SetTextureScale;
   end;
 
-  { Base structure for all random landscape objects. It can't be used directly
-    since its BuildHeightField procedure is abstract. Use one of its descendants instead. }
+  (* Base structure for all random landscape objects. It can't be used directly
+    since its BuildHeightField procedure is abstract. Use one of its descendants instead. *)
   TgxCustomRandomHDS = class(TgxBaseRandomHDS)
   private
     FSlave: boolean;
@@ -258,31 +262,31 @@ type
     function BoundaryZ: integer;
     // Generate the heightfield array, based on the topographical properties
     procedure BuildHeightField; overload; virtual; abstract;
-    { Provide an automated way to build a landscape. However, a greater control can
+    (* Provide an automated way to build a landscape. However, a greater control can
       be achieved by calling the various procedures manually (they are public methods)
       as one gets a sligthly different result depending on the sequence of erosion
-      and sea steps. }
+      and sea steps. *)
     procedure BuildLandscape;
-    { - Compute the light effects
+    (* - Compute the light effects
       - Compute the casted shadows
-      - Perform a basic smoothing if TextureScale>1 }
+      - Perform a basic smoothing if TextureScale>1 *)
     procedure BuildLightMap; overload;
     procedure BuildLightMap(const aLightDirection: TVector); overload;
     // Normals are needed for lighting and slope-based textures
     procedure BuildNormals;
-    { For every pixel of the texture, computes slope and interpolated height and
+    (* For every pixel of the texture, computes slope and interpolated height and
       sends these information to a user-supplied function (OnDrawTexture), whose
       result is a tColorVector. If no OnDrawTexture is supplied, a basic default
-      texture will be used. }
+      texture will be used. *)
     procedure BuildTexture;
     // Fill the heightfield with "Empty" values (-999)
     procedure ClearHeightField;
     // Fill the light map with 1
     procedure ClearLightMap;
-    { Constrain x,y to be in the boundaries of the height field array. This is
+    (* Constrain x,y to be in the boundaries of the height field array. This is
       done in two way depending on the kind of landscape:
       Cyclic landscapes: 		mod
-      Non-cyclic landscape:	clamp }
+      Non-cyclic landscape:	clamp *)
     procedure ConstrainCoordinates(var x, y: single); overload;
     procedure ConstrainCoordinates(var x, y: integer); overload;
     constructor Create(AOwner: TComponent); override;
@@ -291,36 +295,36 @@ type
     procedure DoCyclicBoundaries;
     (* Not yet implemented *)
     procedure DoErosionByFraction;
-    { Just a smoothing. Should be done last as it improves the look of other
+    (* Just a smoothing. Should be done last as it improves the look of other
       erosion effects. Too much biological erosion can ruin erase their results
-      though. Some tweaking may be needed }
+      though. Some tweaking may be needed *)
     procedure DoErosionByLife;
-    { Create sharp valleys and canyons. If DepositRate>0, it will also fill the
-      low pools, producing flat "lakes" and "ponds" }
+    (* Create sharp valleys and canyons. If DepositRate>0, it will also fill the
+      low pools, producing flat "lakes" and "ponds" *)
     procedure DoErosionByRain;
     // Create a beach and a cliff around the islands
     procedure DoErosionBySea;
-    { Cut all elevations lower than sea level. If Transparency>0, the sea surface
+    (* Cut all elevations lower than sea level. If Transparency>0, the sea surface
       will not be flat, but a slight elevation change (unperceptible in 3D view)
-      allow to fake transparency in the OnDrawTexture. }
+      allow to fake transparency in the OnDrawTexture. *)
     procedure DoSea;
     // Discretise the heigthfield in a chosen number of steps
     procedure DoSteps;
-    { x and y are range-checked and constrained into the array. This slows down
+    (* x and y are range-checked and constrained into the array. This slows down
       computation. If you don't need to range-check (this is mainly useful in
       cyclic landscapes when you need a seamless joint), call fHeigth instead
       (this is a protected field, therefore only accessible from TgxFractalHDS
-      descendents. }
+      descendents. *)
     property Heights[x, y: integer]: single read GetHeight write SetHeight;
     // Range checked
-    { A specific implementation of THeightDataSource.InterpolatedHeight }
+    (* A specific implementation of THeightDataSource.InterpolatedHeight *)
     function Interpolate(x, y: single): single;
-    { Keep the array of normals for future use }
+    // Keep the array of normals for future use
     property KeepNormals: boolean read FKeepNormals write SetKeepNormals;
-    { Property used by TgxTiledRndLandscape to know where the landtile is located
-      and other parameters. See tLandTileInfo }
+    (* Property used by TgxTiledRndLandscape to know where the landtile is located
+      and other parameters. See tLandTileInfo *)
     property LandTileInfo: TLandTileInfo read GetLandTileInfo write SetLandTileInfo;
-    { Range checking }
+    // Range checking
     function PointInMap(const x, y: single): boolean; overload;
     function PointInMap(const x, y: integer): boolean; overload;
     // Store the minimum and maximum elevations
@@ -330,23 +334,23 @@ type
     function Normal(const Position: TVector): TVector;
     // Max height - min height
     property RangeHeight: single read FRangeHeight;
-    { Scale of the Terrain Renderer. They are set so as giving a identical
+    (* Scale of the Terrain Renderer. They are set so as giving a identical
       vertical/horitontal ratio with any size. Therefore, Scale.X=Scale.Y=1 and
       only Scale.Z varies. If you want to increase the landscape scale, the best way
-      would be to place the Terrain Renderer in a DummyCube and rescale it. }
+      would be to place the Terrain Renderer in a DummyCube and rescale it. *)
     function Scale: TgxCoordinates;
-    { Size of the square height array. With the middle-point algorithm, it is always
+    (* Size of the square height array. With the middle-point algorithm, it is always
       Size = 2^N+1. In a cyclic landscape, the last row and columns are identical
-      to the first. }
+      to the first. *)
     property Size: integer read FSize;
-    { A height rescaled between 0 and 1000 for }
+    // A height rescaled between 0 and 1000 for
     function StandardisedHeight(const x, y: integer): single;
-    { When long computations are running, this property contains the operation
-      beeing processed. }
+    (* When long computations are running, this property contains the operation
+      beeing processed. *)
     property Task: string read FTask;
-    { A value between 0 and 100 indicating the percentage of completion }
+    // A value between 0 and 100 indicating the percentage of completion
     property TaskProgress: integer read FTaskProgress;
-    { Use these boundaries with non-cyclic landscapes to constrain camera movements. }
+    // Use these boundaries with non-cyclic landscapes to constrain camera movements.
     function XMoveBoundary: single;
     function ZMoveBoundary: single;
     // tTerrainRender event handler
@@ -355,7 +359,7 @@ type
     property Cyclic: boolean read FCyclic write SetCyclic;
   end;
 
-  { Random landscape based on the middle-point displacement algorithm }
+  // Random landscape based on the middle-point displacement algorithm
   TgxFractalHDS = class(TgxCustomRandomHDS)
   private
     FAmplitude: integer;
@@ -369,13 +373,13 @@ type
     procedure BuildHeightField(const aDepth, aSeed, aAmplitude: integer); overload;
     constructor Create(AOwner: TComponent); override;
   published
-    { Proportional to the difference between highest and lowest altitude. }
+    // Proportional to the difference between highest and lowest altitude.
     property Amplitude: integer read fAmplitude write SetAmplitude;
-    { Number of levels in the fractal process. Depth defines the size of the
+    (* Number of levels in the fractal process. Depth defines the size of the
       landscape: Size = 2^Depth+1 . Good results are got with Depth>=6. Above 10
-      the landscape takes a lot of time to be generated. }
+      the landscape takes a lot of time to be generated. *)
     property Depth: integer read fDepth write SetDepth;
-    { The lower this parameter, the smoother the landscape. Takes value between 0 and 1 }
+    // The lower this parameter, the smoother the landscape. Takes value between 0 and 1
     property Roughness: single read fRoughness write SetRoughness;
   end;
 
@@ -438,17 +442,17 @@ type
       var NewLandTile: TLandTile); virtual;
     procedure CyclicClamp(var x, z: single); overload;
     procedure CyclicClamp(var x, z: integer); overload;
-    { tTerrainRenderer event handler }
+    // tTerrainRenderer event handler
     procedure GetTerrainBounds(var l, t, r, b: single);
     function LandTileSeed(x, z: integer): integer;
     property OnCreateDefaultTile: TStartPreparingDataEvent
       read fOnCreateDefaultTile write SetOnCreateDefaultTile;
     procedure SetCyclic(const Value: boolean); override;
-    { This procedure MUST be called by the descendent of TgxRandomArchipelago }
+    // This procedure MUST be called by the descendent of TgxRandomArchipelago
     procedure SetSize(const aSize: integer);
     function fSortLandscapes(Item1, Item2: Pointer): integer;
     // procedure PrepareLandTileData(HeightData:tHeightData; LandTile:tLandTile);
-    { tTerrainRender event handler }
+    (* tTerrainRender event handler *)
     procedure SetTerrainRenderer(const Value: TgxTerrainRenderer); override;
   public
     procedure ApplyLighting(var aLandTile: TLandTile);
@@ -456,63 +460,63 @@ type
     procedure ApplyTopography(var aLandTile: TLandTile);
     procedure CameraPosition(var TileX, TileZ: integer);
     procedure CleanUp;
-    { Constrain x,y to be in the boundaries of the height field array. This is
+    (* Constrain x,y to be in the boundaries of the height field array. This is
       done in two way depending on the kind of landscape:
       Cyclic landscapes: 		mod
-      Non-cyclic landscape:	clamp }
+      Non-cyclic landscape:	clamp *)
     procedure ConstrainCoordinates(var x, z: single); overload;
     procedure ConstrainCoordinates(var x, z: integer); overload;
     constructor Create(AOwner: TComponent); override;
     destructor Destroy; override;
-    { Compute the landtile containing (x,z) }
+    // Compute the landtile containing (x,z)
     procedure FindLandTile(const x, z: single; var TileX, TileZ: integer);
-    { Build the first landtile and position the camera. Must be called first. }
+    // Build the first landtile and position the camera. Must be called first.
     procedure Initialize(const aX, aZ: single); virtual;
-    { User-supplied function determining if this landtile will be built by the
-      OnCreateDefaultTile or if a landscape will be generated. }
+    (* User-supplied function determining if this landtile will be built by the
+      OnCreateDefaultTile or if a landscape will be generated. *)
     property IsDefaultTile: TIsDefaultTile read FIsDefaultTile
       write SetIsDefaultTile;
-    { Number of landtile in memory }
+    // Number of landtile in memory
     function LandtileCount: integer;
-    { Size of a landtile. Must be a power of two }
+    // Size of a landtile. Must be a power of two
     property LandTileSize: integer read fLandTileSize;
-    { User-specified event handler containing the particular code for tile generation }
+    // User-specified event handler containing the particular code for tile generation
     property OnCreateLandTile: TOnCreateLandTile read fOnCreateLandTile
       write SetOnCreateLandTile;
-    { When long computations are running, this property contains the operation
-      beeing processed. }
+    (* When long computations are running, this property contains the operation
+      beeing processed. *)
     property Task: string read GetTask;
-    { A value between 0 and 100 indicating the percentage of completion }
+    // A value between 0 and 100 indicating the percentage of completion
     property TaskProgress: integer read GetTaskProgress;
-    { Distance between two landtiles }
+    // Distance between two landtiles
     function TileDistance(const x1, z1, x2, z2: integer): single;
-    { Square of distance between two landtiles. Use this function to compare
-      two distances. }
+    (* Square of distance between two landtiles. Use this function to compare
+      two distances. *)
     function TileDistanceSquared(const x1, z1, x2, z2: integer): integer;
-    { This procedure check which landtiles must be generated or destroyed as a
-      function of camera position. This is let to the descendent classes. }
+    (* This procedure check which landtiles must be generated or destroyed as a
+      function of camera position. This is let to the descendent classes. *)
     procedure Update;
     property MapUpdating: boolean read FMapUpdating;
-    { Use these boundaries with non-cyclic landscapes to constrain camera movements. }
+    // Use these boundaries with non-cyclic landscapes to constrain camera movements.
     function XMoveBoundary: single;
     function ZMoveBoundary: single;
     procedure StartPreparingData(HeightData: TgxHeightData); override;
   published
     property Camera: TgxCamera read FCamera write SetCamera;
     property Cyclic: boolean read FCyclic write SetCyclic;
-    { Dimensions of the "infinite" landscape. Can be set very high. These parameters
+    (* Dimensions of the "infinite" landscape. Can be set very high. These parameters
       have neither memory nor speed consequence. They are mainly used to compute
-      a unique seed for each landtile }
+      a unique seed for each landtile *)
     property ExtentX: integer read FExtentX write SetExtentX;
     property ExtentZ: integer read FExtentZ write SetExtentZ;
-    { Distance at which a new landtile begin to be built. Increasing this value
-      allows for a higher camera speed but it will also increase the memory requirements. }
+    (* Distance at which a new landtile begin to be built. Increasing this value
+      allows for a higher camera speed but it will also increase the memory requirements. *)
     property GenerationRadius: integer read FGenerationRadius
       write SetGenerationRadius;
-    { Number of landtile to keep in memory. Should not be modified. }
+    // Number of landtile to keep in memory. Should not be modified.
     property LandTileCapacity: integer read FLandTileCapacity
       write SetLandTileCapacity;
-    { Probability that a given landtile is non-default }
+    // Probability that a given landtile is non-default
     property LandTileDensity: single read FLandTileDensity
       write SetLandTileDensity;
     // Base seed for the entire archipelago
@@ -534,11 +538,11 @@ type
     FWaveAmplitude: single;
     FWaveSpeed: single;
     function GetIslandDensity: single;
-    { PostRender event handler drawing a static water plane between islands
-      Code borrowed from Eric's Archipelago GLScene advanced demo }
+    (* PostRender event handler drawing a static water plane between islands
+      Code borrowed from Eric's Archipelago GLScene advanced demo *)
     procedure FPostRenderSeaStatic(var rci: TgxRenderContextInfo; var HeightDatas: TList);
-    { Sea with waves.
-      Borrowed from Eric's Archipelago GLScene advanced demo }
+    (* Sea with waves.
+      Borrowed from Eric's Archipelago GLScene advanced demo *)
     procedure FPostRenderSeaDynamic(var rci: TgxRenderContextInfo; var HeightDatas: TList);
     procedure SetIslandDensity(const Value: single);
     procedure SetDepth(const Value: integer);
@@ -558,23 +562,23 @@ type
     procedure ComputeLandTile(const aX, aZ: integer; var NewLandTile: TLandTile); override;
     constructor Create(AOwner: TComponent); override;
   published
-    { Ranges for the amplitude parameter in the fractal algorithm }
+    // Ranges for the amplitude parameter in the fractal algorithm
     property AmplitudeMax: integer read FAmplitudeMax write SetAmplitudeMax;
     property AmplitudeMin: integer read FAmplitudeMin write SetAmplitudeMin;
-    { Depth of the fractal algorithm }
+    // Depth of the fractal algorithm
     property Depth: integer read fDepth write SetDepth;
-    { A wrapper for LandtileDensity. This is the probabilty for a landtile to
-      contain an island. }
+    (* A wrapper for LandtileDensity. This is the probabilty for a landtile to
+      contain an island. *)
     property IslandDensity: single read GetIslandDensity write SetIslandDensity;
-    { Ranges for the roughness parameter in the fractal algorithm }
+    // Ranges for the roughness parameter in the fractal algorithm
     property RoughnessMax: single read FRoughnessMax write SetRoughnessMax;
     property RoughnessMin: single read FRoughnessMin write SetRoughnessMin;
-    { If true, the sea will show dynamic waves. Slow. }
+    // If true, the sea will show dynamic waves. Slow.
     property SeaDynamic: boolean read FSeaDynamic write SetSeaDynamic;
-    { Reference to a material in the TerrainRenderer's material library. This
-      material will be used to drape the water plane. }
+    (* Reference to a material in the TerrainRenderer's material library. This
+      material will be used to drape the water plane. *)
     property SeaMaterialName: string read FSeaMaterialName write SetSeaMaterialName;
-    { Size of the waves }
+    // Size of the waves
     property WaveAmplitude: single read FWaveAmplitude write SetWaveAmplitude;
     property WaveSpeed: single read FWaveSpeed write SetWaveSpeed;
   end;
@@ -606,7 +610,7 @@ const
 implementation
 // ==========================================================================
 
-const { Neighbourhood vectors and weight }
+const // Neighbourhood vectors and weight
   NeighX: array [0 .. 8] of integer = (-1, 0, 1, 1, 1, 0, -1, -1, 0);
   NeighY: array [0 .. 8] of integer = (-1, -1, -1, 0, 1, 1, 1, 0, 0);
   NeighW: array [0 .. 8] of single = (1 / 1.4142, 1, 1 / 1.4142, 1, 1 / 1.4142, 1, 1 / 1.4142, 1, 2);
@@ -619,7 +623,7 @@ var
   rhdsLandscapeCounter: cardinal = 0;
   //Counter	:tTickCounter;
 
-{
+(*
 function LoadJPGtexture(const JpgName: string): TBitmap;
 var
   Jpg: TJPEGImage;
@@ -630,7 +634,7 @@ begin
   Result.Assign(Jpg);
   Jpg.Free;
 end;
-}
+*)
 
 function NoisyColor(const Color: TColor; const Noise: single = 0.05): TColorVector;
 var

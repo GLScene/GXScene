@@ -1,21 +1,23 @@
-//
-// Graphic Scene Engine, http://glscene.org
-//
-(*
-   Graphic engine friendly loading of TGA image.
-*)
+(* ******************************************
+  *                                          *
+  * Graphic Scene Engine, http://glscene.org *
+  *                                          *
+  ******************************************* *)
 
 unit Formats.FileTGA;
 
+(* Graphic engine friendly loading of TGA image *)
+
 interface
 
-{.$I Scene.inc}
+{$I Scene.inc}
 
 uses
   System.Classes,
   System.SysUtils,
 
   Import.OpenGLx,
+  Scene.Strings,
   GXS.Context,
   GXS.Graphics,
   GXS.TextureFormat,
@@ -268,9 +270,6 @@ begin
 {$MESSAGE Hint 'TgxTGAImage.SaveToStream not yet implemented' }
 end;
 
-// AssignFromTexture
-//
-
 procedure TgxTGAImage.AssignFromTexture(textureContext: TgxContext;
   const textureHandle: GLuint; textureTarget: TgxTextureTarget;
   const CurrentFormat: boolean; const intFormat: TgxInternalFormat);
@@ -287,7 +286,6 @@ end;
 initialization
 //===========================================================
 
-  { Register this Fileformat-Handler }
   RegisterRasterFormat('tga', 'TARGA Image File', TgxTGAImage);
 
 end.

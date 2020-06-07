@@ -1,6 +1,8 @@
-//
-// Graphic Scene Engine, http://glscene.org
-//
+(*******************************************
+*                                          *
+* Graphic Scene Engine, http://glscene.org *
+*                                          *
+********************************************)
 
 unit GXS.FileJPEG;
 
@@ -14,6 +16,7 @@ uses
 
   Import.OpenGLx,
   Scene.VectorGeometry,
+  Scene.Strings,
   GXS.Context,
   GXS.Graphics,
   GXS.TextureFormat,
@@ -36,7 +39,7 @@ type
     procedure SaveToFile(const filename: string); override;
     procedure LoadFromStream(stream: TStream); override;
     procedure SaveToStream(stream: TStream); override;
-    { Assigns from any Texture. }
+    // Assigns from any Texture.
     procedure AssignFromTexture(textureContext: TgxContext; const textureHandle: GLuint; textureTarget: TgxTextureTarget;
       const CurrentFormat: boolean; const intFormat: TgxInternalFormat); reintroduce;
     property DivScale: longword read FDivScale write FDivScale;
@@ -45,9 +48,8 @@ type
     property ProgressiveEncoding: boolean read FProgressiveEncoding;
   end;
 
-  // ===================================================================
+// ===================================================================
 implementation
-
 // ===================================================================
 
 // ------------------
@@ -122,10 +124,8 @@ end;
 
 // ------------------------------------------------------------------
 initialization
-
 // ------------------------------------------------------------------
 
-{ Register this Fileformat-Handler }
 RegisterRasterFormat('jpg', 'Joint Photographic Experts Group Image', TgxJPEGImage);
 RegisterRasterFormat('jpeg', 'Joint Photographic Experts Group Image', TgxJPEGImage);
 RegisterRasterFormat('jpe', 'Joint Photographic Experts Group Image', TgxJPEGImage);

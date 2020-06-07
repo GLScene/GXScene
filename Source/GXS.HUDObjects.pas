@@ -3,10 +3,10 @@
 * Graphic Scene Engine, http://glscene.org *
 *                                          *
 ********************************************)
-{
-  Objects that get rendered in 2D coordinates
-}
+
 unit GXS.HUDObjects;
+
+(* Objects that get rendered in 2D coordinates *)
 
 interface
 

@@ -816,7 +816,7 @@ var
   I, L: Integer;
   Size, Offset: Cardinal;
   GR: TCUDAGeometryResource;
-  EnabledLocations: array[0..VXS_VERTEX_ATTR_NUM - 1] of Boolean;
+  EnabledLocations: array[0..VERTEX_ATTR_NUM - 1] of Boolean;
 begin
   FVAO.AllocateHandle;
   FVBO.AllocateHandle;
@@ -837,7 +837,7 @@ begin
       FEBO.UnBind; // Just in case
 
     // Predisable attributes
-    for I := 0 to VXS_VERTEX_ATTR_NUM - 1 do
+    for I := 0 to VERTEX_ATTR_NUM - 1 do
       EnabledLocations[I] := false;
 
     Offset := 0;
@@ -848,7 +848,6 @@ begin
       begin
         EnabledLocations[I] := True;
         case Attributes[I].GLSLType of
-
             GLSLType1F:
               glVertexAttribPointer(L, 1, GL_FLOAT, False, 0, pointer(Offset));
 
@@ -901,13 +900,12 @@ begin
 
     // Enable engagement attributes array
     begin
-      for I := VXS_VERTEX_ATTR_NUM - 1 downto 0 do
+      for I := VERTEX_ATTR_NUM - 1 downto 0 do
         if EnabledLocations[I] then
           glEnableVertexAttribArray(I)
         else
           glDisableVertexAttribArray(I);
     end;
-
     FVAO.UnBind;
     FVAO.NotifyDataUpdated;
   end;
@@ -1146,7 +1144,9 @@ begin
   FVAO.NotifyChangesOfData;
 end;
 
+//----------------------------------
 initialization
+//----------------------------------
 
   RegisterClasses([TCUDAImageResource, TCUDAGeometryResource,
     TgxCustomFeedBackMesh, TgxFeedBackMesh]);

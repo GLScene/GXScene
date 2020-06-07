@@ -1,11 +1,12 @@
-//
-// Graphic Scene Engine, http://glscene.org
-//
-(*
-  Base abstract ragdoll class. Should be extended to use any physics system.
-*)
+(*******************************************
+*                                          *
+* Graphic Scene Engine, http://glscene.org *
+*                                          *
+********************************************)
 
 unit GXS.Ragdoll;
+
+(* Base abstract ragdoll class. Should be extended to use any physics system *)
 
 interface
 

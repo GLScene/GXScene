@@ -3,14 +3,14 @@
 * Graphic Scene Engine, http://glscene.org *
 *                                          *
 ********************************************)
-{
-  Bitmap Fonts management classes
-}
+
 unit GXS.BitmapFont;
 
-{$I Scene.inc}
+(* Bitmap Fonts management classes *)
 
 interface
+
+{$I Scene.inc}
 
 uses
   System.Classes,

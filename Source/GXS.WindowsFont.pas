@@ -1,11 +1,12 @@
-//
-// Graphic Scene Engine, http://glscene.org
-//
-{
-  TFont Import into a BitmapFont using variable width... 
-  
-}
+(*******************************************
+*                                          *
+* Graphic Scene Engine, http://glscene.org *
+*                                          *
+********************************************)
+
 unit GXS.WindowsFont;
+
+(* TFont Import into a BitmapFont using variable width...*)
 
 interface
 

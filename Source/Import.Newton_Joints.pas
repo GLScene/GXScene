@@ -1,6 +1,8 @@
-//
-// This unit is part of the GLScene Engine, http://glscene.org
-//
+(*******************************************
+*                                          *
+* Graphic Scene Engine, http://glscene.org *
+*                                          *
+********************************************)
 {*******************************************************************************}
 {                                                                               }
 {      Newton Game Dynamics Delphi-Header translation                            }

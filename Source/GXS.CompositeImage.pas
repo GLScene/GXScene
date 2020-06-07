@@ -1,12 +1,15 @@
-//
-// Graphic Scene Engine, http://glscene.org
-//
-{
-    This class is required for loading images such classes as in DDSImage,
-    TgxO3TCImage, TgxHDRImage etc.
-}
+(*******************************************
+*                                          *
+* Graphic Scene Engine, http://glscene.org *
+*                                          *
+********************************************)
 
 unit GXS.CompositeImage;
+
+(*
+    This class is required for loading images such classes as in DDSImage,
+    TgxO3TCImage, TgxHDRImage etc.
+*)
 
 interface
 
@@ -19,7 +22,6 @@ uses
   GXS.Texture,
   GXS.TextureFormat,
   GXS.Context;
-
 
 type
 

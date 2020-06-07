@@ -1,3 +1,9 @@
+(*******************************************
+*                                          *
+* Graphic Scene Engine, http://glscene.org *
+*                                          *
+********************************************)
+
 unit GXS.PhysX;
 
 interface

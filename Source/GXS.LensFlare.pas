@@ -3,11 +3,10 @@
 * Graphic Scene Engine, http://glscene.org *
 *                                          *
 ********************************************)
-{
-  Lens flare object.
 
-}
 unit GXS.LensFlare;
+
+(* Lens flare object *)
 
 interface
 

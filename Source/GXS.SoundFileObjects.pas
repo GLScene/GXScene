@@ -3,12 +3,13 @@
 * Graphic Scene Engine, http://glscene.org *
 *                                          *
 ********************************************)
-{
+
+unit GXS.SoundFileObjects;
+
+(*
    Support classes for loading various fileformats.
    These classes work together like vector file formats or Delphi's TGraphic classes.
-
-}
-unit GXS.SoundFileObjects;
+*)
 
 interface
 
@@ -23,7 +24,7 @@ uses
 
 type
 
-  { Defines a sound sampling quality. }
+  // Defines a sound sampling quality.
   TgxSoundSampling = class(TPersistent)
   private
     FOwner: TPersistent;
@@ -42,24 +43,24 @@ type
     function WaveFormat: TWaveFormatEx;
 {$ENDIF}
   published
-    { Sampling frequency in Hz (= samples per sec) }
+    // Sampling frequency in Hz (= samples per sec)
     property Frequency: Integer read FFrequency write FFrequency default 22050;
-    { Nb of sampling channels.
-      1 = mono, 2 = stereo, etc. }
+    (* Nb of sampling channels.
+      1 = mono, 2 = stereo, etc. *)
     property NbChannels: Integer read FNbChannels write FNbChannels default 1;
-    { Nb of bits per sample.
-      Common values are 8 and 16 bits. }
+    (* Nb of bits per sample.
+      Common values are 8 and 16 bits. *)
     property BitsPerSample: Integer read FBitsPerSample write FBitsPerSample
       default 8;
   end;
 
-   { Abstract base class for different Sound file formats.
+   (* Abstract base class for different Sound file formats.
       The actual implementation for these files (WAV, RAW...) must be done
       seperately. The concept for TgxSoundFile is very similar to TGraphic
       (see Delphi Help).
       Default implementation for LoadFromFile/SaveToFile are to directly call the
       relevent stream-based methods, ie. you will just have to override the stream
-      methods in most cases. }
+      methods in most cases. *)
    TgxSoundFile = class(TgxDataFile)
    private
      FSampling: TgxSoundSampling;
@@ -69,17 +70,17 @@ type
      constructor Create(AOwner: TPersistent); override;
      destructor Destroy; override;
      procedure PlayOnWaveOut; virtual;
-     { Returns a pointer to the sample data viewed as an in-memory WAV File. }
+     // Returns a pointer to the sample data viewed as an in-memory WAV File.
      function WAVData: Pointer; virtual; abstract;
-     { Returns the size (in bytes) of the WAVData. }
+     // Returns the size (in bytes) of the WAVData.
      function WAVDataSize: Integer; virtual; abstract;
-     { Returns a pointer to the sample data viewed as an in-memory PCM buffer. }
+     // Returns a pointer to the sample data viewed as an in-memory PCM buffer.
      function PCMData: Pointer; virtual; abstract;
-     { Length of PCM data, in bytes. }
+     // Length of PCM data, in bytes.
      function LengthInBytes: Integer; virtual; abstract;
-     { Nb of intensity samples in the sample. }
+     // Nb of intensity samples in the sample.
      function LengthInSamples: Integer;
-     { Length of play of the sample at nominal speed in seconds. }
+     // Length of play of the sample at nominal speed in seconds.
      function LengthInSec: Single;
      property Sampling: TgxSoundSampling read FSampling write SetSampling;
    end;

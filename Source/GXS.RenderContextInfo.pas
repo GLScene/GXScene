@@ -1,10 +1,12 @@
-//
-// Graphic Scene Engine, http://glscene.org
-//
-(*
-   Stores contextual info useful during rendering methods.
-*)
+(*******************************************
+*                                          *
+* Graphic Scene Engine, http://glscene.org *
+*                                          *
+********************************************)
+
 unit GXS.RenderContextInfo;
+
+(* Stores contextual info useful during rendering methods *)
 
 interface
 

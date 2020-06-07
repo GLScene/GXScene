@@ -1,12 +1,15 @@
-//
-// Graphic Scene Engine, http://glscene.org
-//
+(* ******************************************
+  *                                          *
+  * Graphic Scene Engine, http://glscene.org *
+  *                                          *
+  ******************************************* *)
+
+unit Formats.FileHDRImage;
+
 (*
     Good for preview picture in OpenDialog,
     so you may include both HDRImage (preview) and GLFileHDR (loading)
 *)
-
-unit Formats.FileHDRImage;
 
 interface
 

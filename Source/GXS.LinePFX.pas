@@ -3,11 +3,10 @@
 * Graphic Scene Engine, http://glscene.org *
 *                                          *
 ********************************************)
-{
-  A PFX whose particles are lines
 
-}
 unit GXS.LinePFX;
+
+(* A PFX whose particles are lines *)
 
 interface
 

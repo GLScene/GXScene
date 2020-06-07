@@ -1,14 +1,17 @@
-//
-// Graphic Scene Engine, http://glscene.org
-//
-{
+(*******************************************
+*                                          *
+* Graphic Scene Engine, http://glscene.org *
+*                                          *
+********************************************)
+
+unit GXS.ShadowPlane;
+
+(*
    Implements a basic shadow plane.
 
    It is strongly recommended to read and understand the explanations in the
    materials/mirror demo before using this component.
-
-}
-unit GXS.ShadowPlane;
+*)
 
 interface
 

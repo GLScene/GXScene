@@ -3,9 +3,10 @@
 * Graphic Scene Engine, http://glscene.org *
 *                                          *
 ********************************************)
-{
-   Tools for managing an application-side cache of OpenGL state.
-}
+
+unit GXS.State;
+
+(* Tools for managing an application-side cache of OpenGL state *)
 
 // TODO: Proper client-side pushing + popping of state, in OpenGL 3+ contexts,
 //       rather than using glPushAttrib + glPopAttrib.
@@ -20,8 +21,6 @@
 // DONE: remove stTexture1D, 2D, etc from TgxState if possible, since they are
 //       per texture-unit + also deprecated in OpenGL 3+
 
-unit GXS.State;
-
 interface
 
 {$I Scene.inc}
@@ -31,13 +30,14 @@ uses
   System.SysUtils,
 
   Import.OpenGLx,
-  GXS.CrossPlatform,
   Scene.VectorTypes,
   Scene.VectorGeometry,
+  Scene.Strings,
+  GXS.CrossPlatform,
   GXS.TextureFormat;
 
 const
-  VXS_VERTEX_ATTR_NUM = 16;
+  VERTEX_ATTR_NUM = 16;
 
 type
 
@@ -542,7 +542,7 @@ type
     procedure ResetFrontFace; deprecated;
     procedure SetGLFrontFaceCW; deprecated;
     procedure ResetAll; deprecated;
-    { Adjusts material colors for a face. }
+    // Adjusts material colors for a face.
     procedure SetMaterialColors(const aFace: TgxCullFaceMode;
       const emission, ambient, diffuse, specular: TVector;
       const shininess: Integer);
@@ -556,11 +556,11 @@ type
       read GetMaterialEmission;
     property MaterialShininess[const aFace: TgxCullFaceMode]: Integer
       read GetMaterialShininess;
-    { Adjusts material alpha channel for a face. }
+    // Adjusts material alpha channel for a face.
     procedure SetMaterialAlphaChannel(const aFace: GLEnum; const alpha: Single);
-    { Adjusts material diffuse color for a face. }
+    // Adjusts material diffuse color for a face.
     procedure SetMaterialDiffuseColor(const aFace: GLEnum; const diffuse: TVector);
-    { Lighting states }
+    // Lighting states
     property FixedFunctionPipeLight: Boolean read FFFPLight write SetFFPLight;
     property MaxLights: Integer read GetMaxLights;
     property LightEnabling[Index: Integer]: Boolean read GetLightEnabling write
@@ -589,103 +589,101 @@ type
     function GetLightStateAsAddress: Pointer;
     property LightNumber: Integer read FLightNumber;
     property OnLightsChanged: TgxOnLightsChanged read FOnLightsChanged write FOnLightsChanged;
-    { Blending states }
+    // Blending states
     procedure SetAlphaFunction(func: TgxComparisonFunction; ref: Single);
     // Vertex Array Data state
-    { The currently bound array buffer (calling glVertexAttribPointer
-       locks this buffer to the currently bound VBO). }
+    (* The currently bound array buffer (calling glVertexAttribPointer
+       locks this buffer to the currently bound VBO). *)
     property VertexArrayBinding: GLuint read FVertexArrayBinding write
       SetVertexArrayBinding;
-    { The currently bound vertex buffer object (VAO). }
+    // The currently bound vertex buffer object (VAO).
     property ArrayBufferBinding: GLuint read GetArrayBufferBinding write
       SetArrayBufferBinding;
-    { The currently bound element buffer object (EBO). }
+    // The currently bound element buffer object (EBO).
     property ElementBufferBinding: GLuint read GetElementBufferBinding write
       SetElementBufferBinding;
-    { Determines whether primitive restart is turned on or off. }
+    // Determines whether primitive restart is turned on or off.
     property EnablePrimitiveRestart: GLboolean read GetEnablePrimitiveRestart
       write SetEnablePrimitiveRestart;
-    { The index Value that causes a primitive restart. }
+    // The index Value that causes a primitive restart.
     property PrimitiveRestartIndex: GLuint read GetPrimitiveRestartIndex write
       SetPrimitiveRestartIndex;
-    { The currently bound texture buffer object (TBO). }
+    // The currently bound texture buffer object (TBO).
     property TextureBufferBinding: GLuint read FTextureBufferBinding write
       SetTextureBufferBinding;
-    // Transformation state
-    { The viewport. }
+    // Transformation state The viewport.
     property ViewPort: TVector4i read FViewPort write SetViewPort;
-    { Modifies the near + far clipping planes. }
+    // Modifies the near + far clipping planes.
     procedure SetDepthRange(const ZNear, ZFar: GLclampd);
-    { The near clipping plane distance. }
+    // The near clipping plane distance.
     property DepthRangeNear: GLclampd read GetDepthRangeNear write
       SetDepthRangeNear;
-    { The far clipping plane distance. }
+    // The far clipping plane distance.
     property DepthRangeFar: GLclampd read GetDepthRangeFar write
       SetDepthRangeFar;
-    { Enables/Disables each of the clip distances, used in shaders. }
+    // Enables/Disables each of the clip distances, used in shaders.
     property EnableClipDistance[Index: Cardinal]: GLboolean read
     GetEnableClipDistance write SetEnableClipDistance;
-    { Enables/Disables depth clamping. }
+    // Enables/Disables depth clamping.
     property EnableDepthClamp: GLboolean read FEnableDepthClamp write
       SetEnableDepthClamp;
-    // Coloring state
-    { Controls read color clamping. }
+    // Coloring state. Controls read color clamping.
     property ClampReadColor: GLEnum read FClampReadColor write
       SetClampReadColor;
-    { The provoking vertex used in flat shading.  All the vertices of each
-       primitive will the same value determined by this property. }
+    (* The provoking vertex used in flat shading.  All the vertices of each
+       primitive will the same value determined by this property. *)
     property ProvokingVertex: GLEnum read FProvokingVertex write
       SetProvokingVertex;
     // Rasterization state
-    { The default point size, used when EnableProgramPointSize = false. }
+    (* The default point size, used when EnableProgramPointSize = false. *)
     property PointSize: Single read FPointSize write SetPointSize;
-    { If multisampling is enabled, this can control when points are faded out.}
+    // If multisampling is enabled, this can control when points are faded out.
     property PointFadeThresholdSize: Single read FPointFadeThresholdSize write
       SetPointFadeThresholdSize;
-    { The texture coordinate origin of point sprites. }
+    // The texture coordinate origin of point sprites.
     property PointSpriteCoordOrigin: GLEnum read FPointSpriteCoordOrigin write
       SetPointSpriteCoordOrigin;
-    { The line width. }
+    // The line width.
     property LineWidth: Single read FLineWidth write SetLineWidth;
-    { The line stipple. }
+    // The line stipple.
     property LineStippleFactor: GLint read FLineStippleFactor write
       SetLineStippleFactor;
-    { The line stipple. }
+    // The line stipple.
     property LineStipplePattern: GLushort read FLineStipplePattern write
       SetLineStipplePattern;
-    { Enable/Disable line smoothing. }
+    // Enable/Disable line smoothing.
     property EnableLineSmooth: GLboolean read FEnableLineSmooth write
       SetEnableLineSmooth;
-    { Enable/Disable face culling. }
+    // Enable/Disable face culling.
     property EnableCullFace: GLboolean read FEnableCullFace write
       SetEnableCullFace;
-    { Selects which faces to cull: front, back or front+back.}
+    // Selects which faces to cull: front, back or front+back.
     property CullFaceMode: TgxCullFaceMode read FCullFaceMode write
       SetCullFaceMode;
-    { The winding direction that indicates a front facing primitive. }
+    // The winding direction that indicates a front facing primitive.
     property FrontFace: {GLEnum} TgxFaceWinding read FFrontFace write
     SetFrontFace;
     // Enables/Disables polygon smoothing.
     property EnablePolygonSmooth: GLboolean read FEnablePolygonSmooth write
       SetEnablePolygonSmooth;
-    { Whether polygons appear filled, lines or points. }
+    // Whether polygons appear filled, lines or points.
     property PolygonMode: TgxPolygonMode read FPolygonMode write SetPolygonMode;
-    { Scales the maximum depth of the polygon. }
+    // Scales the maximum depth of the polygon.
     property PolygonOffsetFactor: Single read FPolygonOffsetFactor write
       SetPolygonOffsetFactor;
-    { Scales an implementation-dependent constant that relates to the usable
-       resolution of the depth buffer. }
+    (* Scales an implementation-dependent constant that relates to the usable
+       resolution of the depth buffer. *)
     property PolygonOffsetUnits: Single read FPolygonOffsetUnits write
       SetPolygonOffsetUnits;
-    { Set polygon offset. }
+    // Set polygon offset.
     procedure SetPolygonOffset(const factor, units: Single);
-    { Enable/Disable polygon offset for polygons in point mode. }
+    // Enable/Disable polygon offset for polygons in point mode.
     property EnablePolygonOffsetPoint: GLboolean read FEnablePolygonOffsetPoint
       write SetEnablePolygonOffsetPoint;
-    { Enable/Disable polygon offset for polygons in line mode. }
+    // Enable/Disable polygon offset for polygons in line mode.
     property EnablePolygonOffsetLine: GLboolean read FEnablePolygonOffsetLine
       write SetEnablePolygonOffsetLine;
-    { Enable/Disable polygon offset for polygons in fill mode. }
+    // Enable/Disable polygon offset for polygons in fill mode.
     property EnablePolygonOffsetFill: GLboolean read FEnablePolygonOffsetFill
       write SetEnablePolygonOffsetFill;
     // Multisample state

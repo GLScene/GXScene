@@ -1,10 +1,12 @@
-//
-// Graphic Scene Engine, http://glscene.org
-//
-(*
-   Simple Quake III BSP file loader. 
-*)
+(* ******************************************
+  *                                          *
+  * Graphic Scene Engine, http://glscene.org *
+  *                                          *
+  ******************************************* *)
+
 unit Formats.FileQ3BSP;
+
+(* Simple Quake III BSP file loader *)
 
 interface
 

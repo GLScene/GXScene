@@ -1,11 +1,16 @@
-//
-// Graphic Scene Engine, http://glscene.org
-//
-(*
-	Ghoul2 (GLM/GLA) file format loading structures 
-	Also referred to as MDX (MDXM/MDXA) format in C source. 
-*)
+(* ******************************************
+  *                                          *
+  * Graphic Scene Engine, http://glscene.org *
+  *                                          *
+  ******************************************* *)
+
 unit Formats.FileGL2;
+
+(*
+	Ghoul2 (GLM/GLA) file format loading structures
+	Also referred to as MDX (MDXM/MDXA) format in C source.
+*)
+
 
 interface
 

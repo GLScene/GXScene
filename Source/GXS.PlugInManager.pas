@@ -1,10 +1,12 @@
-//
-// Graphic Scene Engine, http://glscene.org
-//
-(*
-  An old PlugIn Manager unit. Don't know if it ever was used...
-*)
+(*******************************************
+*                                          *
+* Graphic Scene Engine, http://glscene.org *
+*                                          *
+********************************************)
+
 unit GXS.PlugInManager;
+
+(* An old PlugIn Manager unit. Don't know if it ever was used...*)
 
 interface
 
@@ -18,7 +20,6 @@ uses
   FMX.Forms,
 
   Scene.PlugInInterface;
-
 
 type
   PPlugInEntry = ^TgxPlugInEntry;

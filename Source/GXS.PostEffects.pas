@@ -1,10 +1,12 @@
-//
-// Graphic Scene Engine, http://glscene.org
-//
-(*
-  A collection of components that generate post effects.
-*)
+(* ********************************************
+  *                                           *
+  *  Graphic Scene Engine, http://glscene.org *
+  *                                           *
+  ******************************************** *)
+
 unit GXS.PostEffects;
+
+(* A collection of components that generate post effects *)
 
 interface
 
@@ -34,7 +36,7 @@ type
   TgxPostShaderCollectionItem = class(TCollectionItem)
   private
     FShader: TgxShader;
-    FPostShaderInterface: IVXPostShader;
+    FPostShaderInterface: IgxPostShader;
     procedure SetShader(const Value: TgxShader);
   protected
     function GetRealOwner: TgxPostShaderHolder;
@@ -343,8 +345,8 @@ begin
   if FShader <> nil then
       FShader.RemoveFreeNotification(RealOwner);
 
-  if not Supports(TObject(Value), IVXPostShader, FPostShaderInterface) then
-    raise EGLPostShaderHolderException.Create('Shader must support interface IGLPostShader!');
+  if not Supports(TObject(Value), IgxPostShader, FPostShaderInterface) then
+    raise EGLPostShaderHolderException.Create('Shader must support interface IPostShader!');
 
   if RealOwner <> nil then
     if FPostShaderInterface.GetTextureTarget <> RealOwner.TempTextureTarget then

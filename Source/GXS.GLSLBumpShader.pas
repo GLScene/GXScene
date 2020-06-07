@@ -121,7 +121,7 @@ type
     procedure DoInitialize(var rci : TgxRenderContextInfo; Sender : TObject); override;
   end;
 
-  TgxCustomGLSLBumpShader = class(TgxBaseCustomGLSLBumpShader, IGLShaderDescription)
+  TgxCustomGLSLBumpShader = class(TgxBaseCustomGLSLBumpShader, IgxShaderDescription)
   private
     // Implementing IGLShaderDescription.
     procedure SetShaderTextures(const Textures: array of TgxTexture);
@@ -139,7 +139,7 @@ type
   end;
 
   // MultiLight shaders.
-  TgxCustomGLSLMLBumpShader = class(TgxBaseCustomGLSLBumpShader, IGLShaderDescription)
+  TgxCustomGLSLMLBumpShader = class(TgxBaseCustomGLSLBumpShader, IgxShaderDescription)
   private
     FLightSources: TgxLightSourceSet;
     FLightCompensation: Single;

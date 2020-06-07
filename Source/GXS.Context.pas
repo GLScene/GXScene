@@ -183,37 +183,37 @@ type
       contexts). }
     procedure CreateMemoryContext(OutputDevice: THandle; Width, Height: // VCL -> HWND
       Integer; BufferCount: Integer = 1);
-    { Setup display list sharing between two rendering contexts.
-      Both contexts must have the same pixel format. }
+    (* Setup display list sharing between two rendering contexts.
+      Both contexts must have the same pixel format. *)
     procedure ShareLists(aContext: TgxContext);
-    { Destroy the context.
+    (* Destroy the context.
       Will fail if no context has been created.
       The method will first invoke the OnDestroyContext
       event, then attempts to deactivate the context
-      (if it is active) before destroying it. }
+      (if it is active) before destroying it. *)
     procedure DestroyContext;
-    { Activates the context.
+    (* Activates the context.
       A context can be activated multiple times (and must be
       deactivated the same number of times), but this function
-      will fail if another context is already active. }
+      will fail if another context is already active. *)
     procedure Activate;
-    { Deactivates the context.
+    (* Deactivates the context.
       Will fail if the context is not active or another
-      context has been activated. }
+      context has been activated. *)
     procedure Deactivate;
-    { Call OnPrepare for all handles. }
+    // Call OnPrepare for all handles.
     procedure PrepareHandlesData;
-    { Returns true if the context is valid.
+    (* Returns true if the context is valid.
       A context is valid from the time it has been successfully
-      created to the time of its destruction. }
+      created to the time of its destruction. *)
     function IsValid: Boolean; virtual; abstract;
-    { Request to swap front and back buffers if they were defined. }
+    // Request to swap front and back buffers if they were defined.
     procedure SwapBuffers; virtual; abstract;
-    { Returns the first compatible context that isn't self in the shares. }
+    // Returns the first compatible context that isn't self in the shares.
     function FindCompatibleContext: TgxContext;
     procedure DestroyAllHandles;
     function RenderOutputDevice: Pointer; virtual; abstract;
-    { Access to OpenGL command and extension. }
+    // Access to OpenGL command and extension.
     /// property GL: TGLExtensionsAndEntryPoints read FGL; depricated from OpenGLAdapter
     property MultitextureCoordinator: TgxAbstractMultitextureCoordinator read GetXGL;
     property IsPraparationNeed: Boolean read FIsPraparationNeed;
@@ -238,7 +238,7 @@ type
     property FullScreen: Boolean read FFullScreen write FFullScreen;
   end;
 
-  PVXRCHandle = ^TgxRCHandle;
+  PgxRCHandle = ^TgxRCHandle;
 
   TgxRCHandle = record
     FRenderingContext: TgxContext;
@@ -255,12 +255,12 @@ type
   TgxContextHandle = class
   private
     FHandles: TList;
-    FLastHandle: PVXRCHandle;
+    FLastHandle: PgxRCHandle;
     FOnPrepare: TOnPrepareHandleData;
     function GetHandle: Cardinal; inline;
     function GetContext: TgxContext;
-    function SearchRC(aContext: TgxContext): PVXRCHandle;
-    function RCItem(AIndex: Integer): PVXRCHandle; inline;
+    function SearchRC(aContext: TgxContext): PgxRCHandle;
+    function RCItem(AIndex: Integer): PgxRCHandle; inline;
     procedure CheckCurrentRC;
   protected
     // Invoked by when there is no compatible context left for relocation
@@ -355,8 +355,8 @@ type
     class function IsSupported: Boolean; override;
   end;
 
-  { Manages a handle to a query.
-    Do not use this class directly, use one of its subclasses instead. }
+  (* Manages a handle to a query.
+    Do not use this class directly, use one of its subclasses instead. *)
   TgxQueryHandle = class(TgxContextHandle)
   private
     FActive: Boolean;
@@ -383,14 +383,14 @@ type
     function QueryResultBool: BYTEBOOL;
     property Target: LongWord read GetTarget;
     property QueryType: TgxQueryType read GetQueryType;
-    { True if within a Begin/EndQuery. }
+    // True if within a Begin/EndQuery.
     property Active: Boolean read FActive;
   end;
 
-  { Manages a handle to an occlusion query.
+  (* Manages a handle to an occlusion query.
     Requires OpenGL 1.5+
     Does *NOT* check for extension availability, this is assumed to have been
-    checked by the user. }
+    checked by the user. *)
   TgxOcclusionQueryHandle = class(TgxQueryHandle)
   protected
     function GetTarget: LongWord; override;
@@ -410,10 +410,10 @@ type
     class function IsSupported: Boolean; override;
   end;
 
-  { Manages a handle to a timer query.
+  (* Manages a handle to a timer query.
     Requires GL_EXT_timer_query extension.
     Does *NOT* check for extension availability, this is assumed to have been
-    checked by the user. }
+    checked by the user. *)
   TgxTimerQueryHandle = class(TgxQueryHandle)
   protected
     function GetTarget: LongWord; override;
@@ -426,10 +426,10 @@ type
     function Time: Integer;
   end;
 
-  { Manages a handle to a primitive query.
+  (* Manages a handle to a primitive query.
     Requires OpenGL 3.0+
     Does *NOT* check for extension availability, this is assumed to have been
-    checked by the user. }
+    checked by the user. *)
   TgxPrimitiveQueryHandle = class(TgxQueryHandle)
   protected
     function GetTarget: LongWord; override;
@@ -441,9 +441,9 @@ type
     function PrimitivesGenerated: Integer;
   end;
 
-  { Manages a handle to a Buffer Object.
+  (* Manages a handle to a Buffer Object.
     Does *NOT* check for extension availability, this is assumed to have been
-    checked by the user. }
+    checked by the user. *)
   TgxBufferObjectHandle = class(TgxContextHandle)
   private
     FSize: Integer;
@@ -453,50 +453,50 @@ type
     function GetTarget: LongWord; virtual; abstract;
     class function IsValid(const ID: LongWord): BYTEBOOL; override;
   public
-    { Creates the buffer object buffer and initializes it. }
+    // Creates the buffer object buffer and initializes it.
     constructor CreateFromData(p: Pointer; size: Integer; bufferUsage: LongWord);
     procedure Bind; virtual; abstract;
-    { Note that it is not necessary to UnBind before Binding another buffer. }
+    // Note that it is not necessary to UnBind before Binding another buffer.
     procedure UnBind; virtual; abstract;
-    { Bind a buffer object to an indexed target, used by transform feedback
-      buffer objects and uniform buffer objects. (OpenGL 3.0+) }
+    (* Bind a buffer object to an indexed target, used by transform feedback
+      buffer objects and uniform buffer objects. (OpenGL 3.0+) *)
     procedure BindRange(index: LongWord; offset: PGLint; size: PGLsizei); virtual;
-    { Equivalent to calling BindRange with offset = 0, and size = the size of buffer. }
+    // Equivalent to calling BindRange with offset = 0, and size = the size of buffer.
     procedure BindBase(index: LongWord); virtual;
     procedure UnBindBase(index: LongWord); virtual;
-    { Specifies buffer content.
+    (* Specifies buffer content.
       Common bufferUsage values are GL_STATIC_DRAW_ARB for data that will
       change rarely, but be used often, GL_STREAM_DRAW_ARB for data specified
       once but used only a few times, and GL_DYNAMIC_DRAW_ARB for data
       that is re-specified very often.
-      Valid only if the buffer has been bound. }
+      Valid only if the buffer has been bound. *)
     procedure BufferData(p: Pointer; size: Integer; bufferUsage: LongWord);
     // Invokes Bind then BufferData
     procedure BindBufferData(p: Pointer; size: Integer; bufferUsage: LongWord);
-    { Updates part of an already existing buffer.
+    (* Updates part of an already existing buffer.
       offset and size indicate which part of the data in the buffer is
-      to bo modified and p where the data should be taken from. }
+      to bo modified and p where the data should be taken from. *)
     procedure BufferSubData(offset, size: Integer; p: Pointer);
-    { Map buffer content to memory.
+    (* Map buffer content to memory.
       Values for access are GL_READ_ONLY_ARB, GL_WRITE_ONLY_ARB and
       GL_READ_WRITE_ARB.
       Valid only if the buffer has been bound, must be followed by
-      an UnmapBuffer, only one buffer may be mapped at a time. }
+      an UnmapBuffer, only one buffer may be mapped at a time. *)
     function MapBuffer(access: LongWord): Pointer;
     function MapBufferRange(offset: GLint; len: GLsizei; access: GLbitfield): Pointer;
     procedure Flush(offset: GLint; len: GLsizei);
-    { Unmap buffer content from memory.
-      Must follow a MapBuffer, and happen before the buffer is unbound. }
+    (* Unmap buffer content from memory.
+      Must follow a MapBuffer, and happen before the buffer is unbound. *)
     function UnmapBuffer: BYTEBOOL;
     class function IsSupported: Boolean; override;
     property Target: LongWord read GetTarget;
     property BufferSize: Integer read FSize;
   end;
 
-  { Manages a handle to an Vertex Buffer Object.
+  (* Manages a handle to an Vertex Buffer Object.
     Does *NOT* check for extension availability, this is assumed to have been
     checked by the user.
-    Do not use this class directly, use one of its subclasses instead. }
+    Do not use this class directly, use one of its subclasses instead. *)
   TgxVBOHandle = class(TgxBufferObjectHandle)
   private
     function GetVBOTarget: LongWord;
@@ -504,8 +504,8 @@ type
     property VBOTarget: LongWord read GetVBOTarget;
   end;
 
-  { Manages a handle to VBO Array Buffer.
-    Typically used to store vertices, normals, texcoords, etc. }
+  (* Manages a handle to VBO Array Buffer.
+    Typically used to store vertices, normals, texcoords, etc. *)
   TgxVBOArrayBufferHandle = class(TgxVBOHandle)
   protected
     function GetTarget: LongWord; override;
@@ -514,8 +514,8 @@ type
     procedure UnBind; override;
   end;
 
-  { Manages a handle to VBO Element Array Buffer.
-    Typically used to store vertex indices. }
+  (* Manages a handle to VBO Element Array Buffer.
+    Typically used to store vertex indices. *)
   TgxVBOElementArrayHandle = class(TgxVBOHandle)
   protected
     function GetTarget: LongWord; override;
@@ -524,9 +524,9 @@ type
     procedure UnBind; override;
   end;
 
-  { Manages a handle to PBO Pixel Pack Buffer.
+  (* Manages a handle to PBO Pixel Pack Buffer.
     When bound, commands such as ReadPixels write
-    their data into a buffer object. }
+    their data into a buffer object. *)
   TgxPackPBOHandle = class(TgxBufferObjectHandle)
   protected
     function GetTarget: LongWord; override;
@@ -536,8 +536,8 @@ type
     class function IsSupported: Boolean; override;
   end;
 
-  { Manages a handle to PBO Pixel Unpack Buffer.
-    When bound, commands such as DrawPixels read their data from a buffer object }
+  (* Manages a handle to PBO Pixel Unpack Buffer.
+    When bound, commands such as DrawPixels read their data from a buffer object *)
   TgxUnpackPBOHandle = class(TgxBufferObjectHandle)
   protected
     function GetTarget: LongWord; override;
@@ -547,14 +547,14 @@ type
     class function IsSupported: Boolean; override;
   end;
 
-  { Manages a handle to a Transform Feedback Buffer Object.
+  (* Manages a handle to a Transform Feedback Buffer Object.
     Transform feedback buffers can be used to capture vertex data from the
     vertex or geometry shader stage to perform further processing without
-    going on to the fragment shader stage. }
+    going on to the fragment shader stage. *)
   TgxTransformFeedbackBufferHandle = class(TgxBufferObjectHandle)
-    // FTransformFeedbackBufferBuffer: array[0..15] of LongWord; // (0, 0, 0, ...)
-    // FTransformFeedbackBufferStart: array[0..15] of LongWord64; // (0, 0, 0, ...)
-    // FTransformFeedbackBufferSize: array[0..15] of LongWord64; // (0, 0, 0, ...)
+    /// FTransformFeedbackBufferBuffer: array[0..15] of LongWord; // (0, 0, 0, ...)
+    /// FTransformFeedbackBufferStart: array[0..15] of LongWord64; // (0, 0, 0, ...)
+    /// FTransformFeedbackBufferSize: array[0..15] of LongWord64; // (0, 0, 0, ...)
   protected
     function GetTarget: LongWord; override;
   public
@@ -568,7 +568,7 @@ type
     class function IsSupported: Boolean; override;
   end;
 
-  { Manages a handle to a Buffer Texture. (TBO) }
+  // Manages a handle to a Buffer Texture. (TBO)
   TgxTextureBufferHandle = class(TgxBufferObjectHandle)
   protected
     function GetTarget: LongWord; override;
@@ -578,13 +578,13 @@ type
     class function IsSupported: Boolean; override;
   end;
 
-  { Manages a handle to a Uniform Buffer Object (UBO).
+  (* Manages a handle to a Uniform Buffer Object (UBO).
     Uniform buffer objects store "uniform blocks"; groups of uniforms
-    that can be passed as a group into a GLSL program. }
+    that can be passed as a group into a GLSL program. *)
   TgxUniformBufferHandle = class(TgxBufferObjectHandle)
-    // FUniformBufferBuffer: array[0..15] of LongWord; // (0, 0, 0, ...)
-    // FUniformBufferStart: array[0..15] of LongWord64; // (0, 0, 0, ...)
-    // FUniformBufferSize: array[0..15] of LongWord64; // (0, 0, 0, ...)
+    /// FUniformBufferBuffer: array[0..15] of LongWord; // (0, 0, 0, ...)
+    /// FUniformBufferStart: array[0..15] of LongWord64; // (0, 0, 0, ...)
+    /// FUniformBufferSize: array[0..15] of LongWord64; // (0, 0, 0, ...)
   protected
     function GetTarget: LongWord; override;
   public
@@ -655,38 +655,38 @@ type
     procedure Attach3DTexture(Target: GLenum; attachment: GLenum; textarget: GLenum; texture: LongWord; level: GLint; Layer: GLint);
     procedure AttachLayer(Target: GLenum; attachment: GLenum; texture: LongWord; level: GLint; Layer: GLint);
     procedure AttachRenderBuffer(Target: GLenum; attachment: GLenum; renderbuffertarget: GLenum; renderbuffer: LongWord);
-    { If texture is the name of a three-dimensional texture, cube map texture, one-or
+    (* If texture is the name of a three-dimensional texture, cube map texture, one-or
       two-dimensional array texture, or two-dimensional multisample array texture, the
       texture level attached to the framebuffer attachment point is an array of images,
-      and the framebuffer attachment is considered layered. }
+      and the framebuffer attachment is considered layered. *)
     procedure AttachTexture(Target: GLenum; attachment: GLenum; texture: LongWord; level: GLint);
     procedure AttachTextureLayer(Target: GLenum; attachment: GLenum; texture: LongWord; level: GLint; Layer: GLint);
     // copy rect from bound read framebuffer to bound draw framebuffer
     procedure Blit(srcX0: GLint; srcY0: GLint; srcX1: GLint; srcY1: GLint; dstX0: GLint; dstY0: GLint; dstX1: GLint;
       dstY1: GLint; mask: GLbitfield; filter: GLenum);
-    // target = GL_DRAW_FRAMEBUFFER, GL_READ_FRAMEBUFFER, GL_FRAMEBUFFER (equivalent to GL_DRAW_FRAMEBUFFER)
-    // If default framebuffer (0) is bound:
-    // attachment = GL_FRONT_LEFT, GL_FRONT_RIGHT, GL_BACK_LEFT, or GL_BACK_RIGHT, GL_DEPTH, GL_STENCIL
-    // if a framebuffer object is bound:
-    // attachment = GL_COLOR_ATTACHMENTi, GL_DEPTH_ATTACHMENT, GL_STENCIL_ATTACHMENT, GL_DEPTH_STENCIL_ATTACHMENT
-    // param = GL_FRAMEBUFFER_ATTACHMENT_(OBJECT_TYPE, OBJECT_NAME,
-    // RED_SIZE, GREEN_SIZE, BLUE_SIZE, ALPHA_SIZE, DEPTH_SIZE, STENCIL_SIZE,
-    // COMPONENT_TYPE, COLOR_ENCODING, TEXTURE_LEVEL, LAYERED, TEXTURE_CUBE_MAP_FACE, TEXTURE_LAYER
+    (* target = GL_DRAW_FRAMEBUFFER, GL_READ_FRAMEBUFFER, GL_FRAMEBUFFER (equivalent to GL_DRAW_FRAMEBUFFER)
+     If default framebuffer (0) is bound:
+     attachment = GL_FRONT_LEFT, GL_FRONT_RIGHT, GL_BACK_LEFT, or GL_BACK_RIGHT, GL_DEPTH, GL_STENCIL
+     if a framebuffer object is bound:
+     attachment = GL_COLOR_ATTACHMENTi, GL_DEPTH_ATTACHMENT, GL_STENCIL_ATTACHMENT, GL_DEPTH_STENCIL_ATTACHMENT
+     param = GL_FRAMEBUFFER_ATTACHMENT_(OBJECT_TYPE, OBJECT_NAME,
+     RED_SIZE, GREEN_SIZE, BLUE_SIZE, ALPHA_SIZE, DEPTH_SIZE, STENCIL_SIZE,
+     COMPONENT_TYPE, COLOR_ENCODING, TEXTURE_LEVEL, LAYERED, TEXTURE_CUBE_MAP_FACE, TEXTURE_LAYER *)
     function GetAttachmentParameter(Target: GLenum; attachment: GLenum; pname: GLenum): GLint;
-    // Returns the type of object bound to attachment point:
-    // GL_NONE, GL_FRAMEBUFFER_DEFAULT, GL_TEXTURE, or GL_RENDERBUFFER
+    (* Returns the type of object bound to attachment point:
+      GL_NONE, GL_FRAMEBUFFER_DEFAULT, GL_TEXTURE, or GL_RENDERBUFFER *)
     function GetAttachmentObjectType(Target: GLenum; attachment: GLenum): GLint;
-    { Returns the name (ID) of the texture or renderbuffer attached to attachment point }
+    // Returns the name (ID) of the texture or renderbuffer attached to attachment point
     function GetAttachmentObjectName(Target: GLenum; attachment: GLenum): GLint;
     function GetStatus: TgxFramebufferStatus;
     function GetStringStatus(out clarification: string): TgxFramebufferStatus;
     class function IsSupported: Boolean; override;
   end;
 
-  { Manages a handle to a Renderbuffer Object.
+  (* Manages a handle to a Renderbuffer Object.
     A Renderbuffer is a "framebuffer-attachable image" for generalized offscreen
     rendering and it also provides a means to support rendering to GL logical
-    buffer types which have no corresponding texture format (stencil, accum, etc). }
+    buffer types which have no corresponding texture format (stencil, accum, etc). *)
   TgxRenderbufferHandle = class(TgxContextHandle)
   protected
     function DoAllocateHandle: Cardinal; override;
@@ -739,8 +739,8 @@ type
     class function IsSupported: Boolean; override;
   end;
 
-  { Base class for GLSL handles (programs and shaders).
-    Do not use this class directly, use one of its subclasses instead. }
+  (* Base class for GLSL handles (programs and shaders).
+    Do not use this class directly, use one of its subclasses instead. *)
   TgxSLHandle = class(TgxContextHandle)
   private
   protected
@@ -750,10 +750,10 @@ type
     class function IsSupported: Boolean; override;
   end;
 
-  { Manages a handle to a Shader Object.
+  (* Manages a handle to a Shader Object.
     Does *NOT* check for extension availability, this is assumed to have been
     checked by the user.
-    Do not use this class directly, use one of its subclasses instead. }
+    Do not use this class directly, use one of its subclasses instead. *)
   TgxShaderHandle = class(TgxSLHandle)
   private
     FShaderType: Cardinal;
@@ -769,44 +769,44 @@ type
 
   TgxShaderHandleClass = class of TgxShaderHandle;
 
-  { Manages a handle to a Vertex Shader Object. }
+  // Manages a handle to a Vertex Shader Object.
   TgxVertexShaderHandle = class(TgxShaderHandle)
   public
     constructor Create; override;
     class function IsSupported: Boolean; override;
   end;
 
-  { Manages a handle to a Geometry Shader Object. }
+  // Manages a handle to a Geometry Shader Object.
   TgxGeometryShaderHandle = class(TgxShaderHandle)
   public
     constructor Create; override;
     class function IsSupported: Boolean; override;
   end;
 
-  { Manages a handle to a Fragment Shader Object. }
+  // Manages a handle to a Fragment Shader Object.
   TgxFragmentShaderHandle = class(TgxShaderHandle)
   public
     constructor Create; override;
     class function IsSupported: Boolean; override;
   end;
 
-  { Manages a handle to a Tessellation Control Shader Object. }
+  // Manages a handle to a Tessellation Control Shader Object.
   TgxTessControlShaderHandle = class(TgxShaderHandle)
   public
     constructor Create; override;
     class function IsSupported: Boolean; override;
   end;
 
-  { Manages a handle to a Tessellation Evaluation Shader Object. }
+  // Manages a handle to a Tessellation Evaluation Shader Object.
   TgxTessEvaluationShaderHandle = class(TgxShaderHandle)
   public
     constructor Create; override;
     class function IsSupported: Boolean; override;
   end;
 
-  { Manages a GLSL Program Object.
+  (* Manages a GLSL Program Object.
     Does *NOT* check for extension availability, this is assumed to have been
-    checked by the user. }
+    checked by the user. *)
   TgxProgramHandle = class(TgxSLHandle)
   public
     class function IsValid(const ID: LongWord): BYTEBOOL; override;
@@ -842,8 +842,8 @@ type
   public
     property Name: string read FName write FName;
     constructor Create; override;
-    { Compile and attach a new shader.
-      Raises an EGLShader exception in case of failure. }
+    (* Compile and attach a new shader.
+      Raises an EGLShader exception in case of failure. *)
     procedure AddShader(ShaderType: TgxShaderHandleClass; const ShaderSource: string; treatWarningsAsErrors: Boolean = False);
     procedure AttachObject(shader: TgxShaderHandle);
     procedure DetachAllObject;
@@ -870,7 +870,7 @@ type
     procedure SetUniformf(const index: string; const val: TVector2f); overload;
     procedure SetUniformf(const index: string; const val: TVector3f); overload;
     procedure SetUniformf(const index: string; const val: TVector4f); overload;
-    { Shader parameters. }
+    // Shader parameters.
     property Uniform1i[const index: string]: GLint read GetUniform1i write SetUniform1i;
     property Uniform2i[const index: string]: TVector2i read GetUniform2i write SetUniform2i;
     property Uniform3i[const index: string]: TVector3i read GetUniform3i write SetUniform3i;
@@ -914,25 +914,25 @@ type
   public
     constructor Create;
     destructor Destroy; override;
-    { Returns an appropriate, ready-to use context.
-      The returned context should be freed by caller. }
+    (* Returns an appropriate, ready-to use context.
+      The returned context should be freed by caller. *)
     function CreateContext(AClass: TgxContextClass = nil): TgxContext;
-    { Returns the number of TgxContext object.
-      This is *not* the number of OpenGL rendering contexts! }
+    (* Returns the number of TgxContext object.
+      This is *not* the number of OpenGL rendering contexts! *)
     function ContextCount: Integer;
-    { Registers a new object to notify when the last context is destroyed.
+    (* Registers a new object to notify when the last context is destroyed.
       When the last rendering context is destroyed, the 'anEvent' will
       be invoked with 'anObject' as parameter.
       Note that the registration is kept until the notification is triggered
-      or a RemoveNotification on 'anObject' is issued. }
+      or a RemoveNotification on 'anObject' is issued. *)
     procedure LastContextDestroyNotification(anObject: TObject; anEvent: TNotifyEvent);
-    { Unregisters an object from the notification lists. }
+    // Unregisters an object from the notification lists.
     procedure RemoveNotification(anObject: TObject);
     // Marks the context manager for termination
     procedure Terminate;
-    { Request all contexts to destroy all their handles. }
+    // Request all contexts to destroy all their handles.
     procedure DestroyAllHandles;
-    { Notify all contexts about necessity of handles preparation. }
+    // Notify all contexts about necessity of handles preparation.
     procedure NotifyPreparationNeed;
   end;
 
@@ -940,10 +940,10 @@ type
   EPBuffer = class(Exception);
   EVXShader = class(EVXContext);
 
-{ Drivers should register themselves via this function. }
+// Drivers should register themselves via this function.
 procedure RegisterVXContextClass(aVXContextClass: TgxContextClass);
-{ The TgxContext that is the currently active context, if any.
-  Returns nil if no context is active. }
+(* The TgxContext that is the currently active context, if any.
+  Returns nil if no context is active. *)
 function CurrentVXContext: TgxContext;
 function SafeCurrentVXContext: TgxContext;
 function IsMainThread: Boolean;
@@ -1495,7 +1495,7 @@ var
   I: Integer;
   bSucces: Boolean;
   aList: TList;
-  p: PVXRCHandle;
+  p: PgxRCHandle;
 
 begin
   // if handle aready allocated in current context
@@ -1567,7 +1567,7 @@ begin
   Result := SearchRC(aContext).FHandle > 0;
 end;
 
-function TgxContextHandle.SearchRC(aContext: TgxContext): PVXRCHandle;
+function TgxContextHandle.SearchRC(aContext: TgxContext): PgxRCHandle;
 var
   I: Integer;
 begin
@@ -1610,7 +1610,7 @@ end;
 procedure TgxContextHandle.DestroyHandle;
 var
   oldContext: TgxContext;
-  p: PVXRCHandle;
+  p: PgxRCHandle;
   I: Integer;
 begin
   oldContext := vCurrentContext;
@@ -1646,7 +1646,7 @@ end;
 procedure TgxContextHandle.ContextDestroying;
 var
   I: Integer;
-  p: PVXRCHandle;
+  p: PgxRCHandle;
   aList: TList;
   bShared: Boolean;
 begin
@@ -1702,7 +1702,7 @@ end;
 function TgxContextHandle.GetContext: TgxContext;
 var
   I: Integer;
-  p: PVXRCHandle;
+  p: PgxRCHandle;
 begin
   Result := nil;
   // Return first context where handle is allocated
@@ -1781,7 +1781,7 @@ begin
     /// ShowMessages(cNoActiveRC);
 end;
 
-function TgxContextHandle.RCItem(AIndex: Integer): PVXRCHandle;
+function TgxContextHandle.RCItem(AIndex: Integer): PgxRCHandle;
 begin
   Result := FHandles[AIndex];
 end;

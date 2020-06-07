@@ -1,10 +1,12 @@
-//
-// Graphic Scene Engine, http://glscene.org
-//
-(*
-  Loader for FSRad OCT files.
-*)
+(* ******************************************
+  *                                          *
+  * Graphic Scene Engine, http://glscene.org *
+  *                                          *
+  ******************************************* *)
+
 unit Formats.FileOCT;
+
+(* Loader for FSRad OCT files *)
 
 interface
 
@@ -73,8 +75,8 @@ type
     PlayerPos: TAffineVector;
     constructor Create; overload;
     constructor Create(octStream: TStream); overload;
-    { Saves content to stream in OCT format.
-      The Header is automatically prepared before streaming. }
+    (* Saves content to stream in OCT format.
+      The Header is automatically prepared before streaming. *)
     procedure SaveToStream(aStream: TStream);
     procedure AddTriangles(vertexCoords: TAffineVectorList;
       texMapCoords: TAffineVectorList; const textureName: String);

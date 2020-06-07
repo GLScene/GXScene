@@ -3,10 +3,10 @@
 * Graphic Scene Engine, http://glscene.org *
 *                                          *
 ********************************************)
-{
-   TgxGLSLShader is a wrapper for GLS shaders.
- }
+
 unit GXS.GLSLShader;
+
+(* GLSLShader is a wrapper for GLS shaders *)
 
 interface
 

@@ -1,6 +1,11 @@
-//
-// Graphic Scene Engine, http://glscene.org
-//
+(*******************************************
+*                                          *
+* Graphic Scene Engine, http://glscene.org *
+*                                          *
+********************************************)
+
+unit GXS.Console;
+
 (*
    The console is a popdown window that appears on a game for text output/input.
    What is different compared to the original component?
@@ -31,8 +36,6 @@
       May be SceneViewer should be a TControl to support the FullScreenViewer...
 *)
 
-unit GXS.Console;
-
 interface
 
 {$I Scene.inc}
@@ -46,20 +49,21 @@ uses
   System.UIConsts,
   FMX.Graphics,
 
+  Scene.VectorTypes,
+  Scene.PersistentClasses,
+  Scene.Strings,
+
   GXS.Coordinates,
   GXS.Scene,
   GXS.Objects,
   GXS.HUDObjects,
   GXS.Win64Viewer,
   GXS.BitmapFont,
-  Scene.PersistentClasses,
   GXS.Context,
   GXS.Texture,
   GXS.Utils,
-  Scene.Strings,
   GXS.CrossPlatform,
-  GXS.Material,
-  Scene.VectorTypes;
+  GXS.Material;
 
 const
   CONSOLE_MAX_COMMANDS = 120;
@@ -142,12 +146,12 @@ type
     property OnHelp: TNotifyEvent read FOnHelp write FOnHelp;
     // Disabled commands won't execute
     property Enabled: Boolean read FEnabled write FEnabled default True;
-    { If command is disabled and user calls it, no error report will be
-       generated if SilentDisabled is enabled }
+    (* If command is disabled and user calls it, no error report will be
+       generated if SilentDisabled is enabled *)
     property SilentDisabled: Boolean read FSilentDisabled write FSilentDisabled
       default False;
-    { Hidden commands won't show when user requests command list
-      or uses auto-complete }
+    (* Hidden commands won't show when user requests command list
+      or uses auto-complete *)
     property Visible: Boolean read FVisible write FVisible default True;
   end;
 
@@ -174,7 +178,6 @@ type
   TgxConsoleControls = class(TPersistent)
   private
     FOwner: TPersistent;
-
     FNavigatePageUp: Byte;
     FAutoCompleteCommand: Byte;
     FPreviousCommand: Byte;
@@ -207,7 +210,7 @@ type
       default 300;
   end;
 
-  { TgxCustomConsole }
+  // TgxCustomConsole
   TgxCustomConsole = class(TgxBaseSceneObject)
   private
     FHudSprite: TgxHudSprite;
@@ -224,18 +227,14 @@ type
     FAdditionalCommands: TgxConsoleStringList;
     FTypedCommands: TStringList;
     FControls: TgxConsoleControls;
-
     FOnCommandIssued: TgxlConsoleEvent;
-
     FOptions: TgxConsoleOptions;
     FHint: string;
-
     procedure SetSize(const Value: Single);
     procedure SetSceneViewer(const Value: TgxSceneViewer);
     function GetFont: TgxCustomBitmapFont;
     procedure SetFont(const Value: TgxCustomBitmapFont);
   protected
-    { Misc }
     procedure DoOnCommandIssued(var UserInputCommand: TgxUserInputCommand);
       virtual;
     procedure SetFontColor(const Color: TColor); virtual;
@@ -245,34 +244,27 @@ type
     function NumLines: Integer; virtual;
     procedure ShowConsoleHelp; virtual;
     procedure HandleUnknownCommand(const Command: string); virtual;
-
-    { Auto Complete Command }
+    // Auto Complete Command
     procedure AutoCompleteCommand; overload; virtual;
     procedure AutoCompleteCommand(var MatchCount: Integer; var
       AdditionalCommandsMatchList: TgxConsoleMatchList; var CommandsMatchList:
       TgxConsoleMatchList); overload;
-
-    { Command interpreters }
+    // Command interpreters
     procedure CommandIssued(var UserInputCommand: TgxUserInputCommand); virtual;
     procedure FixCommand(var UserInputCommand: TgxUserInputCommand); virtual;
     function ParseString(str, caract: string): TgxUserInputCommand; virtual;
     procedure ProcessInput; virtual;
-
-    { Refreshes the Hud (clip lines outside the visible console). }
+    // Refreshes the Hud (clip lines outside the visible console).
     procedure RefreshHud; virtual;
-
     // Register built-in commands (onCreate)
     procedure RegisterBuiltInCommands; virtual;
-
     // Internal command handlers:
-
     procedure ProcessInternalCommandHelp(const ConsoleCommand:
       TgxConsoleCommand; const Console: TgxCustomConsole; var Command:
       TgxUserInputCommand); virtual;
     procedure ProcessInternalCommandClearScreen(const ConsoleCommand:
       TgxConsoleCommand; const Console: TgxCustomConsole; var Command:
       TgxUserInputCommand); virtual;
-
     procedure ProcessInternalCommandConsoleHide(const ConsoleCommand:
       TgxConsoleCommand; const Console: TgxCustomConsole; var Command:
       TgxUserInputCommand); virtual;
@@ -291,7 +283,6 @@ type
     procedure ProcessInternalCommandSystemDate(const ConsoleCommand:
       TgxConsoleCommand; const Console: TgxCustomConsole; var Command:
       TgxUserInputCommand); virtual;
-
     procedure ProcessInternalCommandViewerFPS(const ConsoleCommand:
       TgxConsoleCommand; const Console: TgxCustomConsole; var Command:
       TgxUserInputCommand); virtual;
@@ -313,67 +304,55 @@ type
     // Methods: User *must* call these methods in his code.
     procedure ProcessKeyPress(const c: Char); virtual;
     procedure ProcessKeyDown(const key: word); virtual;
-
     // Navigation through code from outside
     procedure NavigateUp;
     procedure NavigateDown;
     procedure NavigatePageUp;
     procedure NavigatePageDown;
-
     (* Refreshes the size of the hud to reflect changes on the viewer.
        Should be called whenever the viewer's size changes. *)
     procedure RefreshHudSize; virtual;
-    // Adds a line (which is not treated as a command). 
+    // Adds a line (which is not treated as a command).
     procedure AddLine(const str: string);
-    // TypedCommands are cleared and current command index is reset. 
+    // TypedCommands are cleared and current command index is reset.
     procedure ClearTypedCommands;
-
     procedure ExecuteCommand(const Command: string);
     procedure ExecuteCommands(const Commands: TStrings);
-
     constructor Create(AOwner: TComponent); override;
     destructor Destroy; override;
-    { Properties. }
-    { Changes the console font color. }
+    // Changes the console font color.
     property FontColor: TColor read GetFontColor write SetFontColor stored
       False;
     property HUDSpriteColor: TColor read GetHUDSpriteColor write
       SetHUDSpriteColor stored False;
-
     // Where user enters his commands.
     property InputLine: string read FInputLine write FInputLine;
-
     // List of commands that user typed.
     property TypedCommands: TStringList read FTypedCommands;
-
     // Commands have events that are called when user types a sertauin command
     property Commands: TgxConsoleCommandList read FCommands;
-    { Aditional commands can be registered to participate in command auto-completion.
-     They can be interpreted in the global OnCommandIssued event handler. }
+    (* Aditional commands can be registered to participate in command auto-completion.
+     They can be interpreted in the global OnCommandIssued event handler. *)
     property AdditionalCommands: TgxConsoleStringList read FAdditionalCommands;
-    { User controls. }
+    // User controls.
     property Controls: TgxConsoleControls read FControls;
-    { list of commands that user typed and console's responces. }
+    // list of commands that user typed and console's responces.
     property ColsoleLog: TStringList read FColsoleLog;
-
-    { Allows to change consol's height from 0 to 1. }
+    // Allows to change consol's height from 0 to 1.
     property Size: Single read FSize write SetSize;
-    { Visual stuff. }
+    // Visual stuff.
     property SceneViewer: TgxSceneViewer read FSceneViewer write SetSceneViewer;
     property HudSprite: TgxHudSprite read FHudSprite;
     property HudText: TgxHudText read FHudText;
     property Font: TgxCustomBitmapFont read GetFont write SetFont stored False;
-
     property Options: TgxConsoleOptions read FOptions write FOptions;
-
-    { Main event of the console. Happens whenever the enter key is pressed.
+    (* Main event of the console. Happens whenever the enter key is pressed.
       First the input line is compared to all registered commands, then everything
       is parsed into a TgxUserInputCommand record and  sent to the event.
-      Empty lines are  not  ignored (i.e. they also trigger events)}
+      Empty lines are  not  ignored (i.e. they also trigger events)*)
     property OnCommandIssued: TgxlConsoleEvent read FOnCommandIssued write
       FOnCommandIssued;
-
-    { Standard stuff }
+    // Standard stuff
     property Hint: string read FHint write FHint;
     property Visible default False;
   end;
@@ -394,7 +373,6 @@ type
     property Font;
     property Options;
     property OnCommandIssued;
-
     property Hint;
     property Tag;
     property ObjectsSorting;
@@ -402,7 +380,9 @@ type
     property OnProgress;
   end;
 
+//-------------------------------------------
 implementation
+//-------------------------------------------
 
 const
   STR_NO_DUPLICATE_NAMES_ALLOWED = 'Duplicate names not allowed!';
@@ -412,7 +392,9 @@ const
   conDefaultConsoleWidth = 400;
   conDefaultConsoleHeight = 100;
 
-  { TgxCustomConsole }
+//-------------------------------------------
+// TgxCustomConsole
+//-------------------------------------------
 
 procedure TgxCustomConsole.ProcessInternalCommandClearScreen(const
   ConsoleCommand: TgxConsoleCommand; const Console: TgxCustomConsole; var Command:

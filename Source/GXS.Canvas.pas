@@ -3,12 +3,14 @@
 * Graphic Scene Engine, http://glscene.org *
 *                                          *
 ********************************************)
-{
+
+unit GXS.Canvas;
+
+(*
    Implements a basic Canvas-like interface over for OpenGL
    This class can be used for generic OpenGL applications and has no dependencies
    to the GXScene core units (only to base units).
-}
-unit GXS.Canvas;
+*)
 
 interface
 

@@ -1,12 +1,16 @@
-//
-// Graphic Scene Engine, http://glscene.org
-//
-{
+(*******************************************
+*                                          *
+* Graphic Scene Engine, http://glscene.org *
+*                                          *
+********************************************)
+
+unit GXS.CelShader;
+
+(*
    A shader that applies cel shading through a vertex program
    and shade definition texture.
+*)
 
-}
-unit GXS.CelShader;
 
 interface
 

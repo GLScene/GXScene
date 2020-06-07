@@ -29,17 +29,19 @@ uses
 
   Import.OpenGLx,
   Scene.XOpenGL,
+  Scene.BaseClasses,
   Scene.PersistentClasses,
   Scene.VectorGeometry,
   Scene.VectorTypes,
-  GXS.Scene,
   Scene.VectorLists,
+  Scene.Strings,
+
+  GXS.Scene,
   GXS.CrossPlatform,
   GXS.Context,
   GXS.Silhouette,
   GXS.Color,
   GXS.RenderContextInfo,
-  Scene.BaseClasses,
   GXS.Nodes,
   GXS.PipelineTransformation,
   GXS.Coordinates;
@@ -61,13 +63,13 @@ type
     TexCoord: TVector2f;
   end;
 
-  { A simple cube, invisible at run-time.
+  (* A simple cube, invisible at run-time.
     This is a usually non-visible object -except at design-time- used for
     building hierarchies or groups, when some kind of joint or movement
     mechanism needs be described, you can use DummyCubes.
     DummyCube's barycenter is its children's barycenter.
     The DummyCube can optionnally amalgamate all its children into a single
-    display list (see Amalgamate property). }
+    display list (see Amalgamate property). *)
   TgxDummyCube = class(TgxCameraInvariantObject)
   private
     FCubeSize: Single;
@@ -95,11 +97,11 @@ type
   published
     property CubeSize: Single read FCubeSize write SetCubeSize;
     property EdgeColor: TgxColor read FEdgeColor write SetEdgeColor;
-    { If true the dummycube's edges will be visible at runtime.
+    (* If true the dummycube's edges will be visible at runtime.
       The default behaviour of the dummycube is to be visible at design-time
-      only, and invisible at runtime. }
+      only, and invisible at runtime. *)
     property VisibleAtRunTime: Boolean read FVisibleAtRunTime write SetVisibleAtRunTime default False;
-    { Amalgamate the dummy's children in a single OpenGL entity.
+    (* Amalgamate the dummy's children in a single OpenGL entity.
       This activates a special rendering mode, which will compile
       the rendering of all of the dummycube's children objects into a
       single display list. This may provide a significant speed up in some
@@ -110,15 +112,15 @@ type
       and culling to operate as usual.
       In short, this features is best used for static, non-transparent
       geometry, or when the point of view won't change over a large
-      number of frames. }
+      number of frames. *)
     property Amalgamate: Boolean read FAmalgamate write SetAmalgamate default False;
-    { Camera Invariance Options.
+    (* Camera Invariance Options.
       These options allow to "deactivate" sensitivity to camera, f.i. by
-      centering the object on the camera or ignoring camera orientation. }
+      centering the object on the camera or ignoring camera orientation. *)
     property CamInvarianceMode default cimNone;
-    { Event for custom visibility determination.
+    (* Event for custom visibility determination.
       Event handler should return True if the dummycube and its children
-      are to be considered visible for the current render. }
+      are to be considered visible for the current render. *)
     property OnVisibilityDetermination: TgxVisibilityDeterminationEvent
       read FOnVisibilityDetermination write FOnVisibilityDetermination;
   end;
@@ -126,9 +128,9 @@ type
   TgxPlaneStyle = (psSingleQuad, psTileTexture);
   TgxPlaneStyles = set of TgxPlaneStyle;
 
-  { A simple plane object.
+  (* A simple plane object.
     Note that a plane is always made of a single quad (two triangles) and the
-    tiling is only applied to texture coordinates. }
+    tiling is only applied to texture coordinates. *)
   TgxPlane = class(TgxSceneObject)
   private
     FXOffset, FYOffset: Single;
@@ -158,11 +160,11 @@ type
     function AxisAlignedDimensionsUnscaled: TVector; override;
     function RayCastIntersect(const rayStart, rayVector: TVector;
       intersectPoint: PVector = nil; intersectNormal: PVector = nil): Boolean; override;
-    { Computes the screen coordinates of the smallest rectangle encompassing the plane.
-      Returned extents are NOT limited to any physical screen extents. }
+    (* Computes the screen coordinates of the smallest rectangle encompassing the plane.
+      Returned extents are NOT limited to any physical screen extents. *)
     function ScreenRect(aBuffer: TgxSceneBuffer): TRect;
-    { Computes the signed distance to the point.
-      Point coordinates are expected in absolute coordinates. }
+    (* Computes the signed distance to the point.
+      Point coordinates are expected in absolute coordinates. *)
     function PointDistance(const aPoint: TVector): Single;
   published
     property Height: Single read FHeight write SetHeight;
@@ -176,9 +178,9 @@ type
     property Style: TgxPlaneStyles read FStyle write SetStyle default [psSingleQuad, psTileTexture];
   end;
 
-  { A rectangular area, perspective projected, but always facing the camera.
+  (* A rectangular area, perspective projected, but always facing the camera.
     A TgxSprite is perspective projected and as such is scaled with distance,
-    if you want a 2D sprite that does not get scaled, see TgxHUDSprite. }
+    if you want a 2D sprite that does not get scaled, see TgxHUDSprite. *)
   TgxSprite = class(TgxSceneObject)
   private
     FWidth: Single;
@@ -203,26 +205,26 @@ type
     // Set width and height to "size"
     procedure SetSquareSize(const Size: Single);
   published
-    { Sprite Width in 3D world units. }
+    // Sprite Width in 3D world units.
     property Width: Single read FWidth write SetWidth;
-    { Sprite Height in 3D world units. }
+    // Sprite Height in 3D world units.
     property Height: Single read FHeight write SetHeight;
-    { This the ON-SCREEN rotation of the sprite. 
-      Rotatation=0 is handled faster. }
+    (* This the ON-SCREEN rotation of the sprite.
+      Rotatation=0 is handled faster. *)
     property Rotation: Single read FRotation write SetRotation;
-    { If different from 1, this value will replace that of Diffuse.Alpha }
+    // If different from 1, this value will replace that of Diffuse.Alpha
     property AlphaChannel: Single read FAlphaChannel write SetAlphaChannel stored StoreAlphaChannel;
-    { Reverses the texture coordinates in the U and V direction to mirror
-      the texture. }
+    (* Reverses the texture coordinates in the U and V direction to mirror
+      the texture. *)
     property MirrorU: Boolean read FMirrorU write SetMirrorU default False;
     property MirrorV: Boolean read FMirrorV write SetMirrorV default False;
   end;
 
   TgxPointStyle = (psSquare, psRound, psSmooth, psSmoothAdditive, psSquareAdditive);
 
-  { Point parameters as in ARB_point_parameters.
+  (* Point parameters as in ARB_point_parameters.
     Make sure to read the ARB_point_parameters spec if you want to understand
-    what each parameter does. }
+    what each parameter does. *)
   TgxPointParameters = class(TUpdateAbleObject)
   private
     FEnabled: Boolean;
@@ -249,13 +251,13 @@ type
     property MinSize: Single read FMinSize write SetMinSize stored False;
     property MaxSize: Single read FMaxSize write SetMaxSize stored False;
     property FadeTresholdSize: Single read FFadeTresholdSize write SetFadeTresholdSize stored False;
-    { Components XYZ are for constant, linear and quadratic attenuation. }
+    // Components XYZ are for constant, linear and quadratic attenuation.
     property DistanceAttenuation: TgxCoordinates read FDistanceAttenuation write SetDistanceAttenuation;
   end;
 
-  { Renders a set of non-transparent colored points.
+  (* Renders a set of non-transparent colored points.
     The points positions and their color are defined through the Positions
-    and Colors properties. }
+    and Colors properties. *)
   TgxPoints = class(TgxImmaterialSceneObject)
   private
     FPositions: TAffineVectorList;
@@ -278,39 +280,39 @@ type
     destructor Destroy; override;
     procedure Assign(Source: TPersistent); override;
     procedure BuildList(var rci: TgxRenderContextInfo); override;
-    { Points positions. If empty, a single point is assumed at (0, 0, 0) }
+    // Points positions. If empty, a single point is assumed at (0, 0, 0)
     property Positions: TAffineVectorList read FPositions write SetPositions;
-    { Defines the points colors.
+    (* Defines the points colors.
        if empty, point color will be opaque white
        if contains a single color, all points will use that color
        if contains N colors, the first N points (at max) will be rendered
-      using the corresponding colors. }
+      using the corresponding colors. *)
     property Colors: TVectorList read FColors write SetColors;
   published
-    { If true points do not write their Z to the depth buffer. }
+    // If true points do not write their Z to the depth buffer.
     property NoZWrite: Boolean read FNoZWrite write SetNoZWrite;
-    { Tells the component if point coordinates are static. 
+    (* Tells the component if point coordinates are static.
       If static, changes to the positions should be notified via an
-      explicit StructureChanged call, or may not refresh. 
-      Static sets of points may render faster than dynamic ones. }
+      explicit StructureChanged call, or may not refresh.
+      Static sets of points may render faster than dynamic ones. *)
     property Static: Boolean read FStatic write SetStatic;
-    { Point size, all points have a fixed size. }
+    // Point size, all points have a fixed size.
     property Size: Single read FSize write SetSize stored StoreSize;
-    { Points style.  }
+    // Points style.
     property Style: TgxPointStyle read FStyle write SetStyle default psSquare;
-    { Point parameters as of ARB_point_parameters. 
+    (* Point parameters as of ARB_point_parameters.
       Allows to vary the size and transparency of points depending
-      on their distance to the observer. }
+      on their distance to the observer. *)
     property PointParameters: TgxPointParameters read FPointParameters write SetPointParameters;
   end;
 
-  { Possible aspects for the nodes of a TLine. }
+  // Possible aspects for the nodes of a TLine.
   TLineNodesAspect = (lnaInvisible, lnaAxes, lnaCube);
 
-  { Available spline modes for a TLine. }
+  // Available spline modes for a TLine.
   TgxLineSplineMode = (lsmLines, lsmCubicSpline, lsmBezierSpline, lsmNURBSCurve, lsmSegments, lsmLoop);
 
-  { Specialized Node for use in a TgxLines objects. Adds a Color property (TgxColor). }
+  // Specialized Node for use in a TgxLines objects. Adds a Color property (TgxColor).
   TgxLinesNode = class(TgxNode)
   private
     FColor: TgxColor;
@@ -323,20 +325,20 @@ type
     destructor Destroy; override;
     procedure Assign(Source: TPersistent); override;
   published
-    { The node color.
+    (* The node color.
       Can also defined the line color (interpolated between nodes) if
-      loUseNodeColorForLines is set (in TgxLines). }
+      loUseNodeColorForLines is set (in TgxLines). *)
     property Color: TgxColor read FColor write SetColor stored StoreColor;
   end;
 
-  { Specialized collection for Nodes in a TgxLines objects. Stores TgxLinesNode items. }
+  // Specialized collection for Nodes in a TgxLines objects. Stores TgxLinesNode items.
   TgxLinesNodes = class(TgxNodes)
   public
     constructor Create(AOwner: TComponent); overload;
     procedure NotifyChange; override;
   end;
 
-  { Base class for line objects. Introduces line style properties (width, color...). }
+  // Base class for line objects. Introduces line style properties (width, color...)
   TgxLineBase = class(TgxImmaterialSceneObject)
   private
     FLineColor: TgxColor;
@@ -349,9 +351,9 @@ type
     procedure SetLineWidth(const val: Single);
     function StoreLineWidth: Boolean; inline;
     procedure SetAntiAliased(const val: Boolean);
-    { Setup OpenGL states according to line style.
+    (* Setup OpenGL states according to line style.
       You must call RestoreLineStyle after drawing your lines.
-      You may use nested calls with SetupLineStyle/RestoreLineStyle. }
+      You may use nested calls with SetupLineStyle/RestoreLineStyle. *)
     procedure SetupLineStyle(var rci: TgxRenderContextInfo);
   public
     constructor Create(AOwner: TComponent); override;
@@ -359,22 +361,22 @@ type
     procedure Assign(Source: TPersistent); override;
     procedure NotifyChange(Sender: TObject); override;
   published
-    { Indicates if OpenGL should smooth line edges.
+    (* Indicates if OpenGL should smooth line edges.
       Smoothed lines looks better but are poorly implemented in most OpenGL
-      drivers and take *lots* of rendering time. }
+      drivers and take *lots* of rendering time. *)
     property AntiAliased: Boolean read FAntiAliased write SetAntiAliased default False;
-    { Default color of the lines. }
+    // Default color of the lines.
     property LineColor: TgxColor read FLineColor write SetLineColor;
-    { Bitwise line pattern.
+    (* Bitwise line pattern.
       For instance $FFFF (65535) is a white line (stipple disabled), $0000
-      is a black line, $CCCC is the stipple used in axes and dummycube, etc. }
+      is a black line, $CCCC is the stipple used in axes and dummycube, etc. *)
     property LinePattern: GLushort read FLinePattern write SetLinePattern default $FFFF;
-    { Default width of the lines. }
+    // Default width of the lines.
     property LineWidth: Single read FLineWidth write SetLineWidth stored StoreLineWidth;
     property Visible;
   end;
 
-  { Class that defines lines via a series of nodes. Base class, does not render anything. }
+  // Class that defines lines via a series of nodes. Base class, does not render anything.
   TgxNodedLines = class(TgxLineBase)
   private
     FNodes: TgxLinesNodes;
@@ -400,27 +402,27 @@ type
     procedure AddNode(const Value: TVector); overload;
     procedure AddNode(const Value: TAffineVector); overload;
   published
-    { Default color for nodes. lnaInvisible and lnaAxes ignore this setting. }
+    // Default color for nodes. lnaInvisible and lnaAxes ignore this setting.
     property NodeColor: TgxColor read FNodeColor write SetNodeColor;
-    { The nodes list.  }
+    // The nodes list.
     property Nodes: TgxLinesNodes read FNodes write SetNodes;
-    { Default aspect of line nodes.
-      May help you materialize nodes, segments and control points. }
+    (* Default aspect of line nodes.
+      May help you materialize nodes, segments and control points. *)
     property NodesAspect: TLineNodesAspect read FNodesAspect write SetNodesAspect default lnaAxes;
-    { Size for the various node aspects. }
+    // Size for the various node aspects.
     property NodeSize: Single read FNodeSize write SetNodeSize stored StoreNodeSize;
   end;
 
   TLinesOption = (loUseNodeColorForLines, loColorLogicXor);
   TgxLinesOptions = set of TLinesOption;
 
-  { Set of 3D line segments.
+  (* Set of 3D line segments.
     You define a 3D Line by adding its nodes in the "Nodes" property. The line
     may be rendered as a set of segment or as a curve (nodes then act as spline
     control points).
     Alternatively, you can also use it to render a set of spacial nodes (points
     in space), just make the lines transparent and the nodes visible by picking
-    the node aspect that suits you. }
+    the node aspect that suits you. *)
   TgxLines = class(TgxNodedLines)
   private
     FDivision: Integer;
@@ -444,34 +446,34 @@ type
     property NURBSOrder: Integer read FNURBSOrder write SetNURBSOrder;
     property NURBSTolerance: Single read FNURBSTolerance write SetNURBSTolerance;
   published
-    { Number of divisions for each segment in spline modes.
-      Minimum 1 (disabled), ignored in lsmLines mode. }
+    (* Number of divisions for each segment in spline modes.
+      Minimum 1 (disabled), ignored in lsmLines mode. *)
     property Division: Integer read FDivision write SetDivision default 10;
-    { Default spline drawing mode.  }
+    // Default spline drawing mode.
     property SplineMode: TgxLineSplineMode read FSplineMode write SetSplineMode default lsmLines;
-    { Rendering options for the line.
+    (* Rendering options for the line.
        loUseNodeColorForLines: if set lines will be drawn using node
       colors (and color interpolation between nodes), if not, LineColor
       will be used (single color).
-      loColorLogicXor: enable logic operation for color of XOR type.  }
+      loColorLogicXor: enable logic operation for color of XOR type.  *)
     property Options: TgxLinesOptions read FOptions write SetOptions;
   end;
 
-  TCubePart = (cpTop, cpBottom, cpFront, cpBack, cpLeft, cpRight);
-  TCubeParts = set of TCubePart;
+  TgxCubePart = (cpTop, cpBottom, cpFront, cpBack, cpLeft, cpRight);
+  TgxCubeParts = set of TgxCubePart;
 
-  { A simple cube object.
+  (* A simple cube object.
     This cube use the same material for each of its faces, ie. all faces look
     the same. If you want a multi-material cube, use a mesh in conjunction
-    with a TgxFreeForm and a material library. }
+    with a TgxFreeForm and a material library. *)
   TgxCube = class(TgxSceneObject)
   private
     FCubeSize: TAffineVector;
-    FParts: TCubeParts;
+    FParts: TgxCubeParts;
     FNormalDirection: TgxNormalDirection;
     function GetCubeWHD(const Index: Integer): Single; inline;
     procedure SetCubeWHD(Index: Integer; AValue: Single); inline;
-    procedure SetParts(aValue: TCubeParts); inline;
+    procedure SetParts(aValue: TgxCubeParts); inline;
     procedure SetNormalDirection(aValue: TgxNormalDirection); inline;
   protected
     procedure DefineProperties(Filer: TFiler); override;
@@ -483,25 +485,25 @@ type
     procedure BuildList(var rci: TgxRenderContextInfo); override;
     procedure Assign(Source: TPersistent); override;
     function AxisAlignedDimensionsUnscaled: TVector; override;
-    function RayCastIntersect(const rayStart, rayVector: TVector; intersectPoint: PVector = nil; 
+    function RayCastIntersect(const rayStart, rayVector: TVector; intersectPoint: PVector = nil;
 	  intersectNormal: PVector = nil): Boolean; override;
   published
     property CubeWidth: Single index 0 read GetCubeWHD write SetCubeWHD stored False;
     property CubeHeight: Single index 1 read GetCubeWHD write SetCubeWHD stored False;
     property CubeDepth: Single index 2 read GetCubeWHD write SetCubeWHD stored False;
     property NormalDirection: TgxNormalDirection read FNormalDirection write SetNormalDirection default ndOutside;
-    property Parts: TCubeParts read FParts write SetParts default [cpTop, cpBottom, cpFront, cpBack, cpLeft, cpRight];
+    property Parts: TgxCubeParts read FParts write SetParts default [cpTop, cpBottom, cpFront, cpBack, cpLeft, cpRight];
   end;
 
-  { Determines how and if normals are smoothed.
+  (* Determines how and if normals are smoothed.
     - nsFlat : facetted look
     - nsSmooth : smooth look
-    - nsNone : unlighted rendering, usefull for decla texturing }
+    - nsNone : unlighted rendering, usefull for decla texturing *)
   TgxNormalSmoothing = (nsFlat, nsSmooth, nsNone);
 
-  { Base class for quadric objects.
+  (* Base class for quadric objects.
     Introduces some basic Quadric interaction functions (the actual quadric
-    math is part of the GLU library). }
+    math is part of the GLU library). *)
   TgxQuadricObject = class(TgxSceneObject)
   private
     FNormals: TgxNormalSmoothing;
@@ -524,9 +526,9 @@ type
   TAngleLimit2 = 0 .. 360;
   TgxCapType = (ctNone, ctCenter, ctFlat);
 
-  { A sphere object.
+  (* A sphere object.
     The sphere can have to and bottom caps, as well as being just a slice
-    of sphere. }
+    of sphere. *)
   TgxSphere = class(TgxQuadricObject)
   private
     FRadius: Single;
@@ -568,7 +570,7 @@ type
     property TopCap: TgxCapType read FTopCap write SetTopCap default ctNone;
   end;
 
-  { Base class for objects based on a polygon. }
+  // Base class for objects based on a polygon.
   TgxPolygonBase = class(TgxSceneObject)
   private
     FDivision: Integer;
@@ -589,19 +591,19 @@ type
     procedure AddNode(const Value: TVector); overload;
     procedure AddNode(const Value: TAffineVector); overload;
   published
-    { The nodes list.  }
+    // The nodes list.
     property Nodes: TgxNodes read FNodes write SetNodes;
-    { Number of divisions for each segment in spline modes.
-      Minimum 1 (disabled), ignored in lsmLines mode. }
+    (* Number of divisions for each segment in spline modes.
+      Minimum 1 (disabled), ignored in lsmLines mode. *)
     property Division: Integer read FDivision write SetDivision default 10;
-    { Default spline drawing mode.
-      This mode is used only for the curve, not for the rotation path. }
+    (* Default spline drawing mode.
+      This mode is used only for the curve, not for the rotation path. *)
     property SplineMode: TgxLineSplineMode read FSplineMode write SetSplineMode
       default lsmLines;
   end;
 
-  { A Superellipsoid object. The Superellipsoid can have top and bottom caps,
-    as well as being just a slice of Superellipsoid. }
+  (* A Superellipsoid object. The Superellipsoid can have top and bottom caps,
+    as well as being just a slice of Superellipsoid. *)
   TgxSuperellipsoid = class(TgxQuadricObject)
   private
     FRadius, FVCurve, FHCurve: Single;
@@ -2497,7 +2499,7 @@ begin
 end;
 
 
-procedure TgxCube.SetParts(aValue: TCubeParts);
+procedure TgxCube.SetParts(aValue: TgxCubeParts);
 begin
   if aValue <> FParts then
   begin

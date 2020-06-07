@@ -1,7 +1,12 @@
-//
-// Graphic Scene Engine, http://glscene.org
-//
-{
+(*******************************************
+*                                          *
+* Graphic Scene Engine, http://glscene.org *
+*                                          *
+********************************************)
+
+unit GXS.ObjectManager;
+
+(*
    The object manager is used for registering classes together with a category,
    description + icon, so that they can be displayed visually.  This can then
    be used by run-time or design-time scene editors for choosing which
@@ -9,9 +14,7 @@
 
    TODO: add some notification code, so that when a scene object is registered/
    unregistered, any editor that is using the object manager can be notified.
-}
-
-unit GXS.ObjectManager;
+*)
 
 interface
 
@@ -42,7 +45,7 @@ type
 
   TgxObjectManager = class(TComponent)
   private
-    
+
     FSceneObjectList: TList;
     FObjectIcons: TStyleBook; // In VCL FObjectIcons: TImageList; <- a list of icons for scene objects
 {$IFDEF MSWINDOWS}

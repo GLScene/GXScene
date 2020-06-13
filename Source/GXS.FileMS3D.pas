@@ -1,10 +1,12 @@
-//
-// Graphic Scene Engine, http://glscene.org
-//
-{
-  Support for MS3D file format.
-}
+(********************************************
+ *                                          *
+ * Graphic Scene Engine, http://glscene.org *
+ *                                          *
+ ********************************************)
+
 unit GXS.FileMS3D;
+
+(* Support for MS3D file format *)
 
 interface
 

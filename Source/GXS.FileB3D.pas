@@ -1,10 +1,12 @@
-//
-// Graphic Scene Engine, http://glscene.org
-//
-(*
-  B3D VectorFile class to load Blitz 3D model files
-*)
+(********************************************
+ *                                          *
+ * Graphic Scene Engine, http://glscene.org *
+ *                                          *
+ ********************************************)
+
 unit GXS.FileB3D;
+
+(* B3D VectorFile class to load Blitz 3D model files *)
 
 interface
 

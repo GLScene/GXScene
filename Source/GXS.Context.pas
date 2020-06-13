@@ -174,13 +174,13 @@ type
       This events happens *before* the context has been
       actually destroyed, OpenGL resource cleanup can still occur here. *)
     property OnDestroyContext: TNotifyEvent read FOnDestroyContext write FOnDestroyContext;
-    { Creates the context.
-      This method must be invoked before the context can be used. }
+    (* Creates the context.
+      This method must be invoked before the context can be used. *)
     procedure CreateContext(ADeviceHandle: THandle); overload; // VCL -> HDC
-    { Creates an in-memory context.
+    (* Creates an in-memory context.
       The function should fail if no hardware-accelerated memory context
       can be created (the CreateContext method can handle software OpenGL
-      contexts). }
+      contexts). *)
     procedure CreateMemoryContext(OutputDevice: THandle; Width, Height: // VCL -> HWND
       Integer; BufferCount: Integer = 1);
     (* Setup display list sharing between two rendering contexts.
@@ -274,18 +274,18 @@ type
     constructor Create; virtual;
     constructor CreateAndAllocate(failIfAllocationFailed: Boolean = True);
     destructor Destroy; override;
-    { Return OpenGL identifier in current context. }
+    // Return OpenGL identifier in current context.
     property Handle: LongWord read GetHandle;
-    { Return current rendering context if handle is allocated in it
-      or first context where handle is allocated. }
+    (* Return current rendering context if handle is allocated in it
+      or first context where handle is allocated. *)
     property RenderingContext: TgxContext read GetContext;
-    { Return True is data need update in current context. }
+    // Return True is data need update in current context.
     function IsDataNeedUpdate: Boolean; inline;
-    { Return True if data updated in all contexts. }
+    // Return True if data updated in all contexts.
     function IsDataComplitelyUpdated: Boolean;
-    { Notify the data was updated in current context. }
+    // Notify the data was updated in current context.
     procedure NotifyDataUpdated;
-    { Notify the data was changed through all context. }
+    // Notify the data was changed through all context.
     procedure NotifyChangesOfData;
     // Checks if required extensions / OpenGL version are met
     class function IsSupported: Boolean; virtual;
@@ -299,7 +299,7 @@ type
   TgxVirtualHandle = class;
   TgxVirtualHandleEvent = procedure(Sender: TgxVirtualHandle; var Handle: LongWord) of object;
 
-  { A context handle with event-based handle allocation and destruction. }
+  // A context handle with event-based handle allocation and destruction.
   TgxVirtualHandle = class(TgxContextHandle)
   private
     FOnAllocate, FOnDestroy: TgxVirtualHandleEvent;
@@ -397,8 +397,8 @@ type
     function GetQueryType: TgxQueryType; override;
   public
     class function IsSupported: Boolean; override;
-    // Number of samples (pixels) drawn during the query, some pixels may
-    // be drawn to several times in the same query
+    (* Number of samples (pixels) drawn during the query, some pixels may
+       be drawn to several times in the same query *)
     function PixelCount: Integer;
   end;
 
@@ -420,9 +420,9 @@ type
     function GetQueryType: TgxQueryType; override;
   public
     class function IsSupported: Boolean; override;
-    // Time, in nanoseconds (1 ns = 10^-9 s) between starting + ending the query.
-    // with 32 bit integer can measure up to approximately 4 seconds, use
-    // QueryResultUInt64 if you may need longer
+    (* Time, in nanoseconds (1 ns = 10^-9 s) between starting + ending the query.
+       with 32 bit integer can measure up to approximately 4 seconds, use
+       QueryResultUInt64 if you may need longer *)
     function Time: Integer;
   end;
 
@@ -436,8 +436,8 @@ type
     function GetQueryType: TgxQueryType; override;
   public
     class function IsSupported: Boolean; override;
-    // Number of primitives (eg. Points, Triangles etc.) drawn whilst the
-    // query was active
+    (* Number of primitives (eg. Points, Triangles etc.) drawn whilst the
+       query was active *)
     function PrimitivesGenerated: Integer;
   end;
 
@@ -644,7 +644,7 @@ type
     procedure BindForDrawing;
     // Bind framebuffer for reading
     procedure BindForReading;
-    { Note that it is not necessary to unbind before binding another framebuffer. }
+    // Note that it is not necessary to unbind before binding another framebuffer.
     procedure UnBind;
     procedure UnBindForDrawing;
     procedure UnBindForReading;

@@ -1,10 +1,12 @@
-//
-// Graphic Scene Engine, http://glscene.org
-//
-(*
-  Doom3 MD5 mesh and animation vector file format implementation.
-*)
+(********************************************
+ *                                          *
+ * Graphic Scene Engine, http://glscene.org *
+ *                                          *
+ ********************************************)
+
 unit GXS.FileMD5;
+
+(* Doom3 MD5 mesh and animation vector file format implementation *)
 
 interface
 

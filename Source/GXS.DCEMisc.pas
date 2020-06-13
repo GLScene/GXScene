@@ -1,10 +1,12 @@
-//
-// Graphic Scene Engine, http://glscene.org
-//
-(*
-  Miscelaneous functions used by DCE (Dynamic Collision Engine).
-*)
+(*********************************************
+ *                                           *
+ *  Graphic Scene Engine, http://glscene.org *
+ *                                           *
+ *********************************************)
+
 unit GXS.DCEMisc;
+
+(* Miscelaneous functions used by DCE (Dynamic Collision Engine) *)
 
 interface
 
@@ -154,10 +156,8 @@ begin
   i := 0;
   while i < 36 do
   begin
-
     count := count + 1;
     SetLength(MovePack.TriMeshes[t].Triangles,count);
-
     with MovePack.TriMeshes[t] do
     begin
       p1 := DCEBox[i]; ScaleVector(p1,BoxSize); p1 := BoxObj.LocalToAbsolute(p1);
@@ -170,7 +170,6 @@ begin
       ObjectInfo.Solid := Solid;
       ObjectInfo.ObjectID := ObjectID;
     end;
-
   end;
 end;
 
@@ -239,10 +238,8 @@ begin
 
       x := x + Resolution;
     end;
-
   end;
 end;
-
 
 procedure ECAddEllipsoid(var MovePack: TECMovePack; ePos, eRadius: TAffineVector;
   Solid: Boolean; ObjectID: Integer);
@@ -264,7 +261,6 @@ begin
     ObjectInfo.Solid := Solid;
     ObjectInfo.ObjectID := ObjectID;
   end;
-
 end;
 
 

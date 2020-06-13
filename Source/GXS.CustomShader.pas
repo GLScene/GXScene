@@ -42,7 +42,7 @@ type
   TgxShaderFogSupport = (sfsEnabled, sfsDisabled, sfsAuto);
   TgxTransformFeedBackMode = (tfbmInterleaved, tfbmSeparate);
 
-  EVXCustomShaderException = class(EVXShaderException);
+  ECustomShaderException = class(EShaderException);
 
   TgxCustomShader = class;
   TgxVertexProgram = class;

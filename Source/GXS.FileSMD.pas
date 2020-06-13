@@ -1,10 +1,13 @@
-//
-// Graphic Scene Engine, http://glscene.org
-//
-(*
-  SMD vector file format implementation.
-*)
+(*******************************************
+*                                          *
+* Graphic Scene Engine, http://glscene.org *
+*                                          *
+********************************************)
+
 unit GXS.FileSMD;
+
+(* SMD vector file format implementation *)
+
 
 interface
 
@@ -159,9 +162,9 @@ begin
           frame.Rotation.Add(NullVector);
         end;
         frame.Position.Add(GXS.Utils.StrToFloatDef(tl[1]),
-          GXS.Utils.StrToFloatDef(tl[2]), GXS.Utils.StrToFloatDef(tl[3]));
+          StrToFloatDef(tl[2]), GXS.Utils.StrToFloatDef(tl[3]));
         v := AffineVectorMake(GXS.Utils.StrToFloatDef(tl[4]),
-          GXS.Utils.StrToFloatDef(tl[5]), GXS.Utils.StrToFloatDef(tl[6]));
+          StrToFloatDef(tl[5]), GXS.Utils.StrToFloatDef(tl[6]));
         frame.Rotation.Add(v);
         Inc(i);
       end;
@@ -223,13 +226,13 @@ begin
 
               nVert := FindOrAdd(boneIDs,
                 AffineVectorMake(GXS.Utils.StrToFloatDef(tl[1]),
-                GXS.Utils.StrToFloatDef(tl[2]), GXS.Utils.StrToFloatDef(tl[3])),
+                StrToFloatDef(tl[2]), GXS.Utils.StrToFloatDef(tl[3])),
                 AffineVectorMake(GXS.Utils.StrToFloatDef(tl[4]),
-                GXS.Utils.StrToFloatDef(tl[5]),
-                GXS.Utils.StrToFloatDef(tl[6])));
+                StrToFloatDef(tl[5]),
+                StrToFloatDef(tl[6])));
               nTex := TexCoords.FindOrAdd
                 (AffineVectorMake(GXS.Utils.StrToFloatDef(tl[7]),
-                GXS.Utils.StrToFloatDef(tl[8]), 0));
+                StrToFloatDef(tl[8]), 0));
               faceGroup.Add(nVert, nVert, nTex);
               Inc(i);
             end
@@ -239,13 +242,13 @@ begin
               boneID := StrToInt(tl[0]);
               nVert := FindOrAdd(boneID,
                 AffineVectorMake(GXS.Utils.StrToFloatDef(tl[1]),
-                GXS.Utils.StrToFloatDef(tl[2]), GXS.Utils.StrToFloatDef(tl[3])),
+                StrToFloatDef(tl[2]), GXS.Utils.StrToFloatDef(tl[3])),
                 AffineVectorMake(GXS.Utils.StrToFloatDef(tl[4]),
-                GXS.Utils.StrToFloatDef(tl[5]),
-                GXS.Utils.StrToFloatDef(tl[6])));
+                StrToFloatDef(tl[5]),
+                StrToFloatDef(tl[6])));
               nTex := TexCoords.FindOrAdd
                 (AffineVectorMake(GXS.Utils.StrToFloatDef(tl[7]),
-                GXS.Utils.StrToFloatDef(tl[8]), 0));
+                StrToFloatDef(tl[8]), 0));
               faceGroup.Add(nVert, nVert, nTex);
               Inc(i);
             end;

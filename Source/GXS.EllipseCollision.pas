@@ -3,10 +3,10 @@
 * Graphic Scene Engine, http://glscene.org *
 *                                          *
 ********************************************)
-(*
-  Ellipsoid collision functions (mainly used by DCE).
-*)
+
 unit GXS.EllipseCollision;
+
+(* Ellipsoid collision functions (mainly used by DCE) *)
 
 interface
 
@@ -147,7 +147,8 @@ begin
   Debug_tri[High(Debug_tri)].p3 := p3;
 end;
 {$ENDIF}
-{ Utility functions }
+
+// Utility functions
 
 function CheckPointInTriangle(Point, pa, pb, pc: TAffineVector): Boolean;
 var
@@ -235,7 +236,7 @@ begin
 end;
 
 //-----------------------------------------
-{ TECPlane }
+// TECPlane
 //-----------------------------------------
 procedure TECPlane.MakePlane(const nOrigin, nNormal: TAffineVector);
 begin
@@ -267,7 +268,7 @@ begin
   result := VectorDotProduct(Point, Normal) + Equation[3];
 end;
 
-{ Collision detection functions }
+// Collision detection functions
 
 // Assumes: p1,p2 and p3 are given in ellisoid space:
 // Returns true if collided

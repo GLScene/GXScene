@@ -1,10 +1,12 @@
-//
-// Graphic Scene Engine, http://glscene.org
-//
-{
-  GXS.FileNMF - NormalMapper loading into GLScene FreeForms/Actors
-}
+(********************************************
+ *                                          *
+ * Graphic Scene Engine, http://glscene.org *
+ *                                          *
+ ********************************************)
+
 unit GXS.FileNMF;
+
+(* NormalMapper loading into GLScene FreeForms/Actors *)
 
 interface
 

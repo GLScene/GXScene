@@ -1003,17 +1003,17 @@ begin
       ; // Do nothing ;)
     fiaRaiseHandledException:
       try
-        raise EVXShaderException.Create(GetStardardNotSupportedMessage);
+        raise EShaderException.Create(GetStardardNotSupportedMessage);
       except
       end;
     fiaRaiseStandardException:
-      raise EVXShaderException.Create(GetStardardNotSupportedMessage);
+      raise EShaderException.Create(GetStardardNotSupportedMessage);
     fiaReRaiseException:
       begin
         if LastErrorMessage <> '' then
-          raise EVXShaderException.Create(LastErrorMessage)
+          raise EShaderException.Create(LastErrorMessage)
         else
-          raise EVXShaderException.Create(GetStardardNotSupportedMessage)
+          raise EShaderException.Create(GetStardardNotSupportedMessage)
       end;
     // fiaGenerateEvent:; // Do nothing. Event creation is left up to user shaders
     // // which may choose to override this procedure.

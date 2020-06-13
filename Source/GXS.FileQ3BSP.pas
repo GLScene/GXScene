@@ -1,12 +1,16 @@
-//
-// Graphic Scene Engine, http://glscene.org
-//
+(*******************************************
+*                                          *
+* Graphic Scene Engine, http://glscene.org *
+*                                          *
+********************************************)
+
+unit GXS.FileQ3BSP;
+
 (*
     Support-code to load Q3BSP Files into TgxFreeForm-Components.
     Note that you must manually add this unit to one of your project's uses
     to enable support for OBJ & OBJF at run-time.
 *)
-unit GXS.FileQ3BSP;
 
 interface
 

@@ -6,10 +6,7 @@
 
 unit GXS.Utils;
 
-(*
-   Miscellaneous support utilities & classes.
-   The history is logged in a former GLS version of the unit.
-*)
+(*  Miscellaneous support utilities & classes *)
 
 interface
 
@@ -22,8 +19,6 @@ uses
   System.UITypes,
   System.UIConsts,
 
-  FMX.Graphics,
-  FMX.Controls,
   FMX.Dialogs,
 
   Scene.VectorGeometry,

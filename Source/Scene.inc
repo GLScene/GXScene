@@ -1,9 +1,10 @@
-//
-// This unit for GXScene Engine
-//
-(*
-  Include File for Scene
-*)
+(*******************************************
+*                                          *
+* Graphic Scene Engine, http://glscene.org *
+*                                          *
+********************************************)
+
+(* Include File for Scene *)
 
 {.$DEFINE SCENE}
 

@@ -1,12 +1,15 @@
-//
-// Graphic Scene Engine, http://glscene.org
-//
-{
+(*******************************************
+*                                          *
+* Graphic Scene Engine, http://glscene.org *
+*                                          *
+********************************************)
+
+unit GXS.FileOCT;
+
+(*
     Support-code to load OCT Files into TgxFreeForm-Components in GLScene.
     (OCT being the format output from FSRad, http://www.fluidstudios.com/fsrad.html).
-
-}
-unit GXS.FileOCT;
+*)
 
 interface
 
@@ -32,7 +35,7 @@ uses
 
 type
 
-  { The OCT vector file (FSRad output).  }
+  // The OCT vector file (FSRad output).
   TgxOCTgxVectorFile = class(TgxVectorFile)
   public
     class function Capabilities: TgxDataFileCapabilities; override;
@@ -40,12 +43,12 @@ type
   end;
 
 var
+  // Scaling factor, 1.0 = unchanged
   vFileOCTLightmapBrightness: single = 1;
-  // Mrqzzz : scaling factor, 1.0 = unchanged
+  // Scaling factor, 1.0 = unchanged
   vFileOCTLightmapGammaCorrection: single = 1;
-  // Mrqzzz : scaling factor, 1.0 = unchanged
+  // Flag to avoid loading materials (useful for IDE Extensions or scene editors)
   vFileOCTAllocateMaterials: boolean = True;
-// Mrqzzz : Flag to avoid loading materials (useful for IDE Extensions or scene editors)
 
 // ------------------------------------------------------------------
 implementation
@@ -54,8 +57,6 @@ implementation
 // ------------------
 // ------------------ TgxOCTgxVectorFile ------------------
 // ------------------
-
-// Capabilities
 
 class function TgxOCTgxVectorFile.Capabilities: TgxDataFileCapabilities;
 begin
@@ -86,7 +87,7 @@ begin
       n := oct.Header.numLightmaps;
       lightmapBmp := TBitmap.Create;
       try
-        { TODO : E2129 Cannot assign to a read-only property }
+        // TODO : E2129 Cannot assign to a read-only property
         (*lightmapBmp.PixelFormat := glpf24bit;*)
         lightmapBmp.Width := 128;
         lightmapBmp.Height := 128;
@@ -105,7 +106,7 @@ begin
               vFileOCTLightmapGammaCorrection);
           // convert RAW RGB to BMP
           for y := 0 to 127 do
-          { TODO : E2003 Undeclared identifier: 'ScanLine' }
+          // TODO : E2003 Undeclared identifier: 'ScanLine'
           (*
           Move(octLightmap.map[y * 128 * 3],
              lightmapBmp.ScanLine[127 - y]^, 128 * 3);
@@ -155,12 +156,8 @@ begin
 end;
 
 // ------------------------------------------------------------------
-// ------------------------------------------------------------------
-// ------------------------------------------------------------------
 initialization
-  // ------------------------------------------------------------------
-  // ------------------------------------------------------------------
-  // ------------------------------------------------------------------
+// ------------------------------------------------------------------
 
   RegisterVectorFileFormat('oct', 'FSRad OCT files', TgxOCTgxVectorFile);
 

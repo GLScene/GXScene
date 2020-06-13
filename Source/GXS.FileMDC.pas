@@ -1,6 +1,11 @@
-//
-// Graphic Scene Engine, http://glscene.org
-//
+(********************************************
+ *                                          *
+ * Graphic Scene Engine, http://glscene.org *
+ *                                          *
+ ********************************************)
+
+unit GXS.FileMDC;
+
 (*
   Code for loading animated MDC files into FreeForms
   and Actors.
@@ -8,8 +13,6 @@
   of MD3 files. It has got all MD3 features (such as Tag frames)
   plus very small data!
 *)
-
-unit GXS.FileMDC;
 
 interface
 

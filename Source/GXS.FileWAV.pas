@@ -1,10 +1,12 @@
-//
-// Graphic Scene Engine, http://glscene.org
-//
-(*
-  Support for Windows WAV format.
-*)
+(********************************************
+ *                                          *
+ * Graphic Scene Engine, http://glscene.org *
+ *                                          *
+ ********************************************)
+
 unit GXS.FileWAV;
+
+(* Support for Windows WAV format *)
 
 interface
 

@@ -1,11 +1,12 @@
-//
-// Graphic Scene Engine, http://glscene.org
-//
-(*
-  Simple X format support for Delphi (Microsoft's favorite format)
-*)
+(********************************************
+ *                                          *
+ * Graphic Scene Engine, http://glscene.org *
+ *                                          *
+ ********************************************)
 
 unit GXS.FileX;
+
+(* Simple X format support for Delphi (Microsoft's favorite format) *)
 
 interface
 

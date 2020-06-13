@@ -3,10 +3,10 @@
 * Graphic Scene Engine, http://glscene.org *
 *                                          *
 ********************************************)
+
 unit GXS.FileLWO;
 
 (* Support-code to load Lightwave LWO Files (v6.0+, partial support) *)
-
 
 interface
 

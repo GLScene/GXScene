@@ -58,7 +58,6 @@ type
 
   TgxEParticleMask = class(TCollectionItem, IgxMaterialLibrarySupported)
   private
-
     FName: string;
     FScale: TgxCoordinates;
     FPosition: TgxCoordinates;
@@ -71,10 +70,9 @@ type
     FMaxX, FMaxY, FMaxZ, FMinX, FMinY, FMinZ: Integer;
     IXW, IXH, IYW, IYH, IZW, IZH: Integer;
     LX, LY, LZ: Integer;
-
     MX, MY: Integer;
     BogusMask, BogusMaskX, BogusMaskY, BogusMaskZ: Boolean;
-      // we might have a pitch mask
+    // we might have a pitch mask
     FRollAngle: Single;
     FPitchAngle: Single;
     FTurnAngle: Single;
@@ -93,10 +91,8 @@ type
     function _AddRef: Integer; stdcall;
     function _Release: Integer; stdcall;
   protected
-    
     function GetDisplayName: string; override;
   public
-    
     constructor Create(Collection: TCollection); override;
     destructor Destroy; override;
     procedure Assign(Source: TPersistent); override;
@@ -207,7 +203,9 @@ begin
   inherited Items[Index] := Val;
 end;
 
-{ TgxEParticleMask }
+//----------------------------------------
+// TgxEParticleMask
+//----------------------------------------
 
 procedure TgxEParticleMask.Assign(Source: TPersistent);
 begin
@@ -246,7 +244,6 @@ begin
   FZMask := '';
 
   UpdateExtents;
-
 end;
 
 destructor TgxEParticleMask.Destroy;
@@ -270,28 +267,21 @@ var
   X, Y: Integer;
   Rect: TRect;
 begin
-
   FromBitMap := nil;
   ToBitMap := nil;
-
   if not assigned(FMaterialLibrary) then
     Exit;
-
   if FromMask = ToMask then
     Exit; // we can't project to the same mask
-
   if Depth < 0 then
     Exit;
-
   case FromMask of
     pptXMask: FromBitMap := XCan;
     pptYMask: FromBitMap := YCan;
     pptZMask: FromBitMap := ZCan;
   end;
-
   if (FromBitMap.Width = 0) and (FromBitMap.Height = 0) then
     Exit; // we can't use something that has no image
-
   case ToMask of
     pptXMask: ToBitMap := XCan;
     pptYMask: ToBitMap := YCan;
@@ -301,7 +291,7 @@ begin
   ToBitMap.Width := FromBitMap.Width;
   ToBitMap.Height := FromBitMap.Height;
 
-  { TODO : E2003 Undeclared identifier: 'Pen' }
+  // TODO : E2003 Undeclared identifier: 'Pen'
   (*
   ToBitMap.Canvas.Pen.Color := FBackgroundColor;
   ToBitMap.Canvas.Pen.Style := psSolid;
@@ -327,7 +317,7 @@ begin
     begin
       // from x mask
       if (FromMask = pptXMask) and (ToMask = pptYMask) then
-        { TODO : E2003 Undeclared identifier: 'Pixels' }
+      // TODO : E2003 Undeclared identifier: 'Pixels'
         (*
       if FromBitMap.Canvas.Pixels[X, Y] = FMaskColor then
         begin
@@ -550,7 +540,7 @@ begin
     begin
       if XCan <> nil then
         if (X <= XCan.Width) and (Y <= XCan.Height) then
-          { TODO : E2003 Undeclared identifier: 'Pixels' }
+          // TODO : E2003 Undeclared identifier: 'Pixels'
           (*if (XCan.Canvas.Pixels[X, Y] = FMaskColor) then*)
           begin
             if X > MaxXX then
@@ -565,7 +555,7 @@ begin
           end;
       if YCan <> nil then
         if (X <= YCan.Width) and (Y <= YCan.Height) then
-         { TODO : E2003 Undeclared identifier: 'Pixels' }
+         // TODO : E2003 Undeclared identifier: 'Pixels'
          (* if (YCan.Canvas.Pixels[X, Y] = FMaskColor) then*)
           begin
             if X > MaxYX then
@@ -580,7 +570,7 @@ begin
           end;
       if ZCan <> nil then
         if (X <= ZCan.Width) and (Y <= ZCan.Height) then
-         { TODO : E2003 Undeclared identifier: 'Pixels' }
+         // TODO : E2003 Undeclared identifier: 'Pixels'
          (*if (ZCan.Canvas.Pixels[X, Y] = FMaskColor) then*)
           begin
             if X > MaxZX then
@@ -680,7 +670,9 @@ begin
   Result := -1; //ignore
 end;
 
-{ TgxEParticleMasksManager }
+//----------------------------------------
+// TgxEParticleMasksManager
+//----------------------------------------
 
 procedure TgxEParticleMasksManager.ApplyOrthoGraphic(var Vec: TVector3f; Mask:
   TgxEParticleMask);
@@ -770,7 +762,7 @@ procedure TgxEParticleMasksManager.FindParticlePosition(var Vec: TVector3f;
 var
   X, Y, Z: Integer;
 begin
- { TODO : E2003 Undeclared identifier: 'Pixels' }
+ // TODO : E2003 Undeclared identifier: 'Pixels'
  (*
   repeat
     X := Random(Mask.FMaxX - Mask.FMinX) + Mask.FMinX;

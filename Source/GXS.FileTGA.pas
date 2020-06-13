@@ -1,12 +1,16 @@
-//
-// Graphic Scene Engine, http://glscene.org
-//
+(*******************************************
+*                                          *
+* Graphic Scene Engine, http://glscene.org *
+*                                          *
+********************************************)
+
+unit GXS.FileTGA;
+
 (*
   Simple TGA formats supports for Delphi.
   Currently supports only 24 and 32 bits RGB formats (uncompressed
   and RLE compressed).
 *)
-unit GXS.FileTGA;
 
 interface
 

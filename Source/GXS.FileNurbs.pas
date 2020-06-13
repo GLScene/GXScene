@@ -1,10 +1,12 @@
-//
-// Graphic Scene Engine, http://glscene.org
-//
-{
-  Nurbs surfaces vector file loading.
-}
+(********************************************
+ *                                          *
+ * Graphic Scene Engine, http://glscene.org *
+ *                                          *
+ ********************************************)
+
 unit GXS.FileNurbs;
+
+(* Nurbs surfaces vector file loading *)
 
 interface
 

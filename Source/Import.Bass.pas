@@ -1,3 +1,9 @@
+(*******************************************
+*                                          *
+* Graphic Scene Engine, http://glscene.org *
+*                                          *
+********************************************)
+
 {
   BASS 2.4 Delphi unit
   Copyright (c) 1999-2013 Un4seen Developments Ltd.

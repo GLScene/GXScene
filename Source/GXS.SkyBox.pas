@@ -44,7 +44,7 @@ type
     FCloudsPlaneOffset: Single;
     FCloudsPlaneSize: Single;
     FStyle: TgxSkyBoxStyle;
-    //implementing IGLMaterialLibrarySupported
+    //implementing IgxMaterialLibrarySupported
     function GetMaterialLibrary: TgxAbstractMaterialLibrary;
   protected
     procedure SetMaterialLibrary(const Value: TgxMaterialLibrary);
@@ -61,6 +61,10 @@ type
   public
     constructor Create(AOwner: TComponent); override;
     destructor Destroy; override;
+    (* We want children of the sky box to appear far away too
+       Note: simply not writing to depth buffer may not make this not work,
+       child objects may need the depth buffer to render themselves properly,
+       this may require depth buffer cleared after that *)
     procedure DoRender(var ARci: TgxRenderContextInfo;
       ARenderSelf, ARenderChildren: Boolean); override;
     procedure BuildList(var ARci: TgxRenderContextInfo); override;
@@ -130,23 +134,14 @@ begin
   inherited;
 end;
 
-// DoRender
-//
-
 procedure TgxSkyBox.DoRender(var ARci: TgxRenderContextInfo; ARenderSelf,
   ARenderChildren: Boolean);
 begin
-  // We want children of the sky box to appear far away too
-  // (note: simply not writing to depth buffer may not make this not work,
-  //  child objects may need the depth buffer to render themselves properly,
-  //  this may require depth buffer cleared after that. - DanB)
   Arci.gxStates.DepthWriteMask := False;
   Arci.ignoreDepthRequests := true;
   inherited;
   Arci.ignoreDepthRequests := False;
 end;
-// DoRender
-//
 
 procedure TgxSkyBox.BuildList(var ARci: TgxRenderContextInfo);
 var
@@ -365,7 +360,6 @@ begin
     end;
 
     glPopMatrix;
-
     if stLighting in oldStates then
       ARci.gxStates.Enable(stLighting);
     if stFog in oldStates then
@@ -389,17 +383,11 @@ begin
   StructureChanged;
 end;
 
-// SetStyle
-//
-
 procedure TgxSkyBox.SetStyle(const value: TgxSkyBoxStyle);
 begin
   FStyle := value;
   StructureChanged;
 end;
-
-// SetMaterialLibrary
-//
 
 procedure TgxSkyBox.SetMaterialLibrary(const value: TgxMaterialLibrary);
 begin
@@ -450,12 +438,8 @@ begin
 end;
 
 // ------------------------------------------------------------------
-// ------------------------------------------------------------------
-// ------------------------------------------------------------------
 initialization
-  // ------------------------------------------------------------------
-  // ------------------------------------------------------------------
-  // ------------------------------------------------------------------
+// ------------------------------------------------------------------
 
   RegisterClass(TgxSkyBox);
 

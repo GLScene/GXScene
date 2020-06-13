@@ -1,6 +1,8 @@
-//
-// Graphic Scene Engine, http://glscene.org
-//
+(*******************************************
+*                                          *
+* Graphic Scene Engine, http://glscene.org *
+*                                          *
+********************************************)
 
 unit GXS.CUDAFFTPlan;
 
@@ -35,7 +37,6 @@ type
 
   TCUDAFFTPlan = class(TCUDAComponent)
   private
-    
     FHandle: TcufftHandle;
     FWidth: Integer;
     FHeight: Integer;
@@ -51,7 +52,6 @@ type
     procedure SetBatch(Value: Integer);
     procedure SetTransform(Value: TCUDAFFTransform);
   protected
-    { Protected declaration }
     procedure AllocateHandles; override;
     procedure DestroyHandles; override;
     class procedure CheckLib;
@@ -63,7 +63,6 @@ type
     procedure Execute(ASrc: TCUDAMemData; ADst: TCUDAMemData;
       const ADir: TCUDAFFTdir = fftdForward);
   published
-    
     property Width: Integer read fWidth write SetWidth default 256;
     property Height: Integer read FHeight write SetHeight default 0;
     property Depth: Integer read FDepth write SetDepth default 0;

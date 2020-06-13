@@ -63,8 +63,8 @@ type
 
   TgxMagFilter = (maNearest, maLinear);
 
-  // Specifies how depth values should be treated
-  // during filtering and texture application
+  (* Specifies how depth values should be treated
+     during filtering and texture application *)
   TgxDepthTextureMode = (dtmLuminance, dtmIntensity, dtmAlpha);
 
   // Specifies the depth comparison function.
@@ -184,13 +184,13 @@ type
      Subclasses may ignore this call if the HBitmap was obtained at
      no particular memory cost. *)
     procedure ReleaseBitmap32; virtual;
-    //{AsBitmap : Returns the TextureImage as a TBitmap }
+    // AsBitmap : Returns the TextureImage as a TBitmap
     function AsBitmap: TBitmap;
     procedure AssignToBitmap(aBitmap: TBitmap);
      property Width: Integer read GetWidth;
     property Height: Integer read GetHeight;
     property Depth: Integer read GetDepth;
-    //Native OpenGL texture target.  }
+    //Native OpenGL texture target.
     property NativeTextureTarget: TgxTextureTarget read GetTextureTarget;
     property ResourceName: string read GetResourceName;
   end;
@@ -668,7 +668,7 @@ type
   end;
 
   ETexture = class(Exception);
-  EVXShaderException = class(Exception);
+  EShaderException = class(Exception);
 
 // Register a TgxTextureImageClass (used for persistence and IDE purposes)
 procedure RegisterTextureImageClass(textureImageClass: TgxTextureImageClass);

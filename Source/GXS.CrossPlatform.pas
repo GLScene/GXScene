@@ -50,7 +50,7 @@ type
 
   // Several define from unit Consts
 const
-  sAllFilter: string = SMsgDlgAll; //in VCL -> sAllFilter;
+  sAllFilter: string = SMsgDlgAll; ///in VCL -> sAllFilter;
 
   FONT_CHARS_COUNT = 2024;
 

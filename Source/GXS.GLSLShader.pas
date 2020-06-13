@@ -6,7 +6,7 @@
 
 unit GXS.GLSLShader;
 
-(* GLSLShader is a wrapper for GLS shaders *)
+(* GLSLShader is a wrapper for GXS shaders *)
 
 interface
 
@@ -29,7 +29,7 @@ uses
 type
   TgxGLSLShaderParameter = class;
   TgxCustomGLSLShader = class;
-  EGLSLShaderException = class(EVXCustomShaderException);
+  EGLSLShaderException = class(ECustomShaderException);
 
   TgxGLSLShaderEvent = procedure(Shader: TgxCustomGLSLShader) of object;
   TgxGLSLShaderUnApplyEvent = procedure(Shader: TgxCustomGLSLShader;
@@ -86,7 +86,7 @@ type
     property TransformFeedBackMode: TgxTransformFeedBackMode read FTransformFeedBackMode write SetTransformFeedBackMode default tfbmInterleaved;
   end;
 
-  { Wrapper around a parameter of a GLSL program. }
+  // Wrapper around a parameter of a GLSL program.
   TgxGLSLShaderParameter = class(TgxCustomShaderParameter)
   private
     FGLSLProg: TgxProgramHandle;
@@ -156,7 +156,9 @@ implementation
 uses
   GXS.State;
 
-{ TgxCustomGLSLShader }
+//---------------------------------
+// TgxCustomGLSLShader
+//---------------------------------
 
 procedure TgxCustomGLSLShader.DoApply(var rci: TgxRenderContextInfo; Sender: TObject);
 begin
@@ -274,7 +276,6 @@ begin
   if not Result then
     FGLSLProg.EndUseProgramObject;
 end;
-
 
 function TgxCustomGLSLShader.ShaderSupported: Boolean;
 begin
@@ -417,7 +418,7 @@ begin
 end;
 
 //------------------------------------------------------------
-{ TgxGLSLShaderParameter }
+// TgxGLSLShaderParameter
 //------------------------------------------------------------
 
 function TgxGLSLShaderParameter.GetAsCustomTexture(
@@ -598,6 +599,7 @@ end;
 //=======================================================
 initialization
 //=======================================================
+
   RegisterClasses([TgxCustomGLSLShader, TgxGLSLShader]);
 
 end.

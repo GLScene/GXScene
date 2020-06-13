@@ -1,10 +1,12 @@
-//
-// Graphic Scene Engine, http://glscene.org
-//
-(*
-  Code for loading animated MD3 files into GXScene FreeForms and Actors.
-*)
+(********************************************
+ *                                          *
+ * Graphic Scene Engine, http://glscene.org *
+ *                                          *
+ ********************************************)
+
 unit GXS.FileMD3;
+
+(* Code for loading animated MD3 files into GXScene FreeForms and Actors *)
 
 interface
 

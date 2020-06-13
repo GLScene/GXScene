@@ -3,11 +3,10 @@
 * Graphic Scene Engine, http://glscene.org *
 *                                          *
 ********************************************)
-(*
-   Wraper of cutil.
-*)
 
 unit Import.CUDAUtility;
+
+(* Wraper of cutil.*)
 
 interface
 

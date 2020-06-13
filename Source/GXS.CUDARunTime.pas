@@ -1,6 +1,8 @@
-//
-// Graphic Scene Engine, http://glscene.org
-//
+(*******************************************
+*                                          *
+* Graphic Scene Engine, http://glscene.org *
+*                                          *
+********************************************)
 /// *
 // * Copyright 1993-2009 NVIDIA Corporation.  All rights reserved.
 // *

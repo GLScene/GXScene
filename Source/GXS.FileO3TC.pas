@@ -1,6 +1,8 @@
-//
-// Graphic Scene Engine, http://glscene.org
-//
+(*******************************************
+*                                          *
+* Graphic Scene Engine, http://glscene.org *
+*                                          *
+********************************************)
 
 unit GXS.FileO3TC;
 
@@ -15,6 +17,7 @@ uses
 
   Import.OpenGLx,
   Scene.VectorGeometry,
+  Scene.Strings,
   GXS.CrossPlatform,
   GXS.Context,
   GXS.Graphics,

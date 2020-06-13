@@ -3,6 +3,9 @@
 * Graphic Scene Engine, http://glscene.org *
 *                                          *
 ********************************************)
+
+unit GXS.GLSLDiffuseSpecularShader;
+
 (*
     This is a collection of GLSL Diffuse Specular shaders, comes in these variaties
               (to know what these suffixes and prefixes mean see GXS.CustomShader.pas):
@@ -18,8 +21,6 @@
      2) TgxSLDiffuseSpecularShader takes all Light parameters directly
       from OpenGL (that includes TgxLightSource's)
 *)
-
-unit GXS.GLSLDiffuseSpecularShader;
 
 interface
 

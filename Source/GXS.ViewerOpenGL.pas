@@ -116,7 +116,7 @@ begin
   end;
   FreeAndNil(FFMXBuffer);
   FreeAndNil(FFMXContext);
-  FreeAndNil(FMultisample);
+  FreeAndNil(TObject(FMultisample));
   inherited;
 end;
 
@@ -126,7 +126,7 @@ begin
 
   if FFMXContext <> nil then
   begin
-    FGLSBuffer.DestroyRC; // Yar: Painfull, but Service Context, which is shared handles, will be no so much
+    FGLSBuffer.DestroyRC; // Service Context is shared handles, will be no so much
     FFMXBuffer.SetSize(Trunc(Width), Trunc(Height));
     FFMXContext.SetSize(Trunc(Width), Trunc(Height));
     AlignObjects(Self, Margins, FFMXBuffer.Width, FFMXBuffer.Height, FLastWidth, FLastHeight, FDisableAlign);

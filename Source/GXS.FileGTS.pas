@@ -1,10 +1,12 @@
-//
-// Graphic Scene Engine, http://glscene.org
-//
-(*
-  GTS (GNU Triangulated Surface) vector file format implementation.
-*)
+(********************************************
+ *                                          *
+ * Graphic Scene Engine, http://glscene.org *
+ *                                          *
+ ********************************************)
+
 unit GXS.FileGTS;
+
+(* GTS (GNU Triangulated Surface) vector file format implementation *)
 
 interface
 

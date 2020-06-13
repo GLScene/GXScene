@@ -1,10 +1,12 @@
-//
-// Graphic Scene Engine, http://glscene.org
-//
-{
-  Support for MP3 format.
-}
+(********************************************
+ *                                          *
+ * Graphic Scene Engine, http://glscene.org *
+ *                                          *
+ ********************************************)
+
 unit GXS.FileMP3;
+
+(* Support for MP3 format *)
 
 interface
 
@@ -17,8 +19,8 @@ uses
 
 type
 
-  { Support for MP3 format.
-    *Partial* support only, access to PCMData is NOT supported. }
+  (* Support for MP3 format.
+    *Partial* support only, access to PCMData is NOT supported. *)
   TgxMP3File = class(TgxSoundFile)
   private
     data: array of Byte; // used to store MP3 bitstream

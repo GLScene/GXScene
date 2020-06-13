@@ -1,10 +1,12 @@
-//
-// Graphic Scene Engine, http://glscene.org
-//
-(*
-  GRD (Grid Text Format) vector file format implementation.
-*)
+(********************************************
+ *                                          *
+ * Graphic Scene Engine, http://glscene.org *
+ *                                          *
+ ********************************************)
+
 unit GXS.FileGRD;
+
+(* GRD (Grid Text Format) vector file format implementation *)
 
 interface
 

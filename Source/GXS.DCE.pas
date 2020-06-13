@@ -34,18 +34,20 @@ uses
   System.SysUtils,
 
   Scene.XCollection,
-  GXS.Scene,
   Scene.VectorGeometry,
   Scene.VectorLists,
+  Scene.BaseClasses,
+  Scene.Manager,
+  Scene.VectorTypes,
+  Scene.Strings,
+
+  GXS.Scene,
   GXS.VectorFileObjects,
   GXS.CrossPlatform,
   GXS.DCEMisc,
   GXS.EllipseCollision,
   GXS.TerrainRenderer,
-  GXS.Coordinates,
-  Scene.BaseClasses,
-  Scene.Manager,
-  Scene.VectorTypes;
+  GXS.Coordinates;
 
 type
   // Only csEllipsoid can have dynamic behaviour 
@@ -62,15 +64,14 @@ type
     layers are positive (that is, turns off collision
     for bodies whose layer is < 0) *)
   TDCECollisionSelection = (ccsDCEStandard, ccsCollisionStandard, ccsHybrid);
-  // gak:20041119
 
   TDCECollision = record
     Position: TAffineVector;
     Normal: TAffineVector; // Surface normal
     Bounce: TAffineVector; // Surface reflection
     Nearest: Boolean;
-    RootCollision: Boolean; // gak:20041119
-    Distance: single; // gak:20041119
+    RootCollision: Boolean;
+    Distance: single;
   end;
 
   TgxDCEStatic = class;
@@ -115,15 +116,12 @@ type
     property StaticCount: Integer read GetStaticCount;
   published
     property Gravity: single read FGravity write FGravity;
-    property WorldDirection: TgxCoordinates read FWorldDirection
-      write SetWorldDirection;
+    property WorldDirection: TgxCoordinates read FWorldDirection write SetWorldDirection;
     property WorldScale: single read FWorldScale write SetWorldScale;
     property MovimentScale: single read FMovimentScale write FMovimentScale;
-    Property StandardiseLayers: TDCECollisionSelection read FStandardiseLayers
-      write FStandardiseLayers; // gak:20041119
+    Property StandardiseLayers: TDCECollisionSelection read FStandardiseLayers write FStandardiseLayers; 
     Property ManualStep: Boolean read FManualStep write FManualStep;
-    property OnCollision: TDCECollisionEvent read FOnCollision
-      write FOnCollision;
+    property OnCollision: TDCECollisionEvent read FOnCollision write FOnCollision;
   end;
 
   TgxDCEStatic = class(TgxBehaviour)
@@ -132,9 +130,10 @@ type
     FManagerName: String; // NOT persistent, temporarily used for persistence
     FActive: Boolean;
     FShape: TDCEShape;
-    FLayer: Integer; // Collides only with lower or equal layers
-    FSolid: Boolean;
+  	// Collides only with lower or equal layers
+    FLayer: Integer;
     // Collide and slide if true, otherwise it "walk thru walls"
+    FSolid: Boolean;
     FFriction: single; // 0 (no friction); 100 (no movement)
     FBounceFactor: single; // 0 (don't bounce); 1 (bounce forever)
     FSize: TgxCoordinates;
@@ -155,8 +154,7 @@ type
     procedure Assign(Source: TPersistent); override;
     class function FriendlyName: String; override;
     class function FriendlyDescription: String; override;
-    property OnCollision: TDCEObjectCollisionEvent read FOnCollision
-      write FOnCollision;
+    property OnCollision: TDCEObjectCollisionEvent read FOnCollision write FOnCollision;
   published
     property Active: Boolean read FActive write FActive;
     property Manager: TgxDCEManager read FManager write SetManager;
@@ -182,8 +180,8 @@ type
     FFriction: single; // 0 (no friction); 100 (no movement)
     FBounceFactor: single; // 0 (don't bounce); 1 (bounce forever)
     FSize: TgxCoordinates;
-    FMaxRecursionDepth: byte;
-    // gak20041119 //Number of iterations of the collision method
+    //Number of iterations of the collision method
+	FMaxRecursionDepth: byte;
     FSlideOrBounce: TDCESlideOrBounce; // gak20041122
     // Movement
     FAccel: TAffineVector; // Current acceleration
@@ -220,16 +218,14 @@ type
     procedure StopAbsAccel;
     procedure Jump(jHeight, jSpeed: single);
     procedure Move(deltaS: TAffineVector; deltaTime: Double);
-    procedure MoveTo(Position: TAffineVector; Amount: single); // gak:20041119
+    procedure MoveTo(Position: TAffineVector; Amount: single);
     procedure DoMove(deltaTime: Double);
     procedure DoProgress(const progressTime: TProgressTimes); override;
     // Runtime only
     property Speed: TAffineVector read FSpeed write FSpeed;
     property InGround: Boolean read FInGround;
-    property MaxRecursionDepth: byte read FMaxRecursionDepth
-      write FMaxRecursionDepth; // gak20041119
-    property OnCollision: TDCEObjectCollisionEvent read FOnCollision
-      write FOnCollision;
+    property MaxRecursionDepth: byte read FMaxRecursionDepth write FMaxRecursionDepth; 
+    property OnCollision: TDCEObjectCollisionEvent read FOnCollision write FOnCollision;
   published
     property Active: Boolean read FActive write FActive;
     property Manager: TgxDCEManager read FManager write SetManager;
@@ -239,24 +235,19 @@ type
     property Friction: single read FFriction write SetFriction;
     property BounceFactor: single read FBounceFactor write SetBounceFactor;
     property Size: TgxCoordinates read FSize write SetSize;
-    property SlideOrBounce: TDCESlideOrBounce read FSlideOrBounce
-      write FSlideOrBounce; // gak20041122
+    property SlideOrBounce: TDCESlideOrBounce read FSlideOrBounce write FSlideOrBounce;
   end;
 
-function GetOrCreateDCEStatic(behaviours: TgxBehaviours): TgxDCEStatic;
-  overload;
+function GetOrCreateDCEStatic(behaviours: TgxBehaviours): TgxDCEStatic; overload;
 function GetOrCreateDCEStatic(obj: TgxBaseSceneObject): TgxDCEStatic; overload;
-function GetOrCreateDCEDynamic(behaviours: TgxBehaviours)
-  : TgxDCEDynamic; overload;
-function GetOrCreateDCEDynamic(obj: TgxBaseSceneObject): TgxDCEDynamic;
-  overload;
+function GetOrCreateDCEDynamic(behaviours: TgxBehaviours): TgxDCEDynamic; overload;
+function GetOrCreateDCEDynamic(obj: TgxBaseSceneObject): TgxDCEDynamic; overload;
 
 // -------------------------------------------------------------------
 implementation
 // -------------------------------------------------------------------
 
-function RotateVectorByObject(obj: TgxBaseSceneObject; v: TAffineVector)
-  : TAffineVector;
+function RotateVectorByObject(obj: TgxBaseSceneObject; v: TAffineVector): TAffineVector;
 var
   v2: TVector;
 begin
@@ -270,8 +261,7 @@ begin
   FStatics := TList.Create;
   FDynamics := TList.Create;
   FGravity := 0;
-  FWorldDirection := TgxCoordinates.CreateInitialized(Self, YHmgVector,
-    csVector);
+  FWorldDirection := TgxCoordinates.CreateInitialized(Self, YHmgVector, csVector);
   FWorldScale := 1;
   FMovimentScale := 1;
   FStandardiseLayers := ccsDCEStandard;
@@ -311,7 +301,7 @@ var
   TObject: TgxBaseSceneObject;
   // Collision results
   ColInfo: TDCECollision;
-  lastobj: Integer; // gak:20041119
+  lastobj: Integer;
   i, oi: Integer;
   MP: TECMovePack;
   CanCollide, GravCollided: Boolean;
@@ -326,7 +316,7 @@ begin
   MP.Gravity := deltaAbsS;
   MP.ObjectInfo.Solid := Body.Solid;
   MP.UnitScale := FWorldScale;
-  MP.MaxRecursionDepth := Body.MaxRecursionDepth; // gak://20041119
+  MP.MaxRecursionDepth := Body.MaxRecursionDepth;
   // Get collision range, if it is too big separate into small pieces
   ECSetCollisionRange(MP);
   ColRange := MP.CollisionRange;
@@ -430,7 +420,7 @@ begin
   Body.FInGround := GravCollided;
 
   // Generate events and calculate average friction
-  lastobj := -1; // gak:20041119
+  lastobj := -1;
   TotalFriction := Body.Friction;
   ContactList := TIntegerList.Create;
 
@@ -508,11 +498,9 @@ begin
 
         end;
 
-        // gak:20041119 start
         ColInfo.RootCollision := (lastobj <> oi);
         ColInfo.Distance := Contacts[i].Distance;
         lastobj := oi;
-        // gak:20041119 end
 
         if Assigned(FOnCollision) then
           FOnCollision(Self, Body.OwnerBaseSceneObject, TObject, ColInfo);
@@ -767,7 +755,9 @@ begin
     FSize.z := 0.1;
 end;
 
-{ TgxDCEDynamic }
+//-------------------------------------
+// TgxDCEDynamic
+//-------------------------------------
 
 procedure TgxDCEDynamic.ApplyAccel(NewAccel: TAffineVector);
 begin
@@ -826,8 +816,8 @@ begin
   FSolid := True;
   FFriction := 1;
   FBounceFactor := 0;
-  FMaxRecursionDepth := 5; // gak:20041119
-  FSlideOrBounce := csbSlide; // gak:20041122
+  FMaxRecursionDepth := 5;
+  FSlideOrBounce := csbSlide;
   FInGround := False;
 
   FAccel := NullVector;
@@ -878,13 +868,13 @@ begin
   // v = TIME * force + max(1-TIME*Friction,0) * v;
   Accel(FSpeed, fGround, FAccel);
   Accel(FAbsSpeed, fGround, FAbsAccel);
-  { FSpeed[0] := deltaTime * FAccel[0] + fGround * FSpeed[0];
+  (* FSpeed[0] := deltaTime * FAccel[0] + fGround * FSpeed[0];
     FSpeed[1] := deltaTime * FAccel[1] + fGround * FSpeed[1];
     FSpeed[2] := deltaTime * FAccel[2] + fGround * FSpeed[2];
 
     FAbsSpeed[0] := deltaTime * FAbsAccel[0] + fGround * FAbsSpeed[0];
     FAbsSpeed[1] := deltaTime * FAbsAccel[1] + fGround * FAbsSpeed[1];
-    FAbsSpeed[2] := deltaTime * FAbsAccel[2] + fGround * FAbsSpeed[2]; }
+    FAbsSpeed[2] := deltaTime * FAbsAccel[2] + fGround * FAbsSpeed[2]; *)
 
   if FUseGravity then
   begin
@@ -962,12 +952,12 @@ end;
 
 class function TgxDCEDynamic.FriendlyDescription: String;
 begin
-  result := 'Dynamic Collision-detection registration';
+  Result := 'Dynamic Collision-detection registration';
 end;
 
 class function TgxDCEDynamic.FriendlyName: String;
 begin
-  result := 'DCE Dynamic Collider';
+  Result := 'DCE Dynamic Collider';
 end;
 
 procedure TgxDCEDynamic.Jump(jHeight, jSpeed: single);
@@ -1031,10 +1021,8 @@ begin
     WriteBoolean(FUseGravity);
     WriteSingle(FFriction);
     WriteSingle(FBounceFactor);
-    // gak:20041122 - start
     WriteInteger(FMaxRecursionDepth);
     WriteInteger(ord(FSlideOrBounce));
-    // gak:20041122 - end
     FSize.WriteToFiler(writer);
   end;
 end;
@@ -1057,10 +1045,8 @@ begin
     FUseGravity := ReadBoolean;
     FFriction := ReadSingle;
     FBounceFactor := ReadSingle;
-    // gak:20041122 - start
     FMaxRecursionDepth := ReadInteger;
     FSlideOrBounce := TDCESlideOrBounce(ReadInteger);
-    // gak:20041122 - end
     FSize.ReadFromFiler(reader);
   end;
 end;

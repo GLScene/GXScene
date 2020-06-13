@@ -581,7 +581,7 @@ type
   private
     FOwner: TPersistent;
   protected
-    function GeTgxMeshMorphTarget(Index: Integer): TgxMeshMorphTarget;
+    function GetMeshMorphTarget(Index: Integer): TgxMeshMorphTarget;
   public
     constructor CreateOwned(aOwner: TPersistent);
     destructor Destroy; override;
@@ -589,7 +589,7 @@ type
     procedure Translate(const delta: TAffineVector);
     property Owner: TPersistent read FOwner;
     procedure Clear; override;
-    property Items[Index: Integer]: TgxMeshMorphTarget read GeTgxMeshMorphTarget; default;
+    property Items[Index: Integer]: TgxMeshMorphTarget read GetMeshMorphTarget; default;
   end;
 
   (* Mesh object with support for morph targets.
@@ -701,7 +701,7 @@ type
     property Owner: TgxFaceGroups read FOwner write FOwner;
     property MaterialName: string read FMaterialName write FMaterialName;
     property MaterialCache: TgxLibMaterial read FMaterialCache;
-    { Index of lightmap in the lightmap library. }
+    // Index of lightmap in the lightmap library.
     property LightMapIndex: Integer read FLightMapIndex write FLightMapIndex;
   end;
 
@@ -1018,8 +1018,8 @@ type
     function OctreeSphereSweepIntersect(const rayStart, rayVector: TVector; const velocity, radius: Single;
       intersectPoint: PVector = nil; intersectNormal: PVector = nil): Boolean;
     function OctreeTriangleIntersect(const v1, v2, v3: TAffineVector): Boolean;
-    { Returns true if Point is inside the free form - this will only work
-      properly on closed meshes. Requires that Octree has been prepared. }
+    (* Returns true if Point is inside the free form - this will only work
+      properly on closed meshes. Requires that Octree has been prepared. *)
     function OctreePointInMesh(const Point: TVector): Boolean;
     function OctreeAABBIntersect(const aabb: TAABB; objMatrix, invObjMatrix: TMatrix;
       triangles: TAffineVectorList = nil): Boolean;
@@ -1297,7 +1297,7 @@ type
 
   EInvalidVectorFile = class(Exception);
 
-  // Read access to the list of registered vector file formats
+// Read access to the list of registered vector file formats
 function GetVectorFileFormats: TgxVectorFileFormatsList;
 // A file extension filter suitable for dialog's 'Filter' property
 function VectorFileFormatsFilter: string;
@@ -4428,7 +4428,7 @@ begin
   inherited;
 end;
 
-function TgxMeshMorphTargetList.GeTgxMeshMorphTarget(Index: Integer): TgxMeshMorphTarget;
+function TgxMeshMorphTargetList.GetMeshMorphTarget(Index: Integer): TgxMeshMorphTarget;
 begin
   Result := TgxMeshMorphTarget(list^[Index]);
 end;

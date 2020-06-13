@@ -1,12 +1,16 @@
-//
-// Graphic Scene Engine, http://glscene.org
-//
+(*******************************************
+*                                          *
+* Graphic Scene Engine, http://glscene.org *
+*                                          *
+********************************************)
+
+unit GXS.FileSTL;
+
 (*
   Support-code to load STL Files into TgxFreeForm-Components.
   Note that you must manually add this unit to one of your project's uses
   to enable support for STL files at run-time.
 *)
-unit GXS.FileSTL;
 
 interface
 
@@ -29,11 +33,11 @@ type
   end;
 
   TSTLVertex = TAffineVector;
-  { Original specs : = packed record
+  (* Original specs : = packed record
     x : single;
     y : single;
     z : single;
-    end; }
+    end; *)
 
   TSTLFace = packed record
     normal: TSTLVertex; // facet surface normal
@@ -71,9 +75,9 @@ const
   cENDSOLID_LABEL = 'ENDSOLID';
   cFULL_HEADER_LEN = 84;
 
-  // ------------------
-  // ------------------ TgxSTLVectorFile ------------------
-  // ------------------
+// ------------------
+// ------------------ TgxSTLVectorFile ------------------
+// ------------------
 
 class function TgxSTLVectorFile.Capabilities: TgxDataFileCapabilities;
 begin
@@ -91,9 +95,9 @@ var
       raise Exception.Create('Invalid Normal')
     else
     begin
-      aNormal.X := GXS.Utils.StrToFloatDef(sl[2], 0);
-      aNormal.Y := GXS.Utils.StrToFloatDef(sl[3], 0);
-      aNormal.Z := GXS.Utils.StrToFloatDef(sl[4], 0);
+      aNormal.X := StrToFloatDef(sl[2], 0);
+      aNormal.Y := StrToFloatDef(sl[3], 0);
+      aNormal.Z := StrToFloatDef(sl[4], 0);
     end;
   end;
 
@@ -104,9 +108,9 @@ var
       raise Exception.Create('Invalid Vertex')
     else
     begin
-      aVertex.X := GXS.Utils.StrToFloatDef(sl[1], 0);
-      aVertex.Y := GXS.Utils.StrToFloatDef(sl[2], 0);
-      aVertex.Z := GXS.Utils.StrToFloatDef(sl[3], 0);
+      aVertex.X := StrToFloatDef(sl[1], 0);
+      aVertex.Y := StrToFloatDef(sl[2], 0);
+      aVertex.Z := StrToFloatDef(sl[3], 0);
     end;
   end;
 

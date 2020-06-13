@@ -1,6 +1,8 @@
-//
-// Graphic Scene Engine, http://glscene.org
-//
+(*******************************************
+*                                          *
+* Graphic Scene Engine, http://glscene.org *
+*                                          *
+********************************************)
 (*
   Component allows to compile the CUDA-source (*.cu) file.
   in design- and runtime.

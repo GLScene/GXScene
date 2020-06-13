@@ -1,11 +1,12 @@
-//
-// Graphic Scene Engine, http://glscene.org
-//
-(*
-   Friendly loading of BMP image.
-*)
+(********************************************
+ *                                          *
+ * Graphic Scene Engine, http://glscene.org *
+ *                                          *
+ ********************************************)
 
 unit GXS.FileBMP;
+
+(* Friendly loading of BMP image *)
 
 interface
 

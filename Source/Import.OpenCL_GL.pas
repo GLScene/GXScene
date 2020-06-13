@@ -1,6 +1,8 @@
-﻿//
-// This unit is part of the GLScene Engine, http://glscene.org
-//
+﻿(*******************************************
+*                                          *
+* Graphic Scene Engine, http://glscene.org *
+*                                          *
+********************************************)
 (*
    Conversion of OpenCL header file: cl_gl.h to CL_GL.pas,
    from http://www.khronos.org/registry/cl/.

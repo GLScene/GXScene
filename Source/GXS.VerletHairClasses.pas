@@ -47,43 +47,35 @@ type
     procedure SetStiffness(const Value: TVHStiffnessSet);
   public
     procedure BuildHair(const AAnchorPosition, AHairDirection: TAffineVector);
-
     procedure BuildStiffness;
     procedure ClearStiffness;
     procedure Clear;
-
     constructor Create(const AVerletWorld : TgxVerletWorld;
       const ARootDepth, AHairLength : single; ALinkCount : integer;
       const AAnchorPosition, AHairDirection : TAffineVector;
       const AStiffness : TVHStiffnessSet);
-
     destructor Destroy; override;
-
     property NodeList : TVerletNodeList read FNodeList;
     property VerletWorld : TgxVerletWorld read FVerletWorld;
-
     property RootDepth : single read FRootDepth;
     property LinkLength : single read GetLinkLength;
     property LinkCount : integer read FLinkCount;
     property HairLength : single read FHairLength;
-
     property Stiffness : TVHStiffnessSet read FStiffness write SetStiffness;
-
     property Data : pointer read FData write FData;
-
-    { Anchor should be nailed down to give the hair stability }
+    // Anchor should be nailed down to give the hair stability
     property Anchor : TVerletNode read GetAnchor;
-
-    { Root should be nailed down to give the hair stability }
+    // Root should be nailed down to give the hair stability
     property Root : TVerletNode read GetRoot;
   end;
-//---------------------------------------------------------------------------
+
 //---------------------------------------------------------------------------
 implementation
 //---------------------------------------------------------------------------
-//---------------------------------------------------------------------------
 
-{ TgxVerletHair }
+//--------------------------------------
+// TgxVerletHair
+//--------------------------------------
 
 procedure TgxVerletHair.AddStickStiffness(const ANodeSkip: integer);
 var
@@ -101,34 +93,27 @@ var
   Direction : TAffineVector;
 begin
   Clear;
-
   Direction := VectorNormalize(AHairDirection);
-
   // Fix the root of the hair
   Position := VectorAdd(AAnchorPosition, VectorScale(Direction, -FRootDepth));
   Node := VerletWorld.CreateOwnedNode(Position);
   NodeList.Add(Node);
   Node.NailedDown := true;
   PrevNode := Node;
-
   // Now add the links in the hair
   for i := 0 to FLinkCount-1 do
   begin
     Position := VectorAdd(AAnchorPosition, VectorScale(Direction, HairLength * (i/LinkCount)));
-
     Node := VerletWorld.CreateOwnedNode(Position);
     NodeList.Add(Node);
-
     // first one is the anchor
     if i=0 then
       Node.NailedDown := true
     else
       // Create the hair link
       VerletWorld.CreateStick(PrevNode, Node);
-
     PrevNode := Node;
   end;
-
   // Now we must stiffen the hair with either sticks or springs
   BuildStiffness;
 end;
@@ -138,15 +123,12 @@ var
   i : integer;
 begin
   ClearStiffness;
-
   if vhsFull in FStiffness then
   begin
     for i := 1 to 100 do
       AddStickStiffness(i);
-      
     exit;
   end;
-
   if vhsSkip1Node in FStiffness then AddStickStiffness(1);
   if vhsSkip2Node in FStiffness then AddStickStiffness(2);
   if vhsSkip3Node in FStiffness then AddStickStiffness(3);

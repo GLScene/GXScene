@@ -32,10 +32,11 @@ uses
   Import.OpenGLx,
   Scene.XCollection,
   Scene.VectorGeometry,
-  GXS.Scene,
-  GXS.VectorFileObjects,
   Scene.VectorTypes,
   Scene.VectorLists,
+
+  GXS.Scene,
+  GXS.VectorFileObjects,
   GXS.Coordinates,
   GXS.RenderContextInfo,
   GXS.Context,

@@ -1,13 +1,12 @@
-//------------------------------------------------------------
-// Graphic Scene Engine, http://glscene.org
-//-------------------------------------------------------------
+(*******************************************
+*                                          *
+* Graphic Scene Engine, http://glscene.org *
+*                                          *
+********************************************)
 
 unit GXS.PictureRegisteredFormats;
 
-(*
-   Hacks into the FMX to access the list of TPicture registered TGraphic formats
-*)
-
+(* Hacks into the FMX to access the list of TPicture registered TGraphic formats *)
 
 interface
 
@@ -84,7 +83,7 @@ var
   fileFormat: PFileFormat;
 begin
   {$MESSAGE WARN 'HackTPictureRegisteredFormats will crash when Graphics.pas is compiled with the 'Use Debug DCUs' option'}
- { TODO -oPW : FMX.Graphics.TImage has no RegisterFileFormat as VCL.Graphics.TPicture }
+// TODO -oPW : FMX.Graphics.TImage has no RegisterFileFormat as VCL.Graphics.TPicture
   (*pRegisterFileFormat := PAnsiChar(@TPicture.RegisterFileFormat);*)
   if pRegisterFileFormat[0] = #$FF then // in case of BPL redirector
     pRegisterFileFormat := PAnsiChar(PCardinal(PCardinal(@pRegisterFileFormat[2])^)^);

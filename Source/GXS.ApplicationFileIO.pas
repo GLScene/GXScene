@@ -26,10 +26,10 @@ uses
   Scene.Strings;
 
 const
-  VXS_RC_DDS_Type = RT_RCDATA;
-  VXS_RC_JPG_Type = RT_RCDATA;
-  VXS_RC_XML_Type = RT_RCDATA;
-  VXS_RC_String_Type = RT_RCDATA;
+  RC_DDS_Type = RT_RCDATA;
+  RC_JPG_Type = RT_RCDATA;
+  RC_XML_Type = RT_RCDATA;
+  RC_String_Type = RT_RCDATA;
 
 type
 

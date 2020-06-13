@@ -3,8 +3,11 @@
 * Graphic Scene Engine, http://glscene.org *
 *                                          *
 ********************************************)
+
+unit GXS.GLSLBumpShader;
+
 (*
-   A GLSL shader that applies bump mapping. 
+   A GLSL shader that applies bump mapping.
     Notes:
      1) Alpha is a synthetic property, in real life your should set each
       color's Alpha individualy
@@ -13,7 +16,6 @@
     TODO:
       1) Implement IGLShaderDescription in all shaders.
 *)
-unit GXS.GLSLBumpShader;
 
 interface
 

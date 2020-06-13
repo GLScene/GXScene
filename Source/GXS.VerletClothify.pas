@@ -128,33 +128,25 @@ type
     FEdgeList : TEdgeList;
     FCurrentNodeOffset : integer;
     FNodesAdded : boolean;
-
     procedure BuildOpposingEdges;
   protected
     FCalcEdgeLength : boolean;
   public
     property EdgeList : TEdgeList read FEdgeList;
-
     procedure Clear; override;
     procedure ProcessMesh; override;
-
     function AddEdge(const Vi0, Vi1 : integer; const Face : TFace; const AMeshObject : TgxMeshObject) : TEdge;
     function AddFace(const Vi0, Vi1, Vi2 : integer; const MeshObject : TgxMeshObject) : TFace; override;
     function AddNode(const VerletWorld : TgxVerletWorld; const MeshObject : TgxMeshObject; const VertexIndex : integer) : TVerletNode; virtual;
-
     procedure AddNodes(const VerletWorld : TgxVerletWorld);
     procedure AddEdgesAsSticks(const VerletWorld : TgxVerletWorld; const Slack : single);
     procedure AddEdgesAsSprings(const VerletWorld : TgxVerletWorld; const Strength, Damping, Slack : single);
     procedure AddEdgesAsSolidEdges(const VerletWorld : TgxVerletWorld);
     procedure AddOuterEdgesAsSolidEdges(const VerletWorld : TgxVerletWorld);
-
     procedure RenderEdges(var rci : TgxRenderContextInfo);
-
     property CurrentNodeOffset : integer read FCurrentNodeOffset;
     property NodesAdded : boolean read FNodesAdded;
-
     procedure ReplaceVertexIndex(const ViRemove, ViReplaceWith : integer);
-
     constructor Create(const aGLBaseMesh : TgxBaseMesh); override;
     destructor Destroy; override;
   end;
@@ -174,7 +166,10 @@ type
 implementation
 //---------------------------------------------------------------------------
 
-{ TFaceExtractor }
+
+//----------------------------------------
+// TFaceExtractor
+//----------------------------------------
 
 procedure TFaceExtractor.Clear;
 var
@@ -281,13 +276,10 @@ var
   Face : TFace;
 begin
   Face := TFace.Create(MeshObject);
-
   FaceList.Add(Face);
-
   Face.Vertices[0] := Vi0;
   Face.Vertices[1] := Vi1;
   Face.Vertices[2] := Vi2;
-
   result := Face;
 end;
 
@@ -296,8 +288,9 @@ begin
   FWeldDistance := Value;
 end;
 
-
-{ TFaceList }
+//----------------------------------------
+// TFaceList
+//----------------------------------------
 
 function TFaceList.GetItems(i: integer): TFace;
 begin
@@ -309,7 +302,9 @@ begin
   Put(i, Value);
 end;
 
-{ TEdgeList }
+//----------------------------------------
+// TEdgeList
+//----------------------------------------
 
 function TEdgeList.GetItems(i: integer): TEdge;
 begin
@@ -355,7 +350,9 @@ begin
   Sort(@EdgeLength);
 end;
 
-{ TgxMeshObjectVerletNode }
+//----------------------------------------
+// TgxMeshObjectVerletNode
+//----------------------------------------
 
 constructor TgxMeshObjectVerletNode.CreateOwned(const aOwner: TgxVerletWorld);
 begin
@@ -378,7 +375,9 @@ begin
     MeshObject.Vertices[VertexIndices[i]] := MeshObject.Owner.Owner.AbsoluteToLocal(Location);
 end;
 
-{ TEdgeDetector }
+//----------------------------------------
+// TEdgeDetector
+//----------------------------------------
 
 procedure TEdgeDetector.Clear;
 var
@@ -401,7 +400,6 @@ begin
   FCurrentNodeOffset := 0;
   FNodesAdded := false;
   FCalcEdgeLength := false;
-
   inherited;
 end;
 
@@ -421,21 +419,17 @@ begin
   for i := 0 to EdgeList.Count - 1 do
   begin
     Edge := EdgeList[i];
-
     if (Edge.Vertices[0]=Vi0) and (Edge.Vertices[1]=Vi1) or
        (Edge.Vertices[1]=Vi0) and (Edge.Vertices[0]=Vi1) then
     begin
       Edge.Faces[1] := Face;
-
       result := Edge;
       exit;
     end;
   end;
-
   // No edge was found, create a new one
   Edge := TEdge.Create(self, Vi0, Vi1, Face, nil, AMeshObject, true);
   EdgeList.Add(Edge);
-
   result := Edge;
 end;
 
@@ -445,17 +439,13 @@ var
   Face : TFace;
 begin
   Face := TFace.Create(MeshObject);
-
   FaceList.Add(Face);
-
   Face.Vertices[0] := Vi0;
   Face.Vertices[1] := Vi1;
   Face.Vertices[2] := Vi2;
-
   AddEdge(Vi0, Vi1, Face, MeshObject);
   AddEdge(Vi1, Vi2, Face, MeshObject);
   AddEdge(Vi2, Vi0, Face, MeshObject);//}
-
   result := Face;
 end;
 
@@ -466,12 +456,9 @@ var
 begin
   FNodesAdded := true;
   FCurrentNodeOffset := FNodeList.Count;
-
   MO := FGLBaseMesh.MeshObjects[0];
-
   for i := 0 to MO.Vertices.Count-1 do
     AddNode(VerletWorld, MO, i);
-
   // Assert(FNodeList.Count = MO.Vertices.Count, Format('%d <> %d',[FNodeList.Count, MO.Vertices.Count]));
 end;
 
@@ -506,7 +493,6 @@ var
 begin
   if not FNodesAdded then
     AddNodes(VerletWorld);
-
   for i := 0 to EdgeList.Count-1 do
   begin
     // if not EdgeList[i].SameSame(FNodeList) then
@@ -529,7 +515,6 @@ var
 begin
   if not FNodesAdded then
     AddNodes(VerletWorld);
-
   for i := 0 to EdgeList.Count-1 do
   begin
     // if not EdgeList[i].SameSame(FNodeList) then
@@ -607,33 +592,28 @@ begin
   for iEdge := 0 to EdgeCount-1 do
   begin
     Edge := EdgeList[iEdge];
-
     if Assigned(Edge.Faces[1]) then
     begin
       Face0 := Edge.Faces[0];
       Face1 := Edge.Faces[1];
-
       if (Face0.Vertices[0] <> Edge.Vertices[0]) and (Face0.Vertices[0] <> Edge.Vertices[1]) then
         vi0 := Face0.Vertices[0]
       else if (Face0.Vertices[1] <> Edge.Vertices[0]) and (Face0.Vertices[1] <> Edge.Vertices[1]) then
         vi0 := Face0.Vertices[1]
       else
         vi0 := Face0.Vertices[2];
-
       if (Face1.Vertices[0] <> Edge.Vertices[0]) and (Face1.Vertices[0] <> Edge.Vertices[1]) then
         vi1 := Face1.Vertices[0]
       else if (Face1.Vertices[1] <> Edge.Vertices[0]) and (Face1.Vertices[1] <> Edge.Vertices[1]) then
         vi1 := Face1.Vertices[1]
       else
         vi1 := Face1.Vertices[2];
-
       if (vi0=vi1) or
          (vi0=Edge.Vertices[0]) or
          (vi0=Edge.Vertices[1]) or
          (vi1=Edge.Vertices[0]) or
          (vi1=Edge.Vertices[1]) then
         continue;
-
       // Find an indentical edge, if there is one
       for iEdgeTest := 0 to EdgeList.Count - 1 do
       begin
@@ -647,9 +627,7 @@ begin
           continue;
         end;
       end;
-
       NewEdge := TEdge.Create(self, Vi0, Vi1, nil, nil, Edge.MeshObject, false);
-
       EdgeList.Add(NewEdge);//}
     end;
   end;
@@ -677,13 +655,11 @@ begin
       Exit;
     end;
   end;//}
-
   aNode := TgxMeshObjectVerletNode.CreateOwned(VerletWorld);
   aNode.MeshObject := MeshObject;
   aNode.VertexIndices.Add(VertexIndex);
   aNode.Location := Location;
   aNode.OldLocation := Location;
-
   FNodeList.Add(aNode);
   Result:=aNode;
 end;
@@ -691,7 +667,6 @@ end;
 procedure TEdgeDetector.ProcessMesh;
 begin
   inherited;
-
   BuildOpposingEdges;
 end;
 
@@ -709,20 +684,16 @@ begin
       begin
         if Vertices[0] = ViRemove then
           Vertices[0] := ViReplaceWith;
-
         if Vertices[1] = ViRemove then
           Vertices[1] := ViReplaceWith;
-
         if Vertices[2] = ViRemove then
           Vertices[2] := ViReplaceWith;
-
         if (Vertices[0]=Vertices[1]) or
          (Vertices[1]=Vertices[2]) or
          (Vertices[2]=Vertices[0]) then
           Active := false;
       end;
     end;
-
   Done := false;
   while not Done do
   begin
@@ -734,29 +705,25 @@ begin
         begin
           if Vertices[0] = ViRemove then
             Vertices[0] := ViReplaceWith;
-
           if Vertices[1] = ViRemove then
             Vertices[1] := ViReplaceWith;
-
           UpdateEdgeLength;
-
           Edge := EdgeList[i];
           EdgeList.Delete(i);
-
           if Edge.Length=-1 then
             Edge.Free
           else
             EdgeList.InsertSorted(Edge);
-
           Done := false;
-
           break;//}
         end;
       end;
   end;
 end;
 
-{ TFace }
+//----------------------------------------
+// TFace
+//----------------------------------------
 
 constructor TFace.Create(aMeshObject: TgxMeshObject);
 begin
@@ -772,7 +739,9 @@ begin
     MeshObject.Vertices[Vertices[2]], Normal);
 end;
 
-{ TEdge }
+//----------------------------------------
+// TEdge
+//----------------------------------------
 
 procedure TEdge.Contract;
 begin
@@ -792,7 +761,6 @@ begin
   Faces[1] := AFace1;
   FMeshObject := AMeshObject;
   FSolid := true;
-
   UpdateEdgeLength;
 end;
 

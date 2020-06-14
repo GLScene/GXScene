@@ -23,8 +23,7 @@ uses
   Scene.VectorLists,
   GXS.VectorFileObjects,
   GXS.ApplicationFileIO,
-  GXS.Utils,
-  GXS.CrossPlatform;
+  GXS.Utils;
 
 type
   TSTLHeader = packed record

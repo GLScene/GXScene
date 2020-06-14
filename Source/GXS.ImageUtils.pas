@@ -31,7 +31,7 @@ uses
   Scene.VectorGeometry,
 
   Import.OpenGLx,
-  GXS.CrossPlatform,
+  GXS.Utils,
   GXS.TextureFormat;
 
 var

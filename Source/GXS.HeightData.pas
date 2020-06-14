@@ -35,7 +35,6 @@ uses
   Scene.BaseClasses,
   GXS.ApplicationFileIO,
   GXS.Utils,
-  GXS.CrossPlatform,
   GXS.Material;
 
 type

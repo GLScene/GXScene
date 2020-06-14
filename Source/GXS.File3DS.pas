@@ -28,7 +28,6 @@ uses
   Scene.PersistentClasses,
   Scene.Strings,
   GXS.File3DSSceneObjects,
-  GXS.CrossPlatform,
   Scene.VectorTypes,
   Scene.VectorLists,
   GXS.RenderContextInfo,

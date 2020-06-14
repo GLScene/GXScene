@@ -78,10 +78,10 @@ begin
 
   bCubeMap := FullDDS.CubeMap;
   FullDDS.Narrow;
-  { TODO : E2129 Cannot assign to a read-only property }
+  // TODO : E2129 Cannot assign to a read-only property 
   (*PixelFormat := glpf32bit;*)
-  { TODO : E2064 Left side cannot be assigned to }
-  {Transparent := True;}
+  // TODO : E2064 Left side cannot be assigned to 
+  (*Transparent := True; *)
   Width := FullDDS.LevelWidth[0];
   Height := FullDDS.LevelHeight[0];
 
@@ -146,7 +146,7 @@ begin
     dwCaps := DDSCAPS_TEXTURE;
     stream.Write(header, SizeOf(TDDSHeader));
     for i := 0 to Height - 1 do
-      { TODO : E2003 Undeclared identifier: 'ScanLine' }
+      // TODO : E2003 Undeclared identifier: 'ScanLine' 
       (* stream.Write(ScanLine[i]^, rowSize);*)
   end;
 end;
@@ -155,7 +155,7 @@ end;
 initialization
 // ------------------------------------------------------------------
 
-  { TODO : E2003 Undeclared identifier: 'RegisterFileFormat' }
+ // TODO : E2003 Undeclared identifier: 'RegisterFileFormat' 
  (*
   TPicture.RegisterFileFormat(
     'dds', 'Microsoft DirectDraw Surface', TDDSImage);
@@ -165,7 +165,7 @@ initialization
 finalization
 // ------------------------------------------------------------------
 
-  { TODO : E2003 Undeclared identifier: 'UnregisterGraphicClass' }
+  // TODO : E2003 Undeclared identifier: 'UnregisterGraphicClass' 
   (*
   TPicture.UnregisterGraphicClass(TDDSImage);
   *)

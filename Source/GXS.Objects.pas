@@ -37,7 +37,6 @@ uses
   Scene.Strings,
 
   GXS.Scene,
-  GXS.CrossPlatform,
   GXS.Context,
   GXS.Silhouette,
   GXS.Color,

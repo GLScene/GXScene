@@ -3,10 +3,10 @@
 * Graphic Scene Engine, http://glscene.org *
 *                                          *
 ********************************************)
-(*
-  CUDA Integface
-*)
+
 unit GXS.CUDA;
+
+(* CUDA Integface *)
 
 interface
 
@@ -17,7 +17,6 @@ uses
   
   Scene.PersistentClasses,
   Scene.BaseClasses,
-  GXS.CrossPlatform,
   GXS.Context,
   Scene.VectorGeometry,
   Scene.VectorTypes,

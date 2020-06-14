@@ -3,7 +3,10 @@
 * Graphic Scene Engine, http://glscene.org *
 *                                          *
 ********************************************)
-{
+
+unit GXS.AsyncHDS;
+
+(*
   Implements a HDS Filter that generates HeightData tiles in a seperate thread.
 
   This component is a TgxHeightDataSourceFilter, which uses a TgxHeightDataSourceThread,
@@ -14,9 +17,7 @@
   being prepared.  Although this keeps the framerate up, it may cause holes in the
   terrain to show, if the HeightDataThreads cant keep up with the TerrainRenderer's
   requests for new tiles.
-}
-
-unit GXS.AsyncHDS;
+*)
 
 interface
 
@@ -25,8 +26,7 @@ interface
 uses
   System.Classes,
   System.SysUtils,
-  GXS.HeightData,
-  GXS.CrossPlatform;
+  GXS.HeightData;
 
 type
   TgxAsyncHDS = class;

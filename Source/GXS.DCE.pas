@@ -43,7 +43,6 @@ uses
 
   GXS.Scene,
   GXS.VectorFileObjects,
-  GXS.CrossPlatform,
   GXS.DCEMisc,
   GXS.EllipseCollision,
   GXS.TerrainRenderer,

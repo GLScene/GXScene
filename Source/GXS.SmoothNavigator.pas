@@ -34,7 +34,6 @@ uses
   GXS.Navigator,
   Scene.VectorGeometry,
   GXS.Scene,
-  GXS.CrossPlatform,
   GXS.Coordinates,
   GXS.Screen,
   Scene.PersistentClasses;

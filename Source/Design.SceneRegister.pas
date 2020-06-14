@@ -43,7 +43,7 @@ uses
   GXS.Context,
   GXS.Color,
   GXS.Win64Viewer,
-  GXS.CrossPlatform,
+  GXS.Utils,
   GXS.ObjectManager;
 
 type
@@ -154,12 +154,12 @@ type
     function GetVerbCount: Integer; override;
   end;
 
-  { Editor copied from DsgnIntf.
+  (* Editor copied from DsgnIntf.
     Could have been avoided, if only that guy at Borland didn't chose to
     publish only half of the stuff (and that's not the only class with
     that problem, most of the subitems handling code in TgxSceneBaseObject is
     here for the same reason...), the "protected" wasn't meant just to lure
-    programmers into code they can't reuse... Arrr! Grrr... }
+    programmers into code they can't reuse... Arrr! Grrr... *)
   TReuseableDefaultEditor = class(TComponentEditor, IDefaultEditor)
   protected
     FFirst: IProperty;
@@ -628,7 +628,9 @@ begin
     Designer.Modified;
 end;
 
-{ TgxImageClassProperty }
+//---------------------------
+// TgxImageClassProperty 
+//---------------------------
 
 function TgxImageClassProperty.GetAttributes: TPropertyAttributes;
 begin

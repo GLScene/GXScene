@@ -1,11 +1,12 @@
-//
-// Graphic Scene Engine, http://glscene.org
-//
-(*
-   Editor of TgxSCUDA
-*)
+(*******************************************
+*                                          *
+* Graphic Scene Engine, http://glscene.org *
+*                                          *
+********************************************)
 
-unit FCUDAEditor;
+unit Design.FCUDAEditor;
+
+(* Editor of TgxCUDA *)
 
 interface
 
@@ -41,8 +42,6 @@ type
     SBHelp: TSpeedButton;
     Image3: TImage;
     ListBox1: TListBox;
-  private
-  public
   end;
 
 var
@@ -57,12 +56,9 @@ implementation
 
 {$R *.fmx}
 
-const
-  cRegistryKey = 'Software\GXScene\CUDAEditor';
-
 var
   vCUDAEditorForm: TCUDAEditorForm;
-
+  
 function GetCUDAEditorForm: TCUDAEditorForm;
 begin
   if not Assigned(vCUDAEditorForm) then

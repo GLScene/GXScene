@@ -21,7 +21,6 @@ uses
   GXS.Scene,
   GXS.BitmapFont,
   GXS.Material,
-  GXS.CrossPlatform,
   GXS.Context,
   Scene.PersistentClasses,
   Scene.VectorGeometry,

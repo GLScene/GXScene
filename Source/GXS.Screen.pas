@@ -15,8 +15,7 @@ uses
   System.SysUtils,
   Winapi.Windows, 
   FMX.Forms,
-  Scene.VectorGeometry, 
-  GXS.CrossPlatform;
+  Scene.VectorGeometry;
 
 const
   MaxVideoModes = 200;

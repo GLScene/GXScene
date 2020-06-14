@@ -30,8 +30,7 @@ uses
   Scene.VectorGeometry,
   GXS.Color,
   GXS.Texture,
-  Scene.VectorTypes,
-  GXS.Crossplatform;
+  Scene.VectorTypes;
 
 type
   TColorEditorFrame = class(TFrame)

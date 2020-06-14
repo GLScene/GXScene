@@ -27,7 +27,6 @@ uses
   GXS.Scene,
   Scene.VectorGeometry,
   GXS.Context,
-  GXS.CrossPlatform,
   GXS.Texture,
   GXS.State,
   GXS.Utils,
@@ -40,9 +39,9 @@ uses
 
 type
 
-  { An individual character range in a bitmap font.
+  (* An individual character range in a bitmap font.
     A range allows mapping ASCII characters to character tiles in a font
-    bitmap, tiles are enumerated line then column (raster). }
+    bitmap, tiles are enumerated line then column (raster). *)
   TgxBitmapFontRange = class(TCollectionItem)
   private
     function GetStartASCII: WideString;
@@ -88,12 +87,12 @@ type
     function FindItemID(ID: Integer): TgxBitmapFontRange;
     property Items[index: Integer]: TgxBitmapFontRange read GetItems
       write SetItems; default;
-    { Converts an ASCII character into a tile index.
-      Return -1 if character cannot be rendered. }
+    (* Converts an ASCII character into a tile index.
+       Return -1 if character cannot be rendered. *)
     function CharacterToTileIndex(aChar: WideChar): Integer;
     function TileIndexToChar(aIndex: Integer): WideChar;
     procedure NotifyChange;
-    { Total number of characters in the ranges; cached for performance }
+    // Total number of characters in the ranges; cached for performance
     property CharacterCount: Integer read FCharCount;
   end;
 
@@ -102,7 +101,7 @@ type
     l, t, w: word;
   end;
 
-  { Provides access to individual characters in a BitmapFont.
+  (* Provides access to individual characters in a BitmapFont.
     Only fixed-width bitmap fonts are supported, the characters are enumerated
     in a raster fashion (line then column).
     Transparency is all or nothing, the transparent color being that of the
@@ -110,7 +109,7 @@ type
     Performance note: as usual, for best performance, you base font bitmap
     dimensions should be close to a power of two, and have at least 1 pixel
     spacing between characters (horizontally and vertically) to avoid artefacts
-    when rendering with linear filtering. }
+    when rendering with linear filtering. *)
   TgxCustomBitmapFont = class(TUpdateAbleComponent)
   private
     FRanges: TgxBitmapFontRanges;
@@ -155,27 +154,27 @@ type
       out TopLeft, BottomRight: TTexPoint);
     procedure PrepareImage(var ARci: TgxRenderContextInfo); virtual;
     procedure PrepareParams(var ARci: TgxRenderContextInfo);
-    { A single bitmap containing all the characters.
-      The transparent color is that of the top left pixel. }
+    (* A single bitmap containing all the characters.
+      The transparent color is that of the top left pixel. *)
     property Glyphs: TImage read FGlyphs write SetGlyphs;
-    {  Nb of horizontal pixels between two columns in the Glyphs. }
+    //  Nb of horizontal pixels between two columns in the Glyphs.
     property GlyphsIntervalX: Integer read FGlyphsIntervalX
       write SetGlyphsIntervalX;
-    { Nb of vertical pixels between two rows in the Glyphs. }
+    // Nb of vertical pixels between two rows in the Glyphs.
     property GlyphsIntervalY: Integer read FGlyphsIntervalY
       write SetGlyphsIntervalY;
-    { Ranges allow converting between ASCII and tile indexes.
-      See TgxCustomBitmapFontRange. }
+    (* Ranges allow converting between ASCII and tile indexes.
+      See TgxCustomBitmapFontRange. *)
     property Ranges: TgxBitmapFontRanges read FRanges write SetRanges;
-    { Width of a single character. }
+    // Width of a single character.
     property CharWidth: Integer read FCharWidth write SetCharWidth default 16;
-    { Pixels in between rendered characters (horizontally). }
+    // Pixels in between rendered characters (horizontally).
     property HSpace: Integer read FHSpace write SetHSpace default 1;
-    { Pixels in between rendered lines (vertically). }
+    // Pixels in between rendered lines (vertically).
     property VSpace: Integer read FVSpace write SetVSpace default 1;
-    { Horizontal spacing fix offset.
+    (* Horizontal spacing fix offset.
       This property is for internal use, and is added to the hspacing
-      of each character when rendering, typically to fix extra spacing. }
+      of each character when rendering, typically to fix extra spacing. *)
     property HSpaceFix: Integer read FHSpaceFix write FHSpaceFix;
     property MagFilter: TgxMagFilter read FMagFilter write SetMagFilter
       default maLinear;
@@ -188,17 +187,17 @@ type
     destructor Destroy; override;
     procedure RegisterUser(anObject: TgxBaseSceneObject); virtual;
     procedure UnRegisterUser(anObject: TgxBaseSceneObject); virtual;
-    { Renders the given string at current position or at position given by the optional position variable.
+    (* Renders the given string at current position or at position given by the optional position variable.
       The current matrix is blindly used, meaning you can render all kinds
       of rotated and linear distorted text with this method, OpenGL
-      Enable states are also possibly altered. }
+      Enable states are also possibly altered. *)
     procedure RenderString(var ARci: TgxRenderContextInfo;
       const aText: UnicodeString; aAlignment: TAlignment;
       aLayout: TgxTextLayout; const aColor: TColorVector;
       aPosition: PVector = nil; aReverseY: boolean = False); overload; virtual;
-    { A simpler canvas-style TextOut helper for RenderString.
+    (* A simpler canvas-style TextOut helper for RenderString.
       The rendering is reversed along Y by default, to allow direct use
-      with TgxCanvas }
+      with TgxCanvas *)
     procedure TextOut(var rci: TgxRenderContextInfo; X, Y: Single;
       const Text: UnicodeString; const Color: TColorVector); overload;
     procedure TextOut(var rci: TgxRenderContextInfo; X, Y: Single;
@@ -207,22 +206,22 @@ type
     function CharacterToTileIndex(aChar: WideChar): Integer; virtual;
     function TileIndexToChar(aIndex: Integer): WideChar; virtual;
     function CharacterCount: Integer; virtual;
-    { Get the actual width for this char. }
+    // Get the actual width for this char.
     function GetCharWidth(Ch: WideChar): Integer;
-    { Get the actual pixel width for this string. }
+    // Get the actual pixel width for this string.
     function CalcStringWidth(const aText: UnicodeString): Integer;
       overload; virtual;
     // make texture if needed
     procedure CheckTexture(var ARci: TgxRenderContextInfo);
-    { Height of a single character. }
+    // Height of a single character.
     property CharHeight: Integer read FCharHeight write SetCharHeight
       default 16;
     property TextureWidth: Integer read FTextureWidth write FTextureWidth;
     property TextureHeight: Integer read FTextureHeight write FTextureHeight;
   end;
 
-  { See TgxCustomBitmapFont.
-    This class only publuishes some of the properties. }
+  (* See TgxCustomBitmapFont.
+    This class only publuishes some of the properties. *)
   TgxBitmapFont = class(TgxCustomBitmapFont)
   published
     property Glyphs;
@@ -241,9 +240,9 @@ type
   TgxFlatTextOption = (ftoTwoSided);
   TgxFlatTextOptions = set of TgxFlatTextOption;
 
-  { A 2D text displayed and positionned in 3D coordinates.
+  (* A 2D text displayed and positionned in 3D coordinates.
     The FlatText uses a character font defined and stored by a TgxBitmapFont
-    component. Default character scale is 1 font pixel = 1 space unit. }
+    component. Default character scale is 1 font pixel = 1 space unit. *)
   TgxFlatText = class(TgxImmaterialSceneObject)
   private
     FBitmapFont: TgxCustomBitmapFont;
@@ -268,26 +267,26 @@ type
       renderSelf, renderChildren: boolean); override;
     procedure Assign(Source: TPersistent); override;
   published
-    { Refers the bitmap font to use.
+    (* Refers the bitmap font to use.
       The referred bitmap font component stores and allows access to
-      individual character bitmaps. }
+      individual character bitmaps. *)
     property BitmapFont: TgxCustomBitmapFont read FBitmapFont
       write SetBitmapFont;
-    { Text to render.
+    (* Text to render.
       Be aware that only the characters available in the bitmap font will
-      be rendered. CR LF sequences are allowed. }
+      be rendered. CR LF sequences are allowed. *)
     property Text: UnicodeString read FText write SetText;
-    { Controls the text alignment (horizontal).
-      Possible values : taLeftJustify, taRightJustify, taCenter }
+    (* Controls the text alignment (horizontal).
+      Possible values : taLeftJustify, taRightJustify, taCenter *)
     property Alignment: TAlignment read FAlignment write SetAlignment;
-    { Controls the text layout (vertical).
-      Possible values : tlTop, tlCenter, tlBottom }
+    (* Controls the text layout (vertical).
+      Possible values : tlTop, tlCenter, tlBottom *)
     property Layout: TgxTextLayout read FLayout write SetLayout;
-    { Color modulation, can be used for fade in/out too. }
+    // Color modulation, can be used for fade in/out too.
     property ModulateColor: TgxColor read FModulateColor write SetModulateColor;
-    { Flat text options.
+    (* Flat text options.
       ftoTwoSided : when set the text will be visible from its two
-      sides even if faceculling is on (at the scene-level).  }
+      sides even if faceculling is on (at the scene-level).  *)
     property Options: TgxFlatTextOptions read FOptions write SetOptions;
   end;
 

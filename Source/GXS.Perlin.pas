@@ -26,7 +26,7 @@ uses
 
   Scene.VectorGeometry,
   Scene.PerlinBase,
-  GXS.CrossPlatform,
+  GXS.Utils,
   GXS.HeightData;
 
 Type

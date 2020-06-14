@@ -33,7 +33,7 @@ uses
   Scene.VectorTypes,
   Scene.VectorGeometry,
   Scene.Strings,
-  GXS.CrossPlatform,
+  GXS.Utils,
   GXS.TextureFormat;
 
 const

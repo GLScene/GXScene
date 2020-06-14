@@ -15,7 +15,6 @@ uses
   System.SysUtils,
 
   Import.OpenGLx,
-  GXS.CrossPlatform,
   GXS.Context,
   GXS.Graphics,
   GXS.TextureFormat,

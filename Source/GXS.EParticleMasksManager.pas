@@ -46,7 +46,6 @@ uses
   Scene.VectorGeometry,
   Scene.VectorTypes, 
   GXS.ParticleFX, 
-  GXS.CrossPlatform, 
   GXS.Coordinates;
 
 type

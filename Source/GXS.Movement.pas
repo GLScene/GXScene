@@ -32,7 +32,7 @@ uses
 
   GXS.Scene,
   GXS.Objects,
-  GXS.CrossPlatform;
+  GXS.Utils;
 
 type
 

@@ -82,7 +82,6 @@ contains
   GXS.Console in '..\..\Source\GXS.Console.pas',
   GXS.Context in '..\..\Source\GXS.Context.pas',
   GXS.Coordinates in '..\..\Source\GXS.Coordinates.pas',
-  GXS.CrossPlatform in '..\..\Source\GXS.CrossPlatform.pas',
   Scene.CurvesAndSurfaces in '..\..\Source\Scene.CurvesAndSurfaces.pas',
   GXS.CustomShader in '..\..\Source\GXS.CustomShader.pas',
   GXS.DCE in '..\..\Source\GXS.DCE.pas',
@@ -273,6 +272,7 @@ contains
   Scene.Polynomials in '..\..\Source\Scene.Polynomials.pas';
 
 end.
+
 
 
 

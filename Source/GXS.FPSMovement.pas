@@ -22,7 +22,6 @@ uses
   Scene.XCollection,
   Scene.VectorTypes,
   GXS.Context,
-  GXS.CrossPlatform,
   Scene.VectorGeometry,
   GXS.Scene,
   GXS.Coordinates,

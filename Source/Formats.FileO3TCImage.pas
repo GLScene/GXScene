@@ -1,8 +1,8 @@
 (* ******************************************
-  *                                          *
-  * Graphic Scene Engine, http://glscene.org *
-  *                                          *
-  ******************************************* *)
+ *                                          *
+ * Graphic Scene Engine, http://glscene.org *
+ *                                          *
+ ********************************************)
 
 unit Formats.FileO3TCImage;
 
@@ -24,7 +24,6 @@ uses
 
   Import.OpenGLx,
   Scene.VectorGeometry,
-  GXS.CrossPlatform,
   GXS.Graphics,
   GXS.FileO3TC,
   GXS.TextureFormat;

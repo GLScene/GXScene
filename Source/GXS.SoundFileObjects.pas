@@ -1,14 +1,14 @@
-(*******************************************
-*                                          *
-* Graphic Scene Engine, http://glscene.org *
-*                                          *
-********************************************)
+(********************************************
+ *                                          *
+ * Graphic Scene Engine, http://glscene.org *
+ *                                          *
+ ********************************************)
 
 unit GXS.SoundFileObjects;
 
 (*
-   Support classes for loading various fileformats.
-   These classes work together like vector file formats or Delphi's TGraphic classes.
+  Support classes for loading various fileformats.
+  These classes work together like vector file formats or TGraphic classes.
 *)
 
 interface
@@ -18,9 +18,9 @@ interface
 uses
   System.Classes,
   System.SysUtils,
-  {$IFDEF MSWINDOWS}Winapi.MMSystem,{$ENDIF}
+{$IFDEF MSWINDOWS}Winapi.MMSystem, {$ENDIF}
   GXS.ApplicationFileIO,
-  GXS.CrossPlatform;
+  GXS.Utils;
 
 type
 
@@ -54,86 +54,88 @@ type
       default 8;
   end;
 
-   (* Abstract base class for different Sound file formats.
-      The actual implementation for these files (WAV, RAW...) must be done
-      seperately. The concept for TgxSoundFile is very similar to TGraphic
-      (see Delphi Help).
-      Default implementation for LoadFromFile/SaveToFile are to directly call the
-      relevent stream-based methods, ie. you will just have to override the stream
-      methods in most cases. *)
-   TgxSoundFile = class(TgxDataFile)
-   private
-     FSampling: TgxSoundSampling;
-   protected
-     procedure SetSampling(const val: TgxSoundSampling);
-   public
-     constructor Create(AOwner: TPersistent); override;
-     destructor Destroy; override;
-     procedure PlayOnWaveOut; virtual;
-     // Returns a pointer to the sample data viewed as an in-memory WAV File.
-     function WAVData: Pointer; virtual; abstract;
-     // Returns the size (in bytes) of the WAVData.
-     function WAVDataSize: Integer; virtual; abstract;
-     // Returns a pointer to the sample data viewed as an in-memory PCM buffer.
-     function PCMData: Pointer; virtual; abstract;
-     // Length of PCM data, in bytes.
-     function LengthInBytes: Integer; virtual; abstract;
-     // Nb of intensity samples in the sample.
-     function LengthInSamples: Integer;
-     // Length of play of the sample at nominal speed in seconds.
-     function LengthInSec: Single;
-     property Sampling: TgxSoundSampling read FSampling write SetSampling;
-   end;
+  (* Abstract base class for different Sound file formats.
+    The actual implementation for these files (WAV, RAW...) must be done
+    seperately. The concept for TgxSoundFile is very similar to TGraphic
+    (see Delphi Help).
+    Default implementation for LoadFromFile/SaveToFile are to directly call the
+    relevent stream-based methods, ie. you will just have to override the stream
+    methods in most cases. *)
+  TgxSoundFile = class(TgxDataFile)
+  private
+    FSampling: TgxSoundSampling;
+  protected
+    procedure SetSampling(const val: TgxSoundSampling);
+  public
+    constructor Create(AOwner: TPersistent); override;
+    destructor Destroy; override;
+    procedure PlayOnWaveOut; virtual;
+    // Returns a pointer to the sample data viewed as an in-memory WAV File.
+    function WAVData: Pointer; virtual; abstract;
+    // Returns the size (in bytes) of the WAVData.
+    function WAVDataSize: Integer; virtual; abstract;
+    // Returns a pointer to the sample data viewed as an in-memory PCM buffer.
+    function PCMData: Pointer; virtual; abstract;
+    // Length of PCM data, in bytes.
+    function LengthInBytes: Integer; virtual; abstract;
+    // Nb of intensity samples in the sample.
+    function LengthInSamples: Integer;
+    // Length of play of the sample at nominal speed in seconds.
+    function LengthInSec: Single;
+    property Sampling: TgxSoundSampling read FSampling write SetSampling;
+  end;
 
-   TgxSoundFileClass = class of TgxSoundFile;
+  TgxSoundFileClass = class of TgxSoundFile;
+  TgxSoundFileFormat = record
+    SoundFileClass: TgxSoundFileClass;
+    Extension: String;
+    Description: String;
+    DescResID: Integer;
+  end;
 
-   TgxSoundFileFormat = record
-      SoundFileClass : TgxSoundFileClass;
-      Extension      : String;
-      Description    : String;
-      DescResID      : Integer;
-   end;
-   PSoundFileFormat = ^TgxSoundFileFormat;
+  PSoundFileFormat = ^TgxSoundFileFormat;
+  TgxSoundFileFormatsList = class(TList)
+  public
+    destructor Destroy; override;
+    procedure Add(const Ext, Desc: String; DescID: Integer;
+      AClass: TgxSoundFileClass);
+    function FindExt(Ext: string): TgxSoundFileClass;
+    procedure Remove(AClass: TgxSoundFileClass);
+    procedure BuildFilterStrings(SoundFileClass: TgxSoundFileClass;
+      out Descriptions, Filters: string);
+  end;
 
-   TgxSoundFileFormatsList = class(TList)
-   public
-     destructor Destroy; override;
-     procedure Add(const Ext, Desc: String; DescID: Integer;
-       AClass: TgxSoundFileClass);
-     function FindExt(Ext: string): TgxSoundFileClass;
-     procedure Remove(AClass: TgxSoundFileClass);
-     procedure BuildFilterStrings(SoundFileClass: TgxSoundFileClass;
-       out Descriptions, Filters: string);
-   end;
-
-function GetGLSoundFileFormats : TgxSoundFileFormatsList;
-procedure RegisterSoundFileFormat(const AExtension, ADescription: String; AClass: TgxSoundFileClass);
+function GetGLSoundFileFormats: TgxSoundFileFormatsList;
+procedure RegisterSoundFileFormat(const AExtension, ADescription: String;
+  AClass: TgxSoundFileClass);
 procedure UnregisterSoundFileClass(AClass: TgxSoundFileClass);
 
 // ------------------------------------------------------------------
 implementation
+
 // ------------------------------------------------------------------
 
 var
-   vSoundFileFormats : TgxSoundFileFormatsList;
+  vSoundFileFormats: TgxSoundFileFormatsList;
 
-function GetGLSoundFileFormats : TgxSoundFileFormatsList;
+function GetGLSoundFileFormats: TgxSoundFileFormatsList;
 begin
-   if not Assigned(vSoundFileFormats)then
-      vSoundFileFormats := TgxSoundFileFormatsList.Create;
-   Result := vSoundFileFormats;
+  if not Assigned(vSoundFileFormats) then
+    vSoundFileFormats := TgxSoundFileFormatsList.Create;
+  Result := vSoundFileFormats;
 end;
 
-procedure RegisterSoundFileFormat(const AExtension, ADescription: String; AClass: TgxSoundFileClass);
+procedure RegisterSoundFileFormat(const AExtension, ADescription: String;
+  AClass: TgxSoundFileClass);
 begin
-   RegisterClass(AClass);
-	GetGLSoundFileFormats.Add(AExtension, ADescription, 0, AClass);
+  RegisterClass(AClass);
+  GetGLSoundFileFormats.Add(AExtension, ADescription, 0, AClass);
 end;
 
 procedure UnregisterSoundFileClass(AClass: TgxSoundFileClass);
 begin
-	if Assigned(vSoundFileFormats) then
-		vSoundFileFormats.Remove(AClass);
+  if Assigned(vSoundFileFormats) then
+    vSoundFileFormats.Remove(AClass);
 end;
 
 // ------------------
@@ -151,35 +153,39 @@ end;
 
 destructor TgxSoundSampling.Destroy;
 begin
-	inherited Destroy;
+  inherited Destroy;
 end;
 
 procedure TgxSoundSampling.Assign(Source: TPersistent);
 begin
-   if Source is TgxSoundSampling then begin
-      FFrequency:=TgxSoundSampling(Source).Frequency;
-      FNbChannels:=TgxSoundSampling(Source).NbChannels;
-      FBitsPerSample:=TgxSoundSampling(Source).BitsPerSample;
-   end else inherited;
+  if Source is TgxSoundSampling then
+  begin
+    FFrequency := TgxSoundSampling(Source).Frequency;
+    FNbChannels := TgxSoundSampling(Source).NbChannels;
+    FBitsPerSample := TgxSoundSampling(Source).BitsPerSample;
+  end
+  else
+    inherited;
 end;
 
-function TgxSoundSampling.GetOwner : TPersistent;
+function TgxSoundSampling.GetOwner: TPersistent;
 begin
-   Result:=FOwner;
+  Result := FOwner;
 end;
 
-function TgxSoundSampling.BytesPerSec : Integer;
+function TgxSoundSampling.BytesPerSec: Integer;
 begin
-   Result:=(FFrequency*FBitsPerSample*FNbChannels) shr 3;
+  Result := (FFrequency * FBitsPerSample * FNbChannels) shr 3;
 end;
 
-function TgxSoundSampling.BytesPerSample : Integer;
+function TgxSoundSampling.BytesPerSample: Integer;
 begin
-   Result:=FBitsPerSample shr 3;
+  Result := FBitsPerSample shr 3;
 end;
 
 {$IFDEF MSWINDOWS}
-function TgxSoundSampling.WaveFormat : TWaveFormatEx;
+
+function TgxSoundSampling.WaveFormat: TWaveFormatEx;
 begin
   Result.nSamplesPerSec := Frequency;
   Result.nChannels := NbChannels;
@@ -190,46 +196,46 @@ begin
   Result.cbSize := 0;
 end;
 {$ENDIF}
-
 // ------------------
 // ------------------ TgxSoundFile ------------------
 // ------------------
 
 constructor TgxSoundFile.Create(AOwner: TPersistent);
 begin
-   inherited;
-   FSampling:=TgxSoundSampling.Create(Self);
+  inherited;
+  FSampling := TgxSoundSampling.Create(Self);
 end;
 
 destructor TgxSoundFile.Destroy;
 begin
-   FSampling.Free;
-   inherited;
+  FSampling.Free;
+  inherited;
 end;
 
-procedure TgxSoundFile.SetSampling(const val : TgxSoundSampling);
+procedure TgxSoundFile.SetSampling(const val: TgxSoundSampling);
 begin
-   FSampling.Assign(val);
+  FSampling.Assign(val);
 end;
 
 procedure TgxSoundFile.PlayOnWaveOut;
 begin
-//   VXSoundFileObjects.PlayOnWaveOut(PCMData, LengthInSamples, Sampling);
+  // VXSoundFileObjects.PlayOnWaveOut(PCMData, LengthInSamples, Sampling);
 end;
 
-function TgxSoundFile.LengthInSamples : Integer;
+function TgxSoundFile.LengthInSamples: Integer;
 var
-   d : Integer;
+  d: Integer;
 begin
-   d:=Sampling.BytesPerSample*Sampling.NbChannels;
-   if d>0 then
-   	Result:=LengthInBytes div d
-   else Result:=0;
+  d := Sampling.BytesPerSample * Sampling.NbChannels;
+  if d > 0 then
+    Result := LengthInBytes div d
+  else
+    Result := 0;
 end;
 
-function TgxSoundFile.LengthInSec : Single;
+function TgxSoundFile.LengthInSec: Single;
 begin
-	Result:=LengthInBytes/Sampling.BytesPerSec;
+  Result := LengthInBytes / Sampling.BytesPerSec;
 end;
 
 // ------------------
@@ -238,89 +244,101 @@ end;
 
 destructor TgxSoundFileFormatsList.Destroy;
 var
-   i : Integer;
+  i: Integer;
 begin
-   for i:=0 to Count-1 do Dispose(PSoundFileFormat(Items[i]));
-   inherited;
+  for i := 0 to Count - 1 do
+    Dispose(PSoundFileFormat(Items[i]));
+  inherited;
 end;
 
 procedure TgxSoundFileFormatsList.Add(const Ext, Desc: String; DescID: Integer;
-                                     AClass: TgxSoundFileClass);
+  AClass: TgxSoundFileClass);
 var
-   newRec: PSoundFileFormat;
+  newRec: PSoundFileFormat;
 begin
-   New(newRec);
-   with newRec^ do begin
-      Extension := AnsiLowerCase(Ext);
-      SoundFileClass := AClass;
-      Description := Desc;
-      DescResID := DescID;
-   end;
-   inherited Add(NewRec);
+  New(newRec);
+  with newRec^ do
+  begin
+    Extension := AnsiLowerCase(Ext);
+    SoundFileClass := AClass;
+    Description := Desc;
+    DescResID := DescID;
+  end;
+  inherited Add(newRec);
 end;
 
 function TgxSoundFileFormatsList.FindExt(Ext: string): TgxSoundFileClass;
 var
-   i : Integer;
+  i: Integer;
 begin
-   Ext := AnsiLowerCase(Ext);
-   for I := Count-1 downto 0 do with PSoundFileFormat(Items[I])^ do
-      if (Extension = Ext) or ('.'+Extension = Ext) then begin
-         Result := SoundFileClass;
-         Exit;
+  Ext := AnsiLowerCase(Ext);
+  for i := Count - 1 downto 0 do
+    with PSoundFileFormat(Items[i])^ do
+      if (Extension = Ext) or ('.' + Extension = Ext) then
+      begin
+        Result := SoundFileClass;
+        Exit;
       end;
-   Result := nil;
+  Result := nil;
 end;
 
 procedure TgxSoundFileFormatsList.Remove(AClass: TgxSoundFileClass);
 var
-   i : Integer;
-   p : PSoundFileFormat;
+  i: Integer;
+  p: PSoundFileFormat;
 begin
-   for I := Count-1 downto 0 do begin
-      P := PSoundFileFormat(Items[I]);
-      if P^.SoundFileClass.InheritsFrom(AClass) then begin
-         Dispose(P);
-         Delete(I);
-      end;
-   end;
+  for i := Count - 1 downto 0 do
+  begin
+    p := PSoundFileFormat(Items[i]);
+    if p^.SoundFileClass.InheritsFrom(AClass) then
+    begin
+      Dispose(p);
+      Delete(i);
+    end;
+  end;
 end;
 
-procedure TgxSoundFileFormatsList.BuildFilterStrings(SoundFileClass: TgxSoundFileClass;
-                                                    out Descriptions, Filters: string);
+procedure TgxSoundFileFormatsList.BuildFilterStrings(SoundFileClass
+  : TgxSoundFileClass; out Descriptions, Filters: string);
 var
-   c, i : Integer;
-   p    : PSoundFileFormat;
+  c, i: Integer;
+  p: PSoundFileFormat;
 begin
-   Descriptions := '';
-   Filters := '';
-   C := 0;
-   for I := Count-1 downto 0 do begin
-      P := PSoundFileFormat(Items[I]);
-      if P^.SoundFileClass.InheritsFrom(SoundFileClass) and (P^.Extension <> '') then
-         with P^ do begin
-            if C <> 0 then begin
-               Descriptions := Descriptions+'|';
-               Filters := Filters+';';
-            end;
-            if (Description = '') and (DescResID <> 0) then
-               Description := LoadStr(DescResID);
-            FmtStr(Descriptions, '%s%s (*.%s)|*.%2:s',
-                   [Descriptions, Description, Extension]);
-            FmtStr(Filters, '%s*.%s', [Filters, Extension]);
-            Inc(C);
-         end;
-   end;
-   if C > 1 then
-      FmtStr(Descriptions, '%s (%s)|%1:s|%s', [sAllFilter, Filters, Descriptions]);
+  Descriptions := '';
+  Filters := '';
+  c := 0;
+  for i := Count - 1 downto 0 do
+  begin
+    p := PSoundFileFormat(Items[i]);
+    if p^.SoundFileClass.InheritsFrom(SoundFileClass) and (p^.Extension <> '')
+    then
+      with p^ do
+      begin
+        if c <> 0 then
+        begin
+          Descriptions := Descriptions + '|';
+          Filters := Filters + ';';
+        end;
+        if (Description = '') and (DescResID <> 0) then
+          Description := LoadStr(DescResID);
+        FmtStr(Descriptions, '%s%s (*.%s)|*.%2:s', [Descriptions, Description,
+          Extension]);
+        FmtStr(Filters, '%s*.%s', [Filters, Extension]);
+        Inc(c);
+      end;
+  end;
+  if c > 1 then
+    FmtStr(Descriptions, '%s (%s)|%1:s|%s',
+      [sAllFilter, Filters, Descriptions]);
 end;
 
 // ------------------------------------------------------------------
 initialization
+
 // ------------------------------------------------------------------
 
 finalization
 
-  FreeAndNil(vSoundFileFormats);
+FreeAndNil(vSoundFileFormats);
 
 end.

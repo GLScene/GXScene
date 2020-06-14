@@ -26,7 +26,6 @@ uses
   GXS.Texture,
   GXS.Material,
   GXS.Graphics,
-  GXS.CrossPlatform,
   GXS.State,
   GXS.Utils,
   GXS.TextureFormat,

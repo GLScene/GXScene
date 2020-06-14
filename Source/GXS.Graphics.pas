@@ -41,7 +41,6 @@ uses
   GXS.Context,
   GXS.ImageUtils,
   GXS.Utils,
-  GXS.CrossPlatform,
   GXS.Color,
   GXS.TextureFormat,
   Scene.Strings;

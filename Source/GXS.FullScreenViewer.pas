@@ -26,7 +26,7 @@ uses
   GXS.Context,
   GXS.Win64Viewer,
   GXS.Win64Context,
-  GXS.Crossplatform,
+  GXS.Utils,
   GXS.Screen;
 
 type

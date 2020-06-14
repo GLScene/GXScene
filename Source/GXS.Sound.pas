@@ -22,7 +22,6 @@ uses
   Scene.VectorGeometry,
   GXS.Cadencer,
   Scene.BaseClasses,
-  GXS.CrossPlatform,
   GXS.Utils;
 
 {$I Scene.inc}

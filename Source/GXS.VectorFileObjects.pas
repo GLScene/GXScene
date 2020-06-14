@@ -1320,7 +1320,6 @@ implementation
 // ===========================================================================
 
 uses
-  GXS.CrossPlatform,
   GXS.MeshUtils,
   GXS.BaseMeshSilhouette;
 

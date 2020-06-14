@@ -18,7 +18,6 @@ uses
   Import.OpenGLx,
   Scene.VectorGeometry,
   Scene.Strings,
-  GXS.CrossPlatform,
   GXS.Context,
   GXS.Graphics,
   GXS.TextureFormat,

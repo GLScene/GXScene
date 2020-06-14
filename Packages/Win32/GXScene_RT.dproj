@@ -205,7 +205,6 @@
         <DCCReference Include="..\..\Source\GXS.Console.pas"/>
         <DCCReference Include="..\..\Source\GXS.Context.pas"/>
         <DCCReference Include="..\..\Source\GXS.Coordinates.pas"/>
-        <DCCReference Include="..\..\Source\GXS.CrossPlatform.pas"/>
         <DCCReference Include="..\..\Source\Scene.CurvesAndSurfaces.pas"/>
         <DCCReference Include="..\..\Source\GXS.CustomShader.pas"/>
         <DCCReference Include="..\..\Source\GXS.DCE.pas"/>

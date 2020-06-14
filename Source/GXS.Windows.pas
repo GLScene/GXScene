@@ -35,7 +35,6 @@ uses
   GXS.BitmapFont,
   GXS.WindowsFont,
   GXS.Gui,
-  GXS.CrossPlatform,
   GXS.Color,
   GXS.RenderContextInfo,
   GXS.Objects,

@@ -21,7 +21,6 @@ uses
   Scene.VectorGeometry,
   Scene.RGBE,
   Scene.Strings,
-  GXS.CrossPlatform,
   GXS.Context,
   GXS.Graphics,
   GXS.TextureFormat,

@@ -13,7 +13,6 @@ uses
   FMX.Dialogs,
 
   Import.OpenGLx,
-  GXS.CrossPlatform,
   GXS.CUDA,
   GXS.Context,
   GXS.State,

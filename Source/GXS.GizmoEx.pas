@@ -24,27 +24,27 @@ uses
   FMX.TextLayout,
 
   Import.OpenGLx,
+  Scene.GeometryBB,
+  Scene.VectorTypes,
+  Scene.VectorGeometry,
+  Scene.PersistentClasses,
+  Scene.Strings,
   GXS.Scene,
   GXS.Color,
-  GXS.Objects,
-  Scene.VectorGeometry,
   GXS.Material,
-  Scene.Strings,
+  GXS.Objects,
   GXS.Win64Viewer,
   GXS.GeomObjects,
   GXS.BitmapFont,
   GXS.VectorFileObjects,
-  GXS.CrossPlatform,
   GXS.Coordinates,
   GXS.RenderContextInfo,
-  Scene.GeometryBB,
-  Scene.VectorTypes,
   GXS.Canvas,
-  Scene.PersistentClasses,
   GXS.Screen,
   GXS.State,
   GXS.PipelineTransformation,
   GXS.Selection,
+  GXS.Utils,
   GXS.Context;
 
 
@@ -152,7 +152,6 @@ type
   TgxGizmoExPickMode = (pmGetPickedObjects, pmRayCast);
 
   //Gizmo objects
-
   TgxGizmoExUIFrustrum = class(TgxFrustrum)
   private
     FNoZWrite: Boolean;

@@ -31,7 +31,6 @@ uses
   GXS.Texture,
   GXS.Color,
   GXS.Coordinates,
-  GXS.CrossPlatform,
   GXS.State,
   GXS.TextureFormat,
   GXS.ApplicationFileIO,

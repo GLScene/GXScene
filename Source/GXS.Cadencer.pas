@@ -22,7 +22,6 @@ uses
   FMX.Forms,
 
   GXS.Scene,
-  GXS.CrossPlatform,
   Scene.BaseClasses;
 
 type

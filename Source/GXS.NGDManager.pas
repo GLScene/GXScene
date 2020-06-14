@@ -28,7 +28,6 @@ uses
   Scene.BaseClasses,
   GXS.Scene,
   Scene.Manager,
-  GXS.CrossPlatform,
   GXS.Coordinates,
   GXS.Objects,
   GXS.GeomObjects,

@@ -19,8 +19,7 @@ uses
   Scene.PersistentClasses,
   Scene.VectorLists,
   Scene.VectorGeometry,
-  Scene.VectorTypes,
-  GXS.CrossPlatform;
+  Scene.VectorTypes;
 
 (* Converts a triangle strips into a triangle list.
   Vertices are added to list, based on the content of strip. Both non-indexed

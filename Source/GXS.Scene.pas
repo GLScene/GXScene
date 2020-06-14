@@ -39,7 +39,6 @@ uses
   GXS.PipeLineTransformation,
   GXS.State,
   GXS.Graphics,
-  GXS.CrossPlatform,
   GXS.Texture,
   GXS.Color,
   GXS.Coordinates,

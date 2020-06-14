@@ -22,7 +22,6 @@ uses
   GXS.VectorFileObjects,
   Scene.VectorTypes,
   Scene.PersistentClasses,
-  GXS.CrossPlatform,
   GXS.Coordinates,
   GXS.RenderContextInfo,
   GXS.State;

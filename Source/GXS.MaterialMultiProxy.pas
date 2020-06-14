@@ -42,7 +42,6 @@ uses
   GXS.Material,
   GXS.Silhouette,
   Scene.Strings,
-  GXS.CrossPlatform,
   Scene.PersistentClasses,
   GXS.RenderContextInfo,
   Scene.BaseClasses,

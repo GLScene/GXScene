@@ -26,7 +26,6 @@ uses
   Import.SDL2,
   Scene.XOpenGL,
   GXS.Scene,
-  GXS.CrossPlatform,
   GXS.Context,
   GXS.SDLWindow;
 

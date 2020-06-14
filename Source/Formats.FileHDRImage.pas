@@ -23,7 +23,6 @@ uses
 
   Import.OpenGLx,
   Scene.VectorGeometry,
-  GXS.CrossPlatform,
   GXS.Graphics;
 
 type

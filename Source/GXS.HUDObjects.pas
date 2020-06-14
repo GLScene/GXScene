@@ -24,7 +24,7 @@ uses
   Scene.VectorGeometry,
   GXS.Objects,
   GXS.BitmapFont,
-  GXS.CrossPlatform,
+  GXS.Utils,
   GXS.Color,
   GXS.RenderContextInfo,
   GXS.Context,
@@ -32,13 +32,13 @@ uses
 
 type
 
-  { A rectangular area, NOT perspective projected.
+  (* A rectangular area, NOT perspective projected.
     (x, y) coordinates map directly to the viewport (in pixels) and refer
-    the center of the area. 
+    the center of the area.
     The coordinate system is that of an equivalent TCanvas, ie. top-left
-    point is the origin (0, 0). 
-    The z component is ignored and Z-Buffer is disabled when rendering. 
-     Using TgxHUDSprite in 2D only scenes :  
+    point is the origin (0, 0).
+    The z component is ignored and Z-Buffer is disabled when rendering.
+     Using TgxHUDSprite in 2D only scenes :
     The most convenient way to use a TgxHUDSprite as a simple 2D sprite with
     blending capabilities (transparency or additive), is to set the texture
     mode to tmModulate, in FrontProperties, to use the Emission color to
@@ -48,7 +48,7 @@ type
     AlphaChannel field. This provides you with hardware accelerated,
     alpha-blended blitting.
     Note : since TgxHUDSprite works in absolute coordinates, TgxProxyObject
-    can't be used to duplicate an hud sprite. }
+    can't be used to duplicate an hud sprite. *)
   TgxHUDSprite = class(TgxSprite)
   private
     FXTiles, FYTiles: Integer;
@@ -69,10 +69,10 @@ type
     property Height stored StoreHeight;
   end;
 
-  { A 2D text displayed and positionned in 2D coordinates.
+  (* A 2D text displayed and positionned in 2D coordinates.
     The HUDText uses a character font defined and stored by a TgxBitmapFont
     component. The text can be scaled and rotated (2D), the layout and
-    alignment can also be controled. }
+    alignment can also be controled. *)
   TgxHUDText = class(TgxImmaterialSceneObject)
   private
     FBitmapFont: TgxCustomBitmapFont;
@@ -98,41 +98,41 @@ type
     procedure DoRender(var rci: TgxRenderContextInfo;
       renderSelf, renderChildren: Boolean); override;
   published
-    { Refers the bitmap font to use.
+    (* Refers the bitmap font to use.
       The referred bitmap font component stores and allows access to
-      individual character bitmaps. }
+      individual character bitmaps. *)
     property BitmapFont: TgxCustomBitmapFont read FBitmapFont
       write SetBitmapFont;
-    { Text to render.
+    (* Text to render.
       Be aware that only the characters available in the bitmap font will
-      be rendered. CR LF sequences are allowed. }
+      be rendered. CR LF sequences are allowed. *)
     property Text: UnicodeString read FText write SetText;
-    { Rotation angle in degrees (2d). }
+    // Rotation angle in degrees (2d).
     property Rotation: Single read FRotation write SetRotation;
-    { Controls the text alignment (horizontal).
-      Possible values : taLeftJustify, taRightJustify, taCenter }
+    (* Controls the text alignment (horizontal).
+      Possible values : taLeftJustify, taRightJustify, taCenter *)
     property Alignment: TAlignment read FAlignment write SetAlignment
       default taLeftJustify;
-    { Controls the text layout (vertical).
-      Possible values : tlTop, tlCenter, tlBottom }
+    (* Controls the text layout (vertical).
+       Possible values : tlTop, tlCenter, tlBottom *)
     property Layout: TgxTextLayout read FLayout write SetLayout default tlTop;
     { Color modulation, can be used for fade in/out too. }
     property ModulateColor: TgxColor read FModulateColor write SetModulateColor;
   end;
 
-  { Position (X, Y and X) is in absolute coordinates. This component converts
-    them to screen coordinates and renderes text there. }
+  (* Position (X, Y and X) is in absolute coordinates. This component converts
+     them to screen coordinates and renderes text there. *)
   TgxAbsoluteHUDText = class(TgxHUDText)
   public
     procedure DoRender(var rci: TgxRenderContextInfo;
       renderSelf, renderChildren: Boolean); override;
   end;
 
-  { Position (X and Y) is expected in a [0..1] range (from Screen size)
-    This component converts this position to the actual screen position and
-    renders the text there. This way a HUD text always appears to be in the
-    the same place, regardless of the currect screen resolution.
-    Note: this still does not solve the font scaling problem. }
+  (* Position (X and Y) is expected in a [0..1] range (from Screen size)
+     This component converts this position to the actual screen position and
+     renders the text there. This way a HUD text always appears to be in the
+     the same place, regardless of the currect screen resolution.
+     Note: this still does not solve the font scaling problem. *)
   TgxResolutionIndependantHUDText = class(TgxHUDText)
   public
     procedure DoRender(var rci: TgxRenderContextInfo;
@@ -264,16 +264,10 @@ begin
     Self.renderChildren(0, Count - 1, rci);
 end;
 
-// StoreHeight
-//
-
 function TgxHUDSprite.StoreHeight: Boolean;
 begin
   Result := Abs(Height - 16) > 0.001;
 end;
-
-// StoreWidth
-//
 
 function TgxHUDSprite.StoreWidth: Boolean;
 begin
@@ -432,7 +426,6 @@ end;
 //=======================================================================
 initialization
 //=======================================================================
-
 
 RegisterClasses([TgxHUDText, TgxHUDSprite, TgxResolutionIndependantHUDText,
   TgxAbsoluteHUDText]);

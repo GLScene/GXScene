@@ -25,12 +25,12 @@ uses
   Import.OpenGLx,
   Scene.VectorTypes,
   Scene.PersistentClasses,
+  Scene.VectorGeometry,
   GXS.Scene,
   GXS.PipelineTransformation,
   GXS.Context,
-  Scene.VectorGeometry,
   GXS.Objects,
-  GXS.CrossPlatform,
+  GXS.Utils,
   GXS.Color,
   GXS.RenderContextInfo,
   GXS.State,
@@ -46,19 +46,19 @@ const
 
 type
 
-  { A simple shadow plane. 
-     This mirror requires a stencil buffer for optimal rendering! 
+  (* A simple shadow plane.
+     This mirror requires a stencil buffer for optimal rendering!
      The object is a mix between a plane and a proxy object, in that the plane
      defines where the shadows are cast, while the proxy part is used to reference
      the objects that should be shadowing (it is legal to self-shadow, but no
-     self-shadow visuals will be rendered). 
+     self-shadow visuals will be rendered).
      If stenciling isn't used, the shadow will 'paint' the ShadowColor instead
-     of blending it transparently. 
+     of blending it transparently.
      You can have lower quality shadow geometry: add a dummycube, set it to
      invisible (so it won't be rendered in the "regular" pass), and under
      it place another visible dummycube under which you have all your
      low quality objects, use it as shadowing object. Apply the same movements
-     to the low-quality objects that you apply to the visible, high-quality ones }
+     to the low-quality objects that you apply to the visible, high-quality ones *)
   TgxShadowPlane = class(TgxPlane)
   private
     FRendering: Boolean;
@@ -80,30 +80,29 @@ type
       ARenderSelf, ARenderChildren: Boolean); override;
     procedure Assign(Source: TPersistent); override;
   published
-    { Selects the object to mirror. 
-             If nil, the whole scene is mirrored. }
+    // Selects the object to mirror. If nil, the whole scene is mirrored.
     property ShadowingObject: TgxBaseSceneObject read FShadowingObject write SetShadowingObject;
-    { The light which casts shadows. 
-       The light must be enabled otherwise shadows won't be cast. }
+    (* The light which casts shadows.
+       The light must be enabled otherwise shadows won't be cast. *)
     property ShadowedLight: TgxLightSource read FShadowedLight write SetShadowedLight;
-    { The shadow's color. 
-       This color is transparently blended to make shadowed area darker. }
+    (* The shadow's color.
+       This color is transparently blended to make shadowed area darker. *)
     property ShadowColor: TgxColor read FShadowColor write SetShadowColor;
-    { Controls rendering options. 
-        spoUseStencil: plane area is stenciled, prevents shadowing
+    (* Controls rendering options.
+       spoUseStencil: plane area is stenciled, prevents shadowing
           objects to be visible on the sides of the mirror (stencil buffer
           must be active in the viewer too). It also allows shadows to
           be partial (blended).
-        spoScissor: plane area is 'scissored', this should improve
+       spoScissor: plane area is 'scissored', this should improve
           rendering speed by limiting rendering operations and fill rate,
           may have adverse effects on old hardware in rare cases
-        spoTransparent: does not render the plane's material, may help
+       spoTransparent: does not render the plane's material, may help
           improve performance if you're fillrate limited, are using the
-          stencil, and your hardware has optimized stencil-only writes  }
+          stencil, and your hardware has optimized stencil-only writes  *)
     property ShadowOptions: TShadowPlaneOptions read FShadowOptions write SetShadowOptions default cDefaultShadowPlaneOptions;
-    { Fired before the shadows are rendered. }
+    // Fired before the shadows are rendered.
     property OnBeginRenderingShadows: TNotifyEvent read FOnBeginRenderingShadows write FOnBeginRenderingShadows;
-    { Fired after the shadows are rendered. }
+    // Fired after the shadows are rendered.
     property OnEndRenderingShadows: TNotifyEvent read FOnEndRenderingShadows write FOnEndRenderingShadows;
   end;
 
@@ -115,7 +114,6 @@ implementation
 // ------------------ TgxShadowPlane ------------------
 // ------------------
 
-
 constructor TgxShadowPlane.Create(AOwner: Tcomponent);
 const
   cDefaultShadowColor: TColorVector = (X:0; Y:0; Z:0; W:0.5);
@@ -126,15 +124,11 @@ begin
   FShadowColor := TgxColor.CreateInitialized(Self, cDefaultShadowColor);
 end;
 
-// Destroy
-//
-
 destructor TgxShadowPlane.Destroy;
 begin
   inherited;
   FShadowColor.Free;
 end;
-
 
 procedure TgxShadowPlane.DoRender(var ARci: TgxRenderContextInfo;
   ARenderSelf, ARenderChildren: Boolean);
@@ -298,7 +292,6 @@ begin
   inherited;
 end;
 
-
 procedure TgxShadowPlane.SetShadowingObject(const val: TgxBaseSceneObject);
 begin
   if FShadowingObject <> val then
@@ -311,7 +304,6 @@ begin
     NotifyChange(Self);
   end;
 end;
-
 
 procedure TgxShadowPlane.SetShadowedLight(const val: TgxLightSource);
 begin
@@ -332,7 +324,6 @@ begin
   FShadowColor.Assign(val);
 end;
 
-
 procedure TgxShadowPlane.Assign(Source: TPersistent);
 begin
   if Assigned(Source) and (Source is TgxShadowPlane) then
@@ -344,7 +335,6 @@ begin
   end;
   inherited Assign(Source);
 end;
-
 
 procedure TgxShadowPlane.SetShadowOptions(const val: TShadowPlaneOptions);
 begin

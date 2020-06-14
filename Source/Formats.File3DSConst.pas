@@ -1,10 +1,12 @@
-//
-// Graphic Scene Engine, http://glscene.org
-//
-(*
- Constants for commonly used structures
-*)
+(*******************************************
+*                                          *
+* Graphic Scene Engine, http://glscene.org *
+*                                          *
+********************************************)
+
 unit Formats.File3DSConst;
+
+(* Constants for commonly used structures *)
 
 interface
 

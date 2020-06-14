@@ -21,8 +21,7 @@ uses
 
   Import.OpenGLx,
   GXS.Material,
-  GXS.CrossPlatform, 
-  GXS.Scene, 
+  GXS.Scene,
   GXS.Color,
   Scene.BaseClasses, 
   GXS.RenderContextInfo, 

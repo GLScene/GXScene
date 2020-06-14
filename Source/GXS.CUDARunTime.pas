@@ -54,8 +54,7 @@ uses
   Import.OpenCL_Platform,
 
   Import.OpenGLx,
-  GXS.CUDAAPI,
-  GXS.CrossPlatform;
+  GXS.CUDAAPI;
 
 
 const

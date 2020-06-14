@@ -23,7 +23,6 @@ uses
   GXS.RenderContextInfo,
   GXS.TextureCombiners,
   GXS.Context,
-  GXS.CrossPlatform,
   GXS.Utils;
 
 type

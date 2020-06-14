@@ -62,7 +62,6 @@ uses
   GXS.Context,
   GXS.Texture,
   GXS.Utils,
-  GXS.CrossPlatform,
   GXS.Material;
 
 const

@@ -25,7 +25,6 @@ uses
   System.Classes,
   System.SysUtils,
 
-  GXS.CrossPlatform,
   GXS.ApplicationFileIO;
 
 type

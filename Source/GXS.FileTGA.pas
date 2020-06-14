@@ -22,8 +22,7 @@ uses
   FMX.Graphics,
   FMX.Types,
 
-  GXS.Graphics,
-  GXS.CrossPlatform;
+  GXS.Graphics;
 
 type
   (* TGA image load/save capable class for Delphi.

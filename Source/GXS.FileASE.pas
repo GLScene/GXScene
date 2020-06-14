@@ -20,7 +20,6 @@ uses
   Scene.VectorTypes,
   Scene.VectorGeometry,
   Scene.VectorLists,
-  GXS.CrossPlatform,
   GXS.Texture,
   GXS.Material;
 

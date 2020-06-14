@@ -13,8 +13,8 @@ interface
 uses
   System.SysUtils,
   FMX.Dialogs,
-  GXS.CrossPlatform,
-  Scene.Strings;
+  Scene.Strings,
+  GXS.Utils;
 
 type
 

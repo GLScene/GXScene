@@ -27,7 +27,6 @@ uses
   GXS.Scene,
   GXS.Context,
   GXS.Material,
-  GXS.CrossPlatform,
   GXS.RenderContextInfo,
   Scene.BaseClasses,
   GXS.State;

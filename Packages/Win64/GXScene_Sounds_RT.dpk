@@ -46,10 +46,10 @@ contains
   Import.fmoderrors in '..\..\Source\Import.fmoderrors.pas',
   Import.fmodpresets in '..\..\Source\Import.fmodpresets.pas',
   Import.fmodtypes in '..\..\Source\Import.fmodtypes.pas',
+  Import.OpenAL in '..\..\Source\Import.OpenAL.pas',
   GXS.SMBASS in '..\..\Source\GXS.SMBASS.pas',
   GXS.SMFMOD in '..\..\Source\GXS.SMFMOD.pas',
   GXS.SMOpenAL in '..\..\Source\GXS.SMOpenAL.pas',
-  GXS.SMWaveOut in '..\..\Source\GXS.SMWaveOut.pas',
-  Import.OpenAL in '..\..\Source\Import.OpenAL.pas';
+  GXS.SMWaveOut in '..\..\Source\GXS.SMWaveOut.pas';
 
 end.

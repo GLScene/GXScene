@@ -36,7 +36,7 @@ requires
   GXScene_RT;
 
 contains
-  FCUDAEditor in '..\..\Source\FCUDAEditor.pas' {FCUDAEditor: TForm},
-  GXS.ParallelRegister in '..\..\Source\GXS.ParallelRegister.pas';
+  GXS.ParallelRegister in '..\..\Source\GXS.ParallelRegister.pas',
+  Design.FCUDAEditor in '..\..\Source\Design.FCUDAEditor.pas' {CUDAEditorForm};
 
 end.

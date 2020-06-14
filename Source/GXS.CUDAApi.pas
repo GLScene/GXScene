@@ -49,7 +49,6 @@ uses
   FMX.Dialogs,
   Import.OpenCL,
   Import.OpenCL_Platform,
-  GXS.CrossPlatform,
   Scene.Strings;
 
 const

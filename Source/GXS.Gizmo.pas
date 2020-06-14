@@ -19,24 +19,24 @@ uses
   System.Classes,
   System.SysUtils,
   FMX.TextLayout,
-  
+
   Scene.PersistentClasses,
+  Scene.VectorGeometry,
+  Scene.VectorTypes,
+  Scene.Strings,
   GXS.Scene,
   GXS.Color,
   GXS.Objects,
-  Scene.VectorGeometry,
   GXS.Material,
-  Scene.Strings,
   GXS.GeomObjects,
   GXS.BitmapFont,
   GXS.Win64Viewer,
   GXS.VectorFileObjects,
-  GXS.CrossPlatform,
+  GXS.Utils,
   GXS.Coordinates,
   GXS.RenderContextInfo,
   GXS.State,
-  GXS.Selection,
-  Scene.VectorTypes;
+  GXS.Selection;
 
 type
   TgxGizmoUndoCollection = class;
@@ -245,16 +245,16 @@ type
     property NoZWrite: Boolean read FNoZWrite write FNoZWrite;
     property GizmoThickness: Single read FGizmoThickness
       write SetGizmoThickness;
-    { Indicates whether the gizmo is enabled or not.
+    (* Indicates whether the gizmo is enabled or not.
       WARNING: When loading/editing (possibly whenever a structureChanged
       call is made) a model, sometimes the gizmo will trigger a
       bug if the mouse is inside the Viewer. To prevent that,
       remember to disable the gizmo before loading, then process windows
       messages (i.e. application.processMessage) and then enable the gizmo
-      again. }
-    { Warning Enable is ReadOnly property if you set to False, Gizmo is not Hidden
+      again. *)
+    (* Warning Enable is ReadOnly property if you set to False, Gizmo is not Hidden
       use Visible instead if you want to Hide, if you want to Hide but keep enabled
-      see the VisibleGizmo property }
+      see the VisibleGizmo property *)
     property Enabled: Boolean read FEnabled write FEnabled default False;
     property LabelFont: TgxCustomBitmapFont read FLabelFont write SetLabelFont
       default nil;
@@ -262,9 +262,9 @@ type
       write FOnBeforeSelect;
     property OnSelectionLost: TNotifyEvent read FOnSelectionLost
       write FOnSelectionLost;
-    { Called before an Update is applied. The "vector" parameter is the difference
+    (* Called before an Update is applied. The "vector" parameter is the difference
       that will be applied to the object, according to the axis and
-      operation selected. }
+      operation selected. *)
     property OnBeforeUpdate: TgxGizmoUpdateEvent read FOnBeforeUpdate
       write FOnBeforeUpdate;
     property PickMode: TgxGizmoPickMode read FPickMode write FPickMode

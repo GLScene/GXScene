@@ -22,11 +22,9 @@ object ColorEditorFrame: TColorEditorFrame
     Size.Width = 365.000000000000000000
     Size.Height = 128.000000000000000000
     Size.PlatformDefault = False
-    TabOrder = 0
   end
   object AlphaEdit: TEdit
     Touch.InteractiveGestures = [LongTap, DoubleTap]
-    TabOrder = 1
     Text = '0'
     Position.X = 160.000000000000000000
     Position.Y = 80.000000000000000000
@@ -37,7 +35,6 @@ object ColorEditorFrame: TColorEditorFrame
   end
   object BlueEdit: TEdit
     Touch.InteractiveGestures = [LongTap, DoubleTap]
-    TabOrder = 2
     Text = '0'
     Position.X = 160.000000000000000000
     Position.Y = 56.000000000000000000
@@ -48,7 +45,6 @@ object ColorEditorFrame: TColorEditorFrame
   end
   object GreenEdit: TEdit
     Touch.InteractiveGestures = [LongTap, DoubleTap]
-    TabOrder = 3
     Text = '0'
     Position.X = 160.000000000000000000
     Position.Y = 32.000000000000000000
@@ -102,7 +98,6 @@ object ColorEditorFrame: TColorEditorFrame
   end
   object RedEdit: TEdit
     Touch.InteractiveGestures = [LongTap, DoubleTap]
-    TabOrder = 8
     Text = '0'
     Position.X = 160.000000000000000000
     Position.Y = 8.000000000000000000
@@ -118,7 +113,6 @@ object ColorEditorFrame: TColorEditorFrame
     Size.Width = 105.000000000000000000
     Size.Height = 105.000000000000000000
     Size.PlatformDefault = False
-    TabOrder = 9
     OnDblClick = PAPreviewDblClick
   end
 end

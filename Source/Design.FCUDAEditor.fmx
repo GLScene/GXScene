@@ -1,7 +1,7 @@
-object gxSCUDAEditorForm: TgxSCUDAEditorForm
+object CUDAEditorForm: TCUDAEditorForm
   Left = 0
   Top = 0
-  Caption = 'Form1'
+  Caption = 'CUDA Editor'
   ClientHeight = 480
   ClientWidth = 640
   FormFactor.Width = 320
@@ -35,7 +35,6 @@ object gxSCUDAEditorForm: TgxSCUDAEditorForm
               AD214C8A8EEB0491198A743103EEB0987F00BCD98620FC3AAA0101182EACE655
               3DB64203EE6693BA45AEA0DC6664B5D6B63A8313A08CB553D356D1C72EC32FF3
               7CD125F5816F3FE89D944E66519EDE7304D7620000000049454E44AE426082}
-            FileName = 'D:\GXScene\demos\media\GLScene.bmp'
           end>
         Align = Client
         Size.Width = 41.000000000000000000
@@ -68,7 +67,6 @@ object gxSCUDAEditorForm: TgxSCUDAEditorForm
               26788D83F6F47A074A11EAE32A1A93BA8934CAE51284B037A6294050E08A10DC
               5806220265994F3EF024705B28CCEB8A1432CA9C4808BF038BDD8361DE59B930
               C470D3F34EFEFF1F005C003749849CB1BC2E190000000049454E44AE426082}
-            FileName = 'D:\GXScene\demos\media\Flare1.bmp'
           end>
         Align = Client
         Size.Width = 41.000000000000000000
@@ -100,7 +98,6 @@ object gxSCUDAEditorForm: TgxSCUDAEditorForm
               580209068034DBD93230FCFCC9C070F2144618E03700A4D9D28281E1D72F0686
               B3E7B006201394C60DBE7EC3A999388016EA5407F89DE5BC1261FBDE70AC6A09
               87C120070C0C005FEB47B75B2269BF0000000049454E44AE426082}
-            FileName = 'D:\GXScene\demos\media\basinMask.bmp'
           end>
         Align = Client
         Size.Width = 41.000000000000000000

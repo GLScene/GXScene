@@ -25,7 +25,7 @@ uses
   Scene.PersistentClasses,
   Scene.BaseClasses,
   GXS.Scene,
-  GXS.CrossPlatform,
+  GXS.Utils,
   GXS.Context,
   GXS.RenderContextInfo;
 

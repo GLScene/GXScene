@@ -15,7 +15,7 @@ interface
 uses
   System.Classes, 
   FMX.Graphics,
-  GXS.CrossPlatform;
+  GXS.Utils;
 
 {$DEFINE PRF_HACK_PASSES}
 

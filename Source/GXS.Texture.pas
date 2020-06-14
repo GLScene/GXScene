@@ -25,7 +25,6 @@ uses
   Scene.VectorGeometry,
   Scene.BaseClasses,
   Scene.Strings,
-  GXS.CrossPlatform,
   GXS.Graphics,
   GXS.Context,
   GXS.State,

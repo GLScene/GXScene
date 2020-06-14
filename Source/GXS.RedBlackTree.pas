@@ -39,8 +39,7 @@ interface
 {$I Scene.inc}
 
 uses
-  System.Classes,
-  GXS.CrossPlatform;
+  System.Classes;
 
 type
 
@@ -135,15 +134,13 @@ begin
   FDuplicateKeys := Assigned(ValueCompare);
 end;
 
-destructor GRedBlackTree
-< TKey, TValue >.Destroy;
+destructor GRedBlackTree < TKey, TValue >.Destroy;
 begin
   Clear;
   inherited Destroy;
 end;
 
-class procedure GRedBlackTree
-< TKey, TValue >.FastErase(x: TRBNode);
+class procedure GRedBlackTree < TKey, TValue >.FastErase(x: TRBNode);
 var
   y: TRBNode;
 begin
@@ -158,8 +155,7 @@ begin
   until x = nil;
 end;
 
-procedure GRedBlackTree
-< TKey, TValue >.Clear;
+procedure GRedBlackTree < TKey, TValue >.Clear;
 begin
   if (FRoot <> nil) then
     FastErase(FRoot);
@@ -171,8 +167,8 @@ begin
     FOnChange(Self);
 end;
 
-function GRedBlackTree
-< TKey, TValue >.Find(const key: TKey; out Value: TValue): Boolean;
+function GRedBlackTree< TKey, TValue >.Find(const key: TKey;
+  out Value: TValue): Boolean;
 begin
   FLastFound := FindNode(key);
   Result := Assigned(FLastFound);
@@ -288,8 +284,7 @@ begin
     Result := Result.right;
 end;
 
-procedure GRedBlackTree
-< TKey, TValue >.Add(const key: TKey; const Value: TValue);
+procedure GRedBlackTree < TKey, TValue >.Add(const key: TKey; const Value: TValue);
 var
   x, y, z, zpp: TRBNode;
   cmp: Integer;
@@ -349,7 +344,7 @@ begin
             FOnChange(Self);
           exit;
         end;
-        { Value already exists in tree. }
+        // Value already exists in tree.
       end;
       z.Destroy;
       //a jzombi: memory leak: if we don't put it in the tree, we shouldn't hold it in the memory
@@ -440,19 +435,19 @@ begin
   x_parent := nil;
 
   if (y.left = nil) then
-  begin { z has at most one non-null child. y = z. }
-    x := y.right; { x might be null. }
+  begin // z has at most one non-null child. y = z.
+    x := y.right; // x might be null.
   end
   else
   begin
     if (y.right = nil) then
-    begin { z has exactly one non-null child. y = z. }
-      x := y.left; { x is not null. }
+    begin // z has exactly one non-null child. y = z.
+      x := y.left; // x is not null.
     end
     else
     begin
-      { z has two non-null children.  Set y to }
-      y := y.right; {   z's successor.  x might be null. }
+      // z has two non-null children.  Set y to
+      y := y.right; //   z's successor.  x might be null.
       while (y.left <> nil) do
       begin
         y := y.left;
@@ -463,8 +458,8 @@ begin
 
   if (y <> z) then
   begin
-    { "copy y's sattelite data into z" }
-    { relink y in place of z.  y is z's successor }
+    (* "copy y's sattelite data into z"
+      relink y in place of z.  y is z's successor *)
     z.left.parent := y;
     y.left := z.left;
     if (y <> z.right) then
@@ -474,7 +469,7 @@ begin
       begin
         x.parent := y.parent;
       end;
-      y.parent.left := x; { y must be a child of left }
+      y.parent.left := x; // y must be a child of left
       y.right := z.right;
       z.right.parent := y;
     end
@@ -499,10 +494,10 @@ begin
     y.color := z.color;
     z.color := tmpcol;
     y := z;
-    { y now points to node to be actually deleted }
+    // y now points to node to be actually deleted
   end
   else
-  begin { y = z }
+  begin // y = z
     x_parent := y.parent;
     if (x <> nil) then
     begin
@@ -526,7 +521,7 @@ begin
     if (FLeftmost = z) then
     begin
       if (z.right = nil) then
-      begin { z.left must be null also }
+      begin // z.left must be null also
         FLeftmost := z.parent;
       end
       else
@@ -537,17 +532,17 @@ begin
     if (FRightmost = z) then
     begin
       if (z.left = nil) then
-      begin { z.right must be null also }
+      begin // z.right must be null also
         FRightmost := z.parent;
       end
       else
-      begin { x == z.left }
+      begin // x == z.left
         FRightmost := maximum(x);
       end;
     end;
   end;
 
-  { Rebalance tree }
+  // Rebalance tree
   if (y.color = clBlack) then
   begin
     while ((x <> FRoot) and ((x = nil) or (x.color = clBlack))) do
@@ -626,7 +621,7 @@ begin
             w.left.color := clBlack;
           end;
           rotateRight(x_parent);
-          x := FRoot; { break; }
+          x := FRoot; // break;
         end;
       end;
     end;

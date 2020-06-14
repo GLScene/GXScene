@@ -26,7 +26,6 @@ uses
 
   Import.OpenGLx,
   GXS.Material,
-  GXS.CrossPlatform,
   GXS.Color,
   GXS.RenderContextInfo,
   GXS.Context,

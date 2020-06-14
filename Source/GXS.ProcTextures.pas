@@ -21,7 +21,6 @@ uses
 
   GXS.Texture,
   GXS.Graphics,
-  GXS.CrossPlatform,
   GXS.TextureFormat;
 
 const

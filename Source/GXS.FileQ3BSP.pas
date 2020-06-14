@@ -29,7 +29,6 @@ uses
   GXS.BSP,
   GXS.Texture,
   GXS.Graphics,
-  GXS.CrossPlatform,
   GXS.State,
   GXS.Utils,
   GXS.Material,

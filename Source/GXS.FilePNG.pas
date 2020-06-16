@@ -106,7 +106,7 @@ begin
     or (textureTarget = ttTextureRect)) then
     Exit;
 
-  oldContext := CurrentVXContext;
+  oldContext := CurrentContext;
   contextActivate := (oldContext <> textureContext);
   if contextActivate then
   begin

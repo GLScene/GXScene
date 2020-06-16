@@ -477,7 +477,7 @@ procedure TgxSDLWindow.ResizeGLWindow;
 var
   RC: TgxContext;
 begin
-  RC := CurrentVXContext;
+  RC := CurrentContext;
   if Assigned(RC) then
     RC.gxStates.ViewPort := Vector4iMake(0, 0, Width, Height);
 end;

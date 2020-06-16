@@ -241,7 +241,7 @@ begin
   if not((glTarget = GL_TEXTURE_2D) or (glTarget = GL_TEXTURE_RECTANGLE)) then
     Exit;
 
-  oldContext := CurrentVXContext;
+  oldContext := CurrentContext;
   contextActivate := (oldContext <> textureContext);
   if contextActivate then
   begin

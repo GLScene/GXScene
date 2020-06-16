@@ -1,7 +1,7 @@
-GXceneViewerControlToolbarCameraReset BITMAP fmx\ToolbarCameraReset.bmp
-GXceneViewerControlToolbarDefault BITMAP fmx\ToolbarDefault.bmp
-GXceneViewerControlToolbarGizmo BITMAP fmx\ToolbarGizmo.bmp
-GXceneViewerControlToolbarNavigation BITMAP fmx\ToolbarNavigation.bmp
+GXSceneViewerControlToolbarCameraReset BITMAP fmx\ToolbarCameraReset.bmp
+GXSceneViewerControlToolbarDefault BITMAP fmx\ToolbarDefault.bmp
+GXSceneViewerControlToolbarGizmo BITMAP fmx\ToolbarGizmo.bmp
+GXSceneViewerControlToolbarNavigation BITMAP fmx\ToolbarNavigation.bmp
 TgxAnimationControler BITMAP fmx\TgxAnimationControler.bmp
 TgxApplicationFileIO BITMAP fmx\TgxApplicationFileIO.bmp
 TgxAsmShader BITMAP fmx\TgxAsmShader.bmp

@@ -230,7 +230,7 @@ var
 begin
   Self.ApplyShaderPrograms();
 
-  with CurrentVXContext.gxStates do
+  with CurrentContext.gxStates do
   begin
     glGetLightfv(GL_LIGHT0+lightID, GL_POSITION, @LightParam);
     LightParam := LightParam;

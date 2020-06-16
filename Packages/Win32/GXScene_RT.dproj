@@ -393,6 +393,7 @@
         <DCCReference Include="..\..\Source\Scene.XCollection.pas"/>
         <DCCReference Include="..\..\Source\Scene.XOpenGL.pas"/>
         <DCCReference Include="..\..\Source\Scene.Polynomials.pas"/>
+        <DCCReference Include="..\..\Source\GXS.DynamicTexture.pas"/>
         <None Include="..\..\Source\Scene.inc"/>
         <BuildConfiguration Include="Debug">
             <Key>Cfg_2</Key>

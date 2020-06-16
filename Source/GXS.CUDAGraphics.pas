@@ -732,7 +732,7 @@ function TCUDAVertexAttribute.GetLocation: Integer;
 begin
   if FLocation < 0 then
     FLocation := glGetAttribLocation(
-      CurrentVXContext.gxStates.CurrentProgram,
+      CurrentContext.gxStates.CurrentProgram,
       PGLChar(String(FName)));
   Result := FLocation;
 end;

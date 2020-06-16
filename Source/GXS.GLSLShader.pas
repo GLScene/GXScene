@@ -486,7 +486,7 @@ procedure TgxGLSLShaderParameter.SetAsCustomTexture(
   const TextureIndex: Integer; TextureTarget: TgxTextureTarget;
   const Value: Cardinal);
 begin
-  CurrentVXContext.gxStates.TextureBinding[TextureIndex, TextureTarget] := Value;
+  CurrentContext.gxStates.TextureBinding[TextureIndex, TextureTarget] := Value;
   glUniform1i(FParameterID, TextureIndex);
 end;
 
@@ -592,7 +592,7 @@ end;
 
 procedure TgxGLSLShaderParameter.SetAsUniformBuffer(UBO: Cardinal);
 begin
-  CurrentVXContext.gxStates.UniformBufferBinding := UBO;
+  CurrentContext.gxStates.UniformBufferBinding := UBO;
   glUniformBufferEXT(FGLSLProg.Handle, FParameterID, UBO);
 end;
 

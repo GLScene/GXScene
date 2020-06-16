@@ -217,7 +217,7 @@ end;
 
 procedure TgxCanvas.BackupOpenVXStates;
 begin
-  with CurrentVXContext.gxStates do
+  with CurrentContext.gxStates do
   begin
     Disable(stLighting);
     Disable(stFog);
@@ -286,7 +286,7 @@ begin
   if val < 1 then
     Exit;
   if val <> FPenWidth then
-    with CurrentVXContext.gxStates do
+    with CurrentContext.gxStates do
     begin
       FPenWidth := val;
       StopPrimitive;

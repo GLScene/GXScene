@@ -115,7 +115,7 @@ type
     procedure SetActive(const aActive: Boolean); inline;
     procedure SetLayer(const Value: TgxContextLayer); inline;
   protected
-    FXVX: TgxAbstractMultitextureCoordinator;
+    FGXS: TgxAbstractMultitextureCoordinator;
     FgxStates: TgxStateCache;
     FTransformation: TgxTransformation;
     FAcceleration: TgxContextAcceleration;
@@ -137,12 +137,11 @@ type
     procedure DoDeactivate; virtual; abstract;
     class function ServiceContext: TgxContext;
     procedure MakeGLCurrent;
-    function GetXGL: TgxAbstractMultitextureCoordinator;
+    function GetGXS: TgxAbstractMultitextureCoordinator;
   public
     constructor Create; virtual;
     destructor Destroy; override;
-    { An application-side cache of global per-context OpenGL states
-      and parameters }
+    // An application-side cache of global per-context OpenGL states and parameters
     property GXStates: TgxStateCache read FgxStates;
     property PipelineTransformation: TgxTransformation read FTransformation;
     // Context manager reference
@@ -215,7 +214,7 @@ type
     function RenderOutputDevice: Pointer; virtual; abstract;
     // Access to OpenGL command and extension.
     /// property GL: TGLExtensionsAndEntryPoints read FGL; depricated from OpenGLAdapter
-    property MultitextureCoordinator: TgxAbstractMultitextureCoordinator read GetXGL;
+    property MultitextureCoordinator: TgxAbstractMultitextureCoordinator read GetGXS;
     property IsPraparationNeed: Boolean read FIsPraparationNeed;
   end;
 
@@ -944,8 +943,8 @@ type
 procedure RegisterVXContextClass(aVXContextClass: TgxContextClass);
 (* The TgxContext that is the currently active context, if any.
   Returns nil if no context is active. *)
-function CurrentVXContext: TgxContext;
-function SafeCurrentVXContext: TgxContext;
+function CurrentContext: TgxContext;
+function SafeCurrentContext: TgxContext;
 function IsMainThread: Boolean;
 function IsServiceContextAvaible: Boolean;
 function GetServiceWindow: TForm;
@@ -967,14 +966,14 @@ var
   vServiceWindow: TForm;
   vMainThread: Boolean;
 
-function CurrentVXContext: TgxContext; inline;
+function CurrentContext: TgxContext; inline;
 begin
   Result := vCurrentContext;
 end;
 
-function SafeCurrentVXContext: TgxContext; inline;
+function SafeCurrentContext: TgxContext; inline;
 begin
-  Result := CurrentVXContext;
+  Result := CurrentContext;
   if not Assigned(Result) then
   begin
 {$IFDEF USE_LOGGING}
@@ -1051,7 +1050,7 @@ begin
   
   FSharedContexts.Free;
   FgxStates.Free;
-  FXVX.Free;
+  FGXS.Free;
   FTransformation.Free;
   FSharedContexts.Free;
 {$IFDEF USE_MULTITHREAD}
@@ -1447,11 +1446,11 @@ begin
 //
 end;
 
-function TgxContext.GetXGL: TgxAbstractMultitextureCoordinator;
+function TgxContext.GetGXS: TgxAbstractMultitextureCoordinator;
 begin
-  if FXVX = nil then
-    FXVX := vMultitextureCoordinatorClass.Create(Self);
-  Result := FXVX;
+  if FGXS = nil then
+    FGXS := vMultitextureCoordinatorClass.Create(Self);
+  Result := FGXS;
 end;
 
 // ------------------

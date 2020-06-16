@@ -487,7 +487,7 @@ var
   storeDFB: GLuint;
   RC: TgxContext;
 begin
-  RC := SafeCurrentVXContext;
+  RC := SafeCurrentContext;
   storeDFB := RC.gxStates.DrawFrameBuffer;
   if storeDFB <> FFrameBufferHandle.Handle then
     Bind;
@@ -754,7 +754,7 @@ begin
   if FLayer <> Value then
   begin
     FLayer := Value;
-    RC := CurrentVXContext;
+    RC := CurrentContext;
     if Assigned(RC) then
     begin
       if RC.gxStates.DrawFrameBuffer = FFrameBufferHandle.Handle then
@@ -770,7 +770,7 @@ begin
   if FLevel <> Value then
   begin
     FLevel := Value;
-    RC := CurrentVXContext;
+    RC := CurrentContext;
     if Assigned(RC) then
     begin
       if RC.gxStates.DrawFrameBuffer = FFrameBufferHandle.Handle then

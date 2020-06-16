@@ -269,7 +269,8 @@ contains
   Scene.VectorTypes in '..\..\Source\Scene.VectorTypes.pas',
   Scene.XCollection in '..\..\Source\Scene.XCollection.pas',
   Scene.XOpenGL in '..\..\Source\Scene.XOpenGL.pas',
-  Scene.Polynomials in '..\..\Source\Scene.Polynomials.pas';
+  Scene.Polynomials in '..\..\Source\Scene.Polynomials.pas',
+  GXS.DynamicTexture in '..\..\Source\GXS.DynamicTexture.pas';
 
 end.
 

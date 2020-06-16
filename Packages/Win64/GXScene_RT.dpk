@@ -279,7 +279,8 @@ contains
   Scene.SpacePartition in '..\..\Source\Scene.SpacePartition.pas',
   Scene.Spline in '..\..\Source\Scene.Spline.pas',
   Scene.XOpenGL in '..\..\Source\Scene.XOpenGL.pas',
-  Scene.XCollection in '..\..\Source\Scene.XCollection.pas';
+  Scene.XCollection in '..\..\Source\Scene.XCollection.pas',
+  GXS.DynamicTexture in '..\..\Source\GXS.DynamicTexture.pas';
 
 end.
 

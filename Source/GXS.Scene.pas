@@ -4388,7 +4388,7 @@ begin
       v2 := VectorAdd(absPos, v);
       LM := CreateLookAtMatrix(absPos, v2, d);
     end;
-    with CurrentVXContext.PipeLineTransformation do
+    with CurrentContext.PipeLineTransformation do
       SetViewMatrix(MatrixMultiply(LM, ViewMatrix^));
     ClearStructureChanged;
   end;
@@ -4421,7 +4421,7 @@ begin
     FNearPlane := -1;
     vFar := 1;
     mat := CreateOrthoMatrix(vLeft, vRight, vBottom, vTop, FNearPlane, vFar);
-    with CurrentVXContext.PipeLineTransformation do
+    with CurrentContext.PipeLineTransformation do
       SetProjectionMatrix(MatrixMultiply(mat, ProjectionMatrix^));
     FViewPortRadius := VectorLength(AWidth, AHeight) / 2;
   end
@@ -4532,7 +4532,7 @@ begin
       Assert(False);
     end;
 
-    with CurrentVXContext.PipeLineTransformation do
+    with CurrentContext.PipeLineTransformation do
       SetProjectionMatrix(MatrixMultiply(mat, ProjectionMatrix^));
     FViewPortRadius := VectorLength(vRight, vTop) / FNearPlane
   end;
@@ -5882,7 +5882,7 @@ begin
   if nbLights > maxLights then
     nbLights := maxLights;
   // setup all light sources
-  with CurrentVXContext.gxStates, CurrentVXContext.PipeLineTransformation do
+  with CurrentContext.gxStates, CurrentContext.PipeLineTransformation do
   begin
     for i := 0 to nbLights - 1 do
     begin
@@ -6930,9 +6930,6 @@ begin
   Result := rayhit;
 end;
 
-// ClearBuffers
-//
-
 procedure TgxSceneBuffer.ClearBuffers;
 var
   bufferBits: GLbitfield;
@@ -6942,12 +6939,12 @@ begin
   else
   begin
     bufferBits := GL_DEPTH_BUFFER_BIT;
-    CurrentVXContext.gxStates.DepthWriteMask := True;
+    CurrentContext.gxStates.DepthWriteMask := True;
   end;
   if ContextOptions * [roNoColorBuffer, roNoColorBufferClear] = [] then
   begin
     bufferBits := bufferBits or GL_COLOR_BUFFER_BIT;
-    CurrentVXContext.gxStates.SetColorMask(cAllColorComponents);
+    CurrentContext.gxStates.SetColorMask(cAllColorComponents);
   end;
   if roStencilBuffer in ContextOptions then
   begin
@@ -7106,11 +7103,11 @@ begin
   // setup projection matrix
   if Assigned(pickingRect) then
   begin
-    CurrentVXContext.PipeLineTransformation.SetProjectionMatrix(CreatePickMatrix((pickingRect^.Left + pickingRect^.Right) div 2,
+    CurrentContext.PipeLineTransformation.SetProjectionMatrix(CreatePickMatrix((pickingRect^.Left + pickingRect^.Right) div 2,
       FViewPort.height - ((pickingRect^.Top + pickingRect^.Bottom) div 2), Abs(pickingRect^.Right - pickingRect^.Left),
       Abs(pickingRect^.Bottom - pickingRect^.Top), TVector4i(FViewPort)));
   end;
-  FBaseProjectionMatrix := CurrentVXContext.PipeLineTransformation.ProjectionMatrix^;
+  FBaseProjectionMatrix := CurrentContext.PipeLineTransformation.ProjectionMatrix^;
 
   if Assigned(FCamera) then
   begin
@@ -7148,7 +7145,7 @@ begin
       with FCamera.FScene do
       begin
         SetupLights(maxLights);
-        { if not ForwardContext then }
+        // if not ForwardContext then
         begin
           if FogEnable then
           begin
@@ -7660,7 +7657,7 @@ var
   TM: TMatrix;
 begin
   // Setup appropriate FOV
-  with CurrentVXContext.PipeLineTransformation do
+  with CurrentContext.PipeLineTransformation do
   begin
     SetProjectionMatrix(CreatePerspectiveMatrix(90, 1, FCubeMapZNear, FCubeMapZFar));
     TM := CreateTranslationMatrix(FCubeMapTranslation);

@@ -1223,7 +1223,7 @@ var
   requiredSurface, currentSurface, bestSurface: Integer;
 begin
   nbSamples := Coronas.SampleCount;
-  if CurrentVXContext = nil then
+  if CurrentContext = nil then
     maxTexSize := 16 * 1024
   else
     glGetIntegerv(GL_MAX_TEXTURE_SIZE, @maxTexSize);

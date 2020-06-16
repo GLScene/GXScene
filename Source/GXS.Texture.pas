@@ -2585,7 +2585,7 @@ begin
   begin
     if FSamplerHandle.IsDataNeedUpdate then
     begin
-      with CurrentVXContext.gxStates do
+      with CurrentContext.gxStates do
         TextureBinding[ActiveTexture, FTextureHandle.Target] := Result;
       PrepareParams(DecodeTextureTarget(FTextureHandle.Target));
       FSamplerHandle.NotifyDataUpdated;
@@ -2609,7 +2609,7 @@ var
   var
     t: TgxTextureTarget;
   begin
-    with CurrentVXContext.gxStates do
+    with CurrentContext.gxStates do
     begin
       if TextureBinding[ActiveTexture, FTextureHandle.Target] = FTextureHandle.Handle then
         TextureBinding[ActiveTexture, FTextureHandle.Target] := 0;
@@ -2621,13 +2621,13 @@ var
   var
     t: TgxTextureTarget;
   begin
-    with CurrentVXContext.gxStates do
+    with CurrentContext.gxStates do
       for t := Low(TgxTextureTarget) to High(TgxTextureTarget) do
         TextureBinding[ActiveTexture, t] := LBinding[t];
   end;
 
 begin
-  with CurrentVXContext.gxStates do
+  with CurrentContext.gxStates do
   begin
     StoreBindings;
     try
@@ -2687,7 +2687,7 @@ begin
     texComp := tcNone; // no compression support for float_type
 
   if (texComp <> tcNone) and (TextureFormat <= tfNormalMap) then
-    with CurrentVXContext.gxStates do
+    with CurrentContext.gxStates do
     begin
       case texComp of
         tcStandard: TextureCompressionHint := hintDontCare;
@@ -2789,7 +2789,7 @@ begin
       texComp := tcNone;
 
     if (texComp <> tcNone) and (TextureFormat <= tfNormalMap) then
-      with CurrentVXContext.gxStates do
+      with CurrentContext.gxStates do
       begin
         case texComp of
           tcStandard: TextureCompressionHint := hintDontCare;
@@ -2862,7 +2862,7 @@ begin
 
   R_Dim := GL_ARB_texture_cube_map or GL_EXT_texture3D;
 
-  with CurrentVXContext.gxStates do
+  with CurrentContext.gxStates do
   begin
     UnpackAlignment := 1;
     UnpackRowLength := 0;

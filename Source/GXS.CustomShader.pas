@@ -326,7 +326,7 @@ var
   I: Integer;
 begin
   ALightIDs.Clear;
-  with CurrentVXContext.gxStates do
+  with CurrentContext.gxStates do
   begin
     for I := 0 to MaxLights - 1 do
     begin
@@ -360,7 +360,7 @@ end;
 
 procedure ApplyBlendingModeEx(const BlendingMode: TgxBlendingModeEx);
 begin
-  with CurrentVXContext.gxStates do
+  with CurrentContext.gxStates do
   begin
     Enable(stBlend);
 
@@ -492,7 +492,7 @@ procedure InitTexture(
 var
   glTarget: GLEnum;
 begin
-  with CurrentVXContext.gxStates do
+  with CurrentContext.gxStates do
   begin
     TextureBinding[ActiveTexture, TextureTarget] := TextureHandle;
   end;

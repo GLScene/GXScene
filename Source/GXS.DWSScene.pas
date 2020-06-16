@@ -328,8 +328,6 @@ begin
                      Info.Element([3]).Value);
 end;
 
-// SetInfoFromVector
-//
 procedure SetInfoFromVector(Info : IInfo; vec : TVector);
 var
   i : Integer;
@@ -338,8 +336,6 @@ begin
     Info.Element([i]).Value:=vec[i];
 end;
 
-// GetMatrixFromInfo
-//
 function GetMatrixFromInfo(Info : IInfo) : TMatrix;
 var
   i : Integer;
@@ -351,8 +347,6 @@ begin
                           Info.Element([i]).Element([3]).Value);
 end;
 
-// SetInfoFromMatrix
-//
 procedure SetInfoFromMatrix(Info : IInfo; mat : TMatrix);
 var
   i,j : Integer;
@@ -367,16 +361,12 @@ end;
 // ---------- Internal class method execute procedures ----------
 // ----------
 
-// TgxCoordinates internal class methods
-
-// TgxCoordinates.X write access
 procedure TgxCoordinatesSetXMethod.Execute(var ExternalObject: TObject);
 begin
   ValidateExternalObject(ExternalObject, TgxCoordinates);
   TgxCoordinates(ExternalObject).X:=Info['Value'];
 end;
 
-// TgxCoordinates.X read access
 procedure TgxCoordinatesGetXMethod.Execute(var ExternalObject: TObject);
 begin
   ValidateExternalObject(ExternalObject, TgxCoordinates);
@@ -537,7 +527,6 @@ end;
 
 // TgxBaseSceneObject internal class methods
 
-// TgxBaseSceneObject.SetVisible
 procedure TgxBaseSceneObjectSetVisibleMethod.Execute(var ExternalObject: TObject);
 begin
   ValidateExternalObject(ExternalObject, TgxBaseSceneObject);

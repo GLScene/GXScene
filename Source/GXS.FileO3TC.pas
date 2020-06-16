@@ -264,7 +264,7 @@ var
   end;
 
 begin
-  oldContext := CurrentVXContext;
+  oldContext := CurrentContext;
   contextActivate := (oldContext <> textureContext);
   if contextActivate then
   begin

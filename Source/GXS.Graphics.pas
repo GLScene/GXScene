@@ -1426,7 +1426,7 @@ begin
     end;
 
     // Check maximum dimension
-    maxSize := CurrentVXContext.gxStates.MaxTextureSize;
+    maxSize := CurrentContext.gxStates.MaxTextureSize;
     if w > maxSize then
       w := maxSize;
     if h > maxSize then
@@ -1717,7 +1717,7 @@ var
 
 begin
   Result := False;
-  LContext := CurrentVXContext;
+  LContext := CurrentContext;
   if LContext = nil then
   begin
     LContext := AHandle.RenderingContext;
@@ -2439,7 +2439,7 @@ var
 begin
   UnMipmap;
 
-  with CurrentVXContext.gxStates do
+  with CurrentContext.gxStates do
   begin
     oldTex := TextureBinding[ActiveTexture, ttTexture2D];
     TextureBinding[ActiveTexture, ttTexture2D] := textureHandle;
@@ -2468,7 +2468,7 @@ var
 begin
   if Assigned(textureHandle) and (textureHandle.Handle <> 0) then
   begin
-    oldContext := CurrentVXContext;
+    oldContext := CurrentContext;
     contextActivate := (oldContext <> textureHandle.RenderingContext);
     if contextActivate then
     begin
@@ -2787,7 +2787,7 @@ procedure TgxImage.DrawPixels(const x, y: Single);
 begin
   if fBlank or IsEmpty then
     Exit;
-  Assert(not CurrentVXContext.gxStates.ForwardContext);
+  Assert(not CurrentContext.gxStates.ForwardContext);
   glRasterPos2f(x, y);
   glDrawPixels(Width, Height, fColorFormat, fDataType, FData);
 end;

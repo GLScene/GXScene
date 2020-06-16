@@ -853,7 +853,7 @@ begin
           w := 1;
         if h = 0 then
           h := 1;
-        CurrentVXContext.gxStates.Viewport := Vector4iMake(0, 0, w, h);
+        CurrentContext.gxStates.Viewport := Vector4iMake(0, 0, w, h);
       end;
     end
     else

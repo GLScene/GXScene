@@ -35,6 +35,7 @@ uses
   FMX.Controls.Presentation,
 
   Design.FInfo,
+  
   GXS.Scene,
   GXS.Win64Viewer,
   GXS.SceneRegister,
@@ -215,11 +216,9 @@ begin
       if reg.ValueExists('CharacterPanels') then
         TBCharacterPanels.Down := reg.ReadBool('CharacterPanels');
       TBCharacterPanelsClick(Self);
-
       if reg.ValueExists('ExpandTree') then
         TBExpand.Down := reg.ReadBool('ExpandTree');
       ACExpandExecute(Self);
-
       Left := ReadRegistryInteger(reg, 'Left', Left);
       Top := ReadRegistryInteger(reg, 'Top', Top);
       Width := ReadRegistryInteger(reg, 'Width', 250);
@@ -228,7 +227,6 @@ begin
   finally
     reg.Free;
   end;
-
   // Trigger the event OnEdited manualy
   Tree.OnEdited := TreeEdited;
 end;
@@ -270,6 +268,5 @@ begin
     AScene.Free;
   end;
 end;
-
 
 end.

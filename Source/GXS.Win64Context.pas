@@ -1237,6 +1237,6 @@ end;
 initialization
 // ------------------------------------------------------------------
 
-RegisterVXContextClass(TgxWinContext);
+RegisterContextClass(TgxWinContext);
 
 end.

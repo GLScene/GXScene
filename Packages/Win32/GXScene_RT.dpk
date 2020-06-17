@@ -210,8 +210,6 @@ contains
   GXS.Screen in '..\..\Source\GXS.Screen.pas',
   GXS.ScreenSaver in '..\..\Source\GXS.ScreenSaver.pas',
   GXS.ScriptBase in '..\..\Source\GXS.ScriptBase.pas',
-  GXS.SDLContext in '..\..\Source\GXS.SDLContext.pas',
-  GXS.SDLWindow in '..\..\Source\GXS.SDLWindow.pas',
   GXS.Selection in '..\..\Source\GXS.Selection.pas',
   GXS.ShaderCombiner in '..\..\Source\GXS.ShaderCombiner.pas',
   GXS.ShadowHDS in '..\..\Source\GXS.ShadowHDS.pas',

@@ -27,10 +27,10 @@ uses
   FMX.Controls.Presentation,
   FMX.Objects,
 
+  Scene.VectorTypes,
   Scene.VectorGeometry,
   GXS.Color,
-  GXS.Texture,
-  Scene.VectorTypes;
+  GXS.Texture;
 
 type
   TColorEditorFrame = class(TFrame)

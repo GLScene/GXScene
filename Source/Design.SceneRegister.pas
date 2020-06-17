@@ -11,8 +11,6 @@ unit Design.SceneRegister;
   IDE experts.
 *)
 
-(* TODO *)
-
 interface
 
 {$I Scene.inc}
@@ -34,10 +32,12 @@ uses
   (*
   VCLEditors,
   ToolsAPI,
+  *)
+
   DesignIntf,
   DesignEditors,
-  *)
-  
+  DesignMenus,
+
   Scene.Strings,
   GXS.Scene,
   GXS.Context,
@@ -414,12 +414,12 @@ uses
   Scene.VectorTypes,
   Scene.VectorGeometry,
   // Image file formats
-  FileDDSImage,
-  GXS.FileTGA,
+  Formats.FileDDSImage,
+  Formats.FileTGA,
   // Vector file formats
-  GXS.File3DS,
-  GXS.FileASE,
-  GXS.FileB3D,
+  Formats.File3DS,
+  Formats.FileASE,
+  Formats.FileB3D,
   GXS.FileGL2,
   GXS.FileGTS,
   GXS.FileLMTS,

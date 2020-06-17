@@ -37,6 +37,6 @@ requires
 
 contains
   GXS.ParallelRegister in '..\..\Source\GXS.ParallelRegister.pas',
-  Design.FCUDAEditor in '..\..\Source\Design.FCUDAEditor.pas' {CUDAEditorForm};
+  Design.FCUDAEditor in '..\..\Source\Design.FCUDAEditor.pas';
 
 end.

@@ -29,16 +29,27 @@ interface
 {$I Scene.inc}
 
 uses
-  Winapi.Windows,
   System.SysUtils,
   System.Math,
+  {$IFDEF MSWINDOWS}
+     Winapi.Windows,
+  {$ENDIF}
+  {$IFDEF LINUX} X, XLib, XUtil, {$ENDIF}
   Scene.VectorTypes;
 
 const
+{$IFDEF MSWINDOWS}
   opengl32 = 'OpenGL32.dll';
   glu32 = 'GLU32.dll';
   libEGL = 'libEGL.dll';
   libGLES2 = 'libGLESv2.dll';
+{$ENDIF}
+{$IFDEF LINUX}
+  opengl32 = 'libGL.so';
+  glu32 = 'libGLU.so';
+  libEGL = 'libEGL.so';
+  libGLES2 = 'libGLESv2.so';
+{$ENDIF}
 
 type
    TRCOptions = set of (
@@ -147,7 +158,6 @@ type
   PGLPointer = ^Pointer;
 
  // the size of these depend on platform (32bit or 64bit)
-  // GL_VERSION_1_5
   TGLintptr = NativeInt;
   PGLintptr = ^TGLintptr;
   TGLsizeiptr = NativeInt;
@@ -830,7 +840,7 @@ const
   GL_COLOR_BUFFER_BIT = $00004000;
   GL_TRUE = 1;
   GL_FALSE = 0;
-  { BeginMode }
+  // BeginMode 
   GL_POINTS = $0000;
   GL_LINES = $0001;
   GL_LINE_LOOP = $0002;
@@ -7691,6 +7701,7 @@ var
 
    // OpenGL 3.3 reuses entry points from these extensions:
    // GL_ARB_blend_func_extended (ARB #78)
+   (* ARB_sampler_objects *)
    // GL_ARB_explicit_attrib_location (ARB #79) (none)
    // GL_ARB_occlusion_query2 (ARB #80)
    // GL_ARB_sampler_objects (ARB #81)
@@ -7706,6 +7717,7 @@ var
    //  ###########################################################
 
    // OpenGL 4.0 uses entry points from these extensions:
+  (* ARB_texture_query_lod (no entry points) *)
    // GL_ARB_draw_indirect (ARB #87)
    // GL_ARB_gpu_shader5 (ARB #88) (none)
    // GL_ARB_gpu_shader_fp64 (ARB #89)
@@ -7714,6 +7726,10 @@ var
    // GL_ARB_texture_buffer_object_rgb32 (ARB #92) (none)
    // GL_ARB_transform_feedback2 (ARB #93)
    // GL_ARB_transform_feedback3 (ARB #94)
+
+
+  // GL_VERSION_4_1
+
 
    //  ###########################################################
    //           function and procedure definitions for

@@ -940,7 +940,7 @@ type
   EVXShader = class(EVXContext);
 
 // Drivers should register themselves via this function.
-procedure RegisterVXContextClass(aVXContextClass: TgxContextClass);
+procedure RegisterContextClass(aContextClass: TgxContextClass);
 (* The TgxContext that is the currently active context, if any.
   Returns nil if no context is active. *)
 function CurrentContext: TgxContext;
@@ -998,11 +998,11 @@ begin
   Result := vServiceWindow;
 end;
 
-procedure RegisterVXContextClass(aVXContextClass: TgxContextClass);
+procedure RegisterContextClass(aContextClass: TgxContextClass);
 begin
   if not Assigned(vContextClasses) then
     vContextClasses := TList.Create;
-  vContextClasses.Add(aVXContextClass);
+  vContextClasses.Add(aContextClass);
 end;
 
 constructor TgxAbstractMultitextureCoordinator.Create(AOwner: TgxContext);

@@ -14,7 +14,7 @@ interface
 
 uses
   System.Classes,
-  GXS.ApplicationFileIO,
+  Scene.ApplicationFileIO,
   GXS.SoundFileObjects;
 
 type

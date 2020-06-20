@@ -17,11 +17,13 @@ uses
   System.SysUtils,
 
   Import.OpenGLx,
+
+  Scene.ApplicationFileIO,
   Scene.Strings,
+
   GXS.Context,
   GXS.Graphics,
-  GXS.TextureFormat,
-  GXS.ApplicationFileIO;
+  GXS.TextureFormat;
 
 type
 

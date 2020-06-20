@@ -18,10 +18,11 @@ uses
   Import.OpenGLx,
   Scene.VectorGeometry,
   Scene.Strings,
+  Scene.ApplicationFileIO,
+
   GXS.Context,
   GXS.Graphics,
-  GXS.TextureFormat,
-  GXS.ApplicationFileIO;
+  GXS.TextureFormat;
 
 type
 

@@ -16,7 +16,7 @@ uses
   GXS.VectorFileObjects,
   Scene.VectorGeometry,
   Scene.VectorLists,
-  GXS.ApplicationFileIO,
+  Scene.ApplicationFileIO,
   GXS.ParametricSurfaces,
   GXS.Utils;
 

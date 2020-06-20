@@ -3,26 +3,30 @@
 * Graphic Scene Engine, http://glscene.org *
 *                                          *
 ********************************************)
+
+unit GXS.CUDACompiler;
+
 (*
   Component allows to compile the CUDA-source (*.cu) file.
   in design- and runtime.
   To work requires the presence of CUDA Toolkit 3.X and MS Visual Studio C++.
 *)
-unit GXS.CUDACompiler;
 
 interface
 
 uses
-  Winapi.Windows, 
+  Winapi.Windows,
   Winapi.Messages,
-  System.SysUtils, 
+  Winapi.ShellAPI,
+  Winapi.TlHelp32,
+  System.SysUtils,
   System.Classes, 
   System.UITypes,
   FMX.Forms, 
   FMX.Dialogs,
   Scene.Strings,
   GXS.CUDAParser, 
-  GXS.ApplicationFileIO;
+  Scene.ApplicationFileIO;
 
 type
   TgxSCUDACompilerOutput = (codeUndefined, codePtx, codeCubin, codeGpu);
@@ -122,11 +126,6 @@ var
 //=========================================
 implementation
 //=========================================
-
-uses
-  Winapi.ShellAPI,
-  Winapi.TlHelp32;
-
 
 // ------------------
 // ------------------ TgxSCUDACompiler ------------------

@@ -37,7 +37,7 @@ uses
   Import.OpenGLx,
   Scene.VectorGeometry,
   Scene.PersistentClasses,
-  GXS.ApplicationFileIO,
+  Scene.ApplicationFileIO,
   GXS.Context,
   GXS.ImageUtils,
   GXS.Utils,

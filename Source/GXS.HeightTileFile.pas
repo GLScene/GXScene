@@ -25,7 +25,7 @@ uses
   System.Classes,
   System.SysUtils,
 
-  GXS.ApplicationFileIO;
+  Scene.ApplicationFileIO;
 
 type
 

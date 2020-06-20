@@ -9,7 +9,7 @@ unit GXS.VfsPAK;
 (*
   Support-code for loading files from Quake II PAK Files.
   When instance is created all LoadFromFile methods using
-  GXS.ApplicationFileIO mechanism will be pointed into PAK file.
+  Scene.ApplicationFileIO mechanism will be pointed into PAK file.
   You can change current PAK file by ActivePak variable.
 *)
 
@@ -22,7 +22,7 @@ uses
   System.Contnrs,
   System.SysUtils,
   Scene.Strings,
-  GXS.ApplicationFileIO;
+  Scene.ApplicationFileIO;
 
 const
   SIGN = 'PACK'; // Signature for uncompressed - raw pak.
@@ -89,7 +89,7 @@ type
     procedure Extract(FileName, NewName: string); overload;
   end;
 
-  // GXS.ApplicationFileIO
+  // Scene.ApplicationFileIO
 function PAKCreateFileStream(const FileName: string; Mode: word): TStream;
 function PAKFileStreamExists(const FileName: string): Boolean;
 
@@ -115,7 +115,7 @@ begin
       Result[i] := s[i];
 end;
 
-// GXS.ApplicationFileIO begin
+// Scene.ApplicationFileIO begin
 function PAKCreateFileStream(const FileName: string; Mode: word): TStream;
 var
   i: integer;
@@ -177,7 +177,7 @@ begin
   Result := FileExists(FileName);
 end;
 
-// GXS.ApplicationFileIO end
+// Scene.ApplicationFileIO end
 
 function TgxVfsPAK.GetStreamNumber: integer;
 begin

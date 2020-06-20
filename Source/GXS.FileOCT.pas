@@ -22,7 +22,7 @@ uses
 
   GXS.VectorFileObjects,
   Scene.VectorGeometry,
-  GXS.ApplicationFileIO,
+  Scene.ApplicationFileIO,
   GXS.Texture,
   GXS.Material,
   GXS.Graphics,

@@ -22,7 +22,7 @@ uses
   FMX.Graphics,
 
   GXS.VectorFileObjects,
-  GXS.ApplicationFileIO,
+  Scene.ApplicationFileIO,
   Scene.VectorGeometry,
   Scene.VectorTypes,
   Scene.VectorLists,

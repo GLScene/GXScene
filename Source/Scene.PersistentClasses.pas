@@ -308,7 +308,7 @@ implementation
 // ------------------------------------------------------------------
 
 uses
-  GXS.ApplicationFileIO;
+  Scene.ApplicationFileIO;
 
 const
   cDefaultListGrowthDelta = 16;

@@ -56,7 +56,7 @@ contains
   Formats.FileVRMLParser in '..\..\Source\Formats.FileVRMLParser.pas',
   GXS.AnimatedSprite in '..\..\Source\GXS.AnimatedSprite.pas',
   Scene.AnimationUtils in '..\..\Source\Scene.AnimationUtils.pas',
-  GXS.ApplicationFileIO in '..\..\Source\GXS.ApplicationFileIO.pas',
+  Scene.ApplicationFileIO in '..\..\Source\Scene.ApplicationFileIO.pas',
   GXS.ArchiveManager in '..\..\Source\GXS.ArchiveManager.pas',
   GXS.AsmShader in '..\..\Source\GXS.AsmShader.pas',
   GXS.AsyncHDS in '..\..\Source\GXS.AsyncHDS.pas',

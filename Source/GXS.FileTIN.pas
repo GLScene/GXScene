@@ -19,7 +19,7 @@ uses
   Scene.VectorRecTypes,
 
   GXS.VectorFileObjects,
-  GXS.ApplicationFileIO,
+  Scene.ApplicationFileIO,
   GXS.Utils;
 
 

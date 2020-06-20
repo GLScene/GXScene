@@ -19,7 +19,7 @@ uses
   System.Classes,
   System.SysUtils,
 {$IFDEF MSWINDOWS}Winapi.MMSystem, {$ENDIF}
-  GXS.ApplicationFileIO,
+  Scene.ApplicationFileIO,
   GXS.Utils;
 
 type

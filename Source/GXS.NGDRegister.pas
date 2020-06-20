@@ -1,11 +1,12 @@
-//
-// Graphic Scene Engine, http://glscene.org
-//
-(*
-  Design time registration code for the Newton Manager.
-*)
+(*******************************************
+*                                          *
+* Graphic Scene Engine, http://glscene.org *
+*                                          *
+********************************************)
 
 unit GXS.NGDRegister;
+
+(* Design time registration code for the Newton Manager *)
 
 interface
 

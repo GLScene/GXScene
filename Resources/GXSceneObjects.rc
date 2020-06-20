@@ -11,6 +11,7 @@ TgxDummyCube BITMAP objects\TgxDummyCube.bmp
 TgxLightSource BITMAP objects\TgxLightSource.bmp
 
 TgxFeedback BITMAP objects\TgxFeedback.bmp
+TgxFeedBackMesh BITMAP objects\TgxFeedBackMesh.bmp
 TgxImposter BITMAP objects\TgxImposter.bmp
 TgxRenderPoint BITMAP objects\TgxRenderPoint.bmp
 TgxFBORenderer BITMAP objects\TgxFBORenderer.bmp

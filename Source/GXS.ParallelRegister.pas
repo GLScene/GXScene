@@ -1,24 +1,28 @@
-//
-// Graphic Scene Engine, http://glscene.org
-//
-(*
-   Registration unit for GPU Computing package.
-*)
+(* ******************************************
+  *                                          *
+  * Graphic Scene Engine, http://glscene.org *
+  *                                          *
+  ******************************************* *)
+
 unit GXS.ParallelRegister;
+
+(*  Registration unit for GPU Computing package *)
 
 interface
 
 uses
   System.Classes,
   System.SysUtils,
+
+//  DesignIntf,
+//  DesignEditors,
+
   {
-  DesignIntf,
-  DesignEditors,
   ToolsAPI,
   STREDIT,
   }
 
-  GXS.SceneRegister;
+  Scene.Strings;
 
 procedure Register;
 

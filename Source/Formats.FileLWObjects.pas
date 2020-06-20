@@ -12,7 +12,10 @@ interface
 
 uses
   System.Classes,
-  Scene.VectorGeometry;
+  System.SysUtils,
+
+  Scene.VectorGeometry,
+  Scene.ApplicationFileIO;
 
 type
 
@@ -240,7 +243,7 @@ type
   TColr4 = array[0..3] of TU1;
   PColr4 = ^TColr4;
 
-  { Lightwave Chunk Struct - Used in TLWOReadCallback }
+  // Lightwave Chunk Struct - Used in TLWOReadCallback
   PLWChunkRec = ^TLWChunkRec;
   TLWChunkRec = record
     id: TID4;
@@ -248,7 +251,7 @@ type
     data: Pointer;
   end;
 
-  { Lightwave SubChunk Struct - Used in TLWOReadCallback }
+  // Lightwave SubChunk Struct - Used in TLWOReadCallback
   PLWSubChunkRec = ^TLWSubChunkRec;
   TLWSubChunkRec = record
     id: TID4;
@@ -279,7 +282,7 @@ type
   end;
   PLWPolyTagMap = ^TLWPolyTagMap;
 
-  { Value Map }
+  // Value Map
   TLWVertexMap = record
     vert: TU2;
     values: TF4DynArray;
@@ -311,7 +314,7 @@ type
     property Data: Pointer read FData;
     property ID: TID4 read FID;
     property Size: TU4 read FSize;
-    { ParentChunk may be nil indicating this is a root chunk. ie. TLWLayr }
+    // ParentChunk may be nil indicating this is a root chunk. ie. TLWLayr
     property ParentChunk: TLWParentChunk read FParentChunk;
     property RootChunks: TLWChunkList read GetRootChunks;
     property Index: Integer read GetIndex;
@@ -601,11 +604,9 @@ type
 
   function GetContentDir: TLWContentDir;
 
-
+//--------------------------------------------
 implementation
-
-uses
-  System.SysUtils, GXS.ApplicationFileIO;
+//--------------------------------------------
 
 type
   PWord = ^Word;

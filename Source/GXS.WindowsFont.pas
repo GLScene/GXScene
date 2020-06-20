@@ -31,7 +31,7 @@ uses
   Scene.VectorLists,
   GXS.Utils,
   Scene.VectorGeometry,
-  GXS.ApplicationFileIO,
+  Scene.ApplicationFileIO,
   Scene.VectorTypes;
 
 type

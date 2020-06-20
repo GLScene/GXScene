@@ -306,7 +306,7 @@ uses
   FVectorEditor,
   FSceneEditor,
   GXS.AnimatedSprite,
-  GXS.ApplicationFileIO,
+  Scene.ApplicationFileIO,
   GXS.AsmShader,
   GXS.AsyncHDS,
   GXS.AsyncTimer,

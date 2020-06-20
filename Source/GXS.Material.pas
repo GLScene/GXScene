@@ -25,6 +25,8 @@ uses
   Scene.VectorGeometry,
   Scene.PersistentClasses,
   Scene.Strings,
+  Scene.ApplicationFileIO,
+
   GXS.RenderContextInfo,
   Scene.BaseClasses,
   GXS.Context,
@@ -33,7 +35,6 @@ uses
   GXS.Coordinates,
   GXS.State,
   GXS.TextureFormat,
-  GXS.ApplicationFileIO,
   GXS.Graphics,
   GXS.Utils;
 

@@ -15,7 +15,7 @@ uses
   System.SysUtils,
   GXS.VectorFileObjects,
   GXS.Utils,
-  GXS.ApplicationFileIO,
+  Scene.ApplicationFileIO,
   Scene.VectorTypes,
   Scene.VectorGeometry,
   Scene.VectorLists;

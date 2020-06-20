@@ -18,7 +18,7 @@ uses
   FMX.DAE.Model,
 
   GXS.VectorFileObjects, 
-  GXS.ApplicationFileIO;
+  Scene.ApplicationFileIO;
 
 type
    // TgxFileDAE

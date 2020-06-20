@@ -24,7 +24,7 @@ uses
 
   GXS.VectorFileObjects,
   GXS.Material,
-  GXS.ApplicationFileIO,
+  Scene.ApplicationFileIO,
   Scene.VectorGeometry;
 
 const

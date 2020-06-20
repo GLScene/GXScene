@@ -176,7 +176,7 @@
         <DCCReference Include="..\..\Source\Formats.FileVRMLParser.pas"/>
         <DCCReference Include="..\..\Source\GXS.AnimatedSprite.pas"/>
         <DCCReference Include="..\..\Source\Scene.AnimationUtils.pas"/>
-        <DCCReference Include="..\..\Source\GXS.ApplicationFileIO.pas"/>
+        <DCCReference Include="..\..\Source\Scene.ApplicationFileIO.pas"/>
         <DCCReference Include="..\..\Source\GXS.ArchiveManager.pas"/>
         <DCCReference Include="..\..\Source\GXS.AsmShader.pas"/>
         <DCCReference Include="..\..\Source\GXS.AsyncHDS.pas"/>
@@ -424,6 +424,12 @@
                 <Platform value="Win64">False</Platform>
             </Platforms>
             <Deployment Version="3">
+                <DeployFile LocalName="C:\Users\Public\Documents\Embarcadero\Studio\21.0\Bpl\GXScene_RT.bpl" Configuration="Debug" Class="ProjectOutput">
+                    <Platform Name="Win32">
+                        <RemoteName>GXScene_RT.bpl</RemoteName>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
                 <DeployFile LocalName="$(BDS)\Redist\osx32\libcgunwind.1.0.dylib" Class="DependencyModule">
                     <Platform Name="OSX32">
                         <Overwrite>true</Overwrite>
@@ -447,12 +453,6 @@
                 </DeployFile>
                 <DeployFile LocalName="$(BDS)\Redist\iossimulator\libcgunwind.1.0.dylib" Class="DependencyModule">
                     <Platform Name="iOSSimulator">
-                        <Overwrite>true</Overwrite>
-                    </Platform>
-                </DeployFile>
-                <DeployFile LocalName="C:\Users\Public\Documents\Embarcadero\Studio\21.0\Bpl\GXScene_RT.bpl" Configuration="Debug" Class="ProjectOutput">
-                    <Platform Name="Win32">
-                        <RemoteName>GXScene_RT.bpl</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>

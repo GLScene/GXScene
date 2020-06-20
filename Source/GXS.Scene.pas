@@ -33,6 +33,7 @@ uses
   Scene.PersistentClasses,
   Scene.GeometryBB,
   Scene.Strings,
+  Scene.ApplicationFileIO,
 
   GXS.Context,
   GXS.Silhouette,
@@ -46,7 +47,6 @@ uses
   GXS.Material,
   GXS.TextureFormat,
   GXS.Selection,
-  GXS.ApplicationFileIO,
   GXS.Utils;
 
 type

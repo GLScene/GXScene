@@ -33,7 +33,7 @@ uses
 
   Scene.VectorGeometry,
   Scene.BaseClasses,
-  GXS.ApplicationFileIO,
+  Scene.ApplicationFileIO,
   GXS.Utils,
   GXS.Material;
 

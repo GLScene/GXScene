@@ -16,7 +16,7 @@ uses
   Winapi.MMSystem,
   System.Classes,
 
-  GXS.ApplicationFileIO,
+  Scene.ApplicationFileIO,
   GXS.SoundFileObjects;
 
 type

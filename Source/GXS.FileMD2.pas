@@ -16,7 +16,7 @@ uses
   System.Classes,
   System.SysUtils,
   GXS.VectorFileObjects,
-  GXS.ApplicationFileIO,
+  Scene.ApplicationFileIO,
 
   Formats.FileMD2;
 

@@ -21,10 +21,11 @@ uses
   Scene.VectorGeometry,
   Scene.RGBE,
   Scene.Strings,
+  Scene.ApplicationFileIO,
+
   GXS.Context,
   GXS.Graphics,
   GXS.TextureFormat,
-  GXS.ApplicationFileIO,
   Formats.FileDXTC;
 
 type

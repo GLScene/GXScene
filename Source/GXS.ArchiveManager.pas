@@ -16,7 +16,7 @@ uses
   
   Scene.Strings,
   Scene.PersistentClasses,
-  GXS.ApplicationFileIO;
+  Scene.ApplicationFileIO;
 
 Type
 

@@ -20,7 +20,7 @@ uses
   GXS.Context,
   GXS.Graphics,
   GXS.TextureFormat,
-  GXS.ApplicationFileIO;
+  Scene.ApplicationFileIO;
 
 type
 

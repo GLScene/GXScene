@@ -18,11 +18,11 @@ uses
   Scene.VectorTypes,
   Scene.VectorGeometry,
   Scene.RGBE,
+  Scene.ApplicationFileIO,
 
   GXS.Context,
   GXS.Graphics,
-  GXS.TextureFormat,
-  GXS.ApplicationFileIO;
+  GXS.TextureFormat;
 
 type
 

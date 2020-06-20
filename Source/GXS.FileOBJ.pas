@@ -30,7 +30,7 @@ uses
   GXS.Context,
   GXS.MeshUtils,
   GXS.Utils,
-  GXS.ApplicationFileIO,
+  Scene.ApplicationFileIO,
   Scene.PersistentClasses,
   Scene.VectorGeometry,
   GXS.Scene,

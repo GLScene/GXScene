@@ -24,7 +24,7 @@ uses
   GXS.Texture,
   Scene.VectorGeometry,
   Scene.VectorLists,
-  GXS.ApplicationFileIO;
+  Scene.ApplicationFileIO;
 
 const
   MAX_MS3D_VERTICES  = 8192;

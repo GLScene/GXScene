@@ -1,11 +1,12 @@
-//
-// Graphic Scene Engine, http://glscene.org
-//
-(*
-  GXS.ODERegister - Design time registration code for the ODE Manager
-*)
+(*******************************************
+*                                          *
+* Graphic Scene Engine, http://glscene.org *
+*                                          *
+********************************************)
 
 unit GXS.ODERegister;
+
+(* Design time registration code for the ODE Manager *)
 
 interface
 

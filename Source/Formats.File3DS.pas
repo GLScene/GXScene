@@ -32,7 +32,7 @@ uses
   System.Classes,
 
   Formats.File3DSTypes,
-  GXS.ApplicationFileIO;
+  Scene.ApplicationFileIO;
 
 type
   TFile3DS = class;

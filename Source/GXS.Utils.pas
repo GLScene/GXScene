@@ -33,8 +33,7 @@ uses
 
   Scene.VectorGeometry,
   Scene.Strings,
-
-  GXS.ApplicationFileIO;
+  Scene.ApplicationFileIO;
 
 type
   EGLUtilsException = class(Exception);

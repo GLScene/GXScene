@@ -13,7 +13,7 @@ uses
   Winapi.OpenGL, Winapi.OpenGLext,
 
   GXS.Context, GXS.Graphics, GXS.TextureFormat,
-  GXS.ApplicationFileIO;
+  Scene.ApplicationFileIO;
 
 type
 

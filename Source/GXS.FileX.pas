@@ -18,7 +18,7 @@ uses
 
   Scene.VectorTypes,
   GXS.VectorFileObjects,
-  GXS.ApplicationFileIO,
+  Scene.ApplicationFileIO,
   Scene.VectorGeometry,
   GXS.Texture,
   Scene.VectorLists,

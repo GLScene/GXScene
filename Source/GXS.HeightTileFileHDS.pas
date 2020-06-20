@@ -43,7 +43,7 @@ type
     // gives you direct access to the HTF object
   published
     { FileName of the HTF file.
-      Note that it is accessed via the services of GXS.ApplicationFileIO,
+      Note that it is accessed via the services of Scene.ApplicationFileIO,
       so this may not necessarily be a regular file on a disk... }
     property HTFFileName: String read FHTFFileName write SetHTFFileName;
     { If true the height field is wrapped indefinetely. }

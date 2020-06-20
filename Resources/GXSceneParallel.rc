@@ -1,4 +1,3 @@
-TgxCUDA BITMAP fmx\TgxCUDA.bmp
-TgxCUDADevice BITMAP fmx\TgxCUDADevice.bmp
-TgxCUDACompiler BITMAP fmx\TgxCUDACompiler.bmp
-TgxFeedBackMesh BITMAP objects\TgxFeedBackMesh.bmp
+TgxCUDA BITMAP components\TgxCUDA.bmp
+TgxCUDADevice BITMAP components\TgxCUDADevice.bmp
+TgxCUDACompiler BITMAP components\TgxCUDACompiler.bmp

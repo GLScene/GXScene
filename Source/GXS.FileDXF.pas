@@ -23,7 +23,7 @@ uses
   System.SysUtils,
 
   Scene.VectorTypes,
-  GXS.ApplicationFileIO,
+  Scene.ApplicationFileIO,
   Scene.VectorGeometry,
   Scene.VectorLists,
   GXS.Scene,

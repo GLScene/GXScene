@@ -16,8 +16,9 @@ uses
 
   Scene.VectorGeometry,
   Scene.VectorLists,
+  Scene.ApplicationFileIO,
+
   GXS.VectorFileObjects,
-  GXS.ApplicationFileIO,
   GXS.Material,
   Formats.FileMD3;
 

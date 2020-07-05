@@ -67,8 +67,7 @@ type
 
   TgxNormalDirection = (ndInside, ndOutside);
 
-  (* Used to describe only the changes in an object,
-    which have to be reflected in the scene *)
+  // Used to describe the changes in an object, which have to be reflected in the scene
   TObjectChange = (ocTransformation, ocAbsoluteMatrix, ocInvAbsoluteMatrix, ocStructure);
   TObjectChanges = set of TObjectChange;
 
@@ -82,16 +81,15 @@ type
     roSoftwareMode: force software rendering.
     roDoubleBuffer: enables double-buffering.
     roRenderToWindows: ignored (legacy).
-    roTwoSideLighting: enables two-side lighting model.
-    roStereo: enables stereo support in the driver
+    roTwoSideLighting: enables two-side lighting model.   
+	roStereo: enables stereo support in the driver
 	  (dunno if it works, I don't have a stereo device to test...)
     roDestinationAlpha: request an Alpha channel for the rendered output
     roNoColorBuffer: don't request a color buffer (color depth setting ignored)
     roNoColorBufferClear: do not clear the color buffer automatically, if the
     whole viewer is fully repainted each frame, this can improve framerate
     roNoSwapBuffers: don't perform RenderingContext.SwapBuffers after rendering
-    roNoDepthBufferClear: do not clear the depth buffer automatically. Useful for
-    early-z culling.
+    roNoDepthBufferClear: do not clear the depth buffer automatically. Useful for early-z culling.
     roForwardContext: force OpenGL forward context *)
   TContextOption = (roSoftwareMode, roDoubleBuffer, roStencilBuffer, roRenderToWindow, roTwoSideLighting, roStereo,
     roDestinationAlpha, roNoColorBuffer, roNoColorBufferClear, roNoSwapBuffers, roNoDepthBufferClear, roDebugContext,
@@ -154,8 +152,7 @@ type
     like the ProxyObject).
     To add children at runtime, use the AddNewChild method of TgxBaseSceneObject;
     other children manipulations methods and properties are provided (to browse,
-    move and delete them). Using the regular TComponent methods is not
-    encouraged. *)
+    move and delete them). Using the regular TComponent methods is not encouraged. *)
   TgxBaseSceneObject = class(TgxCoordinatesUpdateAbleComponent)
   private
     FAbsoluteMatrix, FInvAbsoluteMatrix: TMatrix;
@@ -270,7 +267,8 @@ type
       By default it is calculated from AxisAlignedBoundingBoxUnscaled and
       BarycenterAbsolutePosition, but for most objects there is a more
       efficient method, that's why it is virtual. *)
-    procedure CalculateBoundingBoxPersonalUnscaled(var ANewBoundingBox: THmgBoundingBox); virtual;
+    procedure CalculateBoundingBoxPersonalUnscaled(var ANewBoundingBox: 
+	  THmgBoundingBox); virtual;
   public
     constructor Create(AOwner: TComponent); override;
     constructor CreateAsChild(aParentOwner: TgxBaseSceneObject);
@@ -531,8 +529,10 @@ type
     property Scene: TgxScene read FScene;
     property Visible: Boolean read FVisible write SetVisible default True;
     property Pickable: Boolean read FPickable write SetPickable default True;
-    property ObjectsSorting: TgxObjectsSorting read FObjectsSorting write SetObjectsSorting default osInherited;
-    property VisibilityCulling: TgxVisibilityCulling read FVisibilityCulling write SetVisibilityCulling default vcInherited;
+    property ObjectsSorting: TgxObjectsSorting read FObjectsSorting write 
+	  SetObjectsSorting default osInherited;
+    property VisibilityCulling: TgxVisibilityCulling read FVisibilityCulling 
+	  write SetVisibilityCulling default vcInherited;
     property OnProgress: TProgressEvent read FOnProgress write FOnProgress;
     property OnPicked: TNotifyEvent read FOnPicked write FOnPicked;
     property OnAddedToParent: TNotifyEvent read FOnAddedToParent write FOnAddedToParent;
@@ -576,19 +576,19 @@ type
     procedure DoProgress(const progressTime: TProgressTimes); virtual;
   end;
 
-  { Ancestor for non-rendering behaviours.
+  (* Ancestor for non-rendering behaviours.
     This class shall never receive any properties, it's just here to differentiate
     rendereing and non-rendering behaviours. Rendereing behaviours are named
     "TgxEffect", non-rendering effects (like inertia) are simply named
-    "TgxBehaviour". }
+    "TgxBehaviour". *)
   TgxBehaviour = class(TgxBaseBehaviour)
   end;
 
-  { Holds a list of TgxBehaviour objects.
+  (* Holds a list of TgxBehaviour objects.
     This object expects itself to be owned by a TgxBaseSceneObject.
     As a TXCollection (and contrary to a TCollection), this list can contain
     objects of varying class, the only constraint being that they should all
-    be TgxBehaviour subclasses. }
+    be TgxBehaviour subclasses. *)
   TgxBehaviours = class(TXCollection)
   protected
     function GetBehaviour(Index: Integer): TgxBehaviour;
@@ -601,7 +601,7 @@ type
     procedure DoProgress(const progressTimes: TProgressTimes); inline;
   end;
 
-  { A rendering effect that can be applied to SceneObjects.
+  (* A rendering effect that can be applied to SceneObjects.
     ObjectEffect is a subclass of behaviour that gets a chance to Render
     an object-related special effect.
     TgxEffect should not be used as base class for custom effects,
@@ -612,10 +612,7 @@ type
     NOTES :
     Don't forget to override the ReadFromFiler/WriteToFiler persistence
     methods if you add data in a subclass !
-    Subclasses must be registered using the RegisterXCollectionItemClass
-    function }
-
-  // TgxEffectClass = class of TgxEffect;
+    Subclasses must be registered using the RegisterXCollectionItemClass function *)
 
   TgxEffect = class(TgxBaseBehaviour)
   protected
@@ -627,22 +624,22 @@ type
     procedure Render(var rci: TgxRenderContextInfo); virtual;
   end;
 
-  { An object effect that gets rendered before owner object's render.
-    The current OpenGL matrices and material are that of the owner object. }
+  (* An object effect that gets rendered before owner object's render.
+    The current OpenGL matrices and material are that of the owner object. *)
   TgxObjectPreEffect = class(TgxEffect)
   end;
-  { An object effect that gets rendered after owner object's render.
-    The current OpenGL matrices and material are that of the owner object. }
+  (* An object effect that gets rendered after owner object's render.
+    The current OpenGL matrices and material are that of the owner object. *)
   TgxObjectPostEffect = class(TgxEffect)
   end;
 
-  { An object effect that gets rendered at scene's end.
-    No particular OpenGL matrices or material should be assumed. }
+  (* An object effect that gets rendered at scene's end.
+    No particular OpenGL matrices or material should be assumed. *)
   TgxObjectAfterEffect = class(TgxEffect)
   end;
 
-  { Holds a list of object effects.
-    This object expects itself to be owned by a TgxBaseSceneObject. }
+  (* Holds a list of object effects.
+    This object expects itself to be owned by a TgxBaseSceneObject. *)
   TgxEffects = class(TXCollection)
   protected
     function GetEffect(Index: Integer): TgxEffect;
@@ -654,12 +651,12 @@ type
     function CanAdd(aClass: TXCollectionItemClass): Boolean; override;
     procedure DoProgress(const progressTime: TProgressTimes);
     procedure RenderPreEffects(var rci: TgxRenderContextInfo); inline;
-    { Also take care of registering after effects with the GXSceneViewer. }
+    // Also take care of registering after effects with the GXSceneViewer. 
     procedure RenderPostEffects(var rci: TgxRenderContextInfo); inline;
   end;
 
-  { Extended base scene object class with a material property.
-    The material allows defining a color and texture for the object, see TgxMaterial. }
+  (* Extended base scene object class with a material property.
+    The material allows defining a color and texture for the object, see TgxMaterial. *)
   TgxCustomSceneObject = class(TgxBaseSceneObject)
   private
     FMaterial: TgxMaterial;
@@ -688,11 +685,11 @@ type
     constructor Create(AOwner: TComponent); override;
   end;
 
-  { Base class for objects that do not have a published "material".
+  (* Base class for objects that do not have a published "material".
     Note that the material is available in public properties, but isn't
     applied automatically before invoking BuildList.
     Subclassing should be reserved to structural objects and objects that
-    have no material of their own. }
+    have no material of their own. *)
   TgxImmaterialSceneObject = class(TgxCustomSceneObject)
   public
     procedure DoRender(var ARci: TgxRenderContextInfo; ARenderSelf, ARenderChildren: Boolean); override;
@@ -755,15 +752,14 @@ type
     property Hint;
   end;
 
-  { Event for user-specific rendering in a TgxDirectOpenVX object. }
+  // Event for user-specific rendering in a TgxDirectOpenVX object. 
   TDirectRenderEvent = procedure(Sender: TObject; var rci: TgxRenderContextInfo) of object;
 
-  { Provides a way to issue direct OpenGL calls during the rendering.
+  (* Provides a way to issue direct OpenGL calls during the rendering.
     You can use this object to do your specific rendering task in its OnRender
     event. The OpenGL calls shall restore the OpenGL states they found when
-    entering, or exclusively use the GLMisc utility functions to alter the
-    states. }
-  TgxDirectOpenVX = class(TgxImmaterialSceneObject)
+    entering, or exclusively use the GLMisc utility functions to alter the states. *)
+  TgxDirectOpenGL = class(TgxImmaterialSceneObject)
   private
     FUseBuildList: Boolean;
     FOnRender: TDirectRenderEvent;
@@ -786,23 +782,23 @@ type
       If false, OnRender will be invoked for each render. This is suitable
       for dynamic geometry (things that change often or constantly). }
     property UseBuildList: Boolean read FUseBuildList write SetUseBuildList;
-    { Place your specific OpenGL code here.
+    (* Place your specific OpenGL code here.
       The OpenGL calls shall restore the OpenGL states they found when
       entering, or exclusively use the GLMisc utility functions to alter
-      the states. }
+      the states. *)
     property OnRender: TDirectRenderEvent read FOnRender write FOnRender;
-    { Defines if the object uses blending.
+    (* Defines if the object uses blending.
       This property will allow direct OpenGL objects to be flagged as
-      blended for object sorting purposes. }
+      blended for object sorting purposes. *)
     property Blend: Boolean read FBlend write SetBlend;
   end;
 
-  { Scene object that allows other objects to issue rendering at some point.
+  (* Scene object that allows other objects to issue rendering at some point.
     This object is used to specify a render point for which other components
     have (rendering) tasks to perform. It doesn't render anything itself
     and is invisible, but other components can register and be notified
     when the point is reached in the rendering phase.
-    Callbacks must be explicitly unregistered. }
+    Callbacks must be explicitly unregistered. *)
   TgxRenderPoint = class(TgxImmaterialSceneObject)
   private
     FCallBacks: array of TDirectRenderEvent;
@@ -811,15 +807,16 @@ type
     constructor Create(AOwner: TComponent); override;
     destructor Destroy; override;
     procedure BuildList(var rci: TgxRenderContextInfo); override;
-    procedure RegisterCallBack(renderEvent: TDirectRenderEvent; renderPointFreed: TNotifyEvent);
+    procedure RegisterCallBack(renderEvent: TDirectRenderEvent; 
+	  renderPointFreed: TNotifyEvent);
     procedure UnRegisterCallBack(renderEvent: TDirectRenderEvent);
     procedure Clear;
   end;
 
-  { A full proxy object.
+  (* A full proxy object.
     This object literally uses another object's Render method to do its own
     rendering, however, it has a coordinate system and a life of its own.
-    Use it for duplicates of an object. }
+    Use it for duplicates of an object. *)
   TgxProxyObject = class(TgxBaseSceneObject)
   private
     FMasterObject: TgxBaseSceneObject;
@@ -841,10 +838,11 @@ type
       : Boolean; override;
     function GenerateSilhouette(const SilhouetteParameters: TgxSilhouetteParameters): TgxSilhouette; override;
   published
-    { Specifies the Master object which will be proxy'ed. }
+    // Specifies the Master object which will be proxy'ed. 
     property MasterObject: TgxBaseSceneObject read FMasterObject write SetMasterObject;
-    { Specifies how and what is proxy'ed. }
-    property ProxyOptions: TgxProxyObjectOptions read FProxyOptions write SetProxyOptions default cDefaultProxyOptions;
+    // Specifies how and what is proxy'ed. 
+    property ProxyOptions: TgxProxyObjectOptions read FProxyOptions 
+	  write SetProxyOptions default cDefaultProxyOptions;
     property ObjectsSorting;
     property Direction;
     property PitchAngle;
@@ -863,16 +861,16 @@ type
 
   TgxProxyObjectClass = class of TgxProxyObject;
 
-  { Defines the various styles for lightsources.
+  (* Defines the various styles for lightsources.
     lsSpot : a spot light, oriented and with a cutoff zone (note that if
     cutoff is 180, the spot is rendered as an omni source)
     lsOmni : an omnidirectionnal source, punctual and sending light in
     all directions uniformously
     lsParallel : a parallel light, oriented as the light source is (this
-    type of light can help speed up rendering) }
+    type of light can help speed up rendering) *)
   TLightStyle = (lsSpot, lsOmni, lsParallel, lsParallelSpot);
 
-  { Standard light source.
+  (* Standard light source.
     The standard light source covers spotlights, omnidirectionnal and
     parallel sources (see TLightStyle).
     Lights are colored, have distance attenuation parameters and are turned
@@ -882,7 +880,7 @@ type
     OpenGL implementation (8 lights are supported under most ICDs), though the
     more light you use, the slower rendering may get. If you want to render
     many more light/lightsource, you may have to resort to other techniques
-    like lightmapping. }
+    like lightmapping. *)
   TgxLightSource = class(TgxBaseSceneObject)
   private
     FLightID: Cardinal;
@@ -1026,10 +1024,11 @@ type
     { Calculate an absolute translation vector from a screen vector.
       Ratio is applied to both screen delta, planeNormal should be the
       translation plane's normal. }
-    function ScreenDeltaToVector(deltaX, deltaY: Integer; ratio: Single; const planeNormal: TVector): TVector;
-    { Same as ScreenDeltaToVector but optimized for XY plane. }
+    function ScreenDeltaToVector(deltaX, deltaY: Integer; ratio: Single; 
+	  const planeNormal: TVector): TVector;
+    // Same as ScreenDeltaToVector but optimized for XY plane. 
     function ScreenDeltaToVectorXY(deltaX, deltaY: Integer; ratio: Single): TVector;
-    { Same as ScreenDeltaToVector but optimized for XZ plane. }
+    // Same as ScreenDeltaToVector but optimized for XZ plane. 
     function ScreenDeltaToVectorXZ(deltaX, deltaY: Integer; ratio: Single): TVector;
     { Same as ScreenDeltaToVector but optimized for YZ plane. }
     function ScreenDeltaToVectorYZ(deltaX, deltaY: Integer; ratio: Single): TVector;
@@ -1152,13 +1151,13 @@ type
     function RayCastIntersect(const rayStart, rayVector: TVector; intersectPoint: PVector = nil; intersectNormal: PVector = nil)
       : TgxBaseSceneObject; virtual;
     procedure ShutdownAllLights;
-    { Saves the scene to a file (recommended extension : .GLS) }
+    // Saves the scene to a file (recommended extension : .GLSM) 
     procedure SaveToFile(const fileName: string);
-    { Load the scene from a file.
+    (* Load the scene from a file.
       Existing objects/lights/cameras are freed, then the file is loaded.
       Delphi's IDE is not handling this behaviour properly yet, ie. if
       you load a scene in the IDE, objects will be properly loaded, but
-      no declare will be placed in the code. }
+      no declare will be placed in the code. *)
     procedure LoadFromFile(const fileName: string);
     procedure SaveToStream(aStream: TStream);
     procedure LoadFromStream(aStream: TStream);
@@ -1591,10 +1590,9 @@ type
     property AfterRender: TNotifyEvent read FAfterRender write FAfterRender stored False;
   end;
 
-  { Base class for non-visual viewer.
+  (* Base class for non-visual viewer.
     Non-visual viewer may actually render visuals, but they are non-visual
-    (ie. non interactive) at design time. Such viewers include memory
-    or full-screen viewers. }
+    (ie. non interactive) at design time. Such viewers include memory or full-screen viewers. *)
   TgxNonVisualViewer = class(TComponent)
   private
     FBuffer: TgxSceneBuffer;
@@ -1627,24 +1625,23 @@ type
     procedure Render(baseObject: TgxBaseSceneObject = nil); virtual; abstract;
     procedure CopyToTexture(aTexture: TgxTexture); overload; virtual;
     procedure CopyToTexture(aTexture: TgxTexture; xSrc, ySrc, width, height: Integer; xDest, yDest: Integer); overload;
-    { CopyToTexture for Multiple-Render-Target }
+    // CopyToTexture for Multiple-Render-Target 
     procedure CopyToTextureMRT(aTexture: TgxTexture; BufferIndex: Integer); overload; virtual;
     procedure CopyToTextureMRT(aTexture: TgxTexture; xSrc, ySrc, width, height: Integer; xDest, yDest: Integer;
       BufferIndex: Integer); overload;
-    { Renders the 6 texture maps from a scene.
+    (* Renders the 6 texture maps from a scene.
       The viewer is used to render the 6 images, one for each face
       of the cube, from the absolute position of the camera.
       This does NOT alter the content of the Pictures in the image,
-      and will only change or define the content of textures as
-      registered by OpenGL. }
+      and will only change or define the content of textures as registered by OpenGL. *)
     procedure RenderCubeMapTextures(cubeMapTexture: TgxTexture; zNear: Single = 0; zFar: Single = 0);
   published
-    { Camera from which the scene is rendered. }
+    // Camera from which the scene is rendered. 
     property Camera: TgxCamera read GetCamera write SetCamera;
     property width: Integer read FWidth write SetWidth default 256;
     property height: Integer read FHeight write SetHeight default 256;
-    { Triggered before the scene's objects get rendered.
-      You may use this event to execute your own OpenGL rendering. }
+    (* Triggered before the scene's objects get rendered.
+      You may use this event to execute your own OpenGL rendering. *)
     property BeforeRender: TNotifyEvent read GetBeforeRender write SetBeforeRender;
     { Triggered just after all the scene's objects have been rendered.
       The OpenGL context is still active in this event, and you may use it
@@ -1693,10 +1690,10 @@ procedure RegisterBehaviourNameChangeEvent(notifyEvent: TNotifyEvent);
   See RegisterVKBaseSceneObjectNameChangeEvent. }
 procedure DeRegisterBehaviourNameChangeEvent(notifyEvent: TNotifyEvent);
 
-{ Issues OpenGL calls for drawing X, Y, Z axes in a standard style. }
+// Issues OpenGL calls for drawing X, Y, Z axes in a standard style. 
 procedure AxesBuildList(var rci: TgxRenderContextInfo; pattern: Word; AxisLen: Single);
 
-{ Registers the procedure call used to invoke the info form. }
+// Registers the procedure call used to invoke the info form. 
 procedure RegisterInfoForm(infoForm: TInvokeInfoForm);
 procedure InvokeInfoForm(aSceneBuffer: TgxSceneBuffer; Modal: Boolean);
 
@@ -1714,7 +1711,6 @@ var
 
 // ------------------------------------------------------------------------------
 implementation
-
 // ------------------------------------------------------------------------------
 
 function GetCurrentRenderingObject: TgxBaseSceneObject;
@@ -2658,10 +2654,8 @@ begin
   d := VectorLength(silhouetteParameters.SeenFrom);
   // determine visible radius
   case silhouetteParameters.Style of
-    ssOmni:
-      vr := SphereVisibleRadius(d, r);
-    ssParallel:
-      vr := r;
+    ssOmni: vr := SphereVisibleRadius(d, r);
+    ssParallel: vr := r;
   else
     Assert(False);
     vr := r;
@@ -3059,13 +3053,13 @@ begin
   // convert absolute to local and adjust object
   if Parent <> nil then
   begin
+    FUp.AsVector := Parent.AbsoluteToLocal(absUp);  
     FDirection.AsVector := Parent.AbsoluteToLocal(absDir);
-    FUp.AsVector := Parent.AbsoluteToLocal(absUp);
   end
   else
   begin
+    FUp.AsVector := absUp;  
     FDirection.AsVector := absDir;
-    FUp.AsVector := absUp;
   end;
   TransformationChanged
 end;
@@ -3081,7 +3075,7 @@ end;
 
 procedure TgxBaseSceneObject.SetScaling(aValue: TgxCoordinates);
 begin
-  FScaling.Assign(aValue);
+  FScaling.Assign(AValue);
   TransformationChanged;
 end;
 
@@ -3440,7 +3434,8 @@ begin
   Result := FChildren.IndexOf(AChild)
 end;
 
-function TgxBaseSceneObject.FindChild(const aName: string; ownChildrenOnly: Boolean): TgxBaseSceneObject;
+function TgxBaseSceneObject.FindChild(const aName: string; 
+  ownChildrenOnly: Boolean): TgxBaseSceneObject;
 var
   i: Integer;
   res: TgxBaseSceneObject;
@@ -4023,9 +4018,6 @@ end;
 // ------------------
 // ------------------ TgxBehaviours ------------------
 // ------------------
-
-// Create
-//
 
 constructor TgxBehaviours.Create(AOwner: TPersistent);
 begin
@@ -5038,25 +5030,25 @@ end;
 // ------------------ TxDirectOpenVX ------------------
 // ------------------
 
-constructor TgxDirectOpenVX.Create(AOwner: TComponent);
+constructor TgxDirectOpenGL.Create(AOwner: TComponent);
 begin
   inherited;
   ObjectStyle := ObjectStyle + [osDirectDraw];
   FBlend := False;
 end;
 
-procedure TgxDirectOpenVX.Assign(Source: TPersistent);
+procedure TgxDirectOpenGL.Assign(Source: TPersistent);
 begin
-  if Source is TgxDirectOpenVX then
+  if Source is TgxDirectOpenGL then
   begin
-    UseBuildList := TgxDirectOpenVX(Source).UseBuildList;
-    FOnRender := TgxDirectOpenVX(Source).FOnRender;
-    FBlend := TgxDirectOpenVX(Source).Blend;
+    UseBuildList := TgxDirectOpenGL(Source).UseBuildList;
+    FOnRender := TgxDirectOpenGL(Source).FOnRender;
+    FBlend := TgxDirectOpenGL(Source).Blend;
   end;
   inherited Assign(Source);
 end;
 
-procedure TgxDirectOpenVX.BuildList(var rci: TgxRenderContextInfo);
+procedure TgxDirectOpenGL.BuildList(var rci: TgxRenderContextInfo);
 begin
   if Assigned(FOnRender) then
   begin
@@ -5065,12 +5057,12 @@ begin
   end;
 end;
 
-function TgxDirectOpenVX.AxisAlignedDimensionsUnscaled: TVector;
+function TgxDirectOpenGL.AxisAlignedDimensionsUnscaled: TVector;
 begin
   Result := NullHmgPoint;
 end;
 
-procedure TgxDirectOpenVX.SetUseBuildList(const val: Boolean);
+procedure TgxDirectOpenGL.SetUseBuildList(const val: Boolean);
 begin
   if val <> FUseBuildList then
   begin
@@ -5082,12 +5074,12 @@ begin
   end;
 end;
 
-function TgxDirectOpenVX.Blended: Boolean;
+function TgxDirectOpenGL.Blended: Boolean;
 begin
   Result := FBlend;
 end;
 
-procedure TgxDirectOpenVX.SetBlend(const val: Boolean);
+procedure TgxDirectOpenGL.SetBlend(const val: Boolean);
 begin
   if val <> FBlend then
   begin

@@ -19,6 +19,7 @@ uses
   Scene.VectorGeometry,
   Scene.RGBE,
   Scene.ApplicationFileIO,
+  Scene.Strings,
 
   GXS.Context,
   GXS.Graphics,
@@ -65,7 +66,7 @@ var
 begin
   if FileStreamExists(filename) then
   begin
-    fs := CreateFileStream(filename, fmOpenRead);
+    fs := TFileStream.Create(filename, fmOpenRead);
     try
       LoadFromStream(fs);
     finally

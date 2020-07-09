@@ -2700,7 +2700,7 @@ procedure TgxMaterialLibrary.SaveToFile(const fileName: string);
 var
   fs: TStream;
 begin
-  fs := CreateFileStream(fileName, fmCreate);
+  fs := TFileStream.Create(fileName, fmCreate);
   try
     SaveToStream(fs);
   finally
@@ -2712,7 +2712,7 @@ procedure TgxMaterialLibrary.LoadFromFile(const fileName: string);
 var
   fs: TStream;
 begin
-  fs := CreateFileStream(fileName, fmOpenRead + fmShareDenyNone);
+  fs := TFileStream.Create(fileName, fmOpenRead + fmShareDenyNone);
   try
     LoadFromStream(fs);
   finally
@@ -2724,7 +2724,7 @@ procedure TgxMaterialLibrary.AddMaterialsFromFile(const fileName: string);
 var
   fs: TStream;
 begin
-  fs := CreateFileStream(fileName, fmOpenRead + fmShareDenyNone);
+  fs := TFileStream.Create(fileName, fmOpenRead + fmShareDenyNone);
   try
     AddMaterialsFromStream(fs);
   finally

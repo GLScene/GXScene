@@ -31,15 +31,16 @@ uses
 
   Import.OpenGLx,
   Scene.XOpenGL,
-  GXS.Scene,
-  GXS.Material,
   Scene.VectorGeometry,
   Scene.VectorLists,
-  GXS.VectorFileObjects,
   Scene.ApplicationFileIO,
+  Scene.VectorTypes,
+  Scene.Strings,
+  GXS.Scene,
+  GXS.VectorFileObjects,
   GXS.RenderContextInfo,
   GXS.Context,
-  Scene.VectorTypes;
+  GXS.Material;
 
 type
   TgxTree = class;
@@ -1281,7 +1282,7 @@ procedure TgxTree.LoadFromFile(aFileName: String);
 var
   stream: TStream;
 begin
-  stream := CreateFileStream(aFileName);
+  stream := TFileStream.Create(aFileName, fmOpenRead);
   try
     LoadFromStream(stream);
   finally
@@ -1293,7 +1294,7 @@ procedure TgxTree.SaveToFile(aFileName: String);
 var
   stream: TStream;
 begin
-  stream := CreateFileStream(aFileName, fmCreate);
+  stream := TFileStream.Create(aFileName, fmCreate);
   try
     SaveToStream(stream);
   finally

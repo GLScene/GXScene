@@ -18,15 +18,15 @@ uses
 
   Import.OpenGLx,
   Scene.XCollection,
-  GXS.Scene,
+  Scene.BaseClasses,
   Scene.PersistentClasses,
   Scene.VectorGeometry,
   Scene.VectorTypes,
+  Scene.Strings,
+  GXS.Scene,
   GXS.Texture,
   GXS.VectorFileObjects,
-  Scene.Strings,
   GXS.RenderContextInfo,
-  Scene.BaseClasses,
   GXS.Material,
   GXS.Context,
   GXS.PipelineTransformation;

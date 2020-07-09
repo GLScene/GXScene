@@ -19,7 +19,7 @@ uses
 
   GXS.Scene,
   GXS.Coordinates,
-  GXS.Win64Viewer,
+  GXS.SceneViewer,
 
   GXS.RenderContextInfo,
   GXS.State;

@@ -102,7 +102,7 @@ type
 
   TLightRecord = record
     Enabled: Boolean;
-    Style: TLightStyle;
+    Style: TgxLightStyle;
   end;
 
 // Note: probably LightCount should be replaced by LightSources, like in GLSLBumpShader.pas
@@ -374,7 +374,7 @@ begin
 end;
 
 procedure GetMLFragmentProgramCodeMid(const Code: TStrings;
-  const CurrentLight: Integer; AStyle: TLightStyle);
+  const CurrentLight: Integer; AStyle: TgxLightStyle);
 begin
   with Code do
   begin

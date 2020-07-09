@@ -95,7 +95,7 @@ type
   );
 
 
-  IVXShaderParameter = interface(IInterface)
+  IgxShaderParameter = interface(IInterface)
     function GetName: string;
     function GetGLSLType: TgxSLDataType;
     function GetGLSLSamplerType: TgxSLSamplerType;
@@ -243,7 +243,7 @@ const
     (GL_POINTS, GL_LINE_STRIP, GL_TRIANGLE_STRIP);
 
 type
-  TUniformAutoSetMethod = procedure(Sender: IVXShaderParameter; var ARci: TgxRenderContextInfo) of object;
+  TUniformAutoSetMethod = procedure(Sender: IgxShaderParameter; var ARci: TgxRenderContextInfo) of object;
 
 function GLSLTypeEnum(AType: TgxSLDataType): GLEnum;
 function GLSLTypeComponentCount(AType: TgxSLDataType): Integer;

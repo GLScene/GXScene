@@ -14,14 +14,14 @@ uses
   System.Classes,
   System.SysUtils,
 
-  GXS.VectorFileObjects,
-  Scene.ApplicationFileIO,
-  GXS.Texture,
-  GXS.TextureFormat,
-  GXS.Material,
   Scene.VectorTypes,
   Scene.VectorGeometry,
   Scene.VectorLists,
+  Scene.ApplicationFileIO,
+  GXS.VectorFileObjects,
+  GXS.Texture,
+  GXS.TextureFormat,
+  GXS.Material,
 
   Formats.FileB3D;
 

@@ -169,8 +169,8 @@
         <DCCReference Include="..\..\Source\Formats.FileVFW.pas"/>
         <DCCReference Include="..\..\Source\Formats.FileVRMLParser.pas"/>
         <DCCReference Include="..\..\Source\Formats.FileX.pas"/>
+        <DCCReference Include="..\..\Source\Formats.VfsPAK.pas"/>
         <DCCReference Include="..\..\Source\GXS.AnimatedSprite.pas"/>
-        <DCCReference Include="..\..\Source\GXS.ApplicationFileIO.pas"/>
         <DCCReference Include="..\..\Source\GXS.ArchiveManager.pas"/>
         <DCCReference Include="..\..\Source\GXS.AsmShader.pas"/>
         <DCCReference Include="..\..\Source\GXS.AsyncHDS.pas"/>
@@ -198,6 +198,7 @@
         <DCCReference Include="..\..\Source\GXS.CustomShader.pas"/>
         <DCCReference Include="..\..\Source\GXS.DCE.pas"/>
         <DCCReference Include="..\..\Source\GXS.DCEMisc.pas"/>
+        <DCCReference Include="..\..\Source\GXS.DynamicTexture.pas"/>
         <DCCReference Include="..\..\Source\GXS.EParticleMasksManager.pas"/>
         <DCCReference Include="..\..\Source\GXS.EllipseCollision.pas"/>
         <DCCReference Include="..\..\Source\GXS.ExplosionFx.pas"/>
@@ -314,16 +315,16 @@
         <DCCReference Include="..\..\Source\GXS.RedBlackTree.pas"/>
         <DCCReference Include="..\..\Source\GXS.RenderContextInfo.pas"/>
         <DCCReference Include="..\..\Source\GXS.Scene.pas"/>
-        <DCCReference Include="..\..\Source\GXS.Win64Context.pas"/>
-        <DCCReference Include="..\..\Source\GXS.Win64Viewer.pas"/>
         <DCCReference Include="..\..\Source\GXS.Screen.pas"/>
         <DCCReference Include="..\..\Source\GXS.ScreenSaver.pas"/>
         <DCCReference Include="..\..\Source\GXS.ScriptBase.pas"/>
         <DCCReference Include="..\..\Source\GXS.Selection.pas"/>
         <DCCReference Include="..\..\Source\GXS.ShaderCombiner.pas"/>
+        <DCCReference Include="..\..\Source\GXS.ShaderTextureSharing.pas"/>
         <DCCReference Include="..\..\Source\GXS.ShadowHDS.pas"/>
         <DCCReference Include="..\..\Source\GXS.ShadowPlane.pas"/>
         <DCCReference Include="..\..\Source\GXS.ShadowVolume.pas"/>
+        <DCCReference Include="..\..\Source\GXS.SceneViewer.pas"/>
         <DCCReference Include="..\..\Source\GXS.Silhouette.pas"/>
         <DCCReference Include="..\..\Source\GXS.SimpleNavigation.pas"/>
         <DCCReference Include="..\..\Source\GXS.SkyBox.pas"/>
@@ -342,7 +343,6 @@
         <DCCReference Include="..\..\Source\GXS.TextureCombiners.pas"/>
         <DCCReference Include="..\..\Source\GXS.TextureFormat.pas"/>
         <DCCReference Include="..\..\Source\GXS.TextureImageEditors.pas"/>
-        <DCCReference Include="..\..\Source\GXS.TextureSharingShader.pas"/>
         <DCCReference Include="..\..\Source\GXS.TexturedHDS.pas"/>
         <DCCReference Include="..\..\Source\GXS.ThorFX.pas"/>
         <DCCReference Include="..\..\Source\GXS.TilePlane.pas"/>
@@ -356,14 +356,15 @@
         <DCCReference Include="..\..\Source\GXS.VerletHairClasses.pas"/>
         <DCCReference Include="..\..\Source\GXS.VerletSkeletonColliders.pas"/>
         <DCCReference Include="..\..\Source\GXS.VerletTypes.pas"/>
-        <DCCReference Include="..\..\Source\GXS.VfsPAK.pas"/>
         <DCCReference Include="..\..\Source\GXS.WaterPlane.pas"/>
+        <DCCReference Include="..\..\Source\GXS.WinContext.pas"/>
         <DCCReference Include="..\..\Source\GXS.Windows.pas"/>
         <DCCReference Include="..\..\Source\GXS.WindowsFont.pas"/>
         <DCCReference Include="..\..\Source\GXS.zBuffer.pas"/>
         <DCCReference Include="..\..\Source\GXS.ViewerOpenGL.pas"/>
         <DCCReference Include="..\..\Source\Import.OpenGLx.pas"/>
         <DCCReference Include="..\..\Source\Import.Vulkan.pas"/>
+        <DCCReference Include="..\..\Source\Scene.ApplicationFileIO.pas"/>
         <DCCReference Include="..\..\Source\Scene.Keyboard.pas"/>
         <DCCReference Include="..\..\Source\Scene.PersistentClasses.pas"/>
         <DCCReference Include="..\..\Source\Scene.Strings.pas"/>
@@ -378,15 +379,12 @@
         <DCCReference Include="..\..\Source\Scene.GeometryBB.pas"/>
         <DCCReference Include="..\..\Source\Scene.GeometryCoordinates.pas"/>
         <DCCReference Include="..\..\Source\Scene.Manager.pas"/>
-        <DCCReference Include="..\..\Source\Scene.PerlinBase.pas"/>
-        <DCCReference Include="..\..\Source\Scene.PerlinNoise3D.pas"/>
         <DCCReference Include="..\..\Source\Scene.PlugInInterface.pas"/>
         <DCCReference Include="..\..\Source\Scene.RGBE.pas"/>
         <DCCReference Include="..\..\Source\Scene.SpacePartition.pas"/>
         <DCCReference Include="..\..\Source\Scene.Spline.pas"/>
         <DCCReference Include="..\..\Source\Scene.XOpenGL.pas"/>
         <DCCReference Include="..\..\Source\Scene.XCollection.pas"/>
-        <DCCReference Include="..\..\Source\GXS.DynamicTexture.pas"/>
         <BuildConfiguration Include="Debug">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>
@@ -426,7 +424,7 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="..\..\bpl\Win64\GXScene_RT.bpl" Configuration="Debug" Class="ProjectOutput">
+                <DeployFile LocalName="C:\Users\Public\Documents\Embarcadero\Studio\21.0\Bpl\Win64\GXScene_RT.bpl" Configuration="Debug" Class="ProjectOutput">
                     <Platform Name="Win64">
                         <RemoteName>GXScene_RT.bpl</RemoteName>
                         <Overwrite>true</Overwrite>

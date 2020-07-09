@@ -57,7 +57,7 @@ uses
   GXS.Scene,
   GXS.Objects,
   GXS.HUDObjects,
-  GXS.Win64Viewer,
+  GXS.SceneViewer,
   GXS.BitmapFont,
   GXS.Context,
   GXS.Texture,

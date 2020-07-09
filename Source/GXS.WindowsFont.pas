@@ -36,50 +36,38 @@ uses
 
 type
 
-  // TgxWindowsBitmapFont
-  //
-  { A bitmap font automatically built from a TFont. 
+  (* A bitmap font automatically built from a TFont.
      It works like a TgxBitmapfont, you set ranges and which chars are assigned
      to which indexes, however here you also set the Font property to any TFont
      available to the system and it renders as close to that font
      as possible, on some font types this is 100% on some a slight difference
-     in spacing can occur at most 1 pixel per char on some char combinations. 
+     in spacing can occur at most 1 pixel per char on some char combinations.
      Ranges must be sorted in ascending ASCII order and should not overlap.
      As the font texture is automatically layed out, the Ranges StartGlyphIdx
-     property is ignored and replaced appropriately. }
+     property is ignored and replaced appropriately. *)
   TgxWindowsBitmapFont = class(TgxCustomBitmapFont)
   private
-    
     FFont: TFont;
     procedure SetList(const AList : TIntegerList);
   protected
-    
     procedure SetFont(value: TFont);
     procedure LoadWindowsFont; virtual;
     function  StoreRanges: Boolean;
-
     procedure PrepareImage(var ARci: TgxRenderContextInfo); override;
     function  TextureFormat: Integer; override;
     procedure StreamlineRanges;
   public
-    
     constructor Create(AOwner: TComponent); override;
     destructor Destroy; override;
-
     procedure NotifyChange(Sender: TObject); override;
-
     function FontTextureWidth: Integer;
     function FontTextureHeight: Integer;
-
     procedure EnsureString(const s : String); overload;
     procedure EnsureChars(const AStart, AEnd: widechar);
-
     property Glyphs;
-
   published
-    
-      { The font used to prepare the texture. 
-         Note: the font color is ignored. }
+    (* The font used to prepare the texture.
+       Note: the font color is ignored. *)
     property Font: TFont read FFont write SetFont;
 
     property HSpace;
@@ -89,12 +77,8 @@ type
     property Ranges stored StoreRanges;
   end;
 
-  // ------------------------------------------------------------------
-  // ------------------------------------------------------------------
-  // ------------------------------------------------------------------
+// ------------------------------------------------------------------
 implementation
-// ------------------------------------------------------------------
-// ------------------------------------------------------------------
 // ------------------------------------------------------------------
 
 const
@@ -109,56 +93,38 @@ Var
 // ------------------ TgxWindowsBitmapFont ------------------
 // ------------------
 
-// Create
-//
-
 constructor TgxWindowsBitmapFont.Create(AOwner: TComponent);
 begin
   inherited;
   FFont := TFont.Create;
-  { TODO : E2003 Undeclared identifier: 'Color' }
+  // TODO : E2003 Undeclared identifier: 'Color'
   (*FFont.Color := TColors.White;*)
   FFont.OnChanged := NotifyChange;
   GlyphsAlpha := tiaAlphaFromIntensity;
   EnsureChars(' ', cDefaultLast);
 end;
 
-// Destroy
-//
-
 destructor TgxWindowsBitmapFont.Destroy;
 begin
   FFont.Free;
-  Ranges.Clear; 
+  Ranges.Clear;
   inherited;
 end;
-
-// FontTextureWidth
-//
 
 function TgxWindowsBitmapFont.FontTextureWidth: Integer;
 begin
   Result := Glyphs.Bitmap.Width;
 end;
 
-// FontTextureHeight
-//
-
 function TgxWindowsBitmapFont.FontTextureHeight: Integer;
 begin
   Result := Glyphs.Bitmap.Height;
 end;
 
-// SetFont
-//
-
 procedure TgxWindowsBitmapFont.SetFont(value: TFont);
 begin
   FFont.Assign(value);
 end;
-
-// NotifyChange
-//
 
 procedure TgxWindowsBitmapFont.NotifyChange(Sender: TObject);
 begin
@@ -167,9 +133,6 @@ begin
   InvalidateUsers;
   inherited;
 end;
-
-// LoadWindowsFont
-//
 
 procedure TgxWindowsBitmapFont.LoadWindowsFont;
 
@@ -233,7 +196,7 @@ procedure TgxWindowsBitmapFont.LoadWindowsFont;
           buffer[0] := TileIndexToChar(n);
           // Draw the Char, the trailing space is to properly handle the italics.
           // credits to the Unicode version of SynEdit for this function call. GPL/MPL as GLScene
-          { TODO : E2003 Undeclared identifier: 'Handle' }
+          // TODO : E2003 Undeclared identifier: 'Handle'
           (*ExtTextOutW(bitmap.Canvas.Handle, p.l, p.t, ETO_CLIPPED, @r, buffer, 1, nil);*)
        end;
         Inc(px, cw);
@@ -276,12 +239,12 @@ begin
 
   bitmap.Height      := 0;
   //due to lazarus doesn't properly support pixel formats
-    { TODO : E2129 Cannot assign to a read-only property }
+    // TODO : E2129 Cannot assign to a read-only property
      (*bitmap.PixelFormat := TPixelFormat.RGBA; //in VCL glpf32bit;*)
 
   with bitmap.Canvas do
   begin
-    { TODO : E2129 Cannot assign to a read-only property }
+    // TODO : E2129 Cannot assign to a read-only property
     (*
     Font := Self.Font;
     Font.Color := TColors.White;
@@ -314,7 +277,7 @@ begin
   for i := 0 to nbChars - 1 do
   begin
     ch := TileIndexToChar(i);
-    { TODO : E2003 Undeclared identifier: 'Handle' }
+    // TODO : E2003 Undeclared identifier: 'Handle'
     (*cw := GetTextSize(bitmap.canvas.Handle, @ch, 1).cx-HSpaceFix;*)
     n  := n + cw + GlyphsIntervalX;
     SetCharWidths(i, cw);
@@ -331,9 +294,6 @@ begin
   FCharsLoaded := true;
   Glyphs.Bitmap.OnChange := OnGlyphsChanged;
 end;
-
-// StoreRanges
-//
 
 function TgxWindowsBitmapFont.StoreRanges: Boolean;
 begin
@@ -417,30 +377,23 @@ begin
   ACharList.Free;
 end;
 
-// PrepareImage
-//
-
 procedure TgxWindowsBitmapFont.PrepareImage(var ARci: TgxRenderContextInfo);
 begin
   LoadWindowsFont;
   inherited PrepareImage(ARci);
 end;
 
-// TextureFormat
-//
-
 function TgxWindowsBitmapFont.TextureFormat: Integer;
 begin
   Result := GL_ALPHA;
 end;
 
+// ------------------------------------------------------------------
 initialization
-  // ------------------------------------------------------------------
-  // ------------------------------------------------------------------
-  // ------------------------------------------------------------------
+// ------------------------------------------------------------------
+
   Win32PlatformIsUnicode := (Win32Platform = VER_PLATFORM_WIN32_NT);
 
-   
   RegisterClasses([TgxWindowsBitmapFont]);
 
 end.

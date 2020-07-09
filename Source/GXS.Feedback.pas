@@ -31,6 +31,8 @@ uses
   Scene.PersistentClasses,
   Scene.VectorGeometry,
   Scene.VectorLists,
+  Scene.VectorTypes,
+  Scene.Strings,
   GXS.Scene,
   GXS.VectorFileObjects,
   GXS.Texture,
@@ -38,13 +40,12 @@ uses
   GXS.Context,
   GXS.State,
   GXS.PipelineTransformation,
-  GXS.MeshUtils, 
-  Scene.VectorTypes;
+  GXS.MeshUtils;
 
 type
   TFeedbackMode = (fm2D, fm3D, fm3DColor, fm3DColorTexture, fm4DColorTexture);
 
-  { An object encapsulating the OpenGL feedback rendering mode. }
+  // An object encapsulating the feedback rendering mode.
   TgxFeedback = class(TgxBaseSceneObject)
   private
     FActive: Boolean;
@@ -61,8 +62,8 @@ type
     destructor Destroy; override;
     procedure DoRender(var ARci: TgxRenderContextInfo;
       ARenderSelf, ARenderChildren: Boolean); override;
-    { Parse the the feedback buffer for polygon data and build
-       a mesh into the assigned lists. }
+    (* Parse the feedback buffer for polygon data and build
+       a mesh into the assigned lists. *)
     procedure BuildMeshFromBuffer(
       Vertices: TAffineVectorList = nil;
       Normals: TAffineVectorList = nil;
@@ -73,8 +74,8 @@ type
     property Buffered: Boolean read FBuffered;
     // The feedback buffer
     property Buffer: TSingleList read FBuffer;
-    { Vertex positions in the buffer needs to be scaled by
-       CorrectionScaling to get correct coordinates. }
+    (* Vertex positions in the buffer needs to be scaled by
+       CorrectionScaling to get correct coordinates. *)
     property CorrectionScaling: Single read FCorrectionScaling;
   published
     // Maximum size allocated for the feedback buffer

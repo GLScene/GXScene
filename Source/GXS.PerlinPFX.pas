@@ -17,10 +17,12 @@ uses
   System.Math,
 
   Import.OpenGLx,
-  Scene.PerlinNoise3D,
   Scene.VectorGeometry,
   GXS.ParticleFX,
   GXS.Graphics;
+  
+const
+  cPERLIN_TABLE_SIZE = 256; // must be a power of two
 
 type
 
@@ -86,10 +88,30 @@ type
      property LifeColors;
    end;
 
+  (* Generates Perlin Noise in the [-1; 1] range.
+    2D noise requests are taken in the Z=0 slice *)
+  TgxPerlin3DNoise = class(TObject)
+  protected
+    FPermutations: packed array [0 .. cPERLIN_TABLE_SIZE - 1] of Integer;
+    FGradients: packed array [0 .. cPERLIN_TABLE_SIZE * 3 - 1] of Single;
+  protected
+    function Lattice(ix, iy, iz: Integer; fx, fy, fz: Single): Single; overload;
+    function Lattice(ix, iy: Integer; fx, fy: Single): Single; overload;
+  public
+    constructor Create(randomSeed: Integer);
+    procedure Initialize(randomSeed: Integer);
+    function Noise(const x, y: Single): Single; overload;
+    function Noise(const x, y, z: Single): Single; overload;
+    function Noise(const v: TAffineVector): Single; overload;
+    function Noise(const v: TVector): Single; overload;
+  end;
+
+
 // ------------------------------------------------------------------
 implementation
-// ------------------
+// ------------------------------------------------------------------
 
+// ------------------
 // ------------------ TgxPerlinPFXManager ------------------
 // ------------------
 
@@ -113,17 +135,21 @@ end;
 
 procedure TgxPerlinPFXManager.SetTexMapSize(const val : Integer);
 begin
-   if val<>FTexMapSize then begin
+   if val<>FTexMapSize then 
+   begin
       FTexMapSize:=val;
-      if FTexMapSize<3 then FTexMapSize:=3;
-      if FTexMapSize>9 then FTexMapSize:=9;
+      if FTexMapSize<3 then 
+	    FTexMapSize:=3;
+      if FTexMapSize>9 then 
+	    FTexMapSize:=9;
       NotifyChange(Self);
    end;
 end;
 
 procedure TgxPerlinPFXManager.SetNoiseSeed(const val : Integer);
 begin
-   if val<>FNoiseSeed then begin
+   if val<>FNoiseSeed then 
+   begin
       FNoiseSeed:=val;
       NotifyChange(Self);
    end;
@@ -131,7 +157,8 @@ end;
 
 procedure TgxPerlinPFXManager.SetNoiseScale(const val : Integer);
 begin
-   if val<>FNoiseScale then begin
+   if val<>FNoiseScale then 
+   begin
       FNoiseScale:=val;
       NotifyChange(Self);
    end;
@@ -139,17 +166,21 @@ end;
 
 procedure TgxPerlinPFXManager.SetNoiseAmplitude(const val : Integer);
 begin
-   if val<>FNoiseAmplitude then begin
+   if val<>FNoiseAmplitude then 
+   begin
       FNoiseAmplitude:=val;
-      if FNoiseAmplitude<0 then FNoiseAmplitude:=0;
-      if FNoiseAmplitude>100 then FNoiseAmplitude:=100;
+      if FNoiseAmplitude<0 then 
+	    FNoiseAmplitude:=0;
+      if FNoiseAmplitude>100 then 
+	    FNoiseAmplitude:=100;
       NotifyChange(Self);
    end;
 end;
 
 procedure TgxPerlinPFXManager.SetSmoothness(const val : Single);
 begin
-   if FSmoothness<>val then begin
+   if FSmoothness<>val then 
+   begin
       FSmoothness:=ClampValue(val, 1e-3, 1e3);
       NotifyChange(Self);
    end;
@@ -157,7 +188,8 @@ end;
 
 procedure TgxPerlinPFXManager.SetBrightness(const val : Single);
 begin
-   if FBrightness<>val then begin
+   if FBrightness<>val then 
+   begin
       FBrightness:=ClampValue(val, 1e-3, 1e3);
       NotifyChange(Self);
    end;
@@ -165,7 +197,8 @@ end;
 
 procedure TgxPerlinPFXManager.SetGamma(const val : Single);
 begin
-   if FGamma<>val then begin
+   if FGamma<>val then 
+   begin
       FGamma:=ClampValue(val, 0.1, 10);
       NotifyChange(Self);
    end;
@@ -190,28 +223,36 @@ procedure TgxPerlinPFXManager.PrepareImage(bmp32 : TgxBitmap32; var texFormat : 
 
       if Gamma<0.1 then
          invGamma:=10
-      else invGamma:=1/Gamma;
+      else 
+	    invGamma:=1/Gamma;
       gotIntensityCorrection:=(Gamma<>1) or (Brightness<>1);
 
-      for y:=0 to s-1 do begin
+      for y:=0 to s-1 do 
+	  begin
          fy:=Sqr((y+0.5-s2)*is2);
-         scanLine:=bmp32.ScanLine[y+dy];
-         for x:=0 to s-1 do begin
+         scanLine := bmp32.ScanLine[y+dy];
+         for x:=0 to s-1 do 
+		 begin
             f:=Sqr((x+0.5-s2)*is2)+fy;
-            if f<1 then begin
-               df:=nBase+nAmp*noise.Noise(x*pf, y*pf);
+            if f<1 then 
+			begin
+               df := nBase+nAmp * noise.Noise(x*pf, y*pf);
                if gotIntensityCorrection then
-                  df:=ClampValue(Power(df, InvGamma)*Brightness, 0, 1);
-               dfg:=Power((1-Sqrt(f)), FSmoothness);
-               d:=Trunc(df*255);
-               if d > 255 then d:=255;
-               with scanLine^[x+dx] do begin
+                  df := ClampValue(Power(df, InvGamma)*Brightness, 0, 1);
+               dfg := Power((1-Sqrt(f)), FSmoothness);
+               d := Trunc(df*255);
+               if d > 255 then 
+			     d:=255;
+               with scanLine^[x+dx] do 
+			   begin
                   r:=d;
                   g:=d;
                   b:=d;
                   a:=Trunc(dfg*255);
                end;
-            end else PInteger(@scanLine[x+dx])^:=0;
+            end 
+			else 
+			  PInteger(@scanLine[x+dx])^:=0;
          end;
       end;
    end;
@@ -228,8 +269,9 @@ begin
    noise:=TgxPerlin3DNoise.Create(NoiseSeed);
    try
       case SpritesPerTexture of
-         sptOne : PrepareSubImage(0, 0, s, noise);
-         sptFour : begin
+         sptOne: PrepareSubImage(0, 0, s, noise);
+         sptFour: 
+		 begin
             s2:=s div 2;
             PrepareSubImage(0, 0, s2, noise);
             noise.Initialize(NoiseSeed+1);
@@ -246,6 +288,154 @@ begin
       noise.Free;
    end;
 end;
+
+// ------------------
+// ------------------ TgxPerlin3DNoise ------------------
+// ------------------
+constructor TgxPerlin3DNoise.Create(randomSeed: Integer);
+begin
+  inherited Create;
+  Initialize(randomSeed);
+end;
+
+procedure TgxPerlin3DNoise.Initialize(randomSeed: Integer);
+var
+  seedBackup: Integer;
+  i, t, j: Integer;
+  z, r: Single;
+begin
+  seedBackup := RandSeed;
+  RandSeed := randomSeed;
+
+  // Generate random gradient vectors.
+  for i := 0 to cPERLIN_TABLE_SIZE - 1 do
+  begin
+    z := 1 - 2 * Random;
+    r := Sqrt(1 - z * z);
+    SinCosine(c2PI * Random, r, FGradients[i * 3], FGradients[i * 3 + 1]);
+    FGradients[i * 3 + 2] := z;
+  end;
+  // Initialize permutations table
+  for i := 0 to cPERLIN_TABLE_SIZE - 1 do
+    FPermutations[i] := i;
+  // Shake up
+  for i := 0 to cPERLIN_TABLE_SIZE - 1 do
+  begin
+    j := Random(cPERLIN_TABLE_SIZE);
+    t := FPermutations[i];
+    FPermutations[i] := FPermutations[j];
+    FPermutations[j] := t;
+  end;
+
+  RandSeed := seedBackup;
+end;
+
+function TgxPerlin3DNoise.Lattice(ix, iy, iz: Integer;
+  fx, fy, fz: Single): Single;
+const
+  cMask = cPERLIN_TABLE_SIZE - 1;
+var
+  g: Integer;
+begin
+  g := FPermutations[(ix + FPermutations[(iy + FPermutations[iz and cMask]) and
+    cMask]) and cMask] * 3;
+  Result := FGradients[g] * fx + FGradients[g + 1] * fy + FGradients
+    [g + 2] * fz;
+end;
+
+function TgxPerlin3DNoise.Lattice(ix, iy: Integer; fx, fy: Single): Single;
+const
+  cMask = cPERLIN_TABLE_SIZE - 1;
+var
+  g: Integer;
+begin
+  g := FPermutations[(ix + FPermutations[(iy + FPermutations[0]) and cMask])
+    and cMask] * 3;
+  Result := FGradients[g] * fx + FGradients[g + 1] * fy;
+end;
+
+function TgxPerlin3DNoise.Noise(const v: TAffineVector): Single;
+
+  function Smooth(var x: Single): Single;
+  begin
+    Result := x * x * (3 - 2 * x);
+  end;
+
+var
+  ix, iy, iz: Integer;
+  fx0, fx1, fy0, fy1, fz0, fz1: Single;
+  wx, wy, wz: Single;
+  vy0, vy1, vz0, vz1: Single;
+begin
+  ix := Floor(v.x);
+  fx0 := v.x - ix;
+  fx1 := fx0 - 1;
+  wx := Smooth(fx0);
+
+  iy := Floor(v.y);
+  fy0 := v.y - iy;
+  fy1 := fy0 - 1;
+  wy := Smooth(fy0);
+
+  iz := Floor(v.z);
+  fz0 := v.z - iz;
+  fz1 := fz0 - 1;
+  wz := Smooth(fz0);
+
+  vy0 := Lerp(Lattice(ix, iy, iz, fx0, fy0, fz0), Lattice(ix + 1, iy, iz, fx1,
+    fy0, fz0), wx);
+  vy1 := Lerp(Lattice(ix, iy + 1, iz, fx0, fy1, fz0),
+    Lattice(ix + 1, iy + 1, iz, fx1, fy1, fz0), wx);
+  vz0 := Lerp(vy0, vy1, wy);
+
+  vy0 := Lerp(Lattice(ix, iy, iz + 1, fx0, fy0, fz1),
+    Lattice(ix + 1, iy, iz + 1, fx1, fy0, fz1), wx);
+  vy1 := Lerp(Lattice(ix, iy + 1, iz + 1, fx0, fy1, fz1),
+    Lattice(ix + 1, iy + 1, iz + 1, fx1, fy1, fz1), wx);
+  vz1 := Lerp(vy0, vy1, wy);
+
+  Result := Lerp(vz0, vz1, wz);
+end;
+
+function TgxPerlin3DNoise.Noise(const x, y: Single): Single;
+
+  function Smooth(var x: Single): Single;
+  begin
+    Result := x * x * (3 - 2 * x);
+  end;
+
+var
+  ix, iy: Integer;
+  fx0, fx1, fy0, fy1: Single;
+  wx, wy: Single;
+  vy0, vy1: Single;
+begin
+  ix := Floor(x);
+  fx0 := x - ix;
+  fx1 := fx0 - 1;
+  wx := Smooth(fx0);
+
+  iy := Floor(y);
+  fy0 := y - iy;
+  fy1 := fy0 - 1;
+  wy := Smooth(fy0);
+
+  vy0 := Lerp(Lattice(ix, iy, fx0, fy0), Lattice(ix + 1, iy, fx1, fy0), wx);
+  vy1 := Lerp(Lattice(ix, iy + 1, fx0, fy1), Lattice(ix + 1, iy + 1, fx1,
+    fy1), wx);
+  Result := Lerp(vy0, vy1, wy);
+end;
+
+function TgxPerlin3DNoise.Noise(const x, y, z: Single): Single;
+begin
+  Result := Noise(AffineVectorMake(x, y, z));
+end;
+
+function TgxPerlin3DNoise.Noise(const v: TVector): Single;
+begin
+  Result := Noise(PAffineVector(@v)^);
+end;
+
 
 // ------------------------------------------------------------------
 initialization

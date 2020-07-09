@@ -44,7 +44,7 @@ uses
   GXS.Graphics,
   GXS.Objects,
   GXS.Context,
-  GXS.Win64Viewer,
+  GXS.SceneViewer,
   GXS.Color,
   GXS.RenderContextInfo,
   GXS.State,

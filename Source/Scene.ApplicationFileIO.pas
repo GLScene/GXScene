@@ -40,7 +40,7 @@ type
     var Stream: TStream) of object;
   TgxAFIOFileStreamExistsEvent = function(const fileName: String): Boolean of object;
 
-  (* Allows specifying a custom behaviour for CreateFileStream.
+  (* Allows specifying a custom behaviour for TFileStream.Create.
     The component should be considered a helper only, you can directly specify
     a function via the vAFIOCreateFileStream variable.
     If multiple ApplicationFileIO components exist in the application,
@@ -55,7 +55,7 @@ type
   published
     (* Event that allows you to specify a stream for the file.
       Destruction of the stream is at the discretion of the code that
-      invoked CreateFileStream. Return nil to let the default mechanism
+      invoked TFileStream.Create. Return nil to let the default mechanism
       take place (ie. attempt a regular file system access). *)
     property OnFileStream: TgxAFIOFileStreamEvent read FOnFileStream write FOnFileStream;
     // Event that allows you to specify if a stream for the file exists.
@@ -104,12 +104,6 @@ type
 
   // Returns true if an ApplicationFileIO has been defined
 function ApplicationFileIODefined: Boolean;
-(* Creates a file stream corresponding to the fileName.
-  If the file does not exists, an exception will be triggered.
-  Default mechanism creates a regular TFileStream, the 'mode' parameter
-  is similar to the one for TFileStream. *)
-function CreateFileStream(const fileName: string;
-  mode: Word = fmOpenRead + fmShareDenyNone): TStream;
 // Queries is a file stream corresponding to the fileName exists.
 function FileStreamExists(const fileName: string): Boolean;
 function CreateResourceStream(const ResName: string; ResType: PChar)
@@ -131,26 +125,6 @@ function ApplicationFileIODefined: Boolean;
 begin
   Result := (Assigned(vAFIOCreateFileStream) and Assigned(vAFIOFileStreamExists)
     ) or Assigned(vAFIO);
-end;
-
-function CreateFileStream(const fileName: string;
-  mode: Word = fmOpenRead + fmShareDenyNone): TStream;
-begin
-  if Assigned(vAFIOCreateFileStream) then
-    Result := vAFIOCreateFileStream(fileName, mode)
-  else
-  begin
-    Result := nil;
-    if Assigned(vAFIO) and Assigned(vAFIO.FOnFileStream) then
-      vAFIO.FOnFileStream(fileName, mode, Result);
-    if not Assigned(Result) then
-    begin
-      if ((mode and fmCreate) = fmCreate) or FileExists(fileName) then
-        Result := TFileStream.Create(fileName, mode)
-      else
-        raise Exception.Create('File not found: "' + fileName + '"');
-    end;
-  end;
 end;
 
 function FileStreamExists(const fileName: string): Boolean;
@@ -246,7 +220,7 @@ var
   fs: TStream;
 begin
   ResourceName := ExtractFileName(fileName);
-  fs := CreateFileStream(fileName, fmOpenRead + fmShareDenyNone);
+  fs := TFileStream.Create(fileName, fmOpenRead + fmShareDenyNone);
   try
     LoadFromStream(fs);
   finally
@@ -259,7 +233,7 @@ var
   fs: TStream;
 begin
   ResourceName := ExtractFileName(fileName);
-  fs := CreateFileStream(fileName, fmCreate);
+  fs := TFileStream.Create(fileName, fmCreate);
   try
     SaveToStream(fs);
   finally

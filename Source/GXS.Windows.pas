@@ -818,9 +818,6 @@ begin
   inherited;
 end;
 
-// SetRotation
-//
-
 procedure TgxBaseComponent.SetRotation(const val: Single);
 begin
   if FRotation <> val then
@@ -829,9 +826,6 @@ begin
     NotifyChange(Self);
   end;
 end;
-
-// SetAlphaChannel
-//
 
 procedure TgxBaseComponent.SetAlphaChannel(const val: Single);
 begin
@@ -924,16 +918,10 @@ begin
   end;
 end;
 
-// StoreAlphaChannel
-//
-
 function TgxBaseComponent.StoreAlphaChannel: Boolean;
 begin
   Result := (FAlphaChannel <> 1);
 end;
-
-// SetNoZWrite
-//
 
 procedure TgxBaseComponent.SetNoZWrite(const val: Boolean);
 begin
@@ -1383,21 +1371,21 @@ end;
 procedure TgxFocusControl.InternalKeyPress(var Key: Char);
 begin
   if assigned(FOnKeyPress) then
- { TODO : E2033 Types of actual and formal var parameters must be identical }
+ ///TODO : E2033 Types of actual and formal var parameters must be identical
     (*FOnKeyPress(Self, Key);*)
 end;
 
 procedure TgxFocusControl.InternalKeyDown(var Key: Word; Shift: TShiftState);
 begin
   if assigned(FOnKeyDown) then
- { TODO : E2033 Types of actual and formal var parameters must be identical }
+ ///TODO : E2033 Types of actual and formal var parameters must be identical
   (*  FOnKeyDown(Self, Key, shift); *)
 end;
 
 procedure TgxFocusControl.InternalKeyUp(var Key: Word; Shift: TShiftState);
 begin
   if assigned(FOnKeyUp) then
- { TODO : E2033 Types of actual and formal var parameters must be identical }
+ /// TODO : E2033 Types of actual and formal var parameters must be identical
  (*   FOnKeyUp(Self, Key, shift);*)
 end;
 

@@ -19,8 +19,8 @@ uses
   Scene.VectorGeometry,
   Scene.VectorLists,
   Scene.PersistentClasses,
-  Scene.Strings,
-  GXS.Utils;
+  GXS.Utils,
+  Scene.Strings;
 
 type
   TDXNode = class;

@@ -13,10 +13,11 @@ interface
 uses
   System.Classes,
   System.SysUtils,
-  GXS.VectorFileObjects,
-  GXS.Material,
+
   Scene.ApplicationFileIO,
   Scene.VectorGeometry,
+  GXS.VectorFileObjects,
+  GXS.Material,
   GXS.Texture,
 
   Formats.FileMD3;

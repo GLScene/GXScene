@@ -11,9 +11,10 @@ unit GXS.Screen;
 interface
 
 uses
-  System.Classes, 
+  Winapi.Windows,
+  System.Classes,
   System.SysUtils,
-  Winapi.Windows, 
+
   FMX.Forms,
   Scene.VectorGeometry;
 

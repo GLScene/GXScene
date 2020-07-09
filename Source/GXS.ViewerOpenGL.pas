@@ -27,9 +27,9 @@ uses
 
   Import.OpenGLx,
   GXS.Scene,
-  GXS.Win64Context,
+  GXS.Context,
   GXS.TextureFormat,
-  GXS.Context;
+  GXS.WinContext;
 
 type
 

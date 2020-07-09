@@ -67,7 +67,7 @@ var
 begin
   if FileStreamExists(filename) then
   begin
-    fs := CreateFileStream(filename, fmOpenRead);
+    fs := TFileStream.Create(filename, fmOpenRead);
     try
       LoadFromStream(fs);
     finally
@@ -83,7 +83,7 @@ procedure TgxDDSImage.SaveToFile(const filename: string);
 var
   fs: TStream;
 begin
-  fs := CreateFileStream(filename, fmOpenWrite or fmCreate);
+  fs := TFileStream.Create(filename, fmOpenWrite or fmCreate);
   try
     SaveToStream(fs);
   finally

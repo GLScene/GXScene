@@ -26,7 +26,7 @@ uses
 
   GXS.Graphics,
   GXS.Scene,
-  GXS.Win64Viewer,
+  GXS.SceneViewer,
 
   Formats.FileVFW;
 

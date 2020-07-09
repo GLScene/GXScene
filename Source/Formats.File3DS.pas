@@ -742,7 +742,7 @@ constructor TFile3DS.CreateFromFile(const FileName: String);
 begin
   Create;
   FFileName := FileName;
-  FStream := CreateFileStream(FileName, fmOpenRead or fmShareDenyWrite);
+  FStream := TFileStream.Create(FileName, fmOpenRead or fmShareDenyWrite);
   InitDatabase;
   CreateDatabase;
 end;
@@ -1181,7 +1181,7 @@ begin
   ClearLists;
   ReleaseStream;
   FFileName := FileName;
-  FStream := CreateFileStream(FileName, fmOpenRead or fmShareDenyWrite);
+  FStream := TFileStream.Create(FileName, fmOpenRead or fmShareDenyWrite);
   FOwnStream := True;
   InitDatabase;
   CreateDatabase;

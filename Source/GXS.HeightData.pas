@@ -1922,7 +1922,7 @@ var
 begin
   if not FileExists('tbase.bin') then
     Exit;
-  fs := CreateFileStream('tbase.bin', fmOpenRead + fmShareDenyNone);
+  fs := TFileStream.Create('tbase.bin', fmOpenRead + fmShareDenyNone);
   try
     // retrieve data
     with HeightData do

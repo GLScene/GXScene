@@ -1879,7 +1879,7 @@ begin
   Temp := 0;
   LStream := nil;
   try
-    LStream := CreateFileStream(ResourceName, fmOpenWrite or fmCreate);
+    LStream := TFileStream.Create(ResourceName, fmOpenWrite or fmCreate);
     with LStream do
     begin
       Write(Temp, SizeOf(Integer)); // Version
@@ -1909,7 +1909,7 @@ var
 begin
   LStream := nil;
   try
-    LStream := CreateFileStream(ResourceName, fmOpenRead);
+    LStream := TFileStream.Create(ResourceName, fmOpenRead);
     with LStream do
     begin
       Read(Temp, SizeOf(Integer)); // Version
@@ -1994,7 +1994,7 @@ begin
 
     if FSourceStream = nil then
     begin
-      FSourceStream := CreateFileStream(ResourceName + IntToHex(FStreamLevel, 2));
+      FSourceStream := TFileStream.Create(ResourceName + IntToHex(FStreamLevel, 2));
     end;
 
     // Move to position of next piece and read it

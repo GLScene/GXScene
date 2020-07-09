@@ -170,7 +170,7 @@ begin
     SizeY := aSizeY;
     TileSize := aTileSize;
   end;
-  FFile := CreateFileStream(fileName, fmCreate);
+  FFile := TFileStream.Create(fileName, fmCreate);
   FFile.Write(FHeader, SizeOf(FHeader));
   FCreating := True;
   SetLength(FHeightTile.data, aTileSize * aTileSize);
@@ -180,7 +180,7 @@ constructor TgxHeightTileFile.Create(const fileName: String);
 var
   n, I, key, qx, qy: Integer;
 begin
-  FFile := CreateFileStream(fileName, fmOpenRead + fmShareDenyNone);
+  FFile := TFileStream.Create(fileName, fmOpenRead + fmShareDenyNone);
   // Read Header
   FFile.Read(FHeader, SizeOf(FHeader));
   if FHeader.FileVersion <> cFileVersion then

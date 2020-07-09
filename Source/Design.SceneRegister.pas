@@ -38,11 +38,11 @@ uses
   DesignEditors,
   DesignMenus,
 
-  Scene.Strings,
-  GXS.Scene,
+  Scene.Strings,
+  GXS.Scene,
   GXS.Context,
   GXS.Color,
-  GXS.Win64Viewer,
+  GXS.SceneViewer,
   GXS.Utils,
   GXS.ObjectManager;
 

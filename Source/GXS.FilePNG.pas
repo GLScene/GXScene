@@ -55,7 +55,7 @@ var
 begin
   if FileStreamExists(fileName) then
   begin
-    fs := CreateFileStream(fileName, fmOpenRead);
+    fs := TFileStream.Create(fileName, fmOpenRead);
     try
       LoadFromStream(fs);
     finally
@@ -71,7 +71,7 @@ procedure TgxPNGImage.SaveToFile(const filename: string);
 var
   fs: TStream;
 begin
-  fs := CreateFileStream(fileName, fmOpenWrite or fmCreate);
+  fs := TFileStream.Create(fileName, fmOpenWrite or fmCreate);
   try
     SaveToStream(fs);
   finally

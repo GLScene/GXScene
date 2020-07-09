@@ -29,7 +29,7 @@ uses
   FMX.Types,
   Scene.VectorGeometry,
   GXS.Scene,
-  GXS.Win64Viewer,
+  GXS.SceneViewer,
   Scene.Strings;
 
 type

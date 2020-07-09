@@ -1,14 +1,15 @@
-//
-// Graphic Scene Engine, http://glscene.org
-//
-{
-   Shader code editor. 
-}
+(*******************************************
+*                                          *
+* Graphic Scene Engine, http://glscene.org *
+*                                          *
+********************************************)
+
+unit Design.FShaderMemo;
+
+(* Shader code editor *)
 
 // TODO: decide how to load templates from external file,
 //       update it without package recompilation
-
-unit Design.FShaderMemo;
 
 interface
 
@@ -30,7 +31,7 @@ uses
   FMX.Menus,
   FMX.Memo,
   FMX.ScrollBox,
-  FMX.Controls.Presentation;
+  FMX.Controls.Presentation, FMX.Memo.Types;
 
 type
   TShaderMemoForm = class(TForm)

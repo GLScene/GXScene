@@ -275,7 +275,7 @@ var
 begin
   if FileName <> '' then
   begin
-    fs := CreateFileStream(FileName, fmOpenRead + fmShareDenyWrite);
+    fs := TFileStream.Create(FileName, fmOpenRead + fmShareDenyWrite);
     try
       LoadFromStream(fs);
     finally

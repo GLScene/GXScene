@@ -14,8 +14,8 @@ uses
   System.Classes,
   System.SysUtils,
 
-//  DesignIntf,
-//  DesignEditors,
+  DesignIntf,
+  DesignEditors,
 
   {
   ToolsAPI,
@@ -437,8 +437,9 @@ begin
   ObjectManager.RegisterSceneObject(TgxFeedBackMesh, 'GPU generated mesh', 'GPU Computing', HInstance);
 end;
 
-
+//-------------------------------------
 initialization
+//-------------------------------------
 
   vFindCuFileFunc := FindCuFile;
 

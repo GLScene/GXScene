@@ -17,8 +17,7 @@ uses
   System.SysUtils,
   Scene.VectorTypes,
   Scene.VectorLists,
-  Scene.Strings,
-  GXS.Utils;
+  Scene.Strings;
 
 type
   TVRMLNode = class
@@ -416,7 +415,7 @@ end;
 
 function TVRMLParser.ReadSingle: Single;
 begin
-  Result := GXS.Utils.StrToFloatDef(ReadToken, 0);
+  Result := StrToFloatDef(ReadToken, 0);
 end;
 
 function TVRMLParser.ReadVector3f: TVector3f;
@@ -453,7 +452,7 @@ begin
       exit
     else if token <> ']' then
       TVRMLSingleArray(FCurrentNode)
-        .Values.Add(GXS.Utils.StrToFloatDef(token, 0));
+        .Values.Add(StrToFloatDef(token, 0));
   until token = ']';
 
   FCurrentNode := FCurrentNode.Parent;

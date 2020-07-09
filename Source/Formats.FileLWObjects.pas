@@ -758,14 +758,14 @@ begin
 end;
 
 
-{-----------------------------------------------------------------------------
+(*-----------------------------------------------------------------------------
   Procedure: RegisterChunkClass
   Date:      08-Aug-2002
   Arguments: ChunkClass: TLWChunkClass
   Result:    None
 
   Adds a user defined chunk class to the chunk class list.
------------------------------------------------------------------------------}
+-----------------------------------------------------------------------------*)
 procedure RegisterChunkClass(ChunkClass: TLWChunkClass);
 begin
   GetChunkClasses.Add(ChunkClass);
@@ -774,14 +774,14 @@ begin
 //  RegisterClass(ChunkClass);
 end;
 
-{-----------------------------------------------------------------------------
+(*-----------------------------------------------------------------------------
   Procedure: GetChunkClass
   Date:      08-Aug-2002
   Arguments: ChunkID: TID4
   Result:    TLWChunkClass
 
   Returns the chunk class associated with ChunkID.
------------------------------------------------------------------------------}
+-----------------------------------------------------------------------------*)
 function GetChunkClass(ChunkID: TID4; ADefault: TLWChunkClass): TLWChunkClass;
 var
   i: Integer;
@@ -807,7 +807,7 @@ begin
 
 end;
 
-{-----------------------------------------------------------------------------
+(*-----------------------------------------------------------------------------
   Procedure: Tokenize
   Date:      08-Aug-2002
   Arguments: const Src: string; Delimiter: Char; Dst: TStrings
@@ -815,7 +815,7 @@ end;
 
   Breaks up a string into TStrings items when the Delimiter character is
   encountered.
------------------------------------------------------------------------------}
+-----------------------------------------------------------------------------*)
 procedure Tokenize(const Src: string; Delimiter: Char; Dst: TStrings);
 var
   i,L,SL: Integer;
@@ -841,14 +841,12 @@ begin
   if Length(SubStr)>0 then Dst.Add(SubStr);
 end;
 
-{-----------------------------------------------------------------------------
+(*-----------------------------------------------------------------------------
   Procedure: LoadLW0FromStream
   Date:      08-Aug-2002
   Arguments: Stream: TStream; ReadCallback: TLWOReadCallback; UserData: Pointer
   Result:    LongWord
-
-
------------------------------------------------------------------------------}
+-----------------------------------------------------------------------------*)
 function LoadLW0FromStream(Stream: TStream; ReadCallback: TLWOReadCallback; UserData: Pointer): LongWord;
 var
   Chunk: TLWChunkRec;
@@ -870,23 +868,14 @@ begin
 
     with Stream do while Position < Size do
     begin
-
       Read(Chunk,8);
-
       ReverseByteOrder(@Chunk.size,4);
-
       StartPos:=Position;
-
       GetMem(Chunk.data,Chunk.size);
-
       Stream.Read(Chunk.data^,Chunk.size);
-
       if Assigned(ReadCallback) then ReadCallback(Chunk,UserData);
-
       FreeMem(Chunk.data,Chunk.size);
-
       Position:=StartPos+Chunk.size+(StartPos+Chunk.size) mod 2;
-
     end;
     Stream.Free;
     result:=High(LongWord);
@@ -899,13 +888,11 @@ begin
   end;
 end;
 
-// LoadLWOFromFile
-//
 function LoadLWOFromFile(const aFilename : String; readCallback : TLWOReadCallback; userData : Pointer) : LongWord;
 var
    stream : TStream;
 begin
-   stream:=CreateFileStream(aFilename, fmOpenRead);
+   stream:=TFileStream.Create(aFilename, fmOpenRead);
    try
       Result:=LoadLW0FromStream(stream, readCallback, userData);
    finally
@@ -961,20 +948,15 @@ begin
 
   else
     raise Exception.Create('Lightwave.ReverseByteOrder: Invalid Size = ' + IntToStr(Size));
-
   end;
-
 end;
 
 procedure ReadMotorolaNumber(Stream: TStream; Data: Pointer; ElementSize:
         Integer; Count: Integer = 1);
 begin
-
   Stream.Read(Data^,Count * ElementSize);
-
   if (ElementSize = 2) or (ElementSize = 4) then
     ReverseByteOrder(Data,ElementSize,Count);
-
 end;
 
 function WriteMotorolaNumber(Stream: TStream; Data: Pointer; ElementSize:
@@ -987,10 +969,8 @@ begin
   begin
     TempData := AllocMem(ElementSize * Count);
     try
-
       if (ElementSize = 2) or (ElementSize = 4) then
         ReverseByteOrder(TempData,ElementSize,Count);
-
       result := Stream.Write(Data,Count * ElementSize);
     except
       on E: Exception do
@@ -1016,15 +996,10 @@ begin
     StrBuf := StrBuf + string(Buf);
     Stream.Read(Buf,2);
   end;
-
   if Buf[0] <> #0 then StrBuf := StrBuf + Char(Buf[0]);
-
   Str := Copy(StrBuf,1,Length(StrBuf));
-
   result := Length(Str) + 1;
-
   result := result + (result mod 2);
-
 end;
 
 
@@ -1055,10 +1030,8 @@ begin
   ReadCount := 0;
   for i := 0 to Count -1 do
   begin
-
     Stream.Read(BufByte,1);
     Stream.Position := Stream.Position - 1;
-
     if  BufByte = 255 then
     begin
       Stream.Read(Data^,SizeOf(TU4));
@@ -1072,7 +1045,6 @@ begin
       PU4Array(Data)^[i] := TempU2;
       Inc(ReadCount,2);
     end;
-
   end;
   result := ReadCount;
 end;
@@ -1086,10 +1058,8 @@ begin
   ReadCount := 0;
   for i := 0 to Count -1 do
   begin
-
     Stream.Read(BufByte,1);
     Stream.Position := Stream.Position - 1;
-
     if  BufByte = 255 then
     begin
       Stream.Position := Stream.Position + 4;
@@ -1102,7 +1072,6 @@ begin
       PU2Array(Data)^[i] := TempU2;
       Inc(ReadCount,2);
     end;
-
   end;
   result := ReadCount;
 end;
@@ -1111,7 +1080,7 @@ end;
 
 procedure WriteS0(Stream: TStream; Data: string);
 begin
-  {ToDo: WriteS0}
+  // ToDo: WriteS0
 end;
 
 procedure WriteU4AsVX(Stream:TStream; Data: Pointer; Count: Integer);
@@ -1137,20 +1106,12 @@ function ID4ToInt(const Id: TId4): Integer;
 var
   TmpId: AnsiString;
 begin
-
   TmpId := Id;
-
   TmpId := AnsiString(UpperCase(string(Id)));
-
   result := PInteger(@TmpId)^;
-
 end;
 
-{ TLWChunk }
-
-{
-*********************************** TLWChunk ***********************************
-}
+(*********************************** TLWChunk ********************************)
 destructor TLWChunk.Destroy;
 begin
   Clear;
@@ -1196,11 +1157,7 @@ begin
   end;
 end;
 
-{ TLWChunks }
-
-{
-********************************* TLWChunkList *********************************
-}
+(******************************* TLWChunkList ********************************)
 constructor TLWChunkList.Create(AOwnsItems: boolean; AOwner: TObject);
 begin
   inherited Create;
@@ -1210,11 +1167,8 @@ end;
 
 destructor TLWChunkList.Destroy;
 begin
-  
   Clear;
-  
   inherited;
-  
 end;
 
 procedure TLWChunkList.Clear;
@@ -1237,35 +1191,23 @@ begin
   result := TLWChunk(inherited Items[Index]);
 end;
 
-{ TLWObjectFile }
-
-{
-******************************** TLWObjectFile *********************************
-}
+(***************************** TLWObjectFile ********************************)
 constructor TLWObjectFile.Create;
 begin
-  
   inherited;
-  
 end;
 
 destructor TLWObjectFile.Destroy;
 begin
-
   FreeAndNil(FChunks);
-
   inherited;
-
 end;
 
 function TLWObjectFile.GetChunks: TLWChunkList;
 begin
-
   if FChunks = nil then
     FChunks := TLWChunkList.Create(true,Self);
-
   result := FChunks;
-  
 end;
 
 function TLWObjectFile.GetCount: Integer;
@@ -1296,11 +1238,11 @@ procedure TLWObjectFile.LoadFromFile(const AFilename: string);
 var
   Stream: TMemoryStream;
 begin
-  
+
   Stream := TMemoryStream.Create;
   try
     Stream.LoadFromFile(AFilename);
-  
+
     LoadFromStream(Stream);
     Stream.Free;
     FFileName := AFilename;
@@ -1311,7 +1253,7 @@ begin
       raise;
     end;
   end;
-  
+
 end;
 
 procedure TLWObjectFile.LoadFromStream(AStream: TStream);
@@ -1392,17 +1334,12 @@ begin
   Chunks.Loaded;
 end;
 
-{ TLWPnts }
-
-{
-*********************************** TLWPnts ************************************
-}
+(********************************** TLWPnts **********************************)
 function TLWPnts.AddPoly(PntIdx, PolyIdx: Integer): Integer;
 var
   i,L: Integer;
 begin
-  {DONE: Pnts.AddPoly}
-
+  // DONE: Pnts.AddPoly
   for i := 0 to FPntsInfo[PntIdx].npols -1 do
   begin
     if FPntsInfo[PntIdx].pols[i] = PolyIdx then
@@ -1465,11 +1402,7 @@ begin
   ReadMotorolaNumber(AStream,@FPnts[0],4,DataSize div 4); // read the point data
 end;
 
-{ TLWPols }
-
-{
-*********************************** TLWPols ************************************
-}
+(******************************** TLWPols ************************************)
 procedure TLWPols.CalcPolsNormals;
 var
   i,j,PolyIdx: Integer;
@@ -1482,7 +1415,7 @@ begin
 
   for PolyIdx := 0 to FPolsCount - 1 do
   begin
-    {DONE: call Pnts.AddPoly}
+    // DONE: call Pnts.AddPoly
     i := PolsByIndex[PolyIdx];
 
     with Pnts do
@@ -1571,37 +1504,24 @@ begin
 
     // To avoid memory manager hits, set an estimate length of indices
     SetLength(FPols,(DataSize - 4) div 2);
-
     while Position < EndPos do
     begin
-
       ReadMotorolaNumber(AStream,@FPols[Idx],2);
       TmpU2 := FPols[Idx] and POLS_VCOUNT_MASK;
-
       ReadVXAsU2(AStream,@FPols[Idx + 1],TmpU2);
       Inc(Idx,FPols[Idx] + 1);
       Inc(FPolsCount);
     end;
-
     // correct length estimate errors if any
     if (Idx + 1) < Cardinal(Length(FPols)) then
       SetLength(FPols,Idx + 1);
-
   end;
-
   SetLength(FPolsInfo,FPolsCount);
-
   CalcPolsNormals;
-
 end;
 
 
-
-{ TLWVMap }
-
-{
-*********************************** TLWVMap ************************************
-}
+(********************************** TLWVMap *********************************)
 procedure TLWVMap.Clear;
 var
   i: Integer;
@@ -1614,16 +1534,12 @@ end;
 
 class function TLWVMap.GetID: TID4;
 begin
-  
   result := ID_VMAP;
-  
 end;
 
 function TLWVMap.GetValue(AIndex: TU2): TLWVertexMap;
 begin
-
   result := FValues[AIndex];
-  
 end;
 
 function TLWVMap.GetValueCount: Integer;
@@ -1636,39 +1552,26 @@ var
   Idx: TU4;
 begin
   Idx := 0;
-  
   with AStream do
   begin
-  
     Read(FVMapType,4);
     ReadMotorolaNumber(AStream,@FDimensions,2);
-  
     ReadS0(AStream,FName);
-  
     if FDimensions > 0 then
     begin
-  
       while Cardinal(Position) < (DataStart + DataSize) do
       begin
         SetLength(FValues,Length(FValues) + 1);
-  
         ReadVXAsU2(AStream,@FValues[Idx].vert,1);
         SetLength(FValues[Idx].values,Dimensions * 4);
         ReadMotorolaNumber(AStream,@FValues[Idx].values[0],4,Dimensions);
-  
         Inc(Idx);
       end;
-  
     end;
-  
   end;
 end;
 
-{ TLWTags }
-
-{
-*********************************** TLWTags ************************************
-}
+(********************************* TLWTags ***********************************)
 destructor TLWTags.Destroy;
 begin
   inherited;
@@ -1710,11 +1613,7 @@ begin
   result := Tags[Tag];
 end;
 
-{ TLWSubChunk }
-
-{
-********************************* TLWSubChunk **********************************
-}
+(****************************** TLWSubChunk **********************************)
 procedure TLWSubChunk.LoadFromStream(AStream: TStream);
 var
   DataStart: Integer;
@@ -1739,9 +1638,7 @@ begin
 end;
 
 
-{
-*********************************** TLWLayr ************************************
-}
+(******************************** TLWLayr ************************************)
 destructor TLWLayr.Destroy;
 begin
   inherited;
@@ -1764,11 +1661,7 @@ begin
       ReadMotorolaNumber(AStream,@FParent,2);
 end;
 
-{ TLWSurf }
-
-{
-*********************************** TLWSurf ************************************
-}
+(******************************** TLWSurf ************************************)
 destructor TLWSurf.Destroy;
 begin
   inherited;
@@ -1839,11 +1732,7 @@ begin
 
 end;
 
-{ TLWPTag }
-
-{
-*********************************** TLWPTag ************************************
-}
+(******************************** TLWPTag ************************************)
 constructor TLWPTag.Create;
 begin
   inherited;
@@ -1862,17 +1751,12 @@ begin
       result := i;
       Exit;
     end;
-
-
   if result = -1 then
   begin
-
     SetLength(FTags,L + 1);
     FTags[L] := Value;
     result := L;
-
   end;
-
 end;
 
 procedure TLWPTag.Clear;
@@ -1884,29 +1768,19 @@ end;
 function TLWPTag.GetPolsByTag(Tag: TU2; var PolyIndices: TU2DynArray): Integer;
 var
   i: Integer;
-
   procedure AddPoly(Value: TU2);
   var
     L: Integer;
-
   begin
-
     L := Length(PolyIndices);
     SetLength(PolyIndices,L+1);
     PolyIndices[L] := Value;
-
   end;
-
 begin
-
   for i := 0 to TagMapCount -1 do
-
     if TagMaps[i].tag = Tag then
-
       AddPoly(TagMaps[i].poly);
-
   result := Length(PolyIndices);
-
 end;
 
 class function TLWPTag.GetID: TID4;
@@ -1955,35 +1829,22 @@ begin
       ReadMotorolaNumber(AStream,@FTagMaps[Idx + 1],2);
       Inc(Idx, 2);
     end;
-
     // correct length guestimate errors if any
     if (Idx + 1) < Length(FTagMaps) then
       SetLength(FTagMaps,Idx + 1);
-
   end;
-
 end;
 
 procedure TLWPTag.ValidateTagInfo;
 var
   i: Integer;
-
 begin
-
   if Length(FTags) > 0 then Exit;
-
   for i := 0 to TagMapCount -1 do
     AddTag(TagMaps[i].tag);
-
-
-
 end;
 
-{ TLWParentChunk }
-
-{
-******************************** TLWParentChunk ********************************
-}
+(***************************** TLWParentChunk ********************************)
 procedure TLWParentChunk.Clear;
 begin
   FreeAndNil(FItems);
@@ -1997,12 +1858,9 @@ begin
   pdata:=ParamAddr[Param];
   if pdata <> nil then
   begin
-
     result:=PF4(pdata)^;
     ReverseByteOrder(@result,4);
-
   end else
-
     result:=0.0;
 end;
 
@@ -2271,7 +2129,9 @@ begin
     result := TLWTags(Chunks[TagsIdx]).TagToName(Tag);
 end;
 
-{ TLWClip }
+//---------------------------------
+// TLWClip
+//---------------------------------
 
 class function TLWClip.GetID: TID4;
 begin
@@ -2303,9 +2163,12 @@ begin
 
 end;
 
-{ TLWContentDir }
+//---------------------------------
+// TLWContentDir
+//---------------------------------
 
-{function TLWContentDir.ContentSearch(AFilename: string): string;
+(*
+function TLWContentDir.ContentSearch(AFilename: string): string;
 var
   i: Integer;
 begin
@@ -2333,7 +2196,8 @@ begin
     end;
 
   end;
-end;}
+end;
+*)
 
 destructor TLWContentDir.Destroy;
 begin
@@ -2388,34 +2252,38 @@ begin
   SubDirs.Assign(Value);
 end;
 
+//-----------------------------------
 initialization
+//-----------------------------------
 
-  { Pnts }
+  // Pnts
   RegisterChunkClass(TLWPnts);
 
-  { Pols }
+  // Pols
   RegisterChunkClass(TLWPols);
 
-  { VMap }
+  // VMap
   RegisterChunkClass(TLWVMap);
 
-  { Tags }
+  // Tags
   RegisterChunkClass(TLWTags);
 
-  { PTAG }
+  // PTAG
   RegisterChunkClass(TLWPTAG);
 
-  { SURF }
+  // SURF
   RegisterChunkClass(TLWSurf);
 
-  { LAYR }
+  // LAYR
   RegisterChunkClass(TLWLayr);
 
-  { CLIP }
+  // CLIP
   RegisterChunkClass(TLWClip);
 
+//------------------------------------
 finalization
-//  UnRegisterChunkClasses;
+//------------------------------------
+
   FreeAndNil(ChunkClasses);
   FreeAndNil(ContentDir);
 

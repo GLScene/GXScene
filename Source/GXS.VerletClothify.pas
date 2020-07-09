@@ -17,11 +17,11 @@ uses
   System.SysUtils,
 
   Import.OpenGLx,
-  GXS.VectorFileObjects,
-  GXS.VerletTypes,
   Scene.VectorTypes,
   Scene.VectorLists,
   Scene.VectorGeometry,
+  GXS.VectorFileObjects,
+  GXS.VerletTypes,
   GXS.Texture,
   GXS.RenderContextInfo,
   GXS.State,
@@ -29,17 +29,15 @@ uses
 
 
 type
-  { Class that represents a face. This structure is not used for rendering, but
-  for extracting info from meshes }
+  (* Class that represents a face. This structure is not used for rendering, but
+  for extracting info from meshes *)
   TFace = class
   public
     Vertices : array[0..2] of integer;
     Normal : TAffineVector;
     MeshObject : TgxMeshObject;
     Active : boolean;
-
     procedure UpdateNormal;
-
     constructor Create(aMeshObject : TgxMeshObject);
   end;
 
@@ -52,7 +50,7 @@ type
     property Items[i : integer] : TFace read GetItems write SetItems; default;
   end;
 
-  { Class that extracts faces from a GLBaseMesh}
+  // Class that extracts faces from a GLBaseMesh
   TFaceExtractor = class
   private
     FFaceList : TFaceList;
@@ -60,34 +58,25 @@ type
     FNodeList : TVerletNodeList;
     FWeldDistance: single;
     FEdgeDoublesSkipped : integer;
-
     procedure SetWeldDistance(const Value: single);
   protected
     procedure ProcessMeshObject(const MeshObject : TgxMeshObject); virtual;
   public
     procedure ExtractFacesFromVertexIndexList(
       const FaceGroup : TFGVertexIndexList; const MeshObject : TgxMeshObject);
-
     property FaceList : TFaceList read FFaceList;
-
     procedure Clear; virtual;
     procedure ProcessMesh; virtual;
-
     property WeldDistance : single read FWeldDistance write SetWeldDistance;
     property EdgeDoublesSkipped : integer read FEdgeDoublesSkipped;
-
     property GLBaseMesh : TgxBaseMesh read FGLBaseMesh;
-
     property NodeList : TVerletNodeList read FNodeList;
-
     function AddFace(const Vi0, Vi1, Vi2 : integer; const MeshObject : TgxMeshObject) : TFace; virtual;
-
     constructor Create(const aGLBaseMesh : TgxBaseMesh); virtual;
     destructor Destroy; override;
   end;
 
-  // ************ EDGE DETECTOR
-
+  // *** EDGE DETECTOR
   TEdgeDetector = class;
   TEdge = class
   private
@@ -98,16 +87,12 @@ type
   public
     Vertices : array[0..1] of integer;
     Faces : array[0..1] of TFace;
-
     procedure Contract;
-
     property Owner : TEdgeDetector read FOwner;
     property MeshObject : TgxMeshObject read FMeshObject write FMeshObject;
     property Length : single read FLength write FLength;
     property Solid : boolean read FSolid write FSolid;
-
     procedure UpdateEdgeLength;
-
     constructor Create(const AOwner: TEdgeDetector; AVi0, AVi1 : integer;
       AFace0, AFace1 : TFace; AMeshObject : TgxMeshObject; ASolid : boolean);
   end;
@@ -118,7 +103,6 @@ type
     procedure SetItems(i: integer; const Value: TEdge);
   public
     property Items[i : integer] : TEdge read GetItems write SetItems; default;
-
     procedure SortByLength;
     function InsertSorted(AEdge : TEdge) : integer;
   end;
@@ -192,10 +176,8 @@ end;
 destructor TFaceExtractor.Destroy;
 begin
   Clear;
-
   FreeAndNil(FNodeList);
   FreeAndNil(FFaceList);
-
   inherited;
 end;
 
@@ -406,7 +388,6 @@ end;
 destructor TEdgeDetector.Destroy;
 begin
   inherited;
-
   FreeAndNil(FEdgeList);
 end;
 

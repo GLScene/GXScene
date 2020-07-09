@@ -33,7 +33,7 @@ uses
   GXS.Color,
   GXS.Material,
   GXS.Objects,
-  GXS.Win64Viewer,
+  GXS.SceneViewer,
   GXS.GeomObjects,
   GXS.BitmapFont,
   GXS.VectorFileObjects,

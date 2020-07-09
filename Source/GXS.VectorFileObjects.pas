@@ -5818,7 +5818,7 @@ begin
   FLastLoadedFilename := '';
   if filename <> '' then
   begin
-    fs := CreateFileStream(filename, fmOpenRead + fmShareDenyWrite);
+    fs := TFileStream.Create(filename, fmOpenRead + fmShareDenyWrite);
     try
       LoadFromStream(filename, fs);
       FLastLoadedFilename := filename;
@@ -5867,7 +5867,7 @@ var
 begin
   if filename <> '' then
   begin
-    fs := CreateFileStream(filename, fmCreate);
+    fs := TFileStream.Create(filename, fmCreate);
     try
       SaveToStream(filename, fs);
     finally
@@ -5901,7 +5901,7 @@ var
 begin
   if filename <> '' then
   begin
-    fs := CreateFileStream(filename, fmOpenRead + fmShareDenyWrite);
+    fs := TFileStream.Create(filename, fmOpenRead + fmShareDenyWrite);
     try
       AddDataFromStream(filename, fs);
     finally
@@ -6776,7 +6776,7 @@ procedure TgxActorAnimations.SaveToFile(const filename: string);
 var
   fs: TStream;
 begin
-  fs := CreateFileStream(filename, fmCreate);
+  fs := TFileStream.Create(filename, fmCreate);
   try
     SaveToStream(fs);
   finally
@@ -6788,7 +6788,7 @@ procedure TgxActorAnimations.LoadFromFile(const filename: string);
 var
   fs: TStream;
 begin
-  fs := CreateFileStream(filename, fmOpenRead + fmShareDenyWrite);
+  fs := TFileStream.Create(filename, fmOpenRead + fmShareDenyWrite);
   try
     LoadFromStream(fs);
   finally

@@ -1,21 +1,19 @@
 //
 // Graphic Scene Engine, http://glscene.org
 //
-(*
-  3ds-specific scene objects.
-*)
+
 unit GXS.File3DSSceneObjects;
+
+(* 3ds-specific scene objects *)
 
 interface
 
-{$I Scene.inc}
-
 uses
+  Winapi.OpenGL,
   System.Classes,
   System.SysUtils,
   System.Math,
 
-  Import.OpenGLx,
   Scene.VectorGeometry,
   GXS.Context,
   GXS.Scene,
@@ -46,8 +44,8 @@ type
   TgxFile3DSCamera = class(TgxCamera)
   private
     FTargetPos: TgxCoordinates;
-    FQuadCyl: array[0..1] of PGLUquadricObj;
-    FQuadDisk: array[0..1] of PGLUquadricObj;
+    FQuadCyl: array[0..1] of GLUquadricObj;
+    FQuadDisk: array[0..1] of GLUquadricObj;
   public
     constructor Create(AOwner: TComponent); override;
     procedure DoRender(var rci: TgxRenderContextInfo; renderSelf, renderChildren: Boolean); override;
@@ -474,9 +472,6 @@ begin
   Result.W := 0;
 end;
 
-// BarycenterAbsolutePosition
-//
-
 function TgxFile3DSFreeForm.BarycenterAbsolutePosition: TVector;
 var
   dMin, dMax: TAffineVector;
@@ -498,7 +493,10 @@ begin
   Result := LocalToAbsolute(Result);
 end;
 
+//-------------------------------------
 initialization
+//-------------------------------------
+
   RegisterClasses([TgxFile3DSLight, TgxFile3DSCamera, TgxFile3DSActor, TgxFile3DSFreeForm]);
 
 end.

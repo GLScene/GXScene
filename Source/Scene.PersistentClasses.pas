@@ -619,7 +619,7 @@ var
 begin
   if writerClass = nil then
     writerClass := FileVirtualWriter;
-  fs := CreateFileStream(fileName, fmCreate);
+  fs := TFileStream.Create(fileName, fmCreate);
   try
     SaveToStream(fs, writerClass);
   finally
@@ -633,7 +633,7 @@ var
 begin
   if readerClass = nil then
     readerClass := FileVirtualReader;
-  fs := CreateFileStream(fileName, fmOpenRead + fmShareDenyWrite);
+  fs := TFileStream.Create(fileName, fmOpenRead + fmShareDenyWrite);
   try
     LoadFromStream(fs, readerClass);
   finally

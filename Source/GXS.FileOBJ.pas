@@ -785,7 +785,7 @@ var
             libFilename := IncludeTrailingPathDelimiter(matLib.TexturePaths) + libName;
 
           try
-            fs := CreateFileStream(libFilename);
+            fs := TFileStream.Create(libFilename, fmOpenReadWrite);
           except
             fs := nil;
           end;

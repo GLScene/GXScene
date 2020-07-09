@@ -30,7 +30,7 @@ uses
   GXS.Material,
   GXS.GeomObjects,
   GXS.BitmapFont,
-  GXS.Win64Viewer,
+  GXS.SceneViewer,
   GXS.VectorFileObjects,
   GXS.Utils,
   GXS.Coordinates,

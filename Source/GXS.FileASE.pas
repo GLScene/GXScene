@@ -85,11 +85,11 @@ type
     property Count: Integer read GetCount;
   end;
 
-  { ASE geom object, represents single mesh object;
+  (* ASE geom object, represents single mesh object;
    contains: vertices, faces, vertex indices, faces and vertices normals,
    channels of texture coordinates and indices, scaling and location info;
    this object used only to store ASE data temporary to copy supported
-   piece of it into TgxMeshObject }
+   piece of it into TgxMeshObject *)
   TgxASEMeshObject = class(TObject)
   private
     FFaces: TgxASEFaceList;
@@ -216,7 +216,7 @@ type
   end;
 
 
-  { ASE vector file parser }
+  // ASE vector file parser
   TgxASEVectorFile = class(TgxVectorFile)
   private
     FStringData: TStringList;
@@ -274,11 +274,11 @@ type
   TASETextureMap = (tmGeneric, tmAmbient, tmDiffuse, tmSpecular, tmShine, tmShinestrength,
     tmSelfillum, tmOpacity, tmFiltercolor, tmBump, tmReflect, tmRefract);
 
-  { Use this functions to select texture and lightmap from ASE file
+  (* Use this functions to select texture and lightmap from ASE file
    aSubMaterialIndex = -1 - means main material maps
    Default are:
    Texture  - main material Diffuse map
-   Lightmap - main material Ambient map }
+   Lightmap - main material Ambient map *)
   procedure ASESetPreferredTexture(aMap: TASETextureMap; aSubMaterialIndex: Integer = -1);
   procedure ASESetPreferredLightmap(aMap: TASETextureMap; aSubMaterialIndex: Integer = -1);
 
@@ -1781,9 +1781,12 @@ begin
   Inc(aLineIndex);
 end;
 
+//-------------------------------------
 initialization
+//-------------------------------------
+
   RegisterVectorFileFormat('ase', 'ASCII files', TgxASEVectorFile);
   ASESetPreferredTexture(tmDiffuse);
   ASESetPreferredLightmap(tmAmbient);
-  
+
 end.

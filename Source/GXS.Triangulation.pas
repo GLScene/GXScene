@@ -59,7 +59,7 @@ type
   TDComplete = array of Boolean;
   TDEdges = array of array of LongInt;
 
-{ TgxDelaunay2D is a class for Delaunay triangulation of arbitrary points
+(* TgxDelaunay2D is a class for Delaunay triangulation of arbitrary points
   Credit to Paul Bourke (http://paulbourke.net/) for the original Fortran 77 Program :))
   Conversion to Visual Basic by EluZioN (EluZioN@casesladder.com)
   Conversion from VB to Delphi6 by Dr Steve Evans (steve@lociuk.com)
@@ -71,7 +71,7 @@ type
   triangles flagged when no longer needed. The circumcircle centre and radius of
   the triangles are now stored to improve calculation time.
   You can use this code however you like providing the above credits remain in tact
-}
+*)
 
 type
   TgxDelaunay2D = class

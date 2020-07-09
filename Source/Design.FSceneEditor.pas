@@ -37,8 +37,8 @@ uses
   Design.FInfo,
   
   GXS.Scene,
-  GXS.Win64Viewer,
-  GXS.SceneRegister,
+  GXS.SceneViewer,
+  Design.SceneRegister,
   Scene.Strings,
   GXS.CrossPlatform,
   Scene.XCollection;

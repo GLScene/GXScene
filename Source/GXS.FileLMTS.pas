@@ -15,13 +15,13 @@ uses
   System.SysUtils,
   FMX.Graphics,
 
-  GXS.VectorFileObjects,
   Scene.ApplicationFileIO,
   Scene.VectorLists,
   Scene.VectorGeometry,
-  GXS.Texture,
   Scene.PersistentClasses,
+  GXS.VectorFileObjects,
   GXS.Graphics,
+  GXS.Texture,
   GXS.Material;
 
 const

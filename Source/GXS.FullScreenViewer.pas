@@ -24,8 +24,8 @@ uses
 
   GXS.Scene,
   GXS.Context,
-  GXS.Win64Viewer,
-  GXS.Win64Context,
+  GXS.SceneViewer,
+  GXS.WinContext,
   GXS.Utils,
   GXS.Screen;
 

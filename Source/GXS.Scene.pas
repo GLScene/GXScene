@@ -6,7 +6,7 @@
 
 unit GXS.Scene;
 
-(* Base classes and structures for GXScene *)
+(* Base classes and structures *)
 
 interface
 
@@ -32,8 +32,8 @@ uses
   Scene.VectorGeometry,
   Scene.PersistentClasses,
   Scene.GeometryBB,
-  Scene.Strings,
   Scene.ApplicationFileIO,
+  Scene.Strings,
 
   GXS.Context,
   GXS.Silhouette,
@@ -67,7 +67,8 @@ type
 
   TgxNormalDirection = (ndInside, ndOutside);
 
-  // Used to describe the changes in an object, which have to be reflected in the scene
+  (* Used to describe only the changes in an object,
+    which have to be reflected in the scene *)
   TObjectChange = (ocTransformation, ocAbsoluteMatrix, ocInvAbsoluteMatrix, ocStructure);
   TObjectChanges = set of TObjectChange;
 
@@ -81,15 +82,16 @@ type
     roSoftwareMode: force software rendering.
     roDoubleBuffer: enables double-buffering.
     roRenderToWindows: ignored (legacy).
-    roTwoSideLighting: enables two-side lighting model.   
-	roStereo: enables stereo support in the driver
+    roTwoSideLighting: enables two-side lighting model.
+    roStereo: enables stereo support in the driver
 	  (dunno if it works, I don't have a stereo device to test...)
     roDestinationAlpha: request an Alpha channel for the rendered output
     roNoColorBuffer: don't request a color buffer (color depth setting ignored)
     roNoColorBufferClear: do not clear the color buffer automatically, if the
     whole viewer is fully repainted each frame, this can improve framerate
     roNoSwapBuffers: don't perform RenderingContext.SwapBuffers after rendering
-    roNoDepthBufferClear: do not clear the depth buffer automatically. Useful for early-z culling.
+    roNoDepthBufferClear: do not clear the depth buffer automatically. Useful for
+    early-z culling.
     roForwardContext: force OpenGL forward context *)
   TContextOption = (roSoftwareMode, roDoubleBuffer, roStencilBuffer, roRenderToWindow, roTwoSideLighting, roStereo,
     roDestinationAlpha, roNoColorBuffer, roNoColorBufferClear, roNoSwapBuffers, roNoDepthBufferClear, roDebugContext,
@@ -267,8 +269,7 @@ type
       By default it is calculated from AxisAlignedBoundingBoxUnscaled and
       BarycenterAbsolutePosition, but for most objects there is a more
       efficient method, that's why it is virtual. *)
-    procedure CalculateBoundingBoxPersonalUnscaled(var ANewBoundingBox: 
-	  THmgBoundingBox); virtual;
+    procedure CalculateBoundingBoxPersonalUnscaled(var ANewBoundingBox: THmgBoundingBox); virtual;
   public
     constructor Create(AOwner: TComponent); override;
     constructor CreateAsChild(aParentOwner: TgxBaseSceneObject);
@@ -298,120 +299,119 @@ type
     procedure ForceLocalMatrix(const aMatrix: TMatrix); inline;
     // See AbsoluteMatrix.
     function AbsoluteMatrixAsAddress: PMatrix;
-    { Holds the absolute transformation matrix.
+    (* Holds the absolute transformation matrix.
       If you're not *sure* the absolute matrix is up-to-date,
-      use the AbsoluteMatrix property, this one may be nil... }
+      use the AbsoluteMatrix property, this one may be nil... *)
     property DirectAbsoluteMatrix: PMatrix read GetDirectAbsoluteMatrix;
-    { Calculates the object's absolute inverse matrix.
+    (* Calculates the object's absolute inverse matrix.
       Multiplying an absolute coordinate with this matrix gives a local coordinate.
       The current implem uses transposition(AbsoluteMatrix), which is true
-      unless you're using some scaling... }
+      unless you're using some scaling... *)
     function InvAbsoluteMatrix: TMatrix; inline;
     // See InvAbsoluteMatrix.
     function InvAbsoluteMatrixAsAddress: PMatrix;
-    { The object's absolute matrix by composing all local matrices.
-      Multiplying a local coordinate with this matrix gives an absolute coordinate. }
+    (* The object's absolute matrix by composing all local matrices.
+      Multiplying a local coordinate with this matrix gives an absolute coordinate. *)
     property AbsoluteMatrix: TMatrix read GetAbsoluteMatrix write SetAbsoluteMatrix;
-    { Direction vector in absolute coordinates. }
+    // Direction vector in absolute coordinates.
     property AbsoluteDirection: TVector read GetAbsoluteDirection write SetAbsoluteDirection;
     property AbsoluteAffineDirection: TAffineVector read GetAbsoluteAffineDirection write SetAbsoluteAffineDirection;
-    { Scale vector in absolute coordinates.
-      Warning: SetAbsoluteScale() does not work correctly at the moment. }
+    (* Scale vector in absolute coordinates.
+      Warning: SetAbsoluteScale() does not work correctly at the moment. *)
     property AbsoluteScale: TVector read GetAbsoluteScale write SetAbsoluteScale;
     property AbsoluteAffineScale: TAffineVector read GetAbsoluteAffineScale write SetAbsoluteAffineScale;
-    { Up vector in absolute coordinates. }
+    // Up vector in absolute coordinates.
     property AbsoluteUp: TVector read GetAbsoluteUp write SetAbsoluteUp;
     property AbsoluteAffineUp: TAffineVector read GetAbsoluteAffineUp write SetAbsoluteAffineUp;
-    { Calculate the right vector in absolute coordinates. }
+    // Calculate the right vector in absolute coordinates.
     function AbsoluteRight: TVector;
-    { Calculate the left vector in absolute coordinates. }
+    // Calculate the left vector in absolute coordinates.
     function AbsoluteLeft: TVector;
-    { Computes and allows to set the object's absolute coordinates. }
+    // Computes and allows to set the object's absolute coordinates.
     property AbsolutePosition: TVector read GetAbsolutePosition write SetAbsolutePosition;
     property AbsoluteAffinePosition: TAffineVector read GetAbsoluteAffinePosition write SetAbsoluteAffinePosition;
     function AbsolutePositionAsAddress: PVector;
-    { Returns the Absolute X Vector expressed in local coordinates. }
+    // Returns the Absolute X Vector expressed in local coordinates.
     function AbsoluteXVector: TVector;
-    { Returns the Absolute Y Vector expressed in local coordinates. }
+    // Returns the Absolute Y Vector expressed in local coordinates.
     function AbsoluteYVector: TVector;
-    { Returns the Absolute Z Vector expressed in local coordinates. }
+    // Returns the Absolute Z Vector expressed in local coordinates.
     function AbsoluteZVector: TVector;
-    { Converts a vector/point from absolute coordinates to local coordinates. }
+    // Converts a vector/point from absolute coordinates to local coordinates.
     function AbsoluteToLocal(const v: TVector): TVector; overload;
-    { Converts a vector from absolute coordinates to local coordinates. }
+    // Converts a vector from absolute coordinates to local coordinates.
     function AbsoluteToLocal(const v: TAffineVector): TAffineVector; overload;
-    { Converts a vector/point from local coordinates to absolute coordinates. }
+    // Converts a vector/point from local coordinates to absolute coordinates.
     function LocalToAbsolute(const v: TVector): TVector; overload;
-    { Converts a vector from local coordinates to absolute coordinates. }
+    // Converts a vector from local coordinates to absolute coordinates.
     function LocalToAbsolute(const v: TAffineVector): TAffineVector; overload;
-    { Returns the Right vector (based on Up and Direction) }
+    // Returns the Right vector (based on Up and Direction)
     function Right: TVector; inline;
-    { Returns the Left vector (based on Up and Direction) }
+    // Returns the Left vector (based on Up and Direction)
     function LeftVector: TVector; inline;
-    { Returns the Right vector (based on Up and Direction) }
+    // Returns the Right vector (based on Up and Direction)
     function AffineRight: TAffineVector; inline;
-    { Returns the Left vector (based on Up and Direction) }
+    // Returns the Left vector (based on Up and Direction)
     function AffineLeftVector: TAffineVector; inline;
-    { Calculates the object's square distance to a point/object.
+    (* Calculates the object's square distance to a point/object.
       pt is assumed to be in absolute coordinates,
-      AbsolutePosition is considered as being the object position. }
+      AbsolutePosition is considered as being the object position. *)
     function SqrDistanceTo(anObject: TgxBaseSceneObject): Single; overload;
     function SqrDistanceTo(const pt: TVector): Single; overload;
     function SqrDistanceTo(const pt: TAffineVector): Single; overload;
-    { Computes the object's distance to a point/object.
-      Only objects AbsolutePositions are considered. }
+    (* Computes the object's distance to a point/object.
+      Only objects AbsolutePositions are considered. *)
     function DistanceTo(anObject: TgxBaseSceneObject): Single; overload;
     function DistanceTo(const pt: TAffineVector): Single; overload;
     function DistanceTo(const pt: TVector): Single; overload;
-    { Calculates the object's barycenter in absolute coordinates.
+    (* Calculates the object's barycenter in absolute coordinates.
       Default behaviour is to consider Barycenter=AbsolutePosition
       (whatever the number of children).
       SubClasses where AbsolutePosition is not the barycenter should
       override this method as it is used for distance calculation, during
-      rendering for instance, and may lead to visual inconsistencies. }
+      rendering for instance, and may lead to visual inconsistencies. *)
     function BarycenterAbsolutePosition: TVector; virtual;
-    { Calculates the object's barycenter distance to a point. }
+    // Calculates the object's barycenter distance to a point.
     function BarycenterSqrDistanceTo(const pt: TVector): Single;
-    { Shall returns the object's axis aligned extensions.
+    (* Shall returns the object's axis aligned extensions.
       The dimensions are measured from object center and are expressed
-      <i>with</i> scale accounted for, in the object's coordinates
+      with scale accounted for, in the object's coordinates
       (not in absolute coordinates).
-      Default value is half the object's Scale. }
+      Default value is half the object's Scale. *)
     function AxisAlignedDimensions: TVector; virtual;
     function AxisAlignedDimensionsUnscaled: TVector; virtual;
-    { Calculates and return the AABB for the object.
+    (* Calculates and return the AABB for the object.
       The AABB is currently calculated from the BB.
-      There is  no  caching scheme for them. }
+      There is  no  caching scheme for them. *)
     function AxisAlignedBoundingBox(const AIncludeChilden: Boolean = True): TAABB;
     function AxisAlignedBoundingBoxUnscaled(const AIncludeChilden: Boolean = True): TAABB;
     function AxisAlignedBoundingBoxAbsolute(const AIncludeChilden: Boolean = True;
       const AUseBaryCenter: Boolean = False): TAABB;
-    { Advanced AABB functions that use a caching scheme.
-      Also they include children and use BaryCenter. }
+    (* Advanced AABB functions that use a caching scheme.
+      Also they include children and use BaryCenter. *)
     function AxisAlignedBoundingBoxEx: TAABB;
     function AxisAlignedBoundingBoxAbsoluteEx: TAABB;
-    { Calculates and return the Bounding Box for the object.
+    (* Calculates and return the Bounding Box for the object.
       The BB is calculated  each  time this method is invoked,
       based on the AxisAlignedDimensions of the object and that of its
-      children.
-      There is  no  caching scheme for them. }
+      children. There is  no  caching scheme for them. *)
     function BoundingBox(const AIncludeChilden: Boolean = True; const AUseBaryCenter: Boolean = False): THmgBoundingBox;
     function BoundingBoxUnscaled(const AIncludeChilden: Boolean = True; const AUseBaryCenter: Boolean = False): THmgBoundingBox;
     function BoundingBoxAbsolute(const AIncludeChilden: Boolean = True; const AUseBaryCenter: Boolean = False): THmgBoundingBox;
-    { Advanced BB functions that use a caching scheme.
-      Also they include children and use BaryCenter. }
+    (* Advanced BB functions that use a caching scheme.
+      Also they include children and use BaryCenter. *)
     function BoundingBoxPersonalUnscaledEx: THmgBoundingBox;
     function BoundingBoxOfChildrenEx: THmgBoundingBox;
     function BoundingBoxIncludingChildrenEx: THmgBoundingBox;
-    { Max distance of corners of the BoundingBox. }
+    // Max distance of corners of the BoundingBox.
     function BoundingSphereRadius: Single; inline;
     function BoundingSphereRadiusUnscaled: Single; inline;
-    { Indicates if a point is within an object.
+    (* Indicates if a point is within an object.
       Given coordinate is an absolute coordinate.
       Linear or surfacic objects shall always return False.
-      Default value is based on AxisAlignedDimension and a cube bounding. }
+      Default value is based on AxisAlignedDimension and a cube bounding. *)
     function PointInObject(const point: TVector): Boolean; virtual;
-    { Request to determine an intersection with a casted ray.
+    (* Request to determine an intersection with a casted ray.
       Given coordinates & vector are in absolute coordinates, rayVector
       must be normalized.
       rayStart may be a point inside the object, allowing retrieval of
@@ -420,13 +420,13 @@ type
       take advantage of this to optimize calculus, if not, and an intersect
       is found, non nil parameters should be defined.
       The intersectNormal needs NOT be normalized by the implementations.
-      Default value is based on bounding sphere. }
+      Default value is based on bounding sphere. *)
     function RayCastIntersect(const rayStart, rayVector: TVector; intersectPoint: PVector = nil; intersectNormal: PVector = nil)
       : Boolean; virtual;
-    { Request to generate silhouette outlines.
+    (* Request to generate silhouette outlines.
       Default implementation assumes the objects is a sphere of
       AxisAlignedDimensionUnscaled size. Subclasses may choose to return
-      nil instead, which will be understood as an empty silhouette. }
+      nil instead, which will be understood as an empty silhouette. *)
     function GenerateSilhouette(const silhouetteParameters: TgxSilhouetteParameters): TgxSilhouette; virtual;
     property Children[Index: Integer]: TgxBaseSceneObject read Get; default;
     property Count: Integer read GetCount;
@@ -443,18 +443,18 @@ type
     function HasSubChildren: Boolean;
     procedure DeleteChildren; virtual;
     procedure Insert(AIndex: Integer; AChild: TgxBaseSceneObject); virtual;
-    { Takes a scene object out of the child list, but doesn't destroy it.
+    (* Takes a scene object out of the child list, but doesn't destroy it.
       If 'KeepChildren' is true its children will be kept as new children
-      in this scene object. }
+      in this scene object. *)
     procedure Remove(AChild: TgxBaseSceneObject; keepChildren: Boolean); virtual;
     function IndexOfChild(AChild: TgxBaseSceneObject): Integer;
     function FindChild(const aName: string; ownChildrenOnly: Boolean): TgxBaseSceneObject;
-    { The "safe" version of this procedure checks if indexes are inside
-      the list. If not, no exception if raised. }
+    (* The "safe" version of this procedure checks if indexes are inside
+      the list. If not, no exception if raised. *)
     procedure ExchangeChildrenSafe(anIndex1, anIndex2: Integer);
-    { The "regular" version of this procedure does not perform any checks
+    (* The "regular" version of this procedure does not perform any checks
       and calls FChildren.Exchange directly. User should/can perform range
-      checks manualy. }
+      checks manualy. *)
     procedure ExchangeChildren(anIndex1, anIndex2: Integer);
     // These procedures are safe.
     procedure MoveChildUp(anIndex: Integer);
@@ -487,17 +487,17 @@ type
     procedure Pitch(angle: Single);
     procedure Roll(angle: Single);
     procedure Turn(angle: Single);
-    { Sets all rotations to zero and restores default Direction/Up.
+    (* Sets all rotations to zero and restores default Direction/Up.
       Using this function then applying roll/pitch/turn in the order that
       suits you, you can give an "absolute" meaning to rotation angles
       (they are still applied locally though).
-      Scale and Position are not affected. }
+      Scale and Position are not affected. *)
     procedure ResetRotations;
-    { Reset rotations and applies them back in the specified order. }
+    // Reset rotations and applies them back in the specified order.
     procedure ResetAndPitchTurnRoll(const degX, degY, degZ: Single);
-    { Applies rotations around absolute X, Y and Z axis. }
+    // Applies rotations around absolute X, Y and Z axis.
     procedure RotateAbsolute(const rx, ry, rz: Single); overload;
-    { Applies rotations around the absolute given vector (angle in degrees). }
+    // Applies rotations around the absolute given vector (angle in degrees).
     procedure RotateAbsolute(const axis: TAffineVector; angle: Single); overload;
     // Moves camera along the right vector (move left and right)
     procedure Slide(ADistance: Single);
@@ -529,10 +529,8 @@ type
     property Scene: TgxScene read FScene;
     property Visible: Boolean read FVisible write SetVisible default True;
     property Pickable: Boolean read FPickable write SetPickable default True;
-    property ObjectsSorting: TgxObjectsSorting read FObjectsSorting write 
-	  SetObjectsSorting default osInherited;
-    property VisibilityCulling: TgxVisibilityCulling read FVisibilityCulling 
-	  write SetVisibilityCulling default vcInherited;
+    property ObjectsSorting: TgxObjectsSorting read FObjectsSorting write SetObjectsSorting default osInherited;
+    property VisibilityCulling: TgxVisibilityCulling read FVisibilityCulling write SetVisibilityCulling default vcInherited;
     property OnProgress: TProgressEvent read FOnProgress write FOnProgress;
     property OnPicked: TNotifyEvent read FOnPicked write FOnPicked;
     property OnAddedToParent: TNotifyEvent read FOnAddedToParent write FOnAddedToParent;
@@ -612,7 +610,10 @@ type
     NOTES :
     Don't forget to override the ReadFromFiler/WriteToFiler persistence
     methods if you add data in a subclass !
-    Subclasses must be registered using the RegisterXCollectionItemClass function *)
+    Subclasses must be registered using the RegisterXCollectionItemClass
+    function *)
+
+  // TgxEffectClass = class of TgxEffect;
 
   TgxEffect = class(TgxBaseBehaviour)
   protected
@@ -651,7 +652,7 @@ type
     function CanAdd(aClass: TXCollectionItemClass): Boolean; override;
     procedure DoProgress(const progressTime: TProgressTimes);
     procedure RenderPreEffects(var rci: TgxRenderContextInfo); inline;
-    // Also take care of registering after effects with the GXSceneViewer. 
+    // Also take care of registering after effects with the GXSceneViewer.
     procedure RenderPostEffects(var rci: TgxRenderContextInfo); inline;
   end;
 
@@ -713,10 +714,10 @@ type
     property Hint;
   end;
 
-  { Base class for camera invariant objects.
+  (* Base class for camera invariant objects.
     Camera invariant objects bypass camera settings, such as camera
     position (object is always centered on camera) or camera orientation
-    (object always has same orientation as camera). }
+    (object always has same orientation as camera). *)
   TgxCameraInvariantObject = class(TgxImmaterialSceneObject)
   private
     FCamInvarianceMode: TgxCameraInvarianceMode;
@@ -774,13 +775,13 @@ type
     procedure BuildList(var rci: TgxRenderContextInfo); override;
     function AxisAlignedDimensionsUnscaled: TVector; override;
   published
-    { Specifies if a build list be made.
+    (* Specifies if a build list be made.
       If True, GXScene will generate a build list (side cache),
       ie. OnRender will only be invoked once for the first render, or after
       a StructureChanged call. This is suitable for "static" geometry and
       will usually speed up rendering of things that don't change.
       If false, OnRender will be invoked for each render. This is suitable
-      for dynamic geometry (things that change often or constantly). }
+      for dynamic geometry (things that change often or constantly). *)
     property UseBuildList: Boolean read FUseBuildList write SetUseBuildList;
     (* Place your specific OpenGL code here.
       The OpenGL calls shall restore the OpenGL states they found when
@@ -807,8 +808,7 @@ type
     constructor Create(AOwner: TComponent); override;
     destructor Destroy; override;
     procedure BuildList(var rci: TgxRenderContextInfo); override;
-    procedure RegisterCallBack(renderEvent: TDirectRenderEvent; 
-	  renderPointFreed: TNotifyEvent);
+    procedure RegisterCallBack(renderEvent: TDirectRenderEvent; renderPointFreed: TNotifyEvent);
     procedure UnRegisterCallBack(renderEvent: TDirectRenderEvent);
     procedure Clear;
   end;
@@ -838,11 +838,10 @@ type
       : Boolean; override;
     function GenerateSilhouette(const SilhouetteParameters: TgxSilhouetteParameters): TgxSilhouette; override;
   published
-    // Specifies the Master object which will be proxy'ed. 
+    // Specifies the Master object which will be proxy'ed.
     property MasterObject: TgxBaseSceneObject read FMasterObject write SetMasterObject;
-    // Specifies how and what is proxy'ed. 
-    property ProxyOptions: TgxProxyObjectOptions read FProxyOptions 
-	  write SetProxyOptions default cDefaultProxyOptions;
+    // Specifies how and what is proxy'ed.
+    property ProxyOptions: TgxProxyObjectOptions read FProxyOptions write SetProxyOptions default cDefaultProxyOptions;
     property ObjectsSorting;
     property Direction;
     property PitchAngle;
@@ -868,7 +867,7 @@ type
     all directions uniformously
     lsParallel : a parallel light, oriented as the light source is (this
     type of light can help speed up rendering) *)
-  TLightStyle = (lsSpot, lsOmni, lsParallel, lsParallelSpot);
+  TgxLightStyle = (lsSpot, lsOmni, lsParallel, lsParallelSpot);
 
   (* Standard light source.
     The standard light source covers spotlights, omnidirectionnal and
@@ -889,7 +888,7 @@ type
     FConstAttenuation, FLinearAttenuation, FQuadraticAttenuation: Single;
     FShining: Boolean;
     FAmbient, FDiffuse, FSpecular: TgxColor;
-    FLightStyle: TLightStyle;
+    FLightStyle: TgxLightStyle;
   protected
     procedure SetAmbient(aValue: TgxColor);
     procedure SetDiffuse(aValue: TgxColor);
@@ -901,7 +900,7 @@ type
     procedure SetSpotDirection(AVector: TgxCoordinates);
     procedure SetSpotExponent(aValue: Single);
     procedure SetSpotCutOff(const val: Single);
-    procedure SetLightStyle(const val: TLightStyle);
+    procedure SetLightStyle(const val: TgxLightStyle);
   public
     constructor Create(AOwner: TComponent); override;
     destructor Destroy; override;
@@ -920,7 +919,7 @@ type
     property LinearAttenuation: Single read FLinearAttenuation write SetLinearAttenuation;
     property QuadraticAttenuation: Single read FQuadraticAttenuation write SetQuadraticAttenuation;
     property Position;
-    property LightStyle: TLightStyle read FLightStyle write SetLightStyle default lsSpot;
+    property LightStyle: TgxLightStyle read FLightStyle write SetLightStyle default lsSpot;
     property Shining: Boolean read FShining write SetShining default True;
     property Specular: TgxColor read FSpecular write SetSpecular;
     property SpotCutOff: Single read FSpotCutOff write SetSpotCutOff;
@@ -969,9 +968,9 @@ type
     constructor Create(AOwner: TComponent); override;
     destructor Destroy; override;
     procedure Assign(Source: TPersistent); override;
-    { Nearest clipping plane for the frustum.
+    (* Nearest clipping plane for the frustum.
       This value depends on the FocalLength and DepthOfView fields and
-      is calculated to minimize Z-Buffer crawling as suggested by the OpenGL documentation. }
+      is calculated to minimize Z-Buffer crawling as suggested by the OpenGL documentation. *)
     property NearPlane: Single read FNearPlane;
 
     // Apply camera transformation
@@ -986,62 +985,61 @@ type
     procedure ZoomAll(aSceneBuffer: TgxSceneBuffer);
     procedure RotateObject(obj: TgxBaseSceneObject; pitchDelta, turnDelta: Single; rollDelta: Single = 0);
     procedure RotateTarget(pitchDelta, turnDelta: Single; rollDelta: Single = 0);
-    { Change camera's position to make it move around its target.
+    (* Change camera's position to make it move around its target.
       If TargetObject is nil, nothing happens. This method helps in quickly
       implementing camera controls. Camera's Up and Direction properties are unchanged.
       Angle deltas are in degrees, camera parent's coordinates should be identity.
       Tip : make the camera a child of a "target" dummycube and make
       it a target the dummycube. Now, to pan across the scene, just move
-      the dummycube, to change viewing angle, use this method. }
+      the dummycube, to change viewing angle, use this method. *)
     procedure MoveAroundTarget(pitchDelta, turnDelta: Single);
-    { Change camera's position to make it move all around its target.
+    (* Change camera's position to make it move all around its target.
       If TargetObject is nil, nothing happens. This method helps in quickly
       implementing camera controls. Camera's Up and Direction properties are changed.
-      Angle deltas are in degrees. }
+      Angle deltas are in degrees. *)
     procedure MoveAllAroundTarget(pitchDelta, turnDelta: Single);
-    { Moves the camera in eye space coordinates. }
+    // Moves the camera in eye space coordinates.
     procedure MoveInEyeSpace(forwardDistance, rightDistance, upDistance: Single);
-    { Moves the target in eye space coordinates. }
+    // Moves the target in eye space coordinates.
     procedure MoveTargetInEyeSpace(forwardDistance, rightDistance, upDistance: Single);
-    { Computes the absolute vector corresponding to the eye-space translations. }
+    // Computes the absolute vector corresponding to the eye-space translations.
     function AbsoluteEyeSpaceVector(forwardDistance, rightDistance, upDistance: Single): TVector;
-    { Adjusts distance from camera to target by applying a ratio.
+    (* Adjusts distance from camera to target by applying a ratio.
       If TargetObject is nil, nothing happens. This method helps in quickly
-      implementing camera controls. Only the camera's position is changed. }
+      implementing camera controls. Only the camera's position is changed. *)
     procedure AdjustDistanceToTarget(distanceRatio: Single);
-    { Returns the distance from camera to target.
-      If TargetObject is nil, returns 1. }
+    (* Returns the distance from camera to target.
+      If TargetObject is nil, returns 1. *)
     function DistanceToTarget: Single;
-    { Computes the absolute normalized vector to the camera target.
-      If no target is defined, AbsoluteDirection is returned. }
+    (* Computes the absolute normalized vector to the camera target.
+      If no target is defined, AbsoluteDirection is returned. *)
     function AbsoluteVectorToTarget: TVector;
-    { Computes the absolute normalized right vector to the camera target.
-      If no target is defined, AbsoluteRight is returned. }
+    (* Computes the absolute normalized right vector to the camera target.
+      If no target is defined, AbsoluteRight is returned. *)
     function AbsoluteRightVectorToTarget: TVector;
-    { Computes the absolute normalized up vector to the camera target.
-      If no target is defined, AbsoluteUpt is returned. }
+    (* Computes the absolute normalized up vector to the camera target.
+      If no target is defined, AbsoluteUpt is returned. *)
     function AbsoluteUpVectorToTarget: TVector;
-    { Calculate an absolute translation vector from a screen vector.
+    (* Calculate an absolute translation vector from a screen vector.
       Ratio is applied to both screen delta, planeNormal should be the
-      translation plane's normal. }
-    function ScreenDeltaToVector(deltaX, deltaY: Integer; ratio: Single; 
-	  const planeNormal: TVector): TVector;
-    // Same as ScreenDeltaToVector but optimized for XY plane. 
+      translation plane's normal. *)
+    function ScreenDeltaToVector(deltaX, deltaY: Integer; ratio: Single; const planeNormal: TVector): TVector;
+    // Same as ScreenDeltaToVector but optimized for XY plane.
     function ScreenDeltaToVectorXY(deltaX, deltaY: Integer; ratio: Single): TVector;
-    // Same as ScreenDeltaToVector but optimized for XZ plane. 
+    // Same as ScreenDeltaToVector but optimized for XZ plane.
     function ScreenDeltaToVectorXZ(deltaX, deltaY: Integer; ratio: Single): TVector;
-    { Same as ScreenDeltaToVector but optimized for YZ plane. }
+    // Same as ScreenDeltaToVector but optimized for YZ plane.
     function ScreenDeltaToVectorYZ(deltaX, deltaY: Integer; ratio: Single): TVector;
-    { Returns true if a point is in front of the camera. }
+    // Returns true if a point is in front of the camera.
     function PointInFront(const point: TVector): Boolean; overload;
-    { Calculates the field of view in degrees, given a viewport dimension
-      (width or height). F.i. you may wish to use the minimum of the two. }
+    (* Calculates the field of view in degrees, given a viewport dimension
+      (width or height). F.i. you may wish to use the minimum of the two. *)
     function GetFieldOfView(const AViewportDimension: Single): Single;
-    { Sets the FocalLength in degrees, given a field of view and a viewport
-      dimension (width or height). }
+    (* Sets the FocalLength in degrees, given a field of view and a viewport
+      dimension (width or height). *)
     procedure SetFieldOfView(const AFieldOfView, AViewportDimension: Single);
   published
-    { Depth of field/view.
+    (* Depth of field/view.
       Adjusts the maximum distance, beyond which objects will be clipped
       (ie. not visisble).
       You must adjust this value if you are experiencing disappearing
@@ -1049,27 +1047,27 @@ type
       value). Z-Buffer crawling happens when depth of view is too large
       and the Z-Buffer precision cannot account for all that depth
       accurately : objects farther overlap closer objects and vice-versa.
-      Note that this value is ignored in cSOrtho2D mode. }
+      Note that this value is ignored in cSOrtho2D mode. *)
     property DepthOfView: Single read FDepthOfView write SetDepthOfView;
-    { Focal Length of the camera.
+    (* Focal Length of the camera.
       Adjusting this value allows for lens zooming effects (use SceneScale
-      for linear zooming). This property affects near/far planes clipping. }
+      for linear zooming). This property affects near/far planes clipping. *)
     property FocalLength: Single read FFocalLength write SetFocalLength;
-    { Scene scaling for camera point.
+    (* Scene scaling for camera point.
       This is a linear 2D scaling of the camera's output, allows for
-      linear zooming (use FocalLength for lens zooming). }
+      linear zooming (use FocalLength for lens zooming). *)
     property SceneScale: Single read FSceneScale write SetSceneScale stored StoreSceneScale;
-    { Scaling bias applied to near-plane calculation.
+    (* Scaling bias applied to near-plane calculation.
       Values inferior to one will move the nearplane nearer, and also
       reduce medium/long range Z-Buffer precision, values superior
       to one will move the nearplane farther, and also improve medium/long
-      range Z-Buffer precision. }
+      range Z-Buffer precision. *)
     property NearPlaneBias: Single read FNearPlaneBias write SetNearPlaneBias stored StoreNearPlaneBias;
-    { If set, camera will point to this object.
+    (* If set, camera will point to this object.
       When camera is pointing an object, the Direction vector is ignored
-      and the Up vector is used as an absolute vector to the up. }
+      and the Up vector is used as an absolute vector to the up. *)
     property TargetObject: TgxBaseSceneObject read FTargetObject write SetTargetObject;
-    { Adjust the camera style.
+    (* Adjust the camera style.
       Three styles are available :
       csPerspective, the default value for perspective projection
       csOrthogonal, for orthogonal (or isometric) projection.
@@ -1077,18 +1075,18 @@ type
       (in x or y) represents 1 pixel.
       csInfinitePerspective, for perspective view without depth limit.
       csKeepCamAnglePerspective, for perspective view with keeping aspect on view resize.
-      csCustom, setup is deferred to the OnCustomPerspective event. }
+      csCustom, setup is deferred to the OnCustomPerspective event. *)
     property CameraStyle: TgxCameraStyle read FCameraStyle write SetCameraStyle default csPerspective;
-    { Keep camera angle mode.
+    (* Keep camera angle mode.
       When CameraStyle is csKeepCamAnglePerspective, select which camera angle you want to keep.
       kaHeight, for Keep Height oriented camera angle
-      kaWidth,  for Keep Width oriented camera angle }
+      kaWidth,  for Keep Width oriented camera angle *)
     property KeepFOVMode: TgxCameraKeepFOVMode read FKeepFOVMode write SetKeepFOVMode default ckmHorizontalFOV;
-    { Custom perspective event.
+    (* Custom perspective event.
       This event allows you to specify your custom perpective, either
       with a glFrustrum, a glOrtho or whatever method suits you.
       You must compute viewPortRadius for culling to work.
-      This event is only called if CameraStyle is csCustom. }
+      This event is only called if CameraStyle is csCustom. *)
     property OnCustomPerspective: TOnCustomPerspective read FOnCustomPerspective write FOnCustomPerspective;
     property Position;
     property Direction;
@@ -1096,7 +1094,7 @@ type
     property OnProgress;
   end;
 
-  { Scene object.
+  (* Scene object.
     The scene contains the scene description (lights, geometry...), which is
     basicly a hierarchical scene graph made of TgxBaseSceneObject. It will
     usually contain one or more TgxCamera object, which can be referred by
@@ -1104,7 +1102,7 @@ type
     The scene's objects can be accessed directly from Delphi code (as regular
     components), but those are edited with a specific editor (double-click
     on the TgxScene component at design-time to invoke it). To add objects
-    at runtime, use the AddNewChild method of TgxBaseSceneObject. }
+    at runtime, use the AddNewChild method of TgxBaseSceneObject. *)
   TgxScene = class(TUpdateAbleComponent)
   private
     FUpdateCount: Integer;
@@ -1143,15 +1141,15 @@ type
     procedure NotifyChange(Sender: TObject); override;
     procedure Progress(const deltaTime, newTime: Double);
     function FindSceneObject(const aName: string): TgxBaseSceneObject;
-    { Calculates, finds and returns the first object intercepted by the ray.
+    (* Calculates, finds and returns the first object intercepted by the ray.
       Returns nil if no intersection was found. This function will be
       accurate only for objects that overrided their RayCastIntersect
       method with accurate code, otherwise, bounding sphere intersections
-      will be returned. }
+      will be returned. *)
     function RayCastIntersect(const rayStart, rayVector: TVector; intersectPoint: PVector = nil; intersectNormal: PVector = nil)
       : TgxBaseSceneObject; virtual;
     procedure ShutdownAllLights;
-    // Saves the scene to a file (recommended extension : .GLSM) 
+    // Saves the scene to a file (recommended extension : .GLS)
     procedure SaveToFile(const fileName: string);
     (* Load the scene from a file.
       Existing objects/lights/cameras are freed, then the file is loaded.
@@ -1161,54 +1159,54 @@ type
     procedure LoadFromFile(const fileName: string);
     procedure SaveToStream(aStream: TStream);
     procedure LoadFromStream(aStream: TStream);
-    { Saves the scene to a text file }
+    // Saves the scene to a text file
     procedure SaveToTextFile(const fileName: string);
-    { Load the scene from a text files.
-      See LoadFromFile for details. }
+    (* Load the scene from a text files.
+      See LoadFromFile for details. *)
     procedure LoadFromTextFile(const fileName: string);
     property CurrentCamera: TgxCamera read FCurrentCamera;
     property Lights: TPersistentObjectList read FLights;
     property Objects: TgxSceneRootObject read FObjects;
     property CurrentBuffer: TgxSceneBuffer read FCurrentBuffer;
-    { List of objects that request to be initialized when rendering context is active.
-      They are removed automaticly from this list once initialized. }
+    (* List of objects that request to be initialized when rendering context is active.
+      They are removed automaticly from this list once initialized. *)
     property InitializableObjects: TgxInitializableObjectList read FInitializableObjects;
     property CurrentDeltaTime: Double read FCurrentDeltaTime;
   published
-    { Defines default ObjectSorting option for scene objects. }
+    // Defines default ObjectSorting option for scene objects.
     property ObjectsSorting: TgxObjectsSorting read FObjectsSorting write SetObjectsSorting default osRenderBlendedLast;
-    { Defines default VisibilityCulling option for scene objects. }
+    // Defines default VisibilityCulling option for scene objects.
     property VisibilityCulling: TgxVisibilityCulling read FVisibilityCulling write SetVisibilityCulling default vcNone;
     property OnBeforeProgress: TProgressEvent read FOnBeforeProgress write FOnBeforeProgress;
     property OnProgress: TProgressEvent read FOnProgress write FOnProgress;
   end;
 
-  TFogMode = (fmLinear, fmExp, fmExp2);
+  TgxFogMode = (fmLinear, fmExp, fmExp2);
 
-  { Fog distance calculation mode.
+  (* Fog distance calculation mode.
     fdDefault: let OpenGL use its default formula
     fdEyeRadial: uses radial "true" distance (best quality)
     fdEyePlane: uses the distance to the projection plane (same as Z-Buffer, faster)
-    Requires support of GL_NV_fog_distance extension, otherwise, it is ignored. }
-  TFogDistance = (fdDefault, fdEyeRadial, fdEyePlane);
+    Requires support of GL_NV_fog_distance extension, otherwise, it is ignored. *)
+  TgxFogDistance = (fdDefault, fdEyeRadial, fdEyePlane);
 
-  { Parameters for fog environment in a scene.
+  (* Parameters for fog environment in a scene.
     The fog descibed by this object is a distance-based fog, ie. the "intensity"
     of the fog is given by a formula depending solely on the distance, this
-    intensity is used for blending to a fixed color. }
+    intensity is used for blending to a fixed color. *)
   TgxFogEnvironment = class(TUpdateAbleObject)
   private
     FSceneBuffer: TgxSceneBuffer;
     FFogColor: TgxColor; // alpha value means the fog density
     FFogStart, FFogEnd: Single;
-    FFogMode: TFogMode;
-    FFogDistance: TFogDistance;
+    FFogMode: TgxFogMode;
+    FFogDistance: TgxFogDistance;
   protected
     procedure SetFogColor(Value: TgxColor);
     procedure SetFogStart(Value: Single);
     procedure SetFogEnd(Value: Single);
-    procedure SetFogMode(Value: TFogMode);
-    procedure SetFogDistance(const val: TFogDistance);
+    procedure SetFogMode(Value: TgxFogMode);
+    procedure SetFogDistance(const val: TgxFogDistance);
   public
     constructor Create(AOwner: TPersistent); override;
     destructor Destroy; override;
@@ -1216,30 +1214,28 @@ type
     procedure Assign(Source: TPersistent); override;
     function IsAtDefaultValues: Boolean;
   published
-    { Color of the fog when it is at 100% intensity. }
+    // Color of the fog when it is at 100% intensity.
     property FogColor: TgxColor read FFogColor write SetFogColor;
-    { Minimum distance for fog, what is closer is not affected. }
+    // Minimum distance for fog, what is closer is not affected.
     property FogStart: Single read FFogStart write SetFogStart;
-    { Maximum distance for fog, what is farther is at 100% fog intensity. }
+    // Maximum distance for fog, what is farther is at 100% fog intensity.
     property FogEnd: Single read FFogEnd write SetFogEnd;
-    { The formula used for converting distance to fog intensity. }
-    property FogMode: TFogMode read FFogMode write SetFogMode default fmLinear;
-    { Adjusts the formula used for calculating fog distances.
+    // The formula used for converting distance to fog intensity.
+    property FogMode: TgxFogMode read FFogMode write SetFogMode default fmLinear;
+    (* Adjusts the formula used for calculating fog distances.
       This option is honoured if and only if the OpenGL ICD supports the
       GL_NV_fog_distance extension, otherwise, it is ignored.
       fdDefault: let OpenGL use its default formula
       fdEyeRadial: uses radial "true" distance (best quality)
-      fdEyePlane: uses the distance to the projection plane  (same as Z-Buffer, faster) }
-    property FogDistance: TFogDistance read FFogDistance write SetFogDistance default fdDefault;
+      fdEyePlane: uses the distance to the projection plane  (same as Z-Buffer, faster) *)
+    property FogDistance: TgxFogDistance read FFogDistance write SetFogDistance default fdDefault;
   end;
 
   TgxDepthPrecision = (dpDefault, dp16bits, dp24bits, dp32bits);
-
   TgxColorDepth = (cdDefault, cd8bits, cd16bits, cd24bits, cdFloat64bits, cdFloat128bits); // float_type
-
   TgxShadeModel = (smDefault, smSmooth, smFlat);
 
-  { Encapsulates an OpenGL frame/rendering buffer. }
+  // Encapsulates an OpenGL frame/rendering buffer.
   TgxSceneBuffer = class(TUpdateAbleObject)
   private
     // Internal state
@@ -1334,265 +1330,263 @@ type
     property viewport: TRectangle read FViewPort;
     // Fills the PickList with objects in Rect area
     procedure PickObjects(const rect: TRect; pickList: TgxPickList; objectCountGuess: Integer);
-    { Returns a PickList with objects in Rect area.
+    (* Returns a PickList with objects in Rect area.
       Returned list should be freed by caller.
-      Objects are sorted by depth (nearest objects first). }
+      Objects are sorted by depth (nearest objects first). *)
     function GetPickedObjects(const rect: TRect; objectCountGuess: Integer = 64): TgxPickList;
     // Returns the nearest object at x, y coordinates or nil if there is none
     function GetPickedObject(x, y: Integer): TgxBaseSceneObject;
     // Returns the color of the pixel at x, y in the frame buffer
     function GetPixelColor(x, y: Integer): TColor;
-    { Returns the raw depth (Z buffer) of the pixel at x, y in the frame buffer.
+    (* Returns the raw depth (Z buffer) of the pixel at x, y in the frame buffer.
       This value does not map to the actual eye-object distance, but to
-      a depth buffer value in the [0; 1] range. }
+      a depth buffer value in the [0; 1] range. *)
     function GetPixelDepth(x, y: Integer): Single;
-    { Converts a raw depth (Z buffer value) to frustrum distance.
+    (* Converts a raw depth (Z buffer value) to frustrum distance.
       This calculation is only accurate for the pixel at the centre of the viewer,
       because it does not take into account that the corners of the frustrum
-      are further from the eye than its centre. }
+      are further from the eye than its centre. *)
     function PixelDepthToDistance(aDepth: Single): Single;
-    { Converts a raw depth (Z buffer value) to world distance.
+    (* Converts a raw depth (Z buffer value) to world distance.
       It also compensates for the fact that the corners of the frustrum
-      are further from the eye, than its centre. }
+      are further from the eye, than its centre. *)
     function PixelToDistance(x, y: Integer): Single;
-    { Design time notification }
+    // Design time notification
     procedure NotifyMouseMove(Shift: TShiftState; x, y: Single);
-    { Renders the scene on the viewer.
+    (* Renders the scene on the viewer.
       You do not need to call this method, unless you explicitly want a
       render at a specific time. If you just want the control to get
-      refreshed, use Invalidate instead. }
+      refreshed, use Invalidate instead. *)
     procedure Render(baseObject: TgxBaseSceneObject); overload;
     procedure Render; overload;
     procedure RenderScene(aScene: TgxScene; const viewPortSizeX, viewPortSizeY: Integer; drawState: TgxDrawState;
       baseObject: TgxBaseSceneObject);
-    { Render the scene to a bitmap at given DPI.
+    (* Render the scene to a bitmap at given DPI.
       DPI = "dots per inch".
-      The "magic" DPI of the screen is 96 under Windows. }
+      The "magic" DPI of the screen is 96 under Windows. *)
     procedure RenderToBitmap(ABitmap: TBitmap; DPI: Integer = 0);
-    { Render the scene to a bitmap at given DPI and saves it to a file.
+    (* Render the scene to a bitmap at given DPI and saves it to a file.
       DPI = "dots per inch".
-      The "magic" DPI of the screen is 96 under Windows. }
+      The "magic" DPI of the screen is 96 under Windows. *)
     procedure RenderToFile(const AFile: string; DPI: Integer = 0); overload;
-    { Renders to bitmap of given size, then saves it to a file.
-      DPI is adjusted to make the bitmap similar to the viewer. }
+    (* Renders to bitmap of given size, then saves it to a file.
+      DPI is adjusted to make the bitmap similar to the viewer. *)
     procedure RenderToFile(const AFile: string; bmpWidth, bmpHeight: Integer); overload;
-    { Creates a TgxBitmap32 that is a snapshot of current OpenGL content.
+    (* Creates a TgxBitmap32 that is a snapshot of current OpenGL content.
       When possible, use this function instead of RenderToBitmap, it won't
       request a redraw and will be significantly faster.
-      The returned TgxBitmap32 should be freed by calling code. }
+      The returned TgxBitmap32 should be freed by calling code. *)
     function CreateSnapShot: TgxImage;
-    { Creates a FMX bitmap that is a snapshot of current OpenGL content. }
+    // Creates a bitmap that is a snapshot of current graphic content.
     function CreateSnapShotBitmap: TBitmap;
     procedure CopyToTexture(aTexture: TgxTexture); overload;
     procedure CopyToTexture(aTexture: TgxTexture; xSrc, ySrc, AWidth, AHeight: Integer; xDest, yDest: Integer;
       glCubeFace: GLEnum = 0); overload;
-    { Save as raw float data to a file }
+    // Save as raw float data to a file
     procedure SaveAsFloatToFile(const aFilename: string);
-    { Event reserved for viewer-specific uses. }
+    // Event reserved for viewer-specific uses.
     property ViewerBeforeRender: TNotifyEvent read FViewerBeforeRender write FViewerBeforeRender stored False;
     procedure SetViewPort(x, y, W, H: Integer);
     function width: Integer;
     function height: Integer;
-    { Indicates if the Viewer is "frozen". }
+    // Indicates if the Viewer is "frozen".
     property Freezed: Boolean read FFreezed;
-    { Freezes rendering leaving the last rendered scene on the buffer. This
+    (* Freezes rendering leaving the last rendered scene on the buffer. This
       is usefull in windowed applications for temporarily stopping rendering
-      (when moving the window, for example). }
+      (when moving the window, for example). *)
     procedure Freeze;
     { Restarts rendering after it was freezed. }
     procedure Melt;
-    { Displays a window with info on current OpenGL ICD and context. }
+    // Displays a window with info on current OpenGL ICD and context.
     procedure ShowInfo(Modal: Boolean = False);
-    { Currently Rendering? }
+    // Currently Rendering?
     property Rendering: Boolean read FRendering;
-    { Adjusts background alpha channel. }
+    // Adjusts background alpha channel.
     property BackgroundAlpha: Single read FBackgroundAlpha write SetBackgroundAlpha;
-    { Returns the projection matrix in use or used for the last rendering. }
+    // Returns the projection matrix in use or used for the last rendering.
     function ProjectionMatrix: TMatrix; deprecated;
-    { Returns the view matrix in use or used for the last rendering. }
+    // Returns the view matrix in use or used for the last rendering.
     function ViewMatrix: TMatrix; deprecated;
     function ModelMatrix: TMatrix; deprecated;
-    { Returns the base projection matrix in use or used for the last rendering.
+    (* Returns the base projection matrix in use or used for the last rendering.
       The "base" projection is (as of now) either identity or the pick
       matrix, ie. it is the matrix on which the perspective or orthogonal
-      matrix gets applied. }
+      matrix gets applied. *)
     property BaseProjectionMatrix: TMatrix read FBaseProjectionMatrix;
-    { Back up current View matrix and replace it with newMatrix.
+    (* Back up current View matrix and replace it with newMatrix.
       This method has no effect on theOpenVX matrix, only on the Buffer's
-      matrix, and is intended for special effects rendering. }
+      matrix, and is intended for special effects rendering. *)
     procedure PushViewMatrix(const newMatrix: TMatrix); deprecated;
-    { Restore a View matrix previously pushed. }
+    // Restore a View matrix previously pushed.
     procedure PopViewMatrix; deprecated;
     procedure PushProjectionMatrix(const newMatrix: TMatrix); deprecated;
     procedure PopProjectionMatrix; deprecated;
-    { Converts a screen pixel coordinate into 3D coordinates for orthogonal projection.
+    (* Converts a screen pixel coordinate into 3D coordinates for orthogonal projection.
       This function accepts standard canvas coordinates, with (0,0) being
       the top left corner, and returns, when the camera is in orthogonal
-      mode, the corresponding 3D world point that is in the camera's plane. }
+      mode, the corresponding 3D world point that is in the camera's plane. *)
     function OrthoScreenToWorld(screenX, screenY: Integer): TAffineVector; overload;
-    { Converts a screen coordinate into world (3D) coordinates.
+    (* Converts a screen coordinate into world (3D) coordinates.
       This methods wraps a call to gluUnProject.
-      Note that screen coord (0,0) is the lower left corner. }
+      Note that screen coord (0,0) is the lower left corner. *)
     function ScreenToWorld(const aPoint: TAffineVector): TAffineVector; overload;
     function ScreenToWorld(const aPoint: TVector): TVector; overload;
-    { Converts a screen pixel coordinate into 3D world coordinates.
+    (* Converts a screen pixel coordinate into 3D world coordinates.
       This function accepts standard canvas coordinates, with (0,0) being
-      the top left corner. }
+      the top left corner. *)
     function ScreenToWorld(screenX, screenY: Integer): TAffineVector; overload;
-    { Converts an absolute world coordinate into screen coordinate.
+    (* Converts an absolute world coordinate into screen coordinate.
       This methods wraps a call to gluProject.
-      Note that screen coord (0,0) is the lower left corner. }
+      Note that screen coord (0,0) is the lower left corner. *)
     function WorldToScreen(const aPoint: TAffineVector): TAffineVector; overload;
     function WorldToScreen(const aPoint: TVector): TVector; overload;
-    { Converts a set of point absolute world coordinates into screen coordinates. }
+    // Converts a set of point absolute world coordinates into screen coordinates.
     procedure WorldToScreen(points: PVector; nbPoints: Integer); overload;
-    { Calculates the 3D vector corresponding to a 2D screen coordinate.
+    (* Calculates the 3D vector corresponding to a 2D screen coordinate.
       The vector originates from the camera's absolute position and is
       expressed in absolute coordinates.
-      Note that screen coord (0,0) is the lower left corner. }
+      Note that screen coord (0,0) is the lower left corner. *)
     function ScreenToVector(const aPoint: TAffineVector): TAffineVector; overload;
     function ScreenToVector(const aPoint: TVector): TVector; overload;
     function ScreenToVector(const x, y: Integer): TVector; overload;
-    { Calculates the 2D screen coordinate of a vector from the camera's
+    (* Calculates the 2D screen coordinate of a vector from the camera's
       absolute position and is expressed in absolute coordinates.
-      Note that screen coord (0,0) is the lower left corner. }
+      Note that screen coord (0,0) is the lower left corner. *)
     function VectorToScreen(const VectToCam: TAffineVector): TAffineVector;
-    { Calculates intersection between a plane and screen vector.
+    (* Calculates intersection between a plane and screen vector.
       If an intersection is found, returns True and places result in
-      intersectPoint. }
+      intersectPoint. *)
     function ScreenVectorIntersectWithPlane(const aScreenPoint: TVector; const planePoint, planeNormal: TVector;
       var intersectPoint: TVector): Boolean;
-    { Calculates intersection between plane XY and screen vector.
-      If an intersection is found, returns True and places result in
-      intersectPoint. }
+    (* Calculates intersection between plane XY and screen vector.
+      If an intersection is found, returns True and places result in intersectPoint. *)
     function ScreenVectorIntersectWithPlaneXY(const aScreenPoint: TVector; const z: Single;
       var intersectPoint: TVector): Boolean;
-    { Calculates intersection between plane YZ and screen vector.
-      If an intersection is found, returns True and places result in
-      intersectPoint. }
+    (* Calculates intersection between plane YZ and screen vector.
+      If an intersection is found, returns True and places result in intersectPoint. *)
     function ScreenVectorIntersectWithPlaneYZ(const aScreenPoint: TVector; const x: Single;
       var intersectPoint: TVector): Boolean;
-    { Calculates intersection between plane XZ and screen vector.
-      If an intersection is found, returns True and places result in
-      intersectPoint. }
+    (* Calculates intersection between plane XZ and screen vector.
+      If an intersection is found, returns True and places result in intersectPoint. *)
     function ScreenVectorIntersectWithPlaneXZ(const aScreenPoint: TVector; const y: Single;
       var intersectPoint: TVector): Boolean;
-    { Calculates a 3D coordinate from screen position and ZBuffer.
+    (* Calculates a 3D coordinate from screen position and ZBuffer.
       This function returns a world absolute coordinate from a 2D point
       in the viewer, the depth being extracted from the ZBuffer data
       (DepthTesting and ZBuffer must be enabled for this function to work).
       Note that ZBuffer precision is not linear and can be quite low on
-      some boards (either from compression or resolution approximations). }
+      some boards (either from compression or resolution approximations). *)
     function PixelRayToWorld(x, y: Integer): TAffineVector;
-    { Time (in second) spent to issue rendering order for the last frame.
+    (* Time (in second) spent to issue rendering order for the last frame.
       Be aware that since execution by the hardware isn't synchronous,
       this value may not be an accurate measurement of the time it took
       to render the last frame, it's a measurement of only the time it
-      took to issue rendering orders. }
+      took to issue rendering orders. *)
     property LastFrameTime: Single read FLastFrameTime;
-    { Current FramesPerSecond rendering speed.
+    (* Current FramesPerSecond rendering speed.
       You must keep the renderer busy to get accurate figures from this
       property.
       This is an average value, to reset the counter, call
-      ResetPerfomanceMonitor. }
+      ResetPerfomanceMonitor. *)
     property FramesPerSecond: Single read FFramesPerSecond;
-    { Resets the perfomance monitor and begin a new statistics set.
-      See FramesPerSecond. }
+    (* Resets the perfomance monitor and begin a new statistics set.
+      See FramesPerSecond. *)
     procedure ResetPerformanceMonitor;
-    { Retrieve one of the OpenGL limits for the current viewer.
-      Limits include max texture size, OpenGL stack depth, etc. }
+    (* Retrieve one of the OpenGL limits for the current viewer.
+      Limits include max texture size, OpenGL stack depth, etc. *)
     property LimitOf[Which: TLimitType]: Integer read GetLimit;
-    { Current rendering context.
+    (* Current rendering context.
       The context is a wrapper around platform-specific contexts
       (see TgxContext) and takes care of context activation and handle
-      management. }
+      management. *)
     property RenderingContext: TgxContext read FRenderingContext;
-    { The camera from which the scene is rendered.
-      A camera is an object you can add and define in a TgxScene component. }
+    (* The camera from which the scene is rendered.
+      A camera is an object you can add and define in a TgxScene component. *)
     property Camera: TgxCamera read FCamera write SetCamera;
-    { Specifies the layer plane that the rendering context is bound to. }
+    // Specifies the layer plane that the rendering context is bound to.
     property Layer: TgxContextLayer read FLayer write SetLayer default clMainPlane;
   published
-    { Fog environment options. See TgxFogEnvironment. }
+    // Fog environment options. See TgxFogEnvironment.
     property FogEnvironment: TgxFogEnvironment read FFogEnvironment write SetFogEnvironment stored StoreFog;
-    { Color used for filling the background prior to any rendering. }
+    // Color used for filling the background prior to any rendering.
     property BackgroundColor: TColor read FBackgroundColor write SetBackgroundColor default TColors.SysBtnFace;
-    { Scene ambient color vector.
+    (* Scene ambient color vector.
       This ambient color is defined independantly from all lightsources,
-      which can have their own ambient components. }
+      which can have their own ambient components. *)
     property AmbientColor: TgxColor read FAmbientColor write SetAmbientColor;
-    { Context options allows to setup specifics of the rendering context.
-      Not all contexts support all options. }
+    (* Context options allows to setup specifics of the rendering context.
+      Not all contexts support all options. *)
     property ContextOptions: TContextOptions read FContextOptions write SetContextOptions
       default [roDoubleBuffer, roRenderToWindow, roDebugContext];
-    { Number of precision bits for the accumulation buffer. }
+    // Number of precision bits for the accumulation buffer.
     property AccumBufferBits: Integer read FAccumBufferBits write SetAccumBufferBits default 0;
-    { DepthTest enabling.
+    (* DepthTest enabling.
       When DepthTest is enabled, objects closer to the camera will hide
       farther ones (via use of Z-Buffering).
       When DepthTest is disabled, the latest objects drawn/rendered overlap
       all previous objects, whatever their distance to the camera.
       Even when DepthTest is enabled, objects may chose to ignore depth
-      testing through the osIgnoreDepthBuffer of their ObjectStyle property. }
+      testing through the osIgnoreDepthBuffer of their ObjectStyle property. *)
     property DepthTest: Boolean read FDepthTest write SetDepthTest default True;
-    { Enable or disable face culling in the renderer.
+    (* Enable or disable face culling in the renderer.
       Face culling is used in hidden faces removal algorithms : each face
       is given a normal or 'outside' direction. When face culling is enabled,
-      only faces whose normal points towards the observer are rendered. }
+      only faces whose normal points towards the observer are rendered. *)
     property FaceCulling: Boolean read FFaceCulling write SetFaceCulling default True;
-    { Toggle to enable or disable the fog settings. }
+    // Toggle to enable or disable the fog settings.
     property FogEnable: Boolean read FFogEnable write SetFogEnable default False;
-    { Toggle to enable or disable lighting calculations.
+    (* Toggle to enable or disable lighting calculations.
       When lighting is enabled, objects will be lit according to lightsources,
       when lighting is disabled, objects are rendered in their own colors,
       without any shading.
-      Lighting does NOT generate shadows in OpenGL. }
+      Lighting does NOT generate shadows in OpenGL. *)
     property Lighting: Boolean read FLighting write SetLighting default True;
-    { AntiAliasing option.
-      Ignored if not hardware supported, currently based on ARB_multisample. }
+    (* AntiAliasing option.
+      Ignored if not hardware supported, currently based on ARB_multisample. *)
     property AntiAliasing: TgxAntiAliasing read FAntiAliasing write SetAntiAliasing default aaDefault;
-    { Depth buffer precision.
-      Default is highest available (below and including 24 bits) }
+    (* Depth buffer precision.
+      Default is highest available (below and including 24 bits) *)
     property DepthPrecision: TgxDepthPrecision read FDepthPrecision write SetDepthPrecision default dpDefault;
-    { Color buffer depth.
-      Default depth buffer is highest available (below and including 24 bits) }
+    (* Color buffer depth.
+      Default depth buffer is highest available (below and including 24 bits) *)
     property ColorDepth: TgxColorDepth read FColorDepth write SetColorDepth default cdDefault;
-    { Shade model. Default is "Smooth". }
+    // Shade model. Default is "Smooth".
     property ShadeModel: TgxShadeModel read FShadeModel write SetShadeModel default smDefault;
-    { Indicates a change in the scene or buffer options.
-      A simple re-render is enough to take into account the changes. }
+    (* Indicates a change in the scene or buffer options.
+      A simple re-render is enough to take into account the changes. *)
     property OnChange: TNotifyEvent read FOnChange write FOnChange stored False;
-    { Indicates a structural change in the scene or buffer options.
+    (* Indicates a structural change in the scene or buffer options.
       A reconstruction of the RC is necessary to take into account the
-      changes (this may lead to a driver switch or lengthy operations). }
+      changes (this may lead to a driver switch or lengthy operations). *)
     property OnStructuralChange: TNotifyEvent read FOnStructuralChange write FOnStructuralChange stored False;
-    { Triggered before the scene's objects get rendered.
+    (* Triggered before the scene's objects get rendered.
       You may use this event to execute your own OpenGL rendering
-      (usually background stuff). }
+      (usually background stuff). *)
     property BeforeRender: TNotifyEvent read FBeforeRender write FBeforeRender stored False;
-    { Triggered after BeforeRender, before rendering objects.
+    (* Triggered after BeforeRender, before rendering objects.
       This one is fired after the rci has been initialized and can be used
       to alter it or perform early renderings that require an rci,
-      the Sender is the buffer. }
+      the Sender is the buffer. *)
     property InitiateRendering: TDirectRenderEvent read FInitiateRendering write FInitiateRendering stored False;
-    { Triggered after rendering all scene objects, before PostRender.
+    (* Triggered after rendering all scene objects, before PostRender.
       This is the last point after which the rci becomes unavailable,
-      the Sender is the buffer. }
+      the Sender is the buffer. *)
     property WrapUpRendering: TDirectRenderEvent read FWrapUpRendering write FWrapUpRendering stored False;
-    { Triggered just after all the scene's objects have been rendered.
+    (* Triggered just after all the scene's objects have been rendered.
       The OpenGL context is still active in this event, and you may use it
       to execute your own OpenGL rendering (usually for HUD, 2D overlays
-      or after effects). }
+      or after effects). *)
     property PostRender: TNotifyEvent read FPostRender write FPostRender stored False;
-    { Called after rendering.
+    (* Called after rendering.
       You cannot issue OpenGL calls in this event, if you want to do your own
-      OpenGL stuff, use the PostRender event. }
+      OpenGL stuff, use the PostRender event. *)
     property AfterRender: TNotifyEvent read FAfterRender write FAfterRender stored False;
   end;
 
   (* Base class for non-visual viewer.
     Non-visual viewer may actually render visuals, but they are non-visual
-    (ie. non interactive) at design time. Such viewers include memory or full-screen viewers. *)
+    (ie. non interactive) at design time. Such viewers include memory
+    or full-screen viewers. *)
   TgxNonVisualViewer = class(TComponent)
   private
     FBuffer: TgxSceneBuffer;
@@ -1625,7 +1619,7 @@ type
     procedure Render(baseObject: TgxBaseSceneObject = nil); virtual; abstract;
     procedure CopyToTexture(aTexture: TgxTexture); overload; virtual;
     procedure CopyToTexture(aTexture: TgxTexture; xSrc, ySrc, width, height: Integer; xDest, yDest: Integer); overload;
-    // CopyToTexture for Multiple-Render-Target 
+    // CopyToTexture for Multiple-Render-Target
     procedure CopyToTextureMRT(aTexture: TgxTexture; BufferIndex: Integer); overload; virtual;
     procedure CopyToTextureMRT(aTexture: TgxTexture; xSrc, ySrc, width, height: Integer; xDest, yDest: Integer;
       BufferIndex: Integer); overload;
@@ -1633,31 +1627,32 @@ type
       The viewer is used to render the 6 images, one for each face
       of the cube, from the absolute position of the camera.
       This does NOT alter the content of the Pictures in the image,
-      and will only change or define the content of textures as registered by OpenGL. *)
+      and will only change or define the content of textures as
+      registered by OpenGL. *)
     procedure RenderCubeMapTextures(cubeMapTexture: TgxTexture; zNear: Single = 0; zFar: Single = 0);
   published
-    // Camera from which the scene is rendered. 
+    // Camera from which the scene is rendered.
     property Camera: TgxCamera read GetCamera write SetCamera;
     property width: Integer read FWidth write SetWidth default 256;
     property height: Integer read FHeight write SetHeight default 256;
     (* Triggered before the scene's objects get rendered.
       You may use this event to execute your own OpenGL rendering. *)
     property BeforeRender: TNotifyEvent read GetBeforeRender write SetBeforeRender;
-    { Triggered just after all the scene's objects have been rendered.
+    (* Triggered just after all the scene's objects have been rendered.
       The OpenGL context is still active in this event, and you may use it
-      to execute your own OpenGL rendering. }
+      to execute your own OpenGL rendering. *)
     property PostRender: TNotifyEvent read GetPostRender write SetPostRender;
-    { Called after rendering.
+    (* Called after rendering.
       You cannot issue OpenGL calls in this event, if you want to do your own
-      OpenGL stuff, use the PostRender event. }
+      OpenGL stuff, use the PostRender event. *)
     property AfterRender: TNotifyEvent read GetAfterRender write SetAfterRender;
-    { Access to buffer properties. }
+    // Access to buffer properties.
     property Buffer: TgxSceneBuffer read FBuffer write SetBuffer;
   end;
 
-  { Component to render a scene to memory only.
+  (* Component to render a scene to memory only.
     This component curently requires that the OpenGL ICD supports the
-    WGL_ARB_pbuffer extension (indirectly). }
+    WGL_ARB_pbuffer extension (indirectly). *)
   TgxMemoryViewer = class(TgxNonVisualViewer)
   private
     FBufferCount: Integer;
@@ -1667,33 +1662,33 @@ type
     procedure InstantiateRenderingContext;
     procedure Render(baseObject: TgxBaseSceneObject = nil); override;
   published
-    { Set BufferCount > 1 for multiple render targets.
+    (* Set BufferCount > 1 for multiple render targets.
       Users should check if the corresponding extension (GL_ATI_draw_buffers)
-      is supported. Current hardware limit is BufferCount = 4. }
+      is supported. Current hardware limit is BufferCount = 4. *)
     property BufferCount: Integer read FBufferCount write SetBufferCount default 1;
   end;
 
   TInvokeInfoForm = procedure(aSceneBuffer: TgxSceneBuffer; Modal: Boolean);
 
-  { Register an event handler triggered by any TgxBaseSceneObject Name change.
-    *INCOMPLETE*, currently allows for only 1 (one) event, and is used by
-    GXSceneEdit in the IDE. }
+(* Register an event handler triggered by any TgxBaseSceneObject Name change.
+   *INCOMPLETE*, currently allows for only 1 (one) event, and is used by
+   FSceneEdit in the IDE. *)
 procedure RegisterBaseSceneObjectNameChangeEvent(notifyEvent: TNotifyEvent);
-{ Deregister an event handler triggered by any TgxBaseSceneObject Name change.
-  See RegisterVKBaseSceneObjectNameChangeEvent. }
+(* Deregister an event handler triggered by any TgxBaseSceneObject Name change.
+  See RegisterVKBaseSceneObjectNameChangeEvent. *)
 procedure DeRegisterBaseSceneObjectNameChangeEvent(notifyEvent: TNotifyEvent);
-{ Register an event handler triggered by any TgxBehaviour Name change.
+(* Register an event handler triggered by any TgxBehaviour Name change.
   *INCOMPLETE*, currently allows for only 1 (one) event, and is used by
-  FBehavioursEditor in the IDE. }
+  FBehavioursEditor in the IDE. *)
 procedure RegisterBehaviourNameChangeEvent(notifyEvent: TNotifyEvent);
-{ Deregister an event handler triggered by any TgxBaseSceneObject Name change.
-  See RegisterVKBaseSceneObjectNameChangeEvent. }
+(* Deregister an event handler triggered by any TgxBaseSceneObject Name change.
+  See RegisterVKBaseSceneObjectNameChangeEvent. *)
 procedure DeRegisterBehaviourNameChangeEvent(notifyEvent: TNotifyEvent);
 
-// Issues OpenGL calls for drawing X, Y, Z axes in a standard style. 
+// Issues OpenGL calls for drawing X, Y, Z axes in a standard style.
 procedure AxesBuildList(var rci: TgxRenderContextInfo; pattern: Word; AxisLen: Single);
 
-// Registers the procedure call used to invoke the info form. 
+// Registers the procedure call used to invoke the info form.
 procedure RegisterInfoForm(infoForm: TInvokeInfoForm);
 procedure InvokeInfoForm(aSceneBuffer: TgxSceneBuffer; Modal: Boolean);
 
@@ -1846,7 +1841,6 @@ end;
 destructor TgxBaseSceneObject.Destroy;
 begin
   DeleteChildCameras;
-  // k00m memory fix and remove some leak of the old version.
   FEffects.Free;
   FBehaviours.Free;
   FListHandle.Free;
@@ -1867,7 +1861,6 @@ end;
 
 function TgxBaseSceneObject.GetHandle(var rci: TgxRenderContextInfo): Cardinal;
 begin
-
   // Special case.. dirty trixxors
   if not Assigned(FListHandle) then
   begin
@@ -2062,16 +2055,16 @@ var
   reader: TReader;
 begin
   reader := TReader.Create(stream, 16384);
-  { with TReader(FOriginalFiler) do }
+  // with TReader(FOriginalFiler) do
   try
-    { reader.Root                 := Root;
+    (* reader.Root                 := Root;
       reader.OnError              := OnError;
       reader.OnFindMethod         := OnFindMethod;
       reader.OnSetName            := OnSetName;
       reader.OnReferenceName      := OnReferenceName;
       reader.OnAncestorNotFound   := OnAncestorNotFound;
       reader.OnCreateComponent    := OnCreateComponent;
-      reader.OnFindComponentClass := OnFindComponentClass; }
+      reader.OnFindComponentClass := OnFindComponentClass; *)
     Effects.ReadFromFiler(reader);
   finally
     reader.Free;
@@ -2654,8 +2647,10 @@ begin
   d := VectorLength(silhouetteParameters.SeenFrom);
   // determine visible radius
   case silhouetteParameters.Style of
-    ssOmni: vr := SphereVisibleRadius(d, r);
-    ssParallel: vr := r;
+    ssOmni:
+      vr := SphereVisibleRadius(d, r);
+    ssParallel:
+      vr := r;
   else
     Assert(False);
     vr := r;
@@ -3053,13 +3048,13 @@ begin
   // convert absolute to local and adjust object
   if Parent <> nil then
   begin
-    FUp.AsVector := Parent.AbsoluteToLocal(absUp);  
     FDirection.AsVector := Parent.AbsoluteToLocal(absDir);
+    FUp.AsVector := Parent.AbsoluteToLocal(absUp);
   end
   else
   begin
-    FUp.AsVector := absUp;  
     FDirection.AsVector := absDir;
+    FUp.AsVector := absUp;
   end;
   TransformationChanged
 end;
@@ -3075,7 +3070,7 @@ end;
 
 procedure TgxBaseSceneObject.SetScaling(aValue: TgxCoordinates);
 begin
-  FScaling.Assign(AValue);
+  FScaling.Assign(aValue);
   TransformationChanged;
 end;
 
@@ -3434,8 +3429,7 @@ begin
   Result := FChildren.IndexOf(AChild)
 end;
 
-function TgxBaseSceneObject.FindChild(const aName: string; 
-  ownChildrenOnly: Boolean): TgxBaseSceneObject;
+function TgxBaseSceneObject.FindChild(const aName: string; ownChildrenOnly: Boolean): TgxBaseSceneObject;
 var
   i: Integer;
   res: TgxBaseSceneObject;
@@ -4018,6 +4012,9 @@ end;
 // ------------------
 // ------------------ TgxBehaviours ------------------
 // ------------------
+
+// Create
+//
 
 constructor TgxBehaviours.Create(AOwner: TPersistent);
 begin
@@ -5030,25 +5027,25 @@ end;
 // ------------------ TxDirectOpenVX ------------------
 // ------------------
 
-constructor TgxDirectOpenGL.Create(AOwner: TComponent);
+constructor TgxDirectOpenVX.Create(AOwner: TComponent);
 begin
   inherited;
   ObjectStyle := ObjectStyle + [osDirectDraw];
   FBlend := False;
 end;
 
-procedure TgxDirectOpenGL.Assign(Source: TPersistent);
+procedure TgxDirectOpenVX.Assign(Source: TPersistent);
 begin
-  if Source is TgxDirectOpenGL then
+  if Source is TgxDirectOpenVX then
   begin
-    UseBuildList := TgxDirectOpenGL(Source).UseBuildList;
-    FOnRender := TgxDirectOpenGL(Source).FOnRender;
-    FBlend := TgxDirectOpenGL(Source).Blend;
+    UseBuildList := TgxDirectOpenVX(Source).UseBuildList;
+    FOnRender := TgxDirectOpenVX(Source).FOnRender;
+    FBlend := TgxDirectOpenVX(Source).Blend;
   end;
   inherited Assign(Source);
 end;
 
-procedure TgxDirectOpenGL.BuildList(var rci: TgxRenderContextInfo);
+procedure TgxDirectOpenVX.BuildList(var rci: TgxRenderContextInfo);
 begin
   if Assigned(FOnRender) then
   begin
@@ -5057,12 +5054,12 @@ begin
   end;
 end;
 
-function TgxDirectOpenGL.AxisAlignedDimensionsUnscaled: TVector;
+function TgxDirectOpenVX.AxisAlignedDimensionsUnscaled: TVector;
 begin
   Result := NullHmgPoint;
 end;
 
-procedure TgxDirectOpenGL.SetUseBuildList(const val: Boolean);
+procedure TgxDirectOpenVX.SetUseBuildList(const val: Boolean);
 begin
   if val <> FUseBuildList then
   begin
@@ -5074,12 +5071,12 @@ begin
   end;
 end;
 
-function TgxDirectOpenGL.Blended: Boolean;
+function TgxDirectOpenVX.Blended: Boolean;
 begin
   Result := FBlend;
 end;
 
-procedure TgxDirectOpenGL.SetBlend(const val: Boolean);
+procedure TgxDirectOpenVX.SetBlend(const val: Boolean);
 begin
   if val <> FBlend then
   begin
@@ -5420,7 +5417,7 @@ begin
   end;
 end;
 
-procedure TgxLightSource.SetLightStyle(const val: TLightStyle);
+procedure TgxLightSource.SetLightStyle(const val: TgxLightStyle);
 begin
   if FLightStyle <> val then
   begin
@@ -5688,7 +5685,7 @@ procedure TgxScene.SaveToFile(const fileName: string);
 var
   stream: TStream;
 begin
-  stream := CreateFileStream(fileName, fmCreate);
+  stream := TFileStream.Create(fileName, fmCreate);
   try
     SaveToStream(stream);
   finally
@@ -5713,7 +5710,7 @@ procedure TgxScene.LoadFromFile(const fileName: string);
 var
   stream: TStream;
 begin
-  stream := CreateFileStream(fileName, fmOpenRead);
+  stream := TFileStream.Create(fileName, fmOpenRead);
   try
     CheckResFileStream(stream);
     LoadFromStream(stream);
@@ -5728,7 +5725,7 @@ var
   fil: TStream;
 begin
   mem := TMemoryStream.Create;
-  fil := CreateFileStream(fileName, fmCreate);
+  fil := TFileStream.Create(fileName, fmCreate);
   try
     SaveToStream(mem);
     mem.Position := 0;
@@ -5745,7 +5742,7 @@ var
   fil: TStream;
 begin
   mem := TMemoryStream.Create;
-  fil := CreateFileStream(fileName, fmOpenRead);
+  fil := TFileStream.Create(fileName, fmOpenRead);
   try
     ObjectTextToBinary(fil, mem);
     mem.Position := 0;
@@ -6006,7 +6003,7 @@ begin
     and (FogDistance = fdDefault);
 end;
 
-procedure TgxFogEnvironment.SetFogMode(Value: TFogMode);
+procedure TgxFogEnvironment.SetFogMode(Value: TgxFogMode);
 begin
   if Value <> FFogMode then
   begin
@@ -6015,7 +6012,7 @@ begin
   end;
 end;
 
-procedure TgxFogEnvironment.SetFogDistance(const val: TFogDistance);
+procedure TgxFogEnvironment.SetFogDistance(const val: TgxFogDistance);
 begin
   if val <> FFogDistance then
   begin
@@ -7843,7 +7840,6 @@ end;
 
 // ------------------------------------------------------------------------------
 initialization
-
 // ------------------------------------------------------------------------------
 
 RegisterClasses([TgxLightSource, TgxCamera, TgxProxyObject, TgxScene, TgxDirectOpenVX, TgxRenderPoint, TgxMemoryViewer]);

@@ -128,9 +128,9 @@ begin
     case LTarget of
       ttNoShape: ;
       ttTexture1D: ;
-      ttTexture2D: glTexImage2D(GL_TEXTURE_2D, 0, TgxTexture(OwnerTexture)
-          .OpenVXTextureFormat, Width, Height, 0, TextureFormat,
-          GL_UNSIGNED_BYTE, nil);
+      ttTexture2D: glTexImage2D(GL_TEXTURE_2D, 0,
+        TgxTexture(OwnerTexture).OpenGLTextureFormat, Width, Height, 0,
+        TextureFormat, GL_UNSIGNED_BYTE, nil);
       ttTexture3D: ;
       ttTexture1DArray: ;
       ttTexture2DArray: ;

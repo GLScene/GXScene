@@ -95,7 +95,7 @@ type
     roForwardContext: force OpenGL forward context *)
   TContextOption = (roSoftwareMode, roDoubleBuffer, roStencilBuffer, roRenderToWindow, roTwoSideLighting, roStereo,
     roDestinationAlpha, roNoColorBuffer, roNoColorBufferClear, roNoSwapBuffers, roNoDepthBufferClear, roDebugContext,
-    roForwardContext, roOpenVX_ES2_Context);
+    roForwardContext, roOpenGL_ES2_Context);
   TContextOptions = set of TContextOption;
 
   // IDs for limit determination
@@ -5024,28 +5024,28 @@ begin
 end;
 
 // ------------------
-// ------------------ TxDirectOpenVX ------------------
+// ------------------ TxDirectOpenGL ------------------
 // ------------------
 
-constructor TgxDirectOpenVX.Create(AOwner: TComponent);
+constructor TgxDirectOpenGL.Create(AOwner: TComponent);
 begin
   inherited;
   ObjectStyle := ObjectStyle + [osDirectDraw];
   FBlend := False;
 end;
 
-procedure TgxDirectOpenVX.Assign(Source: TPersistent);
+procedure TgxDirectOpenGL.Assign(Source: TPersistent);
 begin
-  if Source is TgxDirectOpenVX then
+  if Source is TgxDirectOpenGL then
   begin
-    UseBuildList := TgxDirectOpenVX(Source).UseBuildList;
-    FOnRender := TgxDirectOpenVX(Source).FOnRender;
-    FBlend := TgxDirectOpenVX(Source).Blend;
+    UseBuildList := TgxDirectOpenGL(Source).UseBuildList;
+    FOnRender := TgxDirectOpenGL(Source).FOnRender;
+    FBlend := TgxDirectOpenGL(Source).Blend;
   end;
   inherited Assign(Source);
 end;
 
-procedure TgxDirectOpenVX.BuildList(var rci: TgxRenderContextInfo);
+procedure TgxDirectOpenGL.BuildList(var rci: TgxRenderContextInfo);
 begin
   if Assigned(FOnRender) then
   begin
@@ -5054,12 +5054,12 @@ begin
   end;
 end;
 
-function TgxDirectOpenVX.AxisAlignedDimensionsUnscaled: TVector;
+function TgxDirectOpenGL.AxisAlignedDimensionsUnscaled: TVector;
 begin
   Result := NullHmgPoint;
 end;
 
-procedure TgxDirectOpenVX.SetUseBuildList(const val: Boolean);
+procedure TgxDirectOpenGL.SetUseBuildList(const val: Boolean);
 begin
   if val <> FUseBuildList then
   begin
@@ -5071,12 +5071,12 @@ begin
   end;
 end;
 
-function TgxDirectOpenVX.Blended: Boolean;
+function TgxDirectOpenGL.Blended: Boolean;
 begin
   Result := FBlend;
 end;
 
-procedure TgxDirectOpenVX.SetBlend(const val: Boolean);
+procedure TgxDirectOpenGL.SetBlend(const val: Boolean);
 begin
   if val <> FBlend then
   begin
@@ -6134,7 +6134,7 @@ begin
     locOptions := locOptions + [rcoStereo];
   if roDebugContext in ContextOptions then
     locOptions := locOptions + [rcoDebug];
-  if roOpenVX_ES2_Context in ContextOptions then
+  if roOpenGL_ES2_Context in ContextOptions then
     locOptions := locOptions + [rcoOGL_ES];
   if roNoColorBuffer in ContextOptions then
     locColorBits := 0
@@ -7546,17 +7546,17 @@ var
       glReadPixels(0, 0, width, height, GL_RGBA, GL_UNSIGNED_BYTE, buf);
       case aTexture.MinFilter of
         miNearest, miLinear:
-          glTexImage2d(target, 0, aTexture.OpenVXTextureFormat, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, buf);
+          glTexImage2d(target, 0, aTexture.OpenGLTextureFormat, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, buf);
       else
         if (target = GL_TEXTURE_2D) then
         begin
           // hardware-accelerated when supported
           glTexParameteri(target, GL_GENERATE_MIPMAP_SGIS, GL_TRUE);
-          glTexImage2d(target, 0, aTexture.OpenVXTextureFormat, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, buf);
+          glTexImage2d(target, 0, aTexture.OpenGLTextureFormat, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, buf);
         end
         else
         begin
-          glTexImage2d(target, 0, aTexture.OpenVXTextureFormat, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, buf);
+          glTexImage2d(target, 0, aTexture.OpenGLTextureFormat, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, buf);
           glGenerateMipmap(target);
         end;
       end;
@@ -7842,7 +7842,7 @@ end;
 initialization
 // ------------------------------------------------------------------------------
 
-RegisterClasses([TgxLightSource, TgxCamera, TgxProxyObject, TgxScene, TgxDirectOpenVX, TgxRenderPoint, TgxMemoryViewer]);
+RegisterClasses([TgxLightSource, TgxCamera, TgxProxyObject, TgxScene, TgxDirectOpenGL, TgxRenderPoint, TgxMemoryViewer]);
 
 // preparation for high resolution timer
 QueryPerformanceFrequency(vCounterFrequency);

@@ -500,7 +500,7 @@ type
     function AllocateHandle: Cardinal;
     function IsHandleAllocated: Boolean;
     // Returns OpenGL texture format corresponding to current options.
-    function OpenVXTextureFormat: Integer;
+    function OpenGLTextureFormat: Integer;
     //Returns if of float data type
     function IsFloatType: Boolean;
     // Is the texture enabled? Always equals to 'not Disabled'.
@@ -2667,7 +2667,7 @@ begin
   Result := IsFloatFormat(TextureFormatEx);
 end;
 
-function TgxTexture.OpenVXTextureFormat: Integer;
+function TgxTexture.OpenGLTextureFormat: Integer;
 var
   texComp: TgxTextureCompression;
 begin

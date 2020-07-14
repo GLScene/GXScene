@@ -1,0 +1,56 @@
+package GXScene_DT;
+
+{$R *.res}
+{$IFDEF IMPLICITBUILDING This IFDEF should not be used by users}
+{$ALIGN 8}
+{$ASSERTIONS ON}
+{$BOOLEVAL OFF}
+{$DEBUGINFO OFF}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS ON}
+{$LOCALSYMBOLS ON}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION OFF}
+{$OVERFLOWCHECKS OFF}
+{$RANGECHECKS OFF}
+{$REFERENCEINFO ON}
+{$SAFEDIVIDE OFF}
+{$STACKFRAMES ON}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST OFF}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $400000}
+{$DEFINE DEBUG}
+{$ENDIF IMPLICITBUILDING}
+{$DESCRIPTION 'GLScene FMX OpenGL 3D library'}
+{$RUNONLY}
+{$IMPLICITBUILD ON}
+
+requires
+  rtl,
+  designide,
+  fmx,
+  GXScene_RT;
+
+contains
+  Design.FLayoutEditor in '..\Source\Design.FLayoutEditor.pas',
+  Design.FInfo in '..\Source\Design.FInfo.pas',
+  Design.FRTextureEdit in '..\Source\Design.FRTextureEdit.pas',
+  Design.FXCollectionEditor in '..\Source\Design.FXCollectionEditor.pas',
+  Design.FLibMaterialPicker in '..\Source\Design.FLibMaterialPicker.pas',
+  Design.FRMaterialPreview in '..\Source\Design.FRMaterialPreview.pas',
+  Design.FRFaceEditor in '..\Source\Design.FRFaceEditor.pas',
+  Design.FRColorEditor in '..\Source\Design.FRColorEditor.pas',
+  Design.FPlugInManagerEditor in '..\Source\Design.FPlugInManagerEditor.pas',
+  Design.FMaterialEditorForm in '..\Source\Design.FMaterialEditorForm.pas',
+  Design.FShaderMemo in '..\Source\Design.FShaderMemo.pas',
+  Design.FShaderUniformEditor in '..\Source\Design.FShaderUniformEditor.pas',
+  Design.FSkinEditor in '..\Source\Design.FSkinEditor.pas',
+  Design.FSceneEditor in '..\Source\Design.FSceneEditor.pas',
+  Design.SceneRegister in '..\Source\Design.SceneRegister.pas',
+  Design.XCollectionRegister in '..\Source\Design.XCollectionRegister.pas';
+
+end.

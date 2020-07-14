@@ -139,7 +139,7 @@ type
     CollisionStates: TCollisionStates;
     ArrowLine1, ArrowLine2, ArrowLine3, ArrowLine4, ArrowLine5,
       ArrowLine6: TgxArrowLine;
-    dirGl: TgxDirectOpenVX;
+    dirGl: TgxDirectOpenGL;
     tickCount: Int64;
     oldPosition: TVector;
     FGravityEnabled: boolean;
@@ -642,7 +642,7 @@ begin
   ArrowLine6 := TgxArrowLine.Create(nil);
   setupArrow(ArrowLine6, TColors.Silver);
 
-  dirGl := TgxDirectOpenVX.Create(nil);
+  dirGl := TgxDirectOpenGL.Create(nil);
   dirGl.OnRender := RenderArrowLines;
 
   oldPosition := OwnerBaseSceneObject.Position.AsVector;

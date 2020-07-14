@@ -164,7 +164,7 @@ type
     Mx, My: Integer;
     Rx, Ry: Integer;
     dglEnable, dglDisable, dgtEnable, dgtDisable, dgcEnable, dgcDisable,
-      dglaEnable, dglaDisable, dgliEnable, dgliDisable: TgxDirectOpenVX;
+      dglaEnable, dglaDisable, dgliEnable, dgliDisable: TgxDirectOpenGL;
     LastMousePos: TVector;
     ObjDimensions: TVector;
     FOnBeforeSelect: TgxGizmoAcceptEvent;
@@ -339,17 +339,17 @@ begin
   _GZORootAxisLabel := _GZORootHelpers.AddNewChild(TgxDummyCube);
   _GZORootVisibleInfoLabels := _GZORootHelpers.AddNewChild(TgxDummyCube);
 
-  DglDisable := TgxDirectOpenVX(_GZORootLines.AddNewChild(TgxDirectOpenVX));
+  DglDisable := TgxDirectOpenGL(_GZORootLines.AddNewChild(TgxDirectOpenGL));
   DglDisable.OnRender := DirectGlDisable;
-  DgtDisable := TgxDirectOpenVX(_GZORootTorus.AddNewChild(TgxDirectOpenVX));
+  DgtDisable := TgxDirectOpenGL(_GZORootTorus.AddNewChild(TgxDirectOpenGL));
   DgtDisable.OnRender := DirectGlDisable;
-  DgcDisable := TgxDirectOpenVX(_GZORootCubes.AddNewChild(TgxDirectOpenVX));
+  DgcDisable := TgxDirectOpenGL(_GZORootCubes.AddNewChild(TgxDirectOpenGL));
   DgcDisable.OnRender := DirectGlDisable;
-  DglaDisable := TgxDirectOpenVX
-    (_GZORootAxisLabel.AddNewChild(TgxDirectOpenVX));
+  DglaDisable := TgxDirectOpenGL
+    (_GZORootAxisLabel.AddNewChild(TgxDirectOpenGL));
   DglaDisable.OnRender := DirectGlDisable;
-  DgliDisable := TgxDirectOpenVX(_GZORootVisibleInfoLabels.AddNewChild
-    (TgxDirectOpenVX));
+  DgliDisable := TgxDirectOpenGL(_GZORootVisibleInfoLabels.AddNewChild
+    (TgxDirectOpenGL));
   DgliDisable.OnRender := DirectGlDisable;
 
   with _GZOBoundingcube.Material do
@@ -658,16 +658,16 @@ begin
     Text := '';
   end;
 
-  DglEnable := TgxDirectOpenVX(_GZORootLines.AddNewChild(TgxDirectOpenVX));
+  DglEnable := TgxDirectOpenGL(_GZORootLines.AddNewChild(TgxDirectOpenGL));
   DglEnable.OnRender := DirectGlEnable;
-  DgtEnable := TgxDirectOpenVX(_GZORootTorus.AddNewChild(TgxDirectOpenVX));
+  DgtEnable := TgxDirectOpenGL(_GZORootTorus.AddNewChild(TgxDirectOpenGL));
   DgtEnable.OnRender := DirectGlEnable;
-  DgcEnable := TgxDirectOpenVX(_GZORootCubes.AddNewChild(TgxDirectOpenVX));
+  DgcEnable := TgxDirectOpenGL(_GZORootCubes.AddNewChild(TgxDirectOpenGL));
   DgcEnable.OnRender := DirectGlEnable;
-  DglaEnable := TgxDirectOpenVX(_GZORootAxisLabel.AddNewChild(TgxDirectOpenVX));
+  DglaEnable := TgxDirectOpenGL(_GZORootAxisLabel.AddNewChild(TgxDirectOpenGL));
   DglaEnable.OnRender := DirectGlEnable;
-  DgliEnable := TgxDirectOpenVX(_GZORootVisibleInfoLabels.AddNewChild
-    (TgxDirectOpenVX));
+  DgliEnable := TgxDirectOpenGL(_GZORootVisibleInfoLabels.AddNewChild
+    (TgxDirectOpenGL));
   DgliEnable.OnRender := DirectGlEnable;
 
   _GZObaseGizmo.Visible := False;

@@ -235,11 +235,10 @@ type
     FUIRootScale: TgxBaseSceneObject; // for Scale
     FUIRootAxisLabel: TgxBaseSceneObject;
     FUIRootVisibleInfoLabels: TgxBaseSceneObject;
-    FInterfaceRender: TgxDirectOpenVX;
-    FInternalRender: TgxDirectOpenVX;
+    FInterfaceRender: TgxDirectOpenGL;
+    FInternalRender: TgxDirectOpenGL;
     FUISelectLineX, FUISelectLineY, FUISelectLineZ: TgxGizmoExUILines;  //  For None (Select)
-    //IC- Invisible Control
-    //For Move
+    //IC- Invisible Contro, for move
     FUIICMovementLineX, FUIICMovementLineY, FUIICMovementLineZ, FUIICMovementLineXY, FUIICMovementLineXZ, FUIICMovementLineYZ: TgxGizmoExUIFrustrum;
     FUIMovementArrowX, FUIMovementArrowY, FUIMovementArrowZ: TgxGizmoExUIArrowLine; // For Move
     FUIMovementLineX, FUIMovementLineY, FUIMovementLineZ, FUIMovementLineXY, FUIMovementLineXZ, FUIMovementLineYZ: TgxGizmoExUILines; // For Move
@@ -252,7 +251,7 @@ type
     FUIICRotateSphereXY: TgxGizmoExUISphere;
     FUIRotateAxisLabelX, FUIRotateAxisLabelY, FUIRotateAxisLabelZ: TgxGizmoExUIFlatText;
     //ForScale
-    FUIScaleArrowX, FUIScaleArrowY, FUIScaleArrowZ: TgxGizmoExUISphere; // For Scale
+    FUIScaleArrowX, FUIScaleArrowY, FUIScaleArrowZ: TgxGizmoExUISphere;
     FUIScaleLineX, FUIScaleLineY, FUIScaleLineZ, FUIScaleLineXY, FUIScaleLineYZ, FUIScaleLineXZ: TgxGizmoExUILines;
     FUIICScaleLineX, FUIICScaleLineY, FUIICScaleLineZ, FUIICScaleLineXY, FUIICScaleLineXZ, FUIICScaleLineYZ, FUIICScaleLineXYZ: TgxGizmoExUIFrustrum;
     FUIScalePlaneXY, FUIScalePlaneXZ, FUIScalePlaneYZ, FUIScalePlaneXYZ: TgxGizmoExUIPolyGon; // For Move
@@ -696,7 +695,6 @@ begin
 end;
 
 //------------------------------------------------------------------------------
-
 constructor TgxGizmoEx.Create(aOwner: TComponent);
 var
   I: Integer;
@@ -721,13 +719,13 @@ begin
   FUIBaseGizmo := TgxDummyCube.Create(Self);
 
   //BoundingBoxes...
-  FInternalRender := TgxDirectOpenVX(FUIBaseGizmo.AddNewChild(TgxDirectOpenVX));
+  FInternalRender := TgxDirectOpenGL(FUIBaseGizmo.AddNewChild(TgxDirectOpenGL));
   FInternalRender.OnRender := InternalRender;
 
   FUIRootHelpers := TgxDummyCube(FUIBaseGizmo.AddNewChild(TgxDummyCube));
 
   //Canvas...
-  FInterfaceRender := TgxDirectOpenVX(FUIBaseGizmo.AddNewChild(TgxDirectOpenVX));
+  FInterfaceRender := TgxDirectOpenGL(FUIBaseGizmo.AddNewChild(TgxDirectOpenGL));
   FInterfaceRender.OnRender := InterfaceRender;
 
   FSelectedObjects := TgxPickList.Create(psMinDepth);
@@ -781,8 +779,6 @@ begin
 
 
   //For movement
-
-
   FUIMovementLineX := TgxGizmoExUILines(FUIRootMovement.addnewChild(TgxGizmoExUILines));
   with FUIMovementLineX do
   begin
@@ -1044,8 +1040,6 @@ begin
   end;
 
   //Rotate
-
-
   FUIRotateLineXY := TgxGizmoExUILines(FUIRootRotate.addnewChild(TgxGizmoExUILines));
   with FUIRotateLineXY do
   begin
@@ -1114,7 +1108,7 @@ begin
   with FUIRotateLineX do
   begin
     Options := [loUseNodeColorForLines];
-    //Для исправления проблем с прозрачностью
+    // To fix transparency issues
     lineColor.Alpha := 0.1;
     Nodecolor.Color := clrred;
     Nodecolor.Alpha := 0.1;
@@ -1197,7 +1191,7 @@ begin
   with FUIRotateLineY do
   begin
     Options := [loUseNodeColorForLines];
-    //Для исправления проблем с прозрачностью
+    // To fix transparency issues
     lineColor.Alpha := 0.1;
     Nodecolor.Color := clrLime;
     Nodecolor.Alpha := 0.1;
@@ -1401,7 +1395,6 @@ begin
   end;
 
   //for Scale
-
   FUIScaleLineX := TgxGizmoExUILines(FUIRootScale.addnewChild(TgxGizmoExUILines));
   with FUIScaleLineX do
   begin
@@ -1737,7 +1730,6 @@ begin
   end;
 
   //For Axis
-
   FUIAxisLabelX := TgxGizmoExUIFlatText(FUIRootAxisLabel.AddNewChild(TgxGizmoExUIFlatText));
   with FUIAxisLabelX do
   begin
@@ -1985,10 +1977,15 @@ end;
 
 procedure TgxGizmoEx.AssignPickList(aList: TgxPickList; RemoveObj: Boolean = False);
 
-  function WithOutGizmoElements(obj: TgxBasesceneobject): Boolean;
+  function WithOutGizmoElements(obj: TgxBaseSceneObject): Boolean;
   begin
-    if (obj <> FInterfaceRender) and
-      (obj <> FInternalRender) and not (obj is TgxGizmoExUISphere) and not (obj is TgxGizmoExUIPolyGon) and not (obj is TgxGizmoExUITorus) and not (obj is TgxGizmoExUIFrustrum) and not (obj is TgxGizmoExUIArrowLine) and not (obj is TgxGizmoExUILines) and not (obj is TgxGizmoExUIDisk) and not (obj is TgxGizmoExUIFlatText) and not (CheckObjectInExcludeList(obj)) and not (CheckClassNameInExcludeList(obj)) then
+    if (obj <> FInterfaceRender) and (obj <> FInternalRender) and
+      not(obj is TgxGizmoExUISphere) and not(obj is TgxGizmoExUIPolygon) and
+      not(obj is TgxGizmoExUITorus) and not(obj is TgxGizmoExUIFrustrum) and
+      not(obj is TgxGizmoExUIArrowLine) and not(obj is TgxGizmoExUILines) and
+      not(obj is TgxGizmoExUIDisk) and not(obj is TgxGizmoExUIFlatText) and
+      not(CheckObjectInExcludeList(obj)) and
+      not(CheckClassNameInExcludeList(obj)) then
       Result := True
     else
       Result := False;
@@ -1999,18 +1996,17 @@ var
 begin
   for I := 0 to aList.Count - 1 do
     with aList do
-      if WithOutGizmoElements(TgxBaseSceneObject(Hit[I])) then
+      if WithOutGizmoElements(TgxBaseSceneObject(hit[I])) then
         if not RemoveObj then
         begin
-          if (Hit[I] <> nil) and (FSelectedObjects.FindObject(Hit[I]) = -1) then
-            FSelectedObjects.AddHit(Hit[I], SubObjects[I], NearDistance[I], FarDistance[I]);
+          if (hit[I] <> nil) and (FSelectedObjects.FindObject(hit[I]) = -1) then
+            FSelectedObjects.AddHit(hit[I], SubObjects[I], NearDistance[I],
+              FarDistance[I]);
         end
-        else
-        if (Hit[I] <> nil) and (FSelectedObjects.FindObject(Hit[I]) <> -1) then
-          FSelectedObjects.Delete(FSelectedObjects.FindObject(Hit[I]));
+        else if (hit[I] <> nil) and (FSelectedObjects.FindObject(hit[I]) <> -1)
+        then
+          FSelectedObjects.Delete(FSelectedObjects.FindObject(hit[I]));
 end;
-
-
 
 procedure TgxGizmoEx.InterfaceRender(Sender: TObject; var rci: TgxRenderContextInfo);
 
@@ -2116,7 +2112,6 @@ procedure TgxGizmoEx.InternalRender(Sender: TObject; var rci: TgxRenderContextIn
   end;
 
   //test#12 result is positive, but only for 2d
-  //
   procedure ShowText(const Text: UnicodeString; Position: Tvector; Scale: TVector; Color: Tvector);
   var
     FLayout: TgxTextLayout;
@@ -2853,7 +2848,6 @@ begin
 end;
 
 //------------------------------------------------------------------------------
-
 procedure TgxGizmoEx.SetLabelFont(const Value: TgxCustomBitmapFont);
 begin
   if FLabelFont <> Value then
@@ -3017,7 +3011,6 @@ begin
 end;
 
 //------------------------------------------------------------------------------
-
 function TgxGizmoEx.CheckObjectInExcludeList(const Obj: TgxBaseSceneObject): Boolean;
 var
   I: Integer;
@@ -3061,11 +3054,8 @@ var
   v: TVector;
   InvertedY: Integer;
 begin
-
   InvertedY := Round(Viewer.Height) - Y;
-
   SetVector(v, X, InvertedY, 0);
-
   case selAxis of
     gaX: Viewer.Buffer.ScreenVectorIntersectWithPlaneXZ(v, FUIRootHelpers.AbsolutePosition.Y, Result);
     gaY: Viewer.Buffer.ScreenVectorIntersectWithPlaneYZ(v, FUIRootHelpers.AbsolutePosition.X, Result);
@@ -3692,7 +3682,6 @@ var
     end;
 
     SubtractVector(vec1, vec2);
-
     if (VectorLength(Vec1) > 5) then
       Exit;// prevents NAN problems
 
@@ -3723,21 +3712,19 @@ var
       with TgxBaseSceneObject(FSelectedObjects.Hit[t]) do
       begin
         IncludeCh := True;
-
         if not CanChangeWithChildren and (parent <> RootObjects) and (FSelectedObjects.Count - 1 > 0) then
           IncludeCh := FindParent(parent);
 
         FUIRootScale.Scale.Translate(vec1);
-
         if IncludeCh then
         begin
-         { case ord(ReferenceCoordSystem) of
+         (* case ord(ReferenceCoordSystem) of
                0:begin
                 vec1:=LocalToAbsolute(vec1);
                 absoluteScale:=VectorAdd(absolutescale,vec1);
                end;
                1:Scale.Translate(vec1);
-          end; }
+          end; *)
           Scale.Translate(vec1);
         end;
       end;
@@ -3751,9 +3738,9 @@ var
   {$ENDIF}
   begin
   {$IFDEF MSWINDOWS}
-    //Процедура для перевода курсора из начала в конец
-    //без потерь операций над обьектом
-    GetWindowRect(GetDesktopWindow, R);
+(* Procedure for moving the cursor from beginning to end
+      without loss of operations on the object *)
+   GetWindowRect(GetDesktopWindow, R);
     { TODO : E2003 Undeclared identifier: 'Handle' }
     (*GetWindowRect(viewer.Handle, VR);*)
     GLGetCursorPos(cp);
@@ -3765,7 +3752,7 @@ var
       else
       begin
         lastMousePos := MouseWorldPos(X, r.Top + 3 - vr.Top);
-        //введено что бы обьект не дергался
+        // entered so that the object does not twitch
         mousepos := lastMousePos;
       end;
     end;
@@ -4004,7 +3991,7 @@ begin
   if operation = gopNone then
   begin
     pick := InternalGetPickedObjects(X - 1, Y - 1, X + 1, Y + 1, 8);
-    //очистка списка если кликнули в пустоту
+   // clear the list if clicked into the void
     if not FCanAddObjToSelectionList and not FCanRemoveObjFromSelectionList and (pick.Count = 0) then
       ClearSelection;
 
@@ -4021,7 +4008,6 @@ begin
 end;
 
 //------------------------------------------------------------------------------
-
 procedure TgxGizmoEx.UpdateGizmo;
 var
   d: Single;
@@ -4032,7 +4018,7 @@ begin
      not Assigned(RootObjects) or
      not Assigned(Viewer)      then
     Exit;
-    
+
   if FSelectedObjects.Count - 1 < 0 then
   begin
     FUIRootHelpers.Visible := False;
@@ -4046,7 +4032,7 @@ begin
       OnUpdate(self);
 
     v := VectorMake(0, 0, 0);
-    //устанавливаем гизмо в нужную позицию!
+    // set the gizmo to the desired position!
     for  I := 0 to FSelectedObjects.Count - 1 do
       VectorAdd(v, TgxBaseSceneObject(FSelectedObjects.Hit[I]).AbsolutePosition, v);
 
@@ -4108,20 +4094,16 @@ begin
     FUIRotateAxisLabelY.StructureChanged;
     FUIRotateAxisLabelZ.PointTo(Viewer.Camera.Position.AsVector, Viewer.Camera.Up.AsVector);
     FUIRotateAxisLabelZ.StructureChanged;
-
     FUIRootRotate.Scale.AsVector := VectorMake(d, d, d);
   end;
-
   if not moving and FUIRootScale.Visible then
     FUIRootScale.Scale.AsVector := VectorMake(d, d, d);
 
   if FUIRootVisibleInfoLabels.Visible then
   begin
     UpdateVisibleInfoLabels;
-
     FUIRootVisibleInfoLabels.AbsoluteDirection := FUIBaseGizmo.AbsoluteDirection;
     FUIRootVisibleInfoLabels.AbsoluteUp := FUIBaseGizmo.AbsoluteUp;
-
     FUIVisibleInfoLabels.ModulateColor.Color := FVisibleInfoLabelsColor.Color;
     FUIVisibleInfoLabels.PointTo(Viewer.Camera.Position.AsVector, Viewer.Camera.Up.AsVector);
     FUIVisibleInfoLabels.StructureChanged;
@@ -4216,7 +4198,7 @@ begin
   UpdateGizmo;
 end;
 
-////////////////////////////////////////////////////////////
+(*******************************************************************)
 
 procedure TgxGizmoExObjectItem.AssignFromObject(const AObject: TgxBaseSceneObject; AssignAndRemoveObj: Boolean = False);
 begin
@@ -4312,7 +4294,9 @@ begin
   FOldMatrix := Value;
 end;
 
-{ TgxGizmoExUndoCollection }
+//------------------------------------
+// TgxGizmoExUndoCollection
+//------------------------------------
 
 function TgxGizmoExObjectCollection.Add: TgxGizmoExObjectItem;
 begin
@@ -4360,7 +4344,7 @@ begin
     GetItems(I).DoUndo;
 end;
 
-/////////////////////////////////////////////////////////////
+(*****************************************************)
 
 constructor TgxGizmoExActionHistoryItem.Create(AOwner: TCollection);
 begin
@@ -4386,7 +4370,9 @@ begin
     FGizmoObjectCollection := aValue;
 end;
 
-{ TgxGizmoExUndoCollection }
+//----------------------------------------
+// TgxGizmoExUndoCollection
+//----------------------------------------
 
 constructor TgxGizmoExActionHistoryCollection.Create(AOwner: TPersistent; ItemClass: TCollectionItemClass);
 begin
@@ -4471,7 +4457,6 @@ begin
     for I := 0 to objs.Count - 1 do
       GizmoObjectCollection.Add.AssignFromObject(TgxBaseSceneObject(objs.Hit[I]));
   end;
-
 end;
 
 procedure TgxGizmoExActionHistoryCollection.AddObject(obj: TObject);
@@ -4496,9 +4481,7 @@ begin
           GizmoTmpRoot := self.GizmoTmpRoot;
           AssignFromObject(TgxBaseSceneObject(objs.Hit[I]), True);
         end;
-
   objs.Clear;
 end;
-
 
 end.

@@ -20,7 +20,7 @@ uses
 
   GXS.VectorFileObjects,
   GXS.Material,
-  Formats.FileMD3;
+  Scene.Formats.FileMD3;
 
 type
   (* This class is used to extract the tag transform information
@@ -57,7 +57,6 @@ procedure LoadQ3Skin(FileName: string; Actor: TgxActor);
 
 // ---------------------------------------------------------------------------
 implementation
-
 // ---------------------------------------------------------------------------
 
 procedure LoadQ3Anims(Animations: TgxActorAnimations; FileName: string;

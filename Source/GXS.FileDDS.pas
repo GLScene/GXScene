@@ -41,7 +41,7 @@ type
     procedure SaveToFile(const filename: string); override;
     procedure LoadFromStream(stream: TStream); override;
     procedure SaveToStream(stream: TStream); override;
-    { Assigns from any Texture. }
+    // Assigns from any Texture.
     procedure AssignFromTexture(textureContext: TgxContext; const textureHandle: GLuint; textureTarget: TgxTextureTarget;
       const CurrentFormat: Boolean; const intFormat: TgxInternalFormat); reintroduce;
   end;
@@ -320,9 +320,6 @@ begin
   end;
 end;
 
-// AssignFromTexture
-//
-
 procedure TgxDDSImage.AssignFromTexture(textureContext: TgxContext; const textureHandle: GLuint;
   textureTarget: TgxTextureTarget; const CurrentFormat: Boolean; const intFormat: TgxInternalFormat);
 var
@@ -556,15 +553,14 @@ begin
   end;
 end;
 
-// Capabilities
-//
-
 class function TgxDDSImage.Capabilities: TgxDataFileCapabilities;
 begin
   Result := [dfcRead, dfcWrite];
 end;
 
+//---------------------------------------
 initialization
+//---------------------------------------
 
 RegisterRasterFormat('dds', 'Direct Draw Surface', TgxDDSImage);
 

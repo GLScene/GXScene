@@ -1,10 +1,10 @@
 (* ******************************************
-  *                                          *
-  * Graphic Scene Engine, http://glscene.org *
-  *                                          *
-  ******************************************* *)
+ *                                          *
+ * Graphic Scene Engine, http://glscene.org *
+ *                                          *
+ ******************************************* *)
 
-unit Formats.FileVRMLParser;
+unit Scene.Formats.FileVRMLParser;
 
 (* VRML file format parser *)
 
@@ -148,9 +148,8 @@ type
       write FAllowUnknownNodes;
   end;
 
-  // ---------------------------------------------------------------------------
+// ---------------------------------------------------------------------------
 implementation
-
 // ---------------------------------------------------------------------------
 
 function CreateVRMLTokenList(Text: String): TStringList;

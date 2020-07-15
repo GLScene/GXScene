@@ -4,7 +4,7 @@
   *                                          *
   ******************************************* *)
 
-unit Formats.File3DSUtils;
+unit Scene.Formats.File3DSUtils;
 
 (*
    Utility functions for the universal 3DS file reader and writer (TFile3DS).
@@ -22,9 +22,9 @@ uses
   System.Classes,
 
   Scene.Strings,
-  Formats.File3DSConst,
-  Formats.File3DS,
-  Formats.File3DSTypes;
+  Scene.Formats.File3DSConst,
+  Scene.Formats.File3DS,
+  Scene.Formats.File3DSTypes;
 
 // functions to retrieve global settings of a specific 3DS database
 function GetAtmosphere(const Source: TFile3DS; var DB: TDatabase3DS): TAtmosphere3DS;

@@ -4,7 +4,7 @@
 *                                          *
 ********************************************)
 
-unit Formats.FileMD2;
+unit Scene.Formats.FileMD2;
 
 (* MD2 file loader *)
 

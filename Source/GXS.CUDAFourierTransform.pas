@@ -51,9 +51,9 @@ uses
   System.SysUtils,
   FMX.Dialogs,
 
-  Scene.VectorTypes,
   Scene.Import.CUDAAPI,
   Scene.Import.CUDARunTime,
+  Scene.VectorTypes,
   Scene.Strings;
 
 

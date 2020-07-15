@@ -20,12 +20,12 @@ uses
   Scene.VectorLists,
   Scene.VectorTypes,
   Scene.VectorRecTypes,
+  Scene.Spline,
 
   GXS.Objects,
   GXS.MultiPolygon,
   GXS.Coordinates,
   GXS.Color,
-  Scene.Spline,
   GXS.SpaceText,
   GXS.VectorFileObjects;
 

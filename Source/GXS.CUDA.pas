@@ -6,7 +6,7 @@
 
 unit GXS.CUDA;
 
-(* CUDA Integface *)
+(* CUDA Interface *)
 
 interface
 
@@ -24,10 +24,10 @@ uses
 
   Scene.Import.CUDAApi,
   Scene.Import.CUDARuntime,
+  Scene.Import.CUDAParser,
 
   GXS.Context,
   GXS.Graphics,
-  GXS.CUDAParser,
   GXS.CUDAFourierTransform,
   GXS.CUDACompiler,
   GXS.CUDAContext,
@@ -65,7 +65,6 @@ type
     function GetItem(const i: Integer): TCUDAComponent;
     function GetItemsCount: Integer;
   protected
-    
     FStatus: TCUresult;
     FChanges: TCUDAChanges;
     function GetContext: TCUDAContext; override;
@@ -77,7 +76,6 @@ type
     procedure SetName(const NewName: TComponentName); override;
     function GetIsAllocated: Boolean; virtual; abstract;
   public
-    
     destructor Destroy; override;
     procedure CuNotifyChange(AChange: TCUDAChange); virtual;
 
@@ -86,13 +84,12 @@ type
     function HasParent: Boolean; override;
     function GetItemByName(const name: string): TCUDAComponent;
     function MakeUniqueName(const BaseName: string): string;
-
     property Master: TCUDAComponent read FMaster write SetMaster;
     property Context: TCUDAContext read GetContext;
     property Items[const i: Integer]: TCUDAComponent read GetItem;
     property ItemsCount: Integer read GetItemsCount;
     property Status: TCUresult read FStatus;
-    { Return true if handle is allocated (i.e. component has device object) }
+    // Return true if handle is allocated (i.e. component has device object)
     property IsAllocated: Boolean read GetIsAllocated;
   end;
 
@@ -106,7 +103,6 @@ type
 
   TCUDAModule = class(TCUDAComponent)
   private
-    
     FHandle: PCUmodule;
     FCode: TStringList;
     FCodeType: TgxSCUDACompilerOutput;
@@ -117,7 +113,6 @@ type
     function GetKernelTexture(const AName: string): TCUDATexture;
     function GetKernelConstant(const AName: string): TCUDAConstant;
   protected
-    
     procedure AllocateHandles; override;
     procedure DestroyHandles; override;
     procedure OnChangeCode(Sender: TObject);
@@ -125,16 +120,13 @@ type
     function GetContext: TCUDAContext; override;
     function GetIsAllocated: Boolean; override;
   public
-    
     constructor Create(AOwner: TComponent); override;
     destructor Destroy; override;
     procedure Assign(Source: TPersistent); override;
-
     procedure LoadFromFile(const AFilename: string);
     procedure LoadFromSource;
     procedure Unload;
     procedure LoadAndCompile;
-
     property Context: TCUDAContext read GetContext;
     property CodeType: TgxSCUDACompilerOutput read FCodeType;
     property KernelFunction[const AName: string]: TCUDAFunction
@@ -144,21 +136,16 @@ type
     property KernelConstant[const AName: string]: TCUDAConstant
       read GetKernelConstant;
   published
-    
+
     property Code: TStringList read FCode write SetCode;
     property Compiler: TgxSCUDACompiler read FCompiler write SetCompiler;
   end;
 
   TgxResourceType = (rtTexture, rtBuffer);
 
-  { Abstract class of graphic resources. }
-
-  // TCUDAGraphicResource
-  //
-
+  // Abstract class of graphic resources.
   TCUDAGraphicResource = class(TCUDAComponent)
   protected
-    { Protected declaration }
     FHandle: array [0 .. 7] of PCUgraphicsResource;
     FMapping: TCUDAMapping;
     FResourceType: TgxResourceType;
@@ -195,7 +182,6 @@ type
 
   TCUDAMemData = class(TCUDAComponent)
   private
-    
     FData: TCUdeviceptr;
     FMappedMemory: TCUdeviceptr;
     FHandle: PCUarray;
@@ -220,33 +206,28 @@ type
     function GetData: TCUdeviceptr;
     function GetArrayHandle: PCUarray;
   protected
-    { Protected declaration }
     procedure AllocateHandles; override;
     procedure DestroyHandles; override;
     function GetIsAllocated: Boolean; override;
   public
-    
     constructor Create(AOwner: TComponent); override;
     destructor Destroy; override;
     procedure CuNotifyChange(AChange: TCUDAChange); override;
-    { Map device and array memory to host or host memory to device.
+    (* Map device and array memory to host or host memory to device.
        Mapping is necessary for modifying device data.
        When mapped host memory - it can be accessed in device side
-       via MappedHostAddress. }
+       via MappedHostAddress. *)
     procedure Map(const AFlags: TCUDAMemMapFlags = []);
-    { Done mapping operation. }
+    // Done mapping operation.
     procedure UnMap;
-
     function Data<EType>(X: Integer): GCUDAHostElementAccess<EType>; overload;
     function Data<EType>(X, Y: Integer): GCUDAHostElementAccess<EType>; overload;
     function Data<EType>(X, Y, Z: Integer): GCUDAHostElementAccess<EType>; overload;
-
-    { Fill device data }
+    // Fill device data
     procedure FillMem(const Value);
-
     procedure CopyTo(const ADstMemData: TCUDAMemData); overload;
     procedure CopyTo(const AGLImage: TgxImage); overload;
-    { Copy data to Graphic resource. }
+    // Copy data to Graphic resource.
     procedure CopyTo(const AGLGraphic: TCUDAGraphicResource;
       aAttr: string = ''); overload;
     procedure CopyFrom(const ASrcMemData: TCUDAMemData); overload;
@@ -255,7 +236,6 @@ type
       aAttr: string = ''); overload;
     procedure SubCopyTo(const ADstMemData: TCUDAMemData;
       ASrcXYZ, ADstXYZ, ASizes: IntElement.TVector3);
-
     property ElementSize: Integer read FElementSize;
     property DataSize: Integer read FDataSize;
     property Pitch: Cardinal read fPitch;
@@ -263,7 +243,6 @@ type
     property MappedMemoryAddress: TCUdeviceptr read FMappedMemory;
     property ArrayHandle: PCUarray read GetArrayHandle;
   published
-    
     property Width: Integer read fWidth write SetWidth default 256;
     property Height: Integer read fHeight write SetHeight default 0;
     property Depth: Integer read fDepth write SetDepth default 0;
@@ -275,12 +254,8 @@ type
       default cnOne;
   end;
 
-  // TCUDAUniform
-  //
-
   TCUDAUniform = class(TCUDAComponent)
   protected
-    { Protected declaration }
     FHandle: TCUdeviceptr;
     FSize: Cardinal;
     FKernelName: string;
@@ -294,7 +269,6 @@ type
     procedure SetSize(const AValue: Cardinal);
     procedure SetRef(AValue: Boolean);
     procedure SetDefined(AValue: Boolean);
-
     property KernelName: string read FKernelName write SetKernelName;
     property DataType: TCUDAType read FType write SetType;
     property CustomType: string read FCustomType write SetCustomType;
@@ -302,26 +276,19 @@ type
     property Reference: Boolean read FRef write SetRef;
     function GetIsAllocated: Boolean; override;
   public
-    
     constructor Create(AOwner: TComponent); override;
     destructor Destroy; override;
     property IsValueDefined: Boolean read FDefined write SetDefined;
   end;
 
-
-  // TCUDAConstant
-  //
-
   TCUDAConstant = class(TCUDAUniform)
   protected
-    { Protected declaration }
     procedure AllocateHandles; override;
     procedure DestroyHandles; override;
     function GetDeviceAddress: TCUdeviceptr;
   public
     property DeviceAddress: TCUdeviceptr read GetDeviceAddress;
   published
-    
     property KernelName;
     property DataType;
     property CustomType;
@@ -329,21 +296,13 @@ type
     property Reference;
   end;
 
-  // TCUDAFuncParam
-  //
-
   TCUDAFuncParam = class(TCUDAUniform)
-  private
-    
   protected
-    { Protected declaration }
     procedure AllocateHandles; override;
     procedure DestroyHandles; override;
   public
-    
     constructor Create(AOwner: TComponent); override;
   published
-    
     property KernelName;
     property DataType;
     property CustomType;
@@ -353,7 +312,6 @@ type
 
   TCUDAFunction = class(TCUDAComponent)
   private
-    
     FKernelName: string;
     FHandle: PCUfunction;
     FAutoSync: Boolean;
@@ -374,12 +332,10 @@ type
     function GetNumRegisters: Integer;
     function GetParameter(const AName: string): TCUDAFuncParam;
   protected
-    { Protected declaration }
     procedure AllocateHandles; override;
     procedure DestroyHandles; override;
     function GetIsAllocated: Boolean; override;
   public
-    
     constructor Create(AOwner: TComponent); override;
     destructor Destroy; override;
     procedure SetParam(Value: Integer); overload;
@@ -395,9 +351,7 @@ type
     procedure SetParam(TexRef: TCUDATexture); overload;
     procedure SetParam(Ptr: Pointer); overload;
     property Parameters[const AName: string]: TCUDAFuncParam read GetParameter;
-
     procedure Launch(Grided: Boolean = true);
-
     property Handle: PCUfunction read GetHandle;
     property SharedMemorySize: Integer read GetSharedMemorySize
       write SetSharedMemorySize;
@@ -406,9 +360,7 @@ type
     property LocalMemorySize: Integer read GetLocalMemorySize;
     property NumRegisters: Integer read GetNumRegisters;
   published
-    
     property KernelName: string read FKernelName write SetKernelName;
-
     property AutoSync: Boolean read FAutoSync write FAutoSync default true;
     property BlockShape: TCUDADimensions read FBlockShape write SetBlockShape;
     property Grid: TCUDADimensions read FGrid write SetGrid;
@@ -418,7 +370,6 @@ type
 
   TCUDATexture = class(TCUDAComponent)
   private
-    
     FKernelName: string;
     FHandle: PCUtexref;
     fArray: TCUDAMemData;
@@ -440,17 +391,14 @@ type
     procedure SetArray(Value: TCUDAMemData);
     function GetHandle: PCUtexref;
   protected
-    { Protected declaration }
     procedure AllocateHandles; override;
     procedure DestroyHandles; override;
     function GetIsAllocated: Boolean; override;
   public
-    
     constructor Create(AOwner: TComponent); override;
     destructor Destroy; override;
     property Handle: PCUtexref read GetHandle;
   published
-    
     property KernelName: string read FKernelName write SetKernelName;
     property AddressModeS: TCuAddresMode read fAddressModeS
       write SetAddressModeS default amClamp;
@@ -458,7 +406,6 @@ type
       write SetAddressModeT default amClamp;
     property AddressModeR: TCuAddresMode read fAddressModeR
       write SetAddressModeR default amClamp;
-
     property NormalizedCoord: Boolean read fNormalizedCoord
       write SetNormalizedCoord default true;
     property ReadAsInteger: Boolean read fReadAsInteger write SetReadAsInteger
@@ -472,7 +419,6 @@ type
 
   TgxSCUDA = class(TCUDAComponent)
   private
-    
     fDevice: TgxSCUDADevice;
     fContext: TCUDAContext;
     FOnOpenGLInteropInit: TOnOpenGLInteropInit;
@@ -480,39 +426,28 @@ type
     procedure SetOnOpenGLInteropInit(AEvent: TOnOpenGLInteropInit);
     function GetModule(const i: Integer): TCUDAModule;
   protected
-    
     procedure Notification(AComponent: TComponent;
       Operation: TOperation); override;
     function GetContext: TCUDAContext; override;
     function GetIsAllocated: Boolean; override;
   public
-    
     constructor Create(AOwner: TComponent); override;
     destructor Destroy; override;
-
     property Context: TCUDAContext read GetContext;
     property Modules[const i: Integer]: TCUDAModule read GetModule;
   published
-    
     property ComputingDevice: TgxSCUDADevice read fDevice write SetDevice;
     property OnOpenGLInteropInit: TOnOpenGLInteropInit read FOnOpenGLInteropInit
       write SetOnOpenGLInteropInit;
   end;
 
 function GetChannelTypeAndNum(AType: TCUDAType): TChannelTypeAndNum;
-
 procedure RegisterCUDAComponentNameChangeEvent(ANotifyEvent: TNotifyEvent);
 procedure DeRegisterCUDAComponentNameChangeEvent;
 
 //---------------------------------------------------------------------------
-//---------------------------------------------------------------------------
-//---------------------------------------------------------------------------
-
 implementation
 //---------------------------------------------------------------------------
-//---------------------------------------------------------------------------
-//---------------------------------------------------------------------------
-
 
 const
   cAddressMode: array [TCuAddresMode] of TCUaddress_mode =
@@ -591,10 +526,6 @@ end;
 // ------------------
 // ------------------ TgxSCUDA ------------------
 // ------------------
-
-{$IFDEF VXS_REGION}{$REGION 'TgxSCUDA'}{$ENDIF}
-// Create
-//
 
 constructor TgxSCUDA.Create(AOwner: TComponent);
 begin
@@ -687,15 +618,9 @@ begin
   end;
 end;
 
-{$IFDEF VXS_REGION}{$ENDREGION}{$ENDIF}
 // ------------------
 // ------------------ TCUDAModule ------------------
 // ------------------
-
-{$IFDEF VXS_REGION}{$REGION 'TCUDAmodule'}{$ENDIF}
-
-// Create
-//
 
 constructor TCUDAModule.Create(AOwner: TComponent);
 begin
@@ -895,9 +820,6 @@ begin
   end;
 end;
 
-// DestroyHandles
-//
-
 procedure TCUDAModule.DestroyHandles;
 var
   I: Integer;
@@ -905,9 +827,6 @@ begin
   for I := 0 to ItemsCount - 1 do
     TCUDAComponent(Items[I]).DestroyHandles;
 end;
-
-// LoadFromFile
-//
 
 procedure TCUDAModule.LoadFromFile(const AFilename: string);
 var
@@ -949,9 +868,6 @@ begin
     ShowMessage(Format(strFailedOpenFile, [AFilename]));
 end;
 
-// LoadFromSource
-//
-
 procedure TCUDAModule.LoadFromSource;
 var
   Text: AnsiString;
@@ -970,16 +886,10 @@ begin
   end;
 end;
 
-// LoadAndCompile
-//
-
 procedure TCUDAModule.LoadAndCompile;
 begin
   AllocateHandles;
 end;
-
-// Unload
-//
 
 procedure TCUDAModule.Unload;
 begin
@@ -994,9 +904,6 @@ begin
   end;
 end;
 
-// OnChangeCode
-//
-
 procedure TCUDAModule.OnChangeCode(Sender: TObject);
 begin
   if not(csLoading in ComponentState) and (Sender is TgxSCUDACompiler) then
@@ -1009,9 +916,6 @@ procedure TCUDAModule.SetCode(const Value: TStringList);
 begin
   FCode.Assign(Value);
 end;
-
-// GetKernelFunction
-//
 
 function TCUDAModule.GetKernelFunction(const AName: string): TCUDAFunction;
 var
@@ -1027,9 +931,6 @@ begin
         exit(TCUDAFunction(item));
   end;
 end;
-
-// GetKernelTexture
-//
 
 function TCUDAModule.GetKernelTexture(const AName: string): TCUDATexture;
 var
@@ -1047,9 +948,6 @@ begin
 end;
 
 
-// GetKernelConstant
-//
-
 function TCUDAModule.GetKernelConstant(const AName: string): TCUDAConstant;
 var
   i: Integer;
@@ -1065,12 +963,9 @@ begin
   end;
 end;
 
-{$IFDEF VXS_REGION}{$ENDREGION}{$ENDIF}
 // ------------------
 // ------------------ TCUDAComponent ------------------
 // ------------------
-
-{$IFDEF VXS_REGION}{$REGION 'TCUDAComponent'}{$ENDIF}
 
 destructor TCUDAComponent.Destroy;
 begin
@@ -1083,9 +978,6 @@ begin
   end;
   inherited;
 end;
-
-// CuNotifyChange
-//
 
 procedure TCUDAComponent.CuNotifyChange(AChange: TCUDAChange);
 begin
@@ -1116,9 +1008,6 @@ begin
         AProc(TComponent(FItems.List^[i]));
 end;
 
-// SetParentComponent
-//
-
 procedure TCUDAComponent.SetParentComponent(Value: TComponent);
 begin
   inherited;
@@ -1128,16 +1017,10 @@ begin
     Master := TCUDAComponent(Value);
 end;
 
-// GetParentComponent
-//
-
 function TCUDAComponent.GetParentComponent: TComponent;
 begin
   Result := FMaster;
 end;
-
-// HasParent
-//
 
 function TCUDAComponent.HasParent: Boolean;
 begin
@@ -1239,14 +1122,9 @@ begin
   end;
 end;
 
-{$IFDEF VXS_REGION}{$ENDREGION}{$ENDIF}
 // ------------------
 // ------------------ TCUDAFunction ------------------
 // ------------------
-
-{$IFDEF VXS_REGION}{$REGION 'TCUDAFunction'}{$ENDIF}
-// Create
-//
 
 constructor TCUDAFunction.Create(AOwner: TComponent);
 begin
@@ -1257,9 +1135,6 @@ begin
   FGrid := TCUDADimensions.Create(Self);
   FLaunching := false;
 end;
-
-// Destroy
-//
 
 destructor TCUDAFunction.Destroy;
 begin
@@ -1311,9 +1186,6 @@ begin
   inherited;
 end;
 
-// DestroyHandles
-//
-
 procedure TCUDAFunction.DestroyHandles;
 var
   i: Integer;
@@ -1332,24 +1204,15 @@ begin
   end;
 end;
 
-// SetBlockShape
-//
-
 procedure TCUDAFunction.SetBlockShape(const AShape: TCUDADimensions);
 begin
   FBlockShape.Assign(AShape);
 end;
 
-// SetGrid
-//
-
 procedure TCUDAFunction.SetGrid(const AGrid: TCUDADimensions);
 begin
   FGrid.Assign(AGrid);
 end;
-
-// SetKernelName
-//
 
 procedure TCUDAFunction.SetKernelName(const AName: string);
 begin
@@ -1520,9 +1383,6 @@ begin
   Inc(ParamOffset, SizeOf(Cardinal));
 end;
 
-// Launch
-//
-
 procedure TCUDAFunction.Launch(Grided: Boolean = true);
 begin
   if not(FMaster is TCUDAModule) then
@@ -1670,12 +1530,9 @@ begin
   end;
 end;
 
-{$IFDEF VXS_REGION}{$ENDREGION}{$ENDIF}
 // ------------------
 // ------------------ TCUDAMemData ------------------
 // ------------------
-
-{$IFDEF VXS_REGION}{$REGION 'TCUDAMemData'}{$ENDIF}
 
 constructor TCUDAMemData.Create(AOwner: TComponent);
 begin
@@ -2514,10 +2371,6 @@ end;
 // ------------------ TCUDATexture ------------------
 // ------------------
 
-{$IFDEF VXS_REGION}{$REGION 'TCUDATexture'}{$ENDIF}
-// Create
-//
-
 constructor TCUDATexture.Create(AOwner: TComponent);
 begin
   inherited Create(AOwner);
@@ -2533,9 +2386,6 @@ begin
   fChannelNum := cnOne;
 end;
 
-// Destroy
-//
-
 destructor TCUDATexture.Destroy;
 begin
   if Assigned(fArray) then
@@ -2543,9 +2393,6 @@ begin
   DestroyHandles;
   inherited;
 end;
-
-// GetHandle
-//
 
 function TCUDATexture.GetHandle: PCUtexref;
 begin
@@ -2662,9 +2509,6 @@ begin
   end;
 end;
 
-// SetAddressModeT
-//
-
 procedure TCUDATexture.SetAddressModeT(const AMode: TCuAddresMode);
 begin
   if AMode <> fAddressModeT then
@@ -2673,9 +2517,6 @@ begin
     CuNotifyChange(cuchAddresMode);
   end;
 end;
-
-// SetAddressModeR
-//
 
 procedure TCUDATexture.SetAddressModeR(const AMode: TCuAddresMode);
 begin
@@ -2686,9 +2527,6 @@ begin
   end;
 end;
 
-// SetNormalizedCoord
-//
-
 procedure TCUDATexture.SetNormalizedCoord(const flag: Boolean);
 begin
   if flag <> fNormalizedCoord then
@@ -2698,9 +2536,6 @@ begin
   end;
 end;
 
-// SetReadAsInteger
-//
-
 procedure TCUDATexture.SetReadAsInteger(const flag: Boolean);
 begin
   if flag <> fReadAsInteger then
@@ -2709,9 +2544,6 @@ begin
     CuNotifyChange(cuchFlag);
   end;
 end;
-
-// SetFilterMode
-//
 
 procedure TCUDATexture.SetFilterMode(const mode: TCuFilterMode);
 begin
@@ -2732,9 +2564,6 @@ begin
     CuNotifyChange(cuchFormat);
   end;
 end;
-
-// SetDataArray
-//
 
 procedure TCUDATexture.SetArray(Value: TCUDAMemData);
 begin
@@ -2776,12 +2605,9 @@ begin
   end;
 end;
 
-{$IFDEF VXS_REGION}{$ENDREGION}{$ENDIF}
 // ------------------
 // ------------------ TCUDAGraphicResource ------------------
 // ------------------
-
-{$IFDEF VXS_REGION}{$REGION 'TCUDAGraphicResource'}{$ENDIF}
 
 procedure TCUDAGraphicResource.SetMapping(const Value: TCUDAMapping);
 begin
@@ -2866,12 +2692,9 @@ begin
   end;
 end;
 
-{$IFDEF VXS_REGION}{$ENDREGION}{$ENDIF}
 // ------------------
 // ------------------ TCUDAUniform ------------------
 // ------------------
-
-{$IFDEF VXS_REGION}{$REGION 'TCUDAUniform'}{$ENDIF}
 
 constructor TCUDAUniform.Create(AOwner: TComponent);
 begin
@@ -2953,13 +2776,10 @@ begin
     CuNotifyChange(cuchSize);
   end;
 end;
-{$IFDEF VXS_REGION}{$ENDREGION}{$ENDIF}
 
 // ------------------
 // ------------------ TCUDAConstant ------------------
 // ------------------
-
-{$IFDEF VXS_REGION}{$REGION 'TCUDAConstant'}{$ENDIF}
 
 procedure TCUDAConstant.AllocateHandles;
 var
@@ -3008,13 +2828,9 @@ begin
   Result := FHandle;
 end;
 
-{$IFDEF VXS_REGION}{$ENDREGION}{$ENDIF}
-
 // ------------------
 // ------------------ TCUDAFuncParam ------------------
 // ------------------
-
-{$IFDEF VXS_REGION}{$REGION 'TCUDAFuncParam'}{$ENDIF}
 
 procedure TCUDAFuncParam.AllocateHandles;
 begin
@@ -3042,13 +2858,9 @@ begin
   end;
 end;
 
-{$IFDEF VXS_REGION}{$ENDREGION}{$ENDIF}
-
+//----------------------------------------------
 initialization
-
-// ------------------------------------------------------------------
-// ------------------------------------------------------------------
-// ------------------------------------------------------------------
+//----------------------------------------------
 
   RegisterClasses([TgxSCUDA, TgxSCUDACompiler, TCUDAModule, TCUDAFunction,
     TCUDATexture, TCUDAMemData, TCUDAConstant, TCUDAFuncParam]);

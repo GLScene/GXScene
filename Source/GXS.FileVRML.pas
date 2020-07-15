@@ -14,15 +14,16 @@ uses
   System.Classes,
   System.SysUtils,
   System.Math,
-  GXS.VectorFileObjects,
-  GXS.Material,
+
   Scene.ApplicationFileIO,
   Scene.VectorTypes,
   Scene.VectorGeometry,
   Scene.VectorLists,
+  GXS.VectorFileObjects,
+  GXS.Material,
   GXS.MeshUtils,
 
-  Formats.FileVRMLParser;
+  Scene.Formats.FileVRMLParser;
 
 type
 

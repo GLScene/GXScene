@@ -20,7 +20,7 @@ uses
   GXS.Material,
   GXS.Texture,
 
-  Formats.FileMD3;
+  Scene.Formats.FileMD3;
 
 type
 

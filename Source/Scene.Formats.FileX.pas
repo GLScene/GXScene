@@ -3,7 +3,7 @@
   * Graphic Scene Engine, http://glscene.org *
   *                                          *
   ******************************************* *)
-unit Formats.FileX;
+unit Scene.Formats.FileX;
 
 (* Simple X format support for Delphi (Microsoft's favorite format) *)
 
@@ -19,7 +19,6 @@ uses
   Scene.VectorGeometry,
   Scene.VectorLists,
   Scene.PersistentClasses,
-  GXS.Utils,
   Scene.Strings;
 
 type
@@ -256,7 +255,7 @@ var
     if ContainsEnd(str) then
       str := StringReplace(str, '}', '', [rfReplaceAll]);
 
-    Result := StrToFloatDef(str);
+    Result := StrToFloatDef(str, 0);
   end;
 
   function ReadMatrix: TMatrix;
@@ -284,13 +283,13 @@ var
     TempBuffer.CommaText := str;
     if TempBuffer.Count > 1 then
     begin
-      Result.X := StrToFloatDef(TempBuffer[0]);
-      Result.Y := StrToFloatDef(TempBuffer[1]);
-      Result.Z := StrToFloatDef(TempBuffer[2]);
+      Result.X := StrToFloatDef(TempBuffer[0], 0);
+      Result.Y := StrToFloatDef(TempBuffer[1], 0);
+      Result.Z := StrToFloatDef(TempBuffer[2], 0);
     end
     else
     begin
-      Result.X := StrToFloatDef(TempBuffer[0]);
+      Result.X := StrToFloatDef(TempBuffer[0], 0);
       Result.Y := ReadSingle;
       Result.Z := ReadSingle;
     end;
@@ -305,14 +304,14 @@ var
     TempBuffer.CommaText := str;
     if TempBuffer.Count > 1 then
     begin
-      Result.X := StrToFloatDef(TempBuffer[0]);
-      Result.Y := StrToFloatDef(TempBuffer[1]);
-      Result.Z := StrToFloatDef(TempBuffer[2]);
-      Result.W := StrToFloatDef(TempBuffer[3]);
+      Result.X := StrToFloatDef(TempBuffer[0], 0);
+      Result.Y := StrToFloatDef(TempBuffer[1], 0);
+      Result.Z := StrToFloatDef(TempBuffer[2], 0);
+      Result.W := StrToFloatDef(TempBuffer[3], 0);
     end
     else
     begin
-      Result.X := StrToFloatDef(TempBuffer[0]);
+      Result.X := StrToFloatDef(TempBuffer[0], 0);
       Result.Y := ReadSingle;
       Result.Z := ReadSingle;
       Result.W := ReadSingle;
@@ -328,12 +327,12 @@ var
     TempBuffer.CommaText := str;
     if TempBuffer.Count > 1 then
     begin
-      Result.X := StrToFloatDef(TempBuffer[0]);
-      Result.Y := StrToFloatDef(TempBuffer[1]);
+      Result.X := StrToFloatDef(TempBuffer[0], 0);
+      Result.Y := StrToFloatDef(TempBuffer[1], 0);
     end
     else
     begin
-      Result.X := StrToFloatDef(TempBuffer[0]);
+      Result.X := StrToFloatDef(TempBuffer[0], 0);
       Result.Y := ReadSingle;
     end;
     Result.Z := 0;

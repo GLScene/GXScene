@@ -1,8 +1,8 @@
 (* ******************************************
-  *                                          *
-  * Graphic Scene Engine, http://glscene.org *
-  *                                          *
-  ******************************************* *)
+ *                                          *
+ * Graphic Scene Engine, http://glscene.org *
+ *                                          *
+ ********************************************)
 
 unit GXS.ParallelRegister;
 
@@ -72,14 +72,14 @@ implementation
 //======================================
 
 uses
-  GXS.CUDARunTime,
-  GXS.CUDAEditor,
+  Design.FCUDAEditor,
+  Scene.Import.CUDARunTime,
+  Scene.Import.CUDAParser,
   GXS.CUDAContext,
   GXS.CUDA,
   GXS.CUDACompiler,
   GXS.CUDAFFTPlan,
-  GXS.CUDAGraphics,
-  GXS.CUDAParser;
+  GXS.CUDAGraphics;
 
 function FindCuFile(var AModuleName: string): Boolean;
 var

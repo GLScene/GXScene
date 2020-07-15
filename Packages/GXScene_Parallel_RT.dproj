@@ -156,13 +156,14 @@
         <DCCReference Include="..\Source\GXS.CUDAContext.pas"/>
         <DCCReference Include="..\Source\GXS.CUDAFFTPlan.pas"/>
         <DCCReference Include="..\Source\GXS.CUDAGraphics.pas"/>
-        <DCCReference Include="..\Source\GXS.CUDAParser.pas"/>
+        <DCCReference Include="..\Source\Scene.Import.CUDAParser.pas"/>
         <DCCReference Include="..\Source\GXS.CUDADataAccess.pas"/>
         <DCCReference Include="..\Source\Scene.Import.CUDAApi.pas"/>
         <DCCReference Include="..\Source\Scene.Import.OpenCL.pas"/>
         <DCCReference Include="..\Source\Scene.Import.OpenCL_GL.pas"/>
         <DCCReference Include="..\Source\Scene.Import.OpenCL_Platform.pas"/>
         <DCCReference Include="..\Source\GXS.CUDAFourierTransform.pas"/>
+        <DCCReference Include="..\Source\Scene.Import.CUDAParallelPrimitives.pas"/>
         <BuildConfiguration Include="Debug">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>

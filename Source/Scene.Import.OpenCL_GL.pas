@@ -3,10 +3,9 @@
 * Graphic Scene Engine, http://glscene.org *
 *                                          *
 ********************************************)
-(*
-   Conversion of OpenCL header file: cl_gl.h to CL_GL.pas,
-   from http://www.khronos.org/registry/cl/.
-*)
+
+unit Scene.Import.OpenCL_GL;
+
 ///*****************************************************************************
 // * Copyright (c) 2008-2020 The Khronos Group Inc.
 // *
@@ -29,8 +28,6 @@
 // * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
 // * MATERIALS OR THE USE OR OTHER DEALINGS IN THE MATERIALS.
 // ****************************************************************************/
-
-unit Scene.Import.OpenCL_GL;
 
 interface
 

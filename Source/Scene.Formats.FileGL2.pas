@@ -4,13 +4,12 @@
   *                                          *
   ******************************************* *)
 
-unit Formats.FileGL2;
+unit Scene.Formats.FileGL2;
 
 (*
 	Ghoul2 (GLM/GLA) file format loading structures
 	Also referred to as MDX (MDXM/MDXA) format in C source.
 *)
-
 
 interface
 
@@ -48,16 +47,8 @@ type
   end;
 
   TgxMSurfaceHeader = record
-    ident,
-    thisSurfaceIndex,
-    ofsHeader,
-    numVerts,
-    ofsVerts,
-    numTriangles,
-    ofsTriangles,
-    numBoneReferences,
-    ofsBoneReferences,
-    ofsEnd            : integer;
+    ident, thisSurfaceIndex, ofsHeader, numVerts, ofsVerts, numTriangles,
+      ofsTriangles, numBoneReferences, ofsBoneReferences, ofsEnd: integer;
   end;
 
   TgxMTriangle = record
@@ -144,7 +135,7 @@ type
 
 function G2_GetVertWeights(vert:TgxMVertex):Integer;
 function G2_GetVertBoneIndex(vert:TgxMVertex; iWeightNum:Integer):Integer;
-function G2_GetVertBoneWeight(vert:TgxMVertex; iWeightNum:Cardinal; 
+function G2_GetVertBoneWeight(vert:TgxMVertex; iWeightNum:Cardinal;
   var fTotalWeight:Single; const iNumWeights:Cardinal):single;
 
 procedure MC_UnCompressQuat(var mat : TMatrix; const comp : TgxACompQuatBone);
@@ -289,8 +280,6 @@ begin
   Result:=CompBonePool[BoneIndices[Frame*AnimHeader.numBones+Bone]];
 end;
 
-// GetUnCompressedMatrix
-//
 function TFileGLA.GetUnCompressedMatrix(Frame, Bone: Integer): TMatrix;
 begin
   MC_UnCompressQuat(Result,CompBonePool[BoneIndices[Frame*AnimHeader.numBones+Bone]]);

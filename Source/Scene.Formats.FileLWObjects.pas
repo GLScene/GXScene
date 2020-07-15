@@ -1,10 +1,10 @@
 (* ******************************************
-  *                                          *
-  * Graphic Scene Engine, http://glscene.org *
-  *                                          *
-  ******************************************* *)
+ *                                          *
+ * Graphic Scene Engine, http://glscene.org *
+ *                                          *
+ ********************************************)
 
-unit Formats.FileLWObjects;
+unit Scene.Formats.FileLWObjects;
 
 interface
 
@@ -733,14 +733,14 @@ begin
 
 end;
 
-{-----------------------------------------------------------------------------
+(*----------------------------------------------------------------------------
   Procedure: GetChunkClasses
   Date:      08-Aug-2002
   Arguments: None
   Result:    TClassList
 
   Singleton access for the chunk class list.
------------------------------------------------------------------------------}
+-----------------------------------------------------------------------------*)
 function GetChunkClasses: TList;
 begin
   if ChunkClasses=nil then
@@ -856,16 +856,13 @@ var
 begin
   try
     Stream.Read(CurId,4);
-
     ReadMotorolaNumber(Stream,@CurSize,4);
-
     if UpperCase(string(CurId)) = 'FORM' then
     begin
-
       Stream.Read(CurId,4);
-
-    end else raise Exception.Create('Invalid magic number. Not a valid Lightwave Object');
-
+    end
+    else
+      raise Exception.Create('Invalid magic number. Not a valid Lightwave Object');
     with Stream do while Position < Size do
     begin
       Read(Chunk,8);
@@ -890,11 +887,11 @@ end;
 
 function LoadLWOFromFile(const aFilename : String; readCallback : TLWOReadCallback; userData : Pointer) : LongWord;
 var
-   stream : TStream;
+   stream: TStream;
 begin
-   stream:=TFileStream.Create(aFilename, fmOpenRead);
+   stream := TFileStream.Create(aFilename, fmOpenRead);
    try
-      Result:=LoadLW0FromStream(stream, readCallback, userData);
+      Result := LoadLW0FromStream(stream, readCallback, userData);
    finally
       stream.Free;
    end;
@@ -921,12 +918,9 @@ begin
         pB^ := Blo;
         Dec(pB);
         pB^ := Bhi;
-
         PU2Array(ValueIn)^[i] := w;
-
         Inc(i);
       end;
-
     end;
 
     4: begin

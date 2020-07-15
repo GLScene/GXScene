@@ -31,6 +31,7 @@ package GXScene_Parallel_DT;
 
 requires
   rtl,
+  designide,
   fmx,
   GXScene_Parallel_RT,
   GXScene_RT;

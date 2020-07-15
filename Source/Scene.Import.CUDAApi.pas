@@ -4,6 +4,8 @@
 *                                          *
 ********************************************)
 
+unit Scene.Import.CUDAApi;
+
 (*
  * Copyright 1993-2020 NVIDIA Corporation.  All rights reserved.
  *
@@ -39,7 +41,6 @@
  * the above Disclaimer and U.S. Government End Users Notice.
  *)
 
-unit Scene.Import.CUDAApi;
 
 interface
 

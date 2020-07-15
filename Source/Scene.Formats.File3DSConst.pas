@@ -4,14 +4,14 @@
 *                                          *
 ********************************************)
 
-unit Formats.File3DSConst;
+unit Scene.Formats.File3DSConst;
 
 (* Constants for commonly used structures *)
 
 interface
 
 uses
-  Formats.File3DSTypes;
+  Scene.Formats.File3DSTypes;
 
 const // Flags used by the flag field of the Mesh3DS structure
       FaceCAVisable3DS = $0001;                  // flags the CA edge as visible

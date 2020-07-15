@@ -4,7 +4,7 @@
   *                                          *
   ******************************************* *)
 
-unit Formats.FileMD3;
+unit Scene.Formats.FileMD3;
 
 (* FileMD3 - File loading methods for the MD3 file format *)
 
@@ -16,7 +16,6 @@ uses
 
 type
   // Quake3 MD3 structure types
-
   TMD3Tag = record
     strName: array [0 .. 63] of AnsiChar;
     vPosition: TVector3f;
@@ -78,8 +77,6 @@ type
     Vertices: array of TMD3Triangle;
   end;
 
-  // MD3 Main file class
-
   TFileMD3 = class
   public
     ModelHeader: TMD3Header;
@@ -89,9 +86,8 @@ type
     procedure LoadFromStream(aStream: TStream);
   end;
 
-  // ===================================================================
+// ===================================================================
 implementation
-
 // ===================================================================
 
 // ------------------

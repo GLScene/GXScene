@@ -77,12 +77,12 @@ type
     procedure LBUniformsKeyDown(Sender: TObject; var Key: Word;
       var KeyChar: Char; Shift: TShiftState);
   private
-    FUniformList: array of IVXShaderParameter;
+    FUniformList: array of IgxShaderParameter;
   public
     procedure Clear;
     procedure AddTextureName(const S: string);
     procedure AddSamplerName(const S: string);
-    procedure AddUniform(AValue: IVXShaderParameter);
+    procedure AddUniform(AValue: IgxShaderParameter);
     procedure Execute;
   end;
 
@@ -118,7 +118,7 @@ end;
 // TShaderUniformEditor
 //-----------------------------------------------------------
 
-procedure TShaderUniformEditorForm.AddUniform(AValue: IVXShaderParameter);
+procedure TShaderUniformEditorForm.AddUniform(AValue: IgxShaderParameter);
 begin
   if AValue <> nil then
   begin
@@ -183,7 +183,7 @@ end;
 procedure TShaderUniformEditorForm.LBUniformsClick(Sender: TObject);
 var
   SV: TSwizzleVector;
-  IParam: IVXShaderParameter;
+  IParam: IgxShaderParameter;
 begin
   if LBUniforms.ItemIndex >= 0 then
   begin

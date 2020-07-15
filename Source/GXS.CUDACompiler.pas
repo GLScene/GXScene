@@ -27,7 +27,7 @@ uses
 
   Scene.ApplicationFileIO,
   Scene.Strings,
-  GXS.CUDAParser;
+  Scene.Import.CUDAParser;
 
 type
   TgxSCUDACompilerOutput = (codeUndefined, codePtx, codeCubin, codeGpu);

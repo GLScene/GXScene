@@ -4,7 +4,7 @@
 *                                          *
 ********************************************)
 
-unit Scene.FilePAK;
+unit Scene.PAKArchive;
 
 {$I Scene.inc}
 
@@ -49,16 +49,12 @@ Type
     function GetContent(Stream: TStream; index: integer): TStream; override;
     function GetContent(index: integer): TStream; override;
     function GetContent(ContentName: string): TStream; override;
-
     function GetContentSize(index: integer): integer; override;
     function GetContentSize(ContentName: string): integer; override;
-
     procedure AddFromStream(ContentName, Path: string; FS: TStream); override;
     procedure AddFromFile(FileName, Path: string); override;
-
     procedure RemoveContent(index: integer); override;
     procedure RemoveContent(ContentName: string); override;
-
     procedure Extract(index: integer; NewName: string); override;
     procedure Extract(ContentName, NewName: string); override;
   end;

@@ -3,6 +3,8 @@
 * Graphic Scene Engine, http://glscene.org *
 *                                          *
 ********************************************)
+unit Scene.Formats.FileVFW;
+
 (****************************************************************************
  *
  *      VfW.H - Video for windows include file for WIN32
@@ -41,7 +43,6 @@
  *          NOMSACM         - dont include ACM stuff.
  *
  ****************************************************************************)
-unit Formats.FileVFW;
 
 interface
 

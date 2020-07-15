@@ -16,13 +16,13 @@ uses
   System.SysUtils,
   System.Classes,
   System.Math,
-  GXS.VectorFileObjects,
+  Scene.VectorTypes,
   Scene.VectorGeometry,
   GXS.Texture,
   GXS.Material,
-  Scene.VectorTypes,
+  GXS.VectorFileObjects,
 
-  Formats.FileLWObjects;
+  Scene.Formats.FileLWObjects;
 
 type
   TgxLWOVectorFile = class(TgxVectorFile)
@@ -65,11 +65,7 @@ type
   end;
   TNormBufferDynArray = array of TNormBuffer;
 
-  { TgxLWOVectorFile }
-
-  {
-  ******************************* TgxLWOVectorFile *******************************
-  }
+(******************************* TgxLWOVectorFile *****************************)
 
 procedure TgxLWOVectorFile.AddLayr(Layr: TLWLayr; LWO: TLWObjectFile);
 var
@@ -187,96 +183,73 @@ begin
 
                         NormIdx := Mesh.Normals.Add(PVector3f(@PolsInfo[TagPolys[j]].vnorms[0])^);
                         FaceGrp.Add(Indices[PolyIdx + 1], NormIdx, Indices[PolyIdx + 1]);
-
                       end;
-
                     3: for k := 1 to 3 do
                       begin
-
                         NormIdx := Mesh.Normals.Add(PVector3f(@PolsInfo[TagPolys[j]].vnorms[k - 1])^);
-
                         FaceGrp.Add(Indices[PolyIdx + k], NormIdx, Indices[PolyIdx + 1]);
-
                       end;
-
                     4:
                       begin
-
                         // triangle A
                         NormIdx := Mesh.Normals.Add(PVector3f(@PolsInfo[TagPolys[j]].vnorms[0])^);
                         FaceGrp.Add(Indices[PolyIdx + 1], NormIdx, Indices[PolyIdx + 1]);
-
                         NormIdx := Mesh.Normals.Add(PVector3f(@PolsInfo[TagPolys[j]].vnorms[1])^);
                         FaceGrp.Add(Indices[PolyIdx + 2], NormIdx, Indices[PolyIdx + 1]);
-
                         NormIdx := Mesh.Normals.Add(PVector3f(@PolsInfo[TagPolys[j]].vnorms[2])^);
                         FaceGrp.Add(Indices[PolyIdx + 3], NormIdx, Indices[PolyIdx + 1]);
-
                         // triangle B
                         NormIdx := Mesh.Normals.Add(PVector3f(@PolsInfo[TagPolys[j]].vnorms[0])^);
                         FaceGrp.Add(Indices[PolyIdx + 1], NormIdx, Indices[PolyIdx + 1]);
-
                         NormIdx := Mesh.Normals.Add(PVector3f(@PolsInfo[TagPolys[j]].vnorms[2])^);
                         FaceGrp.Add(Indices[PolyIdx + 3], NormIdx, Indices[PolyIdx + 1]);
 
                         NormIdx := Mesh.Normals.Add(PVector3f(@PolsInfo[TagPolys[j]].vnorms[3])^);
                         FaceGrp.Add(Indices[PolyIdx + 4], NormIdx, Indices[PolyIdx + 1]);
-
                       end;
-
                   end;
-
                 end;
-
                 SetLength(TagPolys, 0);
-
               end;
-
             end;
-
           end
-          else if MapType = PTAG_TYPE_PART then
+          else
+          if MapType = PTAG_TYPE_PART then
           begin
-            {Todo: PTag PART}
-
+            // Todo: PTag PART
           end
           else
             if MapType = PTAG_TYPE_SMGP then
             begin
-              {Todo: PTag Smooth Group}
-
+              // Todo: PTag Smooth Group
             end;
           Idx := Items.FindChunk(@FindChunkById, @ID_PTAG, Idx + 1);
         end;
       end;
     end
     else
-
-      {// curv type pols chunk (catmull-rom splines)} if PolsType = POLS_TYPE_CURV then
+      //// curv type pols chunk (catmull-rom splines)
+      if PolsType = POLS_TYPE_CURV then
       begin
-        {Todo: CURV Pols import}
-
+        // Todo: CURV Pols import
       end
       else
-
-        {// nurbs patch pols type chunk} if PolsType = POLS_TYPE_PTCH then
+        {// nurbs patch pols type chunk}
+        if PolsType = POLS_TYPE_PTCH then
         begin
           {Todo: NURBS Patch Pols import}
-
         end
         else
-
-          {// metaball pols type chunk} if PolsType = POLS_TYPE_MBAL then
+          {// metaball pols type chunk}
+          if PolsType = POLS_TYPE_MBAL then
           begin
             {Todo: MetaBall type Pols import}
-
           end
           else
-
-            {// bone pols type chunk} if PolsType = POLS_TYPE_BONE then
+            {// bone pols type chunk}
+            if PolsType = POLS_TYPE_BONE then
             begin
               {Todo: Bone Pols import}
-
             end;
     SetLength(TagPolys, 0);
   end;
@@ -293,57 +266,41 @@ var
   StrParm: string;
   Idx: integer;
 begin
-  {DONE: implement surface inheritance}
-
+  // DONE: implement surface inheritance
   if GetOwner is TgxBaseMesh then
   begin
     matLib := TgxBaseMesh(GetOwner).MaterialLibrary;
-
     if Assigned(matLib) then
     begin
-
       libMat := matLib.Materials.GetLibMaterialByName(Surf.Name);
-
       if not Assigned(libMat) then
       begin
-
         libMat := matLib.Materials.Add;
         libMat.Name := Surf.Name;
-
         with libMat.Material.FrontProperties do
         begin
-
           tran := Surf.FloatParam[ID_TRAN];
-
           if tran <> 0 then
             libMat.Material.BlendingMode := bmTransparency;
-
           colr := Surf.Vec3Param[ID_COLR];
-
           //          Ambient.Color := VectorMake(colr[0],colr[1],colr[2],1);
           Ambient.Color := VectorMake(0, 0, 0, 1);
-
           (* Diffuse *)
           FloatParm := Surf.FloatParam[ID_DIFF];
           Diffuse.Color := VectorMake(colr[0] * FloatParm, colr[1] * FloatParm, colr[2] * FloatParm, tran);
-
           (* Luminosity -> Emission *)
           FloatParm := Surf.FloatParam[ID_LUMI];
           Emission.Color := VectorMake(colr[0] * FloatParm, colr[1] * FloatParm, colr[2] * FloatParm, 1);
-
           (* Specularity *)
           FloatParm := Surf.FloatParam[ID_SPEC];
           Specular.Color := VectorMake(colr[0] * FloatParm, colr[1] * FloatParm, colr[2] * FloatParm, 1);
-
           (* Glossiness -> Shininess *)
           FloatParm := Surf.FloatParam[ID_GLOS];
           Shininess := Round(Power(2, 7 * FloatParm));
-
           (* Polygon sidedness *)
           WordParm := Surf.WordParam[ID_SIDE];
           if (WordParm and SIDE_BACK) = SIDE_BACK then
             AssignTo(libMat.Material.BackProperties);
-
           (* Reflection settings *)
           refl := Surf.FloatParam[ID_REFL];
           if refl > 0 then
@@ -352,10 +309,8 @@ begin
             WordParm := Surf.WordParam[ID_RFOP];
             if WordParm > RFOP_RAYTRACEANDBACKDROP then
             begin
-
               WordParm := Surf.VXParam[ID_RIMG];
               Idx := Surf.RootChunks.FindChunk(@FindClipByClipIndex, @WordParm);
-
               if Idx <> -1 then
               begin
                 StrParm := string(PAnsiChar(TLWClip(Surf.RootChunks[Idx]).ParamAddr[ID_STIL]));
@@ -366,13 +321,10 @@ begin
                       tex2Mat := libMat
                     else
                       tex2Mat := matLib.Materials.Add;
-
                     with tex2Mat do
                     begin
-
                       Material.Texture.Image.LoadFromFile(StrParm);
                       Material.Texture.Disabled := False;
-
                       with Material.Texture do
                       begin
                         MappingMode := tmmCubeMapReflection;
@@ -393,55 +345,42 @@ begin
               end;
             end;
           end;
-
         end;
-
       end;
-
     end;
-
   end;
-
 end;
 
 procedure TgxLWOVectorFile.AddVMap(VMap: TLWVMap; Mesh: TgxMeshObject);
 var
   i: integer;
 begin
-
   with VMap, Mesh do
   begin
-
     // texture coords
     if VMapType = VMAP_TYPE_TXUV then
     begin
-
       for i := 0 to ValueCount - 1 do
         TexCoords.Items[Value[i].vert] := AffineVectorMake(Value[i].values[0], Value[i].values[1], 0);
-
     end
     else
-
-      {// vertex weight map} if VMapType = VMAP_TYPE_WGHT then
+      {// vertex weight map}
+      if VMapType = VMAP_TYPE_WGHT then
       begin
-        {Todo: WeightMap import}
-
+        // Todo: WeightMap import
       end
       else
-
-        {// vertex morph (relative)} if VMapType = VMAP_TYPE_MORF then
+        {// vertex morph (relative)}
+        if VMapType = VMAP_TYPE_MORF then
         begin
-          {Todo: Morph target (relative) import}
-
+          // Todo: Morph target (relative) import
         end
         else
-
-          {// vertex morph (absolute)} if VMapType = VMAP_TYPE_SPOT then
+          {// vertex morph (absolute)}
+          if VMapType = VMAP_TYPE_SPOT then
           begin
-            {Todo: Morph target (absolute) import}
-
+            // Todo: Morph target (absolute) import
           end;
-
   end;
 end;
 
@@ -450,44 +389,32 @@ var
   Ind: Integer;
 begin
   FLWO := TLWObjectFile.Create;
-
   with FLWO do
     try
-
       LoadFromStream(aStream);
-
       // Add Surfaces to material list
       Ind := Chunks.FindChunk(@FindChunkById, @ID_SURF, 0);
-
       while Ind <> -1 do
       begin
-
         AddSurf(TLWSurf(Chunks[Ind]), FLWO);
-
         Ind := Chunks.FindChunk(@FindChunkById, @ID_SURF, Ind + 1);
-
       end;
-
       // Lw layer
       Ind := Chunks.FindChunk(@FindChunkById, @ID_LAYR, 0);
-
       while Ind <> -1 do
       begin
-
         AddLayr(TLWLayr(Chunks[Ind]), FLWO);
-
         Ind := Chunks.FindChunk(@FindChunkById, @ID_LAYR, Ind + 1);
-
       end;
-
     finally
-
       FreeAndNil(FLWO);
-
     end;
 end;
 
+//---------------------------------------------------
 initialization
+//---------------------------------------------------
+
   RegisterVectorFileFormat('lwo', 'Lightwave3D object file (6.0 or above)', TgxLWOVectorFile);
 
 finalization

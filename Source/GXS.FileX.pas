@@ -24,7 +24,7 @@ uses
   Scene.VectorLists,
   GXS.Material,
 
-  Formats.FileX;
+  Scene.Formats.FileX;
 
 type
   TgxXVectorFile = class(TgxVectorFile)

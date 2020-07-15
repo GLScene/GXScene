@@ -4,7 +4,7 @@
   *                                          *
   ******************************************* *)
 
-unit Formats.File3DSTypes;
+unit Scene.Formats.File3DSTypes;
 
 (*
   Implements the standard Teapot, build from evaluators.

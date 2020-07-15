@@ -34,7 +34,7 @@ uses
   GXS.Material,
   GXS.TextureFormat,
 
-  Formats.FileQ3BSP;
+  Scene.Formats.FileQ3BSP;
 
 type
 

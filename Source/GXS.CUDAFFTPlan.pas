@@ -15,11 +15,11 @@ uses
   System.SysUtils,
   FMX.Dialogs,
   
-  GXS.CUDAContext,
   GXS.CUDA,
+  GXS.CUDAContext,
   GXS.CUDAFourierTransform,
-  Scene.Strings,
-  Scene.Import.CUDAAPI;
+  Scene.Import.CUDAAPI,
+  Scene.Strings;
 
 type
 

@@ -42,12 +42,13 @@ contains
   GXS.CUDAContext in '..\Source\GXS.CUDAContext.pas',
   GXS.CUDAFFTPlan in '..\Source\GXS.CUDAFFTPlan.pas',
   GXS.CUDAGraphics in '..\Source\GXS.CUDAGraphics.pas',
-  GXS.CUDAParser in '..\Source\GXS.CUDAParser.pas',
+  Scene.Import.CUDAParser in '..\Source\Scene.Import.CUDAParser.pas',
   GXS.CUDADataAccess in '..\Source\GXS.CUDADataAccess.pas',
   Scene.Import.CUDAApi in '..\Source\Scene.Import.CUDAApi.pas',
   Scene.Import.OpenCL in '..\Source\Scene.Import.OpenCL.pas',
   Scene.Import.OpenCL_GL in '..\Source\Scene.Import.OpenCL_GL.pas',
   Scene.Import.OpenCL_Platform in '..\Source\Scene.Import.OpenCL_Platform.pas',
-  GXS.CUDAFourierTransform in '..\Source\GXS.CUDAFourierTransform.pas';
+  GXS.CUDAFourierTransform in '..\Source\GXS.CUDAFourierTransform.pas',
+  Scene.Import.CUDAParallelPrimitives in '..\Source\Scene.Import.CUDAParallelPrimitives.pas';
 
 end.

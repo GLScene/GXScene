@@ -1,10 +1,10 @@
 (* ******************************************
-  *                                          *
-  * Graphic Scene Engine, http://glscene.org *
-  *                                          *
-  ******************************************* *)
+ *                                          *
+ * Graphic Scene Engine, http://glscene.org *
+ *                                          *
+ ******************************************* *)
 
-unit Formats.VfsPAK;
+unit Scene.Formats.VfsPAK;
 
 (*
   Support-code for loading files from Quake II PAK Files.

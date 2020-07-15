@@ -4,7 +4,9 @@
 *                                          *
 ********************************************)
 
-{
+unit Scene.Import.Bass;
+
+(*
   BASS 2.4 Delphi unit
   Copyright (c) 1999-2013 Un4seen Developments Ltd.
   See the BASS.CHM file for more detailed documentation
@@ -12,8 +14,7 @@
   --------------
   Copy BASS.PAS to the \LIB subdirectory of your Delphi path or your project dir
   NOTE: Delphi users should use the BASS_UNICODE flag where possible
-}
-unit Import.Bass;
+*)
 
 interface
 

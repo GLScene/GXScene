@@ -3,6 +3,9 @@
 * Graphic Scene Engine, http://glscene.org *
 *                                          *
 ********************************************)
+
+unit Scene.Import.ODE;
+
 (*************************************************************************
  *                                                                       *
  * Open Dynamics Engine, Copyright (C) 2001,2020 Russell L. Smith.       *
@@ -24,8 +27,6 @@
  * LICENSE.TXT and LICENSE-BSD.TXT for more details.                     *
  *                                                                       *
  *************************************************************************)
-
-unit Import.ODE;
 
  (*************************************************************************
   Some notes;

@@ -4,10 +4,9 @@
 *                                          *
 ********************************************)
 
-unit Import.ODEUtils;
+unit Scene.Import.ODEUtils;
 
-(* Open Dynamic Engine Utils for GLScene *)
-(*
+(* Open Dynamic Engine Utils for GLScene
   Here is the collection of random functions and procedures that useful when
   integrating ODE into GLScene. If you don't use GLScene, this unit won't be
   very useful to you. The unit is not intended as a sorted toolbox, but more
@@ -17,12 +16,11 @@ unit Import.ODEUtils;
 interface
 
 uses
-  Winapi.OpenGL,
   System.SysUtils,
   System.Classes,
 
-  Import.ODE,
-
+  Scene.Import.OpenGLx,
+  Scene.Import.ODE,
   Scene.VectorGeometry,
   Scene.VectorTypes,
   Scene.VectorLists,

@@ -18,11 +18,9 @@ uses
   Scene.Strings,
   Scene.Generics,
   Scene.BaseClasses,
-  GXS.CUDARunTime,
-  GXS.Context,
-  Import.OpenCL,
-  Import.OpenCL_Platform,
-  GXS.CUDAAPI;
+  Scene.Import.CUDAAPI,
+  Scene.Import.CUDARunTime,
+  GXS.Context;
 
 type
 
@@ -80,20 +78,20 @@ type
     function TotalMemory: Cardinal;
   published
     property Name: string read GetName;
-    property TotalGlobalMem: TSize_t read fDeviceProperties.TotalGlobalMem;
-    property SharedMemPerBlock: TSize_t read fDeviceProperties.SharedMemPerBlock;
+    property TotalGlobalMem: NativeUInt read fDeviceProperties.TotalGlobalMem;
+    property SharedMemPerBlock: NativeUInt read fDeviceProperties.SharedMemPerBlock;
     property RegsPerBlock: Integer read fDeviceProperties.RegsPerBlock;
     property WarpSize: Integer read fDeviceProperties.WarpSize;
-    property MemPitch: TSize_t read fDeviceProperties.MemPitch;
+    property MemPitch: NativeUInt read fDeviceProperties.MemPitch;
     property MaxThreadsPerBlock: Integer
       read fDeviceProperties.MaxThreadsPerBlock;
     property MaxThreadsDim: TCUDADimensions read fMaxThreadsDim;
     property MaxGridSize: TCUDADimensions read fMaxGridSize;
     property ClockRate: Integer read fDeviceProperties.ClockRate;
-    property TotalConstMem: TSize_t read fDeviceProperties.TotalConstMem;
+    property TotalConstMem: NativeUInt read fDeviceProperties.TotalConstMem;
     property Major: Integer read fDeviceProperties.Major;
     property Minor: Integer read fDeviceProperties.Minor;
-    property TextureAlignment: TSize_t read fDeviceProperties.TextureAlignment;
+    property TextureAlignment: NativeUInt read fDeviceProperties.TextureAlignment;
     property DeviceOverlap: Integer read fDeviceProperties.DeviceOverlap;
     property MultiProcessorCount: Integer
       read fDeviceProperties.MultiProcessorCount;
@@ -147,8 +145,6 @@ type
 
   TCUDADeviceList = GList<TCUDADevice>;
   TCUDAContextList = GList<TCUDAContext>;
-
-  // CUDAContextManager
 
   //  Static class of CUDA contexts manager.
   CUDAContextManager = class

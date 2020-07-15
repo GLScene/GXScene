@@ -15,7 +15,7 @@ uses
   System.SysUtils,
   System.Math,
 
-  Import.OpenGLx,
+  Scene.Import.OpenGLx,
   Scene.VectorTypes,
   Scene.XOpenGL,
   Scene.VectorGeometry,

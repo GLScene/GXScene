@@ -32,13 +32,13 @@ uses
   System.SysUtils,
   System.Math,
 
-  Import.OpenGLx,
+  Scene.Import.OpenGLx,
+  Scene.VectorTypes,
   Scene.VectorLists,
   GXS.HeightData,
   GXS.Graphics,
   Scene.VectorGeometry,
   GXS.Texture,
-  Scene.VectorTypes,
   GXS.Coordinates,
   GXS.Material;
 

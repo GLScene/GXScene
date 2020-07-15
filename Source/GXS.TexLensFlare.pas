@@ -15,7 +15,7 @@ interface
 uses
   System.Classes,
 
-  Import.OpenGLx,
+  Scene.Import.OpenGLx,
   GXS.Scene,
   Scene.VectorGeometry,
   Scene.PersistentClasses,

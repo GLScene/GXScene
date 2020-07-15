@@ -34,7 +34,7 @@ interface
 {$I Scene.inc}
 
 uses
-  Import.OpenGLx,
+  Scene.Import.OpenGLx,
   Scene.VectorTypes,
   Scene.CurvesAndSurfaces,
   Scene.VectorGeometry,

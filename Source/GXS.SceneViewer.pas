@@ -22,7 +22,7 @@ uses
   FMX.Dialogs.Win,
   FMX.Viewport3D,
   
-  Import.OpenGLx,
+  Scene.Import.OpenGLx,
   GXS.Scene,
   GXS.Context,
   GXS.WinContext;

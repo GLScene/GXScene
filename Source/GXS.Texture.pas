@@ -19,7 +19,7 @@ uses
   FMX.Graphics,
   FMX.Objects,
 
-  Import.OpenGLx,
+  Scene.Import.OpenGLx,
   Scene.XOpenGL,
   Scene.VectorTypes,
   Scene.VectorGeometry,

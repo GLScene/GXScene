@@ -29,7 +29,7 @@ interface
 {$I Scene.inc}
 
 uses
-  Import.OpenGLx,
+  Scene.Import.OpenGLx,
   Scene.XCollection,
   Scene.VectorGeometry,
   Scene.VectorTypes,

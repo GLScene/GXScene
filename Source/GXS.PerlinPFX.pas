@@ -16,7 +16,7 @@ uses
   System.Classes,
   System.Math,
 
-  Import.OpenGLx,
+  Scene.Import.OpenGLx,
   Scene.VectorGeometry,
   GXS.ParticleFX,
   GXS.Graphics;

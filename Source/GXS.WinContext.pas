@@ -21,7 +21,7 @@ uses
   FMX.Dialogs,
   FMX.Platform.Win,
 
-  Import.OpenGLx,
+  Scene.Import.OpenGLx,
   GXS.Context,
   GXS.State,
   Scene.Strings,

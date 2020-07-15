@@ -16,15 +16,15 @@ uses
   System.Classes,
   System.SysUtils,
 
-  Import.OpenGLx,
+  Scene.Import.OpenGLx,
+  Scene.VectorTypes,
   Scene.PersistentClasses,
   Scene.VectorGeometry,
   GXS.ParticleFX,
   GXS.Texture,
   GXS.Color,
   GXS.RenderContextInfo,
-  GXS.Context,
-  Scene.VectorTypes;
+  GXS.Context;
 
 type
 

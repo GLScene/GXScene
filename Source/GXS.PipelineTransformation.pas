@@ -14,7 +14,7 @@ uses
   System.Sysutils,
   FMX.Dialogs,
 
-  Import.OpenGLx,
+  Scene.Import.OpenGLx,
   Scene.VectorGeometry,
   Scene.VectorTypes,
   Scene.Strings;

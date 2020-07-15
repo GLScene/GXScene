@@ -18,7 +18,7 @@ uses
   System.SysUtils,
 
   Scene.Strings,
-  GXS.CUDARunTime;
+  Scene.Import.CUDARunTime;
 
 type
 

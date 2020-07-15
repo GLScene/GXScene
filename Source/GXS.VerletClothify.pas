@@ -16,7 +16,7 @@ uses
   System.Classes,
   System.SysUtils,
 
-  Import.OpenGLx,
+  Scene.Import.OpenGLx,
   Scene.VectorTypes,
   Scene.VectorLists,
   Scene.VectorGeometry,

@@ -19,7 +19,7 @@ uses
   GXS.CUDA,
   GXS.CUDAFourierTransform,
   Scene.Strings,
-  GXS.CUDAAPI;
+  Scene.Import.CUDAAPI;
 
 type
 

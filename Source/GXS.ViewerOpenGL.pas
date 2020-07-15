@@ -25,7 +25,7 @@ uses
   FMX.Controls,
   FMX.Graphics,
 
-  Import.OpenGLx,
+  Scene.Import.OpenGLx,
   GXS.Scene,
   GXS.Context,
   GXS.TextureFormat,

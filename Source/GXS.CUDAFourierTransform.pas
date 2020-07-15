@@ -4,6 +4,9 @@
 *                                          *
 ********************************************)
 
+
+unit GXS.CUDAFourierTransform;
+
 (*
  * Copyright 1993-2009 NVIDIA Corporation.  All rights reserved.
  *
@@ -39,8 +42,6 @@
  * the above Disclaimer and U.S. Government End Users Notice.
  *)
 
-unit GXS.CUDAFourierTransform;
-
 interface
 
 {$I Scene.inc}
@@ -51,8 +52,8 @@ uses
   FMX.Dialogs,
 
   Scene.VectorTypes,
-  GXS.CUDAAPI,
-  GXS.CUDARunTime,
+  Scene.Import.CUDAAPI,
+  Scene.Import.CUDARunTime,
   Scene.Strings;
 
 

@@ -23,7 +23,7 @@ uses
   System.Math,
   FMX.Graphics,
 
-  Import.OpenGLx,
+  Scene.Import.OpenGLx,
   Scene.VectorGeometry,
   GXS.Color,
   GXS.Context,

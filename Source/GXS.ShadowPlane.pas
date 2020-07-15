@@ -22,7 +22,7 @@ uses
   System.Classes,
   FMX.Effects,
 
-  Import.OpenGLx,
+  Scene.Import.OpenGLx,
   Scene.VectorTypes,
   Scene.PersistentClasses,
   Scene.VectorGeometry,

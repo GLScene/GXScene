@@ -4,7 +4,7 @@
 *                                          *
 ********************************************)
 
-unit Import.Vulkan;
+unit Scene.Import.Vulkan;
 
 (*
 ** Copyright (c) 2015-2017 The Khronos Group Inc.

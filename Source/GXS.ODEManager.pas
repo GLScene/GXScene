@@ -21,7 +21,7 @@ uses
   System.SysUtils,
   System.Math,
 
-  Import.OpenGLx,
+  Scene.Import.OpenGLx,
   Scene.XOpenGL,
   Scene.XCollection,
   Scene.VectorGeometry,
@@ -40,8 +40,8 @@ uses
   GXS.TerrainRenderer,
   GXS.Graph,
 
-  Import.ODEUtils,
-  Import.ODE;
+  Scene.Import.ODE,
+  Scene.Import.ODEUtils;
 
 type
 

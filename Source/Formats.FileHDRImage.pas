@@ -21,7 +21,7 @@ uses
   System.SysUtils,
   FMX.Graphics,
 
-  Import.OpenGLx,
+  Scene.Import.OpenGLx,
   Scene.VectorGeometry,
   GXS.Graphics;
 

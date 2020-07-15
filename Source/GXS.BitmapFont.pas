@@ -21,7 +21,7 @@ uses
   FMX.Graphics,
   FMX.Types,
 
-  Import.OpenGLx,
+  Scene.Import.OpenGLx,
   Scene.XOpenGL,
   Scene.PersistentClasses,
   GXS.Scene,

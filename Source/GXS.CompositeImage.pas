@@ -17,7 +17,7 @@ uses
   System.Classes,
   FMX.Graphics,
 
-  Import.OpenGLx,
+  Scene.Import.OpenGLx,
   GXS.Graphics,
   GXS.Texture,
   GXS.TextureFormat,

@@ -14,25 +14,25 @@ uses
   System.Classes,
   System.SysUtils,
   FMX.Dialogs,
-  
+
   Scene.PersistentClasses,
   Scene.BaseClasses,
-  GXS.Context,
   Scene.VectorGeometry,
   Scene.VectorTypes,
   Scene.VectorLists,
+  Scene.Strings,
+
+  Scene.Import.CUDAApi,
+  Scene.Import.CUDARuntime,
+
+  GXS.Context,
   GXS.Graphics,
-  GXS.CUDARuntime,
   GXS.CUDAParser,
   GXS.CUDAFourierTransform,
   GXS.CUDACompiler,
   GXS.CUDAContext,
   GXS.CUDADataAccess,
-  Scene.Strings,
-  GXS.Utils,
-  Import.OpenCL,
-  Import.OpenCL_Platform,
-  GXS.CUDAApi;
+  GXS.Utils;
 
 type
 
@@ -1611,7 +1611,7 @@ end;
 
 procedure TCUDAFunction.SetSharedMemorySize(Value: Integer);
 var
-  MemPerBlock: TSize_t;
+  MemPerBlock: NativeUInt;
 begin
   Context.Requires;
   MemPerBlock := TgxSCUDA(TCUDAModule(FMaster).FMaster)

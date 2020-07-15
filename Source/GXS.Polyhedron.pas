@@ -13,11 +13,11 @@ interface
 uses
   System.Classes,
 
-  Import.OpenGLx,
+  Scene.Import.OpenGLx,
+  Scene.VectorGeometry,
   GXS.Scene,
   GXS.VectorFileObjects,
   GXS.Objects,
-  Scene.VectorGeometry,
   GXS.RenderContextInfo;
 
 type

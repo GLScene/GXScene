@@ -21,7 +21,7 @@ uses
   System.SysUtils,
   System.Types,
 
-  Import.OpenGLx,
+  Scene.Import.OpenGLx,
   Scene.XOpenGL,
   Scene.BaseClasses,
   Scene.VectorLists,

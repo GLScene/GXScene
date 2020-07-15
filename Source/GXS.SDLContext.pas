@@ -22,7 +22,7 @@ uses
   System.Classes,
   System.SysUtils,
 
-  Import.OpenGLx,
+  Scene.Import.OpenGLx,
   Import.SDL2,
   Scene.XOpenGL,
   GXS.Scene,

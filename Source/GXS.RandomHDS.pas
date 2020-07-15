@@ -59,7 +59,7 @@ uses
 ///  Fmx.Imaging.jpeg,
   Fmx.Forms,
 
-  Import.OpenGLx,
+  Scene.Import.OpenGLx,
   GXS.Scene,
   Scene.VectorTypes,
   Scene.VectorGeometry,

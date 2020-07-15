@@ -1,6 +1,11 @@
-//
-// Graphic Scene Engine, http://glscene.org
-//
+(*******************************************
+*                                          *
+* Graphic Scene Engine, http://glscene.org *
+*                                          *
+********************************************)
+
+unit GXS.SMBASS;
+
 (*
   BASS based sound-manager (http://www.un4seen.com/music/, free for freeware).
 
@@ -9,7 +14,6 @@
        looping (sounds are played either once or forever)
        source priorities (not relevant, channels are not limited)
 *)
-unit GXS.SMBASS;
 
 interface
 
@@ -25,7 +29,7 @@ uses
   GXS.Scene,
   Scene.VectorGeometry,
 
-  Import.Bass;
+  Scene.Import.Bass;
 
 type
 
@@ -33,12 +37,12 @@ type
 
 	TgxSMBASS = class (TgxSoundManager)
 	   private
-	      
+
          FActivated : Boolean;
          FAlgorithm3D : TBASS3DAlgorithm;
 
 	   protected
-	      
+
 	      function DoActivate : Boolean; override;
 	      procedure DoDeActivate; override;
          procedure NotifyMasterVolumeChange; override;

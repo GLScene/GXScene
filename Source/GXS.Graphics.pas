@@ -34,7 +34,7 @@ uses
   GR32,
 {$ENDIF}
 
-  Import.OpenGLx,
+  Scene.Import.OpenGLx,
   Scene.VectorGeometry,
   Scene.PersistentClasses,
   Scene.ApplicationFileIO,

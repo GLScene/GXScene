@@ -30,7 +30,7 @@ uses
   Scene.Strings,
   Scene.VectorGeometry,
 
-  Import.OpenGLx,
+  Scene.Import.OpenGLx,
   GXS.Utils,
   GXS.TextureFormat;
 

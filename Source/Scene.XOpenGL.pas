@@ -21,7 +21,7 @@ interface
 {$I Scene.inc}
 
 uses
-  Import.OpenGLx;
+  Scene.Import.OpenGLx;
 
 type
   TMapTexCoordMode = (mtcmUndefined, mtcmNull, mtcmMain, mtcmDual, mtcmSecond, mtcmArbitrary);

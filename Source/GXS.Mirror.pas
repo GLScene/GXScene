@@ -19,7 +19,7 @@ interface
 uses
   System.Classes,
 
-  Import.OpenGLx,
+  Scene.Import.OpenGLx,
   Scene.XCollection,
   Scene.PersistentClasses,
   GXS.Scene,

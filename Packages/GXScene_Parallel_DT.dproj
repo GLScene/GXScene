@@ -114,6 +114,7 @@
         <DCC_HppOutput>..\include\$(Platform)</DCC_HppOutput>
         <DCC_ObjOutput>..\lib\$(Platform)</DCC_ObjOutput>
         <DCC_DcuOutput>..\lib\$(Platform)</DCC_DcuOutput>
+        <DCC_Description>GXScene GPU Computing</DCC_Description>
     </PropertyGroup>
     <Import Project="CBoutput_FMX.optset" Condition="'$(Base)'!='' And Exists('CBoutput_FMX.optset')"/>
     <ItemGroup>
@@ -126,6 +127,9 @@
         <DCCReference Include="GXScene_RT.dcp"/>
         <DCCReference Include="..\Source\GXS.ParallelRegister.pas"/>
         <DCCReference Include="..\Source\Design.FCUDAEditor.pas"/>
+        <RcCompile Include="..\Resources\GXSceneParallel.rc">
+            <Form>GXSceneParallel.res</Form>
+        </RcCompile>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>
@@ -156,6 +160,12 @@
             <Deployment Version="3">
                 <DeployFile LocalName="$(BDS)\Redist\osx32\libcgunwind.1.0.dylib" Class="DependencyModule">
                     <Platform Name="OSX32">
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="C:\Users\Public\Documents\Embarcadero\Studio\21.0\Bpl\GXScene_Parallel_DT.bpl" Configuration="Release" Class="ProjectOutput">
+                    <Platform Name="Win32">
+                        <RemoteName>GXScene_Parallel_DT.bpl</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>

@@ -23,7 +23,7 @@ uses
   System.UITypes,
   FMX.Graphics,
 
-  Import.OpenGLx,
+  Scene.Import.OpenGLx,
   GXS.Scene,
   GXS.Texture,
   GXS.BitmapFont,

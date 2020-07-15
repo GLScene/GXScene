@@ -20,7 +20,7 @@ interface
 uses
   System.Classes,
 
-  Import.OpenGLx,
+  Scene.Import.OpenGLx,
   GXS.Context,
   GXS.Texture,
   GXS.Graphics,

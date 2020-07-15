@@ -3,10 +3,10 @@
 * Graphic Scene Engine, http://glscene.org *
 *                                          *
 ********************************************)
-{ =============================================================================================== }
-{ FMOD presets header file. Copyright (c), FireLight Technologies Pty, Ltd. 1999-2004.            }
-{ =============================================================================================== }
-{
+(*===============================================================================================
+ FMOD presets header file. Copyright (c), FireLight Technologies Pty, Ltd. 1999-2004.
+ ===============================================================================================
+
   NOTE: For the demos to run you must have either fmod.dll (in Windows)
   or libfmod-3.75.so (in Linux) installed.
 
@@ -21,14 +21,14 @@
   a symbolic link between libfmod-3.5.so and libfmod.so. This is done with
   the following command (assuming you are in /usr/lib/)...
   ln -s libfmod-3.75.so libfmod.so.
-}
+*)
 
-unit Import.fmodpresets;
+unit Scene.Import.FmodPresets;
 
 interface
 
 uses
-  Import.fmodtypes;
+  Scene.Import.FmodTypes;
 
 (*
 [DEFINE_START]
@@ -87,6 +87,8 @@ const
 
 (* [DEFINE_END] *)
 
+//---------------------------------------------
 implementation
+//---------------------------------------------
 
 end.

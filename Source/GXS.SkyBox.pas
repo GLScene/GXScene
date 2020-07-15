@@ -18,13 +18,13 @@ interface
 uses
   System.Classes,
 
-  Import.OpenGLx,
+  Scene.Import.OpenGLx,
   Scene.XOpenGL,
+  Scene.VectorTypes,
+  Scene.VectorGeometry,
   GXS.Scene,
   GXS.Material,
-  Scene.VectorGeometry,
-  GXS.RenderContextInfo,
-  Scene.VectorTypes;
+  GXS.RenderContextInfo;
 
 type
 

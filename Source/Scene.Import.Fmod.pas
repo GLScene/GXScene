@@ -3,10 +3,10 @@
 * Graphic Scene Engine, http://glscene.org *
 *                                          *
 ********************************************)
-{ =============================================================================================== }
-{ FMOD Main header file. Copyright (c), Firelight Technologies Pty, Ltd. 1999-2004.               }
-{ =============================================================================================== }
-{
+(*=============================================================================================== }
+ FMOD Main header file. Copyright (c), Firelight Technologies Pty, Ltd. 1999-2004.               }
+ =============================================================================================== }
+
   NOTE: For the demos to run you must have either fmod.dll (in Windows)
   or libfmod-3.75.so (in Linux) installed.
 
@@ -21,10 +21,10 @@
   a symbolic link between libfmod-3.75.so and libfmod.so. This is done with
   the following command (assuming you are in /usr/lib/)...
   ln -s libfmod-3.75.so libfmod.so.
-}
-{ =============================================================================================== }
 
-unit Import.fmod;
+ ===============================================================================================*)
+
+unit Scene.Import.Fmod;
 
 interface
 
@@ -32,8 +32,7 @@ interface
 
 uses
   Winapi.Windows,
-
-  Import.fmodtypes;
+  Scene.Import.FmodTypes;
 
 (*
   Disable warning for unsafe types in Delphi 7

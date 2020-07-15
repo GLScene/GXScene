@@ -92,7 +92,7 @@
         <DCCReference Include="GXScene_RT.dcp"/>
         <DCCReference Include="..\Source\GXS.ODERegister.pas"/>
         <DCCReference Include="..\Source\GXS.NGDRegister.pas"/>
-        <RcCompile Include="D:\Resources\GXScenePhysics.rc">
+        <RcCompile Include="..\Resources\GXScenePhysics.rc">
             <Form>GXScenePhysics.res</Form>
         </RcCompile>
         <BuildConfiguration Include="Debug">
@@ -127,7 +127,7 @@
                 <Platform value="Win64">False</Platform>
             </Platforms>
             <Deployment Version="3">
-                <DeployFile LocalName="..\..\bpl\Win32\GXScene_Physics_DT.bpl" Configuration="Debug" Class="ProjectOutput">
+                <DeployFile LocalName="C:\Users\Public\Documents\Embarcadero\Studio\21.0\Bpl\GXScene_Physics_DT.bpl" Configuration="Debug" Class="ProjectOutput">
                     <Platform Name="Win32">
                         <RemoteName>GXScene_Physics_DT.bpl</RemoteName>
                         <Overwrite>true</Overwrite>

@@ -23,7 +23,7 @@ uses
   FMX.Types,
   FMX.Dialogs,
 
-  Import.OpenGLx,
+  Scene.Import.OpenGLx,
   Scene.XOpenGL,
   Scene.XCollection,
   Scene.BaseClasses,

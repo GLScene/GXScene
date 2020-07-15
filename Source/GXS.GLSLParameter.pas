@@ -14,7 +14,7 @@ interface
 uses
   System.Classes,
 
-  Import.OpenGLx,
+  Scene.Import.OpenGLx,
   Scene.VectorTypes,
   GXS.TextureFormat,
   GXS.RenderContextInfo;

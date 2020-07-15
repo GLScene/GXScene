@@ -15,8 +15,9 @@ interface
 uses
   System.SysUtils,
   FMX.Dialogs,
-  
-  Import.OpenGLx,
+
+  Scene.Import.OpenGLx,
+  Scene.VectorTypes,
   GXS.Scene,
   GXS.Context,
   GXS.State,
@@ -25,8 +26,7 @@ uses
   GXS.RenderContextInfo,
   GXS.MultisampleImage,
   GXS.Graphics,
-  GXS.TextureFormat,
-  Scene.VectorTypes;
+  GXS.TextureFormat;
 
 
 const

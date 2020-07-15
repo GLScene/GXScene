@@ -19,7 +19,7 @@ uses
   System.UITypes,
   FMX.Dialogs,
 
-  Import.OpenGLx,
+  Scene.Import.OpenGLx,
   Scene.VectorTypes,
   Scene.VectorGeometry,
   Scene.PersistentClasses,

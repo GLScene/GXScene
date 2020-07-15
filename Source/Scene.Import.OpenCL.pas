@@ -35,13 +35,13 @@
  * MATERIALS OR THE USE OR OTHER DEALINGS IN THE MATERIALS.
  **************************************************************************)
 
-unit Import.OpenCL;
+unit Scene.Import.OpenCL;
 
 interface
 
 uses
   Winapi.Windows,
-  Import.OpenCL_Platform;
+  Scene.Import.OpenCL_Platform;
 
 const
   {$IFDEF MSWINDOWS}

@@ -17,7 +17,7 @@ uses
   System.SysUtils,
   FMX.Dialogs,
 
-  Import.OpenGLx,
+  Scene.Import.OpenGLx,
   Scene.PersistentClasses,
   Scene.VectorGeometry,
   GXS.Scene,

@@ -12,7 +12,8 @@ uses
   System.Classes,
   FMX.Dialogs,
 
-  Import.OpenGLx,
+  Scene.Import.OpenGLx,
+  Scene.Import.CUDAAPI,
   GXS.CUDA,
   GXS.Context,
   GXS.State,
@@ -22,7 +23,6 @@ uses
   GXS.Texture,
   GXS.GLSLShader,
   GXS.GLSLParameter,
-  GXS.CUDAAPI,
   GXS.RenderContextInfo;
 
 type

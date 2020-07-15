@@ -11,8 +11,8 @@ unit GXS.ODERagdoll;
 interface
 
 uses
-  Import.ODE,
-  Import.ODEUtils,
+  Scene.Import.ODE,
+  Scene.Import.ODEUtils,
   Scene.VectorGeometry,
   GXS.Ragdoll,
   GXS.Scene,

@@ -17,18 +17,18 @@ uses
   System.SysUtils,
   System.Math,
 
-  Import.OpenGLx,
+  Scene.Import.OpenGLx,
   Scene.PersistentClasses,
-  GXS.Scene,
+  Scene.BaseClasses,
+  Scene.VectorTypes,
   Scene.VectorGeometry,
+  GXS.Scene,
   GXS.Objects,
   GXS.PipelineTransformation,
   GXS.Context,
   GXS.Color,
-  Scene.BaseClasses,
   GXS.RenderContextInfo,
   GXS.State,
-  Scene.VectorTypes,
   GXS.Utils,
   GXS.TextureFormat;
 

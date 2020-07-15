@@ -35,7 +35,7 @@
  * MATERIALS OR THE USE OR OTHER DEALINGS IN THE MATERIALS.
  **************************************************************************)
 
-unit Import.OpenCL_Platform;
+unit Scene.Import.OpenCL_Platform;
 
 interface
 

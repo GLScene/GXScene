@@ -43,13 +43,13 @@ requires
 contains
   GXS.ODEManager in '..\Source\GXS.ODEManager.pas',
   GXS.ODESkeletonColliders in '..\Source\GXS.ODESkeletonColliders.pas',
-  Import.ODE in '..\Source\Import.ODE.pas',
-  Import.ODEUtils in '..\Source\Import.ODEUtils.pas',
+  Scene.Import.ODE in '..\Source\Scene.Import.ODE.pas',
+  Scene.Import.ODEUtils in '..\Source\Scene.Import.ODEUtils.pas',
   GXS.ODERagdoll in '..\Source\GXS.ODERagdoll.pas',
   GXS.ModuleLoader in '..\Source\GXS.ModuleLoader.pas',
   GXS.NGDManager in '..\Source\GXS.NGDManager.pas',
-  Import.Newton in '..\Source\Import.Newton.pas',
-  Import.Newton_Joints in '..\Source\Import.Newton_Joints.pas',
+  Scene.Import.Newton in '..\Source\Scene.Import.Newton.pas',
+  Scene.Import.Newton_Joints in '..\Source\Scene.Import.Newton_Joints.pas',
   GXS.PhysX in '..\Source\GXS.PhysX.pas',
   GXS.NGDRagdoll in '..\Source\GXS.NGDRagdoll.pas';
 

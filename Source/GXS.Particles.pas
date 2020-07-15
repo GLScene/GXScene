@@ -16,14 +16,14 @@ uses
   System.Classes,
   System.SysUtils,
 
-  Import.OpenGLx,
+  Scene.Import.OpenGLx,
   Scene.XCollection,
-  GXS.Scene,
+  Scene.BaseClasses,
   Scene.PersistentClasses,
   Scene.VectorGeometry,
+  GXS.Scene,
   GXS.Context,
   GXS.Color,
-  Scene.BaseClasses,
   GXS.RenderContextInfo,
   GXS.State;
 

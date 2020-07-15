@@ -1,12 +1,15 @@
-//
-// Graphic Scene Engine, http://glscene.org
-//
-{
+(*******************************************
+*                                          *
+* Graphic Scene Engine, http://glscene.org *
+*                                          *
+********************************************)
+
+unit GXS.GLSLToonShader;
+
+(*
    Toon shader : Toon shading also called Cell Shading 
    At this time only one light source is supported
-
- }
-unit GXS.GLSLToonShader;
+*)
 
 interface
 
@@ -16,14 +19,15 @@ uses
   Winapi.OpenGL, 
   Winapi.OpenGLext,  
   System.Classes,
+  
+  Scene.Import.OpenGLx, 
+  Scene.BaseClasses, 
+  Scene.VectorGeometry, 
   GXS.Scene, 
   GXS.CrossPlatform, 
-  Scene.BaseClasses, 
   GXS.State, 
-  Import.OpenGLx, 
   GXS.Context, 
   GXS.RenderContextInfo, 
-  Scene.VectorGeometry, 
   GXS.Coordinates,
   GXS.TextureFormat, 
   GXS.Color, 

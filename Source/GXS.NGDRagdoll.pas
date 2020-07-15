@@ -14,7 +14,7 @@ uses
   Scene.VectorGeometry,
   Scene.VectorTypes,
   GXS.VectorFileObjects,
-  Import.Newton;
+  Scene.Import.Newton;
 
 type
   TNewtonRagdoll = class

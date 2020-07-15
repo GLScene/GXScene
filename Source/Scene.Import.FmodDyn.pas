@@ -3,10 +3,10 @@
 * Graphic Scene Engine, http://glscene.org *
 *                                          *
 ********************************************)
-{ ============================================================================================ }
-{ FMOD Main header file. Copyright (c), FireLight Technologies Pty, Ltd. 1999-2003. }
-{ =========================================================================================== }
-{
+(*==========================================================================================
+ FMOD Main header file. Copyright (c), FireLight Technologies Pty, Ltd. 1999-2003.
+ ===========================================================================================
+
   NOTE: For the demos to run you must have either fmod.dll (in Windows)
   or libfmod-3.75.so (in Linux) installed.
 
@@ -21,10 +21,10 @@
   a symbolic link between libfmod-3.75.so and libfmod.so. This is done with
   the following command (assuming you are in /usr/lib/)...
   ln -s libfmod-3.75.so libfmod.so.
-}
-{ =============================================================================================== }
 
-unit Import.fmoddyn;
+============================================================================================*)
+
+unit Scene.Import.FmodDyn;
 
 interface
 
@@ -36,7 +36,7 @@ uses
   Winapi.Windows,
 {$ENDIF}
   FMX.Dialogs,
-  Import.fmodtypes;
+  Scene.Import.FmodTypes;
 
 // ===============================================================================================
 // FUNCTION PROTOTYPES

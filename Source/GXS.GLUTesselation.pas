@@ -15,7 +15,7 @@ interface
 uses
   System.SysUtils,
 
-  Import.OpenGLx,
+  Scene.Import.OpenGLx,
   GXS.VectorFileObjects,
   Scene.VectorLists,
   Scene.VectorGeometry,

@@ -20,7 +20,7 @@ uses
   System.SysUtils,
   System.Types,
 
-  Import.OpenGLx,
+  Scene.Import.OpenGLx,
   Scene.VectorGeometry,
   Scene.Strings,
 

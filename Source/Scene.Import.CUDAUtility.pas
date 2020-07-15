@@ -4,7 +4,7 @@
 *                                          *
 ********************************************)
 
-unit Import.CUDAUtility;
+unit Scene.Import.CUDAUtility;
 
 (* Wraper of cutil.*)
 

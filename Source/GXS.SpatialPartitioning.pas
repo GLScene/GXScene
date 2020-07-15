@@ -11,7 +11,7 @@ unit GXS.SpatialPartitioning;
 interface
 
 uses
-  Import.OpenGLx,
+  Scene.Import.OpenGLx,
   Scene.VectorTypes,
   Scene.VectorGeometry,
   Scene.GeometryBB,

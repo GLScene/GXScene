@@ -26,7 +26,7 @@ uses
   System.SysUtils,
   System.SyncObjs,
 
-  Import.OpenGLx,
+  Scene.Import.OpenGLx,
   Scene.VectorTypes,
   GXS.Context,
   Scene.VectorGeometry,

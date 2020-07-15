@@ -361,8 +361,8 @@
         <DCCReference Include="..\Source\GXS.WindowsFont.pas"/>
         <DCCReference Include="..\Source\GXS.zBuffer.pas"/>
         <DCCReference Include="..\Source\GXS.ViewerOpenGL.pas"/>
-        <DCCReference Include="..\Source\Import.OpenGLx.pas"/>
-        <DCCReference Include="..\Source\Import.Vulkan.pas"/>
+        <DCCReference Include="..\Source\Scene.Import.OpenGLx.pas"/>
+        <DCCReference Include="..\Source\Scene.Import.Vulkan.pas"/>
         <DCCReference Include="..\Source\Scene.AnimationUtils.pas"/>
         <DCCReference Include="..\Source\Scene.ApplicationFileIO.pas"/>
         <DCCReference Include="..\Source\Scene.ArchiveManager.pas"/>

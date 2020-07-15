@@ -30,13 +30,13 @@
 // * MATERIALS OR THE USE OR OTHER DEALINGS IN THE MATERIALS.
 // ****************************************************************************/
 
-unit Import.OpenCL_GL;
+unit Scene.Import.OpenCL_GL;
 
 interface
 
 uses
-  Import.OpenCL,
-  Import.OpenCL_Platform;
+  Scene.Import.OpenCL,
+  Scene.Import.OpenCL_Platform;
 
 type
   PGLuint = ^Cardinal;

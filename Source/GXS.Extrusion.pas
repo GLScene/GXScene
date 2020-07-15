@@ -25,7 +25,7 @@ uses
   System.Classes,
   System.Math,
 
-  Import.OpenGLx,
+  Scene.Import.OpenGLx,
   Scene.XOpenGL,
   Scene.VectorTypes,
   Scene.VectorLists,

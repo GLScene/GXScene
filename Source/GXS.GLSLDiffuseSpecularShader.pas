@@ -30,7 +30,7 @@ uses
   System.Classes,
   System.SysUtils,
 
-  Import.OpenGLx,
+  Scene.Import.OpenGLx,
   GXS.Texture,
   GXS.Scene,
   Scene.VectorGeometry,

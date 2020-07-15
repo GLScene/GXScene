@@ -18,7 +18,7 @@ uses
   System.UITypes,
   FMX.Graphics,
 
-  Import.OpenGLx,
+  Scene.Import.OpenGLx,
   Scene.XCollection,
   Scene.VectorTypes,
   GXS.Context,

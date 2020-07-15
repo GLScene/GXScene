@@ -28,7 +28,7 @@ uses
   FMX.Types,
   FMX.Dialogs,
 
-  Import.OpenGLx,
+  Scene.Import.OpenGLx,
   Scene.Generics,
   Scene.VectorGeometry,
   Scene.Strings,

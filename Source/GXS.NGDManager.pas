@@ -20,8 +20,8 @@ uses
   System.Classes, // TComponent Tlist TWriter TReader TPersistent
   System.SysUtils, //System utilities
   System.Math, // Samevalue isZero to compare single
-  Import.Newton,
-  Import.Newton_Joints, // Newton
+  Scene.Import.Newton, // Newton
+  Scene.Import.Newton_Joints,
   Scene.XCollection,  //TXCollection file function
   Scene.VectorGeometry, // PVector TVector TMatrix PMatrix NullHmgVector...
   Scene.VectorLists, // TaffineVectorList for Tree
@@ -36,7 +36,7 @@ uses
   Scene.GeometryBB; // For show debug
 
 type
-  NGDFloat = Import.Newton.Float;
+  NGDFloat = Scene.Import.Newton.Float;
   PNGDFloat = ^NGDFloat;
 
   TgxHeightField = record

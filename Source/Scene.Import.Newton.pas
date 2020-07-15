@@ -4,6 +4,8 @@
 *                                          *
 ********************************************)
 
+unit Scene.Import.Newton;
+
 (* Copyright (c) <2003-2020> <Julio Jerez, Newton Game Dynamics>
 *
 * This software is provided 'as-is', without any express or implied
@@ -24,12 +26,12 @@
 *
 * 3. This notice may not be removed or altered from any source distribution.
 *)
-unit Import.Newton;
+
+interface
 
 // Define double to use newton in double precision
 {.$DEFINE USE_DOUBLE_PRECISION}
 
-interface
  const
  {$IFDEF USE_DOUBLE_PRECISION}
   NEWTON_API = 'newtond.dll';
@@ -299,7 +301,7 @@ PNewtonJointRecord = ^TNewtonJointRecord;
                                                 	// I0, I1, I2, .. are the indices to the vertex, relative to m_vertex pointer
 		                                        	// M is the index to the material sub shape id
 													// N in the index to the vertex normal relative to m_vertex pointer
-													// E0, E1, E2, ... are the indices of the the face normal that is shared to that face edge, when the edge does not share a face normal then the edge index is set to index N, which the index to the face normal    
+													// E0, E1, E2, ... are the indices of the the face normal that is shared to that face edge, when the edge does not share a face normal then the edge index is set to index N, which the index to the face normal
 													// A is and estimate of the largest diagonal of the face, this used internally as a hint to improve floating point accuracy and algorithm performance. 
  end;
  PNewtonUserMeshCollisionCollideDesc = ^TNewtonUserMeshCollisionCollideDesc;
@@ -659,7 +661,7 @@ procedure NewtonMaterialSetSurfaceThickness (const newtonWorld: PNewtonWorld; id
 
 //	deprecated, not longer continue collision is set on the material  	
 //	NEWTON_API void NewtonMaterialSetContinuousCollisionMode (const NewtonWorld* const newtonWorld, int id0, int id1, int state);
-	
+
 procedure NewtonMaterialSetCallbackUserData (const newtonWorld: PNewtonWorld; id0: Integer; id1: Integer; const userData: Pointer); cdecl; external NEWTON_API;
 procedure NewtonMaterialSetContactGenerationCallback (const newtonWorld: PNewtonWorld; id0: Integer; id1: Integer; contactGeneration: NewtonOnContactGeneration); cdecl; external NEWTON_API;
 procedure NewtonMaterialSetCompoundCollisionCallback (const newtonWorld: PNewtonWorld; id0: Integer; id1: Integer; compoundAabbOverlap: NewtonOnCompoundSubCollisionAABBOverlap); cdecl; external NEWTON_API;

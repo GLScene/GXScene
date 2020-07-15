@@ -19,13 +19,13 @@ uses
   System.Math,
   FMX.Graphics,
 
-  Import.OpenGLx,
-  GXS.Scene,
+  Scene.Import.OpenGLx,
+  Scene.VectorTypes,
   Scene.VectorGeometry,
+  GXS.Scene,
   GXS.Context,
   GXS.State,
   GXS.Graphics,
-  Scene.VectorTypes,
   GXS.Color,
   GXS.RenderContextInfo;
 

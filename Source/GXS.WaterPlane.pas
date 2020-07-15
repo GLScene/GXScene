@@ -18,7 +18,7 @@ uses
   FMX.Types,
   FMX.Graphics,
 
-  Import.OpenGLx,
+  Scene.Import.OpenGLx,
   Scene.VectorGeometry,
   Scene.VectorTypes,
   Scene.VectorLists,

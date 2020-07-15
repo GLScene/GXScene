@@ -1,6 +1,11 @@
-//
-// Graphic Scene Engine, http://glscene.org
-//
+(*******************************************
+*                                          *
+* Graphic Scene Engine, http://glscene.org *
+*                                          *
+********************************************)
+
+unit GXS.SMOpenAL;
+
 (*
   OpenAL based sound-manager (http://www.openal.org).
   OpenAL drivers can be download from the OpenAL site or your soundcard
@@ -16,7 +21,6 @@
   can crash if too playing at once.
   ???
 *)
-unit GXS.SMOpenAL;
 
 interface
 
@@ -28,7 +32,7 @@ uses
   FMX.Forms,
   FMX.Dialogs,
 
-  Import.OpenAL {al, alut, alTypes} ,
+  Scene.Import.OpenAL {al, alut, alTypes} ,
   Scene.VectorGeometry,
   GXS.Sound,
   GXS.Scene,

@@ -1,10 +1,12 @@
-//
-// Graphic Scene Engine, http://glscene.org
-//
-(*
-  Design time registration code for the Sounds
-*)
+(*******************************************
+*                                          *
+* Graphic Scene Engine, http://glscene.org *
+*                                          *
+********************************************)
+
 unit GXS.SoundRegister;
+
+(* Design time registration code for the Sounds *)
 
 interface
 

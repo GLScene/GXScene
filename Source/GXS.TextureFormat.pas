@@ -10,7 +10,7 @@ interface
 
 uses
   Scene.Strings,
-  Import.OpenGLx;
+  Scene.Import.OpenGLx;
 
 type
   // Texture addressing rules

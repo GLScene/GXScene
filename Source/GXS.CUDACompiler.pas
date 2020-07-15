@@ -20,13 +20,14 @@ uses
   Winapi.ShellAPI,
   Winapi.TlHelp32,
   System.SysUtils,
-  System.Classes, 
+  System.Classes,
   System.UITypes,
-  FMX.Forms, 
+  FMX.Forms,
   FMX.Dialogs,
+
+  Scene.ApplicationFileIO,
   Scene.Strings,
-  GXS.CUDAParser, 
-  Scene.ApplicationFileIO;
+  GXS.CUDAParser;
 
 type
   TgxSCUDACompilerOutput = (codeUndefined, codePtx, codeCubin, codeGpu);

@@ -1,7 +1,12 @@
-//
-// Graphic Scene Engine, http://glscene.org
-//
-{
+(*******************************************
+*                                          *
+* Graphic Scene Engine, http://glscene.org *
+*                                          *
+********************************************)
+
+unit GXS.GLSLVertexDisplacementShader;
+
+(*
    VertexDisplacement shader : Basic Vertex Displacement with Perlin Noise
    You can Improved it :
    The vertex displacement can be done by reading a 2D or 3D texture.
@@ -11,28 +16,25 @@
 
    At this time only one light source is supported
 
- }
-
-
-unit GXS.GLSLVertexDisplacementShader;
+ *)
 
 interface
 
 {$I Scene.inc}
 
 uses
-  System.Classes,
-  
-  GXS.Scene, 
-  GXS.CrossPlatform, 
-  Scene.BaseClasses, 
-  GXS.State,
   Winapi.OpenGL, 
   Winapi.OpenGLext,  
-  Import.OpenGLx, 
+  System.Classes,
+  
+  Scene.Import.OpenGLx, 
+  Scene.BaseClasses, 
+  Scene.VectorGeometry, 
+  GXS.Scene, 
+  GXS.CrossPlatform, 
+  GXS.State,
   GXS.Context, 
   GXS.RenderContextInfo, 
-  Scene.VectorGeometry, 
   GXS.Coordinates,
   GXS.TextureFormat, 
   GXS.Color, 
@@ -41,8 +43,8 @@ uses
   GXS.GLSLShader, 
   GXS.CustomShader;
 
-{ Custom class for GLSLVertexDisplacementShader. 
- VertexDisplacement Shader : Spherical Environment Mapping }
+(* Custom class for GLSLVertexDisplacementShader. 
+ VertexDisplacement Shader : Spherical Environment Mapping *)
 Type
   TgxCustomGLSLVertexDisplacementShader = class(TgxCustomGLSLShader)
   private
@@ -52,11 +54,9 @@ Type
     FAmbientFactor : Single;
     FDiffuseFactor : Single;
     FSpecularFactor : Single;
-
     FMaterialLibrary: TgxAbstractMaterialLibrary;
     FMainTexture: TgxTexture;
     FMainTexName   : TgxLibMaterialName;
-
     FElapsedTime : Single;
     FNoise : Single;
     FDisplacementScale : Single;
@@ -64,39 +64,30 @@ Type
     FTurbulenceFactor : Single;
     FNoisePeriod : Single;
     FTimeFactor : Single;
-
     function GetMaterialLibrary: TgxAbstractMaterialLibrary;
-
     procedure SetMainTexTexture(const Value: TgxTexture);
     function GetMainTexName: TgxLibMaterialName;
     procedure SetMainTexName(const Value: TgxLibMaterialName);
-
     //procedure SetDiffuseColor(AValue: TgxColor);
     procedure SetAmbientColor(AValue: TgxColor);
     procedure SetSpecularColor(AValue: TgxColor);
-
   protected
     procedure DoApply(var rci : TgxRenderContextInfo; Sender : TObject); override;
     function DoUnApply(var rci: TgxRenderContextInfo): Boolean; override;
-
     procedure SetMaterialLibrary(const Value: TgxAbstractMaterialLibrary); virtual;
     procedure Notification(AComponent: TComponent; Operation: TOperation); override;
   public
     constructor Create(AOwner : TComponent); override;
     destructor Destroy; override;
-
 //    property DiffuseColor : TgxColor read FDiffuseColor Write setDiffuseColor;
     property SpecularColor : TgxColor Read FSpecularColor Write setSpecularColor;
     property AmbientColor : TgxColor Read FAmbientColor Write setAmbientColor;
-
     property AmbientFactor : Single Read FAmbientFactor Write FAmbientFactor;
     property DiffuseFactor : Single Read FDiffuseFactor Write FDiffuseFactor;
     property SpecularFactor : Single Read FSpecularFactor Write FSpecularFactor;
-
     property MaterialLibrary: TgxAbstractMaterialLibrary read getMaterialLibrary write SetMaterialLibrary;
     property MainTexture: TgxTexture read FMainTexture write SetMainTexTexture;
     property MainTextureName: TgxLibMaterialName read GetMainTexName write SetMainTexName;
-
     property ElapsedTime: Single read FElapsedTime write FElapsedTime;
     property NoiseFactor : Single read FNoise write FNoise;
     property NoiseScale : Single read FNoiseScale write FNoiseScale;
@@ -108,20 +99,15 @@ Type
 
   TgxSLVertexDisplacementShader = class(TgxCustomGLSLVertexDisplacementShader)
   published
-
-
     property AmbientColor;
 //    property DiffuseColor;
     property SpecularColor;
-
     property AmbientFactor;
     property DiffuseFactor;
     property SpecularFactor;
-
     property MaterialLibrary;
     property MainTexture;
     property MainTextureName;
-
     property ElapsedTime;
     property NoiseFactor;
     property NoiseScale;
@@ -129,9 +115,11 @@ Type
     property NoisePeriod;
     property DisplacementScale;
     property TimeFactor;
-
   end;
+  
+//-------------------------------------------  
 implementation
+//-------------------------------------------  
 
 constructor TgxCustomGLSLVertexDisplacementShader.Create(AOwner: TComponent);
 begin
@@ -154,7 +142,7 @@ begin
     Add('varying float noise; ');
 
     //
-    //VKSL textureless classic 3D noise "cnoise",
+    //GLSL textureless classic 3D noise "cnoise",
     // with an RSL-style periodic variant "pnoise".
     // Author:  Stefan Gustavson (stefan.gustavson@liu.se)
     // Version: 2011-10-11
@@ -469,17 +457,14 @@ begin
     if AComponent = FMaterialLibrary then
       if FMaterialLibrary <> nil then
       begin
-
         if FMainTexture <> nil then
         begin
           Index := TgxMaterialLibrary(FMaterialLibrary).Materials.GetTextureIndex(FMainTexture);
           if Index <> -1 then
             SetMainTexTexture(nil);
         end;
-
         FMaterialLibrary := nil;
       end;
 end;
-
 
 end.

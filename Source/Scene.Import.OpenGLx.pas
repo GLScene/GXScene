@@ -4,7 +4,7 @@
 *                                          *
 ********************************************)
 
-unit Import.OpenGLx;
+unit Scene.Import.OpenGLx;
 
 (* -------------------------------------------------------------
  Copyright 1991-1993, Silicon Graphics, Inc.
@@ -31,10 +31,9 @@ interface
 uses
   System.SysUtils,
   System.Math,
-  {$IFDEF MSWINDOWS}
+ {$IFDEF MSWINDOWS}
      Winapi.Windows,
-  {$ENDIF}
-  {$IFDEF LINUX} X, XLib, XUtil, {$ENDIF}
+ {$ELSE} X, XLib, XUtil, {$ENDIF}
   Scene.VectorTypes;
 
 const
@@ -43,8 +42,7 @@ const
   glu32 = 'GLU32.dll';
   libEGL = 'libEGL.dll';
   libGLES2 = 'libGLESv2.dll';
-{$ENDIF}
-{$IFDEF LINUX}
+{$ELSE}
   opengl32 = 'libGL.so';
   glu32 = 'libGLU.so';
   libEGL = 'libEGL.so';
@@ -63,8 +61,8 @@ type
 
 
    GLenum      = Cardinal;
-   {$EXTERNALSYM GLenum}
-   TGLenum     = Cardinal; 
+ {$EXTERNALSYM GLenum}
+   TGLenum     = Cardinal;
    PGLenum     = ^TGLenum;
 
   GLboolean = BYTEBOOL;
@@ -164,7 +162,7 @@ type
   TGLsync = NativeInt;
 
 
-   {$IFDEF MSWINDOWS}
+ {$IFDEF MSWINDOWS}
    PWGLSwap = ^TWGLSwap;
    _WGLSWAP = packed record
      hdc: HDC;
@@ -172,10 +170,8 @@ type
    end;
    TWGLSwap = _WGLSWAP;
    WGLSWAP = _WGLSWAP;
-   {$ENDIF}
-
+  {$ELSE}
    // Linux type
-   {$IFDEF LINUX}
    GLXContext    = Pointer;
    GLXPixmap     = XID;
    GLXDrawable   = XID;
@@ -185,7 +181,7 @@ type
    GLXContextID  = XID;
    GLXWindow     = XID;
    GLXPbuffer    = XID;
-   {$ENDIF}
+  {$ENDIF}
 
    HPBUFFERARB = Integer;
 
@@ -857,7 +853,7 @@ const
   GL_NOTEQUAL = $0205;
   GL_GEQUAL = $0206;
   GL_ALWAYS = $0207;
-  { BlendingFactorDest }
+  // BlendingFactorDest
   GL_ZERO = 0;
   GL_ONE = 1;
   GL_SRC_COLOR = $0300;
@@ -866,11 +862,11 @@ const
   GL_ONE_MINUS_SRC_ALPHA = $0303;
   GL_DST_ALPHA = $0304;
   GL_ONE_MINUS_DST_ALPHA = $0305;
-  { BlendingFactorSrc }
+  // BlendingFactorSrc
   GL_DST_COLOR = $0306;
   GL_ONE_MINUS_DST_COLOR = $0307;
   GL_SRC_ALPHA_SATURATE = $0308;
-  { DrawBufferMode }
+  // DrawBufferMode
   GL_NONE = 0;
   GL_FRONT_LEFT = $0400;
   GL_FRONT_RIGHT = $0401;
@@ -881,16 +877,16 @@ const
   GL_LEFT = $0406;
   GL_RIGHT = $0407;
   GL_FRONT_AND_BACK = $0408;
-  { ErrorCode }
+  // ErrorCode
   GL_NO_ERROR = 0;
   GL_INVALID_ENUM = $0500;
   GL_INVALID_VALUE = $0501;
   GL_INVALID_OPERATION = $0502;
   GL_OUT_OF_MEMORY = $0505;
-  { FrontFaceDirection }
+  // FrontFaceDirection
   GL_CW = $0900;
   GL_CCW = $0901;
-  { GetPName }
+  // GetPName
   GL_POINT_SIZE = $0B11;
   GL_POINT_SIZE_RANGE = $0B12;
   GL_POINT_SIZE_GRANULARITY = $0B13;
@@ -967,11 +963,11 @@ const
   GL_TEXTURE_GREEN_SIZE = $805D;
   GL_TEXTURE_BLUE_SIZE = $805E;
   GL_TEXTURE_ALPHA_SIZE = $805F;
-  { HintMode }
+  // HintMode
   GL_DONT_CARE = $1100;
   GL_FASTEST = $1101;
   GL_NICEST = $1102;
-  { DataType }
+  // DataType
   GL_BYTE = $1400;
   GL_UNSIGNED_BYTE = $1401;
   GL_SHORT = $1402;
@@ -980,7 +976,7 @@ const
   GL_UNSIGNED_INT = $1405;
   GL_FLOAT = $1406;
   GL_DOUBLE = $140A;
-  { LogicOp }
+  // LogicOp
   GL_CLEAR = $1500;
   GL_AND = $1501;
   GL_AND_REVERSE = $1502;
@@ -997,13 +993,13 @@ const
   GL_OR_INVERTED = $150D;
   GL_NAND = $150E;
   GL_SET = $150F;
-  { MatrixMode (for gl3.h, FBO attachment type) }
+  // MatrixMode (for gl3.h, FBO attachment type)
   GL_TEXTURE = $1702;
-  { PixelCopyType }
+  // PixelCopyType
   GL_COLOR = $1800;
   GL_DEPTH = $1801;
   GL_STENCIL = $1802;
-  { PixelFormat }
+  // PixelFormat
   GL_STENCIL_INDEX = $1901;
   GL_DEPTH_COMPONENT = $1902;
   GL_RED = $1903;
@@ -1012,39 +1008,39 @@ const
   GL_ALPHA = $1906;
   GL_RGB = $1907;
   GL_RGBA = $1908;
-  { PolygonMode }
+  // PolygonMode
   GL_POINT = $1B00;
   GL_LINE = $1B01;
   GL_FILL = $1B02;
-  { StencilOp }
+  // StencilOp
   GL_KEEP = $1E00;
   GL_REPLACE = $1E01;
   GL_INCR = $1E02;
   GL_DECR = $1E03;
-  { StringName }
+  // StringName
   GL_VENDOR = $1F00;
   GL_RENDERER = $1F01;
   GL_VERSION = $1F02;
   GL_EXTENSIONS = $1F03;
-  { TextureMagFilter }
+  // TextureMagFilter
   GL_NEAREST = $2600;
   GL_LINEAR = $2601;
-  { TextureMinFilter }
+  // TextureMinFilter
   GL_NEAREST_MIPMAP_NEAREST = $2700;
   GL_LINEAR_MIPMAP_NEAREST = $2701;
   GL_NEAREST_MIPMAP_LINEAR = $2702;
   GL_LINEAR_MIPMAP_LINEAR = $2703;
-  { TextureParameterName }
+  // TextureParameterName
   GL_TEXTURE_MAG_FILTER = $2800;
   GL_TEXTURE_MIN_FILTER = $2801;
   GL_TEXTURE_WRAP_S = $2802;
   GL_TEXTURE_WRAP_T = $2803;
-  { TextureTarget }
+  // TextureTarget
   GL_PROXY_TEXTURE_1D = $8063;
   GL_PROXY_TEXTURE_2D = $8064;
-  { TextureWrapMode }
+  // TextureWrapMode
   GL_REPEAT = $2901;
-  { PixelInternalFormat }
+  // PixelInternalFormat
   GL_R3_G3_B2 = $2A10;
   GL_RGB4 = $804F;
   GL_RGB5 = $8050;
@@ -2874,7 +2870,7 @@ const
   GL_TIMESTAMP = $8E28;
 
   // GL_ARB_vertex_type_2_10_10_10_rev
-  { reuse GL_UNSIGNED_INT_2_10_10_10_REV }
+  (* reuse GL_UNSIGNED_INT_2_10_10_10_REV *)
   GL_INT_2_10_10_10_REV = $8D9F;
 
   // GL_ARB_draw_indirect
@@ -10685,19 +10681,6 @@ begin
 end;
 {$ENDIF}
 
-procedure CloseOpenGL;
-begin
-   if GLHandle<>INVALID_MODULEHANDLE then begin
-      FreeLibrary(Cardinal(GLHandle));
-      GLHandle:=INVALID_MODULEHANDLE;
-   end;
-
-   if GLUHandle<>INVALID_MODULEHANDLE then begin
-      FreeLibrary(Cardinal(GLUHandle));
-      GLUHandle:=INVALID_MODULEHANDLE;
-   end;
-end;
-
 function InitOpenGL : Boolean;
 begin
    if (GLHandle=INVALID_MODULEHANDLE) or (GLUHandle=INVALID_MODULEHANDLE) then
@@ -10725,6 +10708,19 @@ end;
 function IsOpenGLInitialized: Boolean;
 begin
    Result:=(GLHandle<>INVALID_MODULEHANDLE);
+end;
+
+procedure CloseOpenGL;
+begin
+   if GLHandle<>INVALID_MODULEHANDLE then begin
+      FreeLibrary(Cardinal(GLHandle));
+      GLHandle:=INVALID_MODULEHANDLE;
+   end;
+
+   if GLUHandle<>INVALID_MODULEHANDLE then begin
+      FreeLibrary(Cardinal(GLUHandle));
+      GLUHandle:=INVALID_MODULEHANDLE;
+   end;
 end;
 
 // compatibility routines
@@ -10763,11 +10759,15 @@ begin
   Result:=IsVersionMet(MajorVersion,MinorVersion,GLMajorVersion,GLMinorVersion);
 end;
 
+//----------------------------------------------------
 initialization
+//----------------------------------------------------
 
   Set8087CW($133F);
 
+//----------------------------------------------------
 finalization
+//----------------------------------------------------
 
   CloseOpenGL;
 

@@ -1,6 +1,11 @@
-//
-// Graphic Scene Engine, http://glscene.org
-//
+(*******************************************
+*                                          *
+* Graphic Scene Engine, http://glscene.org *
+*                                          *
+********************************************)
+
+unit GXS.SMFMOD;
+
 (*
   FMOD based sound-manager (http://www.fmod.org/, free for freeware).
 
@@ -10,8 +15,6 @@
        sound cones
 *)
 
-unit GXS.SMFMOD;
-
 interface
 
 {$I Scene.inc}
@@ -20,9 +23,9 @@ uses
   System.Classes,
   System.SysUtils,
 
-  Import.FMod,
-  Import.FmodTypes,
-  Import.FmodPresets,
+  Scene.Import.FMod,
+  Scene.Import.FmodTypes,
+  Scene.Import.FmodPresets,
   GXS.Sound,
   GXS.Scene,
   Scene.VectorGeometry;

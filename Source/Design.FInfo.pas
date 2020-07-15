@@ -9,7 +9,7 @@ unit Design.FInfo;
 interface
 
 uses
-  Import.OpenGLx,
+  Scene.Import.OpenGLx,
   System.SysUtils,
   System.Types,
   System.UITypes,

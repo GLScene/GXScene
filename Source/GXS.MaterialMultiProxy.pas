@@ -32,19 +32,17 @@ uses
   System.Classes,
   System.SysUtils,
 
-  Import.OpenGLx,
-
+  Scene.Import.OpenGLx,
+  Scene.BaseClasses,
+  Scene.PersistentClasses,
   Scene.VectorTypes,
-
-  GXS.Scene,
   Scene.VectorGeometry,
+  Scene.Strings,
   GXS.Texture,
   GXS.Material,
   GXS.Silhouette,
-  Scene.Strings,
-  Scene.PersistentClasses,
+  GXS.Scene,
   GXS.RenderContextInfo,
-  Scene.BaseClasses,
   GXS.Context,
   GXS.PipelineTransformation;
 

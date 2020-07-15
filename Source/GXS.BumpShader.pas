@@ -37,7 +37,7 @@ uses
   System.Classes,
   System.SysUtils,
 
-  Import.OpenGLx,
+  Scene.Import.OpenGLx,
   GXS.Material,
   GXS.Graphics,
   GXS.Utils,

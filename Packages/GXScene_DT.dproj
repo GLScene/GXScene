@@ -173,11 +173,11 @@
         <DCCReference Include="..\Source\Design.FSceneEditor.pas"/>
         <DCCReference Include="..\Source\Design.SceneRegister.pas"/>
         <DCCReference Include="..\Source\Design.XCollectionRegister.pas"/>
-        <RcCompile Include="D:\Resources\GXSceneObjects.rc">
-            <Form>GXSceneObjects.res</Form>
-        </RcCompile>
-        <RcCompile Include="D:\Resources\GXScene.rc">
+        <RcCompile Include="..\Resources\GXScene.rc">
             <Form>GXScene.res</Form>
+        </RcCompile>
+        <RcCompile Include="..\Resources\GXSceneObjects.rc">
+            <Form>GXSceneObjects.res</Form>
         </RcCompile>
         <BuildConfiguration Include="Debug">
             <Key>Cfg_2</Key>
@@ -211,7 +211,7 @@
                 <Platform value="Win64">False</Platform>
             </Platforms>
             <Deployment Version="3">
-                <DeployFile LocalName="..\..\bpl\Win32\GXScene_DT.bpl" Configuration="Debug" Class="ProjectOutput">
+                <DeployFile LocalName="C:\Users\Public\Documents\Embarcadero\Studio\21.0\Bpl\GXScene_DT.bpl" Configuration="Debug" Class="ProjectOutput">
                     <Platform Name="Win32">
                         <RemoteName>GXScene_DT.bpl</RemoteName>
                         <Overwrite>true</Overwrite>

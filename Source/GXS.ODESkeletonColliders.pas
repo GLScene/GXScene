@@ -13,7 +13,7 @@ interface
 uses
   System.Classes,
 
-  Import.ODE,
+  Scene.Import.ODE,
   Scene.PersistentClasses,
   Scene.VectorGeometry,
   GXS.VectorFileObjects;

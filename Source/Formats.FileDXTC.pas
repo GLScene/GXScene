@@ -16,7 +16,7 @@ interface
 
 uses
   System.SysUtils,
-  Import.OpenGLx,
+  Scene.Import.OpenGLx,
   GXS.TextureFormat;
 
 const

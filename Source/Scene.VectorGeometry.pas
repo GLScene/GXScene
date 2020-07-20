@@ -192,10 +192,10 @@ type
   PAffineMatrix = ^TAffineMatrix;
   TAffineMatrix = TAffineFltMatrix;
 
-  { A plane equation.
+  (* A plane equation.
     Defined by its equation A.x+B.y+C.z+D , a plane can be mapped to the
     homogeneous space coordinates, and this is what we are doing here.
-    The typename is just here for easing up data manipulation. }
+    The typename is just here for easing up data manipulation. *)
   THmgPlane = TVector;
   TDoubleHmgPlane = THomogeneousDblVector;
 
@@ -224,9 +224,9 @@ type
     ttRotateX, ttRotateY, ttRotateZ, ttTranslateX, ttTranslateY, ttTranslateZ,
     ttPerspectiveX, ttPerspectiveY, ttPerspectiveZ, ttPerspectiveW);
 
-  // used to describe a sequence of transformations in following order:
-  // [Sx][Sy][Sz][ShearXY][ShearXZ][ShearZY][Rx][Ry][Rz][Tx][Ty][Tz][P(x,y,z,w)]
-  // constants are declared for easier access (see MatrixDecompose below)
+  (* used to describe a sequence of transformations in following order:
+     [Sx][Sy][Sz][ShearXY][ShearXZ][ShearZY][Rx][Ry][Rz][Tx][Ty][Tz][P(x,y,z,w)]
+     constants are declared for easier access (see MatrixDecompose below) *)
   TTransformations = array [TTransType] of Single;
 
   TPackedRotationMatrix = array [0 .. 2] of SmallInt;
@@ -289,9 +289,9 @@ const
   EPSILON: Single = 1E-40;
   EPSILON2: Single = 1E-30;
 
-// ------------------------------------------------------------------------------
-// Vector functions
-// ------------------------------------------------------------------------------
+(* ------------------------------------------------------------------------------
+   Vector functions
+   -----------------------------------------------------------------------------*)
 
 function TexPointMake(const S, T: Single): TTexPoint; inline;
 function AffineVectorMake(const X, Y, Z: Single): TAffineVector; overload; inline;
@@ -402,8 +402,7 @@ function Vector4sMake(const Vector: TVector2s; const Z: SmallInt = 0; const W: S
 function Vector4dMake(const Vector: TVector2d; const Z: Double = 0; const W: Double = 0): TVector4d; overload; inline;
 function Vector4bMake(const Vector: TVector2b; const Z: Byte = 0; const W: Byte = 0): TVector4b; overload; inline;
 
-// Vector comparison functions:
-// ComparedVector
+// Vector comparison functions: ComparedVector
 // 3f
 function VectorMoreThen(const SourceVector, ComparedVector: TVector3f): Boolean; overload; inline;
 function VectorMoreEqualThen(const SourceVector, ComparedVector: TVector3f): Boolean; overload; inline;
@@ -519,7 +518,6 @@ procedure VectorArrayAdd(const src: PAffineVectorArray;
 function VectorSubtract(const V1, V2: TVector2f): TVector2f; overload; inline;
 // Subtracts V2 from V1, result is placed in V1
 procedure SubtractVector(var V1: TVector2f; const V2: TVector2f); overload; inline;
-
 // Returns V1-V2
 function VectorSubtract(const V1, V2: TAffineVector): TAffineVector; overload; inline;
 // Subtracts V2 from V1 and return value in result
@@ -540,7 +538,6 @@ function VectorSubtract(const V1: TVector; delta: Single): TVector; overload;inl
 procedure SubtractVector(var V1: TAffineVector; const V2: TAffineVector); overload; inline;
 // Subtracts V2 from V1, result is placed in V1
 procedure SubtractVector(var V1: TVector; const V2: TVector); overload; inline;
-
 // Combine the first vector with the second : vr:=vr+v*f
 procedure CombineVector(var vr: TAffineVector; const V: TAffineVector; var f: Single); overload; inline;
 procedure CombineVector(var vr: TAffineVector; const V: TAffineVector; pf: PFloat); overload; inline;
@@ -572,27 +569,24 @@ procedure VectorCombine(const V1, V2: TVector; const F2: Single; var vr: TVector
 function VectorCombine3(const V1, V2, V3: TVector; const F1, F2, F3: Single): TVector; overload; inline;
 // Makes a linear combination of three vectors and return the result
 procedure VectorCombine3(const V1, V2, V3: TVector; const F1, F2, F3: Single; var vr: TVector); overload;
-
-{ Calculates the dot product between V1 and V2.
-  Result:=V1[X] * V2[X] + V1[Y] * V2[Y] }
+(* Calculates the dot product between V1 and V2.
+  Result:=V1[X] * V2[X] + V1[Y] * V2[Y] *)
 function VectorDotProduct(const V1, V2: TVector2f): Single; overload; inline;
-{ Calculates the dot product between V1 and V2.
-  Result:=V1[X] * V2[X] + V1[Y] * V2[Y] + V1[Z] * V2[Z] }
+(* Calculates the dot product between V1 and V2.
+  Result:=V1[X] * V2[X] + V1[Y] * V2[Y] + V1[Z] * V2[Z] *)
 function VectorDotProduct(const V1, V2: TAffineVector): Single; overload; inline;
-{ Calculates the dot product between V1 and V2.
-  Result:=V1[X] * V2[X] + V1[Y] * V2[Y] + V1[Z] * V2[Z] }
+(* Calculates the dot product between V1 and V2.
+  Result:=V1[X] * V2[X] + V1[Y] * V2[Y] + V1[Z] * V2[Z] *)
 function VectorDotProduct(const V1, V2: TVector): Single; overload; inline;
-{ Calculates the dot product between V1 and V2.
-  Result:=V1[X] * V2[X] + V1[Y] * V2[Y] + V1[Z] * V2[Z] }
+(* Calculates the dot product between V1 and V2.
+  Result:=V1[X] * V2[X] + V1[Y] * V2[Y] + V1[Z] * V2[Z] *)
 function VectorDotProduct(const V1: TVector; const V2: TAffineVector): Single; overload; inline;
-
-{ Projects p on the line defined by o and direction.
+(* Projects p on the line defined by o and direction.
   Performs VectorDotProduct(VectorSubtract(p, origin), direction), which,
   if direction is normalized, computes the distance between origin and the
-  projection of p on the (origin, direction) line. }
+  projection of p on the (origin, direction) line. *)
 function PointProject(const p, origin, direction: TAffineVector): Single; overload; inline;
 function PointProject(const p, origin, direction: TVector): Single; overload; inline;
-
 // Calculates the cross product between vector 1 and 2
 function VectorCrossProduct(const V1, V2: TAffineVector): TAffineVector; overload;
 // Calculates the cross product between vector 1 and 2
@@ -605,19 +599,16 @@ procedure VectorCrossProduct(const V1, V2: TAffineVector; var vr: TVector); over
 procedure VectorCrossProduct(const V1, V2: TVector; var vr: TAffineVector); overload;
 // Calculates the cross product between vector 1 and 2, place result in vr
 procedure VectorCrossProduct(const V1, V2: TAffineVector; var vr: TAffineVector); overload;
-
 // Calculates linear interpolation between start and stop at point t
 function Lerp(const start, stop, T: Single): Single; inline;
 // Calculates angular interpolation between start and stop at point t
 function AngleLerp(start, stop, T: Single): Single; inline;
-{ This is used for interpolating between 2 matrices. The result
-  is used to reposition the model parts each frame. }
+(* This is used for interpolating between 2 matrices. The result
+  is used to reposition the model parts each frame. *)
 function MatrixLerp(const m1, m2: TMatrix; const delta: Single): TMatrix; inline;
-
-{ Calculates the angular distance between two angles in radians.
-  Result is in the [0; PI] range. }
+(* Calculates the angular distance between two angles in radians.
+  Result is in the [0; PI] range. *)
 function DistanceBetweenAngles(angle1, angle2: Single): Single; inline;
-
 // Calculates linear interpolation between texpoint1 and texpoint2 at point t
 function TexPointLerp(const t1, t2: TTexPoint; T: Single): TTexPoint; overload; inline;
 // Calculates linear interpolation between vector1 and vector2 at point t
@@ -630,7 +621,6 @@ function VectorLerp(const V1, V2: TVector; T: Single): TVector; overload; inline
 procedure VectorLerp(const V1, V2: TVector; T: Single; var vr: TVector); overload; inline;
 function VectorAngleLerp(const V1, V2: TAffineVector; T: Single): TAffineVector; overload;
 function VectorAngleCombine(const V1, V2: TAffineVector; f: Single): TAffineVector; overload; inline;
-
 // Calculates linear interpolation between vector arrays
 procedure VectorArrayLerp(const src1, src2: PVectorArray; T: Single; n: Integer; dest: PVectorArray); overload; inline;
 procedure VectorArrayLerp(const src1, src2: PAffineVectorArray; T: Single; n: Integer; dest: PAffineVectorArray); overload; inline;
@@ -639,18 +629,15 @@ procedure VectorArrayLerp(const src1, src2: PTexPointArray; T: Single; n: Intege
 type
   TGLInterpolationType = (itLinear, itPower, itSin, itSinAlt, itTan, itLn, itExp);
 
-  { There functions that do the same as "Lerp", but add some distortions. }
+// There functions that do the same as "Lerp", but add some distortions.
 function InterpolatePower(const start, stop, delta: Single; const DistortionDegree: Single): Single; inline;
 function InterpolateLn(const start, stop, delta: Single; const DistortionDegree: Single): Single; inline;
 function InterpolateExp(const start, stop, delta: Single; const DistortionDegree: Single): Single; inline;
-
-{ Only valid where Delta belongs to [0..1] }
+// Only valid where Delta belongs to [0..1]
 function InterpolateSin(const start, stop, delta: Single): Single; inline;
 function InterpolateTan(const start, stop, delta: Single): Single; inline;
-
-{ "Alt" functions are valid everywhere }
+// "Alt" functions are valid everywhere
 function InterpolateSinAlt(const start, stop, delta: Single): Single; inline;
-
 function InterpolateCombinedFastPower(const OriginalStart, OriginalStop,
   OriginalCurrent: Single; const TargetStart, TargetStop: Single;
   const DistortionDegree: Single): Single; inline;
@@ -665,10 +652,9 @@ function InterpolateCombinedFast(const OriginalStart, OriginalStop,
 function InterpolateCombined(const start, stop, delta: Single;
   const DistortionDegree: Single;
   const InterpolationType: TGLInterpolationType): Single; inline;
-
-{ Calculates the length of a vector following the equation sqrt(x*x+y*y). }
+// Calculates the length of a vector following the equation sqrt(x*x+y*y).
 function VectorLength(const X, Y: Single): Single; overload; inline;
-{ Calculates the length of a vector following the equation sqrt(x*x+y*y+z*z). }
+// Calculates the length of a vector following the equation sqrt(x*x+y*y+z*z).
 function VectorLength(const X, Y, Z: Single): Single; overload;inline;
 // Calculates the length of a vector following the equation sqrt(x*x+y*y).
 function VectorLength(const V: TVector2f): Single; overload;
@@ -676,28 +662,26 @@ function VectorLength(const V: TVector2f): Single; overload;
 function VectorLength(const V: TAffineVector): Single; overload;
 // Calculates the length of a vector following the equation sqrt(x*x+y*y+z*z+w*w).
 function VectorLength(const V: TVector): Single; overload;
-{ Calculates the length of a vector following the equation: sqrt(x*x+y*y+...).
+(* Calculates the length of a vector following the equation: sqrt(x*x+y*y+...).
   Note: The parameter of this function is declared as open array. Thus
-  there's no restriction about the number of the components of the vector. }
+  there's no restriction about the number of the components of the vector. *)
 function VectorLength(const V: array of Single): Single; overload;
-
-{ Calculates norm of a vector which is defined as norm = x * x + y * y
-  Also known as "Norm 2" in the math world, this is sqr(VectorLength). }
+(* Calculates norm of a vector which is defined as norm = x * x + y * y
+  Also known as "Norm 2" in the math world, this is sqr(VectorLength). *)
 function VectorNorm(const X, Y: Single): Single; overload; inline;
-{ Calculates norm of a vector which is defined as norm = x*x + y*y + z*z
-  Also known as "Norm 2" in the math world, this is sqr(VectorLength). }
+(* Calculates norm of a vector which is defined as norm = x*x + y*y + z*z
+  Also known as "Norm 2" in the math world, this is sqr(VectorLength). *)
 function VectorNorm(const V: TAffineVector): Single; overload; inline;
-{ Calculates norm of a vector which is defined as norm = x*x + y*y + z*z
-  Also known as "Norm 2" in the math world, this is sqr(VectorLength). }
+(* Calculates norm of a vector which is defined as norm = x*x + y*y + z*z
+  Also known as "Norm 2" in the math world, this is sqr(VectorLength). *)
 function VectorNorm(const V: TVector): Single; overload;
-{ Calculates norm of a vector which is defined as norm = v.X*v.X + ...
-  Also known as "Norm 2" in the math world, this is sqr(VectorLength). }
+(* Calculates norm of a vector which is defined as norm = v.X*v.X + ...
+  Also known as "Norm 2" in the math world, this is sqr(VectorLength). *)
 function VectorNorm(var V: array of Single): Single; overload;
-
 // Transforms a vector to unit length
 procedure NormalizeVector(var V: TVector2f); overload;
-// Returns the vector transformed to unit length
-// Transforms a vector to unit length
+(* Returns the vector transformed to unit length
+   Transforms a vector to unit length *)
 procedure NormalizeVector(var V: TAffineVector); overload;
 // Transforms a vector to unit length
 procedure NormalizeVector(var V: TVector); overload;
@@ -707,43 +691,36 @@ function VectorNormalize(const V: TVector2f): TVector2f; overload;
 function VectorNormalize(const V: TAffineVector): TAffineVector; overload;
 // Returns the vector transformed to unit length (w component dropped)
 function VectorNormalize(const V: TVector): TVector; overload;
-
 // Transforms vectors to unit length
 procedure NormalizeVectorArray(list: PAffineVectorArray; n: Integer); overload; inline;
-
-{ Calculates the cosine of the angle between Vector1 and Vector2.
-  Result = DotProduct(V1, V2) / (Length(V1) * Length(V2)) }
+(* Calculates the cosine of the angle between Vector1 and Vector2.
+  Result = DotProduct(V1, V2) / (Length(V1) * Length(V2)) *)
 function VectorAngleCosine(const V1, V2: TAffineVector): Single; overload; inline;
-
-{ Calculates the cosine of the angle between Vector1 and Vector2.
-  Result = DotProduct(V1, V2) / (Length(V1) * Length(V2)) }
+(* Calculates the cosine of the angle between Vector1 and Vector2.
+  Result = DotProduct(V1, V2) / (Length(V1) * Length(V2)) *)
 function VectorAngleCosine(const V1, V2: TVector): Single; overload;   inline;
-
 // Negates the vector
 function VectorNegate(const Vector: TAffineVector): TAffineVector; overload;   inline;
 function VectorNegate(const Vector: TVector): TVector; overload;      inline;
-
 // Negates the vector
 procedure NegateVector(var V: TAffineVector); overload; inline;
 // Negates the vector
 procedure NegateVector(var V: TVector); overload;  inline;
 // Negates the vector
 procedure NegateVector(var V: array of Single); overload;
-
 // Scales given vector by a factor
 procedure ScaleVector(var V: TVector2f; factor: Single); overload; inline;
 // Scales given vector by a factor
 procedure ScaleVector(var V: TAffineVector; factor: Single); overload;  inline;
-{ Scales given vector by another vector.
-  v[x]:=v[x]*factor[x], v[y]:=v[y]*factor[y] etc. }
+(* Scales given vector by another vector.
+  v[x]:=v[x]*factor[x], v[y]:=v[y]*factor[y] etc. *)
 procedure ScaleVector(var V: TAffineVector;
   const factor: TAffineVector); overload; inline;
 // Scales given vector by a factor
 procedure ScaleVector(var V: TVector; factor: Single); overload; inline;
-{ Scales given vector by another vector.
-  v[x]:=v[x]*factor[x], v[y]:=v[y]*factor[y] etc. }
+(* Scales given vector by another vector.
+  v[x]:=v[x]*factor[x], v[y]:=v[y]*factor[y] etc. *)
 procedure ScaleVector(var V: TVector; const factor: TVector); overload; inline;
-
 // Returns a vector scaled by a factor
 function VectorScale(const V: TVector2f; factor: Single): TVector2f; overload; inline;
 // Returns a vector scaled by a factor
@@ -760,9 +737,8 @@ procedure VectorScale(const V: TVector; factor: Single; var vr: TAffineVector); 
 function VectorScale(const V: TAffineVector; const factor: TAffineVector): TAffineVector; overload; inline;
 // RScales given vector by another vector
 function VectorScale(const V: TVector; const factor: TVector): TVector; overload; inline;
-
-{ Divides given vector by another vector.
-  v[x]:=v[x]/divider[x], v[y]:=v[y]/divider[y] etc. }
+(* Divides given vector by another vector.
+  v[x]:=v[x]/divider[x], v[y]:=v[y]/divider[y] etc. *)
 procedure DivideVector(var V: TVector; const divider: TVector); overload; inline;
 procedure DivideVector(var V: TAffineVector; const divider: TAffineVector); overload; inline;
 function VectorDivide(const V: TVector; const divider: TVector): TVector; overload; inline;
@@ -781,25 +757,23 @@ function AffineVectorEquals(const V1, V2: TVector): Boolean; overload; inline;
 function VectorIsNull(const V: TVector): Boolean; overload; inline;
 // True if x=y=z=0, w ignored
 function VectorIsNull(const V: TAffineVector): Boolean; overload; inline;
-{ Calculates Abs(v1[x]-v2[x])+Abs(v1[y]-v2[y]), also know as "Norm1". }
+// Calculates Abs(v1[x]-v2[x])+Abs(v1[y]-v2[y]), also know as "Norm1".
 function VectorSpacing(const V1, V2: TTexPoint): Single; overload; inline;
-{ Calculates Abs(v1[x]-v2[x])+Abs(v1[y]-v2[y])+..., also know as "Norm1". }
+// Calculates Abs(v1[x]-v2[x])+Abs(v1[y]-v2[y])+..., also know as "Norm1".
 function VectorSpacing(const V1, V2: TAffineVector): Single; overload; inline;
-{ Calculates Abs(v1[x]-v2[x])+Abs(v1[y]-v2[y])+..., also know as "Norm1". }
+// Calculates Abs(v1[x]-v2[x])+Abs(v1[y]-v2[y])+..., also know as "Norm1".
 function VectorSpacing(const V1, V2: TVector): Single; overload; inline;
-
-{ Calculates distance between two vectors. ie. sqrt(sqr(v1[x]-v2[x])+...) }
+// Calculates distance between two vectors. ie. sqrt(sqr(v1[x]-v2[x])+...)
 function VectorDistance(const V1, V2: TAffineVector): Single; overload; inline;
-{ Calculates distance between two vectors.
-  ie. sqrt(sqr(v1[x]-v2[x])+...) (w component ignored) }
+(* Calculates distance between two vectors.
+  ie. sqrt(sqr(v1[x]-v2[x])+...) (w component ignored) *)
 function VectorDistance(const V1, V2: TVector): Single; overload; inline;
-
-{ Calculates the "Norm 2" between two vectors. ie. sqr(v1[x]-v2[x])+... }
+// Calculates the "Norm 2" between two vectors. ie. sqr(v1[x]-v2[x])+...
 function VectorDistance2(const V1, V2: TAffineVector): Single; overload; inline;
-{ Calculates the "Norm 2" between two vectors. ie. sqr(v1[x]-v2[x])+... (w component ignored) }
+// Calculates the "Norm 2" between two vectors. ie. sqr(v1[x]-v2[x])+...(w component ignored)
 function VectorDistance2(const V1, V2: TVector): Single; overload; inline;
-
-{ Calculates a vector perpendicular to N. N is assumed to be of unit length, subtract out any component parallel to N }
+(* Calculates a vector perpendicular to N. N is assumed to be of unit length,
+  subtract out any component parallel to N *)
 function VectorPerpendicular(const V, n: TAffineVector): TAffineVector; inline;
 // Reflects vector V against N (assumes N is normalized)
 function VectorReflect(const V, n: TAffineVector): TAffineVector; inline;
@@ -807,7 +781,6 @@ function VectorReflect(const V, n: TAffineVector): TAffineVector; inline;
 procedure RotateVector(var Vector: TVector; const axis: TAffineVector; angle: Single); overload; inline;
 // Rotates Vector about Axis with Angle radians
 procedure RotateVector(var Vector: TVector; const axis: TVector; angle: Single); overload; inline;
-
 // Rotate given vector around the Y axis (alpha is in rad)
 procedure RotateVectorAroundY(var V: TAffineVector; alpha: Single); inline;
 // Returns given vector rotated around the X axis (alpha is in rad)
@@ -818,7 +791,6 @@ function VectorRotateAroundY(const V: TAffineVector; alpha: Single): TAffineVect
 procedure VectorRotateAroundY(const V: TAffineVector; alpha: Single; var vr: TAffineVector); overload; inline;
 // Returns given vector rotated around the Z axis (alpha is in rad)
 function VectorRotateAroundZ(const V: TAffineVector; alpha: Single): TAffineVector; overload; inline;
-
 // Vector components are replaced by their Abs() value. }
 procedure AbsVector(var V: TVector); overload; inline;
 // Vector components are replaced by their Abs() value. }
@@ -834,15 +806,13 @@ function IsColinear(const V1, V2: TAffineVector): Boolean; overload;
 // Returns true if both vector are colinear
 function IsColinear(const V1, V2: TVector): Boolean; overload;
 
-// ------------------------------------------------------------------------------
-// Matrix functions
-// ------------------------------------------------------------------------------
-
+(* ----------------------------------------------------------------------------
+   Matrix functions
+  -----------------------------------------------------------------------------*)
 procedure SetMatrix(var dest: THomogeneousDblMatrix; const src: TMatrix); overload;
 procedure SetMatrix(var dest: TAffineMatrix; const src: TMatrix); overload;
 procedure SetMatrix(var dest: TMatrix; const src: TAffineMatrix); overload;
 procedure SetMatrixRow(var dest: TMatrix; rowNb: Integer; const aRow: TVector); overload;
-
 // Creates scale matrix
 function CreateScaleMatrix(const V: TAffineVector): TMatrix; overload;
 // Creates scale matrix
@@ -851,8 +821,7 @@ function CreateScaleMatrix(const V: TVector): TMatrix; overload;
 function CreateTranslationMatrix(const V: TAffineVector): TMatrix; overload;
 // Creates translation matrix
 function CreateTranslationMatrix(const V: TVector): TMatrix; overload;
-{ Creates a scale+translation matrix.
-  Scale is applied BEFORE applying offset }
+// Creates a scale+translation matrix. Scale is applied BEFORE applying offset
 function CreateScaleAndTranslationMatrix(const scale, offset: TVector): TMatrix; overload;
 // Creates matrix for rotation about x-axis (angle in rad)
 function CreateRotationMatrixX(const sine, cosine: Single): TMatrix; overload;
@@ -868,70 +837,57 @@ function CreateRotationMatrix(const anAxis: TAffineVector; angle: Single): TMatr
 function CreateRotationMatrix(const anAxis: TVector; angle: Single): TMatrix; overload; inline;
 // Creates a rotation matrix along the given Axis by the given Angle in radians.
 function CreateAffineRotationMatrix(const anAxis: TAffineVector; angle: Single): TAffineMatrix;
-
 // Multiplies two 3x3 matrices
-function MatrixMultiply(const m1, m2: TAffineMatrix): TAffineMatrix; overload; {$IFDEF USE_FASTMATH}inline;{$ENDIF}
-
+function MatrixMultiply(const m1, m2: TAffineMatrix): TAffineMatrix; overload; inline;
 // Multiplies two 4x4 matrices
-function MatrixMultiply(const m1, m2: TMatrix): TMatrix; overload; {$IFDEF USE_FASTMATH}inline;{$ENDIF}
+function MatrixMultiply(const m1, m2: TMatrix): TMatrix; overload; inline;
 // Multiplies M1 by M2 and places result in MResult
-procedure MatrixMultiply(const m1, m2: TMatrix; var MResult: TMatrix); overload; {$IFDEF USE_FASTMATH}inline;{$ENDIF}
-
+procedure MatrixMultiply(const m1, m2: TMatrix; var MResult: TMatrix); overload; inline;
 // Transforms a homogeneous vector by multiplying it with a matrix
-function VectorTransform(const V: TVector; const M: TMatrix): TVector; overload; {$IFDEF USE_FASTMATH}inline;{$ENDIF}
+function VectorTransform(const V: TVector; const M: TMatrix): TVector; overload; inline;
 // Transforms a homogeneous vector by multiplying it with a matrix
 function VectorTransform(const V: TVector; const M: TAffineMatrix): TVector; overload; inline;
 // Transforms an affine vector by multiplying it with a matrix
 function VectorTransform(const V: TAffineVector; const M: TMatrix): TAffineVector; overload; inline;
 // Transforms an affine vector by multiplying it with a matrix
 function VectorTransform(const V: TAffineVector; const M: TAffineMatrix): TAffineVector; overload; inline;
-
 // Determinant of a 3x3 matrix
-function MatrixDeterminant(const M: TAffineMatrix): Single; overload;  {$IFDEF USE_FASTMATH}inline;{$ENDIF}
+function MatrixDeterminant(const M: TAffineMatrix): Single; overload; inline;
 // Determinant of a 4x4 matrix
-function MatrixDeterminant(const M: TMatrix): Single; overload; {$IFDEF USE_FASTMATH}inline;{$ENDIF}
-
-{ Adjoint of a 4x4 matrix, used in the computation of the inverse of a 4x4 matrix }
+function MatrixDeterminant(const M: TMatrix): Single; overload;
+// Adjoint of a 4x4 matrix, used in the computation of the inverse of a 4x4 matrix
 procedure AdjointMatrix(var M: TMatrix); overload;
-{ Adjoint of a 3x3 matrix, used in the computation of the inverse of a 3x3 matrix }
+// Adjoint of a 3x3 matrix, used in the computation of the inverse of a 3x3 matrix
 procedure AdjointMatrix(var M: TAffineMatrix); overload;
-
 // Multiplies all elements of a 3x3 matrix with a factor
 procedure ScaleMatrix(var M: TAffineMatrix; const factor: Single); overload;
 // Multiplies all elements of a 4x4 matrix with a factor
 procedure ScaleMatrix(var M: TMatrix; const factor: Single); overload;
-
 // Adds the translation vector into the matrix
 procedure TranslateMatrix(var M: TMatrix; const V: TAffineVector); overload;
 procedure TranslateMatrix(var M: TMatrix; const V: TVector); overload;
-
-{ Normalize the matrix and remove the translation component.
-  The resulting matrix is an orthonormal matrix (Y direction preserved, then Z) }
+(* Normalize the matrix and remove the translation component.
+  The resulting matrix is an orthonormal matrix (Y direction preserved, then Z) *)
 procedure NormalizeMatrix(var M: TMatrix);
-
 // Computes transpose of 3x3 matrix
-procedure TransposeMatrix(var M: TAffineMatrix); overload; {$IFDEF USE_FASTMATH}inline;{$ENDIF}
+procedure TransposeMatrix(var M: TAffineMatrix); overload; inline;
 // Computes transpose of 4x4 matrix
-procedure TransposeMatrix(var M: TMatrix); overload; {$IFDEF USE_FASTMATH}inline;{$ENDIF}
-
+procedure TransposeMatrix(var M: TMatrix); overload; inline;
 // Finds the inverse of a 4x4 matrix
-procedure InvertMatrix(var M: TMatrix); overload; {$IFDEF USE_FASTMATH}inline;{$ENDIF}
-function MatrixInvert(const M: TMatrix): TMatrix; overload; {$IFDEF USE_FASTMATH}inline;{$ENDIF}
-
+procedure InvertMatrix(var M: TMatrix); overload; inline;
+function MatrixInvert(const M: TMatrix): TMatrix; overload; inline;
 // Finds the inverse of a 3x3 matrix;
-procedure InvertMatrix(var M: TAffineMatrix); overload; {$IFDEF USE_FASTMATH}inline;{$ENDIF}
-function  MatrixInvert(const M: TAffineMatrix): TAffineMatrix; overload; {$IFDEF USE_FASTMATH}inline;{$ENDIF}
-
-{ Finds the inverse of an angle preserving matrix.
+procedure InvertMatrix(var M: TAffineMatrix); overload; inline;
+function  MatrixInvert(const M: TAffineMatrix): TAffineMatrix; overload; inline;
+(* Finds the inverse of an angle preserving matrix.
   Angle preserving matrices can combine translation, rotation and isotropic
-  scaling, other matrices won't be properly inverted by this function. }
+  scaling, other matrices won't be properly inverted by this function. *)
 function AnglePreservingMatrixInvert(const mat: TMatrix): TMatrix;
-
-{ Decompose a non-degenerated 4x4 transformation matrix into the sequence of transformations that produced it.
+(* Decompose a non-degenerated 4x4 transformation matrix into the sequence of transformations that produced it.
   Modified by ml then eg, original Author: Spencer W. Thomas, University of Michigan
   The coefficient of each transformation is returned in the corresponding
   element of the vector Tran.
-  Returns true upon success, false if the matrix is singular. }
+  Returns true upon success, false if the matrix is singular. *)
 function MatrixDecompose(const M: TMatrix; var Tran: TTransformations): Boolean;
 function CreateLookAtMatrix(const eye, center, normUp: TVector): TMatrix;
 function CreateMatrixFromFrustum(Left, Right, Bottom, Top, ZNear, ZFar: Single): TMatrix;
@@ -941,9 +897,9 @@ function CreatePickMatrix(X, Y, deltax, deltay: Single; const viewport: TVector4
 function Project(objectVector: TVector; const ViewProjMatrix: TMatrix; const viewport: TVector4i; out WindowVector: TVector): Boolean;
 function UnProject(WindowVector: TVector; ViewProjMatrix: TMatrix; const viewport: TVector4i; out objectVector: TVector): Boolean;
 
-// ------------------------------------------------------------------------------
-// Plane functions
-// ------------------------------------------------------------------------------
+(*------------------------------------------------------------------------------
+ Plane functions
+ ------------------------------------------------------------------------------*)
 
 // Computes the parameters of a plane defined by three points.
 function PlaneMake(const p1, p2, p3: TAffineVector): THmgPlane; overload;
@@ -955,81 +911,64 @@ function PlaneMake(const point, normal: TVector): THmgPlane; overload;
 procedure SetPlane(var dest: TDoubleHmgPlane; const src: THmgPlane); inline;
 // Normalize a plane so that point evaluation = plane distance. }
 procedure NormalizePlane(var plane: THmgPlane);
-
-{ Calculates the cross-product between the plane normal and plane to point vector.
+(* Calculates the cross-product between the plane normal and plane to point vector.
   This functions gives an hint as to were the point is, if the point is in the
   half-space pointed by the vector, result is positive.
-  This function performs an homogeneous space dot-product. }
+  This function performs an homogeneous space dot-product. *)
 function PlaneEvaluatePoint(const plane: THmgPlane; const point: TAffineVector): Single; overload; inline;
 function PlaneEvaluatePoint(const plane: THmgPlane; const point: TVector): Single; overload; inline;
-
-{ Calculate the normal of a plane defined by three points. }
+// Calculate the normal of a plane defined by three points.
 function CalcPlaneNormal(const p1, p2, p3: TAffineVector): TAffineVector; overload;
 procedure CalcPlaneNormal(const p1, p2, p3: TAffineVector; var vr: TAffineVector); overload;
 procedure CalcPlaneNormal(const p1, p2, p3: TVector; var vr: TAffineVector); overload;
-
-{ Returns true if point is in the half-space defined by a plane with normal.
-  The plane itself is not considered to be in the tested halfspace. }
+(* Returns true if point is in the half-space defined by a plane with normal.
+  The plane itself is not considered to be in the tested halfspace. *)
 function PointIsInHalfSpace(const point, planePoint, planeNormal: TVector): Boolean; overload;
 function PointIsInHalfSpace(const point, planePoint, planeNormal: TAffineVector): Boolean; overload;
 function PointIsInHalfSpace(const point: TAffineVector; const plane: THmgPlane): Boolean; overload;
-
-{ Computes algebraic distance between point and plane.
+(* Computes algebraic distance between point and plane.
   Value will be positive if the point is in the halfspace pointed by the normal,
-  negative on the other side. }
+  negative on the other side. *)
 function PointPlaneDistance(const point, planePoint, planeNormal: TVector): Single; overload;
 function PointPlaneDistance(const point, planePoint, planeNormal: TAffineVector): Single; overload;
 function PointPlaneDistance(const point: TAffineVector; const plane: THmgPlane): Single; overload;
-
-{ Computes point to plane projection. Plane and direction have to be normalized }
+// Computes point to plane projection. Plane and direction have to be normalized
 function PointPlaneOrthoProjection(const point: TAffineVector; const plane: THmgPlane; var inter: TAffineVector; bothface: Boolean = True): Boolean;
 function PointPlaneProjection(const point, direction: TAffineVector; const plane: THmgPlane; var inter: TAffineVector; bothface: Boolean = True): Boolean;
-
-{ Computes segment / plane intersection return false if there isn't an intersection }
+// Computes segment / plane intersection return false if there isn't an intersection
 function SegmentPlaneIntersection(const ptA, ptB: TAffineVector; const plane: THmgPlane; var inter: TAffineVector): Boolean;
-
-{ Computes point to triangle projection. Direction has to be normalized }
+// Computes point to triangle projection. Direction has to be normalized
 function PointTriangleOrthoProjection(const point, ptA, ptB, ptC: TAffineVector; var inter: TAffineVector; bothface: Boolean = True): Boolean;
 function PointTriangleProjection(const point, direction, ptA, ptB, ptC: TAffineVector; var inter: TAffineVector; bothface: Boolean = True): Boolean;
-
-{ Returns true if line intersect ABC triangle. }
+// Returns true if line intersect ABC triangle.
 function IsLineIntersectTriangle(const point, direction, ptA, ptB, ptC: TAffineVector): Boolean;
-{ Computes point to Quad projection. Direction has to be normalized. Quad have to be flat and convex }
+// Computes point to Quad projection. Direction has to be normalized. Quad have to be flat and convex
 function PointQuadOrthoProjection(const point, ptA, ptB, ptC, ptD: TAffineVector; var inter: TAffineVector; bothface: Boolean = True): Boolean;
 function PointQuadProjection(const point, direction, ptA, ptB, ptC, ptD: TAffineVector; var inter: TAffineVector; bothface: Boolean = True): Boolean;
-
-{ Returns true if line intersect ABCD quad. Quad have to be flat and convex }
+// Returns true if line intersect ABCD quad. Quad have to be flat and convex
 function IsLineIntersectQuad(const point, direction, ptA, ptB, ptC, ptD: TAffineVector): Boolean;
-
-{ Computes point to disk projection. Direction has to be normalized }
+// Computes point to disk projection. Direction has to be normalized
 function PointDiskOrthoProjection(const point, center, up: TAffineVector; const radius: Single; var inter: TAffineVector;  bothface: Boolean = True): Boolean;
 function PointDiskProjection(const point, direction, center, up: TAffineVector; const radius: Single; var inter: TAffineVector;  bothface: Boolean = True): Boolean;
-
-{ Computes closest point on a segment (a segment is a limited line). }
+// Computes closest point on a segment (a segment is a limited line).
 function PointSegmentClosestPoint(const point, segmentStart, segmentStop: TAffineVector): TAffineVector; overload;
 function PointSegmentClosestPoint(const point, segmentStart, segmentStop: TVector): TVector; overload;
-
-{ Computes algebraic distance between segment and line (a segment is a limited line). }
+// Computes algebraic distance between segment and line (a segment is a limited line).
 function PointSegmentDistance(const point, segmentStart, segmentStop: TAffineVector): Single;
-
-{ Computes closest point on a line. }
+// Computes closest point on a line.
 function PointLineClosestPoint(const point, linePoint, lineDirection: TAffineVector): TAffineVector;
-
-{ Computes algebraic distance between point and line. }
+// Computes algebraic distance between point and line.
 function PointLineDistance(const point, linePoint, lineDirection: TAffineVector): Single;
-
-{ Computes the closest points (2) given two segments. }
+// Computes the closest points (2) given two segments.
 procedure SegmentSegmentClosestPoint(const S0Start, S0Stop, S1Start, S1Stop: TAffineVector; var Segment0Closest, Segment1Closest: TAffineVector);
-
-{ Computes the closest distance between two segments. }
+// Computes the closest distance between two segments.
 function SegmentSegmentDistance(const S0Start, S0Stop, S1Start, S1Stop: TAffineVector): Single;
-
-{ Computes the closest distance between two lines. }
+// Computes the closest distance between two lines.
 function LineLineDistance(const linePt0, lineDir0, linePt1, lineDir1: TAffineVector): Single;
 
-// ------------------------------------------------------------------------------
-// Quaternion functions
-// ------------------------------------------------------------------------------
+(*------------------------------------------------------------------------------
+ Quaternion functions
+ ------------------------------------------------------------------------------*)
 
 type
   TEulerOrder = (eulXYZ, eulXZY, eulYXZ, eulYZX, eulZXY, eulZYX);
@@ -1038,26 +977,23 @@ type
 function QuaternionMake(const Imag: array of Single; Real: Single): TQuaternion; overload;
 function QuaternionMake(const X,Y,Z,W: Single): TQuaternion; overload;
 function QuaternionMake(const V: TVector): TQuaternion; overload;
-
 // Returns the conjugate of a quaternion
 function QuaternionConjugate(const Q: TQuaternion): TQuaternion;
 // Returns the magnitude of the quaternion
 function QuaternionMagnitude(const Q: TQuaternion): Single;
 // Normalizes the given quaternion
 procedure NormalizeQuaternion(var Q: TQuaternion);
-
 // Constructs a unit quaternion from two points on unit sphere
 function QuaternionFromPoints(const V1, V2: TAffineVector): TQuaternion;
 // Converts a unit quaternion into two points on a unit sphere
 procedure QuaternionToPoints(const Q: TQuaternion; var ArcFrom, ArcTo: TAffineVector);
 // Constructs a unit quaternion from a rotation matrix
 function QuaternionFromMatrix(const mat: TMatrix): TQuaternion;
-{ Constructs a rotation matrix from (possibly non-unit) quaternion.
-  Assumes matrix is used to multiply column vector on the left:
-  vnew = mat vold.
-  Works correctly for right-handed coordinate system and right-handed rotations. }
+(* Constructs a rotation matrix from (possibly non-unit) quaternion.
+  Assumes matrix is used to multiply column vector on the left: vnew = mat vold.
+  Works correctly for right-handed coordinate system and right-handed rotations. *)
 function QuaternionToMatrix(quat: TQuaternion): TMatrix;
-{ Constructs an affine rotation matrix from (possibly non-unit) quaternion. }
+// Constructs an affine rotation matrix from (possibly non-unit) quaternion.
 function QuaternionToAffineMatrix(quat: TQuaternion): TAffineMatrix;
 // Constructs quaternion from angle (in deg) and axis
 function QuaternionFromAngleAxis(const angle: Single; const axis: TAffineVector): TQuaternion;
@@ -1065,76 +1001,68 @@ function QuaternionFromAngleAxis(const angle: Single; const axis: TAffineVector)
 function QuaternionFromRollPitchYaw(const r, p, Y: Single): TQuaternion;
 // Constructs quaternion from Euler angles in arbitrary order (angles in degrees)
 function QuaternionFromEuler(const X, Y, Z: Single; eulerOrder: TEulerOrder): TQuaternion;
-
-{ Returns quaternion product qL * qR.
+(* Returns quaternion product qL * qR.
   Note: order is important!
   To combine rotations, use the product QuaternionMuliply(qSecond, qFirst),
-  which gives the effect of rotating by qFirst then qSecond. }
+  which gives the effect of rotating by qFirst then qSecond. *)
 function QuaternionMultiply(const qL, qR: TQuaternion): TQuaternion;
-
-{ Spherical linear interpolation of unit quaternions with spins.
+(* Spherical linear interpolation of unit quaternions with spins.
   QStart, QEnd - start and end unit quaternions
   t            - interpolation parameter (0 to 1)
-  Spin         - number of extra spin rotations to involve }
+  Spin         - number of extra spin rotations to involve *)
 function QuaternionSlerp(const QStart, QEnd: TQuaternion; Spin: Integer; T: Single): TQuaternion; overload;
 function QuaternionSlerp(const source, dest: TQuaternion; const T: Single): TQuaternion; overload;
 
-// ------------------------------------------------------------------------------
-// Logarithmic and exponential functions
-// ------------------------------------------------------------------------------
+(*------------------------------------------------------------------------------
+ Logarithmic and exponential functions
+ ------------------------------------------------------------------------------*)
 
 function Logarithm2(const X: Single): Single; inline;
-
 // Raise base to any power. For fractional exponents, or |exponents| > MaxInt, base must be > 0
 function PowerSingle(const Base, Exponent: Single): Single; overload;
 // Raise base to an integer
 function PowerInteger(Base: Single; Exponent: Integer): Single; overload;
 function PowerInt64(Base: Single; Exponent: Int64): Single; overload;
 
-// ------------------------------------------------------------------------------
-// Trigonometric functions
-// ------------------------------------------------------------------------------
+(*------------------------------------------------------------------------------
+ Trigonometric functions
+ ------------------------------------------------------------------------------*)
 
 function DegToRadian(const Degrees: Extended): Extended; overload; inline
 function DegToRadian(const Degrees: Single): Single; overload; inline
 function RadianToDeg(const Radians: Extended): Extended; overload; inline
 function RadianToDeg(const Radians: Single): Single; overload; inline
-
 // Normalize to an angle in the [-PI; +PI] range
 function NormalizeAngle(angle: Single): Single; inline;
 // Normalize to an angle in the [-180; 180] range
 function NormalizeDegAngle(angle: Single): Single; inline;
-
 // Calculates sine and cosine from the given angle Theta
 procedure SinCosine(const Theta: Extended; out Sin, Cos: Extended); overload;
 // Calculates sine and cosine from the given angle Theta
 procedure SinCosine(const Theta: Double; out Sin, Cos: Double); overload; inline;
 // Calculates sine and cosine from the given angle Theta
 procedure SinCosine(const Theta: Single; out Sin, Cos: Single); overload; inline;
-{ Calculates sine and cosine from the given angle Theta and Radius.
-  sin and cos values calculated from theta are multiplicated by radius. }
+(* Calculates sine and cosine from the given angle Theta and Radius.
+  sin and cos values calculated from theta are multiplicated by radius. *)
 procedure SinCosine(const Theta, radius: Double; out Sin, Cos: Extended); overload;
-{ Calculates sine and cosine from the given angle Theta and Radius.
-  sin and cos values calculated from theta are multiplicated by radius. }
+(* Calculates sine and cosine from the given angle Theta and Radius.
+  sin and cos values calculated from theta are multiplicated by radius. *)
 procedure SinCosine(const Theta, radius: Double; out Sin, Cos: Double); overload; inline;
-{ Calculates sine and cosine from the given angle Theta and Radius.
-  sin and cos values calculated from theta are multiplicated by radius. }
+(* Calculates sine and cosine from the given angle Theta and Radius.
+  sin and cos values calculated from theta are multiplicated by radius. *)
 procedure SinCosine(const Theta, radius: Single; out Sin, Cos: Single); overload; inline;
-
-{ Fills up the two given dynamic arrays with sin cos values.
+(* Fills up the two given dynamic arrays with sin cos values.
   start and stop angles must be given in degrees, the number of steps is
-  determined by the length of the given arrays. }
+  determined by the length of the given arrays. *)
 procedure PrepareSinCosCache(var S, c: array of Single; startAngle, stopAngle: Single);
-
 function ArcCosine(const X: Extended): Extended; overload;
 function ArcSine(const X: Extended): Extended; overload;
-
 // Fast ArcTangent2 approximation, about 0.07 rads accuracy
 function FastArcTangent2(Y, X: Single): Single;
 
-// ------------------------------------------------------------------------------
-// Miscellanious math functions
-// ------------------------------------------------------------------------------
+(*------------------------------------------------------------------------------
+ Miscellanious math functions
+ ------------------------------------------------------------------------------*)
 
 // Computes 1/Sqrt(v)
 function RSqrt(V: Single): Single; inline;
@@ -1145,30 +1073,23 @@ function ISqrt(i: Integer): Integer;
 // Computes an integer length Result:=Sqrt(x*x+y*y)
 function ILength(X, Y: Integer): Integer; overload;
 function ILength(X, Y, Z: Integer): Integer; overload;
-
-// Generates a random point on the unit sphere.
-// Point repartition is correctly isotropic with no privilegied direction
+(* Generates a random point on the unit sphere.
+   Point repartition is correctly isotropic with no privilegied direction *)
 procedure RandomPointOnSphere(var p: TAffineVector);
-
-// Rounds the floating point value to the closest integer.
-// Behaves like Round but returns a floating point value like Int.
+(* Rounds the floating point value to the closest integer.
+   Behaves like Round but returns a floating point value like Int. *)
 function RoundInt(V: Single): Single; overload; inline;
 function RoundInt(V: Extended): Extended; overload; inline;
-
 // Multiples i by s and returns the rounded result.
 function ScaleAndRound(i: Integer; var S: Single): Integer;
-
 // Returns the sign of the x value using the (-1, 0, +1) convention
 function SignStrict(X: Single): Integer;
-
 // Returns True if x is in [a; b]
 function IsInRange(const X, a, b: Single): Boolean; overload;
 function IsInRange(const X, a, b: Double): Boolean; overload;
-
 // Returns True if p is in the cube defined by d.
 function IsInCube(const p, d: TAffineVector): Boolean; overload;
 function IsInCube(const p, d: TVector): Boolean; overload;
-
 // Returns the minimum value of the array.
 function MinFloat(values: PSingleArray; nbItems: Integer): Single; overload;
 function MinFloat(values: PDoubleArray; nbItems: Integer): Double; overload;
@@ -1181,7 +1102,6 @@ function MinFloat(const V1, V2: Extended): Extended; overload; inline;
 function MinFloat(const V1, V2, V3: Single): Single; overload; inline;
 function MinFloat(const V1, V2, V3: Double): Double; overload; inline;
 function MinFloat(const V1, V2, V3: Extended): Extended; overload; inline;
-
 // Returns the maximum value of the array.
 function MaxFloat(values: PSingleArray; nbItems: Integer): Single; overload;
 function MaxFloat(values: PDoubleArray; nbItems: Integer): Double; overload;
@@ -1194,7 +1114,6 @@ function MaxFloat(const V1, V2: Extended): Extended; overload;
 function MaxFloat(const V1, V2, V3: Single): Single; overload;
 function MaxFloat(const V1, V2, V3: Double): Double; overload;
 function MaxFloat(const V1, V2, V3: Extended): Extended; overload;
-
 function MinInteger(const V1, V2: Integer): Integer; overload;
 function MinInteger(const V1, V2: Cardinal): Cardinal; overload;
 function MinInteger(const V1, V2, V3: Integer): Integer; overload;
@@ -1203,7 +1122,6 @@ function MaxInteger(const V1, V2: Integer): Integer; overload;
 function MaxInteger(const V1, V2: Cardinal): Cardinal; overload;
 function MaxInteger(const V1, V2, V3: Integer): Integer; overload;
 function MaxInteger(const V1, V2, V3: Cardinal): Cardinal; overload;
-
 function ClampInteger(const value, min, max: Integer): Integer; overload; inline;
 function ClampInteger(const value, min, max: Cardinal): Cardinal; overload; inline;
 // Computes the triangle's area
@@ -1214,20 +1132,17 @@ function PolygonArea(const p: PAffineVectorArray; nSides: Integer): Single; over
 function TriangleSignedArea(const p1, p2, p3: TAffineVector): Single; overload;
 // Computes a 2D polygon's signed area. Only X and Y coordinates are used, Z is ignored. Polygon needs not be convex
 function PolygonSignedArea(const p: PAffineVectorArray; nSides: Integer): Single; overload;
-
-{ Multiplies values in the array by factor.
+(* Multiplies values in the array by factor.
   This function is especially efficient for large arrays, it is not recommended
   for arrays that have less than 10 items.
   Expected performance is 4 to 5 times that of a Deliph-compiled loop on AMD
-  CPUs, and 2 to 3 when 3DNow! isn't available. }
+  CPUs, and 2 to 3 when 3DNow! isn't available. *)
 procedure ScaleFloatArray(values: PSingleArray; nb: Integer; var factor: Single); overload;
 procedure ScaleFloatArray(var values: TSingleArray; factor: Single); overload;
-
 // Adds delta to values in the array. Array size must be a multiple of four
 procedure OffsetFloatArray(values: PSingleArray; nb: Integer; var delta: Single); overload;
 procedure OffsetFloatArray(var values: array of Single; delta: Single); overload;
 procedure OffsetFloatArray(valuesDest, valuesDelta: PSingleArray; nb: Integer); overload;
-
 // Returns the max of the X, Y and Z components of a vector (W is ignored)
 function MaxXYZComponent(const V: TVector): Single; overload;
 function MaxXYZComponent(const V: TAffineVector): Single; overload;
@@ -1244,36 +1159,33 @@ procedure MaxVector(var V: TAffineVector; const V1: TAffineVector); overload;
 // Replace components of v with the min of v or v1 component. Minimum is computed per component
 procedure MinVector(var V: TVector; const V1: TVector); overload;
 procedure MinVector(var V: TAffineVector; const V1: TAffineVector); overload;
-
 // Sorts given array in ascending order. NOTE : current implementation is a slow bubble sort...
 procedure SortArrayAscending(var a: array of Extended);
-
 // Clamps aValue in the aMin-aMax interval
 function ClampValue(const aValue, aMin, aMax: Single): Single; overload;
 // Clamps aValue in the aMin-INF interval
 function ClampValue(const aValue, aMin: Single): Single; overload;
-
 // Returns the detected optimization mode. Returned values is either 'FPU', '3DNow!' or 'SSE'
 function GeometryOptimizationMode: String;
-
-{ Begins a FPU-only section.
+(* Begins a FPU-only section.
   You can use a FPU-only section to force use of FPU versions of the math
   functions, though typically slower than their SIMD counterparts, they have
   a higher precision (80 bits internally) that may be required in some cases.
   Each BeginFPUOnlySection call must be balanced by a EndFPUOnlySection (calls
-  can be nested). }
+  can be nested). *)
 procedure BeginFPUOnlySection;
 // Ends a FPU-only section. See BeginFPUOnlySection
 procedure EndFPUOnlySection;
 
 // --------------------- Unstandardized functions after these lines
 
-// mixed functions
-
-// Turn a triplet of rotations about x, y, and z (in that order) into an equivalent rotation around a single axis (all in radians)
+(* Mixed functions.  Turn a triplet of rotations about x, y, and z
+  (in that order) into an equivalent rotation around a single axis (all in radians)*)
 function ConvertRotation(const Angles: TAffineVector): TVector;
 
-// miscellaneous functions
+(*------------------------------------------------------------------------------
+  Miscellaneous functions
+ ------------------------------------------------------------------------------*)
 
 function MakeAffineDblVector(var V: array of Double): TAffineDblVector;
 function MakeDblVector(var V: array of Double): THomogeneousDblVector;
@@ -1285,14 +1197,16 @@ function VectorDblToFlt(const V: THomogeneousDblVector): THomogeneousVector;
 function VectorAffineFltToDbl(const V: TAffineVector): TAffineDblVector;
 // Converts a vector containing single sized values into a vector with double sized values
 function VectorFltToDbl(const V: TVector): THomogeneousDblVector;
-{ The code below is from Wm. Randolph Franklin <wrf@ecse.rpi.edu>
+(* The code below is from Wm. Randolph Franklin <wrf@ecse.rpi.edu>
   with some minor modifications for speed. It returns 1 for strictly
-  interior points, 0 for strictly exterior, and 0 or 1 for points on the boundary.}
+  interior points, 0 for strictly exterior, and 0 or 1 for points on the boundary.*)
 function PointInPolygon(const xp, yp: array of Single; X, Y: Single): Boolean;
 function IsPointInPolygon(const Polygon: array of TPoint; const p: TPoint): Boolean;
 procedure DivMod(Dividend: Integer; Divisor: Word; var result, Remainder: Word);
 
-// coordinate system manipulation functions
+(*------------------------------------------------------------------------------
+  Coordinate system manipulation functions.
+------------------------------------------------------------------------------*)
 
 // Rotates the given coordinate system (represented by the matrix) around its Y-axis
 function Turn(const Matrix: TMatrix; angle: Single): TMatrix; overload;
@@ -1307,79 +1221,75 @@ function Roll(const Matrix: TMatrix; angle: Single): TMatrix; overload;
 // Rotates the given coordinate system (represented by the matrix) around MasterDirection
 function Roll(const Matrix: TMatrix; const MasterDirection: TAffineVector; angle: Single): TMatrix; overload;
 
-// intersection functions
 
-{ Compute the intersection point "res" of a line with a plane.
+(*------------------------------------------------------------------------------
+ Intersection functions
+------------------------------------------------------------------------------*)
+
+(* Compute the intersection point "res" of a line with a plane.
   Return value:
   0 : no intersection, line parallel to plane
   1 : res is valid
   -1 : line is inside plane
-
   Adapted from:
-  E.Hartmann, Computeruntersttzte Darstellende Geometrie, B.G. Teubner Stuttgart 1988 }
+  E.Hartmann, Computeruntersttzte Darstellende Geometrie, B.G. Teubner Stuttgart 1988 *)
 function IntersectLinePlane(const point, direction: TVector;
   const plane: THmgPlane; intersectPoint: PVector = nil): Integer; overload;
-
-{ Compute intersection between a triangle and a box.
-  Returns True if an intersection was found. }
+(* Compute intersection between a triangle and a box.
+  Returns True if an intersection was found. *)
 function IntersectTriangleBox(const p1, p2, p3, aMinExtent, aMaxExtent: TAffineVector): Boolean;
-
-{ Compute intersection between a Sphere and a box.
+(* Compute intersection between a Sphere and a box.
   Up, Direction and Right must be normalized!
-  Use CubDepth, CubeHeight and CubeWidth to scale TGLCube. }
+  Use CubeDepth, CubeHeight and CubeWidth to scale T_Cube. *)
 function IntersectSphereBox(const SpherePos: TVector;
   const SphereRadius: Single; const BoxMatrix: TMatrix;
   const BoxScale: TAffineVector; intersectPoint: PAffineVector = nil;
   normal: PAffineVector = nil; depth: PSingle = nil): Boolean;
-
-{ Compute intersection between a ray and a plane.
+(* Compute intersection between a ray and a plane.
   Returns True if an intersection was found, the intersection point is placed
-  in intersectPoint is the reference is not nil. }
+  in intersectPoint is the reference is not nil. *)
 function RayCastPlaneIntersect(const rayStart, rayVector: TVector;
   const planePoint, planeNormal: TVector; intersectPoint: PVector = nil): Boolean; overload;
 function RayCastPlaneXZIntersect(const rayStart, rayVector: TVector;
   const planeY: Single; intersectPoint: PVector = nil): Boolean; overload;
-
-{ Compute intersection between a ray and a triangle. }
+// Compute intersection between a ray and a triangle.
 function RayCastTriangleIntersect(const rayStart, rayVector: TVector;
   const p1, p2, p3: TAffineVector; intersectPoint: PVector = nil;
   intersectNormal: PVector = nil): Boolean; overload;
-{ Compute the min distance a ray will pass to a point. }
+// Compute the min distance a ray will pass to a point.
 function RayCastMinDistToPoint(const rayStart, rayVector: TVector; const point: TVector): Single;
-{ Determines if a ray will intersect with a given sphere. }
+// Determines if a ray will intersect with a given sphere.
 function RayCastIntersectsSphere(const rayStart, rayVector: TVector;
   const sphereCenter: TVector; const SphereRadius: Single): Boolean; overload;
-{ Calculates the intersections between a sphere and a ray.
+(* Calculates the intersections between a sphere and a ray.
   Returns 0 if no intersection is found (i1 and i2 untouched), 1 if one
   intersection was found (i1 defined, i2 untouched), and 2 is two intersections
-  were found (i1 and i2 defined). }
+  were found (i1 and i2 defined). *)
 function RayCastSphereIntersect(const rayStart, rayVector: TVector;
   const sphereCenter: TVector; const SphereRadius: Single; var i1, i2: TVector): Integer; overload;
-{ Compute intersection between a ray and a box.
+(* Compute intersection between a ray and a box.
   Returns True if an intersection was found, the intersection point is
-  placed in intersectPoint if the reference is not nil. }
+  placed in intersectPoint if the reference is not nil. *)
 function RayCastBoxIntersect(const rayStart, rayVector, aMinExtent,
   aMaxExtent: TAffineVector; intersectPoint: PAffineVector = nil): Boolean;
 
-// Some 2d intersection functions.
+(*------------------------------------------------------------------------------
+ Some 2d intersection functions.
+------------------------------------------------------------------------------*)
 
-{ Determine if 2 rectanges intersect. }
+// Determine if 2 rectanges intersect.
 function RectanglesIntersect(const ACenterOfRect1, ACenterOfRect2, ASizeOfRect1,
   ASizeOfRect2: TVector2f): Boolean;
-
-{ Determine if BigRect completely contains SmallRect. }
+// Determine if BigRect completely contains SmallRect.
 function RectangleContains(const ACenterOfBigRect1, ACenterOfSmallRect2,
   ASizeOfBigRect1, ASizeOfSmallRect2: TVector2f;
   const AEps: Single = 0.0): Boolean;
-
-{ Computes the visible radius of a sphere in a perspective projection.
+(* Computes the visible radius of a sphere in a perspective projection.
   This radius can be used for occlusion culling (cone extrusion) or 2D
-  intersection testing. }
+  intersection testing. *)
 function SphereVisibleRadius(distance, radius: Single): Single;
-
-{ Extracts a TFrustum for combined modelview and projection matrices. }
+// Extracts a TFrustum for combined modelview and projection matrices.
 function ExtractFrustumFromModelViewProjection(const modelViewProj: TMatrix): TFrustum;
-
 // Determines if volume is clipped or not
 function IsVolumeClipped(const objPos: TAffineVector; const objRadius: Single;
   const Frustum: TFrustum): Boolean; overload;
@@ -1387,66 +1297,58 @@ function IsVolumeClipped(const objPos: TVector; const objRadius: Single;
   const Frustum: TFrustum): Boolean; overload; inline;
 function IsVolumeClipped(const min, max: TAffineVector; const Frustum: TFrustum): Boolean; overload; inline;
 
-// misc funcs
+(*------------------------------------------------------------------------------
+ Misc funcs
+------------------------------------------------------------------------------*)
 
-{ Creates a parallel projection matrix.
-  Transformed points will projected on the plane along the specified direction. }
+(* Creates a parallel projection matrix.
+  Transformed points will projected on the plane along the specified direction. *)
 function MakeParallelProjectionMatrix(const plane: THmgPlane; const dir: TVector): TMatrix;
-
-{ Creates a shadow projection matrix.
+(* Creates a shadow projection matrix.
   Shadows will be projected onto the plane defined by planePoint and planeNormal,
-  from lightPos. }
+  from lightPos. *)
 function MakeShadowMatrix(const planePoint, planeNormal, lightPos: TVector): TMatrix;
-
-{ Builds a reflection matrix for the given plane.
-  Reflection matrix allow implementing planar reflectors in OpenGL (mirrors). }
+(* Builds a reflection matrix for the given plane.
+  Reflection matrix allow implementing planar reflectors in OpenGL (mirrors). *)
 function MakeReflectionMatrix(const planePoint, planeNormal: TAffineVector): TMatrix;
-
-{ Packs an homogeneous rotation matrix to 6 bytes.
+(* Packs an homogeneous rotation matrix to 6 bytes.
   The 6:64 (or 6:36) compression ratio is achieved by computing the quaternion
   associated to the matrix and storing its Imaginary components at 16 bits
   precision each.
   Deviation is typically below 0.01% and around 0.1% in worst case situations.
-  Note: quaternion conversion is faster and more robust than an angle decomposition. }
+  Note: quaternion conversion is faster and more robust than an angle decomposition. *)
 function PackRotationMatrix(const mat: TMatrix): TPackedRotationMatrix;
-{ Restores a packed rotation matrix.
-  See PackRotationMatrix. }
+// Restores a packed rotation matrix. See PackRotationMatrix.
 function UnPackRotationMatrix(const packedMatrix: TPackedRotationMatrix): TMatrix;
-
-{ Calculates the barycentric coordinates for the point p on the triangle
+(* Calculates the barycentric coordinates for the point p on the triangle
   defined by the vertices v1, v2 and v3. That is, solves
   p = u * v1 + v * v2 + (1-u-v) * v3
   for u,v.
   Returns true if the point is inside the triangle, false otherwise.
   NOTE: This function assumes that the point lies on the plane defined by the triangle.
-  If this is not the case, the function will not work correctly! }
+  If this is not the case, the function will not work correctly! *)
 function BarycentricCoordinates(const V1, V2, V3, p: TAffineVector; var u, V: Single): Boolean;
-
-{ Calculates angles for the Camera.MoveAroundTarget(pitch, turn) procedure.
+(* Calculates angles for the Camera.MoveAroundTarget(pitch, turn) procedure.
   Initially from then GLCameraColtroller unit, requires AOriginalUpVector to contain only -1, 0 or 1.
-  Result contains pitch and turn angles. }
+  Result contains pitch and turn angles. *)
 function GetSafeTurnAngle(const AOriginalPosition, AOriginalUpVector,
   ATargetPosition, AMoveAroundTargetCenter: TVector): TVector2f; overload;
 function GetSafeTurnAngle(const AOriginalPosition, AOriginalUpVector,
   ATargetPosition, AMoveAroundTargetCenter: TAffineVector): TVector2f; overload;
-
-{ Extracted from Camera.MoveAroundTarget(pitch, turn). }
+// Extracted from Camera.MoveAroundTarget(pitch, turn).
 function MoveObjectAround(const AMovingObjectPosition, AMovingObjectUp,
   ATargetPosition: TVector; pitchDelta, turnDelta: Single): TVector;
-
-{ Calcualtes Angle between 2 Vectors: (A-CenterPoint) and (B-CenterPoint). In radians. }
+// Calcualtes Angle between 2 Vectors: (A-CenterPoint) and (B-CenterPoint). In radians.
 function AngleBetweenVectors(const a, b, ACenterPoint: TVector): Single; overload;
 function AngleBetweenVectors(const a, b, ACenterPoint: TAffineVector): Single; overload;
-
-{ AOriginalPosition - Object initial position.
+(* AOriginalPosition - Object initial position.
   ACenter - some point, from which is should be distanced.
   ADistance + AFromCenterSpot - distance, which object should keep from ACenter or
   ADistance + not AFromCenterSpot - distance, which object should shift
-  from his current position away from center. }
+  from his current position away from center. *)
 function ShiftObjectFromCenter(const AOriginalPosition: TVector;
   const ACenter: TVector; const ADistance: Single;
   const AFromCenterSpot: Boolean): TVector; overload;
-
 function ShiftObjectFromCenter(const AOriginalPosition: TAffineVector;
   const ACenter: TAffineVector; const ADistance: Single;
   const AFromCenterSpot: Boolean): TAffineVector; overload;
@@ -1467,8 +1369,8 @@ const
   cOneHalf: Single = 0.5;
   cLn10: Single = 2.302585093;
 
-  // Ranges of the IEEE floating point types, including denormals
-  // with Math.pas compatible name
+  (* Ranges of the IEEE floating point types, including denormals
+    with Math.pas compatible name *)
   MinSingle = 1.5E-45;
   MaxSingle = 3.4E+38;
   MinDouble = 5.0E-324;
@@ -1479,10 +1381,10 @@ const
   MaxComp = 9.223372036854775807E+18;
 
 var
-  // this var is adjusted during "initialization", current values are
-  // + 0 : use standard optimized FPU code
-  // + 1 : use 3DNow! optimized code (requires K6-2/3 CPU)
-  // + 2 : use Intel SSE code (Pentium III, NOT IMPLEMENTED YET !)
+  (* this var is adjusted during "initialization", current values are
+   + 0 : use standard optimized FPU code
+   + 1 : use 3DNow! optimized code (requires K6-2/3 CPU)
+   + 2 : use Intel SSE code (Pentium III, NOT IMPLEMENTED YET !) *)
   vSIMD: Byte = 0;
 
 // ==============================================================

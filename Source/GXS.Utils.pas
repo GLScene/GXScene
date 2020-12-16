@@ -1074,7 +1074,6 @@ begin
     else
     begin
       // Exp is > 0 so input float is normalized Single
-
       // round to nearest
       if (Mantissa and $00001000) > 0 then
       begin

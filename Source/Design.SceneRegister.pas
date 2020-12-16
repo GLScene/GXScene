@@ -68,7 +68,7 @@ type
     function GetVerbCount: Integer; override;
   end;
 
-  TResolutionProperty = class(TPropertyEditor)
+  TgxResolutionProperty = class(TPropertyEditor)
   public
     function GetAttributes: TPropertyAttributes; override;
     function GetValue: string; override;
@@ -97,7 +97,6 @@ type
 
   TgxColorProperty = class(TClassProperty, ICustomPropertyDrawing,
     ICustomPropertyListDrawing)
-  private
   protected
     function ColorToBorderColor(aColor: TColorVector;
       selected: Boolean): TColor;
@@ -121,14 +120,14 @@ type
     procedure SetValue(const Value: string); override;
   end;
 
-  TSoundFileProperty = class(TClassProperty)
+  TgxSoundFileProperty = class(TClassProperty)
   public
     function GetAttributes: TPropertyAttributes; override;
     function GetValue: string; override;
     procedure Edit; override;
   end;
 
-  TSoundNameProperty = class(TStringProperty)
+  TgxSoundNameProperty = class(TStringProperty)
   public
     function GetAttributes: TPropertyAttributes; override;
     procedure GetValues(Proc: TGetStrProc); override;
@@ -160,7 +159,7 @@ type
     that problem, most of the subitems handling code in TgxSceneBaseObject is
     here for the same reason...), the "protected" wasn't meant just to lure
     programmers into code they can't reuse... Arrr! Grrr... *)
-  TReuseableDefaultEditor = class(TComponentEditor, IDefaultEditor)
+  TgxReuseableDefaultEditor = class(TComponentEditor, IDefaultEditor)
   protected
     FFirst: IProperty;
     FBest: IProperty;
@@ -173,7 +172,7 @@ type
   end;
 
   // Editor for material library.
-  TgxMaterialLibraryEditor = class(TReuseableDefaultEditor, IDefaultEditor)
+  TgxMaterialLibraryEditor = class(TgxReuseableDefaultEditor, IDefaultEditor)
   protected
     procedure EditProperty(const Prop: IProperty;
       var Continue: Boolean); override;
@@ -206,7 +205,7 @@ type
   end;
 
   // Editor for Archive Manager.
-  TgxSArchiveManagerEditor = class(TReuseableDefaultEditor, IDefaultEditor)
+  TgxSArchiveManagerEditor = class(TgxReuseableDefaultEditor, IDefaultEditor)
   protected
     procedure EditProperty(const Prop: IProperty;
       var Continue: Boolean); override;
@@ -526,18 +525,18 @@ begin
   Result := 1;
 end;
 
-function TResolutionProperty.GetAttributes: TPropertyAttributes;
+function TgxResolutionProperty.GetAttributes: TPropertyAttributes;
 begin
   Result := [paValueList];
 end;
 
 
-function TResolutionProperty.GetValue: string;
+function TgxResolutionProperty.GetValue: string;
 begin
   Result := vVideoModes[GetOrdValue].Description;
 end;
 
-procedure TResolutionProperty.GetValues(Proc: TGetStrProc);
+procedure TgxResolutionProperty.GetValues(Proc: TGetStrProc);
 var
   i: Integer;
 begin
@@ -545,7 +544,7 @@ begin
     Proc(vVideoModes[i].Description);
 end;
 
-procedure TResolutionProperty.SetValue(const Value: string);
+procedure TgxResolutionProperty.SetValue(const Value: string);
 
 const
   Nums = ['0' .. '9'];
@@ -782,12 +781,12 @@ begin
   DefaultPropertyDrawName(Self, ACanvas, ARect);
 end;
 
-function TSoundFileProperty.GetAttributes: TPropertyAttributes;
+function TgxSoundFileProperty.GetAttributes: TPropertyAttributes;
 begin
   Result := [paDialog];
 end;
 
-function TSoundFileProperty.GetValue: string;
+function TgxSoundFileProperty.GetValue: string;
 var
   sample: TgxSoundSample;
 begin
@@ -799,7 +798,7 @@ begin
 end;
 
 
-procedure TSoundFileProperty.Edit;
+procedure TgxSoundFileProperty.Edit;
 var
   ODialog: TOpenDialog;
   sample: TgxSoundSample;
@@ -822,12 +821,12 @@ end;
 
 //---------------------------------------------------------
 
-function TSoundNameProperty.GetAttributes: TPropertyAttributes;
+function TgxSoundNameProperty.GetAttributes: TPropertyAttributes;
 begin
   Result := [paValueList];
 end;
 
-procedure TSoundNameProperty.GetValues(Proc: TGetStrProc);
+procedure TgxSoundNameProperty.GetValues(Proc: TGetStrProc);
 var
   i: Integer;
   source: TgxBaseSoundSource;
@@ -901,13 +900,13 @@ begin
   Result := 1;
 end;
 
-procedure TReuseableDefaultEditor.CheckEdit(const Prop: IProperty);
+procedure TgxReuseableDefaultEditor.CheckEdit(const Prop: IProperty);
 begin
   if FContinue then
     EditProperty(Prop, FContinue);
 end;
 
-procedure TReuseableDefaultEditor.EditProperty(const Prop: IProperty;
+procedure TgxReuseableDefaultEditor.EditProperty(const Prop: IProperty;
   var Continue: Boolean);
 var
   PropName: string;
@@ -939,7 +938,7 @@ begin
         ReplaceBest;
 end;
 
-procedure TReuseableDefaultEditor.Edit;
+procedure TgxReuseableDefaultEditor.Edit;
 var
   Components: IDesignerSelections;
 begin
@@ -1336,16 +1335,16 @@ begin
 end;
 
 // ******************************************************************************
-procedure GLRegisterPropertiesInCategories;
+procedure RegisterPropertiesInCategories;
 begin
-  // GXS.SceneViewer 
+  // GXS.SceneViewer
 {$IFDEF WIN32}
   RegisterPropertiesInCategory(sOpenGLCategoryName, [TypeInfo(TgxCamera), TypeInfo(TgxSceneBuffer),
     TypeInfo(TVSyncMode), TypeInfo(TgxScreenDepth)]);
 {$ENDIF}
   RegisterPropertiesInCategory(sOpenGLCategoryName, TgxSceneViewer, ['*Render']);
 
-  // GXS.Scene 
+  // GXS.Scene
   RegisterPropertiesInCategory(sOpenGLCategoryName, [TypeInfo(Tgxx.ObjectsSorting), TypeInfo(TProgressEvent),
     TypeInfo(TgxBehaviours), TypeInfo(TgxEffects), TypeInfo(TDirectRenderEvent), TypeInfo(TgxCameraStyle),
     TypeInfo(TOnCustomPerspective), TypeInfo(TgxScene)]);
@@ -1502,9 +1501,9 @@ begin
   RegisterComponentEditor(TgxMaterialLibraryEx, TgxMaterialLibraryEditor);
   RegisterComponentEditor(TgxSArchiveManager, TgxSArchiveManagerEditor);
 
-  XRRegisterPropertiesInCategories;
+  RegisterPropertiesInCategories;
 
-  RegisterPropertyEditor(TypeInfo(TResolution), nil, '', TResolutionProperty);
+  RegisterPropertyEditor(TypeInfo(TResolution), nil, '', TgxResolutionProperty);
   RegisterPropertyEditor(TypeInfo(TgxTexture), TgxMaterial, '',
     TgxTextureProperty);
   RegisterPropertyEditor(TypeInfo(TgxTextureImage), TgxTexture, '',
@@ -1513,9 +1512,9 @@ begin
     TgxImageClassProperty);
 
   RegisterPropertyEditor(TypeInfo(TgxSoundFile), TgxSoundSample, '',
-    TSoundFileProperty);
+    TgxSoundFileProperty);
   RegisterPropertyEditor(TypeInfo(string), TgxBaseSoundSource, 'SoundName',
-    TSoundNameProperty);
+    TgxSoundNameProperty);
 
   RegisterPropertyEditor(TypeInfo(TgxCoordinates), nil, '',
     TgxCoordinatesProperty);
@@ -1591,58 +1590,6 @@ begin
   RegisterPropertyEditor(TypeInfo(TStringList), TgxShaderEx, 'Source', TgxShaderEditorProperty);
 end;
 
-function GetSceneVersion: string;
-var
-  LProject: IOTAProject;
-  LExePath, LProjectPath, LSVN, LRevision: string;
-begin
-  LRevision := Copy(GRScene_REVISION, 12, 4);
-
-  // will be assigned after project compilation
-  // after each compilation get it from file \.svn\entries in 4-th line
-  // and write to file GXSceneRevision
-  // in both fail (no \.svn\entries or GXSceneRevision file) get a version value from GXS.Scene.pas
-  LProject := GetActiveProject;
-  LExePath := ExtractFilePath(ParamStr(0));
-  if Assigned(LProject) then
-  begin
-    LProjectPath := ExtractFilePath(LProject.FileName);
-    LSVN := LProjectPath + '.svn\entries';
-    if FileExists(LSVN) then
-      with TStringList.Create do
-        try
-          // Load
-          LoadFromFile(LSVN);
-          if (Count >= 4) and (Trim(Strings[3]) <> '') and
-            IsDirectoryWriteable(LExePath) then
-          begin
-            LRevision := Trim(Strings[3]);
-            // Save
-            Clear;
-            Add(LRevision);
-            SaveToFile(LExePath + 'GRSceneRevision');
-          end;
-        finally
-          Free;
-        end;
-  end
-  else if FileExists(LExePath + 'GRSceneRevision') then
-    try
-      with TStringList.Create do
-        try
-          LoadFromFile(LExePath + 'GRSceneRevision');
-          if (Count >= 1) and (Trim(Strings[0]) <> '') then
-            LRevision := Trim(Strings[0]);
-        finally
-          Free;
-        end;
-    except
-    end;
-
-  // Finally
-  Result := Format(GXScene_VERSION, [LRevision]);
-end;
-
 function GetProjectTargetName: string;
 var
   Project: IOTAProject;
@@ -1662,7 +1609,7 @@ initialization
 // ------------------------------------------------------------------
 
 SplashScreenServices.AddPluginBitmap(GetGXSceneVersion,
-  LoadBitmap(HInstance, 'TgxScene'), False, 'MPL 2 license', 'SVN version');
+  LoadBitmap(HInstance, 'TgxScene'), False, 'MPL 2 license', 'FMX version');
 
 GXS.CrossPlatform.IsDesignTime := True;
 GXS.CrossPlatform.vProjectTargetName := GetProjectTargetName;
@@ -1690,32 +1637,21 @@ begin
   RegisterSceneObject(TgxCone, 'Cone', strOCBasicGeometry, HInstance);
   RegisterSceneObject(TgxCylinder, 'Cylinder', strOCBasicGeometry, HInstance);
   RegisterSceneObject(TgxCapsule, 'Capsule', strOCBasicGeometry, HInstance);
-  RegisterSceneObject(TgxDodecahedron, 'Dodecahedron', strOCBasicGeometry,
-    HInstance);
-  RegisterSceneObject(TgxIcosahedron, 'Icosahedron', strOCBasicGeometry,
-    HInstance);
-  RegisterSceneObject(TgxOctahedron, 'Octahedron', strOCBasicGeometry,
-    HInstance);
-  RegisterSceneObject(TgxTetrahedron, 'Tetrahedron', strOCBasicGeometry,
-    HInstance);
-  RegisterSceneObject(TgxSuperellipsoid, 'Superellipsoid', strOCBasicGeometry,
-    HInstance);
+  RegisterSceneObject(TgxDodecahedron, 'Dodecahedron', strOCBasicGeometry, HInstance);
+  RegisterSceneObject(TgxIcosahedron, 'Icosahedron', strOCBasicGeometry, HInstance);
+  RegisterSceneObject(TgxOctahedron, 'Octahedron', strOCBasicGeometry, HInstance);
+  RegisterSceneObject(TgxTetrahedron, 'Tetrahedron', strOCBasicGeometry, HInstance);
+  RegisterSceneObject(TgxSuperellipsoid, 'Superellipsoid', strOCBasicGeometry, HInstance);
 
   // Advanced geometry
-  RegisterSceneObject(TgxAnimatedSprite, 'Animated Sprite',
-    strOCAdvancedGeometry, HInstance);
-  RegisterSceneObject(TgxArrowLine, 'ArrowLine', strOCAdvancedGeometry,
-    HInstance);
-  RegisterSceneObject(TgxArrowArc, 'ArrowArc', strOCAdvancedGeometry,
-    HInstance);
+  RegisterSceneObject(TgxAnimatedSprite, 'Animated Sprite', strOCAdvancedGeometry, HInstance);
+  RegisterSceneObject(TgxArrowLine, 'ArrowLine', strOCAdvancedGeometry, HInstance);
+  RegisterSceneObject(TgxArrowArc, 'ArrowArc', strOCAdvancedGeometry, HInstance);
   RegisterSceneObject(TgxAnnulus, 'Annulus', strOCAdvancedGeometry, HInstance);
-  RegisterSceneObject(TgxExtrusionSolid, 'ExtrusionSolid',
-    strOCAdvancedGeometry, HInstance);
-  RegisterSceneObject(TgxMultiPolygon, 'MultiPolygon', strOCAdvancedGeometry,
-    HInstance);
+  RegisterSceneObject(TgxExtrusionSolid, 'ExtrusionSolid', strOCAdvancedGeometry, HInstance);
+  RegisterSceneObject(TgxMultiPolygon, 'MultiPolygon', strOCAdvancedGeometry, HInstance);
   RegisterSceneObject(TgxPipe, 'Pipe', strOCAdvancedGeometry, HInstance);
-  RegisterSceneObject(TgxRevolutionSolid, 'RevolutionSolid',
-    strOCAdvancedGeometry, HInstance);
+  RegisterSceneObject(TgxRevolutionSolid, 'RevolutionSolid', strOCAdvancedGeometry, HInstance);
   RegisterSceneObject(TgxTorus, 'Torus', strOCAdvancedGeometry, HInstance);
 
   // Mesh objects
@@ -1724,88 +1660,63 @@ begin
   RegisterSceneObject(TgxMesh, 'Mesh', strOCMeshObjects, HInstance);
   RegisterSceneObject(TgxTilePlane, 'TilePlane', strOCMeshObjects, HInstance);
   RegisterSceneObject(TgxPortal, 'Portal', strOCMeshObjects, HInstance);
-  RegisterSceneObject(TgxTerrainRenderer, 'TerrainRenderer', strOCMeshObjects,
-    HInstance);
+  RegisterSceneObject(TgxTerrainRenderer, 'TerrainRenderer', strOCMeshObjects, HInstance);
 
   // Graph-plotting objects
-  RegisterSceneObject(TgxFlatText, 'FlatText', strOCGraphPlottingObjects,
-    HInstance);
-  RegisterSceneObject(TgxHeightField, 'HeightField', strOCGraphPlottingObjects,
-    HInstance);
-  RegisterSceneObject(TgxXYZGrid, 'XYZGrid', strOCGraphPlottingObjects,
-    HInstance);
+  RegisterSceneObject(TgxFlatText, 'FlatText', strOCGraphPlottingObjects, HInstance);
+  RegisterSceneObject(TgxHeightField, 'HeightField', strOCGraphPlottingObjects, HInstance);
+  RegisterSceneObject(TgxXYZGrid, 'XYZGrid', strOCGraphPlottingObjects, HInstance);
 
   // Particle systems
-  RegisterSceneObject(TgxParticles, 'Particles', strOCParticleSystems,
-    HInstance);
-  RegisterSceneObject(TgxParticleFXRenderer, 'PFX Renderer',
-    strOCParticleSystems, HInstance);
+  RegisterSceneObject(TgxParticles, 'Particles', strOCParticleSystems, HInstance);
+  RegisterSceneObject(TgxParticleFXRenderer, 'PFX Renderer', strOCParticleSystems, HInstance);
 
   // Environment objects
-  RegisterSceneObject(TgxEarthSkyDome, 'EarthSkyDome', strOCEnvironmentObjects,
-    HInstance);
-  RegisterSceneObject(TgxSkyDome, 'SkyDome', strOCEnvironmentObjects,
-    HInstance);
+  RegisterSceneObject(TgxEarthSkyDome, 'EarthSkyDome', strOCEnvironmentObjects, HInstance);
+  RegisterSceneObject(TgxSkyDome, 'SkyDome', strOCEnvironmentObjects, HInstance);
   RegisterSceneObject(TgxSkyBox, 'SkyBox', strOCEnvironmentObjects, HInstance);
-  RegisterSceneObject(TgxAtmosphere, 'Atmosphere', strOCEnvironmentObjects,
-    HInstance);
+  RegisterSceneObject(TgxAtmosphere, 'Atmosphere', strOCEnvironmentObjects, HInstance);
 
   // HUD objects.
   RegisterSceneObject(TgxHUDSprite, 'HUD Sprite', strOCHUDObjects, HInstance);
   RegisterSceneObject(TgxHUDText, 'HUD Text', strOCHUDObjects, HInstance);
   RegisterSceneObject(TgxResolutionIndependantHUDText,
     'Resolution Independant HUD Text', strOCHUDObjects, HInstance);
-  RegisterSceneObject(TgxAbsoluteHUDText, 'Absolute HUD Text', strOCHUDObjects,
-    HInstance);
+  RegisterSceneObject(TgxAbsoluteHUDText, 'Absolute HUD Text', strOCHUDObjects, HInstance);
   RegisterSceneObject(TgxGameMenu, 'GameMenu', strOCHUDObjects, HInstance);
   RegisterSceneObject(TgxConsole, 'Console', strOCHUDObjects, HInstance);
 
   // GUI objects.
-  RegisterSceneObject(TgxBaseControl, 'Root Control', strOCGuiObjects,
-    HInstance);
-  RegisterSceneObject(TgxPopupMenu, 'XRPopupMenu', strOCGuiObjects, HInstance);
-  RegisterSceneObject(TgxForm, 'XRForm', strOCGuiObjects, HInstance);
-  RegisterSceneObject(TgxPanel, 'XRPanel', strOCGuiObjects, HInstance);
-  RegisterSceneObject(TgxButton, 'XRButton', strOCGuiObjects, HInstance);
-  RegisterSceneObject(TgxCheckBox, 'XRCheckBox', strOCGuiObjects, HInstance);
-  RegisterSceneObject(TgxEdit, 'XREdit', strOCGuiObjects, HInstance);
-  RegisterSceneObject(TgxLabel, 'XRLabel', strOCGuiObjects, HInstance);
-  RegisterSceneObject(TgxAdvancedLabel, 'XRAdvancedLabel', strOCGuiObjects,
-    HInstance);
-  RegisterSceneObject(TgxScrollbar, 'GLScrollbar', strOCGuiObjects, HInstance);
-  RegisterSceneObject(StringGrid, 'GLStringGrid', strOCGuiObjects,
-    HInstance);
-  RegisterSceneObject(TgxCustomControl, 'GLBitmapControl', strOCGuiObjects,
-    HInstance);
+  RegisterSceneObject(TgxBaseControl, 'Root Control', strOCGuiObjects, HInstance);
+  RegisterSceneObject(TgxPopupMenu, 'PopupMenu', strOCGuiObjects, HInstance);
+  RegisterSceneObject(TgxForm, 'Form', strOCGuiObjects, HInstance);
+  RegisterSceneObject(TgxPanel, 'Panel', strOCGuiObjects, HInstance);
+  RegisterSceneObject(TgxButton, 'Button', strOCGuiObjects, HInstance);
+  RegisterSceneObject(TgxCheckBox, 'CheckBox', strOCGuiObjects, HInstance);
+  RegisterSceneObject(TgxEdit, 'Edit', strOCGuiObjects, HInstance);
+  RegisterSceneObject(TgxLabel, 'Label', strOCGuiObjects, HInstance);
+  RegisterSceneObject(TgxAdvancedLabel, 'AdvancedLabel', strOCGuiObjects, HInstance);
+  RegisterSceneObject(TgxScrollbar, 'Scrollbar', strOCGuiObjects, HInstance);
+  RegisterSceneObject(StringGrid, 'StringGrid', strOCGuiObjects, HInstance);
+  RegisterSceneObject(TgxCustomControl, 'BitmapControl', strOCGuiObjects, HInstance);
 
   // Special objects
-  RegisterSceneObject(TgxLensFlare, 'LensFlare', strOCSpecialObjects,
-    HInstance);
-  RegisterSceneObject(TgxTextureLensFlare, 'TextureLensFlare',
-    strOCSpecialObjects, HInstance);
+  RegisterSceneObject(TgxLensFlare, 'LensFlare', strOCSpecialObjects, HInstance);
+  RegisterSceneObject(TgxTextureLensFlare, 'TextureLensFlare', strOCSpecialObjects, HInstance);
   RegisterSceneObject(TgxMirror, 'Mirror', strOCSpecialObjects, HInstance);
-  RegisterSceneObject(TgxShadowPlane, 'ShadowPlane', strOCSpecialObjects,
-    HInstance);
-  RegisterSceneObject(TgxShadowVolume, 'ShadowVolume', strOCSpecialObjects,
-    HInstance);
+  RegisterSceneObject(TgxShadowPlane, 'ShadowPlane', strOCSpecialObjects, HInstance);
+  RegisterSceneObject(TgxShadowVolume, 'ShadowVolume', strOCSpecialObjects, HInstance);
   RegisterSceneObject(TgxZShadows, 'ZShadows', strOCSpecialObjects, HInstance);
-  RegisterSceneObject(TgxSLTextureEmitter, 'GLSL Texture Emitter',
-    strOCSpecialObjects, HInstance);
-  RegisterSceneObject(TgxSLProjectedTextures, 'GLSL Projected Textures',
-    strOCSpecialObjects, HInstance);
-  RegisterSceneObject(TgxTextureEmitter, 'Texture Emitter', strOCSpecialObjects,
-    HInstance);
-  RegisterSceneObject(TgxProjectedTextures, 'Projected Textures',
-    strOCSpecialObjects, HInstance);
+  RegisterSceneObject(TgxSLTextureEmitter, 'GLSL Texture Emitter', strOCSpecialObjects, HInstance);
+  RegisterSceneObject(TgxSLProjectedTextures, 'GLSL Projected Textures', strOCSpecialObjects, HInstance);
+  RegisterSceneObject(TgxTextureEmitter, 'Texture Emitter', strOCSpecialObjects, HInstance);
+  RegisterSceneObject(TgxProjectedTextures, 'Projected Textures', strOCSpecialObjects, HInstance);
   RegisterSceneObject(TgxBlur, 'Blur', strOCSpecialObjects, HInstance);
-  RegisterSceneObject(TgxMotionBlur, 'MotionBlur', strOCSpecialObjects,
-    HInstance);
+  RegisterSceneObject(TgxMotionBlur, 'MotionBlur', strOCSpecialObjects, HInstance);
   RegisterSceneObject(TgxSpaceText, 'SpaceText', strOCDoodad, HInstance);
   RegisterSceneObject(TgxTrail, 'Trail', strOCSpecialObjects, HInstance);
-  RegisterSceneObject(TgxPostEffect, 'PostEffect', strOCSpecialObjects,
-    HInstance);
-  RegisterSceneObject(TgxPostShaderHolder, 'PostShaderHolder',
-    strOCSpecialObjects, HInstance);
+  RegisterSceneObject(TgxPostEffect, 'PostEffect', strOCSpecialObjects, HInstance);
+  RegisterSceneObject(TgxPostShaderHolder, 'PostShaderHolder', strOCSpecialObjects, HInstance);
 
   // Doodad objects.
   RegisterSceneObject(TgxTeapot, 'Teapot', strOCDoodad, HInstance);
@@ -1813,20 +1724,13 @@ begin
   RegisterSceneObject(TgxWaterPlane, 'WaterPlane', strOCDoodad, HInstance);
 
   // Proxy objects.
-  RegisterSceneObject(TgxProxyObject, 'ProxyObject', strOCProxyObjects,
-    HInstance);
-  RegisterSceneObject(TgxColorProxy, 'ColorProxy', strOCProxyObjects,
-    HInstance);
-  RegisterSceneObject(TgxFreeFormProxy, 'FreeFormProxy', strOCProxyObjects,
-    HInstance);
-  RegisterSceneObject(TgxMaterialProxy, 'MaterialProxy', strOCProxyObjects,
-    HInstance);
-  RegisterSceneObject(TgxActorProxy, 'ActorProxy', strOCProxyObjects,
-    HInstance);
-  RegisterSceneObject(TgxMultiProxy, 'MultiProxy', strOCProxyObjects,
-    HInstance);
-  RegisterSceneObject(TgxMaterialMultiProxy, 'MaterialMultiProxy',
-    strOCProxyObjects, HInstance);
+  RegisterSceneObject(TgxProxyObject, 'ProxyObject', strOCProxyObjects, HInstance);
+  RegisterSceneObject(TgxColorProxy, 'ColorProxy', strOCProxyObjects, HInstance);
+  RegisterSceneObject(TgxFreeFormProxy, 'FreeFormProxy', strOCProxyObjects, HInstance);
+  RegisterSceneObject(TgxMaterialProxy, 'MaterialProxy', strOCProxyObjects, HInstance);
+  RegisterSceneObject(TgxActorProxy, 'ActorProxy', strOCProxyObjects, HInstance);
+  RegisterSceneObject(TgxMultiProxy, 'MultiProxy', strOCProxyObjects, HInstance);
+  RegisterSceneObject(TgxMaterialMultiProxy, 'MaterialMultiProxy', strOCProxyObjects, HInstance);
 
   // Other objects.
   RegisterSceneObject(TgxDirectOpenGL, 'Direct OpenGL', '', HInstance);

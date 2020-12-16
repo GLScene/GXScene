@@ -249,7 +249,7 @@ end;
 
 function TgxDynamicTextureImage.GetDataFormat: integer;
 var
-  Data, color: GLEnum;
+  Data, color: NativeUint;
 begin
   FindCompatibleDataFormat(TgxTexture(OwnerTexture).TextureFormatEx,
     color, Data);
@@ -263,7 +263,7 @@ end;
 
 function TgxDynamicTextureImage.GetTextureFormat: integer;
 var
-  Data, color: GLEnum;
+  Data, color: NativeUint;
 begin
   FindCompatibleDataFormat(TgxTexture(OwnerTexture).TextureFormatEx,
     color, Data);

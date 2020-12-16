@@ -2627,7 +2627,7 @@ begin
       try
         tf := GL_RGBA;
         PrepareImage(bmp32, tf);
-        bmp32.RegisterAsOpenVXTexture(
+        bmp32.RegisterAsOpenRXTexture(
           FTexHandle,
           True,
           tf, tw, th, td);

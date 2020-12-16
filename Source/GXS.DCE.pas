@@ -50,7 +50,7 @@ uses
 
 type
   // Only csEllipsoid can have dynamic behaviour 
-  TDCEShape = (csEllipsoid, csBox, csFreeform, csTerrain);
+  TgxDCEShape = (csEllipsoid, csBox, csFreeform, csTerrain);
 
   (* Indicates which type of layer comparison is made when trying to detect
     collisions between 2 bodies (A and B). Possible values are:
@@ -62,9 +62,9 @@ type
     equal to 0 or if A.layer <= B.layer) *and* if both
     layers are positive (that is, turns off collision
     for bodies whose layer is < 0) *)
-  TDCECollisionSelection = (ccsDCEStandard, ccsCollisionStandard, ccsHybrid);
+  TgxDCECollisionSelection = (ccsDCEStandard, ccsCollisionStandard, ccsHybrid);
 
-  TDCECollision = record
+  TgxDCECollision = record
     Position: TAffineVector;
     Normal: TAffineVector; // Surface normal
     Bounce: TAffineVector; // Surface reflection
@@ -76,11 +76,11 @@ type
   TgxDCEStatic = class;
   TgxDCEDynamic = class;
 
-  TDCECollisionEvent = procedure(Sender: TObject;
-    object1, object2: TgxBaseSceneObject; CollisionInfo: TDCECollision)
+  TgxDCECollisionEvent = procedure(Sender: TObject;
+    object1, object2: TgxBaseSceneObject; CollisionInfo: TgxDCECollision)
     of object;
-  TDCEObjectCollisionEvent = procedure(Sender: TObject;
-    ObjectCollided: TgxBaseSceneObject; CollisionInfo: TDCECollision) of object;
+  TgxDCEObjectCollisionEvent = procedure(Sender: TObject;
+    ObjectCollided: TgxBaseSceneObject; CollisionInfo: TgxDCECollision) of object;
 
   TgxDCEManager = class(TComponent)
   private
@@ -90,9 +90,9 @@ type
     FWorldDirection: TgxCoordinates; // Used to calculate jumps f.i.
     FWorldScale: single;
     FMovimentScale: single;
-    FStandardiseLayers: TDCECollisionSelection;
+    FStandardiseLayers: TgxDCECollisionSelection;
     FManualStep: Boolean;
-    FOnCollision: TDCECollisionEvent;
+    FOnCollision: TgxDCECollisionEvent;
     procedure SetWorldDirection(const Value: TgxCoordinates);
     procedure SetWorldScale(const Value: single);
     function GetDynamicCount: Integer;
@@ -118,9 +118,9 @@ type
     property WorldDirection: TgxCoordinates read FWorldDirection write SetWorldDirection;
     property WorldScale: single read FWorldScale write SetWorldScale;
     property MovimentScale: single read FMovimentScale write FMovimentScale;
-    Property StandardiseLayers: TDCECollisionSelection read FStandardiseLayers write FStandardiseLayers; 
+    Property StandardiseLayers: TgxDCECollisionSelection read FStandardiseLayers write FStandardiseLayers;
     Property ManualStep: Boolean read FManualStep write FManualStep;
-    property OnCollision: TDCECollisionEvent read FOnCollision write FOnCollision;
+    property OnCollision: TgxDCECollisionEvent read FOnCollision write FOnCollision;
   end;
 
   TgxDCEStatic = class(TgxBehaviour)
@@ -128,7 +128,7 @@ type
     FManager: TgxDCEManager;
     FManagerName: String; // NOT persistent, temporarily used for persistence
     FActive: Boolean;
-    FShape: TDCEShape;
+    FShape: TgxDCEShape;
   	// Collides only with lower or equal layers
     FLayer: Integer;
     // Collide and slide if true, otherwise it "walk thru walls"
@@ -137,8 +137,8 @@ type
     FBounceFactor: single; // 0 (don't bounce); 1 (bounce forever)
     FSize: TgxCoordinates;
     // Events
-    FOnCollision: TDCEObjectCollisionEvent;
-    procedure SetShape(const Value: TDCEShape);
+    FOnCollision: TgxDCEObjectCollisionEvent;
+    procedure SetShape(const Value: TgxDCEShape);
     procedure SetFriction(const Value: single);
     procedure SetBounceFactor(const Value: single);
     procedure SetSize(const Value: TgxCoordinates);
@@ -153,11 +153,11 @@ type
     procedure Assign(Source: TPersistent); override;
     class function FriendlyName: String; override;
     class function FriendlyDescription: String; override;
-    property OnCollision: TDCEObjectCollisionEvent read FOnCollision write FOnCollision;
+    property OnCollision: TgxDCEObjectCollisionEvent read FOnCollision write FOnCollision;
   published
     property Active: Boolean read FActive write FActive;
     property Manager: TgxDCEManager read FManager write SetManager;
-    property Shape: TDCEShape read FShape write SetShape;
+    property Shape: TgxDCEShape read FShape write SetShape;
     property Layer: Integer read FLayer write FLayer;
     property Solid: Boolean read FSolid write FSolid;
     property Friction: single read FFriction write SetFriction;
@@ -165,7 +165,7 @@ type
     property Size: TgxCoordinates read FSize write SetSize;
   end;
 
-  TDCESlideOrBounce = (csbSlide, csbBounce);
+  TgxDCESlideOrBounce = (csbSlide, csbBounce);
 
   TgxDCEDynamic = class(TgxBehaviour)
   private
@@ -181,7 +181,7 @@ type
     FSize: TgxCoordinates;
     //Number of iterations of the collision method
 	FMaxRecursionDepth: byte;
-    FSlideOrBounce: TDCESlideOrBounce; // gak20041122
+    FSlideOrBounce: TgxDCESlideOrBounce; // gak20041122
     // Movement
     FAccel: TAffineVector; // Current acceleration
     FSpeed: TAffineVector; // Current speed
@@ -194,7 +194,7 @@ type
     FJumpHeight, FJumpForce, FJumpSpeed: single;
     FJumping: Boolean;
     // Events
-    FOnCollision: TDCEObjectCollisionEvent;
+    FOnCollision: TgxDCEObjectCollisionEvent;
     procedure SetFriction(const Value: single);
     procedure SetBounceFactor(const Value: single);
     procedure SetSize(const Value: TgxCoordinates);
@@ -224,7 +224,7 @@ type
     property Speed: TAffineVector read FSpeed write FSpeed;
     property InGround: Boolean read FInGround;
     property MaxRecursionDepth: byte read FMaxRecursionDepth write FMaxRecursionDepth; 
-    property OnCollision: TDCEObjectCollisionEvent read FOnCollision write FOnCollision;
+    property OnCollision: TgxDCEObjectCollisionEvent read FOnCollision write FOnCollision;
   published
     property Active: Boolean read FActive write FActive;
     property Manager: TgxDCEManager read FManager write SetManager;
@@ -234,7 +234,7 @@ type
     property Friction: single read FFriction write SetFriction;
     property BounceFactor: single read FBounceFactor write SetBounceFactor;
     property Size: TgxCoordinates read FSize write SetSize;
-    property SlideOrBounce: TDCESlideOrBounce read FSlideOrBounce write FSlideOrBounce;
+    property SlideOrBounce: TgxDCESlideOrBounce read FSlideOrBounce write FSlideOrBounce;
   end;
 
 function GetOrCreateDCEStatic(behaviours: TgxBehaviours): TgxDCEStatic; overload;
@@ -299,7 +299,7 @@ var
   tFriction, tBounceFactor: single;
   TObject: TgxBaseSceneObject;
   // Collision results
-  ColInfo: TDCECollision;
+  ColInfo: TgxDCECollision;
   lastobj: Integer;
   i, oi: Integer;
   MP: TECMovePack;
@@ -699,7 +699,7 @@ begin
       inherited;
     FManagerName := ReadString;
     Manager := nil;
-    FShape := TDCEShape(ReadInteger);
+    FShape := TgxDCEShape(ReadInteger);
     FLayer := ReadInteger;
     FSolid := ReadBoolean;
     FActive := ReadBoolean;
@@ -738,7 +738,7 @@ begin
   end;
 end;
 
-procedure TgxDCEStatic.SetShape(const Value: TDCEShape);
+procedure TgxDCEStatic.SetShape(const Value: TgxDCEShape);
 begin
   FShape := Value;
 end;
@@ -878,21 +878,18 @@ begin
   if FUseGravity then
   begin
     // Calculate gravity acceleration
-
     if FInGround then
       G := FManager.Gravity * abs(1 - VectorDotProduct(FGroundNormal,
         FManager.WorldDirection.AsAffineVector))
     else
       G := FManager.Gravity;
-
     if FJumping then
       G := 0;
     v := VectorScale(FManager.WorldDirection.AsAffineVector, G);
-
     Accel(FGravSpeed, fAir, v);
-    { FGravSpeed[0] := deltaTime * v[0] + fAir * FGravSpeed[0];
+    (* FGravSpeed[0] := deltaTime * v[0] + fAir * FGravSpeed[0];
       FGravSpeed[1] := deltaTime * v[1] + fAir * FGravSpeed[1];
-      FGravSpeed[2] := deltaTime * v[2] + fAir * FGravSpeed[2]; }
+      FGravSpeed[2] := deltaTime * v[2] + fAir * FGravSpeed[2]; *)
   end
   else
     FGravSpeed := NullVector;
@@ -930,7 +927,6 @@ begin
 
   // Returns the friction of all collided objects
   FTotalFriction := FManager.MoveByDistance(Self, deltaS, deltaAbsS);
-
   FAccel := NullVector;
   FAbsAccel := NullVector;
 end;
@@ -939,7 +935,6 @@ procedure TgxDCEDynamic.DoProgress(const progressTime: TProgressTimes);
 begin
   inherited DoProgress(progressTime);
   Assert(Assigned(Manager), 'DCE Manager not assigned to behaviour.');
-
   if (not FManager.ManualStep) and FActive then
   begin
     if progressTime.deltaTime > 0.1 then
@@ -999,7 +994,6 @@ procedure TgxDCEDynamic.MoveTo(Position: TAffineVector; Amount: single);
 begin
   SubtractVector(Position,
     AffineVectorMake(OwnerBaseSceneObject.AbsolutePosition));
-
   Move(Position, Amount);
 end;
 
@@ -1045,7 +1039,7 @@ begin
     FFriction := ReadSingle;
     FBounceFactor := ReadSingle;
     FMaxRecursionDepth := ReadInteger;
-    FSlideOrBounce := TDCESlideOrBounce(ReadInteger);
+    FSlideOrBounce := TgxDCESlideOrBounce(ReadInteger);
     FSize.ReadFromFiler(reader);
   end;
 end;
@@ -1126,7 +1120,6 @@ end;
 
 // ------------------------------------------------------------------
 initialization
-
 // ------------------------------------------------------------------
 
 

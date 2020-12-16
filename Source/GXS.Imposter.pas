@@ -632,7 +632,7 @@ var
   size: Integer;
 begin
   destImposter.PrepareTexture(rci);
-  bmp32.RegisterAsOpenVXTexture(
+  bmp32.RegisterAsOpenRXTexture(
     destImposter.FTexture, False, GL_RGBA8, size, size, size);
 end;
 

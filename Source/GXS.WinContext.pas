@@ -592,14 +592,10 @@ begin
     end;
 
     case Layer of
-      clUnderlay2:
-        AddIAttrib(WGL_CONTEXT_LAYER_PLANE_ARB, -2);
-      clUnderlay1:
-        AddIAttrib(WGL_CONTEXT_LAYER_PLANE_ARB, -1);
-      clOverlay1:
-        AddIAttrib(WGL_CONTEXT_LAYER_PLANE_ARB, 1);
-      clOverlay2:
-        AddIAttrib(WGL_CONTEXT_LAYER_PLANE_ARB, 2);
+      clUnderlay2: AddIAttrib(WGL_CONTEXT_LAYER_PLANE_ARB, -2);
+      clUnderlay1: AddIAttrib(WGL_CONTEXT_LAYER_PLANE_ARB, -1);
+      clOverlay1: AddIAttrib(WGL_CONTEXT_LAYER_PLANE_ARB, 1);
+      clOverlay2: AddIAttrib(WGL_CONTEXT_LAYER_PLANE_ARB, 2);
     end;
 
     FRC := 0;

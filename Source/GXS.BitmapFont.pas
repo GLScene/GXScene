@@ -783,7 +783,7 @@ begin
       else
         Assert(False);
       end;
-      RegisterAsOpenVXTexture(t, not(FMinFilter in [miNearest, miLinear]),
+      RegisterAsOpenRXTexture(t, not(FMinFilter in [miNearest, miLinear]),
         TextureFormat, cap, cap, cap);
     end;
 

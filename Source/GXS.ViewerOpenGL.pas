@@ -116,7 +116,7 @@ begin
   end;
   FreeAndNil(FFMXBuffer);
   FreeAndNil(FFMXContext);
-  FreeAndNil(TObject(FMultisample));
+  FreeAndNil(FMultisample);
   inherited;
 end;
 

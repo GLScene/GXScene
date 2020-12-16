@@ -266,7 +266,8 @@ contains
   Scene.VectorLists in '..\Source\Scene.VectorLists.pas',
   Scene.VectorTypes in '..\Source\Scene.VectorTypes.pas',
   Scene.XCollection in '..\Source\Scene.XCollection.pas',
-  Scene.XOpenGL in '..\Source\Scene.XOpenGL.pas';
+  Scene.XOpenGL in '..\Source\Scene.XOpenGL.pas',
+  Formats.FileB3D in '..\Source\Formats.FileB3D.pas';
 
 end.
 

@@ -472,8 +472,8 @@ function DDSHeaderToGLEnum(const DX9header: TDDSHeader;
                            const DX11header: TDDS_HEADER_DXT10;
                            const useDX11: Boolean;
                            out iFormat: TgxinternalFormat;
-                           out colorFormat: GLEnum;
-                           out dataType: GLenum;
+                           out colorFormat: NativeUInt;
+                           out dataType: NativeUInt;
                            out bpe: Integer): Boolean;
 
 function GLEnumToDDSHeader(var DX9header: TDDSHeader;
@@ -485,8 +485,8 @@ function GLEnumToDDSHeader(var DX9header: TDDSHeader;
                            const bpe: Integer): Boolean;
 
 function FindDDSCompatibleDataFormat(const iFormat: TgxinternalFormat;
-                                     out colorFormat: GLEnum;
-                                     out dataType: GLEnum): Boolean;
+                                     out colorFormat: NativeUInt;
+                                     out dataType: NativeUInt): Boolean;
 
 implementation
 
@@ -899,8 +899,8 @@ function DDSHeaderToGLEnum(const DX9header: TDDSHeader;
                            const DX11header: TDDS_HEADER_DXT10;
                            const useDX11: Boolean;
                            out iFormat: TgxinternalFormat;
-                           out colorFormat: GLEnum;
-                           out dataType: GLenum;
+                           out colorFormat: NativeUInt;
+                           out dataType: NativeUInt;
                            out bpe: Integer): Boolean;
 var
   i: Integer;
@@ -1298,8 +1298,8 @@ begin
 end;
 
 function FindDDSCompatibleDataFormat(const iFormat: TgxInternalFormat;
-                                     out colorFormat: GLEnum;
-                                     out dataType: GLEnum): Boolean;
+                                     out colorFormat: NativeUInt;
+                                     out dataType: NativeUInt): Boolean;
 var
   i: Integer;
 begin

@@ -222,7 +222,7 @@ function GetTextureElementSize(colorFormat: Cardinal; dataType: Cardinal):
   Integer; overload;
 // Give compatible OpenGL image format and data type.
 procedure FindCompatibleDataFormat(intFormat: TgxInternalFormat; out dFormat:
-  Cardinal; out dType: Cardinal);
+  NativeUInt; out dType: NativeUInt);
 (* Give a compressed OpenGL texture format from GLScene texture format
   if format is have not compression than return same openGL format. *)
 function CompressedInternalFormatToOpenVX(intFormat: TgxInternalFormat): Integer;
@@ -560,7 +560,7 @@ begin
 end;
 
 procedure FindCompatibleDataFormat(intFormat: TgxInternalFormat; out dFormat:
-  Cardinal; out dType: Cardinal);
+  NativeUInt; out dType: NativeUInt);
 begin
   dFormat := cTextureFormatToOpenVX[intFormat].ClrFmt;
   dType := cTextureFormatToOpenVX[intFormat].DataFmt;

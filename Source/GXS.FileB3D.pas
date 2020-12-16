@@ -22,7 +22,6 @@ uses
   GXS.Texture,
   GXS.TextureFormat,
   GXS.Material,
-
   Formats.FileB3D;
 
 type

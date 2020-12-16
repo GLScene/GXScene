@@ -2804,7 +2804,7 @@ begin
     else
       glFormat := InternalFormatToOpenVXFormat(FTextureFormat);
 
-    bitmap32.RegisterAsOpenVXTexture(
+    bitmap32.RegisterAsOpenRXTexture(
       FTextureHandle,
       not (FMinFilter in [miNearest, miLinear]),
       glFormat,

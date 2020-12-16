@@ -178,7 +178,8 @@ begin
     end;
     fTextureArray := false;
 
-    if not DDSHeaderToGLEnum(header, DX10header, bDXT10Header, fInternalFormat, fColorFormat, fDataType, fElementSize) then
+    if not DDSHeaderToGLEnum(header, DX10header, bDXT10Header,
+           fInternalFormat, fColorFormat, fDataType, fElementSize) then
       raise EInvalidRasterFile.Create('DDS errorneus format');
     btcCompressed := IsCompressedFormat(fInternalFormat);
   end; // of with

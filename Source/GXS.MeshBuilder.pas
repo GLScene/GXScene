@@ -1,8 +1,8 @@
-(*******************************************
-*                                          *
-* Graphic Scene Engine, http://glscene.org *
-*                                          *
-********************************************)
+//
+//
+// The graphics rendering engine GXScene  http://glscene.org
+//
+//
 
 unit GXS.MeshBuilder;
 
@@ -20,9 +20,9 @@ uses
   System.Classes,
   GXS.Scene,
   GXS.VectorFileObjects,
-  Scene.VectorTypes,
-  Scene.VectorGeometry,
-  Scene.VectorLists;
+  GXS.VectorTypes,
+  GXS.VectorGeometry,
+  GXS.VectorLists;
 
 procedure BuildCube(Mesh: TgxMeshObject; Position, Scale: TAffineVector);
 procedure BuildCylinder(Mesh: TgxMeshObject; Position, Scale: TAffineVector;

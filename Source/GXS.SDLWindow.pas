@@ -1,8 +1,8 @@
-(*******************************************
-*                                          *
-* Graphic Scene Engine, http://glscene.org *
-*                                          *
-********************************************)
+//
+//
+// The graphics rendering engine GXScene  http://glscene.org
+//
+//
 
 unit GXS.SDLWindow;
 
@@ -19,17 +19,17 @@ unit GXS.SDLWindow;
 
 interface
 
-{$I Scene.inc}
+{$I GXScene.inc}
 
 uses
   System.Classes,
   System.SysUtils,
   System.SyncObjs,
 
-  Scene.Import.OpenGLx,
-  Scene.VectorTypes,
+  Importx.OpenGLx,
+  GXS.VectorTypes,
   GXS.Context,
-  Scene.VectorGeometry,
+  GXS.VectorGeometry,
   Import.SDL2;
 
 type

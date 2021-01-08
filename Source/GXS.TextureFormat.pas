@@ -1,16 +1,13 @@
-(*******************************************
-*                                          *
-* Graphic Scene Engine, http://glscene.org *
-*                                          *
-********************************************)
-
+//
+// The graphics rendering engine GXScene  http://glscene.org
+//
 unit GXS.TextureFormat;
 
 interface
 
 uses
-  Scene.Strings,
-  Scene.Import.OpenGLx;
+  GXS.Strings,
+  Importx.OpenGLx;
 
 type
   // Texture addressing rules

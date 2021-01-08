@@ -1,8 +1,8 @@
-(*******************************************
-*                                          *
-* Graphic Scene Engine, http://glscene.org *
-*                                          *
-********************************************)
+//
+//
+// The graphics rendering engine GXScene  http://glscene.org
+//
+//
 
 unit GXS.CelShader;
 
@@ -14,14 +14,14 @@ unit GXS.CelShader;
 
 interface
 
-{$I Scene.inc}
+{$I GXScene.inc}
 
 uses
   System.Classes,
   System.SysUtils,
 
-  Scene.Import.OpenGLx,
-  Scene.VectorGeometry,
+  Importx.OpenGLx,
+  GXS.VectorGeometry,
   GXS.Texture,
   GXS.Context,
   GXS.Graphics,

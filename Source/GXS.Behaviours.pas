@@ -1,8 +1,8 @@
-(*******************************************
-*                                          *
-* Graphic Scene Engine, http://glscene.org *
-*                                          *
-********************************************)
+//
+//
+// The graphics rendering engine GXScene  http://glscene.org
+//
+//
 
 unit GXS.Behaviours;
 
@@ -10,17 +10,17 @@ unit GXS.Behaviours;
 
 interface
 
-{$I Scene.inc}
+{$I GXScene.inc}
 
 uses
   System.Classes,
   System.SysUtils,
 
-  Scene.XCollection,
-  Scene.VectorTypes,
+  GXS.XCollection,
+  GXS.VectorTypes,
   GXS.Scene,
-  Scene.VectorGeometry,
-  Scene.BaseClasses,
+  GXS.VectorGeometry,
+  GXS.BaseClasses,
   GXS.Coordinates;
 
 type

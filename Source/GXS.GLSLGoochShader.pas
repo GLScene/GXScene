@@ -16,21 +16,21 @@ unit GXS.GLSLGoochShader;
 
 interface
 
-{$I Scene.inc}
+{$I GXScene.inc}
 
 uses
   System.Classes,
   
   GXS.Scene, 
   GXS.CrossPlatform, 
-  Scene.BaseClasses, 
+  GXS.BaseClasses, 
   GXS.State, 
   Winapi.OpenGL, 
   Winapi.OpenGLext,  
   GXS.OpenGL1x, 
   GXS.Context, 
   GXS.RenderContextInfo, 
-  Scene.VectorGeometry, 
+  GXS.VectorGeometry, 
   GXS.Coordinates,
   GXS.TextureFormat, 
   GXS.Color, 

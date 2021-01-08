@@ -1,8 +1,8 @@
-(*******************************************
-*                                          *
-* Graphic Scene Engine, http://glscene.org *
-*                                          *
-********************************************)
+//
+//
+// The graphics rendering engine GXScene  http://glscene.org
+//
+//
 
 unit GXS.AsmShader;
 
@@ -15,16 +15,16 @@ unit GXS.AsmShader;
 
 interface
 
-{$I Scene.inc}
+{$I GXScene.inc}
 
 uses
   System.Classes, 
   System.SysUtils,
 
-  Scene.Import.OpenGLx,
+  Importx.OpenGLx,
   GXS.Context,
-  Scene.VectorGeometry,
-  Scene.VectorTypes,
+  GXS.VectorGeometry,
+  GXS.VectorTypes,
   GXS.Texture,
   GXS.CustomShader,
   GXS.RenderContextInfo;

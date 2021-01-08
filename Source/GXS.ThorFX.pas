@@ -1,36 +1,33 @@
-(*********************************************
- *                                           *
- *  Graphic Scene Engine, http://glscene.org *
- *                                           *
- *********************************************)
-
+//
+// The graphics rendering engine GXScene  http://glscene.org
+//
 unit GXS.ThorFX;
 
 (* ThorFX  for Scene *)
 
 interface
 
-{$I Scene.inc}
+{$I GXScene.inc}
 
 uses
   System.Classes,
   System.SysUtils,
   System.Math,
 
-  Scene.Import.OpenGLx,
-  Scene.XCollection,
+  Importx.OpenGLx,
+  GXS.XCollection,
   GXS.Scene,
   GXS.PipelineTransformation,
-  Scene.VectorGeometry,
+  GXS.VectorGeometry,
   GXS.Context,
-  Scene.VectorLists,
-  Scene.VectorTypes,
+  GXS.VectorLists,
+  GXS.VectorTypes,
   GXS.Cadencer,
   GXS.Color,
-  Scene.BaseClasses,
+  GXS.BaseClasses,
   GXS.Coordinates,
   GXS.RenderContextInfo,
-  Scene.Manager,
+  GXS.Manager,
   GXS.State,
   GXS.TextureFormat;
 

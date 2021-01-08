@@ -1,7 +1,7 @@
 (* ******************************************
-  *                                          *
-  * Graphic Scene Engine, http://glscene.org *
-  *                                          *
+  //
+  // The graphics rendering engine GXScene  http://glscene.org
+  //
   ******************************************* *)
 
 unit GXS.TextureImageEditors;
@@ -10,7 +10,7 @@ unit GXS.TextureImageEditors;
 
 interface
 
-{$I Scene.inc}
+{$I GXScene.inc}
 
 uses
   System.Classes,

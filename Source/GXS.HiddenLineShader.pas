@@ -1,8 +1,8 @@
-(*******************************************
-*                                          *
-* Graphic Scene Engine, http://glscene.org *
-*                                          *
-********************************************)
+//
+//
+// The graphics rendering engine GXScene  http://glscene.org
+//
+//
 
 unit GXS.HiddenLineShader;
 
@@ -14,16 +14,16 @@ unit GXS.HiddenLineShader;
 
 interface
 
-{$I Scene.inc}
+{$I GXScene.inc}
 
 uses
   System.Classes,
 
-  Scene.Import.OpenGLx,
+  Importx.OpenGLx,
   GXS.Material,
   GXS.Scene,
   GXS.Color,
-  Scene.BaseClasses, 
+  GXS.BaseClasses, 
   GXS.RenderContextInfo, 
   GXS.State, 
   GXS.Context;

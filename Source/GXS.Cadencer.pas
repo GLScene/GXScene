@@ -1,8 +1,8 @@
-(*******************************************
-*                                          *
-* Graphic Scene Engine, http://glscene.org *
-*                                          *
-********************************************)
+//
+//
+// The graphics rendering engine GXScene  http://glscene.org
+//
+//
 
 unit GXS.Cadencer;
 
@@ -10,7 +10,7 @@ unit GXS.Cadencer;
 
 interface
 
-{$I Scene.inc}
+{$I GXScene.inc}
 
 uses
   Winapi.Windows,
@@ -22,7 +22,7 @@ uses
   FMX.Forms,
 
   GXS.Scene,
-  Scene.BaseClasses;
+  GXS.BaseClasses;
 
 type
 

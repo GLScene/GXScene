@@ -1,8 +1,8 @@
-(*******************************************
-*                                          *
-* Graphic Scene Engine, http://glscene.org *
-*                                          *
-********************************************)
+//
+//
+// The graphics rendering engine GXScene  http://glscene.org
+//
+//
 
 unit GXS.RenderContextInfo;
 
@@ -10,11 +10,11 @@ unit GXS.RenderContextInfo;
 
 interface
 
-{$I Scene.inc}
+{$I GXScene.inc}
 
 uses
-  Scene.PersistentClasses,
-  Scene.VectorGeometry,
+  GXS.PersistentClasses,
+  GXS.VectorGeometry,
   GXS.State,
   GXS.PipelineTransformation,
   GXS.Color;

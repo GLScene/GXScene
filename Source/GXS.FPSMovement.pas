@@ -1,8 +1,8 @@
-(*******************************************
-*                                          *
-* Graphic Scene Engine, http://glscene.org *
-*                                          *
-********************************************)
+//
+//
+// The graphics rendering engine GXScene  http://glscene.org
+//
+//
 
 unit GXS.FPSMovement;
 
@@ -10,7 +10,7 @@ unit GXS.FPSMovement;
 
 interface
 
-{$I Scene.inc}
+{$I GXScene.inc}
 
 uses
   System.Classes,
@@ -18,20 +18,20 @@ uses
   System.UITypes,
   FMX.Graphics,
 
-  Scene.Import.OpenGLx,
-  Scene.XCollection,
-  Scene.VectorTypes,
+  Importx.OpenGLx,
+  GXS.XCollection,
+  GXS.VectorTypes,
   GXS.Context,
-  Scene.VectorGeometry,
+  GXS.VectorGeometry,
   GXS.Scene,
   GXS.Coordinates,
   GXS.VectorFileObjects,
-  Scene.VectorLists,
+  GXS.VectorLists,
   GXS.GeomObjects,
   GXS.Navigator,
   GXS.RenderContextInfo,
-  Scene.BaseClasses,
-  Scene.Manager,
+  GXS.BaseClasses,
+  GXS.Manager,
   GXS.State;
 
 type

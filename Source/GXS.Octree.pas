@@ -1,8 +1,8 @@
-(*******************************************
-*                                          *
-* Graphic Scene Engine, http://glscene.org *
-*                                          *
-********************************************)
+//
+//
+// The graphics rendering engine GXScene  http://glscene.org
+//
+//
 
 unit GXS.Octree;
 
@@ -13,14 +13,14 @@ unit GXS.Octree;
 
 interface
 
-{$I Scene.inc}
+{$I GXScene.inc}
 
 uses
   System.Classes,
-  Scene.VectorTypes,
-  Scene.VectorGeometry,
-  Scene.VectorLists,
-  Scene.GeometryBB,
+  GXS.VectorTypes,
+  GXS.VectorGeometry,
+  GXS.VectorLists,
+  GXS.GeometryBB,
   GXS.Context;
 
 type

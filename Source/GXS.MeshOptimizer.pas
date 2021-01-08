@@ -1,8 +1,8 @@
-(*******************************************
-*                                          *
-* Graphic Scene Engine, http://glscene.org *
-*                                          *
-********************************************)
+//
+//
+// The graphics rendering engine GXScene  http://glscene.org
+//
+//
 
 unit GXS.MeshOptimizer;
 
@@ -14,11 +14,11 @@ uses
   System.Classes,
   System.SysUtils,
 
-  Scene.VectorGeometry,
-  Scene.VectorTypes,
+  GXS.VectorGeometry,
+  GXS.VectorTypes,
   GXS.VectorFileObjects,
-  Scene.PersistentClasses,
-  Scene.VectorLists,
+  GXS.PersistentClasses,
+  GXS.VectorLists,
   GXS.MeshUtils;
 
 

@@ -1,25 +1,22 @@
-(*******************************************
-*                                          *
-* Graphic Scene Engine, http://glscene.org *
-*                                          *
-********************************************)
-
-unit GXS.GLUTesselation;
+//
+// The graphics rendering engine GXScene  http://glscene.org
+//
+unit GXS.gluTesselation;
 
 (* Code to generate triangle strips and fans for polygons *)
 
 interface
 
-{$I Scene.inc}
+{$I GXScene.inc}
 
 uses
   System.SysUtils,
 
-  Scene.Import.OpenGLx,
+  Importx.OpenGLx,
   GXS.VectorFileObjects,
-  Scene.VectorLists,
-  Scene.VectorGeometry,
-  Scene.VectorTypes;
+  GXS.VectorLists,
+  GXS.VectorGeometry,
+  GXS.VectorTypes;
 
 (* Tesselates the polygon outlined by the Vertexes.
   And addeds them to the first facegroup of the Mesh. *)

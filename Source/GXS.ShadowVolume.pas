@@ -1,8 +1,8 @@
-(*******************************************
-*                                          *
-* Graphic Scene Engine, http://glscene.org *
-*                                          *
-********************************************)
+//
+//
+// The graphics rendering engine GXScene  http://glscene.org
+//
+//
 
 unit GXS.ShadowVolume;
 
@@ -16,23 +16,23 @@ unit GXS.ShadowVolume;
 
 interface
 
-{$I Scene.inc}
+{$I GXScene.inc}
 
 uses
   System.SysUtils,
   System.Classes,
 
-  Scene.Import.OpenGLx,
+  Importx.OpenGLx,
   GXS.Scene,
   GXS.PipelineTransformation,
-  Scene.VectorLists,
+  GXS.VectorLists,
   GXS.State, 
-  Scene.VectorTypes,
-  Scene.VectorGeometry,
+  GXS.VectorTypes,
+  GXS.VectorGeometry,
   GXS.Context,
   GXS.Silhouette,
-  Scene.PersistentClasses,
-  Scene.GeometryBB,
+  GXS.PersistentClasses,
+  GXS.GeometryBB,
   GXS.Color,
   GXS.RenderContextInfo;
 

@@ -4,7 +4,7 @@
 
 unit GXS.FileZLIB;
 
-{$I Scene.inc}
+{$I GXScene.inc}
 
 interface
 

@@ -1,8 +1,8 @@
-(*******************************************
-*                                          *
-* Graphic Scene Engine, http://glscene.org *
-*                                          *
-********************************************)
+//
+//
+// The graphics rendering engine GXScene  http://glscene.org
+//
+//
 
 unit GXS.ShaderCombiner;
 
@@ -17,15 +17,15 @@ unit GXS.ShaderCombiner;
 
 interface
 
-{$I Scene.inc}
+{$I GXScene.inc}
 
 uses
   System.Classes,
 
   GXS.Material,
   GXS.Scene,
-  Scene.VectorGeometry,
-  Scene.Strings,
+  GXS.VectorGeometry,
+  GXS.Strings,
   GXS.RenderContextInfo;
 
 type

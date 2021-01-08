@@ -1,8 +1,8 @@
-(*******************************************
-*                                          *
-* Graphic Scene Engine, http://glscene.org *
-*                                          *
-********************************************)
+//
+//
+// The graphics rendering engine GXScene  http://glscene.org
+//
+//
 
 unit GXS.Ragdoll;
 
@@ -11,10 +11,10 @@ unit GXS.Ragdoll;
 interface
 
 uses
-  Scene.VectorTypes,
-  Scene.PersistentClasses,
-  Scene.VectorGeometry,
-  Scene.VectorLists,
+  GXS.VectorTypes,
+  GXS.PersistentClasses,
+  GXS.VectorGeometry,
+  GXS.VectorLists,
   GXS.Scene,
   GXS.Objects,
   GXS.VectorFileObjects;

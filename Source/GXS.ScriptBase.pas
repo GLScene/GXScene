@@ -1,7 +1,7 @@
 (* ******************************************
-  *                                          *
-  * Graphic Scene Engine, http://glscene.org *
-  *                                          *
+  //
+  // The graphics rendering engine GXScene  http://glscene.org
+  //
   ******************************************* *)
 
 unit GXS.ScriptBase;
@@ -17,7 +17,7 @@ interface
 
 uses
   System.Classes,
-  Scene.XCollection;
+  GXS.XCollection;
 
 type
   TgxScriptState = (ssUncompiled, // The script has yet to be compiled.

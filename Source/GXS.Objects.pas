@@ -1,8 +1,8 @@
-(*******************************************
-*                                          *
-* Graphic Scene Engine, http://glscene.org *
-*                                          *
-********************************************)
+//
+//
+// The graphics rendering engine GXScene  http://glscene.org
+//
+//
 
 unit GXS.Objects;
 
@@ -19,7 +19,7 @@ unit GXS.Objects;
 
 interface
 
-{$I Scene.inc}
+{$I GXScene.inc}
 
 uses
   System.Types,
@@ -27,14 +27,14 @@ uses
   System.SysUtils,
   System.Math,
 
-  Scene.Import.OpenGLx,
-  Scene.XOpenGL,
-  Scene.BaseClasses,
-  Scene.PersistentClasses,
-  Scene.VectorGeometry,
-  Scene.VectorTypes,
-  Scene.VectorLists,
-  Scene.Strings,
+  Importx.OpenGLx,
+  GXS.XOpenGL,
+  GXS.BaseClasses,
+  GXS.PersistentClasses,
+  GXS.VectorGeometry,
+  GXS.VectorTypes,
+  GXS.VectorLists,
+  GXS.Strings,
 
   GXS.Scene,
   GXS.Context,
@@ -661,7 +661,7 @@ implementation
 // -------------------------------------------------------------
 
 uses
-  Scene.Spline,
+  GXS.Spline,
   GXS.State;
 
 procedure CubeWireframeBuildList(var rci: TgxRenderContextInfo; Size: Single;

@@ -1,29 +1,26 @@
-(*********************************************
- *                                           *
- *  Graphic Scene Engine, http://glscene.org *
- *                                           *
- *********************************************)
-
+//
+// The graphics rendering engine GXScene  http://glscene.org
+//
 unit GXS.Collision;
 
 (* Collision-detection management *)
 
 interface
 
-{$I Scene.inc}
+{$I GXScene.inc}
 
 uses
   System.Classes,
   System.SysUtils,
 
-  Scene.XCollection,
+  GXS.XCollection,
   GXS.Scene,
-  Scene.VectorGeometry,
-  Scene.VectorLists,
+  GXS.VectorGeometry,
+  GXS.VectorLists,
   GXS.VectorFileObjects,
-  Scene.GeometryBB,
-  Scene.Manager,
-  Scene.VectorTypes;
+  GXS.GeometryBB,
+  GXS.Manager,
+  GXS.VectorTypes;
 
 type
   TgxBCollision = class;

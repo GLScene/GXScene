@@ -12,7 +12,7 @@ unit GXS.GLSLGlassShader;
 
 interface
 
-{$I Scene.inc}
+{$I GXScene.inc}
 
 uses
   Winapi.OpenGL, 
@@ -21,18 +21,18 @@ uses
   
   GXS.Scene, 
   GXS.CrossPlatform, 
-  Scene.BaseClasses, 
+  GXS.BaseClasses, 
   GXS.State, 
   GXS.OpenGL1x, 
   GXS.Context, 
   GXS.RenderContextInfo, 
-  Scene.VectorGeometry, 
+  GXS.VectorGeometry, 
   GXS.Coordinates, 
   GXS.TextureFormat, 
   GXS.Color, 
   GXS.Texture, 
   GXS.Material, 
-  Scene.PersistentClasses, 
+  GXS.PersistentClasses, 
   GXS.Graphics,
   GXS.GLSLShader, 
   GXS.CustomShader;

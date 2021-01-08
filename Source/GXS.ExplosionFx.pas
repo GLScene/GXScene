@@ -1,8 +1,8 @@
-(*******************************************
-*                                          *
-* Graphic Scene Engine, http://glscene.org *
-*                                          *
-********************************************)
+//
+//
+// The graphics rendering engine GXScene  http://glscene.org
+//
+//
 
 unit GXS.ExplosionFx;
 
@@ -26,14 +26,14 @@ unit GXS.ExplosionFx;
 
 interface
 
-{$I Scene.inc}
+{$I GXScene.inc}
 
 uses
-  Scene.Import.OpenGLx,
-  Scene.XCollection,
-  Scene.VectorGeometry,
-  Scene.VectorTypes,
-  Scene.VectorLists,
+  Importx.OpenGLx,
+  GXS.XCollection,
+  GXS.VectorGeometry,
+  GXS.VectorTypes,
+  GXS.VectorLists,
 
   GXS.Scene,
   GXS.VectorFileObjects,

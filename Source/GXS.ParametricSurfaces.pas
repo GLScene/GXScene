@@ -1,8 +1,8 @@
-(*******************************************
-*                                          *
-* Graphic Scene Engine, http://glscene.org *
-*                                          *
-********************************************)
+//
+//
+// The graphics rendering engine GXScene  http://glscene.org
+//
+//
 
 unit GXS.ParametricSurfaces;
 
@@ -31,15 +31,15 @@ unit GXS.ParametricSurfaces;
 
 interface
 
-{$I Scene.inc}
+{$I GXScene.inc}
 
 uses
-  Scene.Import.OpenGLx,
-  Scene.VectorTypes,
-  Scene.CurvesAndSurfaces,
-  Scene.VectorGeometry,
-  Scene.VectorLists,
-  Scene.PersistentClasses,
+  Importx.OpenGLx,
+  GXS.VectorTypes,
+  GXS.CurvesAndSurfaces,
+  GXS.VectorGeometry,
+  GXS.VectorLists,
+  GXS.PersistentClasses,
   GXS.VectorFileObjects,
   GXS.Texture,
   GXS.State,

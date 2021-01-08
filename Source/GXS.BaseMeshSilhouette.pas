@@ -1,8 +1,8 @@
-(*******************************************
-*                                          *
-* Graphic Scene Engine, http://glscene.org *
-*                                          *
-********************************************)
+//
+//
+// The graphics rendering engine GXScene  http://glscene.org
+//
+//
 
 unit GXS.BaseMeshSilhouette;
 
@@ -10,12 +10,12 @@ unit GXS.BaseMeshSilhouette;
 
 interface
 
-{$I Scene.inc}
+{$I GXScene.inc}
 
 uses
   System.Classes,
-  Scene.VectorGeometry,
-  Scene.VectorLists,
+  GXS.VectorGeometry,
+  GXS.VectorLists,
   GXS.VectorFileObjects,
   GXS.Silhouette;
 

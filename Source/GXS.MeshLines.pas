@@ -1,8 +1,8 @@
-(*******************************************
-*                                          *
-* Graphic Scene Engine, http://glscene.org *
-*                                          *
-********************************************)
+//
+//
+// The graphics rendering engine GXScene  http://glscene.org
+//
+//
 
 unit GXS.MeshLines;
 
@@ -14,11 +14,11 @@ uses
   System.Classes,
   System.SysUtils,
 
-  Scene.Import.OpenGLx,
-  Scene.VectorTypes,
-  Scene.VectorGeometry,
-  Scene.VectorLists,
-  Scene.Spline,
+  Importx.OpenGLx,
+  GXS.VectorTypes,
+  GXS.VectorGeometry,
+  GXS.VectorLists,
+  GXS.Spline,
 
   GXS.Scene,
   GXS.Objects,

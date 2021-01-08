@@ -9,14 +9,14 @@ unit GXS.GLSLErosionShader;
 
 interface
 
-{$I Scene.inc}
+{$I GXScene.inc}
 
 uses
   System.Classes,
   
   GXS.Scene, 
   GXS.CrossPlatform, 
-  Scene.BaseClasses, 
+  GXS.BaseClasses, 
   GXS.State, 
   Winapi.OpenGL, 
   Winapi.OpenGLext,  
@@ -24,8 +24,8 @@ uses
   GXS.Context, 
   GXS.RenderContextInfo, 
   GXS.Coordinates, 
-  Scene.VectorGeometry, 
-  Scene.VectorTypes,
+  GXS.VectorGeometry, 
+  GXS.VectorTypes,
   GXS.TextureFormat, 
   GXS.Color, 
   GXS.Texture, 

@@ -1,8 +1,8 @@
-(*******************************************
-*                                          *
-* Graphic Scene Engine, http://glscene.org *
-*                                          *
-********************************************)
+//
+//
+// The graphics rendering engine GXScene  http://glscene.org
+//
+//
 
 unit GXS.Portal;
 
@@ -14,14 +14,14 @@ unit GXS.Portal;
 
 interface
 
-{$I Scene.inc}
+{$I GXScene.inc}
 
 uses
   System.Classes,
   System.SysUtils,
 
-  Scene.VectorTypes,
-  Scene.VectorGeometry,
+  GXS.VectorTypes,
+  GXS.VectorGeometry,
   GXS.VectorFileObjects,
   GXS.Scene,
   GXS.Material,

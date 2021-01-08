@@ -1,8 +1,8 @@
-(*******************************************
-*                                          *
-* Graphic Scene Engine, http://glscene.org *
-*                                          *
-********************************************)
+//
+//
+// The graphics rendering engine GXScene  http://glscene.org
+//
+//
 
 unit GXS.HUDObjects;
 
@@ -10,18 +10,18 @@ unit GXS.HUDObjects;
 
 interface
 
-{$I Scene.inc}
+{$I GXScene.inc}
 
 uses
   System.Classes,
 
-  Scene.Import.OpenGLx,
-  Scene.XOpenGL,
-  Scene.VectorTypes,
-  Scene.PersistentClasses,
+  Importx.OpenGLx,
+  GXS.XOpenGL,
+  GXS.VectorTypes,
+  GXS.PersistentClasses,
   GXS.Scene,
   GXS.Coordinates,
-  Scene.VectorGeometry,
+  GXS.VectorGeometry,
   GXS.Objects,
   GXS.BitmapFont,
   GXS.Utils,

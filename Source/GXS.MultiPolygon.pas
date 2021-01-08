@@ -1,8 +1,8 @@
-(*******************************************
-*                                          *
-* Graphic Scene Engine, http://glscene.org *
-*                                          *
-********************************************)
+//
+//
+// The graphics rendering engine GXScene  http://glscene.org
+//
+//
 
 unit GXS.MultiPolygon;
 
@@ -10,7 +10,7 @@ unit GXS.MultiPolygon;
 
 (* TODO
 
-  And I reactivated the TgxVectorPool object. The Scene.VectorLists are not suitable for this job.
+  And I reactivated the TgxVectorPool object. The GXS.VectorLists are not suitable for this job.
   When the tesselator finds an intersection of edges it wants us to give him some storage
   for this new vertex, and he wants a pointer (see tessCombine). The pointers taken from
   TAffineVectorList become invalid after enlarging the capacity (makes a ReAllocMem), which
@@ -23,25 +23,25 @@ unit GXS.MultiPolygon;
 
 interface
 
-{$I Scene.inc}
+{$I GXScene.inc}
 
 uses
   System.Classes,
   System.SysUtils,
 
-  Scene.Import.OpenGLx,
-  Scene.XOpenGL,
-  Scene.Spline,
+  Importx.OpenGLx,
+  GXS.XOpenGL,
+  GXS.Spline,
   GXS.Context,
-  Scene.VectorTypes,
-  Scene.VectorGeometry,
-  Scene.VectorLists,
-  Scene.PersistentClasses,
+  GXS.VectorTypes,
+  GXS.VectorGeometry,
+  GXS.VectorLists,
+  GXS.PersistentClasses,
   GXS.Scene,
   GXS.Objects,
   GXS.GeomObjects,
   GXS.Nodes,
-  Scene.BaseClasses,
+  GXS.BaseClasses,
   GXS.Coordinates,
   GXS.RenderContextInfo;
 
@@ -118,7 +118,7 @@ type
      TgxMultiPolygonBase will take the input contours and let the tesselator
      make an outline from it (this is done in RetreiveOutline). This outline is
      used for Rendering. Only when there are changes in the contours, the
-     outline will be recalculated. The ouline in fact is a list of Scene.VectorLists. *)
+     outline will be recalculated. The ouline in fact is a list of GXS.VectorLists. *)
   TgxMultiPolygonBase = class(TgxSceneObject)
   private
     FContours: TgxContours;

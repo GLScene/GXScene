@@ -1,8 +1,8 @@
-(*******************************************
-*                                          *
-* Graphic Scene Engine, http://glscene.org *
-*                                          *
-********************************************)
+//
+//
+// The graphics rendering engine GXScene  http://glscene.org
+//
+//
 
 unit GXS.BumpmapHDS;
 
@@ -14,7 +14,7 @@ unit GXS.BumpmapHDS;
 
 interface
 
-{$I Scene.inc}
+{$I GXScene.inc}
 
 uses
   System.Classes,
@@ -24,11 +24,11 @@ uses
   GXS.HeightData,
   GXS.Graphics,
   GXS.Coordinates,
-  Scene.VectorGeometry,
+  GXS.VectorGeometry,
   GXS.Texture,
   GXS.Material,
   GXS.Utils,
-  Scene.VectorTypes;
+  GXS.VectorTypes;
 
 type
   TgxBumpmapHDS = class;

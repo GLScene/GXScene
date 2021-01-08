@@ -1,8 +1,8 @@
-(*******************************************
-*                                          *
-* Graphic Scene Engine, http://glscene.org *
-*                                          *
-********************************************)
+//
+//
+// The graphics rendering engine GXScene  http://glscene.org
+//
+//
 
 unit GXS.ParticleFX;
 
@@ -16,7 +16,7 @@ unit GXS.ParticleFX;
 
 interface
 
-{$I Scene.inc}
+{$I GXScene.inc}
 
 uses
   System.Classes,
@@ -24,13 +24,13 @@ uses
   System.Types,
   System.Math,
 
-  Scene.Import.OpenGLx,
-  Scene.XCollection,
-  Scene.VectorTypes,
-  Scene.PersistentClasses,
-  Scene.VectorGeometry,
-  Scene.VectorLists,
-  Scene.Manager,
+  Importx.OpenGLx,
+  GXS.XCollection,
+  GXS.VectorTypes,
+  GXS.PersistentClasses,
+  GXS.VectorGeometry,
+  GXS.VectorLists,
+  GXS.Manager,
   GXS.Scene,
   GXS.Utils,
   GXS.State,
@@ -39,7 +39,7 @@ uses
   GXS.Graphics,
   GXS.Context,
   GXS.Color,
-  Scene.BaseClasses,
+  GXS.BaseClasses,
   GXS.Coordinates,
   GXS.RenderContextInfo,
   GXS.PipelineTransformation,

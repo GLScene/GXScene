@@ -1,8 +1,6 @@
-(*********************************************
- *                                           *
- *  Graphic Scene Engine, http://glscene.org *
- *                                           *
- *********************************************)
+//                                           *
+// The graphics rendering engine GXScene  http://glscene.org
+//
 
 unit GXS.DCE;
 
@@ -27,19 +25,19 @@ unit GXS.DCE;
 
 interface
 
-{$I Scene.inc}
+{$I GXScene.inc}
 
 uses
   System.Classes,
   System.SysUtils,
 
-  Scene.XCollection,
-  Scene.VectorGeometry,
-  Scene.VectorLists,
-  Scene.BaseClasses,
-  Scene.Manager,
-  Scene.VectorTypes,
-  Scene.Strings,
+  GXS.XCollection,
+  GXS.VectorGeometry,
+  GXS.VectorLists,
+  GXS.BaseClasses,
+  GXS.Manager,
+  GXS.VectorTypes,
+  GXS.Strings,
 
   GXS.Scene,
   GXS.VectorFileObjects,

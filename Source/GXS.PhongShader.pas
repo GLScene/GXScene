@@ -1,8 +1,8 @@
-(*******************************************
-*                                          *
-* Graphic Scene Engine, http://glscene.org *
-*                                          *
-********************************************)
+//
+//
+// The graphics rendering engine GXScene  http://glscene.org
+//
+//
 
 unit GXS.PhongShader;
 
@@ -10,17 +10,17 @@ unit GXS.PhongShader;
 
 interface
 
-{$I Scene.inc}
+{$I GXScene.inc}
 
 uses
   System.Classes,
   System.SysUtils,
 
-  Scene.Import.OpenGLx,
-  Scene.VectorTypes,
+  Importx.OpenGLx,
+  GXS.VectorTypes,
   GXS.Texture, 
-  Scene.VectorGeometry, 
-  Scene.VectorLists, 
+  GXS.VectorGeometry, 
+  GXS.VectorLists, 
   GXS.Context,
   GXS.AsmShader, 
   GXS.RenderContextInfo, 

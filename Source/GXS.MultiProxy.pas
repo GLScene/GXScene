@@ -1,8 +1,8 @@
-(*******************************************
-*                                          *
-* Graphic Scene Engine, http://glscene.org *
-*                                          *
-********************************************)
+//
+//
+// The graphics rendering engine GXScene  http://glscene.org
+//
+//
 
 unit GXS.MultiProxy;
 
@@ -14,15 +14,15 @@ uses
   System.Classes,
   System.SysUtils,
 
-  Scene.Import.OpenGLx,
-  Scene.PersistentClasses,
+  Importx.OpenGLx,
+  GXS.PersistentClasses,
   GXS.Context,
   GXS.Scene,
-  Scene.VectorGeometry,
+  GXS.VectorGeometry,
   GXS.Silhouette,
   GXS.RenderContextInfo,
-  Scene.BaseClasses,
-  Scene.VectorTypes;
+  GXS.BaseClasses,
+  GXS.VectorTypes;
 
 type
 

@@ -1,23 +1,20 @@
-(*******************************************
-*                                          *
-* Graphic Scene Engine, http://glscene.org *
-*                                          *
-********************************************)
-
+//
+// The graphics rendering engine GXScene  http://glscene.org
+//
 unit GXS.PipelineTransformation;
 
 interface
 
-{$I Scene.inc}
+{$I GXScene.inc}
 
 uses
   System.Sysutils,
   FMX.Dialogs,
 
-  Scene.Import.OpenGLx,
-  Scene.VectorGeometry,
-  Scene.VectorTypes,
-  Scene.Strings;
+  Importx.OpenGLx,
+  GXS.VectorGeometry,
+  GXS.VectorTypes,
+  GXS.Strings;
 
 const
   MAX_MATRIX_STACK_DEPTH = 128;

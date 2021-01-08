@@ -1,8 +1,8 @@
-(*******************************************
-*                                          *
-* Graphic Scene Engine, http://glscene.org *
-*                                          *
-********************************************)
+//
+//
+// The graphics rendering engine GXScene  http://glscene.org
+//
+//
 
 unit GXS.CompositeImage;
 
@@ -17,7 +17,7 @@ uses
   System.Classes,
   FMX.Graphics,
 
-  Scene.Import.OpenGLx,
+  Importx.OpenGLx,
   GXS.Graphics,
   GXS.Texture,
   GXS.TextureFormat,

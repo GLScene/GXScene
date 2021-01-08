@@ -4,7 +4,7 @@
 
 unit GXS.FilePGM;
 
-{$I Scene.inc}
+{$I GXScene.inc}
 
 interface
 
@@ -13,7 +13,7 @@ uses
   Winapi.OpenGL, Winapi.OpenGLext,
 
   GXS.Context, GXS.Graphics, GXS.TextureFormat,
-  Scene.ApplicationFileIO;
+  GXS.ApplicationFileIO;
 
 type
 

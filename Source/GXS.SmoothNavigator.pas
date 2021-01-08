@@ -1,8 +1,8 @@
-(*******************************************
-*                                          *
-* Graphic Scene Engine, http://glscene.org *
-*                                          *
-********************************************)
+//
+//
+// The graphics rendering engine GXScene  http://glscene.org
+//
+//
 
 unit GXS.SmoothNavigator;
 
@@ -23,20 +23,20 @@ unit GXS.SmoothNavigator;
 
 interface
 
-{$I Scene.inc}
+{$I GXScene.inc}
 
 uses
   System.Types,
   System.Classes,
 
-  Scene.XCollection,
-  Scene.VectorTypes,
+  GXS.XCollection,
+  GXS.VectorTypes,
   GXS.Navigator,
-  Scene.VectorGeometry,
+  GXS.VectorGeometry,
   GXS.Scene,
   GXS.Coordinates,
   GXS.Screen,
-  Scene.PersistentClasses;
+  GXS.PersistentClasses;
 
 type
 
@@ -730,7 +730,7 @@ begin
 
     if (Abs(FinalPitch) > FCutOff) or (Abs(FinalTurn) > FCutOff) then
     begin
-      MovingObject.AbsolutePosition := Scene.VectorGeometry.MoveObjectAround(
+      MovingObject.AbsolutePosition := GXS.VectorGeometry.MoveObjectAround(
         MovingObject.AbsolutePosition, lUp, AObject.AbsolutePosition, FinalPitch, FinalTurn);
       Result := True;
     end;

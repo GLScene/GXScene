@@ -1,9 +1,6 @@
-(*******************************************
-*                                          *
-* Graphic Scene Engine, http://glscene.org *
-*                                          *
-********************************************)
-
+//
+// The graphics rendering engine GXScene  http://glscene.org
+//
 unit GXS.ImageUtils;
 
 (*
@@ -20,17 +17,17 @@ unit GXS.ImageUtils;
 
 interface
 
-{$I Scene.inc}
+{$I GXScene.inc}
 
 uses
   System.SysUtils,
   System.Classes,
   System.Math,
 
-  Scene.Strings,
-  Scene.VectorGeometry,
+  GXS.Strings,
+  GXS.VectorGeometry,
 
-  Scene.Import.OpenGLx,
+  Importx.OpenGLx,
   GXS.Utils,
   GXS.TextureFormat;
 

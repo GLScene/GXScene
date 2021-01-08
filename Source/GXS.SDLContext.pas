@@ -1,8 +1,8 @@
-(*******************************************
-*                                          *
-* Graphic Scene Engine, http://glscene.org *
-*                                          *
-********************************************)
+//
+//
+// The graphics rendering engine GXScene  http://glscene.org
+//
+//
 
 unit GXS.SDLContext;
 
@@ -22,9 +22,9 @@ uses
   System.Classes,
   System.SysUtils,
 
-  Scene.Import.OpenGLx,
+  Importx.OpenGLx,
   Import.SDL2,
-  Scene.XOpenGL,
+  GXS.XOpenGL,
   GXS.Scene,
   GXS.Context,
   GXS.SDLWindow;

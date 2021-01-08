@@ -1,8 +1,8 @@
-(*******************************************
-*                                          *
-* Graphic Scene Engine, http://glscene.org *
-*                                          *
-********************************************)
+//
+//
+// The graphics rendering engine GXScene  http://glscene.org
+//
+//
 
 unit GXS.TextureCombiners;
 
@@ -10,13 +10,13 @@ unit GXS.TextureCombiners;
 
 interface
 
-{$I Scene.inc}
+{$I GXScene.inc}
 
 uses
   System.SysUtils,
   System.Classes,
   
-  Scene.Import.OpenGLx,
+  Importx.OpenGLx,
   GXS.Context;
 
 type

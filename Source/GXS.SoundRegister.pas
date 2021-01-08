@@ -1,9 +1,6 @@
-(*******************************************
-*                                          *
-* Graphic Scene Engine, http://glscene.org *
-*                                          *
-********************************************)
-
+//
+// The graphics rendering engine GXScene  http://glscene.org
+//
 unit GXS.SoundRegister;
 
 (* Design time registration code for the Sounds *)
@@ -12,10 +9,10 @@ interface
 
 uses
   System.Classes,
-  GXS.SMBASS,
-  GXS.SMFMOD,
-  GXS.SMOpenAL,
-  GXS.SMWaveOut;
+  Soundx.SMBASS,
+  Soundx.SMFMOD,
+  Soundx.SMOpenAL,
+  Soundx.SMWaveOut;
 
 procedure Register;
 

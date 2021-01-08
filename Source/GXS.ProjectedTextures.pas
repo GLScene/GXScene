@@ -1,8 +1,8 @@
-(*******************************************
-*                                          *
-* Graphic Scene Engine, http://glscene.org *
-*                                          *
-********************************************)
+//
+//
+// The graphics rendering engine GXScene  http://glscene.org
+//
+//
 
 unit GXS.ProjectedTextures;
 
@@ -10,18 +10,18 @@ unit GXS.ProjectedTextures;
 
 interface
 
-{$I Scene.inc}
+{$I GXScene.inc}
 
 uses
   System.Classes,
 
-  Scene.Import.OpenGLx,
-  Scene.XOpenGL,
-  Scene.VectorTypes,
+  Importx.OpenGLx,
+  GXS.XOpenGL,
+  GXS.VectorTypes,
   GXS.Scene,
-  Scene.PersistentClasses,
+  GXS.PersistentClasses,
   GXS.Texture,
-  Scene.VectorGeometry,
+  GXS.VectorGeometry,
   GXS.RenderContextInfo,
   GXS.State,
   GXS.Context;

@@ -1,11 +1,7 @@
-(*******************************************
-*                                          *
-* Graphic Scene Engine, http://glscene.org *
-*                                          *
-********************************************)
-
+//
+// The graphics rendering engine GXScene  http://glscene.org
+//
 unit GXS.SpaceText;
-
 (*
   3D Text component.
 
@@ -14,12 +10,10 @@ unit GXS.SpaceText;
   extents during / after its creation, you will get zeros.
 
   Also extents are valid only when SpaceText has one line.
-
 *)
-
 interface
 
-{$I Scene.inc}
+{$I GXScene.inc}
 
 uses
   Winapi.Windows,
@@ -29,9 +23,9 @@ uses
   System.SysUtils,
   FMX.Graphics,
 
-  Scene.Import.OpenGLx,
-  Scene.VectorGeometry,
-  Scene.Strings,
+  Importx.OpenGLx,
+  GXS.VectorGeometry,
+  GXS.Strings,
 
   GXS.Scene,
   GXS.Texture,

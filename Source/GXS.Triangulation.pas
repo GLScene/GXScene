@@ -1,8 +1,8 @@
-(*******************************************
-*                                          *
-* Graphic Scene Engine, http://glscene.org *
-*                                          *
-********************************************)
+//
+//
+// The graphics rendering engine GXScene  http://glscene.org
+//
+//
 
 unit GXS.Triangulation;
 
@@ -16,7 +16,7 @@ uses
   FMX.Dialogs,
   FMX.Graphics,
   
-  Scene.VectorGeometry;
+  GXS.VectorGeometry;
 
 // Set these as applicable
 const

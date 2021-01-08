@@ -1,8 +1,8 @@
-﻿(*******************************************
-*                                          *
-* Graphic Scene Engine, http://glscene.org *
-*                                          *
-********************************************)
+﻿//
+//
+// The graphics rendering engine GXScene  http://glscene.org
+//
+//
 
 unit GXS.Skydome;
 
@@ -10,7 +10,7 @@ unit GXS.Skydome;
 
 interface
 
-{$I Scene.inc}
+{$I GXScene.inc}
 
 uses
   System.Classes,
@@ -19,9 +19,9 @@ uses
   System.Math,
   FMX.Graphics,
 
-  Scene.Import.OpenGLx,
-  Scene.VectorTypes,
-  Scene.VectorGeometry,
+  Importx.OpenGLx,
+  GXS.VectorTypes,
+  GXS.VectorGeometry,
   GXS.Scene,
   GXS.Context,
   GXS.State,

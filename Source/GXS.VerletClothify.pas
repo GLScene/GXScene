@@ -1,8 +1,8 @@
-(*******************************************
-*                                          *
-* Graphic Scene Engine, http://glscene.org *
-*                                          *
-********************************************)
+//
+//
+// The graphics rendering engine GXScene  http://glscene.org
+//
+//
 
 unit GXS.VerletClothify;
 
@@ -10,16 +10,16 @@ unit GXS.VerletClothify;
 
 interface
 
-{$I Scene.inc}
+{$I GXScene.inc}
 
 uses
   System.Classes,
   System.SysUtils,
 
-  Scene.Import.OpenGLx,
-  Scene.VectorTypes,
-  Scene.VectorLists,
-  Scene.VectorGeometry,
+  Importx.OpenGLx,
+  GXS.VectorTypes,
+  GXS.VectorLists,
+  GXS.VectorGeometry,
   GXS.VectorFileObjects,
   GXS.VerletTypes,
   GXS.Texture,

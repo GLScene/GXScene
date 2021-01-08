@@ -1,7 +1,7 @@
 (* ******************************************
-  *                                          *
-  * Graphic Scene Engine, http://glscene.org *
-  *                                          *
+  //
+  // The graphics rendering engine GXScene  http://glscene.org
+  //
   ******************************************* *)
 
 unit GXS.HeightTileFile;
@@ -19,13 +19,13 @@ unit GXS.HeightTileFile;
 
 interface
 
-{$I Scene.inc}
+{$I GXScene.inc}
 
 uses
   System.Classes,
   System.SysUtils,
 
-  Scene.ApplicationFileIO;
+  GXS.ApplicationFileIO;
 
 type
 

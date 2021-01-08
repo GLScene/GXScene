@@ -1,8 +1,8 @@
-(*******************************************
-*                                          *
-* Graphic Scene Engine, http://glscene.org *
-*                                          *
-********************************************)
+//
+//
+// The graphics rendering engine GXScene  http://glscene.org
+//
+//
 
 unit GXS.WinContext;
 
@@ -10,7 +10,7 @@ unit GXS.WinContext;
 
 interface
 
-{$I Scene.inc}
+{$I GXScene.inc}
 
 uses
   Winapi.Windows,
@@ -21,11 +21,11 @@ uses
   FMX.Dialogs,
   FMX.Platform.Win,
 
-  Scene.Import.OpenGLx,
+  Importx.OpenGLx,
   GXS.Context,
   GXS.State,
-  Scene.Strings,
-  Scene.VectorGeometry;
+  GXS.Strings,
+  GXS.VectorGeometry;
 
 type
   // A context driver for standard Windows OpenGL

@@ -36,21 +36,21 @@ requires
   GXScene_RT;
 
 contains
-  Design.FLayoutEditor in '..\Source\Design.FLayoutEditor.pas',
-  Design.FInfo in '..\Source\Design.FInfo.pas',
-  Design.FRTextureEdit in '..\Source\Design.FRTextureEdit.pas',
-  Design.FXCollectionEditor in '..\Source\Design.FXCollectionEditor.pas',
-  Design.FLibMaterialPicker in '..\Source\Design.FLibMaterialPicker.pas',
-  Design.FRMaterialPreview in '..\Source\Design.FRMaterialPreview.pas',
-  Design.FRFaceEditor in '..\Source\Design.FRFaceEditor.pas',
-  Design.FRColorEditor in '..\Source\Design.FRColorEditor.pas',
-  Design.FPlugInManagerEditor in '..\Source\Design.FPlugInManagerEditor.pas',
-  Design.FMaterialEditorForm in '..\Source\Design.FMaterialEditorForm.pas',
-  Design.FShaderMemo in '..\Source\Design.FShaderMemo.pas',
-  Design.FShaderUniformEditor in '..\Source\Design.FShaderUniformEditor.pas',
-  Design.FSkinEditor in '..\Source\Design.FSkinEditor.pas',
-  Design.FSceneEditor in '..\Source\Design.FSceneEditor.pas',
-  Design.SceneRegister in '..\Source\Design.SceneRegister.pas',
-  Design.XCollectionRegister in '..\Source\Design.XCollectionRegister.pas';
+  FxGuiLayoutEditor in '..\Source\FxGuiLayoutEditor.pas',
+  FxInfo in '..\Source\FxInfo.pas',
+  FRxTextureEdit in '..\Source\FRxTextureEdit.pas',
+  FxXCollectionEditor in '..\Source\FxXCollectionEditor.pas',
+  FxLibMaterialPicker in '..\Source\FxLibMaterialPicker.pas',
+  FRxMaterialPreview in '..\Source\FRxMaterialPreview.pas',
+  FRxFaceEditor in '..\Source\FRxFaceEditor.pas',
+  FRxColorEditor in '..\Source\FRxColorEditor.pas',
+  FxPlugInManagerEditor in '..\Source\FxPlugInManagerEditor.pas',
+  FxMaterialEditor in '..\Source\FxMaterialEditor.pas',
+  FxShaderMemo in '..\Source\FxShaderMemo.pas',
+  FxShaderUniformEditor in '..\Source\FxShaderUniformEditor.pas',
+  FxSkinEditor in '..\Source\FxSkinEditor.pas',
+  FxSceneEditor in '..\Source\FxSceneEditor.pas',
+  GXS.SceneRegister in '..\Source\GXS.SceneRegister.pas',
+  GXS.XCollectionRegister in '..\Source\GXS.XCollectionRegister.pas';
 
 end.

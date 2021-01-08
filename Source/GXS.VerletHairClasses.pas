@@ -1,8 +1,8 @@
-(*******************************************
-*                                          *
-* Graphic Scene Engine, http://glscene.org *
-*                                          *
-********************************************)
+//
+//
+// The graphics rendering engine GXScene  http://glscene.org
+//
+//
 
 unit GXS.VerletHairClasses;
 
@@ -13,16 +13,16 @@ unit GXS.VerletHairClasses;
 
 interface
 
-{$I Scene.inc}
+{$I GXScene.inc}
 
 uses
   System.Classes, 
   System.SysUtils,
 
   GXS.VerletTypes, 
-  Scene.VectorTypes, 
-  Scene.VectorLists, 
-  Scene.VectorGeometry;
+  GXS.VectorTypes, 
+  GXS.VectorLists, 
+  GXS.VectorGeometry;
 
 type
   TVHStiffness = (vhsFull, vhsSkip1Node, vhsSkip2Node, vhsSkip3Node,

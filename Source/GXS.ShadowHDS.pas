@@ -1,7 +1,7 @@
 (* ******************************************
-  *                                          *
-  * Graphic Scene Engine, http://glscene.org *
-  *                                          *
+  //
+  // The graphics rendering engine GXScene  http://glscene.org
+  //
   ******************************************* *)
 
 unit GXS.ShadowHDS;
@@ -32,12 +32,12 @@ uses
   System.SysUtils,
   System.Math,
 
-  Scene.Import.OpenGLx,
-  Scene.VectorTypes,
-  Scene.VectorLists,
+  Importx.OpenGLx,
+  GXS.VectorTypes,
+  GXS.VectorLists,
   GXS.HeightData,
   GXS.Graphics,
-  Scene.VectorGeometry,
+  GXS.VectorGeometry,
   GXS.Texture,
   GXS.Coordinates,
   GXS.Material;

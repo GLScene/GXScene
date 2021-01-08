@@ -1,9 +1,6 @@
-(* ******************************************
- *                                          *
- * Graphic Scene Engine, http://glscene.org *
- *                                          *
- ********************************************)
-
+//
+// The graphics rendering engine GXScene  http://glscene.org
+//
 unit GXS.ParallelRegister;
 
 (*  Registration unit for GPU Computing package *)
@@ -22,7 +19,7 @@ uses
   STREDIT,
   }
 
-  Scene.Strings;
+  GXS.Strings;
 
 procedure Register;
 
@@ -72,14 +69,14 @@ implementation
 //======================================
 
 uses
-  Design.FCUDAEditor,
-  Scene.Import.CUDARunTime,
-  Scene.Import.CUDAParser,
-  GXS.CUDAContext,
-  GXS.CUDA,
-  GXS.CUDACompiler,
-  GXS.CUDAFFTPlan,
-  GXS.CUDAGraphics;
+  FxCUDAEditor,
+  Importx.CUDARunTime,
+  Importx.CUDAParser,
+  CUDAx.Context,
+  CUDAx.API,
+  CUDAx.Compiler,
+  CUDAx.FFTPlan,
+  CUDAx.Graphics;
 
 function FindCuFile(var AModuleName: string): Boolean;
 var

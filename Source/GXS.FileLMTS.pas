@@ -1,24 +1,24 @@
-(*******************************************
-*                                          *
-* Graphic Scene Engine, http://glscene.org *
-*                                          *
-********************************************)
+//
+//
+// The graphics rendering engine GXScene  http://glscene.org
+//
+//
 
 unit GXS.FileLMTS;
 
 interface
 
-{$I Scene.inc}
+{$I GXScene.inc}
 
 uses
   System.Classes,
   System.SysUtils,
   FMX.Graphics,
 
-  Scene.ApplicationFileIO,
-  Scene.VectorLists,
-  Scene.VectorGeometry,
-  Scene.PersistentClasses,
+  GXS.ApplicationFileIO,
+  GXS.VectorLists,
+  GXS.VectorGeometry,
+  GXS.PersistentClasses,
   GXS.VectorFileObjects,
   GXS.Graphics,
   GXS.Texture,

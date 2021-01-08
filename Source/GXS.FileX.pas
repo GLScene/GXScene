@@ -1,30 +1,27 @@
-(********************************************
- *                                          *
- * Graphic Scene Engine, http://glscene.org *
- *                                          *
- ********************************************)
-
+//
+// The graphics rendering engine GXScene  http://glscene.org
+//
 unit GXS.FileX;
 
-(* Simple X format support for Delphi (Microsoft's favorite format) *)
+(* Simple X format support for Microsoft's favorite format *)
 
 interface
 
-{$I Scene.inc}
+{$I GXScene.inc}
 
 uses
   System.Classes,
   System.SysUtils,
 
-  Scene.VectorTypes,
+  GXS.VectorTypes,
   GXS.VectorFileObjects,
-  Scene.ApplicationFileIO,
-  Scene.VectorGeometry,
+  GXS.ApplicationFileIO,
+  GXS.VectorGeometry,
   GXS.Texture,
-  Scene.VectorLists,
+  GXS.VectorLists,
   GXS.Material,
 
-  Scene.Formats.FileX;
+  Formatx.X;
 
 type
   TgxXVectorFile = class(TgxVectorFile)

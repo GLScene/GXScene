@@ -1,9 +1,6 @@
-(********************************************
- *                                          *
- * Graphic Scene Engine, http://glscene.org *
- *                                          *
- ********************************************)
-
+ //
+ // The graphics rendering engine GXScene  http://glscene.org
+ //
 unit GXS.FileMD3;
 
 (* Code for loading animated MD3 files into GXScene FreeForms and Actors *)
@@ -14,13 +11,13 @@ uses
   System.Classes,
   System.SysUtils,
 
-  Scene.ApplicationFileIO,
-  Scene.VectorGeometry,
+  GXS.ApplicationFileIO,
+  GXS.VectorGeometry,
   GXS.VectorFileObjects,
   GXS.Material,
   GXS.Texture,
 
-  Scene.Formats.FileMD3;
+  Formatx.MD3;
 
 type
 

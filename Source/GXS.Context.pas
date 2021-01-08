@@ -13,7 +13,7 @@ unit GXS.Context;
 
 interface
 
-{$I Scene.inc}
+{$I GXScene.inc}
 
 uses
   Winapi.Windows,
@@ -28,11 +28,11 @@ uses
   FMX.Types,
   FMX.Dialogs,
 
-  Scene.Import.OpenGLx,
-  Scene.Generics,
-  Scene.VectorGeometry,
-  Scene.Strings,
-  Scene.VectorTypes,
+  Importx.OpenGLx,
+  GXS.Generics,
+  GXS.VectorGeometry,
+  GXS.Strings,
+  GXS.VectorTypes,
   GXS.State,
   GXS.PipelineTransformation,
   GXS.TextureFormat;

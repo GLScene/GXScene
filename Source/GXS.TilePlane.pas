@@ -1,8 +1,6 @@
-(*********************************************
- *                                           *
- *  Graphic Scene Engine, http://glscene.org *
- *                                           *
- *********************************************)
+//
+// The graphics rendering engine GXScene  http://glscene.org
+//
 
 unit GXS.TilePlane;
 
@@ -10,20 +8,20 @@ unit GXS.TilePlane;
 
 interface
 
-{$I Scene.inc}
+{$I GXScene.inc}
 
 uses
   System.Classes,
 
-  Scene.Import.OpenGLx,
-  Scene.XOpenGL,
+  Importx.OpenGLx,
+  GXS.XOpenGL,
   GXS.Scene,
-  Scene.VectorGeometry,
+  GXS.VectorGeometry,
   GXS.Context,
   GXS.Material,
   GXS.Objects,
-  Scene.PersistentClasses,
-  Scene.VectorLists,
+  GXS.PersistentClasses,
+  GXS.VectorLists,
   GXS.RenderContextInfo;
 
 type

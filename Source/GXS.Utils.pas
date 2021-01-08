@@ -1,8 +1,8 @@
-(*******************************************
-*                                          *
-* Graphic Scene Engine, http://glscene.org *
-*                                          *
-********************************************)
+//
+//
+// The graphics rendering engine GXScene  http://glscene.org
+//
+//
 
 unit GXS.Utils;
 
@@ -10,7 +10,7 @@ unit GXS.Utils;
 
 interface
 
-{$I Scene.inc}
+{$I GXScene.inc}
 
 uses
   Winapi.Windows,
@@ -31,9 +31,9 @@ uses
   FMX.Forms,
 
 
-  Scene.VectorGeometry,
-  Scene.Strings,
-  Scene.ApplicationFileIO;
+  GXS.VectorGeometry,
+  GXS.Strings,
+  GXS.ApplicationFileIO;
 
 type
   EGLUtilsException = class(Exception);

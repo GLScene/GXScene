@@ -13,22 +13,22 @@ unit GXS.Trail;
 
 interface
 
-{$I Scene.inc}
+{$I GXScene.inc}
 
 uses
   System.Classes,
   System.SysUtils,
 
   GXS.Scene,
-  Scene.VectorTypes,
+  GXS.VectorTypes,
   GXS.MeshUtils,
-  Scene.VectorGeometry,
+  GXS.VectorGeometry,
   GXS.VectorFileObjects,
   GXS.Mesh,
   GXS.Objects,
   GXS.Material,
-  Scene.Strings,
-  Scene.BaseClasses;
+  GXS.Strings,
+  GXS.BaseClasses;
 
 const
   cMaxVerts = 2000;

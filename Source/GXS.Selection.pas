@@ -8,18 +8,18 @@ unit GXS.Selection;
 
 interface
 
-{$I Scene.inc}
+{$I GXScene.inc}
 
 uses
   System.SysUtils,
   System.Classes,
 
-  Scene.Import.OpenGLx,
+  Importx.OpenGLx,
   GXS.Context,
-  Scene.VectorLists,
-  Scene.VectorGeometry,
-  Scene.BaseClasses,
-  Scene.PersistentClasses;
+  GXS.VectorLists,
+  GXS.VectorGeometry,
+  GXS.BaseClasses,
+  GXS.PersistentClasses;
 
  const
   MAX_OBJECT_STACK_DEPTH = 512;

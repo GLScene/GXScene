@@ -1,8 +1,8 @@
-(*******************************************
-*                                          *
-* Graphic Scene Engine, http://glscene.org *
-*                                          *
-********************************************)
+//
+//
+// The graphics rendering engine GXScene  http://glscene.org
+//
+//
 
 unit GXS.Blur;
 
@@ -10,7 +10,7 @@ unit GXS.Blur;
 
 interface
 
-{$I Scene.inc}
+{$I GXScene.inc}
 
 uses
   System.Classes,
@@ -18,12 +18,12 @@ uses
   System.UITypes,
   FMX.Graphics,
 
-  Scene.Import.OpenGLx,
-  Scene.VectorTypes,
-  Scene.PersistentClasses,
+  Importx.OpenGLx,
+  GXS.VectorTypes,
+  GXS.PersistentClasses,
   GXS.Scene,
   GXS.Coordinates,
-  Scene.VectorGeometry,
+  GXS.VectorGeometry,
   GXS.Objects,
   GXS.BitmapFont,
   GXS.Texture,
@@ -33,9 +33,9 @@ uses
   GXS.Graphics,
   GXS.Context,
   GXS.State,
-  Scene.Strings,
+  GXS.Strings,
   GXS.TextureFormat,
-  Scene.BaseClasses,
+  GXS.BaseClasses,
   GXS.RenderContextInfo;
 
 type

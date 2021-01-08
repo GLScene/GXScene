@@ -1,8 +1,8 @@
-(*******************************************
-*                                          *
-* Graphic Scene Engine, http://glscene.org *
-*                                          *
-********************************************)
+//
+//
+// The graphics rendering engine GXScene  http://glscene.org
+//
+//
 
 unit GXS.SkyBox;
 
@@ -13,15 +13,15 @@ unit GXS.SkyBox;
 
 interface
 
-{$I Scene.inc}
+{$I GXScene.inc}
 
 uses
   System.Classes,
 
-  Scene.Import.OpenGLx,
-  Scene.XOpenGL,
-  Scene.VectorTypes,
-  Scene.VectorGeometry,
+  Importx.OpenGLx,
+  GXS.XOpenGL,
+  GXS.VectorTypes,
+  GXS.VectorGeometry,
   GXS.Scene,
   GXS.Material,
   GXS.RenderContextInfo;

@@ -1,8 +1,6 @@
-(*********************************************
- *                                           *
- *  Graphic Scene Engine, http://glscene.org *
- *                                           *
- *********************************************)
+//
+// The graphics rendering engine GXScene  http://glscene.org
+//
 
 unit GXS.FireFX;
 
@@ -10,19 +8,19 @@ unit GXS.FireFX;
 
 interface
 
-{$I Scene.inc}
+{$I GXScene.inc}
 
 uses
   System.Classes,
   System.SysUtils,
 
-  Scene.Import.OpenGLx,
-  Scene.XCollection,
-  Scene.BaseClasses,
-  Scene.VectorLists,
-  Scene.VectorTypes,
-  Scene.VectorGeometry,
-  Scene.Manager,
+  Importx.OpenGLx,
+  GXS.XCollection,
+  GXS.BaseClasses,
+  GXS.VectorLists,
+  GXS.VectorTypes,
+  GXS.VectorGeometry,
+  GXS.Manager,
   GXS.Scene,
   GXS.Context,
   GXS.Cadencer,

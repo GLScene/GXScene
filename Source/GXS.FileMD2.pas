@@ -1,8 +1,8 @@
-(*******************************************
-*                                          *
-* Graphic Scene Engine, http://glscene.org *
-*                                          *
-********************************************)
+//
+//
+// The graphics rendering engine GXScene  http://glscene.org
+//
+//
 
 unit GXS.FileMD2;
 
@@ -10,13 +10,13 @@ unit GXS.FileMD2;
 
 interface
 
-{$I Scene.inc}
+{$I GXScene.inc}
 
 uses
   System.Classes,
   System.SysUtils,
   GXS.VectorFileObjects,
-  Scene.ApplicationFileIO,
+  GXS.ApplicationFileIO,
 
   Formats.FileMD2;
 

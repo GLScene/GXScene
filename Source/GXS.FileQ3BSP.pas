@@ -1,8 +1,8 @@
-(*******************************************
-*                                          *
-* Graphic Scene Engine, http://glscene.org *
-*                                          *
-********************************************)
+//
+//
+// The graphics rendering engine GXScene  http://glscene.org
+//
+//
 
 unit GXS.FileQ3BSP;
 
@@ -14,7 +14,7 @@ unit GXS.FileQ3BSP;
 
 interface
 
-{$I Scene.inc}
+{$I GXScene.inc}
 
 uses
   System.Classes,
@@ -22,10 +22,10 @@ uses
   FMX.Graphics,
 
   GXS.VectorFileObjects,
-  Scene.ApplicationFileIO,
-  Scene.VectorGeometry,
-  Scene.VectorTypes,
-  Scene.VectorLists,
+  GXS.ApplicationFileIO,
+  GXS.VectorGeometry,
+  GXS.VectorTypes,
+  GXS.VectorLists,
   GXS.BSP,
   GXS.Texture,
   GXS.Graphics,
@@ -34,7 +34,7 @@ uses
   GXS.Material,
   GXS.TextureFormat,
 
-  Scene.Formats.FileQ3BSP;
+  Formatx.Q3BSP;
 
 type
 

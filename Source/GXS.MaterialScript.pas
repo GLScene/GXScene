@@ -1,8 +1,8 @@
-(*******************************************
-*                                          *
-* Graphic Scene Engine, http://glscene.org *
-*                                          *
-********************************************)
+//
+//
+// The graphics rendering engine GXScene  http://glscene.org
+//
+//
 
 unit GXS.MaterialScript;
 
@@ -10,7 +10,7 @@ unit GXS.MaterialScript;
 
 interface
 
-{$I Scene.inc}
+{$I GXScene.inc}
 
 uses
   System.SysUtils,
@@ -18,7 +18,7 @@ uses
   FMX.StdCtrls,
   FMX.Memo,
 
-  Scene.VectorTypes,
+  GXS.VectorTypes,
   GXS.Texture,
   GXS.TextureFormat,
   GXS.Graphics,

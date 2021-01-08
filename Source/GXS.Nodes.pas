@@ -1,8 +1,8 @@
-(*******************************************
-*                                          *
-* Graphic Scene Engine, http://glscene.org *
-*                                          *
-********************************************)
+//
+//
+// The graphics rendering engine GXScene  http://glscene.org
+//
+//
 
 unit GXS.Nodes;
 
@@ -15,16 +15,16 @@ uses
   System.SysUtils,
   System.Math,
 
-  Scene.Import.OpenGLx,
-  Scene.VectorTypes,
-  Scene.XOpenGL,
-  Scene.VectorGeometry,
+  Importx.OpenGLx,
+  GXS.VectorTypes,
+  GXS.XOpenGL,
+  GXS.VectorGeometry,
   GXS.Context,
-  Scene.BaseClasses,
+  GXS.BaseClasses,
   GXS.Coordinates,
-  Scene.Spline;
+  GXS.Spline;
 
-{$I Scene.inc}
+{$I GXScene.inc}
 
 type
   TgxNode = class(TCollectionItem)

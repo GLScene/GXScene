@@ -1,8 +1,8 @@
-(*******************************************
-*                                          *
-* Graphic Scene Engine, http://glscene.org *
-*                                          *
-********************************************)
+//
+//
+// The graphics rendering engine GXScene  http://glscene.org
+//
+//
 
 unit GXS.Graphics;
 
@@ -17,7 +17,7 @@ unit GXS.Graphics;
 
 interface
 
-{$I Scene.inc}
+{$I GXScene.inc}
 
 uses
   Winapi.Windows,
@@ -34,16 +34,16 @@ uses
   GR32,
 {$ENDIF}
 
-  Scene.Import.OpenGLx,
-  Scene.VectorGeometry,
-  Scene.PersistentClasses,
-  Scene.ApplicationFileIO,
+  Importx.OpenGLx,
+  GXS.VectorGeometry,
+  GXS.PersistentClasses,
+  GXS.ApplicationFileIO,
   GXS.Context,
   GXS.ImageUtils,
   GXS.Utils,
   GXS.Color,
   GXS.TextureFormat,
-  Scene.Strings;
+  GXS.Strings;
 
 type
 

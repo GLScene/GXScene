@@ -14,12 +14,12 @@ uses
   System.SysUtils,
   System.Math,
 
-  Scene.VectorGeometry,
+  GXS.VectorGeometry,
   GXS.Context,
   GXS.Scene,
   GXS.VectorFileObjects,
-  Scene.VectorTypes,
-  Scene.PersistentClasses,
+  GXS.VectorTypes,
+  GXS.PersistentClasses,
   GXS.Coordinates,
   GXS.RenderContextInfo,
   GXS.State;

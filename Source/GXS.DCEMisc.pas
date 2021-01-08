@@ -1,28 +1,25 @@
-(*********************************************
- *                                           *
- *  Graphic Scene Engine, http://glscene.org *
- *                                           *
- *********************************************)
-
+//                                           *
+// The graphics rendering engine GXScene  http://glscene.org
+//
 unit GXS.DCEMisc;
 
 (* Miscelaneous functions used by DCE (Dynamic Collision Engine) *)
 
 interface
 
-{$I Scene.inc}
+{$I GXScene.inc}
 
 uses
   GXS.Coordinates,
   GXS.VectorFileObjects,
   GXS.EllipseCollision,
-  Scene.VectorGeometry,
-  Scene.VectorLists,
+  GXS.VectorGeometry,
+  GXS.VectorLists,
   GXS.Scene,
   GXS.TerrainRenderer,
   GXS.ProxyObjects,
   GXS.MultiProxy,
-  Scene.VectorTypes;
+  GXS.VectorTypes;
 
 //Calculate and set the collision range
 procedure ECSetCollisionRange(var MovePack: TECMovePack);

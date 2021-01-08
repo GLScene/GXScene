@@ -1,8 +1,8 @@
-(*******************************************
-*                                          *
-* Graphic Scene Engine, http://glscene.org *
-*                                          *
-********************************************)
+//
+//
+// The graphics rendering engine GXScene  http://glscene.org
+//
+//
 
 unit GXS.EllipseCollision;
 
@@ -10,13 +10,13 @@ unit GXS.EllipseCollision;
 
 interface
 
-{$I Scene.inc}
+{$I GXScene.inc}
 
 uses
-  Scene.VectorGeometry,
+  GXS.VectorGeometry,
   GXS.Octree,
-  Scene.VectorLists,
-  Scene.VectorTypes;
+  GXS.VectorLists,
+  GXS.VectorTypes;
 
 type
   TECPlane = class

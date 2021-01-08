@@ -1,8 +1,8 @@
-(*******************************************
-*                                          *
-* Graphic Scene Engine, http://glscene.org *
-*                                          *
-********************************************)
+//
+//
+// The graphics rendering engine GXScene  http://glscene.org
+//
+//
 
 unit GXS.LensFlare;
 
@@ -10,18 +10,18 @@ unit GXS.LensFlare;
 
 interface
 
-{$I Scene.inc}
+{$I GXScene.inc}
 
 uses
   System.Classes,
   System.SysUtils,
   System.Math,
 
-  Scene.Import.OpenGLx,
-  Scene.PersistentClasses,
-  Scene.BaseClasses,
-  Scene.VectorTypes,
-  Scene.VectorGeometry,
+  Importx.OpenGLx,
+  GXS.PersistentClasses,
+  GXS.BaseClasses,
+  GXS.VectorTypes,
+  GXS.VectorGeometry,
   GXS.Scene,
   GXS.Objects,
   GXS.PipelineTransformation,

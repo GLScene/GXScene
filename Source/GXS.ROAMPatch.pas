@@ -1,8 +1,8 @@
-(*******************************************
-*                                          *
-* Graphic Scene Engine, http://glscene.org *
-*                                          *
-********************************************)
+//
+//
+// The graphics rendering engine GXScene  http://glscene.org
+//
+//
 
 unit GXS.ROAMPatch;
 
@@ -10,16 +10,16 @@ unit GXS.ROAMPatch;
 
 interface
 
-{$I Scene.inc}
+{$I GXScene.inc}
 
 uses
   System.SysUtils,
 
-  Scene.Import.OpenGLx,
-  Scene.XOpenGL,
-  Scene.VectorGeometry,
-  Scene.VectorLists,
-  Scene.Strings,
+  Importx.OpenGLx,
+  GXS.XOpenGL,
+  GXS.VectorGeometry,
+  GXS.VectorLists,
+  GXS.Strings,
   GXS.HeightData,
   GXS.Isolines,
   GXS.Context;

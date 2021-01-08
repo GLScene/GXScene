@@ -154,27 +154,26 @@
         </DelphiCompile>
         <DCCReference Include="rtl.dcp"/>
         <DCCReference Include="fmx.dcp"/>
-        <DCCReference Include="..\Source\Scene.Formats.FileB3D.pas"/>
-        <DCCReference Include="..\Source\Scene.Formats.File3DS.pas"/>
-        <DCCReference Include="..\Source\Scene.Formats.File3DSConst.pas"/>
-        <DCCReference Include="..\Source\Scene.Formats.File3DSTypes.pas"/>
-        <DCCReference Include="..\Source\Scene.Formats.File3DSUtils.pas"/>
-        <DCCReference Include="..\Source\Formats.FileDDSImage.pas"/>
-        <DCCReference Include="..\Source\Formats.FileHDRImage.pas"/>
-        <DCCReference Include="..\Source\Scene.Formats.FileLWObjects.pas"/>
-        <DCCReference Include="..\Source\Scene.Formats.FileMD3.pas"/>
-        <DCCReference Include="..\Source\Formats.FileO3TCImage.pas"/>
-        <DCCReference Include="..\Source\Formats.FileOCT.pas"/>
-        <DCCReference Include="..\Source\Formats.FileQ3MD3.pas"/>
-        <DCCReference Include="..\Source\Scene.Formats.FileX.pas"/>
-        <DCCReference Include="..\Source\Formats.FileDXTC.pas"/>
-        <DCCReference Include="..\Source\Scene.Formats.FileGL2.pas"/>
-        <DCCReference Include="..\Source\Scene.Formats.FileMD2.pas"/>
-        <DCCReference Include="..\Source\Scene.Formats.FileQ3BSP.pas"/>
-        <DCCReference Include="..\Source\Formats.FileTGA.pas"/>
-        <DCCReference Include="..\Source\Scene.Formats.FileVFW.pas"/>
-        <DCCReference Include="..\Source\Scene.Formats.FileVRMLParser.pas"/>
-        <DCCReference Include="..\Source\Scene.Formats.VfsPAK.pas"/>
+        <DCCReference Include="..\Source\Formatx._3DS.pas"/>
+        <DCCReference Include="..\Source\Formatx._3DSConst.pas"/>
+        <DCCReference Include="..\Source\Formatx._3DSTypes.pas"/>
+        <DCCReference Include="..\Source\Formatx._3DSUtils.pas"/>
+        <DCCReference Include="..\Source\Formatx.DDSImage.pas"/>
+        <DCCReference Include="..\Source\Formatx.HDRImage.pas"/>
+        <DCCReference Include="..\Source\Formatx.LWObjects.pas"/>
+        <DCCReference Include="..\Source\Formatx.MD3.pas"/>
+        <DCCReference Include="..\Source\Formatx.O3TCImage.pas"/>
+        <DCCReference Include="..\Source\Formatx.OCT.pas"/>
+        <DCCReference Include="..\Source\Formatx.Q3MD3.pas"/>
+        <DCCReference Include="..\Source\Formatx.X.pas"/>
+        <DCCReference Include="..\Source\Formatx.DXTC.pas"/>
+        <DCCReference Include="..\Source\Formatx.GL2.pas"/>
+        <DCCReference Include="..\Source\Formatx.MD2.pas"/>
+        <DCCReference Include="..\Source\Formatx.Q3BSP.pas"/>
+        <DCCReference Include="..\Source\Formatx.TGA.pas"/>
+        <DCCReference Include="..\Source\Formatx.VFW.pas"/>
+        <DCCReference Include="..\Source\Formatx.VRML.pas"/>
+        <DCCReference Include="..\Source\Formatx.VfsPAK.pas"/>
         <DCCReference Include="..\Source\GXS.AnimatedSprite.pas"/>
         <DCCReference Include="..\Source\GXS.AsmShader.pas"/>
         <DCCReference Include="..\Source\GXS.AsyncHDS.pas"/>
@@ -244,13 +243,13 @@
         <DCCReference Include="..\Source\GXS.FileX.pas"/>
         <DCCReference Include="..\Source\GXS.FireFX.pas"/>
         <DCCReference Include="..\Source\GXS.FullScreenViewer.pas"/>
-        <DCCReference Include="..\Source\GXS.GLSLBumpShader.pas"/>
-        <DCCReference Include="..\Source\GXS.GLSLDiffuseSpecularShader.pas"/>
-        <DCCReference Include="..\Source\GXS.GLSLParameter.pas"/>
-        <DCCReference Include="..\Source\GXS.GLSLPostShaders.pas"/>
-        <DCCReference Include="..\Source\GXS.GLSLProjectedTextures.pas"/>
-        <DCCReference Include="..\Source\GXS.GLSLShader.pas"/>
-        <DCCReference Include="..\Source\GXS.GLUTesselation.pas"/>
+        <DCCReference Include="..\Source\GXSL.BumpShader.pas"/>
+        <DCCReference Include="..\Source\GXSL.DiffuseSpecularShader.pas"/>
+        <DCCReference Include="..\Source\GXSL.Parameter.pas"/>
+        <DCCReference Include="..\Source\GXSL.PostShaders.pas"/>
+        <DCCReference Include="..\Source\GXSL.ProjectedTextures.pas"/>
+        <DCCReference Include="..\Source\GXSL.Shader.pas"/>
+        <DCCReference Include="..\Source\GXS.gluTesselation.pas"/>
         <DCCReference Include="..\Source\GXS.GameMenu.pas"/>
         <DCCReference Include="..\Source\GXS.GeomObjects.pas"/>
         <DCCReference Include="..\Source\GXS.Gizmo.pas"/>
@@ -361,33 +360,33 @@
         <DCCReference Include="..\Source\GXS.WindowsFont.pas"/>
         <DCCReference Include="..\Source\GXS.zBuffer.pas"/>
         <DCCReference Include="..\Source\GXS.ViewerOpenGL.pas"/>
-        <DCCReference Include="..\Source\Scene.Import.OpenGLx.pas"/>
-        <DCCReference Include="..\Source\Scene.Import.Vulkan.pas"/>
-        <DCCReference Include="..\Source\Scene.AnimationUtils.pas"/>
-        <DCCReference Include="..\Source\Scene.ApplicationFileIO.pas"/>
-        <DCCReference Include="..\Source\Scene.ArchiveManager.pas"/>
-        <DCCReference Include="..\Source\Scene.BaseClasses.pas"/>
-        <DCCReference Include="..\Source\Scene.CurvesAndSurfaces.pas"/>
-        <DCCReference Include="..\Source\Scene.Generics.pas"/>
-        <DCCReference Include="..\Source\Scene.GeometryBB.pas"/>
-        <DCCReference Include="..\Source\Scene.GeometryCoordinates.pas"/>
-        <DCCReference Include="..\Source\Scene.PAKArchive.pas"/>
-        <DCCReference Include="..\Source\Scene.Keyboard.pas"/>
-        <DCCReference Include="..\Source\Scene.Manager.pas"/>
-        <DCCReference Include="..\Source\Scene.PersistentClasses.pas"/>
-        <DCCReference Include="..\Source\Scene.PlugInInterface.pas"/>
-        <DCCReference Include="..\Source\Scene.Polynomials.pas"/>
-        <DCCReference Include="..\Source\Scene.RGBE.pas"/>
-        <DCCReference Include="..\Source\Scene.SpacePartition.pas"/>
-        <DCCReference Include="..\Source\Scene.Spline.pas"/>
-        <DCCReference Include="..\Source\Scene.Strings.pas"/>
-        <DCCReference Include="..\Source\Scene.VectorRecTypes.pas"/>
-        <DCCReference Include="..\Source\Scene.VectorGeometry.pas"/>
-        <DCCReference Include="..\Source\Scene.VectorLists.pas"/>
-        <DCCReference Include="..\Source\Scene.VectorTypes.pas"/>
-        <DCCReference Include="..\Source\Scene.XCollection.pas"/>
-        <DCCReference Include="..\Source\Scene.XOpenGL.pas"/>
-        <DCCReference Include="..\Source\Formats.FileB3D.pas"/>
+        <DCCReference Include="..\Source\Importx.OpenGLx.pas"/>
+        <DCCReference Include="..\Source\Importx.Vulkan.pas"/>
+        <DCCReference Include="..\Source\GXS.AnimationUtils.pas"/>
+        <DCCReference Include="..\Source\GXS.ApplicationFileIO.pas"/>
+        <DCCReference Include="..\Source\GXS.ArchiveManager.pas"/>
+        <DCCReference Include="..\Source\GXS.BaseClasses.pas"/>
+        <DCCReference Include="..\Source\GXS.CurvesAndSurfaces.pas"/>
+        <DCCReference Include="..\Source\GXS.Generics.pas"/>
+        <DCCReference Include="..\Source\GXS.PAKArchive.pas"/>
+        <DCCReference Include="..\Source\GXS.Keyboard.pas"/>
+        <DCCReference Include="..\Source\GXS.Manager.pas"/>
+        <DCCReference Include="..\Source\GXS.PersistentClasses.pas"/>
+        <DCCReference Include="..\Source\GXS.PlugInInterface.pas"/>
+        <DCCReference Include="..\Source\GXS.Polynomials.pas"/>
+        <DCCReference Include="..\Source\GXS.RGBE.pas"/>
+        <DCCReference Include="..\Source\GXS.SpacePartition.pas"/>
+        <DCCReference Include="..\Source\GXS.Spline.pas"/>
+        <DCCReference Include="..\Source\GXS.Strings.pas"/>
+        <DCCReference Include="..\Source\GXS.VectorTypesExt.pas"/>
+        <DCCReference Include="..\Source\GXS.VectorGeometry.pas"/>
+        <DCCReference Include="..\Source\GXS.VectorLists.pas"/>
+        <DCCReference Include="..\Source\GXS.VectorTypes.pas"/>
+        <DCCReference Include="..\Source\GXS.XCollection.pas"/>
+        <DCCReference Include="..\Source\GXS.XOpenGL.pas"/>
+        <DCCReference Include="..\Source\Formatx.B3D.pas"/>
+        <DCCReference Include="..\Source\GXS.GeometryBB.pas"/>
+        <DCCReference Include="..\Source\GXS.GeometryCoordinates.pas"/>
         <BuildConfiguration Include="Debug">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>
@@ -420,12 +419,6 @@
                 <Platform value="Win64">True</Platform>
             </Platforms>
             <Deployment Version="3">
-                <DeployFile LocalName="C:\Users\Public\Documents\Embarcadero\Studio\20.0\Bpl\GXScene_RT.bpl" Configuration="Debug" Class="ProjectOutput">
-                    <Platform Name="Win32">
-                        <RemoteName>GXScene_RT.bpl</RemoteName>
-                        <Overwrite>true</Overwrite>
-                    </Platform>
-                </DeployFile>
                 <DeployFile LocalName="$(BDS)\Redist\osx32\libcgunwind.1.0.dylib" Class="DependencyModule">
                     <Platform Name="OSX32">
                         <Overwrite>true</Overwrite>
@@ -444,6 +437,12 @@
                 </DeployFile>
                 <DeployFile LocalName="$(BDS)\Redist\iossimulator\libPCRE.dylib" Class="DependencyModule">
                     <Platform Name="iOSSimulator">
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="C:\Users\Public\Documents\Embarcadero\Studio\20.0\Bpl\GXScene_RT.bpl" Configuration="Debug" Class="ProjectOutput">
+                    <Platform Name="Win32">
+                        <RemoteName>GXScene_RT.bpl</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>

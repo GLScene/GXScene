@@ -1,8 +1,8 @@
-(*******************************************
-*                                          *
-* Graphic Scene Engine, http://glscene.org *
-*                                          *
-********************************************)
+//
+//
+// The graphics rendering engine GXScene  http://glscene.org
+//
+//
 
 unit GXS.FileSTL;
 
@@ -18,11 +18,11 @@ uses
   System.Classes,
   System.SysUtils,
 
-  Scene.VectorTypes,
-  Scene.VectorGeometry,
-  Scene.VectorLists,
+  GXS.VectorTypes,
+  GXS.VectorGeometry,
+  GXS.VectorLists,
   GXS.VectorFileObjects,
-  Scene.ApplicationFileIO,
+  GXS.ApplicationFileIO,
   GXS.Utils;
 
 type

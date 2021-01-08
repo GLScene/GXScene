@@ -1,8 +1,8 @@
-(*******************************************
-*                                          *
-* Graphic Scene Engine, http://glscene.org *
-*                                          *
-********************************************)
+//
+//
+// The graphics rendering engine GXScene  http://glscene.org
+//
+//
 
 unit GXS.Gizmo;
 
@@ -13,17 +13,17 @@ unit GXS.Gizmo;
 
 interface
 
-{$I Scene.inc}
+{$I GXScene.inc}
 
 uses
   System.Classes,
   System.SysUtils,
   FMX.TextLayout,
 
-  Scene.PersistentClasses,
-  Scene.VectorGeometry,
-  Scene.VectorTypes,
-  Scene.Strings,
+  GXS.PersistentClasses,
+  GXS.VectorGeometry,
+  GXS.VectorTypes,
+  GXS.Strings,
   GXS.Scene,
   GXS.Color,
   GXS.Objects,

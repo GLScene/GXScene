@@ -8,7 +8,7 @@ unit GXS.RegisterXCollection;
 
 interface
 
-{$I Scene.inc}
+{$I GXScene.inc}
 
 uses
   System.Classes,

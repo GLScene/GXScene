@@ -1,8 +1,8 @@
-(*******************************************
-*                                          *
-* Graphic Scene Engine, http://glscene.org *
-*                                          *
-********************************************)
+//
+//
+// The graphics rendering engine GXScene  http://glscene.org
+//
+//
 
 unit GXS.RandomHDS;
 
@@ -59,10 +59,10 @@ uses
 ///  Fmx.Imaging.jpeg,
   Fmx.Forms,
 
-  Scene.Import.OpenGLx,
+  Importx.OpenGLx,
   GXS.Scene,
-  Scene.VectorTypes,
-  Scene.VectorGeometry,
+  GXS.VectorTypes,
+  GXS.VectorGeometry,
   GXS.HeightData,
   GXS.TerrainRenderer,
   GXS.Texture,

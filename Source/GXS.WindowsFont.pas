@@ -1,8 +1,8 @@
-(*******************************************
-*                                          *
-* Graphic Scene Engine, http://glscene.org *
-*                                          *
-********************************************)
+//
+//
+// The graphics rendering engine GXScene  http://glscene.org
+//
+//
 
 unit GXS.WindowsFont;
 
@@ -10,7 +10,7 @@ unit GXS.WindowsFont;
 
 interface
 
-{$I Scene.inc}
+{$I GXScene.inc}
 
 uses
 {$IFDEF MSWINDOWS}
@@ -23,16 +23,16 @@ uses
   System.UITypes,
   FMX.Graphics,
 
-  Scene.Import.OpenGLx,
+  Importx.OpenGLx,
   GXS.Scene,
   GXS.Texture,
   GXS.BitmapFont,
   GXS.RenderContextInfo,
-  Scene.VectorLists,
+  GXS.VectorLists,
   GXS.Utils,
-  Scene.VectorGeometry,
-  Scene.ApplicationFileIO,
-  Scene.VectorTypes;
+  GXS.VectorGeometry,
+  GXS.ApplicationFileIO,
+  GXS.VectorTypes;
 
 type
 

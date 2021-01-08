@@ -1,8 +1,8 @@
-(*******************************************
-*                                          *
-* Graphic Scene Engine, http://glscene.org *
-*                                          *
-********************************************)
+//
+//
+// The graphics rendering engine GXScene  http://glscene.org
+//
+//
 
 unit GXS.EParticleMasksManager;
 
@@ -30,7 +30,7 @@ unit GXS.EParticleMasksManager;
 
 interface
 
-{$I Scene.inc}
+{$I GXScene.inc}
 
 uses
   System.Types,
@@ -43,8 +43,8 @@ uses
   GXS.Texture, 
   GXS.Material, 
   GXS.Scene, 
-  Scene.VectorGeometry,
-  Scene.VectorTypes, 
+  GXS.VectorGeometry,
+  GXS.VectorTypes, 
   GXS.ParticleFX, 
   GXS.Coordinates;
 

@@ -1,8 +1,8 @@
-(*******************************************
-*                                          *
-* Graphic Scene Engine, http://glscene.org *
-*                                          *
-********************************************)
+//
+//
+// The graphics rendering engine GXScene  http://glscene.org
+//
+//
 
 unit GXS.GLSLToonShader;
 
@@ -13,16 +13,16 @@ unit GXS.GLSLToonShader;
 
 interface
 
-{$I Scene.inc}
+{$I GXScene.inc}
 
 uses
   Winapi.OpenGL, 
   Winapi.OpenGLext,  
   System.Classes,
   
-  Scene.Import.OpenGLx, 
-  Scene.BaseClasses, 
-  Scene.VectorGeometry, 
+  Importx.OpenGLx, 
+  GXS.BaseClasses, 
+  GXS.VectorGeometry, 
   GXS.Scene, 
   GXS.CrossPlatform, 
   GXS.State, 

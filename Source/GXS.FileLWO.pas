@@ -1,28 +1,25 @@
-(*******************************************
-*                                          *
-* Graphic Scene Engine, http://glscene.org *
-*                                          *
-********************************************)
-
+//
+// The graphics rendering engine GXScene  http://glscene.org
+//
 unit GXS.FileLWO;
 
 (* Support-code to load Lightwave LWO Files (v6.0+, partial support) *)
 
 interface
 
-{$I Scene.inc}
+{$I GXScene.inc}
 
 uses
   System.SysUtils,
   System.Classes,
   System.Math,
-  Scene.VectorTypes,
-  Scene.VectorGeometry,
+  GXS.VectorTypes,
+  GXS.VectorGeometry,
   GXS.Texture,
   GXS.Material,
   GXS.VectorFileObjects,
 
-  Scene.Formats.FileLWObjects;
+  Formatx.LWObjects;
 
 type
   TgxLWOVectorFile = class(TgxVectorFile)

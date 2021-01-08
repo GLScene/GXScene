@@ -1,8 +1,8 @@
-(*******************************************
-*                                          *
-* Graphic Scene Engine, http://glscene.org *
-*                                          *
-********************************************)
+//
+//
+// The graphics rendering engine GXScene  http://glscene.org
+//
+//
 
 unit GXS.BumpMapping;
 
@@ -15,9 +15,9 @@ uses
   FMX.Graphics,
 
   GXS.Color,
-  Scene.VectorGeometry,
-  Scene.VectorLists,
-  Scene.VectorTypes;
+  GXS.VectorGeometry,
+  GXS.VectorLists,
+  GXS.VectorTypes;
 
 type
   TNormalMapSpace = (nmsObject, nmsTangent);

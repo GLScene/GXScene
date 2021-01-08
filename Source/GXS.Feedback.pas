@@ -1,8 +1,8 @@
-(*******************************************
-*                                          *
-* Graphic Scene Engine, http://glscene.org *
-*                                          *
-********************************************)
+//
+//
+// The graphics rendering engine GXScene  http://glscene.org
+//
+//
 
 unit GXS.Feedback;
 
@@ -21,18 +21,18 @@ unit GXS.Feedback;
 
 interface
 
-{$I Scene.inc}
+{$I GXScene.inc}
 
 uses
   System.Classes,
   System.SysUtils,
 
-  Scene.Import.OpenGLx,
-  Scene.PersistentClasses,
-  Scene.VectorGeometry,
-  Scene.VectorLists,
-  Scene.VectorTypes,
-  Scene.Strings,
+  Importx.OpenGLx,
+  GXS.PersistentClasses,
+  GXS.VectorGeometry,
+  GXS.VectorLists,
+  GXS.VectorTypes,
+  GXS.Strings,
   GXS.Scene,
   GXS.VectorFileObjects,
   GXS.Texture,

@@ -1,8 +1,8 @@
-(*******************************************
-*                                          *
-* Graphic Scene Engine, http://glscene.org *
-*                                          *
-********************************************)
+//
+//
+// The graphics rendering engine GXScene  http://glscene.org
+//
+//
 
 unit GXS.Navigator;
 
@@ -10,7 +10,7 @@ unit GXS.Navigator;
 
 interface
 
-{$I Scene.inc}
+{$I GXScene.inc}
 
 uses
   System.Types,
@@ -18,11 +18,11 @@ uses
   System.Classes,
   System.Math,
 
-  Scene.VectorGeometry,
+  GXS.VectorGeometry,
   GXS.Scene,
   GXS.Coordinates,
   GXS.Screen,
-  Scene.VectorTypes;
+  GXS.VectorTypes;
 
 type
 

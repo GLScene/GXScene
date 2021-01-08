@@ -1,7 +1,7 @@
 (* ******************************************
-  *                                          *
-  * Graphic Scene Engine, http://glscene.org *
-  *                                          *
+  //
+  // The graphics rendering engine GXScene  http://glscene.org
+  //
   ******************************************* *)
 
 unit GXS.Polyhedron;
@@ -13,8 +13,8 @@ interface
 uses
   System.Classes,
 
-  Scene.Import.OpenGLx,
-  Scene.VectorGeometry,
+  Importx.OpenGLx,
+  GXS.VectorGeometry,
   GXS.Scene,
   GXS.VectorFileObjects,
   GXS.Objects,

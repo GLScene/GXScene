@@ -1,8 +1,8 @@
-(*******************************************
-*                                          *
-* Graphic Scene Engine, http://glscene.org *
-*                                          *
-********************************************)
+//
+//
+// The graphics rendering engine GXScene  http://glscene.org
+//
+//
 
 unit GXS.Isosurface;
 
@@ -37,10 +37,10 @@ interface
 {.$Define UseDensity}
 
 uses
-  Scene.VectorGeometry,
-  Scene.VectorLists,
-  Scene.VectorTypes,
-  Scene.VectorRecTypes,
+  GXS.VectorGeometry,
+  GXS.VectorLists,
+  GXS.VectorTypes,
+  GXS.VectorTypesExt,
 
   GXS.Mesh,
   GXS.VectorFileObjects;

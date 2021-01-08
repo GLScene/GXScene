@@ -1,8 +1,8 @@
-(*******************************************
-*                                          *
-* Graphic Scene Engine, http://glscene.org *
-*                                          *
-********************************************)
+//
+//
+// The graphics rendering engine GXScene  http://glscene.org
+//
+//
 
 unit GXS.Graph;
 
@@ -10,25 +10,25 @@ unit GXS.Graph;
 
 interface
 
-{$I Scene.inc}
+{$I GXScene.inc}
 
 uses
   System.Classes,
   System.SysUtils,
 
-  Scene.Import.OpenGLx,
-  Scene.XOpenGL,
+  Importx.OpenGLx,
+  GXS.XOpenGL,
   GXS.Scene,
   GXS.Context,
-  Scene.VectorGeometry,
+  GXS.VectorGeometry,
   GXS.Material,
   GXS.Objects,
-  Scene.VectorLists,
+  GXS.VectorLists,
   GXS.Color,
-  Scene.BaseClasses,
+  GXS.BaseClasses,
   GXS.RenderContextInfo,
   GXS.State,
-  Scene.VectorTypes;
+  GXS.VectorTypes;
 
 type
 

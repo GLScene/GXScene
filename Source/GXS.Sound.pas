@@ -1,8 +1,8 @@
-(*******************************************
-*                                          *
-* Graphic Scene Engine, http://glscene.org *
-*                                          *
-********************************************)
+//
+//
+// The graphics rendering engine GXScene  http://glscene.org
+//
+//
 
 unit GXS.Sound;
 
@@ -15,16 +15,16 @@ uses
   System.SysUtils,
   System.Types,
 
-  Scene.XCollection,
-  Scene.VectorTypes,
+  GXS.XCollection,
+  GXS.VectorTypes,
   GXS.SoundFileObjects,
   GXS.Scene,
-  Scene.VectorGeometry,
+  GXS.VectorGeometry,
   GXS.Cadencer,
-  Scene.BaseClasses,
+  GXS.BaseClasses,
   GXS.Utils;
 
-{$I Scene.inc}
+{$I GXScene.inc}
 
 type
 

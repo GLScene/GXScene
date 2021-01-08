@@ -1,16 +1,13 @@
-(*******************************************
-*                                          *
-* Graphic Scene Engine, http://glscene.org *
-*                                          *
-********************************************)
-
+//
+// The graphics rendering engine GXScene  http://glscene.org
+//
 unit GXS.Color;
 
 (* All color types, constants and utilities should go here *)
 
 interface
 
-{$I Scene.inc}
+{$I GXScene.inc}
 
 uses
   System.SysUtils,
@@ -19,11 +16,11 @@ uses
   System.UITypes,
   FMX.Dialogs,
 
-  Scene.Import.OpenGLx,
-  Scene.VectorTypes,
-  Scene.VectorGeometry,
-  Scene.PersistentClasses,
-  Scene.BaseClasses;
+  Importx.OpenGLx,
+  GXS.VectorTypes,
+  GXS.VectorGeometry,
+  GXS.PersistentClasses,
+  GXS.BaseClasses;
 
 type
   PColorVector = ^TColorVector;
@@ -32,7 +29,7 @@ type
   PRGBColor = ^TRGBColor;
   TRGBColor = TVector3b;
 
-  // Wraps an OpenGL color. 
+  // Wraps an OpenGL color.
   TgxColor = class(TUpdateAbleObject)
   private
     FColor: TColorVector;

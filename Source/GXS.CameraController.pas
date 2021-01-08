@@ -1,8 +1,8 @@
-(*******************************************
-*                                          *
-* Graphic Scene Engine, http://glscene.org *
-*                                          *
-********************************************)
+//
+//
+// The graphics rendering engine GXScene  http://glscene.org
+//
+//
 
 unit GXS.CameraController;
 
@@ -31,12 +31,12 @@ uses
   System.Math, 
   System.Contnrs,
   
-  Scene.PersistentClasses,
+  GXS.PersistentClasses,
   GXS.Scene,
-  Scene.VectorGeometry,
+  GXS.VectorGeometry,
   GXS.Coordinates,
   GXS.SmoothNavigator, 
-  Scene.VectorTypes;
+  GXS.VectorTypes;
 
 type
 

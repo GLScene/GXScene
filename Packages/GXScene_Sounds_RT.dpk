@@ -34,16 +34,16 @@ requires
   GXScene_RT;
 
 contains
-  Scene.Import.Bass in '..\Source\Scene.Import.Bass.pas',
-  Scene.Import.Fmod in '..\Source\Scene.Import.Fmod.pas',
-  Scene.Import.FmodDyn in '..\Source\Scene.Import.FmodDyn.pas',
-  Scene.Import.FmodErrors in '..\Source\Scene.Import.FmodErrors.pas',
-  Scene.Import.FmodPresets in '..\Source\Scene.Import.FmodPresets.pas',
-  Scene.Import.FmodTypes in '..\Source\Scene.Import.FmodTypes.pas',
-  GXS.SMBASS in '..\Source\GXS.SMBASS.pas',
-  GXS.SMFMOD in '..\Source\GXS.SMFMOD.pas',
-  GXS.SMOpenAL in '..\Source\GXS.SMOpenAL.pas',
-  GXS.SMWaveOut in '..\Source\GXS.SMWaveOut.pas',
-  Scene.Import.OpenAL in '..\Source\Scene.Import.OpenAL.pas';
+  Importx.Bass in '..\Source\Importx.Bass.pas',
+  Importx.Fmod in '..\Source\Importx.Fmod.pas',
+  Importx.FmodDyn in '..\Source\Importx.FmodDyn.pas',
+  Importx.FmodErrors in '..\Source\Importx.FmodErrors.pas',
+  Importx.FmodPresets in '..\Source\Importx.FmodPresets.pas',
+  Importx.FmodTypes in '..\Source\Importx.FmodTypes.pas',
+  Soundx.SMBASS in '..\Source\Soundx.SMBASS.pas',
+  Soundx.SMFMOD in '..\Source\Soundx.SMFMOD.pas',
+  Soundx.SMOpenAL in '..\Source\Soundx.SMOpenAL.pas',
+  Soundx.SMWaveOut in '..\Source\Soundx.SMWaveOut.pas',
+  Importx.OpenAL in '..\Source\Importx.OpenAL.pas';
 
 end.

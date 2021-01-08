@@ -9,7 +9,7 @@ unit GXS.FileDAE;
 
 interface
 
-{$I Scene.inc}
+{$I GXScene.inc}
 
 uses
   System.Classes, 
@@ -18,7 +18,7 @@ uses
   FMX.DAE.Model,
 
   GXS.VectorFileObjects, 
-  Scene.ApplicationFileIO;
+  GXS.ApplicationFileIO;
 
 type
    // TgxFileDAE

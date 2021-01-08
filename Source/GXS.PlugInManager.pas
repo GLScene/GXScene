@@ -1,16 +1,13 @@
-(*******************************************
-*                                          *
-* Graphic Scene Engine, http://glscene.org *
-*                                          *
-********************************************)
-
+//
+// The graphics rendering engine GXScene  http://glscene.org
+//
 unit GXS.PlugInManager;
 
 (* An old PlugIn Manager unit. Don't know if it ever was used...*)
 
 interface
 
-{$I Scene.inc}
+{$I GXScene.inc}
 
 uses
   Winapi.Windows,
@@ -19,7 +16,7 @@ uses
   FMX.Dialogs,
   FMX.Forms,
 
-  Scene.PlugInInterface;
+  GXS.PlugInInterface;
 
 type
   PPlugInEntry = ^TgxPlugInEntry;

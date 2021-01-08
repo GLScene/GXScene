@@ -1,8 +1,8 @@
-(*******************************************
-*                                          *
-* Graphic Scene Engine, http://glscene.org *
-*                                          *
-********************************************)
+//
+//
+// The graphics rendering engine GXScene  http://glscene.org
+//
+//
 
 unit GXS.Teapot;
 
@@ -10,20 +10,20 @@ unit GXS.Teapot;
 
 interface
 
-{$I Scene.inc}
+{$I GXScene.inc}
 
 uses
   System.Classes,
 
-  Scene.Import.OpenGLx,
+  Importx.OpenGLx,
   GXS.Scene,
-  Scene.PersistentClasses,
+  GXS.PersistentClasses,
   GXS.State,
-  Scene.VectorGeometry,
+  GXS.VectorGeometry,
   GXS.PipelineTransformation,
   GXS.Context,
   GXS.RenderContextInfo,
-  Scene.VectorTypes;
+  GXS.VectorTypes;
 
 type
 

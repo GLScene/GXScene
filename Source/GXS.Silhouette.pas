@@ -1,8 +1,8 @@
-(*******************************************
-*                                          *
-* Graphic Scene Engine, http://glscene.org *
-*                                          *
-********************************************)
+//
+//
+// The graphics rendering engine GXScene  http://glscene.org
+//
+//
 
 unit GXS.Silhouette;
 
@@ -16,15 +16,15 @@ unit GXS.Silhouette;
 
 interface
 
-{$I Scene.inc}
+{$I GXScene.inc}
 
 uses
   System.Classes,
   System.SysUtils,
 
-  Scene.VectorTypes,
-  Scene.VectorGeometry,
-  Scene.VectorLists;
+  GXS.VectorTypes,
+  GXS.VectorGeometry,
+  GXS.VectorLists;
 
 type
   TgxSilhouetteStyle = (ssOmni, ssParallel);

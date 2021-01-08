@@ -1,7 +1,7 @@
 (* ******************************************
-  *                                          *
-  * Graphic Scene Engine, http://glscene.org *
-  *                                          *
+  //
+  // The graphics rendering engine GXScene  http://glscene.org
+  //
   ******************************************* *)
 
 unit GXS.VerletSkeletonColliders;
@@ -16,11 +16,11 @@ interface
 uses
   System.Classes,
 
-  Scene.PersistentClasses,
-  Scene.VectorGeometry,
+  GXS.PersistentClasses,
+  GXS.VectorGeometry,
   GXS.VectorFileObjects,
   GXS.VerletTypes,
-  Scene.VectorTypes;
+  GXS.VectorTypes;
 
 type
 

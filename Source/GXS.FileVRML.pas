@@ -1,9 +1,6 @@
-(********************************************
- *                                          *
- * Graphic Scene Engine, http://glscene.org *
- *                                          *
- ********************************************)
-
+//
+// The graphics rendering engine GXScene  http://glscene.org
+//
 unit GXS.FileVRML;
 
 (* Preliminary VRML vector file support *)
@@ -15,15 +12,15 @@ uses
   System.SysUtils,
   System.Math,
 
-  Scene.ApplicationFileIO,
-  Scene.VectorTypes,
-  Scene.VectorGeometry,
-  Scene.VectorLists,
+  GXS.ApplicationFileIO,
+  GXS.VectorTypes,
+  GXS.VectorGeometry,
+  GXS.VectorLists,
   GXS.VectorFileObjects,
   GXS.Material,
   GXS.MeshUtils,
 
-  Scene.Formats.FileVRMLParser;
+  Formatx.VRML;
 
 type
 

@@ -13,7 +13,7 @@ uses
   System.Classes,
   System.SysUtils,
 
-  GXS.Scene.XCollection,
+  GXS.GXS.XCollection,
   GXS.ScriptBase,
   GXS.Manager,
 

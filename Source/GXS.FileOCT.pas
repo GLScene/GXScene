@@ -1,19 +1,14 @@
-(*******************************************
-*                                          *
-* Graphic Scene Engine, http://glscene.org *
-*                                          *
-********************************************)
-
+//
+// The graphics rendering engine GXScene  http://glscene.org
+//
 unit GXS.FileOCT;
-
 (*
     Support-code to load OCT Files into TgxFreeForm-Components in GLScene.
     (OCT being the format output from FSRad, http://www.fluidstudios.com/fsrad.html).
 *)
-
 interface
 
-{$I Scene.inc}
+{$I GXScene.inc}
 
 uses
   System.SysUtils,
@@ -21,8 +16,8 @@ uses
   FMX.Graphics,
 
   GXS.VectorFileObjects,
-  Scene.VectorGeometry,
-  Scene.ApplicationFileIO,
+  GXS.VectorGeometry,
+  GXS.ApplicationFileIO,
   GXS.Texture,
   GXS.Material,
   GXS.Graphics,
@@ -30,7 +25,7 @@ uses
   GXS.Utils,
   GXS.TextureFormat,
 
-  Formats.FileOCT;
+  Formatx.OCT;
 
 type
 

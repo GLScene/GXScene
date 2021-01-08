@@ -13,16 +13,16 @@ unit GXS.DynamicTexture;
 
 interface
 
-{$I Scene.inc}
+{$I GXScene.inc}
 
 uses
   System.Classes,
   System.SysUtils,
   System.Types,
 
-  Scene.Import.OpenGLx,
-  Scene.VectorGeometry,
-  Scene.Strings,
+  Importx.OpenGLx,
+  GXS.VectorGeometry,
+  GXS.Strings,
 
   GXS.Context,
   GXS.Texture,

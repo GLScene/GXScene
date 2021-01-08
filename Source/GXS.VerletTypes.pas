@@ -1,8 +1,8 @@
-(*******************************************
-*                                          *
-* Graphic Scene Engine, http://glscene.org *
-*                                          *
-********************************************)
+//
+//
+// The graphics rendering engine GXScene  http://glscene.org
+//
+//
 
 unit GXS.VerletTypes;
 
@@ -16,7 +16,7 @@ unit GXS.VerletTypes;
 
 interface
 
-{$I Scene.inc}
+{$I GXScene.inc}
 
 uses
   System.Classes,
@@ -26,11 +26,11 @@ uses
   GXS.Objects,
   GXS.Scene,
   GXS.Coordinates,
-  Scene.VectorGeometry,
-  Scene.VectorLists,
-  Scene.SpacePartition,
-  Scene.GeometryBB,
-  Scene.VectorTypes;
+  GXS.VectorGeometry,
+  GXS.VectorLists,
+  GXS.SpacePartition,
+  GXS.GeometryBB,
+  GXS.VectorTypes;
 
 const
   G_DRAG = 0.0001;

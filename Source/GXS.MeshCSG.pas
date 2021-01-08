@@ -1,8 +1,8 @@
-(*******************************************
-*                                          *
-* Graphic Scene Engine, http://glscene.org *
-*                                          *
-********************************************)
+//
+//
+// The graphics rendering engine GXScene  http://glscene.org
+//
+//
 
 unit GXS.MeshCSG;
 
@@ -18,7 +18,7 @@ unit GXS.MeshCSG;
 
 interface
 
-{$I Scene.inc}
+{$I GXScene.inc}
 
 uses
   System.SysUtils, 
@@ -26,11 +26,11 @@ uses
   System.Math,
   
   GXS.Scene, 
-  Scene.VectorTypes, 
+  GXS.VectorTypes, 
   GXS.VectorFileObjects,
-  Scene.VectorGeometry, 
+  GXS.VectorGeometry, 
   GXS.BSP, 
-  Scene.VectorLists;
+  GXS.VectorLists;
 
 type
   TCSGOperation = (CSG_Union, CSG_Subtraction, CSG_Intersection);

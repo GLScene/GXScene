@@ -1,8 +1,8 @@
-(*******************************************
-*                                          *
-* Graphic Scene Engine, http://glscene.org *
-*                                          *
-********************************************)
+//
+//
+// The graphics rendering engine GXScene  http://glscene.org
+//
+//
 
 unit GXS.ViewerOpenGL;
 
@@ -10,7 +10,7 @@ unit GXS.ViewerOpenGL;
 
 interface
 
-{$I Scene.inc}
+{$I GXScene.inc}
 
 uses
   WinApi.Windows,
@@ -25,7 +25,7 @@ uses
   FMX.Controls,
   FMX.Graphics,
 
-  Scene.Import.OpenGLx,
+  Importx.OpenGLx,
   GXS.Scene,
   GXS.Context,
   GXS.TextureFormat,

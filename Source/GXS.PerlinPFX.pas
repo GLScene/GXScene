@@ -1,8 +1,8 @@
-(*******************************************
-*                                          *
-* Graphic Scene Engine, http://glscene.org *
-*                                          *
-********************************************)
+//
+//
+// The graphics rendering engine GXScene  http://glscene.org
+//
+//
 
 unit GXS.PerlinPFX;
 
@@ -10,14 +10,14 @@ unit GXS.PerlinPFX;
 
 interface
 
-{$I Scene.inc}
+{$I GXScene.inc}
 
 uses
   System.Classes,
   System.Math,
 
-  Scene.Import.OpenGLx,
-  Scene.VectorGeometry,
+  Importx.OpenGLx,
+  GXS.VectorGeometry,
   GXS.ParticleFX,
   GXS.Graphics;
   

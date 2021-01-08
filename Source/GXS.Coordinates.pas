@@ -10,17 +10,17 @@ unit GXS.Coordinates;
 
 interface
 
-{$I Scene.inc}
+{$I GXScene.inc}
 
 uses
   System.Classes,
   System.SysUtils,
 
-  Scene.Import.OpenGLx,
-  Scene.VectorGeometry,
-  Scene.VectorTypes,
-  Scene.BaseClasses,
-  Scene.Strings;
+  Importx.OpenGLx,
+  GXS.VectorGeometry,
+  GXS.VectorTypes,
+  GXS.BaseClasses,
+  GXS.Strings;
 
 type
   (* Identifie le type de données stockées au sein d'un TgxCustomCoordinates.
@@ -351,17 +351,17 @@ end;
 
 function TgxCustomCoordinates.VectorLength: Single;
 begin
-  Result := Scene.VectorGeometry.VectorLength(FCoords);
+  Result := GXS.VectorGeometry.VectorLength(FCoords);
 end;
 
 function TgxCustomCoordinates.VectorNorm: Single;
 begin
-  Result := Scene.VectorGeometry.VectorNorm(FCoords);
+  Result := GXS.VectorGeometry.VectorNorm(FCoords);
 end;
 
 function TgxCustomCoordinates.MaxXYZ: Single;
 begin
-  Result := Scene.VectorGeometry.MaxXYZComponent(FCoords);
+  Result := GXS.VectorGeometry.MaxXYZComponent(FCoords);
 end;
 
 function TgxCustomCoordinates.Equals(const AVector: TVector): Boolean;
@@ -372,28 +372,28 @@ end;
 procedure TgxCustomCoordinates.SetVector(const X, Y: Single; Z: Single = 0);
 begin
   Assert(FStyle = csVector, csVectorHelp);
-  Scene.VectorGeometry.SetVector(FCoords, X, Y, Z);
+  GXS.VectorGeometry.SetVector(FCoords, X, Y, Z);
   NotifyChange(Self);
 end;
 
 procedure TgxCustomCoordinates.SetVector(const V: TAffineVector);
 begin
   Assert(FStyle = csVector, csVectorHelp);
-  Scene.VectorGeometry.SetVector(FCoords, V);
+  GXS.VectorGeometry.SetVector(FCoords, V);
   NotifyChange(Self);
 end;
 
 procedure TgxCustomCoordinates.SetVector(const V: TVector);
 begin
   Assert(FStyle = csVector, csVectorHelp);
-  Scene.VectorGeometry.SetVector(FCoords, V);
+  GXS.VectorGeometry.SetVector(FCoords, V);
   NotifyChange(Self);
 end;
 
 procedure TgxCustomCoordinates.SetVector(const X, Y, Z, W: Single);
 begin
   Assert(FStyle = csVector, csVectorHelp);
-  Scene.VectorGeometry.SetVector(FCoords, X, Y, Z, W);
+  GXS.VectorGeometry.SetVector(FCoords, X, Y, Z, W);
   NotifyChange(Self);
 end;
 
@@ -529,7 +529,7 @@ end;
 
 function TgxCustomCoordinates.GetAsAffineVector: TAffineVector;
 begin
-  Scene.VectorGeometry.SetVector(Result, FCoords);
+  GXS.VectorGeometry.SetVector(Result, FCoords);
 end;
 
 function TgxCustomCoordinates.GetAsPoint2D: TVector2f;

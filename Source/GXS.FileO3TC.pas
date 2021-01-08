@@ -1,24 +1,24 @@
-(*******************************************
-*                                          *
-* Graphic Scene Engine, http://glscene.org *
-*                                          *
-********************************************)
+//
+//
+// The graphics rendering engine GXScene  http://glscene.org
+//
+//
 
 unit GXS.FileO3TC;
 
 interface
 
-{$I Scene.inc}
+{$I GXScene.inc}
 
 uses
   System.Classes,
   System.SysUtils,
   System.Math,
 
-  Scene.Import.OpenGLx,
-  Scene.VectorGeometry,
-  Scene.Strings,
-  Scene.ApplicationFileIO,
+  Importx.OpenGLx,
+  GXS.VectorGeometry,
+  GXS.Strings,
+  GXS.ApplicationFileIO,
 
   GXS.Context,
   GXS.Graphics,

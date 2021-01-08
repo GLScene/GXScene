@@ -1,8 +1,6 @@
-(*********************************************
- *                                           *
- *  Graphic Scene Engine, http://glscene.org *
- *                                           *
- *********************************************)
+//
+// The graphics rendering engine GXScene  http://glscene.org
+//
 
 unit GXS.TimeEventsMgr;
 
@@ -18,7 +16,7 @@ uses
   System.SysUtils,
 
   GXS.Cadencer,
-  Scene.BaseClasses;
+  GXS.BaseClasses;
 
 type
 

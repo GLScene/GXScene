@@ -1,9 +1,6 @@
-(*******************************************
-*                                          *
-* Graphic Scene Engine, http://glscene.org *
-*                                          *
-********************************************)
-
+//
+// The graphics rendering engine GXScene  http://glscene.org
+//
 unit GXS.FileHDR;
 
 (* HDR File support *)
@@ -14,12 +11,12 @@ uses
   System.Classes,
   System.SysUtils,
 
-  Scene.Import.OpenGLx,
-  Scene.VectorTypes,
-  Scene.VectorGeometry,
-  Scene.RGBE,
-  Scene.ApplicationFileIO,
-  Scene.Strings,
+  Importx.OpenGLx,
+  GXS.VectorTypes,
+  GXS.VectorGeometry,
+  GXS.RGBE,
+  GXS.ApplicationFileIO,
+  GXS.Strings,
 
   GXS.Context,
   GXS.Graphics,

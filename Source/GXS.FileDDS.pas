@@ -1,32 +1,29 @@
-(*******************************************
-*                                          *
-* Graphic Scene Engine, http://glscene.org *
-*                                          *
-********************************************)
-
+//
+// The graphics rendering engine GXScene  http://glscene.org
+//
 unit GXS.FileDDS;
 
 (* DDS File support *)
 
 interface
 
-{$I Scene.inc}
+{$I GXScene.inc}
 
 uses
   System.Classes,
   System.SysUtils,
   System.Math,
 
-  Scene.Import.OpenGLx,
-  Scene.VectorGeometry,
-  Scene.RGBE,
-  Scene.Strings,
-  Scene.ApplicationFileIO,
+  Importx.OpenGLx,
+  GXS.VectorGeometry,
+  GXS.RGBE,
+  GXS.Strings,
+  GXS.ApplicationFileIO,
 
   GXS.Context,
   GXS.Graphics,
   GXS.TextureFormat,
-  Formats.FileDXTC;
+  Formatx.DXTC;
 
 type
 

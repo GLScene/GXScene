@@ -1,8 +1,8 @@
-(*******************************************
-*                                          *
-* Graphic Scene Engine, http://glscene.org *
-*                                          *
-********************************************)
+//
+//
+// The graphics rendering engine GXScene  http://glscene.org
+//
+//
 
 unit GXS.ShaderTextureSharing;
 
@@ -22,15 +22,15 @@ uses
   System.Classes,
   System.SysUtils,
 
-  Scene.XOpenGL,
+  GXS.XOpenGL,
   GXS.Scene,
-  Scene.VectorGeometry,
+  GXS.VectorGeometry,
   GXS.Color,
   GXS.Material,
-  Scene.Strings,
+  GXS.Strings,
   GXS.VectorFileObjects,
   GXS.State,
-  Scene.PersistentClasses,
+  GXS.PersistentClasses,
   GXS.Coordinates,
   GXS.RenderContextInfo;
 

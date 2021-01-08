@@ -1,8 +1,8 @@
-(*******************************************
-*                                          *
-* Graphic Scene Engine, http://glscene.org *
-*                                          *
-********************************************)
+//
+//
+// The graphics rendering engine GXScene  http://glscene.org
+//
+//
 
 unit GXS.HeightTileFileHDS;
 
@@ -10,7 +10,7 @@ unit GXS.HeightTileFileHDS;
 
 interface
 
-{$I Scene.inc}
+{$I GXScene.inc}
 
 uses
   System.Classes,
@@ -43,7 +43,7 @@ type
     // gives you direct access to the HTF object
   published
     { FileName of the HTF file.
-      Note that it is accessed via the services of Scene.ApplicationFileIO,
+      Note that it is accessed via the services of GXS.ApplicationFileIO,
       so this may not necessarily be a regular file on a disk... }
     property HTFFileName: String read FHTFFileName write SetHTFFileName;
     { If true the height field is wrapped indefinetely. }

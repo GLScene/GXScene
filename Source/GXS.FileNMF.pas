@@ -1,8 +1,8 @@
-(********************************************
- *                                          *
- * Graphic Scene Engine, http://glscene.org *
- *                                          *
- ********************************************)
+//*
+ //
+ // The graphics rendering engine GXScene  http://glscene.org
+ //
+ //
 
 unit GXS.FileNMF;
 
@@ -14,9 +14,9 @@ uses
   System.Classes,
 
   GXS.VectorFileObjects,
-  Scene.VectorGeometry,
-  Scene.VectorLists,
-  Scene.ApplicationFileIO;
+  GXS.VectorGeometry,
+  GXS.VectorLists,
+  GXS.ApplicationFileIO;
 
 const
   NMF_HEADER_TAG = 'NMF ';

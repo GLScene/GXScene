@@ -22,20 +22,20 @@ unit GXS.Tree;
 
 interface
 
-{$I Scene.inc}
+{$I GXScene.inc}
 
 uses
   System.Classes,
   System.SysUtils,
   System.Math,
 
-  Scene.Import.OpenGLx,
-  Scene.XOpenGL,
-  Scene.VectorGeometry,
-  Scene.VectorLists,
-  Scene.ApplicationFileIO,
-  Scene.VectorTypes,
-  Scene.Strings,
+  Importx.OpenGLx,
+  GXS.XOpenGL,
+  GXS.VectorGeometry,
+  GXS.VectorLists,
+  GXS.ApplicationFileIO,
+  GXS.VectorTypes,
+  GXS.Strings,
   GXS.Scene,
   GXS.VectorFileObjects,
   GXS.RenderContextInfo,

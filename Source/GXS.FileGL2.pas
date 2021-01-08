@@ -13,11 +13,11 @@ uses
   System.SysUtils,
 
   GXS.VectorFileObjects,
-  Scene.ApplicationFileIO,
+  GXS.ApplicationFileIO,
   GXS.Material,
-  Scene.VectorGeometry,
-  Scene.VectorTypes,
-  Scene.VectorLists,
+  GXS.VectorGeometry,
+  GXS.VectorTypes,
+  GXS.VectorLists,
 
   Formats.FileGL2;
 

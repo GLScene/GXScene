@@ -1,8 +1,8 @@
-(*******************************************
-*                                          *
-* Graphic Scene Engine, http://glscene.org *
-*                                          *
-********************************************)
+//
+//
+// The graphics rendering engine GXScene  http://glscene.org
+//
+//
 
 unit GXS.BumpShader;
 
@@ -31,19 +31,19 @@ unit GXS.BumpShader;
 
 interface
 
-{$I Scene.inc}
+{$I GXScene.inc}
 
 uses
   System.Classes,
   System.SysUtils,
 
-  Scene.Import.OpenGLx,
+  Importx.OpenGLx,
   GXS.Material,
   GXS.Graphics,
   GXS.Utils,
-  Scene.VectorGeometry,
+  GXS.VectorGeometry,
   GXS.Context,
-  Scene.VectorLists,
+  GXS.VectorLists,
   GXS.Color,
   GXS.RenderContextInfo,
   GXS.State,

@@ -10,7 +10,7 @@ unit GXS.GLSLIvoryShader;
 
 interface
 
-{$I Scene.inc}
+{$I GXScene.inc}
 
 uses
   Winapi.OpenGL, 
@@ -20,11 +20,11 @@ uses
   Import.OpenGL1x, 
   GXS.Scene, 
   GXS.CrossPlatform, 
-  Scene.BaseClasses, 
+  GXS.BaseClasses, 
   GXS.State, 
   GXS.Context, 
   GXS.RenderContextInfo, 
-  Scene.VectorGeometry, 
+  GXS.VectorGeometry, 
   GXS.Coordinates,
   GXS.TextureFormat, 
   GXS.Color, 

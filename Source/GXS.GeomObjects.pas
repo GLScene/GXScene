@@ -1,26 +1,23 @@
-(*******************************************
-*                                          *
-* Graphic Scene Engine, http://glscene.org *
-*                                          *
-********************************************)
-
+//
+// The graphics rendering engine GXScene  http://glscene.org
+//
 unit GXS.GeomObjects;
 
 (* Geometric objects *)
 
 interface
 
-{$I Scene.inc}
+{$I GXScene.inc}
 uses
   System.Classes,
   System.Math,
 
-  Scene.Import.OpenGLx,
-  Scene.PersistentClasses,
-  Scene.VectorTypes,
-  Scene.GeometryBB,
-  Scene.VectorGeometry,
-  Scene.Polynomials,
+  Importx.OpenGLx,
+  GXS.PersistentClasses,
+  GXS.VectorTypes,
+  GXS.GeometryBB,
+  GXS.VectorGeometry,
+  GXS.Polynomials,
   GXS.Scene,
   GXS.Context,
   GXS.Objects,

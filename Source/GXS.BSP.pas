@@ -1,8 +1,8 @@
-(*******************************************
-*                                          *
-* Graphic Scene Engine, http://glscene.org *
-*                                          *
-********************************************)
+//
+//
+// The graphics rendering engine GXScene  http://glscene.org
+//
+//
 
 unit GXS.BSP;
 
@@ -13,18 +13,18 @@ unit GXS.BSP;
 
 interface
 
-{$I Scene.inc}
+{$I GXScene.inc}
 
 uses
   System.SysUtils,
   System.Classes,
   System.Math,
 
-  Scene.VectorTypes,
+  GXS.VectorTypes,
   GXS.VectorFileObjects,
   GXS.Material,
-  Scene.VectorGeometry,
-  Scene.VectorLists,
+  GXS.VectorGeometry,
+  GXS.VectorLists,
   GXS.Color,
   GXS.RenderContextInfo;
 

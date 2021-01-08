@@ -1,8 +1,8 @@
-(*******************************************
-*                                          *
-* Graphic Scene Engine, http://glscene.org *
-*                                          *
-********************************************)
+//
+//
+// The graphics rendering engine GXScene  http://glscene.org
+//
+//
 
 unit GXS.HeightData;
 
@@ -22,7 +22,7 @@ unit GXS.HeightData;
 
 interface
 
-{$I Scene.inc}
+{$I GXScene.inc}
 
 uses
   Winapi.Windows, // for CreateMonochromeBitmap
@@ -31,9 +31,9 @@ uses
   FMX.Objects,
   FMX.Graphics,
 
-  Scene.VectorGeometry,
-  Scene.BaseClasses,
-  Scene.ApplicationFileIO,
+  GXS.VectorGeometry,
+  GXS.BaseClasses,
+  GXS.ApplicationFileIO,
   GXS.Utils,
   GXS.Material;
 

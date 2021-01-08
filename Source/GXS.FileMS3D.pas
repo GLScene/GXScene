@@ -1,8 +1,8 @@
-(********************************************
- *                                          *
- * Graphic Scene Engine, http://glscene.org *
- *                                          *
- ********************************************)
+//*
+ //
+ // The graphics rendering engine GXScene  http://glscene.org
+ //
+ //
 
 unit GXS.FileMS3D;
 
@@ -10,7 +10,7 @@ unit GXS.FileMS3D;
 
 interface
 
-{$I Scene.inc}
+{$I GXScene.inc}
 
 uses
   System.Classes,
@@ -18,13 +18,13 @@ uses
   System.Math,
 
   GXS.VectorFileObjects,
-  Scene.VectorTypes,
+  GXS.VectorTypes,
   GXS.Material,
   GXS.Color,
   GXS.Texture,
-  Scene.VectorGeometry,
-  Scene.VectorLists,
-  Scene.ApplicationFileIO;
+  GXS.VectorGeometry,
+  GXS.VectorLists,
+  GXS.ApplicationFileIO;
 
 const
   MAX_MS3D_VERTICES  = 8192;

@@ -1,8 +1,8 @@
-(*******************************************
-*                                          *
-* Graphic Scene Engine, http://glscene.org *
-*                                          *
-********************************************)
+//
+//
+// The graphics rendering engine GXScene  http://glscene.org
+//
+//
 
 unit GXS.GizmoEx;
 
@@ -13,7 +13,7 @@ unit GXS.GizmoEx;
 
 interface
 
-{$I Scene.inc}
+{$I GXScene.inc}
 
 uses
   Winapi.Windows,
@@ -23,12 +23,12 @@ uses
   System.Math,
   FMX.TextLayout,
 
-  Scene.Import.OpenGLx,
-  Scene.GeometryBB,
-  Scene.VectorTypes,
-  Scene.VectorGeometry,
-  Scene.PersistentClasses,
-  Scene.Strings,
+  Importx.OpenGLx,
+  GXS.GeometryBB,
+  GXS.VectorTypes,
+  GXS.VectorGeometry,
+  GXS.PersistentClasses,
+  GXS.Strings,
   GXS.Scene,
   GXS.Color,
   GXS.Material,
@@ -4198,7 +4198,7 @@ begin
   UpdateGizmo;
 end;
 
-(*******************************************************************)
+//************************)
 
 procedure TgxGizmoExObjectItem.AssignFromObject(const AObject: TgxBaseSceneObject; AssignAndRemoveObj: Boolean = False);
 begin
@@ -4344,7 +4344,7 @@ begin
     GetItems(I).DoUndo;
 end;
 
-(*****************************************************)
+//**********)
 
 constructor TgxGizmoExActionHistoryItem.Create(AOwner: TCollection);
 begin

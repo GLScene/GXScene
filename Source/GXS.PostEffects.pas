@@ -10,16 +10,16 @@ unit GXS.PostEffects;
 
 interface
 
-{$I Scene.inc}
+{$I GXScene.inc}
 
 uses
   System.Classes,
   System.SysUtils,
 
-  Scene.Import.OpenGLx,
-  Scene.PersistentClasses,
-  Scene.VectorGeometry,
-  Scene.Strings,
+  Importx.OpenGLx,
+  GXS.PersistentClasses,
+  GXS.VectorGeometry,
+  GXS.Strings,
   GXS.Scene,
   GXS.Texture,
   GXS.Graphics,

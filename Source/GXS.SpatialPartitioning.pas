@@ -1,9 +1,6 @@
-(*******************************************
-*                                          *
-* Graphic Scene Engine, http://glscene.org *
-*                                          *
-********************************************)
-
+//
+// The graphics rendering engine GXScene  http://glscene.org
+//
 unit GXS.SpatialPartitioning;
 
 (* Spatial partitioning related code that also uses scene objects *)
@@ -11,11 +8,11 @@ unit GXS.SpatialPartitioning;
 interface
 
 uses
-  Scene.Import.OpenGLx,
-  Scene.VectorTypes,
-  Scene.VectorGeometry,
-  Scene.GeometryBB,
-  Scene.SpacePartition,
+  Importx.OpenGLx,
+  GXS.VectorTypes,
+  GXS.VectorGeometry,
+  GXS.GeometryBB,
+  GXS.SpacePartition,
 
   GXS.Scene,
   GXS.Coordinates,

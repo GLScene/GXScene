@@ -1,8 +1,8 @@
-(********************************************
- *                                          *
- * Graphic Scene Engine, http://glscene.org *
- *                                          *
- ********************************************)
+//*
+ //
+ // The graphics rendering engine GXScene  http://glscene.org
+ //
+ //
 
 unit GXS.SoundFileObjects;
 
@@ -13,13 +13,13 @@ unit GXS.SoundFileObjects;
 
 interface
 
-{$I Scene.inc}
+{$I GXScene.inc}
 
 uses
   System.Classes,
   System.SysUtils,
 {$IFDEF MSWINDOWS}Winapi.MMSystem, {$ENDIF}
-  Scene.ApplicationFileIO,
+  GXS.ApplicationFileIO,
   GXS.Utils;
 
 type

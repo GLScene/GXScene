@@ -1,9 +1,6 @@
-(********************************************
- *                                          *
- * Graphic Scene Engine, http://glscene.org *
- *                                          *
- ********************************************)
-
+//
+// The graphics rendering engine GXScene  http://glscene.org
+//
 unit GXS.FileB3D;
 
 (* B3D VectorFile class to load Blitz 3D model files *)
@@ -14,15 +11,15 @@ uses
   System.Classes,
   System.SysUtils,
 
-  Scene.VectorTypes,
-  Scene.VectorGeometry,
-  Scene.VectorLists,
-  Scene.ApplicationFileIO,
+  GXS.VectorTypes,
+  GXS.VectorGeometry,
+  GXS.VectorLists,
+  GXS.ApplicationFileIO,
   GXS.VectorFileObjects,
   GXS.Texture,
   GXS.TextureFormat,
   GXS.Material,
-  Formats.FileB3D;
+  Formatx.B3D;
 
 type
   TgxB3DVectorFile = class(TgxVectorFile)

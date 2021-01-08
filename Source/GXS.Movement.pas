@@ -1,8 +1,8 @@
-(*******************************************
-*                                          *
-* Graphic Scene Engine, http://glscene.org *
-*                                          *
-********************************************)
+//
+//
+// The graphics rendering engine GXScene  http://glscene.org
+//
+//
 
 unit GXS.Movement;
 
@@ -15,20 +15,20 @@ unit GXS.Movement;
 
 interface
 
-{$I Scene.inc}
+{$I GXScene.inc}
 
 uses
   System.Classes,
   System.SysUtils,
 
-  Scene.Import.OpenGLx,
-  Scene.XCollection,
-  Scene.PersistentClasses,
-  Scene.BaseClasses,
-  Scene.VectorTypes,
-  Scene.VectorGeometry,
-  Scene.Spline,
-  Scene.Strings,
+  Importx.OpenGLx,
+  GXS.XCollection,
+  GXS.PersistentClasses,
+  GXS.BaseClasses,
+  GXS.VectorTypes,
+  GXS.VectorGeometry,
+  GXS.Spline,
+  GXS.Strings,
 
   GXS.Scene,
   GXS.Objects,

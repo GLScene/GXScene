@@ -1,8 +1,8 @@
-(*******************************************
-*                                          *
-* Graphic Scene Engine, http://glscene.org *
-*                                          *
-********************************************)
+//
+//
+// The graphics rendering engine GXScene  http://glscene.org
+//
+//
 
 unit GXS.Mirror;
 
@@ -14,23 +14,23 @@ unit GXS.Mirror;
 
 interface
 
-{$I Scene.inc}
+{$I GXScene.inc}
 
 uses
   System.Classes,
 
-  Scene.Import.OpenGLx,
-  Scene.XCollection,
-  Scene.PersistentClasses,
+  Importx.OpenGLx,
+  GXS.XCollection,
+  GXS.PersistentClasses,
   GXS.Scene,
   GXS.PipelineTransformation,
-  Scene.VectorGeometry,
+  GXS.VectorGeometry,
   GXS.Context,
   GXS.Material,
   GXS.Color,
   GXS.RenderContextInfo,
   GXS.State,
-  Scene.VectorTypes;
+  GXS.VectorTypes;
 
 
 type

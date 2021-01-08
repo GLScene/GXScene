@@ -1,8 +1,8 @@
-(*******************************************
-*                                          *
-* Graphic Scene Engine, http://glscene.org *
-*                                          *
-********************************************)
+//
+//
+// The graphics rendering engine GXScene  http://glscene.org
+//
+//
 
 unit GXS.ProcTextures;
 
@@ -15,9 +15,9 @@ uses
   System.SysUtils,
   System.Math,
 
-  Scene.Import.OpenGLx,
-  Scene.VectorGeometry,
-  Scene.Strings,
+  Importx.OpenGLx,
+  GXS.VectorGeometry,
+  GXS.Strings,
 
   GXS.Texture,
   GXS.Graphics,

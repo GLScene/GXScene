@@ -1,8 +1,8 @@
-(*******************************************
-*                                          *
-* Graphic Scene Engine, http://glscene.org *
-*                                          *
-********************************************)
+//
+//
+// The graphics rendering engine GXScene  http://glscene.org
+//
+//
 
 unit GXS.TerrainRenderer;
 
@@ -15,17 +15,17 @@ unit GXS.TerrainRenderer;
 
 interface
 
-{$I Scene.inc}
+{$I GXScene.inc}
 
 uses
   System.Classes,
   System.SysUtils,
 
-  Scene.Import.OpenGLx,
-  Scene.XOpenGL,
-  Scene.VectorTypes,
-  Scene.VectorGeometry,
-  Scene.VectorLists,
+  Importx.OpenGLx,
+  GXS.XOpenGL,
+  GXS.VectorTypes,
+  GXS.VectorGeometry,
+  GXS.VectorLists,
   GXS.Scene,
   GXS.HeightData,
   GXS.Material,

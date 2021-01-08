@@ -1,8 +1,8 @@
-(********************************************
- *                                          *
- * Graphic Scene Engine, http://glscene.org *
- *                                          *
- ********************************************)
+//*
+ //
+ // The graphics rendering engine GXScene  http://glscene.org
+ //
+ //
 
 unit GXS.FileMDC;
 
@@ -16,7 +16,7 @@ unit GXS.FileMDC;
 
 interface
 
-{$I Scene.inc}
+{$I GXScene.inc}
 
 uses
   System.Classes,
@@ -24,8 +24,8 @@ uses
 
   GXS.VectorFileObjects,
   GXS.Material,
-  Scene.ApplicationFileIO,
-  Scene.VectorGeometry;
+  GXS.ApplicationFileIO,
+  GXS.VectorGeometry;
 
 const
   MDCFILE_IDENTITY = 'IDPC';

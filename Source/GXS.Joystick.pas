@@ -1,8 +1,8 @@
-(*******************************************
-*                                          *
-* Graphic Scene Engine, http://glscene.org *
-*                                          *
-********************************************)
+//
+//
+// The graphics rendering engine GXScene  http://glscene.org
+//
+//
 
 unit GXS.Joystick;
 
@@ -10,7 +10,7 @@ unit GXS.Joystick;
 
 interface
 
-{$I Scene.inc}
+{$I GXScene.inc}
 
 uses
   Winapi.Windows,
@@ -20,7 +20,7 @@ uses
   System.SysUtils,
   FMX.Forms,
   FMX.Controls,
-  Scene.Strings;
+  GXS.Strings;
 
 type
   TJoystickButton = (jbButton1, jbButton2, jbButton3, jbButton4);

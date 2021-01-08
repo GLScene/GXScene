@@ -1,8 +1,8 @@
-(********************************************
- *                                          *
- * Graphic Scene Engine, http://glscene.org *
- *                                          *
- ********************************************)
+//*
+ //
+ // The graphics rendering engine GXScene  http://glscene.org
+ //
+ //
 
 unit GXS.FileMD5;
 
@@ -15,10 +15,10 @@ uses
   System.SysUtils,
   GXS.VectorFileObjects,
   GXS.Utils,
-  Scene.ApplicationFileIO,
-  Scene.VectorTypes,
-  Scene.VectorGeometry,
-  Scene.VectorLists;
+  GXS.ApplicationFileIO,
+  GXS.VectorTypes,
+  GXS.VectorGeometry,
+  GXS.VectorLists;
 
 type
 

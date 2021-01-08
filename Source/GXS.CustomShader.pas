@@ -15,25 +15,25 @@ unit GXS.CustomShader;
 
 interface
 
-{$I Scene.inc}
+{$I GXScene.inc}
 
 uses
   System.Classes,
   System.SysUtils,
 
-  Scene.Import.OpenGLx,
-  Scene.VectorGeometry,
-  Scene.VectorTypes, 
+  Importx.OpenGLx,
+  GXS.VectorGeometry,
+  GXS.VectorTypes, 
   GXS.Texture, 
   GXS.Cadencer, 
   GXS.Scene,
-  Scene.Strings, 
+  GXS.Strings, 
   GXS.Context,
   GXS.RenderContextInfo, 
   GXS.Material,
-  Scene.VectorLists, 
+  GXS.VectorLists, 
   GXS.TextureFormat, 
-  GXS.GLSLParameter;
+  GXSL.Parameter;
 
 const
   vxsShaderMaxLightSources = 8;

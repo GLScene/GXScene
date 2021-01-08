@@ -1,8 +1,8 @@
-(*******************************************
-*                                          *
-* Graphic Scene Engine, http://glscene.org *
-*                                          *
-********************************************)
+//
+//
+// The graphics rendering engine GXScene  http://glscene.org
+//
+//
 
 unit GXS.SimpleNavigation;
 
@@ -15,7 +15,7 @@ unit GXS.SimpleNavigation;
 
 interface
 
-{$I Scene.inc}
+{$I GXScene.inc}
 
 uses
   System.Types,
@@ -27,10 +27,10 @@ uses
   FMX.Controls,
   FMX.ExtCtrls,
   FMX.Types,
-  Scene.VectorGeometry,
+  GXS.VectorGeometry,
   GXS.Scene,
   GXS.SceneViewer,
-  Scene.Strings;
+  GXS.Strings;
 
 type
 

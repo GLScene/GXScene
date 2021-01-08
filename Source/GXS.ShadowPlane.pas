@@ -1,8 +1,8 @@
-(*******************************************
-*                                          *
-* Graphic Scene Engine, http://glscene.org *
-*                                          *
-********************************************)
+//
+//
+// The graphics rendering engine GXScene  http://glscene.org
+//
+//
 
 unit GXS.ShadowPlane;
 
@@ -15,17 +15,17 @@ unit GXS.ShadowPlane;
 
 interface
 
-{$I Scene.inc}
+{$I GXScene.inc}
 
 uses
   System.Types,
   System.Classes,
   FMX.Effects,
 
-  Scene.Import.OpenGLx,
-  Scene.VectorTypes,
-  Scene.PersistentClasses,
-  Scene.VectorGeometry,
+  Importx.OpenGLx,
+  GXS.VectorTypes,
+  GXS.PersistentClasses,
+  GXS.VectorGeometry,
   GXS.Scene,
   GXS.PipelineTransformation,
   GXS.Context,

@@ -1,8 +1,8 @@
-(*******************************************
-*                                          *
-* Graphic Scene Engine, http://glscene.org *
-*                                          *
-********************************************)
+//
+//
+// The graphics rendering engine GXScene  http://glscene.org
+//
+//
 
 unit GXS.WaterPlane;
 
@@ -10,7 +10,7 @@ unit GXS.WaterPlane;
 
 interface
 
-{$I Scene.inc}
+{$I GXScene.inc}
 
 uses
   System.Classes,
@@ -18,12 +18,12 @@ uses
   FMX.Types,
   FMX.Graphics,
 
-  Scene.Import.OpenGLx,
-  Scene.VectorGeometry,
-  Scene.VectorTypes,
-  Scene.VectorLists,
-  Scene.PersistentClasses,
-  Scene.BaseClasses,
+  Importx.OpenGLx,
+  GXS.VectorGeometry,
+  GXS.VectorTypes,
+  GXS.VectorLists,
+  GXS.PersistentClasses,
+  GXS.BaseClasses,
   GXS.Scene,
   GXS.Utils,
   GXS.Context,

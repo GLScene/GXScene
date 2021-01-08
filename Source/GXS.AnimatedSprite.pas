@@ -1,8 +1,8 @@
-(*******************************************
-*                                          *
-* Graphic Scene Engine, http://glscene.org *
-*                                          *
-********************************************)
+//
+//
+// The graphics rendering engine GXScene  http://glscene.org
+//
+//
 
 unit GXS.AnimatedSprite;
 
@@ -10,25 +10,25 @@ unit GXS.AnimatedSprite;
 
 interface
 
-{$I Scene.inc}
+{$I GXScene.inc}
 
 uses
   System.Classes,
   System.SysUtils,
   System.Math,
 
-  Scene.Import.OpenGLx,
-  Scene.XCollection,
-  Scene.VectorTypes,
-  Scene.VectorGeometry,
-  Scene.PersistentClasses,
-  Scene.Strings,
+  Importx.OpenGLx,
+  GXS.XCollection,
+  GXS.VectorTypes,
+  GXS.VectorGeometry,
+  GXS.PersistentClasses,
+  GXS.Strings,
 
   GXS.Scene,
   GXS.Context,
   GXS.Material,
   GXS.RenderContextInfo,
-  Scene.BaseClasses,
+  GXS.BaseClasses,
   GXS.State;
 
 type

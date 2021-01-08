@@ -1,8 +1,8 @@
-(*******************************************
-*                                          *
-* Graphic Scene Engine, http://glscene.org *
-*                                          *
-********************************************)
+//
+//
+// The graphics rendering engine GXScene  http://glscene.org
+//
+//
 
 unit GXS.Imposter;
 
@@ -10,24 +10,24 @@ unit GXS.Imposter;
 
 interface
 
-{$I Scene.inc}
+{$I GXScene.inc}
 
 uses
   System.Types,
   System.Classes,
   System.SysUtils,
   
-  Scene.Import.OpenGLx,
+  Importx.OpenGLx,
   GXS.Scene,
   GXS.Context,
-  Scene.VectorTypes,
-  Scene.VectorGeometry,
-  Scene.PersistentClasses,
+  GXS.VectorTypes,
+  GXS.VectorGeometry,
+  GXS.PersistentClasses,
   GXS.Graphics,
   GXS.Color,
   GXS.RenderContextInfo,
   GXS.Coordinates,
-  Scene.BaseClasses,
+  GXS.BaseClasses,
   GXS.State,
   GXS.PipelineTransformation,
   GXS.TextureFormat,

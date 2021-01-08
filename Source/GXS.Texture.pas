@@ -1,8 +1,8 @@
-(*******************************************
-*                                          *
-* Graphic Scene Engine, http://glscene.org *
-*                                          *
-********************************************)
+//
+//
+// The graphics rendering engine GXScene  http://glscene.org
+//
+//
 
 unit GXS.Texture;
 
@@ -10,7 +10,7 @@ unit GXS.Texture;
 
 interface
 
-{$I Scene.inc}
+{$I GXScene.inc}
 
 uses
   System.Classes,
@@ -19,13 +19,13 @@ uses
   FMX.Graphics,
   FMX.Objects,
 
-  Scene.Import.OpenGLx,
-  Scene.XOpenGL,
-  Scene.VectorTypes,
-  Scene.VectorGeometry,
-  Scene.BaseClasses,
-  Scene.Strings,
-  Scene.ApplicationFileIO,
+  Importx.OpenGLx,
+  GXS.XOpenGL,
+  GXS.VectorTypes,
+  GXS.VectorGeometry,
+  GXS.BaseClasses,
+  GXS.Strings,
+  GXS.ApplicationFileIO,
 
   GXS.Graphics,
   GXS.Context,

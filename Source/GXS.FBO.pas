@@ -1,8 +1,8 @@
-(*******************************************
-*                                          *
-* Graphic Scene Engine, http://glscene.org *
-*                                          *
-********************************************)
+//
+//
+// The graphics rendering engine GXScene  http://glscene.org
+//
+//
 
 unit GXS.FBO;
 
@@ -10,14 +10,14 @@ unit GXS.FBO;
 
 interface
 
-{$I Scene.inc}
+{$I GXScene.inc}
 
 uses
   System.SysUtils,
   FMX.Dialogs,
 
-  Scene.Import.OpenGLx,
-  Scene.VectorTypes,
+  Importx.OpenGLx,
+  GXS.VectorTypes,
   GXS.Scene,
   GXS.Context,
   GXS.State,

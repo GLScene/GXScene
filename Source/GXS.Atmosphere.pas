@@ -1,8 +1,8 @@
-(*******************************************
-*                                          *
-* Graphic Scene Engine, http://glscene.org *
-*                                          *
-********************************************)
+//
+//
+// The graphics rendering engine GXScene  http://glscene.org
+//
+//
 
 unit GXS.Atmosphere;
 
@@ -16,23 +16,23 @@ unit GXS.Atmosphere;
 
 interface
 
-{$I Scene.inc}
+{$I GXScene.inc}
 
 uses
   System.SysUtils,
   System.Classes,
 
-  Scene.Import.OpenGLx,
+  Importx.OpenGLx,
   GXS.Scene,
   GXS.Objects,
   GXS.Cadencer,
-  Scene.VectorGeometry,
+  GXS.VectorGeometry,
   GXS.Context,
-  Scene.Strings,
+  GXS.Strings,
   GXS.Color,
   GXS.RenderContextInfo,
   GXS.State,
-  Scene.VectorTypes;
+  GXS.VectorTypes;
 
 type
    EGLAtmosphereException = class(Exception);

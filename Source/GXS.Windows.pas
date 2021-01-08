@@ -1,8 +1,8 @@
-(*******************************************
-*                                          *
-* Graphic Scene Engine, http://glscene.org *
-*                                          *
-********************************************)
+//
+//
+// The graphics rendering engine GXScene  http://glscene.org
+//
+//
 
 unit GXS.Windows;
 
@@ -10,7 +10,7 @@ unit GXS.Windows;
 
 interface
 
-{$I Scene.inc}
+{$I GXScene.inc}
 
 uses
   Winapi.Windows,
@@ -21,12 +21,12 @@ uses
   FMX.Graphics,
   FMX.Types,
 
-  Scene.Import.OpenGLx,
-  Scene.VectorTypes,
-  Scene.VectorGeometry,
-  Scene.PersistentClasses,
-  Scene.BaseClasses,
-  Scene.Strings,
+  Importx.OpenGLx,
+  GXS.VectorTypes,
+  GXS.VectorGeometry,
+  GXS.PersistentClasses,
+  GXS.BaseClasses,
+  GXS.Strings,
   GXS.Scene,
   GXS.Coordinates,
   GXS.HUDObjects,

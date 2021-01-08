@@ -1,8 +1,8 @@
-(*******************************************
-*                                          *
-* Graphic Scene Engine, http://glscene.org *
-*                                          *
-********************************************)
+//
+//
+// The graphics rendering engine GXScene  http://glscene.org
+//
+//
 
 unit GXS.Canvas;
 
@@ -14,7 +14,7 @@ unit GXS.Canvas;
 
 interface
 
-{$I Scene.inc}
+{$I GXScene.inc}
 
 uses
   System.Types,
@@ -23,11 +23,11 @@ uses
   System.Math,
   FMX.Graphics,
 
-  Scene.Import.OpenGLx,
-  Scene.VectorGeometry,
+  Importx.OpenGLx,
+  GXS.VectorGeometry,
   GXS.Color,
   GXS.Context,
-  Scene.VectorTypes,
+  GXS.VectorTypes,
   GXS.State;
 
 type

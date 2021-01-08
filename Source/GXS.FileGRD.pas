@@ -1,8 +1,8 @@
-(********************************************
- *                                          *
- * Graphic Scene Engine, http://glscene.org *
- *                                          *
- ********************************************)
+//*
+ //
+ // The graphics rendering engine GXScene  http://glscene.org
+ //
+ //
 
 unit GXS.FileGRD;
 
@@ -10,16 +10,16 @@ unit GXS.FileGRD;
 
 interface
 
-{$I Scene.inc}
+{$I GXScene.inc}
 
 uses
   System.Classes,
   System.SysUtils,
 
-  Scene.VectorGeometry,
-  Scene.VectorTypes,
+  GXS.VectorGeometry,
+  GXS.VectorTypes,
   GXS.VectorFileObjects,
-  Scene.ApplicationFileIO,
+  GXS.ApplicationFileIO,
   GXS.Graph;
 
 type

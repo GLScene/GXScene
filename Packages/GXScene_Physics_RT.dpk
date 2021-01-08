@@ -41,17 +41,17 @@ requires
   GXScene_RT;
 
 contains
-  GXS.ODEManager in '..\Source\GXS.ODEManager.pas',
-  GXS.ODESkeletonColliders in '..\Source\GXS.ODESkeletonColliders.pas',
-  Scene.Import.ODE in '..\Source\Scene.Import.ODE.pas',
-  Scene.Import.ODEUtils in '..\Source\Scene.Import.ODEUtils.pas',
-  GXS.ODERagdoll in '..\Source\GXS.ODERagdoll.pas',
-  GXS.ModuleLoader in '..\Source\GXS.ModuleLoader.pas',
-  GXS.NGDManager in '..\Source\GXS.NGDManager.pas',
-  Scene.Import.Newton in '..\Source\Scene.Import.Newton.pas',
-  Scene.Import.Newton_Joints in '..\Source\Scene.Import.Newton_Joints.pas',
-  GXS.PhysX in '..\Source\GXS.PhysX.pas',
-  GXS.NGDRagdoll in '..\Source\GXS.NGDRagdoll.pas';
+  Physix.ODEManager in '..\Source\Physix.ODEManager.pas',
+  Physix.ODESkeletonColliders in '..\Source\Physix.ODESkeletonColliders.pas',
+  Importx.ODEUtils in '..\Source\Importx.ODEUtils.pas',
+  Physix.ODERagdoll in '..\Source\Physix.ODERagdoll.pas',
+  Physix.ModuleLoader in '..\Source\Physix.ModuleLoader.pas',
+  Physix.NGDManager in '..\Source\Physix.NGDManager.pas',
+  Importx.Newton in '..\Source\Importx.Newton.pas',
+  Importx.Newton_Joints in '..\Source\Importx.Newton_Joints.pas',
+  Physix.PhysX in '..\Source\Physix.PhysX.pas',
+  Physix.NGDRagdoll in '..\Source\Physix.NGDRagdoll.pas',
+  Importx.ODE in '..\Source\Importx.ODE.pas';
 
 end.
 

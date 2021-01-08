@@ -1,25 +1,22 @@
-(* ******************************************
-  *                                          *
-  * Graphic Scene Engine, http://glscene.org *
-  *                                          *
-  ******************************************* *)
-
+//
+// The graphics rendering engine GXScene  http://glscene.org
+//
 unit GXS.MeshUtils;
 
 (* General utilities for mesh manipulations *)
 
 interface
 
-{$I Scene.inc}
+{$I GXScene.inc}
 
 uses
   System.Classes,
   System.SysUtils,
   System.Math,
-  Scene.PersistentClasses,
-  Scene.VectorLists,
-  Scene.VectorGeometry,
-  Scene.VectorTypes;
+  GXS.PersistentClasses,
+  GXS.VectorLists,
+  GXS.VectorGeometry,
+  GXS.VectorTypes;
 
 (* Converts a triangle strips into a triangle list.
   Vertices are added to list, based on the content of strip. Both non-indexed

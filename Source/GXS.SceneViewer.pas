@@ -1,8 +1,8 @@
-(*******************************************
-*                                          *
-* Graphic Scene Engine, http://glscene.org *
-*                                          *
-********************************************)
+//
+//
+// The graphics rendering engine GXScene  http://glscene.org
+//
+//
 
 unit GXS.SceneViewer;
 
@@ -22,7 +22,7 @@ uses
   FMX.Dialogs.Win,
   FMX.Viewport3D,
   
-  Scene.Import.OpenGLx,
+  Importx.OpenGLx,
   GXS.Scene,
   GXS.Context,
   GXS.WinContext;
